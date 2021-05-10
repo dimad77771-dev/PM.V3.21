@@ -1,0 +1,331 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.ChargeoutsListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxsps="http://schemas.devexpress.com/winfx/2008/xaml/spreadsheet"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:localvmodel="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             x:Name="UserControlChargeoutsListView"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="1200">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <infrastructure:ShowRibbonBehavior Name="RibbonChargeoutsListView" IsVisible="{Binding IsMainRibbonShow}" />
+    </i:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <convertext:PictureConverter x:Key="PictureConverter" />
+        <localvmodel:ChargeoutsListRowItalicConverter x:Key="ChargeoutsListRowItalicConverter" />
+        <localvmodel:ChargeoutsListViewModelRowBackgroundConverter x:Key="ChargeoutsListViewModelRowBackgroundConverter" />
+
+        <Style x:Key="localCellStyle0" TargetType="dxg:LightweightCellEditor">
+            <Setter Property="BorderBrush" Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush, ThemeName=Office2013DarkGray}}" />
+            <Setter Property="TextBlock.FontStyle" Value="{Binding Path=RowData.Row, Converter={StaticResource ChargeoutsListRowItalicConverter}}" />
+            <Style.Triggers>
+                <Trigger Property="SelectionState" Value="CellMerge">
+                    <Setter Property="Background" Value="{Binding Path=RowData.Row.IsAlternateRow, Converter={StaticResource IsAlternateRow2BackgroundConverter}}" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+
+            <dxdo:DockLayoutManager Name="dockLayoutManager" BorderThickness="0">
+                <dxdo:LayoutGroup ItemHeight="*" Orientation="Horizontal">
+                    <dxdo:LayoutPanel AllowClose="False"
+                                      AllowFloat="False"
+                                      ItemWidth="*"
+                                      ShowBorder="False"
+                                      ShowCaption="False"
+                                      Visibility="Visible"
+                                      ShowPinButton="False">
+                        <dxg:GridControl x:Name="tableViewGridControl"
+                                         Grid.Row="0"
+                                         ItemsSource="{Binding RowModels}"
+                                         ShowBorder="True"
+                                         SelectedItem="{Binding SelectedRowModel}"
+                                         AllowLiveDataShaping="True"
+                                         AutoExpandAllGroups="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrol}" />
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding MouseDoubleClickCommand}"
+                                                       EventName="MouseDoubleClick">
+                                    <dxmvvm:EventToCommand.EventArgsConverter>
+                                        <dx:EventArgsToDataRowConverter />
+                                    </dxmvvm:EventToCommand.EventArgsConverter>
+                                </dxmvvm:EventToCommand>
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding CustomSummaryCommand}"
+                                                       EventName="CustomSummary" />
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding CustomRowFilterCommand}"
+                                                       EventName="CustomRowFilter" />
+                            </dxmvvm:Interaction.Behaviors>
+
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="False"
+                                               AllowColumnFiltering="False"
+                                               AllowSorting="False"
+                                               AllowPerPixelScrolling="True"
+                                               ShowSearchPanelMode="Always"
+                                               SearchColumns="Chargeout.ChargeoutNumber;Chargeout.PatientFullName;Chargeout.ServiceProvidersList;Chargeout.CategoriesList"
+                                               SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                               ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                               ShowGroupPanel="False"
+                                               AutoWidth="False"
+                                               SearchPanelHorizontalAlignment="Right"
+                                               ShowTotalSummary="True"
+                                               NavigationStyle="Cell"
+                                               TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}"
+                                               CellStyle="{StaticResource localCellStyle0}"
+                                               SearchPanelNullText="Search (Ctrl + F)">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                               Command="{Binding CellMergeCommand}"
+                                                               EventName="CellMerge" />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+
+
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="IsSelected"
+                                                Width="25"
+                                                AllowCellMerge="True"
+                                                Visible="{Binding IsShowIsSelectedColumn}"
+                                                Header=" ">
+                                    <dxg:GridColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <dxe:CheckEdit IsChecked="{Binding Path=DataContext.IsSelectedAllRows,
+                                                                                   RelativeSource={RelativeSource AncestorType=dxg:GridControl},
+                                                                                   Mode=TwoWay}"
+                                                               Visibility="{Binding Path=DataContext.IsVisibleSelectedAllRowsCheckbox,
+                                                                                    RelativeSource={RelativeSource AncestorType=dxg:GridControl},
+                                                                                    Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                               Margin="2,0,0,0"
+                                                               VerticalAlignment="Center"
+                                                               HorizontalAlignment="Center" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </dxg:GridColumn.HeaderTemplate>
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <dxe:CheckEdit HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           IsChecked="{Binding Path=RowData.Row.IsSelected,
+                                                                               Mode=TwoWay}"
+                                                           Visibility="{Binding Path=RowData.Row.IsVisibleSelected,
+                                                                                Converter={StaticResource BooleanToVisibilityConverter}}" />
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>
+
+                                <dxg:GridColumn FieldName="Chargeout.IsSelectedRow"
+                                                AllowColumnFiltering="False"
+                                                AllowSorting="False"
+                                                Header=" "
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Visible="{Binding IsMultirowSelection}"
+                                                Width="25">
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <dxe:CheckEdit HorizontalAlignment="Center" IsChecked="{Binding Path=RowData.Row.Chargeout.IsSelectedRow, Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>
+
+                                <dxg:GridColumn FieldName="Chargeout.ChargeoutDate"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="INVOICE&#10;DATE"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                <!--<dxg:GridColumn Binding="{Binding Chargeout.PaidProblem,
+                                                                  Converter={StaticResource ChargeoutPaidProblemImageConverter},
+                                                                  ConverterParameter=ToolTip}"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="PROBLEM"
+                                                HeaderToolTip="Problems with chargeout paying"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="30">
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Path=RowData.Row.Chargeout.PaidProblem,
+                                                                    Converter={StaticResource ChargeoutPaidProblemImageConverter},
+                                                                    ConverterParameter=Icon}"
+                                                   Visibility="{Binding Path=RowData.Row.Chargeout.PaidProblem,
+                                                                        Converter={StaticResource ChargeoutPaidProblemImageConverter},
+                                                                        ConverterParameter=IconVisibility}"
+                                                   ToolTip="{Binding Path=RowData.Row.Chargeout.PaidProblem,
+                                                                     Converter={StaticResource ChargeoutPaidProblemImageConverter},
+                                                                     ConverterParameter=ToolTip}"
+                                                   Stretch="None" />
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>-->
+
+                                <dxg:GridColumn FieldName="Chargeout.ChargeoutNumber"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="NUMBER"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Visible="True"
+                                                Width="200" />
+
+                                <dxg:GridColumn FieldName="Chargeout.ChargeoutRecipientName"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="RECIPIENT"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="100*" />
+
+                                <dxg:GridColumn FieldName="Chargeout.Total"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="TOTAL"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="110"
+                                                EditSettings="{StaticResource moneyEditSettings}" />
+                                <dxg:GridColumn FieldName="Chargeout.PaychargeTotal"
+                                                AllowCellMerge="True"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Width="110"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Header="PAID"
+                                                EditSettings="{StaticResource moneyEditSettings}" />
+                                <dxg:GridColumn FieldName="Chargeout.Balance"
+                                                AllowCellMerge="True"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Width="110"
+                                                Header="BALANCE"
+                                                EditSettings="{StaticResource moneyEditSettings}">
+                                    <dxg:GridColumn.CellStyle>
+                                        <Style TargetType="dxg:LightweightCellEditor">
+                                            <Setter Property="Background" Value="{Binding Path=RowData.Row.Chargeout.AccountAging, Converter={StaticResource AccountAgingToColorConverter}}" />
+                                            <Setter Property="Foreground" Value="{Binding Path=RowData.Row.Chargeout.AccountAging, Converter={StaticResource AccountAgingToForegrondColorConverterConverter}}" />
+                                            <Setter Property="ToolTip">
+                                                <Setter.Value>
+                                                    <ToolTip Background="Yellow">
+                                                        <TextBlock Text="{Binding Path=RowData.Row.Chargeout.AccountAgingToolTip}" />
+                                                    </ToolTip>
+                                                </Setter.Value>
+                                            </Setter>
+                                        </Style>
+                                    </dxg:GridColumn.CellStyle>
+                                </dxg:GridColumn>
+
+
+
+
+                                <dxg:GridColumn FieldName="Chargeout.ServiceProvidersList"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="SPECIALIST"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="70*"
+                                                Visible="{Binding IsFullListMode}" />
+                                <dxg:GridColumn FieldName="Chargeout.CategoriesList"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="TREATMENT"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="70*" />
+                                <dxg:GridColumn FieldName="Chargeout.MinChargeoutItemDate"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="START&#10;DATE"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="{x:Static infrastructure:WidthInfo.DateColumn}"
+                                                Visible="{Binding IsFullListMode}" />
+                                <dxg:GridColumn FieldName="Chargeout.MaxChargeoutItemDate"
+                                                AllowColumnFiltering="True"
+                                                AllowSorting="True"
+                                                Header="FINISH&#10;DATE"
+                                                AllowCellMerge="True"
+                                                CellStyle="{StaticResource localCellStyle0}"
+                                                Width="{x:Static infrastructure:WidthInfo.DateColumn}"
+                                                Visible="{Binding IsFullListMode}" />
+                                
+                                <dxg:GridColumn FieldName="Button"
+                                                Style="{StaticResource OpenDetailColumnStyle}"
+                                                AllowCellMerge="True"
+                                                Visible="{Binding IsFullListMode,
+                                                                  Converter={StaticResource BooleanNegationConverter}}" />
+                            </dxg:GridControl.Columns>
+                            <dxg:GridControl.TotalSummary>
+                                <dxg:GridSummaryItem FieldName="Chargeout.ChargeoutNumber"
+                                                     SummaryType="Custom"
+                                                     DisplayFormat="Count={0}" />
+                                <dxg:GridSummaryItem FieldName="Chargeout.Total"
+                                                     SummaryType="Custom"
+                                                     DisplayFormat="c" />
+                                <dxg:GridSummaryItem FieldName="Chargeout.PaychargeTotal"
+                                                     SummaryType="Custom"
+                                                     DisplayFormat="c" />
+                                <dxg:GridSummaryItem FieldName="Chargeout.RefchargeAmount"
+                                                     SummaryType="Custom"
+                                                     DisplayFormat="c" />
+                                <dxg:GridSummaryItem FieldName="Chargeout.Balance"
+                                                     SummaryType="Custom"
+                                                     DisplayFormat="c" />
+                            </dxg:GridControl.TotalSummary>
+                        </dxg:GridControl>
+                    </dxdo:LayoutPanel>
+                </dxdo:LayoutGroup>
+            </dxdo:DockLayoutManager>
+
+            <dxg:GridControl ItemsSource="{Binding RowModels}" Visibility="Collapsed">
+                <dxmvvm:Interaction.Behaviors>
+                    <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolForFilter}" />
+                </dxmvvm:Interaction.Behaviors>
+            </dxg:GridControl>
+        </Grid>
+
+    </dx:LoadingDecorator>
+</UserControl>

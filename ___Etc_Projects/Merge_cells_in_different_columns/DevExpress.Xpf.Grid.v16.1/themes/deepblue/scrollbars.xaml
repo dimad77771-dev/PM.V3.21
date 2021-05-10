@@ -1,0 +1,135 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes">
+  <ResourceDictionary.MergedDictionaries>
+    <ResourceDictionary Source="{dx:GridResource themes/DeepBlue/Constants.xaml}"/>
+  </ResourceDictionary.MergedDictionaries>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingCornerStyle}" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.Width" Value="Auto"/>
+    <Setter Property="FrameworkElement.Height" Value="Auto"/>
+    <Setter Property="Border.CornerRadius" Value="0,0,2,0"/>
+    <Setter Property="FrameworkElement.Margin" Value="0,0,0,1"/>
+    <Setter Property="Border.Background">
+      <Setter.Value>
+        <RadialGradientBrush>
+          <Brush.RelativeTransform>
+            <TransformGroup>
+              <ScaleTransform CenterX="0.5" CenterY="0.5" ScaleX="2.671" ScaleY="2.671"/>
+              <SkewTransform AngleX="0" AngleY="0" CenterX="0.5" CenterY="0.5"/>
+              <RotateTransform Angle="90" CenterX="0.5" CenterY="0.5"/>
+              <TranslateTransform X="-0.496" Y="-0.496"/>
+            </TransformGroup>
+          </Brush.RelativeTransform>
+          <GradientStop Color="#FFBAC6D5" Offset="0"/>
+          <GradientStop Color="#FFD2E1ED" Offset="1"/>
+          <GradientStop Color="#FFD3E2EE" Offset="0.538"/>
+        </RadialGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Style.Triggers>
+      <Trigger Property="dxg:GridBorderHelper.ShowBorder" Value="true">
+        <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+        <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+      </Trigger>
+      <MultiTrigger>
+        <MultiTrigger.Conditions>
+          <Condition Property="dxg:GridBorderHelper.ShowBorder" Value="false"/>
+          <Condition Property="dxg:GridScrollBarHelper.HasFixedRightColumns" Value="true"/>
+          <Condition Property="dxg:GridScrollBarHelper.ExtendScrollBarToFixedColumns" Value="false"/>
+        </MultiTrigger.Conditions>
+        <MultiTrigger.Setters>
+          <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+          <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+          <Setter Property="Border.BorderThickness" Value="0,1,0,0"/>
+        </MultiTrigger.Setters>
+      </MultiTrigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingCornerLeftStyle}" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+    <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+    <Setter Property="Border.BorderThickness" Value="0,1,1,0"/>
+    <Style.Triggers>
+      <Trigger Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap">
+        <Setter Property="Border.Background" Value="Transparent"/>
+        <Setter Property="Border.BorderBrush" Value="Transparent"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedLeftThumbStyle}"
+         TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+    <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+    <Setter Property="Border.BorderThickness" Value="0,1,0,0"/>
+    <Style.Triggers>
+      <Trigger Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap">
+        <Setter Property="Border.Background" Value="Transparent"/>
+        <Setter Property="Border.BorderBrush" Value="Transparent"/>
+      </Trigger>
+      <Trigger Property="dxg:GridBorderHelper.ShowBorder" Value="true">
+        <Setter Property="Border.BorderThickness" Value="0"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedRightThumbStyle}"
+         TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+    <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+    <Setter Property="Border.BorderThickness" Value="0,1,0,0"/>
+    <Style.Triggers>
+      <Trigger Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap">
+        <Setter Property="Border.Background" Value="Transparent"/>
+        <Setter Property="Border.BorderBrush" Value="Transparent"/>
+      </Trigger>
+      <Trigger Property="dxg:GridBorderHelper.ShowBorder" Value="true">
+        <Setter Property="Border.BorderThickness" Value="0"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedLineStyle}" TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+    <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+    <Setter Property="Border.BorderThickness" Value="1,1,1,0"/>
+    <Style.Triggers>
+      <Trigger Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap">
+        <Setter Property="Border.Background" Value="Transparent"/>
+        <Setter Property="Border.BorderBrush" Value="Transparent"/>
+      </Trigger>
+      <Trigger Property="dxg:GridBorderHelper.ShowBorder" Value="true">
+        <Setter Property="Border.BorderThickness" Value="1,0"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedLineContentTotalSummaryStyle}"
+         TargetType="{x:Type Border}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Stretch"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Stretch"/>
+    <Setter Property="Border.Background" Value="#FFB6CEEC"/>
+    <Setter Property="Border.BorderBrush" Value="{StaticResource RowIndicatorBorderBrush}"/>
+    <Setter Property="Border.BorderThickness" Value="1,1,1,0"/>
+  </Style>
+  <DataTemplate x:Key="{dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedLineTotalSummaryTemplate}">
+    <Border Style="{DynamicResource {dxgt:ScrollBarThemeKey ResourceKey=ScrollingFixedLineContentTotalSummaryStyle}}"/>
+  </DataTemplate>
+  <Style x:Key="{dxgt:ScrollBarThemeKey ResourceKey=FixedLeftLinePlaceHolderTotalSummaryStyle}"
+         TargetType="{x:Type ContentPresenter}">
+    <Setter Property="FrameworkElement.Margin" Value="0,-3"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:GridBorderHelper.ShowBorder" Value="true">
+        <Setter Property="FrameworkElement.Margin" Value="0,-3"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+</ResourceDictionary>

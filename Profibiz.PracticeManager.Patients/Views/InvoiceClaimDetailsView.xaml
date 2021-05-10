@@ -1,0 +1,354 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.InvoiceClaimDetailsView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             Width="1180"
+             Height="400"
+             Title="Coordination Details"
+             ResizeMode="NoResize"
+             WindowStartupLocation="Manual"
+             Top="0"
+             Left="100"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <local:PictureConverter x:Key="PictureConverter" />
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Visibility="Collapsed"
+                  Background="Transparent"
+                  ShowGridLines="False">
+                <dx:DXBorder Margin="0"
+                             BorderThickness="0 0 0 1"
+                             BorderBrush="#A0A0A0">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="100" />
+                        </Grid.ColumnDefinitions>
+
+                        <dxlc:LayoutItemLabel Grid.Row="1"
+                                              Grid.Column="0"
+                                              Content="Approved Amount"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="1"
+                                      Grid.Column="1"
+                                      EditValue="{Binding InvoiceClaim.ApproveAmont,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      IsReadOnly="True"
+                                      DisplayFormatString="c"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+                        <dxlc:LayoutItemLabel Grid.Row="1"
+                                              Grid.Column="2"
+                                              Content="         Amount of Line Totals"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="1"
+                                      Grid.Column="3"
+                                      EditValue="{Binding Path=SumLineTotals,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      IsReadOnly="True"
+                                      DisplayFormatString="c"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+
+                        <dxlc:LayoutItemLabel Grid.Row="1"
+                                              Grid.Column="4"
+                                              Content="         Difference"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="1"
+                                      Grid.Column="5"
+                                      EditValue="{Binding Path=DifferenceLineTotals,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      IsReadOnly="True"
+                                      DisplayFormatString="c"
+                                      Foreground="{Binding DifferenceLineTotalsForegroundColor}"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+
+
+
+                    </Grid>
+                    <!--</dxlc:LayoutGroup>-->
+                </dx:DXBorder>
+            </Grid>
+
+
+            <infrastructure:ExtraLayoutGroup Grid.Row="1"
+                                             Background="Transparent"
+                                             Orientation="Vertical"
+                                             View="Group">
+
+                <infrastructure:ExtraLayoutGroup Header="COORDINATION ORDER ITEMS"
+                                                 Margin="5"
+                                                 GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                                 Background="Transparent"
+                                                 IsCollapsible="False"
+                                                 View="GroupBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <dxg:GridControl Grid.Row="0"
+                                         AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding Entities}"
+                                         SelectedItem="{Binding SelectedEntity}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxg:GridControl.Resources>
+                                <Style x:Key="blueCellStyle" TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="TextBlock.Foreground" Value="Blue" />
+                                </Style>
+                                <Style x:Key="blueHeaderStyle" TargetType="dxg:GridColumnHeader">
+                                    <Setter Property="Foreground" Value="Blue" />
+                                </Style>
+                                <Style x:Key="blueBandHeaderStyle" TargetType="dxg:BandHeaderControl">
+                                    <Setter Property="Foreground" Value="Blue" />
+                                </Style>
+
+                                <DataTemplate x:Key="insuranceOpenDetailColumnCellTemplate">
+                                    <Grid>
+                                        <Button Content="..."
+                                                Visibility="{Binding Path=RowData.Row.InsuranceInfo.IsFind, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                Command="{Binding RowData.Row.InsuranceOpenCommand}"
+                                                VerticalAlignment="Center"
+                                                HorizontalAlignment="Center" />
+                                        <TextBlock Text="!"
+                                                   Visibility="{Binding Path=RowData.Row.InsuranceInfo.IsFind, Converter={StaticResource BooleanToVisibilityInverseConverter}}"
+                                                   Foreground="Red"
+                                                   ToolTip="No Insurance Coverage for this item"
+                                                   VerticalAlignment="Center"
+                                                   HorizontalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                                <Style x:Key="insuranceOpenDetailColumnStyle"
+                                       TargetType="dxg:GridColumn"
+                                       BasedOn="{StaticResource OpenDetailColumnStyle}">
+                                    <Setter Property="CellTemplate" Value="{StaticResource insuranceOpenDetailColumnCellTemplate}" />
+                                </Style>
+                            </dxg:GridControl.Resources>
+
+
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolOrderItem}" />
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="{Binding ReadOnly,
+                                                                      Converter={StaticResource BooleanNegationConverter}}"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="False"
+                                               EditorShowMode="MouseDown"
+                                               EnableImmediatePosting="True"
+                                               ShowTotalSummary="True"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell"
+                                               AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                                               TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}">
+                                    <dxg:TableView.FormatConditions>
+                                        <dxg:FormatCondition FieldName="InvoiceItemsUnits" Expression="'True' == 'True'">
+                                            <dx:Format Foreground="Blue" />
+                                        </dxg:FormatCondition>
+                                        <dxg:FormatCondition FieldName="InvoiceItemsLineTotal" Expression="'True' == 'True'">
+                                            <dx:Format Foreground="Blue" />
+                                        </dxg:FormatCondition>
+                                    </dxg:TableView.FormatConditions>
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+
+                            <dxg:GridControl.Bands>
+                                <dxg:GridControlBand Header="INVOICE"
+                                                     HorizontalHeaderContentAlignment="Center"
+                                                     OverlayHeaderByChildren="False"
+                                                     AllowMoving="False"
+                                                     AllowResizing="False"
+                                                     HeaderStyle="{StaticResource blueBandHeaderStyle}">
+                                    <dxg:GridColumn FieldName="InvoiceItemsUnits"
+                                                    Header="QTY"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    HeaderStyle="{StaticResource blueHeaderStyle}"
+                                                    AllowMoving="False"
+                                                    AllowResizing="False"
+                                                    ReadOnly="True"
+                                                    Width="68" />
+                                    <dxg:GridColumn FieldName="InvoiceItemsAmount"
+                                                    Header="AMOUNT"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    HeaderStyle="{StaticResource blueHeaderStyle}"
+                                                    AllowMoving="False"
+                                                    AllowResizing="False"
+                                                    ReadOnly="True"
+                                                    Width="78" />
+                                </dxg:GridControlBand>
+
+                                <dxg:GridControlBand Header="APPROVAL" HorizontalHeaderContentAlignment="Center" >
+                                    <dxg:GridColumn FieldName="MedicalServiceOrSupplyName"
+                                                    Header="ITEM NAME"
+                                                    ReadOnly="True"
+                                                    Width="250" />
+                                    <dxg:GridColumn FieldName="Units"
+                                                    Header="QTY"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    Width="68" />
+                                    <dxg:GridColumn FieldName="Amount"
+                                                    Header="AMOUNT"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    Width="78" />
+                                    <dxg:GridColumn FieldName="Description"
+                                                    Header="DESCRIPTION"
+                                                    Width="220" />
+                                </dxg:GridControlBand>
+
+                                <dxg:GridControlBand Header="INSURANCE COVERAGE" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="InsuranceInfo.TotalAmont"
+                                                    Header="ANNUAL"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    ReadOnly="True"
+                                                    Width="78" />
+                                    <dxg:GridColumn FieldName="InsuranceInfo.TotalUnits"
+                                                    Header="MAX.QTY"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    ReadOnly="True"
+                                                    Width="68" />
+                                    <dxg:GridColumn FieldName="InsuranceInfo.ApproveAmount"
+                                                    Header="APPROVE&#10;AMOUNT"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    ReadOnly="True"
+                                                    Width="78" />
+                                    <dxg:GridColumn FieldName="InsuranceInfo.ApproveUnits"
+                                                    Header="APPROVE&#10;QTY"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    ReadOnly="True"
+                                                    Width="68" />
+                                    <dxg:GridColumn FieldName="Button" Style="{StaticResource insuranceOpenDetailColumnStyle}" />
+                                </dxg:GridControlBand>
+                            </dxg:GridControl.Bands>
+
+                            <dxg:GridControl.TotalSummary>
+                                <dxg:GridSummaryItem FieldName="Amount"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                            </dxg:GridControl.TotalSummary>
+                        </dxg:GridControl>
+
+                        <Grid Grid.Row="1"
+                              Margin="5,10,5,0"
+                              Visibility="{Binding Path=ReadOnly,
+                                                   Converter={StaticResource BooleanToVisibilityInverseConverter}}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="1"
+                                    Margin="5 0 5 0"
+                                    Command="{Binding ClearItemCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="Clear Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+
+                            <!--<Button Grid.Column="0"
+                                    Margin="5 0 5 0"
+                                    Command="{Binding OrderItemNewCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Add_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="New Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1"
+                                    Margin="5 0 5 0"
+                                    Command="{Binding OrderItemDeleteCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="Delete Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>-->
+                        </Grid>
+                    </Grid>
+                </infrastructure:ExtraLayoutGroup>
+            </infrastructure:ExtraLayoutGroup>
+
+            <StackPanel Grid.Row="2"
+                        Orientation="Horizontal"
+                        HorizontalAlignment="Right"
+                        Margin="5">
+                <dx:DialogButton Command="{Binding SubmitCommand}"
+                                 Content="OK"
+                                 Margin="5" />
+                <dx:DialogButton Command="{Binding CancelCommand}"
+                                 Content="Cancel"
+                                 Margin="5" />
+            </StackPanel>
+            <!--<infrastructure:CommandPanelView Grid.Row="2" />-->
+        </Grid>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

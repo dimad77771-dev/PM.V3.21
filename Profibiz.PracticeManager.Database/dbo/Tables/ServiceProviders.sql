@@ -1,0 +1,25 @@
+﻿CREATE TABLE [dbo].[ServiceProviders] (
+    [RowId]                      UNIQUEIDENTIFIER NOT NULL,
+    [Title]                      NVARCHAR (255)   NULL,
+    [FirstName]                  NVARCHAR (255)   NOT NULL,
+    [LastName]                   NVARCHAR (255)   NULL,
+    [BirthDate]                  DATETIME         NULL,
+    [Rate]                       DECIMAL (18, 4)  NULL,
+    [TaxRate]                    DECIMAL (18, 4)  NULL,
+    [AddressLine]                NVARCHAR (255)   NULL,
+    [Province]                   NVARCHAR (255)   NULL,
+    [City]                       NVARCHAR (255)   NULL,
+    [Postcode]                   NVARCHAR (255)   NULL,
+    [PhoneNumber]                NVARCHAR (255)   NULL,
+    [MobilePhoneNumber]          NVARCHAR (255)   NULL,
+    [Qualifications]             NVARCHAR (255)   NULL,
+    [WorkWeekDays]               NVARCHAR (1000)  NULL,
+    [EmailAddress]               NVARCHAR (255)   NULL,
+    [AppointmentBookRowId]       UNIQUEIDENTIFIER NULL,
+    [AppointmentBackgroundColor] VARCHAR (50)     NOT NULL,
+    [AppointmentForegroundColor] VARCHAR (50)     NOT NULL,
+    [Position]                   NVARCHAR (255)   NULL,
+    CONSTRAINT [PK_ServiceProviders] PRIMARY KEY CLUSTERED ([RowId] ASC),
+    CONSTRAINT [FK__ServicePr__Appoi__24285DB4] FOREIGN KEY ([AppointmentBookRowId]) REFERENCES [dbo].[AppointmentBooks] ([RowId])
+);
+

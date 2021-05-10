@@ -1,0 +1,69 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.PickPatientInsuranceCoveragesDetailView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:localview="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:localconver="clr-namespace:Profibiz.PracticeManager.Patients.Converters"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <dxg:GridControl AutoExpandAllGroups="True"
+                             ItemsSource="{Binding InsuranceCoverageEntities}"
+                             SelectedItem="{Binding InsuranceCoverageSelectedEntity}"
+                             ShowBorder="True">
+
+                <dxg:GridControl.DetailDescriptor>
+                    <dxg:TabViewDetailDescriptor ShowHeader="False">
+                        <dxg:TabViewDetailDescriptor.ContentTemplate>
+                            <DataTemplate>
+                                <Grid Height="200">
+                                    <localview:InsuranceCoverageView DataContext="{Binding ViewModel9999}" />
+                                </Grid>
+                            </DataTemplate>
+                        </dxg:TabViewDetailDescriptor.ContentTemplate>
+                    </dxg:TabViewDetailDescriptor>
+                </dxg:GridControl.DetailDescriptor>
+
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowEditing="False"
+                                   AllowPerPixelScrolling="True"
+                                   AutoWidth="True"
+                                   EnableImmediatePosting="True"
+                                   ShowGroupPanel="False"
+                                   NavigationStyle="Row">
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn Binding="{Binding Entity.InsuranceProviderRowId, Converter={StaticResource insuranceProviderConverter}}" Header="INSURANCE&#10;PROVIDER" />
+                    <dxg:GridColumn FieldName="Entity.PolicyNumber" Header="POLICY NUMBER" />
+                    <dxg:GridColumn FieldName="Entity.CoverageStartDate"
+                                    Header="COVERAGE&#10;START DATE"
+                                    SortIndex="0"
+                                    SortOrder="Descending" />
+                    <dxg:GridColumn FieldName="Entity.CoverageValidUntil" Header="COVERAGE&#10;VALID UNTIL" />
+                    <dxg:GridColumn FieldName="Entity.PolicyOwner.FullName" Header="POLICY OWNER" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem SummaryType="Count" />
+                </dxg:GridControl.GroupSummary>
+            </dxg:GridControl>
+
+
+
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

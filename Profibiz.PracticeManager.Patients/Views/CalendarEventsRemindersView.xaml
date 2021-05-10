@@ -1,0 +1,234 @@
+﻿<dxc:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.CalendarEventsRemindersView"
+              xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+              xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+              xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+              xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+              xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+              xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+              xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+              xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+              xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+              xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+              xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+              xmlns:dxschi="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/internal"
+              xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+              xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+              xmlns:inter="http://www.codeplex.com/prism"
+              xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+              xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+              xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+              xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+              Height="600"
+              Width="1000"
+              Title="Reminders"
+              Icon="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/reminder-icon.png"
+              WindowStartupLocation="CenterScreen"
+              ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+              prism:ViewModelLocator.AutoWireViewModel="True"
+              UseLayoutRounding="True"
+              mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <dxc:DXWindow.Resources>
+        <dxc:BoolToVisibilityViaOpacityConverter x:Key="BoolToVisibilityViaOpacityConverter" />
+        <dxsch:SchedulerControlStringIdConverter x:Key="SchedulerControlStringIdConverter" />
+
+        <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerCaptionTemplate, ThemeName=Office2013DarkGray}">
+            <Grid x:Name="Root"
+                  Height="Auto"
+                  Background="#3399FF">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Image x:Name="PART_Icon"
+                       Stretch="None"
+                       HorizontalAlignment="Left"
+                       Margin="6,0,5,0"
+                       Source="{Binding Path=(dxc:FloatingContainer.FloatingContainer).Icon,
+                                        RelativeSource={RelativeSource AncestorType=ContentPresenter}}" />
+                <dxc:DXWindowSmartCenteringPanel Grid.Column="0"
+                                                 Grid.ColumnSpan="2"
+                                                 HorizontalAlignment="Stretch">
+                    <TextBlock x:Name="PART_Text"
+                               TextTrimming="WordEllipsis"
+                               Foreground="#FF262626"
+                               FontSize="16"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="{Binding Path=(dxc:FloatingContainer.FloatingContainer).Caption,
+                                              RelativeSource={RelativeSource AncestorType=ContentPresenter}}"
+                               IsHitTestVisible="False" />
+                </dxc:DXWindowSmartCenteringPanel>
+            </Grid>
+            <DataTemplate.Triggers>
+                <Trigger Property="Source" SourceName="PART_Icon" Value="{x:Null}">
+                    <Setter TargetName="PART_Icon" Property="Visibility" Value="Collapsed" />
+                </Trigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+
+    </dxc:DXWindow.Resources>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxc:DXMessageBoxService />
+        <infrastructure:UIElementBehavior Manager="{Binding UIManagerWindow}" />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="AUTO" />
+        </Grid.RowDefinitions>
+
+        <dxe:ListBoxEdit x:Name="lbReminders"
+                         Margin="0,5,0,5"
+                         Grid.Row="0"
+                         SelectionMode="Extended"
+                         ItemsSource="{Binding Alerts}"
+                         MinHeight="130"
+                         SelectedIndex="{Binding SelectedReminderIndex,
+                                                 Mode=TwoWay}"
+                         TabIndex="0"
+                         DisplayMember="Subject" />
+
+
+        <dxg:GridControl ItemsSource="{Binding RemainderEntities}"
+                         SelectedItem="{Binding RemainderSelectedEntity}"
+                         SelectedItems="{Binding RemainderSelectedEntities}"
+                         SelectionMode="MultipleRow"
+                         AllowLiveDataShaping="False"
+                         ShowBorder="True">
+            <dxmvvm:Interaction.Behaviors>
+                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolInvoicePayment}" />
+            </dxmvvm:Interaction.Behaviors>
+            <dxg:GridControl.View>
+                <dxg:TableView AllowEditing="False"
+                               AllowPerPixelScrolling="True"
+                               AutoWidth="False"
+                               EditorShowMode="MouseDown"
+                               EnableImmediatePosting="True"
+                               ShowTotalSummary="False"
+                               ShowGroupPanel="False"
+                               ShowCheckBoxSelectorColumn="True"
+                               NavigationStyle="Row"
+                               AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                               TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}">
+                </dxg:TableView>
+            </dxg:GridControl.View>
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn FieldName="CommonFullName"
+                                Header="PATIENT/(*)SERVICE PROVIDER"
+                                Width="*" />
+                <dxg:GridColumn FieldName="DateString"
+                                Header="DATE"
+                                Width="80" />
+                <dxg:GridColumn FieldName="StartEndTimeString"
+                                Header="TIME"
+                                Width="120" />
+                <dxg:GridColumn FieldName="BeforeStartString"
+                                Header="BEFORE START"
+                                Width="90" />
+                <dxg:GridColumn FieldName="Notes"
+                                Header="NOTES"
+                                Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:MemoEditSettings ShowIcon="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Description"
+                                Header="DESCRIPTION"
+                                Width="*">
+                    <dxg:GridColumn.EditSettings>
+                        <dxe:MemoEditSettings ShowIcon="False" />
+                    </dxg:GridColumn.EditSettings>
+                </dxg:GridColumn>
+                <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+
+
+
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    Orientation="Vertical">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="AUTO" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="AUTO" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0"
+                            HorizontalAlignment="Left"
+                            MinWidth="85">
+                    <Button MinWidth="75"
+                            Margin="5,5,5,5"
+                            Content="{Binding Source={StaticResource SchedulerControlStringIdConverter},
+                                              ConverterParameter=ButtonCaption_DismissAll,
+                                              Converter={StaticResource SchedulerControlStringIdConverter}}"
+                            Command="{Binding DismissAllCommand}"
+                            TabIndex="1" />
+                </StackPanel>
+
+                <Grid Grid.Column="1" HorizontalAlignment="Center">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="AUTO" />
+                        <ColumnDefinition Width="AUTO" />
+                        <ColumnDefinition Width="AUTO" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Margin="5,5,5,5"
+                               Text="Click Snooze to be reminded again in:"
+                               VerticalAlignment="Center" />
+                    <dxe:ComboBoxEdit x:Name="snoozeComboBox"
+                                      Grid.Column="1"
+                                      Margin="5,5,5,5"
+                                      Width="250"
+                                      EditValue="{Binding Path=SnoozedTo,
+                                                          Mode=TwoWay,
+                                                          NotifyOnSourceUpdated=True,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True}"
+                                      Style="{StaticResource comboBoxEditEventCalendarSnoozedStyle}">
+                    </dxe:ComboBoxEdit>
+                    <Button x:Name="btnSnooze"
+                            Grid.Column="2"
+                            MinWidth="75"
+                            Margin="5,5,5,5"
+                            Content="{Binding Source={StaticResource SchedulerControlStringIdConverter},
+                                              ConverterParameter=ButtonCaption_Snooze,
+                                              Converter={StaticResource SchedulerControlStringIdConverter}}"
+                            Command="{Binding SnoozeCommand}"
+                            TabIndex="5" />
+                </Grid>
+
+                <Button x:Name="btnDismiss"
+                        Grid.Column="2"
+                        MinWidth="75"
+                        Margin="5,5,5,5"
+                        Content="{Binding Source={StaticResource SchedulerControlStringIdConverter},
+                                          ConverterParameter=ButtonCaption_Dismiss,
+                                          Converter={StaticResource SchedulerControlStringIdConverter}}"
+                        Command="{Binding DismissCommand}"
+                        TabIndex="3" />
+            </Grid>
+
+
+        </StackPanel>
+    </Grid>
+
+</dxc:DXWindow>

@@ -1,0 +1,220 @@
+<dx:DXWindow x:Class="Profibiz.PracticeManager.Navigation.Views.LookupsEditView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             Height="Auto"
+             Width="1200"
+             Title="Directories"
+             WindowStartupLocation="CenterScreen"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             d:DesignHeight="1200"
+             d:DesignWidth="1483"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <DockPanel>
+        <dxr:RibbonControl x:Name="ribbonControl"
+                           DockPanel.Dock="Top"
+                           RibbonStyle="Office2010">
+            <dxr:RibbonControl.PageHeaderItems>
+                <view:RibbonStyleSelectorItem IsVisible="{Binding ElementName=ribbonControl, Path=IsBackStageViewOpen, Converter={dxmvvm:BooleanNegationConverter}}" SelectedRibbonStyle="{Binding RibbonStyle, ElementName=ribbonControl, Mode=OneWayToSource}" />
+            </dxr:RibbonControl.PageHeaderItems>
+            <dxr:RibbonControl.ApplicationMenu>
+                <dxr:BackstageViewControl x:Name="backstageView">
+                    <dxr:BackstageViewControl.Items>
+                        <dxr:BackstageSeparatorItem />
+                        <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GettingStartedCommand}" Content="Get Started" />
+                        <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GetFreeSupportCommand}" Content="Get Support" />
+                        <dxr:BackstageButtonItem Command="{Binding LinksViewModel.BuyNowCommand}" Content="Buy Now" />
+                    </dxr:BackstageViewControl.Items>
+                </dxr:BackstageViewControl>
+            </dxr:RibbonControl.ApplicationMenu>
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="HOME">
+                    <dxr:RibbonPageGroup Caption="Actions">
+                        <dxb:BarButtonItem Command="{Binding SaveCommand}"
+                                           Content="Save"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-16.png"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-32.png" />
+                        <dxb:BarButtonItem Command="{Binding SaveAndCloseCommand}"
+                                           Content="Save &amp; Close"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-16.png"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-32.png" />
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Close">
+                        <dxb:BarButtonItem Command="{Binding CloseCommand}"
+                                           Content="Close"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-16.png"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-32.png" />
+                    </dxr:RibbonPageGroup>
+                    <dxr:RibbonPageGroup Caption="Edit">
+                        <dxb:BarButtonItem Content="New Row"
+                                           Command="{Binding NewRowCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png" />
+                        <dxb:BarButtonItem Content="Delete Row"
+                                           Command="{Binding DeleteRowCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
+
+                    </dxr:RibbonPageGroup>
+
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+        <dxr:RibbonStatusBarControl DockPanel.Dock="Bottom" />
+
+        <Grid>
+            <TabControl Margin="10"
+                        Padding="10"
+                        SelectedIndex="{Binding TabControlSelectedIndex}">
+                <TabItem Header="Medical Services/Supplies">
+                    <dxlc:LayoutControl>
+                        <dxg:GridControl AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding MedicalServicesEntities}"
+                                         SelectedItem="{Binding MedicalServicesSelectedEntity}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="True"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="True"
+                                               EnableImmediatePosting="True"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell">
+                                    <dxg:TableView.RowCellMenuCustomizations>
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.NewRowCommand}"
+                                                           Content="New"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.DeleteRowCommand}"
+                                                           Content="Delete"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                                    </dxg:TableView.RowCellMenuCustomizations>
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="Name" Header="NAME" />
+                                <dxg:GridColumn FieldName="Code" Header="CODE" />
+                                <dxg:GridColumn FieldName="ItemType"
+                                                Header="ITEM TYPE"
+                                                EditSettings="{StaticResource comboBoxMedicalItemTypes}" />
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </dxlc:LayoutControl>
+                </TabItem>
+
+
+                <TabItem Header="Insurance Providers">
+                    <dxlc:LayoutControl>
+                        <dxg:GridControl AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding InsuranceProvidersEntities}"
+                                         SelectedItem="{Binding InsuranceProvidersSelectedEntity}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="True"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="True"
+                                               EnableImmediatePosting="True"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell">
+                                    <dxg:TableView.RowCellMenuCustomizations>
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.NewRowCommand}"
+                                                           Content="New"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.DeleteRowCommand}"
+                                                           Content="Delete"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                                    </dxg:TableView.RowCellMenuCustomizations>
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="CompanyName" Header="COMPANY&#10;NAME" />
+                                <dxg:GridColumn FieldName="Code" Header="CODE" />
+                                <dxg:GridColumn FieldName="AddressLine1" Header="ADDRESS&#10;LINE 1" />
+                                <dxg:GridColumn FieldName="AddressLine2" Header="ADDRESS&#10;LINE 2" />
+                                <dxg:GridColumn FieldName="Province" Header="PROVINCE" />
+                                <dxg:GridColumn FieldName="City" Header="CITY" />
+                                <dxg:GridColumn FieldName="Postcode" Header="POSTCODE" />
+                                <dxg:GridColumn FieldName="PhoneNumber" Header="PHONE" />
+                                <dxg:GridColumn FieldName="EmailAddress" Header="EMAIL" />
+                                <dxg:GridColumn FieldName="Fax" Header="FAX" />
+                                <dxg:GridColumn FieldName="WebSite" Header="URL" />
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </dxlc:LayoutControl>
+                </TabItem>
+
+
+                <TabItem Header="Professional Associations">
+                    <dxlc:LayoutControl>
+                        <dxg:GridControl AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding ProfessionalAssociationsEntities}"
+                                         SelectedItem="{Binding ProfessionalAssociationsSelectedEntity}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="True"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="True"
+                                               EnableImmediatePosting="True"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell">
+                                    <dxg:TableView.RowCellMenuCustomizations>
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.NewRowCommand}"
+                                                           Content="New"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                                        <dxb:BarButtonItem Command="{Binding View.DataContext.DeleteRowCommand}"
+                                                           Content="Delete"
+                                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                                    </dxg:TableView.RowCellMenuCustomizations>
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="Name" Header="NAME" />
+                                <dxg:GridColumn FieldName="Code" Header="CODE" />
+                            </dxg:GridControl.Columns>
+                        </dxg:GridControl>
+                    </dxlc:LayoutControl>
+                </TabItem>
+            </TabControl>
+
+
+        </Grid>
+
+
+    </DockPanel>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

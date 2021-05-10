@@ -1,0 +1,184 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{81A2C2AD-B05C-472B-9157-CC37BF070EFA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Profibiz.PracticeManager.BL</RootNamespace>
+    <AssemblyName>Profibiz.PracticeManager.BL</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DLL_BACKEND</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.1.0, Culture=neutral, PublicKeyToken=0e99375e54769942">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2, Version=16.2.5.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.Extended, Version=6.0.0.0, Culture=neutral, PublicKeyToken=05b7e29bdd433584, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.Extended.6.1.0.168\lib\net45\EntityFramework.Extended.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LinqKit, Version=1.1.8.0, Culture=neutral, PublicKeyToken=bc217f8844052a91, processorArchitecture=MSIL">
+      <HintPath>..\packages\LinqKit.1.1.8.0\lib\net461\LinqKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MailKit, Version=1.18.0.0, Culture=neutral, PublicKeyToken=4e064fe7c44a8f1b, processorArchitecture=MSIL">
+      <HintPath>..\packages\MailKit.1.18.1.1\lib\net451\MailKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MimeKit, Version=1.18.0.0, Culture=neutral, PublicKeyToken=bede1c8a46c66814, processorArchitecture=MSIL">
+      <HintPath>..\packages\MimeKit.1.18.1\lib\net451\MimeKit.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\Profibiz.PracticeManager.Infrastructure\ClientServerShared\UserErrorInformation.cs">
+      <Link>ClientServerShared\UserErrorInformation.cs</Link>
+    </Compile>
+    <Compile Include="..\Profibiz.PracticeManager.Model\LookupHelper\TypeHelper.cs">
+      <Link>TypeHelper.cs</Link>
+    </Compile>
+    <Compile Include="AutoMapperConfiguration.cs" />
+    <Compile Include="Helprers\DbContextExtentions.cs" />
+    <Compile Include="Helprers\DbUpdateRowsHelper.cs" />
+    <Compile Include="Helprers\DateTimeHelper.cs" />
+    <Compile Include="Helprers\JsonHelper.cs" />
+    <Compile Include="Helprers\ExpressionFunc.cs" />
+    <Compile Include="Helprers\ExceptionHelper.cs" />
+    <Compile Include="Helprers\XDocumentFunc.cs" />
+    <Compile Include="Helprers\WebQueryHelper.cs" />
+    <Compile Include="Helprers\LinqHelper.cs" />
+    <Compile Include="Helprers\MapperReflectionHelper.cs" />
+    <Compile Include="Helprers\InsuranceCoverageHelper.cs" />
+    <Compile Include="Helprers\AutoMapperHelper.cs" />
+    <Compile Include="IWebApiRepository.cs" />
+    <Compile Include="Lock\GlobalLocker.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Queries\Query.cs" />
+    <Compile Include="WebApiRepository.AppointmentTreatmentNote.cs" />
+    <Compile Include="WebApiRepository.CalendarEvent.cs" />
+    <Compile Include="WebApiRepository.EmailCharge.cs" />
+    <Compile Include="WebApiRepository.Email.cs" />
+    <Compile Include="WebApiRepository.AppointmentClinicalNote.cs" />
+    <Compile Include="WebApiRepository.Chargeout.cs" />
+    <Compile Include="WebApiRepository.TreatmentPlanRecord.cs" />
+    <Compile Include="WebApiRepository.PatientDocument.cs" />
+    <Compile Include="WebApiRepository.Paycharge.cs" />
+    <Compile Include="WebApiRepository.Refcharge.cs" />
+    <Compile Include="WebApiRepository.SupplierRefund.cs" />
+    <Compile Include="WebApiRepository.SupplierPayment.cs" />
+    <Compile Include="WebApiRepository.SchedulerRecord.cs" />
+    <Compile Include="WebApiRepository.PatientNote.cs" />
+    <Compile Include="WebApiRepository.PrintdocInfo.cs" />
+    <Compile Include="WebApiRepository.MedicalHistoryRecord.cs" />
+    <Compile Include="WebApiRepository.Inventory.cs" />
+    <Compile Include="WebApiRepository.Refund.cs" />
+    <Compile Include="WebApiRepository.Test.cs" />
+    <Compile Include="WebApiRepository.Payroll.cs" />
+    <Compile Include="WebApiRepository.Payment.cs" />
+    <Compile Include="WebApiRepository.Invoice.cs" />
+    <Compile Include="WebApiRepository.Appointment.cs" />
+    <Compile Include="WebApiRepository.ServiceProvider.cs" />
+    <Compile Include="WebApiRepository.Lookups.cs" />
+    <Compile Include="WebApiRepository.InsuranceCoverage.cs" />
+    <Compile Include="WebApiRepository.Patients.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.Net4.csproj">
+      <Project>{8c955148-fa96-4f0d-880d-abb6770f54e9}</Project>
+      <Name>AutoMapper.Net4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.DTO\Profibiz.PracticeManager.DTO.csproj">
+      <Project>{210fc4b8-9a51-4ade-ad2e-6809795b4159}</Project>
+      <Name>Profibiz.PracticeManager.DTO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.EF\Profibiz.PracticeManager.EF.csproj">
+      <Project>{14642c22-5f56-4d38-8896-876a6e7dc2f1}</Project>
+      <Name>Profibiz.PracticeManager.EF</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.InfrastructureExt\Profibiz.PracticeManager.InfrastructureExt.csproj">
+      <Project>{D3B37908-DE44-4835-B539-18633C8F6647}</Project>
+      <Name>Profibiz.PracticeManager.InfrastructureExt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Patients\Profibiz.PracticeManager.Patients.csproj">
+      <Project>{AB8B448C-DD74-4D60-A041-3E5D03A32180}</Project>
+      <Name>Profibiz.PracticeManager.Patients</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="..\Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems" Label="Shared" />
+  <Import Project="..\Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

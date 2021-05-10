@@ -1,0 +1,859 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5C312CC4-42DF-4D16-86DF-22BCC096DBDB}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Profibiz.PracticeManager.Infrastructure</RootNamespace>
+    <AssemblyName>Profibiz.PracticeManager.Infrastructure</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Images.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Office.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Office.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Pdf.v16.2.Drawing">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Pdf.v16.2.Drawing.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.RichEdit.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.RichEdit.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Spreadsheet.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Spreadsheet.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Controls.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Core.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Extensions">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Layout.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.LayoutControl.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.NavBar.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.NavBar.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Printing.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Ribbon.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.RichEdit.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.RichEdit.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Scheduler.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Scheduler.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Spreadsheet.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Spreadsheet.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.DXStyle.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.DXStyle.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.HybridApp.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.HybridApp.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.LightGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.LightGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.MetropolisDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.MetropolisLight.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Blue.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Blue.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Silver.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Silver.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Blue.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Blue.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Silver.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Silver.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013DarkGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013DarkGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013LightGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013LightGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Colorful.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Seven.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Seven.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.TouchlineDark.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.TouchlineDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.VS2010.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.VS2010.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraEditors.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraEditors.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraGrid.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraGrid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPdfViewer.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraPdfViewer.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraPrinting.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraPrinting.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraScheduler.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog, Version=5.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.5.0.0-beta05-test\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Autofac.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Autofac.6.2.0\lib\net45\Prism.Autofac.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=1.52.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.1.52.0\lib\dotnet\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Behaviors\DateEditCalendarMonth.cs" />
+    <Compile Include="Behaviors\RichEditBehavior.cs" />
+    <Compile Include="Behaviors\ShowRibbonBehavior.cs" />
+    <Compile Include="Behaviors\DataContextReferenceBehavior.cs" />
+    <Compile Include="Behaviors\SchedulerControlBehavior.cs" />
+    <Compile Include="Behaviors\NavBarControlExt.cs" />
+    <Compile Include="Behaviors\BackgroundAnimationElement.cs" />
+    <Compile Include="Behaviors\MouseWaitCursor.cs" />
+    <Compile Include="Behaviors\UIElementBehavior.cs" />
+    <Compile Include="Behaviors\SchedulerControlExt.cs" />
+    <Compile Include="Behaviors\GridControlBehavior.cs" />
+    <Compile Include="ClientServerShared\UserErrorInformation.cs" />
+    <Compile Include="ControlsEx\ExtraLayoutControl.cs" />
+    <Compile Include="ControlsEx\ExtraLayoutGroup.cs" />
+    <Compile Include="ControlsEx\LoadingDecoratorEx.cs" />
+    <Compile Include="ControlsEx\GridEx.cs" />
+    <Compile Include="ControlsEx\RibbonControlEx.cs" />
+    <Compile Include="Converters\ComboBoxEdit2SourcePropertyNameConverter.cs" />
+    <Compile Include="Converters\BaseViewModelConverter.cs" />
+    <Compile Include="Converters\DebugMultiConverter.cs" />
+    <Compile Include="Converters\ObjectToThicknessConverter.cs" />
+    <Compile Include="Converters\ColorToStringConverter.cs" />
+    <Compile Include="Converters\IsLessThenZeroConverter.cs" />
+    <Compile Include="Converters\GuidNullConverter.cs" />
+    <Compile Include="Converters\ItemTypeToColorConverter.cs" />
+    <Compile Include="Converters\ObjectToBoolenConverter.cs" />
+    <Compile Include="Converters\DebugConverter.cs" />
+    <Compile Include="Exceptions\ExceptionLogger.cs" />
+    <Compile Include="Exceptions\LogicalExceptionValue.cs" />
+    <Compile Include="Exceptions\LogicalException.cs" />
+    <Compile Include="Helpers\BindingHelper.cs" />
+    <Compile Include="Helpers\ConvertFunc.cs" />
+    <Compile Include="Helpers\ClipboardRemoteFileFunc.cs" />
+    <Compile Include="Helpers\HolidaysFunc.cs" />
+    <Compile Include="Helpers\EnumItemsSource.cs" />
+    <Compile Include="Helpers\XDocumentFunc.cs" />
+    <Compile Include="Helpers\ViewModelExtensions.cs" />
+    <Compile Include="Helpers\FinanceDateHelper.cs" />
+    <Compile Include="Helpers\UnhandledExceptionProccesing.cs" />
+    <Compile Include="Helpers\NLog.cs" />
+    <Compile Include="Helpers\RuntimeHelper.cs" />
+    <Compile Include="Helpers\AssemblyHelper.cs" />
+    <Compile Include="Helpers\CloneHelper.cs" />
+    <Compile Include="Helpers\DecimalHelper.cs" />
+    <Compile Include="Helpers\OnCloseReturn.cs" />
+    <Compile Include="Helpers\DateTimeHelper.cs" />
+    <Compile Include="Helpers\PropertyHelper.cs" />
+    <Compile Include="Helpers\QueryHelper.cs" />
+    <Compile Include="Helpers\RegionHelper.cs" />
+    <Compile Include="Helpers\ServiceHelper.cs" />
+    <Compile Include="Helpers\TaskHelper.cs" />
+    <Compile Include="Helpers\BitmapFunc.cs" />
+    <Compile Include="Helpers\ColorFunc.cs" />
+    <Compile Include="Helpers\ExpressionFunc.cs" />
+    <Compile Include="Helpers\ColorResourcesHelper.cs" />
+    <Compile Include="Helpers\GuidHelper.cs" />
+    <Compile Include="Helpers\MessageBoxServiceExtExtensions.cs" />
+    <Compile Include="Helpers\DebugFunc.cs" />
+    <Compile Include="Helpers\DXSplashScreenHelper.cs" />
+    <Compile Include="Helpers\ResourceHelper.cs" />
+    <Compile Include="Helpers\DragDropHelper.cs" />
+    <Compile Include="Helpers\EnumFunc.cs" />
+    <Compile Include="Helpers\DispatcherUIHelper.cs" />
+    <Compile Include="Helpers\MessengerHelper.cs" />
+    <Compile Include="Helpers\LinqHelper.cs" />
+    <Compile Include="Helpers\ValidateHelper.cs" />
+    <Compile Include="LeftPanel\IFilterItem.cs" />
+    <Compile Include="Prints\RichTextFunc.cs" />
+    <Compile Include="Prints\IFilterItem.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Services\GlobalService.cs" />
+    <Compile Include="Static\GridDefaults.cs" />
+    <Compile Include="Static\SearchPanelInfo.cs" />
+    <Compile Include="Static\WindowInfo.cs" />
+    <Compile Include="Static\WidthInfo.cs" />
+    <Compile Include="Static\LayoutInfo.cs" />
+    <Compile Include="Behaviors\GridDragDropManagerEx.cs" />
+    <Compile Include="Behaviors\NavBarViewSelectionPreventBehavior.cs" />
+    <Compile Include="Behaviors\ReferenceBehavior.cs" />
+    <Compile Include="Behaviors\ShowWaitIndicator.cs" />
+    <Compile Include="Behaviors\CloseDXWindowsAction.cs" />
+    <Compile Include="Behaviors\CloseDXWindowsActionParam.cs" />
+    <Compile Include="Behaviors\ShowDXWindowsAction.cs" />
+    <Compile Include="Behaviors\TreeListDragDropManagerEx.cs" />
+    <Compile Include="Behaviors\OfficeNavigationBarSelectionPreventBehavior.cs" />
+    <Compile Include="Behaviors\TreeListViewShowingEditorBehavior.cs" />
+    <Compile Include="Behaviors\TreeListViewBehavior.cs" />
+    <Compile Include="Behaviors\TreeViewSelectedItemBehavior.cs" />
+    <Compile Include="ViewHelper\ViewHelper.cs" />
+    <Compile Include="ViewModels\ShellViewModel.cs" />
+    <Compile Include="Views\CommandPanelView.xaml.cs">
+      <DependentUpon>CommandPanelView.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Resources\Analysis\CustomerAnalysis.xlsx" />
+    <None Include="Resources\Analysis\ProductAnalysis.xlsx" />
+    <None Include="Resources\MailMerge\Employee of the Month.rtf" />
+    <None Include="Resources\MailMerge\Employee of the Month.snx" />
+    <None Include="Resources\MailMerge\Employee Probation Notice.rtf" />
+    <None Include="Resources\MailMerge\Employee Probation Notice.snx" />
+    <None Include="Resources\MailMerge\Employee Service Excellence.rtf" />
+    <None Include="Resources\MailMerge\Employee Service Excellence.snx" />
+    <None Include="Resources\MailMerge\Employee Thank You Note.rtf" />
+    <None Include="Resources\MailMerge\Employee Thank You Note.snx" />
+    <None Include="Resources\MailMerge\Order.snx" />
+    <None Include="Resources\MailMerge\Sales Analysys Report.snx" />
+    <None Include="Resources\MailMerge\Sales Invoice.snx" />
+    <None Include="Resources\MailMerge\Sales Order Summary Report.snx" />
+    <None Include="Resources\MailMerge\Sales Thank You.rtf" />
+    <None Include="Resources\MailMerge\Sales Thank You.snx" />
+    <None Include="Resources\MailMerge\Welcome to DevAV.rtf" />
+    <None Include="Resources\MailMerge\Welcome to DevAV.snx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\AppIcon.ico" />
+    <Resource Include="Resources\Buttons\glyph-mail-16.png" />
+    <Resource Include="Resources\Buttons\glyph-message-16.png" />
+    <Resource Include="Resources\Buttons\glyph-phone-16.png" />
+    <Resource Include="Resources\Buttons\glyph-video-16.png" />
+    <Resource Include="Resources\Controls\icon-export-40.png" />
+    <Resource Include="Resources\Controls\icon-page-next-16.png" />
+    <Resource Include="Resources\Controls\icon-page-prev-16.png" />
+    <Resource Include="Resources\Controls\icon-pages-16.png" />
+    <Resource Include="Resources\Controls\icon-print-42x40.png" />
+    <Resource Include="Resources\Controls\icon-scale-16.png" />
+    <Resource Include="Resources\Doctor.png" />
+    <Resource Include="Resources\Employees\All.png" />
+    <Resource Include="Resources\Employees\Commission.png" />
+    <Resource Include="Resources\Employees\OnLeave.png" />
+    <Resource Include="Resources\Employees\Probation.png" />
+    <Resource Include="Resources\Employees\Salaried.png" />
+    <Resource Include="Resources\Employees\Terminated.png" />
+    <Resource Include="Resources\icon-about-16.png" />
+    <Resource Include="Resources\icon-about-32.png" />
+    <Resource Include="Resources\icon-add-column-16.png" />
+    <Resource Include="Resources\icon-add-file-16.png" />
+    <Resource Include="Resources\icon-buy-16.png" />
+    <Resource Include="Resources\icon-buy-32.png" />
+    <Resource Include="Resources\icon-card-16.png" />
+    <Resource Include="Resources\icon-card-32.png" />
+    <Resource Include="Resources\icon-change-view-16.png" />
+    <Resource Include="Resources\icon-change-view-32.png" />
+    <Resource Include="Resources\icon-close-16.png" />
+    <Resource Include="Resources\icon-close-32.png" />
+    <Resource Include="Resources\icon-cost-analysis-16.png" />
+    <Resource Include="Resources\icon-cost-analysis-32.png" />
+    <Resource Include="Resources\icon-data-panel-16.png" />
+    <Resource Include="Resources\icon-data-panel-32.png" />
+    <Resource Include="Resources\icon-delete-16.png" />
+    <Resource Include="Resources\icon-delete-32.png" />
+    <Resource Include="Resources\icon-driving-16.png" />
+    <Resource Include="Resources\icon-driving-32.png" />
+    <Resource Include="Resources\icon-edit-16.png" />
+    <Resource Include="Resources\icon-edit-32.png" />
+    <Resource Include="Resources\icon-email-16.png" />
+    <Resource Include="Resources\icon-expand-collapse-16.png" />
+    <Resource Include="Resources\icon-expand-collapse-32.png" />
+    <Resource Include="Resources\icon-export-16.png" />
+    <Resource Include="Resources\icon-export-32.png" />
+    <Resource Include="Resources\icon-export-40.png" />
+    <Resource Include="Resources\icon-filter-16.png" />
+    <Resource Include="Resources\icon-filter-32.png" />
+    <Resource Include="Resources\icon-fittopage-16.png" />
+    <Resource Include="Resources\icon-folder-panel-16.png" />
+    <Resource Include="Resources\icon-folder-panel-32.png" />
+    <Resource Include="Resources\icon-getting-started-16.png" />
+    <Resource Include="Resources\icon-getting-started-32.png" />
+    <Resource Include="Resources\icon-Hide-product-img-32.png" />
+    <Resource Include="Resources\icon-home-phone-16.png" />
+    <Resource Include="Resources\icon-list-16.png" />
+    <Resource Include="Resources\icon-list-32.png" />
+    <Resource Include="Resources\icon-mail-merge-16.png" />
+    <Resource Include="Resources\icon-mail-merge-32.png" />
+    <Resource Include="Resources\icon-mapit-16.png" />
+    <Resource Include="Resources\icon-mapit-32.png" />
+    <Resource Include="Resources\icon-meeting-16.png" />
+    <Resource Include="Resources\icon-meeting-32.png" />
+    <Resource Include="Resources\icon-mobile-phone-16.png" />
+    <Resource Include="Resources\icon-navigate-16.png" />
+    <Resource Include="Resources\icon-navigate-32.png" />
+    <Resource Include="Resources\icon-new-customers-16.png" />
+    <Resource Include="Resources\icon-new-customers-32.png" />
+    <Resource Include="Resources\icon-new-doc-16.png" />
+    <Resource Include="Resources\icon-new-doc-32.png" />
+    <Resource Include="Resources\icon-new-employee-16.png" />
+    <Resource Include="Resources\icon-new-employee-32.png" />
+    <Resource Include="Resources\icon-new-group-16.png" />
+    <Resource Include="Resources\icon-new-group-32.png" />
+    <Resource Include="Resources\icon-new-item-16.png" />
+    <Resource Include="Resources\icon-new-item-32.png" />
+    <Resource Include="Resources\icon-new-opportunities-16.png" />
+    <Resource Include="Resources\icon-new-opportunities-32.png" />
+    <Resource Include="Resources\icon-new-products-16.png" />
+    <Resource Include="Resources\icon-new-products-32.png" />
+    <Resource Include="Resources\icon-new-sales-16.png" />
+    <Resource Include="Resources\icon-new-sales-32.png" />
+    <Resource Include="Resources\icon-new-tasks-16.png" />
+    <Resource Include="Resources\icon-new-tasks-32.png" />
+    <Resource Include="Resources\icon-normal-bottom-16.png" />
+    <Resource Include="Resources\icon-open-doc-16.png" />
+    <Resource Include="Resources\icon-open-doc-32.png" />
+    <Resource Include="Resources\icon-opportunities-hight-32.png" />
+    <Resource Include="Resources\icon-opportunities-low-32.png" />
+    <Resource Include="Resources\icon-opportunities-medium-32.png" />
+    <Resource Include="Resources\icon-opportunities-unlike-32.png" />
+    <Resource Include="Resources\icon-page-next-16.png" />
+    <Resource Include="Resources\icon-page-prev-16.png" />
+    <Resource Include="Resources\icon-pages-16.png" />
+    <Resource Include="Resources\icon-panel-bottom-16.png" />
+    <Resource Include="Resources\icon-panel-bottom-32.png" />
+    <Resource Include="Resources\icon-panel-off-16.png" />
+    <Resource Include="Resources\icon-panel-off-32.png" />
+    <Resource Include="Resources\icon-panel-right-16.png" />
+    <Resource Include="Resources\icon-panel-right-32.png" />
+    <Resource Include="Resources\icon-print-16.png" />
+    <Resource Include="Resources\icon-print-32.png" />
+    <Resource Include="Resources\icon-print-42x40.png" />
+    <Resource Include="Resources\icon-print-due-date-32.png" />
+    <Resource Include="Resources\icon-print-exclude-evaluations-32.png" />
+    <Resource Include="Resources\icon-print-include-evaluations-32.png" />
+    <Resource Include="Resources\icon-print-preview-16.png" />
+    <Resource Include="Resources\icon-print-preview-32.png" />
+    <Resource Include="Resources\icon-print-quick-16.png" />
+    <Resource Include="Resources\icon-print-quick-32.png" />
+    <Resource Include="Resources\icon-print-sort-ascending-32.png" />
+    <Resource Include="Resources\icon-print-sort-descinding-32.png" />
+    <Resource Include="Resources\icon-print-start-date-32.png" />
+    <Resource Include="Resources\icon-reading-bottom-16.png" />
+    <Resource Include="Resources\icon-redo-16.png" />
+    <Resource Include="Resources\icon-redo-32.png" />
+    <Resource Include="Resources\icon-reset-changes-16.png" />
+    <Resource Include="Resources\icon-reset-changes-32.png" />
+    <Resource Include="Resources\icon-revers-sort-16.png" />
+    <Resource Include="Resources\icon-revers-sort-32.png" />
+    <Resource Include="Resources\icon-sales-analysis-16.png" />
+    <Resource Include="Resources\icon-sales-analysis-32.png" />
+    <Resource Include="Resources\icon-sales-period-lifetime-16.png" />
+    <Resource Include="Resources\icon-sales-period-lifetime-32.png" />
+    <Resource Include="Resources\icon-sales-period-month-16.png" />
+    <Resource Include="Resources\icon-sales-period-month-32.png" />
+    <Resource Include="Resources\icon-sales-period-year-16.png" />
+    <Resource Include="Resources\icon-sales-period-year-32.png" />
+    <Resource Include="Resources\icon-save-16.png" />
+    <Resource Include="Resources\icon-save-32.png" />
+    <Resource Include="Resources\icon-save-as-16.png" />
+    <Resource Include="Resources\icon-save-as-32.png" />
+    <Resource Include="Resources\icon-save-close-16.png" />
+    <Resource Include="Resources\icon-save-close-32.png" />
+    <Resource Include="Resources\icon-scale-16.png" />
+    <Resource Include="Resources\icon-show-product-img-32.png" />
+    <Resource Include="Resources\icon-skype-16.png" />
+    <Resource Include="Resources\icon-Sort-by-Invoice-32.png" />
+    <Resource Include="Resources\icon-Sort-by-OrderDate-32.png" />
+    <Resource Include="Resources\icon-support-16.png" />
+    <Resource Include="Resources\icon-support-32.png" />
+    <Resource Include="Resources\icon-task-16.png" />
+    <Resource Include="Resources\icon-task-32.png" />
+    <Resource Include="Resources\icon-task-active-16.png" />
+    <Resource Include="Resources\icon-task-active-32.png" />
+    <Resource Include="Resources\icon-task-assignto-16.png" />
+    <Resource Include="Resources\icon-task-assignto-32.png" />
+    <Resource Include="Resources\icon-task-attachment-16.png" />
+    <Resource Include="Resources\icon-task-attachment-32.png" />
+    <Resource Include="Resources\icon-task-categorize-16.png" />
+    <Resource Include="Resources\icon-task-categorize-32.png" />
+    <Resource Include="Resources\icon-task-currentview-16.png" />
+    <Resource Include="Resources\icon-task-currentview-32.png" />
+    <Resource Include="Resources\icon-task-detailview-16.png" />
+    <Resource Include="Resources\icon-task-detailview-32.png" />
+    <Resource Include="Resources\icon-task-highpriority-16.png" />
+    <Resource Include="Resources\icon-task-lowpriority-16.png" />
+    <Resource Include="Resources\icon-task-markcomplete-16.png" />
+    <Resource Include="Resources\icon-task-markcomplete-32.png" />
+    <Resource Include="Resources\icon-task-prioritized-16.png" />
+    <Resource Include="Resources\icon-task-prioritized-32.png" />
+    <Resource Include="Resources\icon-task-private-16.png" />
+    <Resource Include="Resources\icon-task-simplelist-16.png" />
+    <Resource Include="Resources\icon-task-simplelist-32.png" />
+    <Resource Include="Resources\icon-undo-16.png" />
+    <Resource Include="Resources\icon-undo-32.png" />
+    <Resource Include="Resources\icon-view-reset-16.png" />
+    <Resource Include="Resources\icon-view-reset-32.png" />
+    <Resource Include="Resources\icon-walking-16.png" />
+    <Resource Include="Resources\icon-walking-32.png" />
+    <Resource Include="Resources\Jolt-Logo.png" />
+    <Resource Include="Resources\MapItems\icon-A-24.png" />
+    <Resource Include="Resources\MapItems\icon-A-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-bear-left-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-bear-right-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-forward-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-left-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-right-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-turn-left-32.png" />
+    <Resource Include="Resources\MapItems\icon-arrow-turn-right-32.png" />
+    <Resource Include="Resources\MapItems\icon-B-24.png" />
+    <Resource Include="Resources\MapItems\icon-B-32.png" />
+    <Resource Include="Resources\MapItems\icon-driving-14.png" />
+    <Resource Include="Resources\MapItems\icon-revert-direction-14.png" />
+    <Resource Include="Resources\MapItems\icon-walking-14.png" />
+    <Resource Include="Resources\Miss.png" />
+    <Resource Include="Resources\Modules\icon-nav-customers-32.png" />
+    <Resource Include="Resources\Modules\icon-nav-employees-32.png" />
+    <Resource Include="Resources\Modules\icon-nav-opportunities-32.png" />
+    <Resource Include="Resources\Modules\icon-nav-products-32.png" />
+    <Resource Include="Resources\Modules\icon-nav-sales-32.png" />
+    <Resource Include="Resources\Modules\icon-nav-tasks-32.png" />
+    <Resource Include="Resources\Mr.png" />
+    <Resource Include="Resources\Mrs.png" />
+    <Resource Include="Resources\Ms.png" />
+    <Resource Include="Resources\Overview-Buy-Normal.png" />
+    <Resource Include="Resources\Overview-Getting-Started-Normal.png" />
+    <Resource Include="Resources\Overview-Logo.png" />
+    <Resource Include="Resources\Overview-Support-Normal.png" />
+    <Resource Include="Resources\PrintItems\icon-cusomer-profile-report-32.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-contact-directory-16.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-contact-directory-32.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-profile-report-16.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-sale-detalis-16.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-sale-detalis-32.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-sales-summary-16.png" />
+    <Resource Include="Resources\PrintItems\icon-customer-sales-summary-32.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-directory-16.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-directory-32.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-profile-16.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-profile-32.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-summary-16.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-summary-32.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-task-list-16.png" />
+    <Resource Include="Resources\PrintItems\icon-employee-task-list-32.png" />
+    <Resource Include="Resources\PrintItems\icon-product-order-detail-16.png" />
+    <Resource Include="Resources\PrintItems\icon-product-order-detail-32.png" />
+    <Resource Include="Resources\PrintItems\icon-product-sales-summary-16.png" />
+    <Resource Include="Resources\PrintItems\icon-product-sales-summary-32.png" />
+    <Resource Include="Resources\PrintItems\icon-product-specification-summary-16.png" />
+    <Resource Include="Resources\PrintItems\icon-product-specification-summary-32.png" />
+    <Resource Include="Resources\PrintItems\icon-sales-by-store-16.png" />
+    <Resource Include="Resources\PrintItems\icon-sales-invoice-16.png" />
+    <Resource Include="Resources\PrintItems\icon-sales-report-16.png" />
+    <Resource Include="Resources\PrintItems\Preview\DefaultPrinter_32x32.png" />
+    <Resource Include="Resources\PrintItems\Preview\Fax_32x32.png" />
+    <Resource Include="Resources\PrintItems\Preview\Printer_32x32.png" />
+    <Resource Include="Resources\Priority\HighPriority.png" />
+    <Resource Include="Resources\Priority\LowPriority.png" />
+    <Resource Include="Resources\Priority\MediumPriority.png" />
+    <Resource Include="Resources\Priority\NormalPriority.png" />
+    <Resource Include="Resources\Products\All.png" />
+    <Resource Include="Resources\Products\Automation.png" />
+    <Resource Include="Resources\Products\Monitors.png" />
+    <Resource Include="Resources\Products\Projectors.png" />
+    <Resource Include="Resources\Products\TVs.png" />
+    <Resource Include="Resources\Products\VideoPlayers.png" />
+    <Resource Include="Resources\QuickItems\icon-customer-quick-employees-16.png" />
+    <Resource Include="Resources\QuickItems\icon-customer-quick-locations-16.png" />
+    <Resource Include="Resources\QuickItems\icon-customer-quick-sales-16.png" />
+    <Resource Include="Resources\QuickItems\icon-employee-quick-award-16.png" />
+    <Resource Include="Resources\QuickItems\icon-employee-quick-exellece-16.png" />
+    <Resource Include="Resources\QuickItems\icon-employee-quick-probation-notice-16.png" />
+    <Resource Include="Resources\QuickItems\icon-employee-quick-thank-16.png" />
+    <Resource Include="Resources\QuickItems\icon-employee-quick-welcome-16.png" />
+    <Resource Include="Resources\QuickItems\icon-product-quick-comparisons-16.png" />
+    <Resource Include="Resources\QuickItems\icon-product-quick-sales-report-16.png" />
+    <Resource Include="Resources\QuickItems\icon-product-quick-shippments-16.png" />
+    <Resource Include="Resources\QuickItems\icon-product-quick-top-salesperson-16.png" />
+    <Resource Include="Resources\QuickItems\icon-sales-quick-invoice-16.png" />
+    <Resource Include="Resources\QuickItems\icon-sales-quick-report-16.png" />
+    <Resource Include="Resources\QuickItems\icon-sales-quick-summary-16.png" />
+    <Resource Include="Resources\QuickItems\icon-sales-quick-thankyou-16.png" />
+    <Resource Include="Resources\RibbonStyle\Office2007_16x16.png" />
+    <Resource Include="Resources\RibbonStyle\Office2007_32x32.png" />
+    <Resource Include="Resources\RibbonStyle\Office2010_16x16.png" />
+    <Resource Include="Resources\RibbonStyle\Office2010_32x32.png" />
+    <Resource Include="Resources\RibbonStyle\OfficeSlim_16x16.png" />
+    <Resource Include="Resources\RibbonStyle\OfficeSlim_32x32.png" />
+    <Resource Include="Resources\RibbonStyle\TabletOffice_16x16.png" />
+    <Resource Include="Resources\RibbonStyle\TabletOffice_32x32.png" />
+    <Resource Include="Resources\SplashScreen\Image.png" />
+    <Resource Include="Resources\SplashScreen\Logo.png" />
+    <Resource Include="Resources\SplashScreen\Shadow.png" />
+    <Resource Include="Resources\Tasks\icon-completed-16.png" />
+    <Resource Include="Resources\Tasks\icon-deferred-16.png" />
+    <Resource Include="Resources\Tasks\icon-droplet-water-32.png" />
+    <Resource Include="Resources\Tasks\icon-inProgress-16.png" />
+    <Resource Include="Resources\Tasks\icon-needAssistance-16.png" />
+    <Resource Include="Resources\Tasks\icon-notStarted-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followup-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followup-32.png" />
+    <Resource Include="Resources\Tasks\icon-task-followupall-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followupcustom-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followupnextweek-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followupnodate-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followupthisweek-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followuptoday-16.png" />
+    <Resource Include="Resources\Tasks\icon-task-followuptomorrow-16.png" />
+    <Resource Include="Resources\UISuperHero.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Themes\Templates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Templates2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\DataEditorTypesTemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Common.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CommandPanelView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Miss9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Mrs9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Doctor9.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MedicalService.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\MedicalSupply.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-new-professional-association-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-new-professional-association-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-actions-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-actions-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-make-header-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-make-header-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-move-another-family-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-family-move-another-family-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\specialist-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\specialist-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-actions-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-actions-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-expand-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-expand-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-collapse-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-tree-collapse-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\insurance-provider-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\insurance-provider-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\insurance-providers-view-group-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\insurance-providers-view-group-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\professional-association-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\professional-association-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\appointment-book-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\appointment-book-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Modules\icon-nav-finances-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\appointment-status-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\appointment-status-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\referrer-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\referrer-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Profibiz.PracticeManager.InfrastructureExt\Profibiz.PracticeManager.InfrastructureExt.csproj">
+      <Project>{d3b37908-de44-4835-b539-18633c8f6647}</Project>
+      <Name>Profibiz.PracticeManager.InfrastructureExt</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Member.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Header.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Single.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-new-payment-16.png" />
+    <Resource Include="Resources\icon-new-payment-24.png" />
+    <Resource Include="Resources\icon-new-payment-256.png" />
+    <Resource Include="Resources\icon-new-payment-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-refund-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-refund-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-refund-112.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\reminder-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\select-all-16.png" />
+    <Resource Include="Resources\select-all-32.png" />
+    <Resource Include="Resources\select-none-16.png" />
+    <Resource Include="Resources\select-none-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-PaidProblem-SentButNotApproved-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-PaidProblem-ApprovedButNotPaidToUs-16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-refcharge-112.png" />
+    <Resource Include="Resources\icon-refcharge-16.png" />
+    <Resource Include="Resources\icon-refcharge-32.png" />
+  </ItemGroup>
+  <Import Project="..\Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems" Label="Shared" />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.2\build\dotnet\Fody.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

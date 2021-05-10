@@ -1,0 +1,149 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxbc="http://schemas.devexpress.com/winfx/2008/xaml/bars/internal"
+    xmlns:dxbt="http://schemas.devexpress.com/winfx/2008/xaml/bars/themekeys"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxtEx="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <dx:BooleanToVisibilityConverter x:Key="boolToVisibilityConverter" />
+    <dx:BooleanToVisibilityConverter x:Key="invertBoolToVisibilityConverter" Invert="True" />
+    <dx:ControlBrushesToVisibilityConverter x:Key="controlToVisibilityConverter" />
+    <dx:ControlBrushesToVisibilityConverter x:Key="invertControlToVisibilityConverter" Invert="True" />
+
+    <!--  @@@ devexpress.xpf.core\devexpress.xpf.core\bars\themes\generic\gallery.xaml  -->
+    <!--  нет изменений между 16.1 и 16.2  -->
+    <ControlTemplate x:Key="{dxbt:GalleryItemControlThemeKey ResourceKey=DefaultControlTemplate, ThemeName=Office2013DarkGray}" TargetType="{x:Type dxb:GalleryItemControl}">
+        <!--  BEGIN WPF  -->
+        <ControlTemplate.Resources>
+            <PopupAnimation x:Key="{x:Static SystemParameters.ToolTipPopupAnimationKey}">None</PopupAnimation>
+        </ControlTemplate.Resources>
+        <!--  END WPF  -->
+
+        <Grid
+            x:Name="PART_Panel"
+            Margin="{Binding Path=(dxb:GalleryControl.GalleryControl).ActualItemMargin, RelativeSource={RelativeSource Self}}"
+            Background="{Binding Path=DataContext.BackgroundColor}"
+            Visibility="{Binding Path=Item.IsVisible, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibilityConverter}}">
+            <dxb:ItemBorderControl
+                x:Name="PART_Border"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch"
+                NormalTemplate="{Binding Path=GroupControl.GroupsControl.ItemBorderTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+
+            <dxb:SplitLayoutPanel Content1Location="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphLocation, RelativeSource={RelativeSource Self}}" Style="{DynamicResource {dxbt:GalleryItemControlThemeKey ResourceKey=SplitLayoutStyle, ThemeName=Office2013DarkGray}}">
+
+                <dxb:SplitLayoutPanel.Content1>
+                    <Grid
+                        Margin="{Binding Path=(dxb:GalleryControl.GalleryControl).ActualItemGlyphMargin, RelativeSource={RelativeSource Self}}"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Visibility="{Binding Path=ActualIsItemGlyphVisible, RelativeSource={RelativeSource Mode=TemplatedParent}, Converter={StaticResource boolToVisibilityConverter}}">
+
+                        <dxb:ItemBorderControl
+                            x:Name="PART_GlyphBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            NormalTemplate="{Binding Path=GroupControl.GroupsControl.ItemGlyphBorderTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                            Visibility="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.IsItemGlyphVisible, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource boolToVisibilityConverter}}" />
+                        <dxb:ContentViewport
+                            x:Name="PART_GlyphViewport"
+                            HorizontalContentAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphHorizontalAlignment, RelativeSource={RelativeSource Mode=Self}}"
+                            VerticalContentAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphVerticalAlignment, RelativeSource={RelativeSource Mode=Self}}">
+                            <dxc:ImagePixelSnapper>
+                                <dxc:DXImage
+                                    x:Name="PART_Image"
+                                    Width="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphSize.Width, RelativeSource={RelativeSource Mode=Self}}"
+                                    Height="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphSize.Height, RelativeSource={RelativeSource Mode=Self}}"
+                                    Margin="{Binding Path=(dxb:GalleryControl.GalleryControl).ActualItemGlyphBorderPadding, RelativeSource={RelativeSource Self}}"
+                                    RenderOptions.BitmapScalingMode="HighQuality"
+                                    SnapsToDevicePixels="True"
+                                    Source="{Binding Path=Item.Glyph, RelativeSource={RelativeSource Mode=TemplatedParent}}"
+                                    Stretch="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemGlyphStretch, RelativeSource={RelativeSource Mode=Self}}" />
+                            </dxc:ImagePixelSnapper>
+                        </dxb:ContentViewport>
+
+                    </Grid>
+
+                </dxb:SplitLayoutPanel.Content1>
+                <dxb:SplitLayoutPanel.Content2>
+
+                    <dxb:ContentViewport
+                        x:Name="PART_ContentViewport"
+                        HorizontalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemContentHorizontalAlignment, RelativeSource={RelativeSource Mode=Self}}"
+                        VerticalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemContentVerticalAlignment, RelativeSource={RelativeSource Mode=Self}}"
+                        HorizontalContentAlignment="Stretch"
+                        VerticalContentAlignment="Stretch"
+                        Visibility="{Binding Path=ActualIsItemContentVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource boolToVisibilityConverter}}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+
+                            <ContentControl
+                                Name="PART_Caption"
+                                Grid.Row="0"
+                                Margin="{Binding Path=(dxb:GalleryControl.GalleryControl).ActualItemCaptionMargin, RelativeSource={RelativeSource Self}}"
+                                HorizontalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemCaptionHorizontalAlignment, RelativeSource={RelativeSource Self}}"
+                                VerticalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemCaptionVerticalAlignment, RelativeSource={RelativeSource Self}}"
+                                Content="{TemplateBinding ActualCaption}"
+                                ContentTemplate="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemCaptionTemplate, RelativeSource={RelativeSource Mode=Self}}"
+                                Focusable="False"
+                                Foreground="{Binding Path=DataContext.ForegroundColor}"
+                                IsTabStop="False"
+                                SnapsToDevicePixels="True"
+                                Style="{TemplateBinding ActualCaptionTextStyle}"
+                                Visibility="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.IsItemCaptionVisible, RelativeSource={RelativeSource Self}, Converter={StaticResource boolToVisibilityConverter}}" />
+
+
+                            <ContentControl
+                                Name="PART_Description"
+                                Grid.Row="1"
+                                Margin="{Binding Path=(dxb:GalleryControl.GalleryControl).ActualItemDescriptionMargin, RelativeSource={RelativeSource Self}}"
+                                HorizontalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemDescriptionHorizontalAlignment, RelativeSource={RelativeSource Mode=Self}}"
+                                VerticalAlignment="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemDescriptionVerticalAlignment, RelativeSource={RelativeSource Mode=Self}}"
+                                Content="{TemplateBinding ActualDescription}"
+                                ContentTemplate="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.ItemDescriptionTemplate, RelativeSource={RelativeSource Mode=Self}}"
+                                Focusable="False"
+                                IsTabStop="False"
+                                SnapsToDevicePixels="True"
+                                Style="{TemplateBinding ActualDescriptionTextStyle}"
+                                Visibility="{Binding Path=(dxb:GalleryControl.GalleryControl).Gallery.IsItemDescriptionVisible, RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource boolToVisibilityConverter}}" />
+                        </Grid>
+                    </dxb:ContentViewport>
+
+                </dxb:SplitLayoutPanel.Content2>
+
+            </dxb:SplitLayoutPanel>
+            <VisualStateManager.VisualStateGroups>
+                <VisualStateGroup x:Name="EnabledStates">
+                    <VisualState x:Name="Enabled">
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Panel"
+                                Storyboard.TargetProperty="Opacity"
+                                To="1"
+                                Duration="0" />
+                        </Storyboard>
+                    </VisualState>
+                    <VisualState x:Name="Disabled">
+                        <Storyboard>
+                            <DoubleAnimation
+                                Storyboard.TargetName="PART_Panel"
+                                Storyboard.TargetProperty="Opacity"
+                                To="0.35"
+                                Duration="0" />
+                        </Storyboard>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateManager.VisualStateGroups>
+        </Grid>
+    </ControlTemplate>
+
+</ResourceDictionary>

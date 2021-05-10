@@ -1,0 +1,285 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxcn="http://schemas.devexpress.com/winfx/2008/xaml/core/internal"
+                    xmlns:dxtEx="clr-namespace:DevExpress.Xpf.Utils.Themes;assembly=DevExpress.Xpf.Core.v16.1"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dxght="clr-namespace:DevExpress.Xpf.Grid.HitTest"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes">
+  <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+  <Style x:Key="{dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle}"
+         TargetType="{x:Type dxg:LightweightCellEditor}">
+    <Setter Property="dxg:LightweightCellEditor.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:LightweightCellEditor.SelectionState" Value="CellMerge">
+        <Setter Property="dxg:LightweightCellEditor.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellMergeNoneBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:LightweightCellEditor.SelectionState" Value="Focused">
+        <Setter Property="dxg:LightweightCellEditor.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBorderFocusedBrush}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellTextFocusedBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:LightweightCellEditor.SelectionState" Value="Selected">
+        <Setter Property="dxg:LightweightCellEditor.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderSelectedBrush}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextRowSelectedBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:LightweightCellEditor.SelectionState" Value="FocusedAndSelected">
+        <Setter Property="dxg:LightweightCellEditor.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderFocusedBrush}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextFocusedBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:LightweightCellEditor.RowSelectionState" Value="Focused">
+        <Setter Property="dxg:LightweightCellEditor.BorderBrush"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBorderFocusedBorderBrush}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style TargetType="{x:Type dxg:RowControl}">
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="dxg:RowControl.CellForegroundBrushes"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellForegroundBrushes}}"/>
+    <Setter Property="dxg:RowControl.CellBackgroundBrushes"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBackgroundBrushes}}"/>
+    <Setter Property="Control.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Setter Property="dxg:RowControl.RowFitBorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Setter Property="Control.Background"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderNoneBrush}}"/>
+    <Setter Property="Control.Foreground"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowTemplate}}"/>
+    <Setter Property="dxg:ToolTipHelper.ShowTooltip" Value="{Binding Path=(dxe:BaseEdit.HasValidationError)}"/>
+    <Setter Property="dxg:ToolTipHelper.Content" Value="{Binding Path=(dxe:BaseEdit.ValidationError)}"/>
+    <Setter Property="dxg:ToolTipHelper.ContentTemplate"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowToolTipTemplate}}"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:RowControl.IsAlternateRow" Value="true">
+        <Setter Property="Control.Background" Value="{Binding Path=View.ActualAlternateRowBackground}"/>
+      </Trigger>
+      <Trigger Property="dxe:BaseEdit.HasValidationError" Value="true">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=ValidationErrorBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderSelectedBrush}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextRowSelectedBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:RowControl.SelectionState" Value="Focused">
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextFocusedBrush}}"/>
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderFocusedBrush}}"/>
+        <Setter Property="dxg:RowControl.RowFitBorderBrush"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBorderFocusedBorderBrush}}"/>
+      </Trigger>
+      <Trigger Property="dxg:RowControl.ShowVerticalLines" Value="false">
+        <Setter Property="dxg:RowControl.RowFitBorderBrush" Value="{x:Null}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style TargetType="{x:Type dxg:RowFixedLineSeparatorControl}">
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=FixedLineSeparatorTemplate}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowFixedLineSeparatorControl}">
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFixedLineSeparatorTemplate}}"/>
+  </Style>
+  <Style x:Key="RowIndicatorStyleBase" TargetType="{x:Type dxg:RowIndicator}">
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Control.Foreground"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=ForegroundBrush}}"/>
+    <Setter Property="dxg:RowIndicator.FocusedContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=FocusedIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.ChangedContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=ChangedIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.NewItemRowContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=NewItemRowIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.EditingContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=EditingIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.ErrorContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=ErrorIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.FocusedErrorContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=FocusedErrorIconTemplate}}"/>
+    <Setter Property="dxg:RowIndicator.AutoFilterRowContentTemplate"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=AutoFilterRowIconTemplate}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:RowIndicator}" BasedOn="{StaticResource RowIndicatorStyleBase}">
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=RowIndicatorTemplate}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowIndicator}" BasedOn="{StaticResource RowIndicatorStyleBase}">
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=GroupRowIndicatorTemplate}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:RowDetailsControl}">
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowDetailsTemplate}}"/>
+    <Setter Property="Control.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowControl}">
+    <Setter Property="dxg:GroupRowControl.FocusOffset"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFocusOffset}}"/>
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Control.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderBrush}}"/>
+    <Setter Property="dxg:GroupRowControl.BottomLineMargin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBottomLineThickness}}"/>
+    <Setter Property="dxg:GroupRowControl.RowFitBorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Setter Property="Control.Background"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackground}}"/>
+    <Setter Property="Control.FontWeight"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFontWeight}}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowLightweightTemplate}}"/>
+    <Setter Property="TextBlock.Foreground"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowForeground}}"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:GroupRowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackgroundSelected}}"/>
+      </Trigger>
+      <Trigger Property="dxg:GroupRowControl.SelectionState" Value="Focused">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackgroundFocused}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFocusForeground}}"/>
+        <Setter Property="dxg:GroupRowControl.RowFitBorderBrush"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBorderFocusedBorderBrush}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupCardRowControl}">
+    <Setter Property="dxg:GroupRowControl.FocusOffset"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFocusOffset}}"/>
+    <Setter Property="FrameworkElement.FocusVisualStyle" Value="{x:Null}"/>
+    <Setter Property="Control.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderBrush}}"/>
+    <Setter Property="dxg:GroupRowControl.BottomLineMargin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBottomLineThickness}}"/>
+    <Setter Property="dxg:GroupRowControl.RowFitBorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Setter Property="Control.Background"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackground}}"/>
+    <Setter Property="Control.FontWeight"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFontWeight}}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:CardViewThemeKey ResourceKey=GroupRowLightweightTemplate}}"/>
+    <Setter Property="TextBlock.Foreground"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowForeground}}"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:GroupRowControl.SelectionState" Value="Selected">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackgroundSelected}}"/>
+      </Trigger>
+      <Trigger Property="dxg:GroupRowControl.SelectionState" Value="Focused">
+        <Setter Property="Control.Background"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBackgroundFocused}}"/>
+        <Setter Property="TextBlock.Foreground"
+                Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowFocusForeground}}"/>
+        <Setter Property="dxg:GroupRowControl.RowFitBorderBrush"
+                Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=CellBorderFocusedBorderBrush}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowCheckBoxSelector}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <dxe:CheckEdit x:Name="PART_CheckBoxRowSelector" Padding="0" Focusable="false" VerticalAlignment="Center"
+                         Margin="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=CheckBoxSelectorMargin}}"
+                         IsChecked="{Binding AllItemsSelected, Mode=TwoWay}" IsReadOnly="{Binding View.HasValidationError}">
+            <dxg:GridViewHitInfoBase.HitTestAcceptor>
+              <dxght:GroupRowCheckBoxTableViewHitTestAcceptor/>
+            </dxg:GridViewHitInfoBase.HitTestAcceptor>
+          </dxe:CheckEdit>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowExpandButton}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Left"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+    <Setter Property="FrameworkElement.Margin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowExpandButtonMargin}}"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:GroupRowExpandButton}">
+          <dxg:GridToggleStateButton x:Name="PART_ToggleButton" ClickMode="Press"
+                                     IsChecked="{TemplateBinding dxg:GridExpandButtonBase.IsChecked}"
+                                     Command="{TemplateBinding dxg:GridExpandButtonBase.Command}"
+                                     CommandParameter="{TemplateBinding dxg:GridExpandButtonBase.CommandParameter}"
+                                     Foreground="{TemplateBinding Control.Foreground}"
+                                     Style="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=ExpandButtonStyle}}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupValuePresenter}">
+    <Setter Property="FrameworkElement.Margin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupValuePresenterMargin}}"/>
+    <Setter Property="FrameworkElement.VerticalAlignment" Value="Center"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:GroupValuePresenter}">
+          <StackPanel Orientation="Horizontal"
+                      Margin="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowContentMargin}}">
+            <TextBlock Text="{TemplateBinding dxg:GroupValuePresenter.GroupColumnHeaderText}"/>
+            <TextBlock x:Name="PART_GroupValue"/>
+          </StackPanel>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowDefaultSummaryControl}">
+    <Setter Property="FrameworkElement.Margin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowDefaultSummaryPadding}}"/>
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+    <Setter Property="dx:ItemsControlBase.ItemsPanel">
+      <Setter.Value>
+        <ControlTemplate>
+          <StackPanel Orientation="Horizontal"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowDefaultSummaryItemControl}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:GroupRowDefaultSummaryItemControl}">
+          <TextBlock Text="{TemplateBinding dxg:GroupRowDefaultSummaryItemControl.Text}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="FrameworkElement.Margin"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowDefaultSummaryMargin}}"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:GroupRowColumnSummaryControl}">
+    <Setter Property="dxg:GroupRowColumnSummaryControl.BorderBrushes"
+            Value="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowColumnSummaryBrushes}}"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:GroupRowColumnSummaryControl}">
+          <Border Name="PART_Border" Background="{TemplateBinding Control.Background}"
+                  Padding="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupColumnSummaryPadding}}"
+                  Margin="{DynamicResource {dxgt:GroupRowThemeKey ResourceKey=GroupRowBottomLineThickness}}"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

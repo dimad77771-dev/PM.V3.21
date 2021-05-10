@@ -1,0 +1,685 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{85E2A96B-AD25-46CA-B501-F5EEE1AB1345}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Profibiz.PracticeManager.Navigation</RootNamespace>
+    <AssemblyName>Profibiz.PracticeManager.Navigation</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DLL_FRONTEND</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac">
+      <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Data.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Data.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.DevAV.v16.2.Data">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.DevAV.v16.2.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Images.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Images.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Mvvm.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Mvvm.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Printing.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Printing.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Controls.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Controls.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Core.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Core.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Docking.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Docking.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Grid.v16.2.Extensions">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Grid.v16.2.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Layout.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Layout.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.LayoutControl.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.LayoutControl.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.NavBar.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.NavBar.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Printing.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Printing.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Ribbon.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Ribbon.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Scheduler.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Scheduler.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.DXStyle.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.DXStyle.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.HybridApp.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.HybridApp.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.LightGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.LightGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisDark.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.MetropolisDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.MetropolisLight.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.MetropolisLight.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Blue.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Blue.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2007Silver.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2007Silver.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Blue.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Blue.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2010Silver.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2010Silver.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013DarkGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013DarkGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2013LightGray.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2013LightGray.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Black.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Black.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016Colorful.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016Colorful.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Office2016White.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Office2016White.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.Seven.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.Seven.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.TouchlineDark.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.TouchlineDark.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpf.Themes.VS2010.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpf.Themes.VS2010.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.Xpo.v16.2">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.Xpo.v16.2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevExpress.XtraScheduler.v16.2.Core">
+      <HintPath>C:\Program Files (x86)\DevExpress 16.2\Components\Bin\Framework\DevExpress.XtraScheduler.v16.2.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Core.6.2.0\lib\net45\Prism.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Prism.Wpf, Version=6.2.0.0, Culture=neutral, PublicKeyToken=91a96d2a154366d8, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\Prism.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="PropertyChanged, Version=1.52.0.0, Culture=neutral, PublicKeyToken=ee3ee20bcf148ddd, processorArchitecture=MSIL">
+      <HintPath>..\packages\PropertyChanged.Fody.1.52.0\lib\dotnet\PropertyChanged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Prism.Wpf.6.2.0\lib\net45\System.Windows.Interactivity.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="LookupsEditViewModel\OpenParams.cs" />
+    <Compile Include="NavigationModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModels\ChargeoutRecipientesViewModel.cs" />
+    <Compile Include="ViewModels\ChargeoutStatusesViewModel.cs" />
+    <Compile Include="ViewModels\OneChargeoutRecipientViewModel.cs" />
+    <Compile Include="ViewModels\OneChargeoutStatusViewModel.cs" />
+    <Compile Include="ViewModels\OnePatientNoteStatusViewModel.cs" />
+    <Compile Include="ViewModels\PatientNoteStatusesViewModel.cs" />
+    <Compile Include="ViewModels\OnePublicHolidayViewModel.cs" />
+    <Compile Include="ViewModels\OneSupplierViewModel.cs" />
+    <Compile Include="ViewModels\PublicHolidaysViewModel.cs" />
+    <Compile Include="ViewModels\CalendarEventStatusesViewModel.cs" />
+    <Compile Include="ViewModels\InvoiceStatusesViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentStatusesViewModel.cs" />
+    <Compile Include="ViewModels\BottomNavigationPanelViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceProvidersViewGroupsViewModel.cs" />
+    <Compile Include="ViewModels\CategoriesViewModel.cs" />
+    <Compile Include="ViewModels\OneCalendarEventStatusViewModel.cs" />
+    <Compile Include="ViewModels\OneInvoiceStatusViewModel.cs" />
+    <Compile Include="ViewModels\OneAppointmentStatusViewModel.cs" />
+    <Compile Include="ViewModels\OneAppointmentBookViewModel.cs" />
+    <Compile Include="ViewModels\OneCategoryViewModel.cs" />
+    <Compile Include="ViewModels\OneReferrerViewModel.cs" />
+    <Compile Include="ViewModels\OneThirdPartyServiceProviderViewModel.cs" />
+    <Compile Include="ViewModels\OneProfessionalAssociationViewModel.cs" />
+    <Compile Include="ViewModels\AppointmentBooksViewModel.cs" />
+    <Compile Include="ViewModels\SuppliersViewModel.cs" />
+    <Compile Include="ViewModels\ReferrersViewModel.cs" />
+    <Compile Include="ViewModels\ThirdPartyServiceProvidersViewModel.cs" />
+    <Compile Include="ViewModels\ProfessionalAssociationsViewModel.cs" />
+    <Compile Include="ViewModels\MedicalServicesViewModel.cs" />
+    <Compile Include="ViewModels\LeftFilterLookupsViewModel.cs" />
+    <Compile Include="ViewModels\LeftNavigationPanelModel.cs" />
+    <Compile Include="ViewModels\LookupsEditViewModel.cs" />
+    <Compile Include="ViewModels\OneMedicalServiceViewModel.cs" />
+    <Compile Include="ViewModels\OneInsuranceProviderViewModel.cs" />
+    <Compile Include="ViewModels\InsuranceProvidersViewModel.cs" />
+    <Compile Include="Views\ChargeoutRecipientesView.xaml.cs">
+      <DependentUpon>ChargeoutRecipientesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ChargeoutStatusesView.xaml.cs">
+      <DependentUpon>ChargeoutStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneChargeoutRecipientView.xaml.cs">
+      <DependentUpon>OneChargeoutRecipientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneChargeoutStatusView.xaml.cs">
+      <DependentUpon>OneChargeoutStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OnePatientNoteStatusView.xaml.cs">
+      <DependentUpon>OnePatientNoteStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PatientNoteStatusesView.xaml.cs">
+      <DependentUpon>PatientNoteStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OnePublicHolidayView.xaml.cs">
+      <DependentUpon>OnePublicHolidayView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneSupplierView.xaml.cs">
+      <DependentUpon>OneSupplierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PublicHolidaysView.xaml.cs">
+      <DependentUpon>PublicHolidaysView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CalendarEventStatusesView.xaml.cs">
+      <DependentUpon>CalendarEventStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceStatusesView.xaml.cs">
+      <DependentUpon>InvoiceStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppointmentStatusesView.xaml.cs">
+      <DependentUpon>AppointmentStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BottomNavigationPanel.xaml.cs">
+      <DependentUpon>BottomNavigationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CategoriesView.xaml.cs">
+      <DependentUpon>CategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneCalendarEventStatusView.xaml.cs">
+      <DependentUpon>OneCalendarEventStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneInvoiceStatusView.xaml.cs">
+      <DependentUpon>OneInvoiceStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneAppointmentStatusView.xaml.cs">
+      <DependentUpon>OneAppointmentStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneAppointmentBookView.xaml.cs">
+      <DependentUpon>OneAppointmentBookView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneCategoryView.xaml.cs">
+      <DependentUpon>OneCategoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneReferrerView.xaml.cs">
+      <DependentUpon>OneReferrerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneThirdPartyServiceProviderView.xaml.cs">
+      <DependentUpon>OneThirdPartyServiceProviderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneProfessionalAssociationView.xaml.cs">
+      <DependentUpon>OneProfessionalAssociationView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\AppointmentBooksView.xaml.cs">
+      <DependentUpon>AppointmentBooksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonChargeoutRecipientesView.xaml.cs">
+      <DependentUpon>RibbonChargeoutRecipientesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonChargeoutStatusesView.xaml.cs">
+      <DependentUpon>RibbonChargeoutStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonPatientNoteStatusesView.xaml.cs">
+      <DependentUpon>RibbonPatientNoteStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonSuppliersView.xaml.cs">
+      <DependentUpon>RibbonSuppliersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SuppliersView.xaml.cs">
+      <DependentUpon>SuppliersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonPublicHolidaysView.xaml.cs">
+      <DependentUpon>RibbonPublicHolidaysView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonCalendarEventStatusesView.xaml.cs">
+      <DependentUpon>RibbonCalendarEventStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonInvoiceStatusesView.xaml.cs">
+      <DependentUpon>RibbonInvoiceStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonAppointmentStatusesView.xaml.cs">
+      <DependentUpon>RibbonAppointmentStatusesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonCategoriesView.xaml.cs">
+      <DependentUpon>RibbonCategoriesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonReferrersView.xaml.cs">
+      <DependentUpon>RibbonReferrersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonThirdPartyServiceProvidersView.xaml.cs">
+      <DependentUpon>RibbonThirdPartyServiceProvidersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReferrersView.xaml.cs">
+      <DependentUpon>ReferrersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ThirdPartyServiceProvidersView.xaml.cs">
+      <DependentUpon>ThirdPartyServiceProvidersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProfessionalAssociationsView.xaml.cs">
+      <DependentUpon>ProfessionalAssociationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MedicalServicesView.xaml.cs">
+      <DependentUpon>MedicalServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceProvidersViewGroupsView.xaml.cs">
+      <DependentUpon>InsuranceProvidersViewGroupsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeftFilterLookupsView.xaml.cs">
+      <DependentUpon>LeftFilterLookupsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LeftNavigationPanel.xaml.cs">
+      <DependentUpon>LeftNavigationPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LookupsEditView.xaml.cs">
+      <DependentUpon>LookupsEditView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InsuranceProvidersView.xaml.cs">
+      <DependentUpon>InsuranceProvidersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneMedicalServiceView.xaml.cs">
+      <DependentUpon>OneMedicalServiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneInsuranceProviderView.xaml.cs">
+      <DependentUpon>OneInsuranceProviderView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonAppointmentBooksView.xaml.cs">
+      <DependentUpon>RibbonAppointmentBooksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonProfessionalAssociationsView.xaml.cs">
+      <DependentUpon>RibbonProfessionalAssociationsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonMedicalServicesView.xaml.cs">
+      <DependentUpon>RibbonMedicalServicesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonInsuranceProvidersView.xaml.cs">
+      <DependentUpon>RibbonInsuranceProvidersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SchedulerDemoTimeZones.xaml.cs">
+      <DependentUpon>SchedulerDemoTimeZones.xaml</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+    <None Include="Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\ChargeoutRecipientesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ChargeoutStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneChargeoutRecipientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneChargeoutStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OnePatientNoteStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PatientNoteStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OnePublicHolidayView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneSupplierView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PublicHolidaysView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CalendarEventStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InvoiceStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AppointmentStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\BottomNavigationPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CategoriesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneCalendarEventStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneInvoiceStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneAppointmentStatusView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneAppointmentBookView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneCategoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneReferrerView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneThirdPartyServiceProviderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneProfessionalAssociationView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AppointmentBooksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonChargeoutRecipientesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonChargeoutStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonPatientNoteStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonSuppliersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SuppliersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonPublicHolidaysView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonCalendarEventStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonInvoiceStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonAppointmentStatusesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonCategoriesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonReferrersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonThirdPartyServiceProvidersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReferrersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ThirdPartyServiceProvidersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ProfessionalAssociationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\MedicalServicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InsuranceProvidersViewGroupsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LeftFilterLookupsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LeftNavigationPanel.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LookupsEditView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\InsuranceProvidersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneMedicalServiceView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneInsuranceProviderView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonAppointmentBooksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonProfessionalAssociationsView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonMedicalServicesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonInsuranceProvidersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SchedulerDemoTimeZones.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\AutoMapper\AutoMapper.Net4.csproj">
+      <Project>{8c955148-fa96-4f0d-880d-abb6770f54e9}</Project>
+      <Name>AutoMapper.Net4</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.InfrastructureExt\Profibiz.PracticeManager.InfrastructureExt.csproj">
+      <Project>{d3b37908-de44-4835-b539-18633c8f6647}</Project>
+      <Name>Profibiz.PracticeManager.InfrastructureExt</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Infrastructure\Profibiz.PracticeManager.Infrastructure.csproj">
+      <Project>{5c312cc4-42df-4d16-86df-22bcc096dbdb}</Project>
+      <Name>Profibiz.PracticeManager.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Model\Profibiz.PracticeManager.Model.csproj">
+      <Project>{07bbd65a-f9c8-48d6-85b7-8782df4f12db}</Project>
+      <Name>Profibiz.PracticeManager.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Patients.BusinessServiceInterface\Profibiz.PracticeManager.Patients.BusinessServiceInterface.csproj">
+      <Project>{8806DB9E-7610-4F41-A4AB-D48650BD727B}</Project>
+      <Name>Profibiz.PracticeManager.Patients.BusinessServiceInterface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Patients.BusinessService\Profibiz.PracticeManager.Patients.BusinessService.csproj">
+      <Project>{7C5749BB-5021-4F07-BFD0-AC67AC9E34E8}</Project>
+      <Name>Profibiz.PracticeManager.Patients.BusinessService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Shared\Profibiz.PracticeManager.Shared.csproj">
+      <Project>{928ecd98-3af0-42cd-bc8c-3bf68d49ae54}</Project>
+      <Name>Profibiz.PracticeManager.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Fody.1.29.2\build\dotnet\Fody.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

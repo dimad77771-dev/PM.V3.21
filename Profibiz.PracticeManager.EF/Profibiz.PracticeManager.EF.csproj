@@ -1,0 +1,539 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{14642C22-5F56-4D38-8896-876A6E7DC2F1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Profibiz.PracticeManager.EF</RootNamespace>
+    <AssemblyName>Profibiz.PracticeManager.EF</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppointmentBook.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentClinicalNote.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentInsuranceProvider.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentRemainder.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentRemaindersForProcessed.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentTreatmentNote.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarEventsForRemainder.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarEventStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarEventT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CalendarEventV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Category.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutPaycharge.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutPaychargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutRecipient.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutRefchargeT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutRefchargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ChargeoutV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CHECKVIEW_InsuranceCoverages.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="City.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ClientError.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailChargeAttachment.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailChargeRecipient.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailChargeT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailChargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailSendAttachment.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailSendRecipient.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailSendT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EmailSendV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceArticleV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverage.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageHolder.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageHolderService.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageItemCategory.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageItemHolder.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageService.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceCoverageV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePatientCategory2InsuranceArticleV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsurancePatientCategory2InvoiceClaimDetailV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceProvider.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceProvidersViewGroup.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InsuranceProvidersViewGroupMapping.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryBalance.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InventoryV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceAdvinfoV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceClaimDetail.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceClaimDetail2InsurancePatientCategoryV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceClaimStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceClaimT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceClaimV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicePayment.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicePaymentByDoctorAndPeriodView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoicePaymentByDoctorsV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceRefundT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceRefundV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="InvoiceV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalCondition.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalHistoryRecordT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalHistoryRecordV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MedicalServicesOrSupply.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ModelEx\IEntityCreatedUpdated.cs" />
+    <Compile Include="ModelEx\PracticeManagerEntities.cs" />
+    <Compile Include="NLogItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItemT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderItemV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderPayment.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="OrderV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Patient.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientAllFamilyMemberView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientDocument.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientFamilyMemberView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientInsuranceCoverageView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientInsuranceProvidersViewGroupView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientMedicalCondition.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientNote.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientNoteStatus.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientPhoto.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientsListView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaychargeRefchargeT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaychargeRefchargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaychargeT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaychargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentRefundT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentRefundV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PaymentV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollInfoResult.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollPaymentAllocationT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollPaymentAllocationV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollPaymentByDoctorAndPeriodView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollPaymentT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PayrollPaymentV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticeManagerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticeManagerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticeManagerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PracticeManagerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PracticeManagerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="PrintDocument.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ProfessionalAssociation.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="PublicHoliday.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefchargeT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefchargeV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Referrer.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefundT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RefundV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulerRecord.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SchedulerRecordItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProvider.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderAssociation.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderService.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ServiceProviderV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Supplier.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierPaymentRefundT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierPaymentRefundV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierPaymentT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierPaymentV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierRefundT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SupplierRefundV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Template.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ThirdPartyServiceProvider.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TreatmentPlanRecordT.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="TreatmentPlanRecordV.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserSetting.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="packages.config" />
+    <EntityDeploy Include="PracticeManagerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PracticeManagerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PracticeManagerModel.edmx.diagram">
+      <DependentUpon>PracticeManagerModel.edmx</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PracticeManagerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PracticeManagerModel.edmx</DependentUpon>
+      <LastGenOutput>PracticeManagerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PracticeManagerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PracticeManagerModel.edmx</DependentUpon>
+      <LastGenOutput>PracticeManagerModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

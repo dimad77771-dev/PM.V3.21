@@ -1,0 +1,83 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.SchedulerDemoTimeZones"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:collections="clr-namespace:System.Collections;assembly=mscorlib"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+             xmlns:dxschcore="clr-namespace:DevExpress.XtraScheduler;assembly=DevExpress.XtraScheduler.v16.2.Core"
+             xmlns:sys2="clr-namespace:System;assembly=mscorlib"
+             xmlns:dxdb="http://schemas.devexpress.com/winfx/2008/xaml/demobase">
+
+    <UserControl.Resources>
+        <Thickness x:Key="GroupMargin">0,10,0,0</Thickness>
+        <Thickness x:Key="ElementMargin">0,4,0,0</Thickness>
+        <Thickness x:Key="ListMargin">0,0,30,0</Thickness>
+        <Thickness x:Key="TextMargin">0,0,8,0</Thickness>
+        <sys2:Double x:Key="GroupIndent">10.0</sys2:Double>
+        <sys2:Double x:Key="ElementIndent">4.0</sys2:Double>
+        <!--<local:UsedAppointmentTypeToBoolConverter x:Key="usedAptTypeToBoolConverter" />
+        <local:AppointmentConflictsModeToBoolConverter x:Key="aptConflictsModeToBoolConverter" />-->
+    </UserControl.Resources>
+
+
+    <dxsch:SchedulerControl x:Name="scheduler"
+                            ActiveViewType="Day"
+                            VerticalAlignment="Stretch">
+        <dxsch:SchedulerControl.DayView>
+            <dxsch:DayView DayCount="3">
+                <dxsch:DayView.TimeRulers>
+                    <dxsch:SchedulerTimeRuler Caption="GMT"
+                                              TimeZoneId="UTC"
+                                              UseClientTimeZone="False">
+                    </dxsch:SchedulerTimeRuler>
+
+                    <dxsch:SchedulerTimeRuler Caption="Local" UseClientTimeZone="False">
+                    </dxsch:SchedulerTimeRuler>
+
+                    <dxsch:SchedulerTimeRuler>
+                    </dxsch:SchedulerTimeRuler>
+
+                </dxsch:DayView.TimeRulers>
+            </dxsch:DayView>
+        </dxsch:SchedulerControl.DayView>
+        <dxsch:SchedulerControl.WeekView>
+            <dxsch:WeekView Enabled="False" />
+        </dxsch:SchedulerControl.WeekView>
+        <dxsch:SchedulerControl.FullWeekView>
+            <dxsch:FullWeekView Enabled="True" />
+        </dxsch:SchedulerControl.FullWeekView>
+        <dxsch:SchedulerControl.WorkWeekView>
+            <dxsch:WorkWeekView>
+                <dxsch:WorkWeekView.TimeRulers>
+                    <dxsch:SchedulerTimeRuler Caption="GMT"
+                                              TimeZoneId="UTC"
+                                              UseClientTimeZone="False">
+                    </dxsch:SchedulerTimeRuler>
+
+                    <dxsch:SchedulerTimeRuler Caption="Local" UseClientTimeZone="False">
+                    </dxsch:SchedulerTimeRuler>
+
+                    <dxsch:SchedulerTimeRuler>
+                    </dxsch:SchedulerTimeRuler>
+
+                </dxsch:WorkWeekView.TimeRulers>
+            </dxsch:WorkWeekView>
+        </dxsch:SchedulerControl.WorkWeekView>
+        <dxsch:SchedulerControl.TimelineView>
+            <dxsch:TimelineView IntervalCount="11">
+                <dxsch:TimelineView.Scales>
+                    <dxschcore:TimeScaleCollection>
+                        <dxschcore:TimeScaleDay>
+                        </dxschcore:TimeScaleDay>
+                        <dxschcore:TimeScaleHour>
+                        </dxschcore:TimeScaleHour>
+                    </dxschcore:TimeScaleCollection>
+                </dxsch:TimelineView.Scales>
+            </dxsch:TimelineView>
+        </dxsch:SchedulerControl.TimelineView>
+    </dxsch:SchedulerControl>
+
+</UserControl>

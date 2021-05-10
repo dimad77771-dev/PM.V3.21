@@ -1,0 +1,95 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.RibbonInsuranceArticleSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="False"
+             mc:Ignorable="d"
+             d:DesignHeight="138.621"
+             d:DesignWidth="477.932">
+    <Grid>
+        <dxr:RibbonControl RibbonStyle="Office2010"
+                           DockPanel.Dock="Top"
+                           ShowApplicationButton="False"
+                           RibbonTitleBarVisibility="Collapsed"
+                           Name="ribbonControl">
+            <dxr:RibbonControl.PageHeaderItems>
+
+            </dxr:RibbonControl.PageHeaderItems>
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="HOME">
+
+                    <dxr:RibbonPageGroup Caption="Categories">
+                        <dxb:BarEditItem ClosePopupOnChangingEditValue="True"
+                                         EditWidth="350"
+                                         EditValue="{Binding FilterCategoriesSelected,
+                                                             Mode=TwoWay}"
+                                         RibbonStyle="SmallWithText">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:ComboBoxEditSettings IsTextEditable="False"
+                                                          PopupMaxHeight="330"
+                                                          SeparatorString=";"
+                                                          DisplayMember="FullName"
+                                                          ItemsSource="{Binding FilterCategoriesAll}">
+                                    <dxe:ComboBoxEditSettings.StyleSettings>
+                                        <dxe:CheckedComboBoxStyleSettings />
+                                    </dxe:ComboBoxEditSettings.StyleSettings>
+                                    <!--<dxe:ComboBoxEditSettings.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="2"
+                                                       VerticalAlignment="Center"
+                                                       Source="{Binding Path=Rowtype9,
+                                                                        Converter={StaticResource medicalRowtype9ToImageConverter}}"
+                                                       Stretch="None" />
+                                                <TextBlock Padding="2"
+                                                           Text="{Binding Path=Name}"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </dxe:ComboBoxEditSettings.ItemTemplate>
+                                    <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+                                        <ControlTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <Image Margin="5"
+                                                       VerticalAlignment="Center"
+                                                       Source="{Binding Path=SelectedItem.Rowtype9,
+                                                                        Converter={StaticResource medicalRowtype9ToImageConverter}}"
+                                                       Stretch="None" />
+                                                <TextBlock Padding="5"
+                                                           Text="{Binding Path=SelectedItem.Name}"
+                                                           VerticalAlignment="Center" />
+                                            </StackPanel>
+                                        </ControlTemplate>
+                                    </dxe:ComboBoxEditSettings.EditNonEditableTemplate>-->
+                                </dxe:ComboBoxEditSettings>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                    </dxr:RibbonPageGroup>
+
+
+                    <dxr:RibbonPageGroup Caption="Problems">
+                        <dxb:BarButtonItem Content="Problems"
+                                           Command="{Binding ShowProblemCommand}"
+                                           LargeGlyph="{dx:DXImage Image=Parameters2_32x32.png}"
+                                           Glyph="{dx:DXImage Image=Parameters2_16x16.png}" />
+                    </dxr:RibbonPageGroup>
+
+
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+    </Grid>
+</UserControl>

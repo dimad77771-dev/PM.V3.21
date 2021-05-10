@@ -1,0 +1,3 @@
+Тут ценные проекты из примеров
+
+E:\PROJECTS\DevExpress16Src\DevExpress.Xpf.Core\DevExpress.Xpf.Core\DevExpress.Xpf.Core.sln 

@@ -1,0 +1,274 @@
+﻿<UserControl xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+             xmlns:dxschi="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/internal"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxschcore="clr-namespace:DevExpress.XtraScheduler;assembly=DevExpress.XtraScheduler.v16.2.Core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:Custom="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+             x:Class="Profibiz.PracticeManager.Patients.Views.AppointmentsSchedulerView"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+             xmlns:localview="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             IsEnabled="{Binding IsEnableControl}"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1000">
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/VerticalAppointment.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/HorizontalAppointment.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/HorizontalAppointmentSameDay.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/TimeRuler.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/VerticalCell.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/LocalResourceDictionary.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/VerticalCell.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/HorizontalResourceHeader.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/Selection.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/CellHeaderTemplates.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/Header.xaml" />
+                <ResourceDictionary Source="AppointmentsSchedulerView.Resources/DayHeader.xaml" />
+				<ResourceDictionary Source="AppointmentsSchedulerView.Resources/DayHeader__DayView.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <infrastructure:ShowRibbonBehavior Name="RibbonAppointmentsSchedulerView" IsVisible="{Binding IsMainRibbonShow}" />
+    </i:Interaction.Behaviors>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+
+            <dxe:ComboBoxEdit Grid.Row="0"
+                              Visibility="{Binding AllAppointmentBooksComboBoxShow,
+                                                   Converter={StaticResource boolToVisibilityConverter}}"
+                              Margin="4"
+                              EditValue="{Binding SelectedAppointmentBook,
+                                                  NotifyOnSourceUpdated=True,
+                                                  UpdateSourceTrigger=PropertyChanged,
+                                                  ValidatesOnDataErrors=True}"
+                              IsTextEditable="False"
+                              ItemsSource="{Binding AllAppointmentBooks}">
+                <dxe:ComboBoxEdit.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Margin="2"
+                                   VerticalAlignment="Center"
+                                   Source="{Binding Path=Rowtype9,
+                                                    Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+                                   Stretch="None" />
+                            <TextBlock Padding="2"
+                                       Text="{Binding Path=Name}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </DataTemplate>
+                </dxe:ComboBoxEdit.ItemTemplate>
+                <dxe:ComboBoxEdit.EditNonEditableTemplate>
+                    <ControlTemplate>
+                        <StackPanel Orientation="Horizontal">
+                            <Image Margin="5"
+                                   VerticalAlignment="Center"
+                                   Source="{Binding Path=SelectedItem.Rowtype9,
+                                                    Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+                                   Stretch="None" />
+                            <TextBlock Padding="5"
+                                       Text="{Binding Path=SelectedItem.Name}"
+                                       VerticalAlignment="Center" />
+                        </StackPanel>
+                    </ControlTemplate>
+                </dxe:ComboBoxEdit.EditNonEditableTemplate>
+            </dxe:ComboBoxEdit>
+
+            <!--<localview:RibbonAppointmentsSchedulerView Grid.Row="1" x:Name="smallRibbon" Visibility="{Binding IsSmallRibbonShow, Converter={StaticResource boolToVisibilityConverter}}" />-->
+            <localview:RibbonAppointmentsSchedulerView Grid.Row="1" x:Name="smallRibbon" />
+
+            <dxsch:SchedulerControl Grid.Row="2"
+                                    x:Name="schedulerControl1"
+                                    ActiveViewType="{Binding ActiveViewType, Mode=TwoWay}"
+                                    GroupType="{Binding GroupType, Mode=TwoWay}"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    infrastructure:SchedulerControlExt.WorkDays="{Binding WeekWorkDays}"
+                                    SelectedAppointmentsBindable="{Binding SelectedAppointments}"
+                                    BarManager="{Binding ElementName=barManager1,
+                                                         Mode=OneTime}"
+                                    Ribbon="{Binding ElementName=ribbonControl1,
+                                                     Mode=OneTime}">
+                <dxsch:SchedulerControl.OptionsCustomization>
+                    <dxsch:OptionsCustomization AllowAppointmentCopy="None"
+                                                AllowAppointmentCreate="None"
+                                                AllowAppointmentDelete="None"
+                                                AllowAppointmentDrag="All"
+                                                AllowAppointmentDragBetweenResources="All"
+                                                AllowAppointmentEdit="All"
+                                                AllowAppointmentMultiSelect="False"
+                                                AllowAppointmentResize="All"
+                                                AllowDisplayAppointmentForm="Never"
+                                                AllowInplaceEditor="None"
+                                                AllowAppointmentConflicts="Custom" />
+                </dxsch:SchedulerControl.OptionsCustomization>
+                <dxsch:SchedulerControl.OptionsBehavior>
+                    <dxsch:OptionsBehavior SelectOnRightClick="True"  />
+                    <!--ClientTimeZoneId="Central Pacific Standard Time"-->
+                </dxsch:SchedulerControl.OptionsBehavior>
+                <dxmvvm:Interaction.Behaviors>
+                    <infrastructure:SchedulerControlBehavior Manager="{Binding SchedulerControlManager}" />
+                    <infrastructure:ReferenceBehavior Source="{Binding SchedulerControl999, Mode=OneWayToSource}" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding AppointmentViewInfoCustomizeCommand}"
+                                           EventName="AppointmentViewInfoCustomizing" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding CustomizeVisualViewInfoCommand}"
+                                           EventName="CustomizeVisualViewInfo" />
+
+                    
+                    
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding AppointmentResizingCommand}"
+                                           EventName="AppointmentResizing" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding AppointmentResizedCommand}"
+                                           EventName="AppointmentResized" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding AppointmentDropCommand}"
+                                           EventName="AppointmentDrop" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding PopupMenuShowingCommand}"
+                                           EventName="PopupMenuShowing" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding MouseDoubleClickCommand}"
+                                           EventName="MouseDoubleClick" />
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding ActiveViewChangedCommand}"
+                                           EventName="ActiveViewChanged" />
+                </dxmvvm:Interaction.Behaviors>
+
+                <dxsch:SchedulerControl.DayView>
+                    <dxsch:DayView DayCount="{Binding ShowDays2}"
+                                   ShowAllDayArea="False"
+                                   AllDayAreaScrollBarVisible="False"
+                                   ShowDayHeaders="True"
+                                   TimeScale="{Binding TimeScale}"
+                                   VisibleTime="{Binding VisibleTimeInterval}"
+                                   ShowMoreButtons="True"
+                                   ShowMoreButtonsOnEachColumn="False">
+                        <dxsch:DayView.AppointmentDisplayOptions>
+                            <dxsch:SchedulerDayViewAppointmentDisplayOptions AllDayAppointmentsStatusDisplayType="Never"
+                                                                             StatusDisplayType="Never"
+                                                                             TimeDisplayType="Auto"
+                                                                             StartTimeVisibility="{Binding StartEndTimeVisibility}"
+                                                                             EndTimeVisibility="{Binding StartEndTimeVisibility}" />
+                        </dxsch:DayView.AppointmentDisplayOptions>
+                    </dxsch:DayView>
+                </dxsch:SchedulerControl.DayView>
+
+                <dxsch:SchedulerControl.WorkWeekView>
+                    <dxsch:WorkWeekView ShowAllDayArea="False"
+                                        AllDayAreaScrollBarVisible="False"
+                                        ShowDayHeaders="True"
+                                        TimeScale="{Binding TimeScale}"
+                                        VisibleTime="{Binding VisibleTimeInterval}"
+                                        ShowMoreButtons="True"
+                                        ShowMoreButtonsOnEachColumn="True">
+                        <dxsch:WorkWeekView.AppointmentDisplayOptions>
+                            <dxsch:SchedulerDayViewAppointmentDisplayOptions AllDayAppointmentsStatusDisplayType="Never"
+                                                                             TimeDisplayType="Auto"
+                                                                             StatusDisplayType="Never"
+                                                                             StartTimeVisibility="{Binding StartEndTimeVisibility}"
+                                                                             EndTimeVisibility="{Binding StartEndTimeVisibility}" />
+                        </dxsch:WorkWeekView.AppointmentDisplayOptions>
+                    </dxsch:WorkWeekView>
+                </dxsch:SchedulerControl.WorkWeekView>
+
+
+                <dxsch:SchedulerControl.MonthView>
+                    <dxsch:MonthView ShowMoreButtons="True" CompressWeekend="{Binding CompressWeekend}">
+                        
+                    </dxsch:MonthView>
+                </dxsch:SchedulerControl.MonthView>
+
+                <dxsch:SchedulerControl.TimelineView>
+                    <dxsch:TimelineView />
+                </dxsch:SchedulerControl.TimelineView>
+
+                <dxsch:SchedulerControl.Storage>
+                    <dxsch:SchedulerStorage>
+                        <dxsch:SchedulerStorage.AppointmentStorage>
+                            <dxsch:AppointmentStorage DataSource="{Binding Appointments}">
+                                <dxsch:AppointmentStorage.Mappings>
+                                    <dxsch:AppointmentMapping Start="StartDate"
+                                                              End="EndDate"
+                                                              Subject="PatientName"
+                                                              Location="Location"
+                                                              ResourceId="DoctorId"
+                                                              RecurrenceInfo="Recurrence"
+                                                              Type="Type" />
+                                </dxsch:AppointmentStorage.Mappings>
+                                <dxsch:AppointmentStorage.CustomFieldMappings>
+                                    <dxsch:SchedulerCustomFieldMapping Member="RowId" Name="RowId" />
+                                    <dxsch:SchedulerCustomFieldMapping Member="Entity" Name="Entity" />
+                                    <dxsch:SchedulerCustomFieldMapping Member="InsuranceNumber" Name="InsuranceNumber" />
+                                    <dxsch:SchedulerCustomFieldMapping Member="FirstVisit" Name="FirstVisit" />
+                                    <dxsch:SchedulerCustomFieldMapping Member="Notes" Name="Notes" />
+                                </dxsch:AppointmentStorage.CustomFieldMappings>
+                            </dxsch:AppointmentStorage>
+                        </dxsch:SchedulerStorage.AppointmentStorage>
+                        
+                        <dxsch:SchedulerStorage.ResourceStorage>
+                            <dxsch:ResourceStorage DataSource="{Binding Doctors}">
+                                <dxsch:ResourceStorage.Mappings>
+                                    <dxsch:ResourceMapping Id="Id" Caption="Name" />
+                                </dxsch:ResourceStorage.Mappings>
+                            </dxsch:ResourceStorage>
+                        </dxsch:SchedulerStorage.ResourceStorage>
+                        
+                    </dxsch:SchedulerStorage>
+                </dxsch:SchedulerControl.Storage>
+
+
+            </dxsch:SchedulerControl>
+
+
+
+
+
+
+
+
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

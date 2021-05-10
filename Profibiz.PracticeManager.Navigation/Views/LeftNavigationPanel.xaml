@@ -1,0 +1,158 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.LeftNavigationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:inf="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:controls="clr-namespace:DevExpress.DevAV.Controls;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             xmlns:local2="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:prism="http://www.codeplex.com/prism"
+             xmlns:view="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             xmlns:view2="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:views="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             d:DesignHeight="138.621"
+             d:DesignWidth="477.932"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <prism:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </prism:InteractionRequestTrigger>
+        <prism:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </prism:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxmvvm:BooleanNegationConverter x:Key="booleanNegationConverter" />
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsMinimizedConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="True" />
+                <dxmvvm:MapItem Source="Normal" Target="False" />
+                <dxmvvm:MapItem Source="Off" Target="False" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsNormalConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="True" />
+                <dxmvvm:MapItem Source="Off" Target="False" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneOffConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="False" />
+                <dxmvvm:MapItem Source="Off" Target="True" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsExpandedConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="True" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneVisibilityConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="Visible" />
+                <dxmvvm:MapItem Source="Normal" Target="Visible" />
+                <dxmvvm:MapItem Source="Off" Target="Collapsed" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NullToVisibilityConverter" DefaultTarget="Visible">
+                <dxmvvm:MapItem Source="{x:Null}" Target="Collapsed" />
+                <dxmvvm:MapItem Source="0" Target="Collapsed" />
+            </dxmvvm:ObjectToObjectConverter>
+            <Style x:Key="collapsedNavPaneItemsStyle" TargetType="{x:Type dxn:NavBarItem}">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="FontSettings" Value="{dxn:NavBarFontSettings FontWeight=Bold}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <!--  infrastructure:NavBarControlExt.Compact="{Binding NavBarCompact}"  -->
+    <dxn:NavBarControl x:Name="navBarControl"
+                       Compact="False"
+                       ItemsSource="{Binding Modules}"
+                       SelectedGroup="{Binding SelectedModule,
+                                               Mode=TwoWay}">
+        <dxn:NavBarControl.Resources>
+            <dxmvvm:ObjectToObjectConverter x:Key="PeekFormTemplateConverter">
+                <dxmvvm:MapItem Source="{x:Null}" Target="{x:Null}" />
+                <dxmvvm:ObjectToObjectConverter.DefaultTarget>
+                    <DataTemplate>
+                        <dxwui:Flyout Command="{Binding DataContext.PinPeekCollectionViewCommand,
+                                                        RelativeSource={RelativeSource FindAncestor,
+                                                                                       AncestorType=UserControl}}"
+                                      CommandParameter="{Binding}"
+                                      ShowIndicator="True">
+                            <Grid x:Name="grid"
+                                  Width="250"
+                                  Height="400">
+                                <view2:AboutView />
+                                <view2:PeekCollectionView x:Name="tmp888"
+                                                          Margin="10"
+                                                          dxmvvm:ViewModelExtensions.DocumentTitle="{Binding DataContext.ModuleTitle,
+                                                                                                             ElementName=grid}"
+                                                          dxmvvm:ViewModelExtensions.ParentViewModel="{Binding DataContext,
+                                                                                                               ElementName=grid}"
+                                                          DataContext="{Binding PeekCollectionViewModel}" />
+                            </Grid>
+                        </dxwui:Flyout>
+                    </DataTemplate>
+                </dxmvvm:ObjectToObjectConverter.DefaultTarget>
+            </dxmvvm:ObjectToObjectConverter>
+        </dxn:NavBarControl.Resources>
+        <dxn:NavBarControl.ItemTemplate>
+            <DataTemplate>
+                <ContentControl>
+                    <controls:AdvancedNavBarGroup CollapsedNavPaneItemsSource="{Binding ViewModel.StaticFilterItems}"
+                                                  CollapsedNavPaneItemsStyle="{StaticResource collapsedNavPaneItemsStyle}"
+                                                  CollapsedNavPaneSelectedItem="{Binding ViewModel.SelectedItem}"
+                                                  DisplayMode="Text"
+                                                  DisplaySource="Content"
+                                                  Header="{Binding ModuleTitle}"
+                                                  ImageSource="{Binding ImageSource}"
+                                                  NavPaneShowMode="{Binding NavPaneShowMode}"
+                                                  NavigationPaneVisible="True"
+                                                  PeekFormTemplate="{Binding PeekCollectionViewModel,
+                                                                             Converter={StaticResource PeekFormTemplateConverter}}">
+                        <controls:AdvancedNavBarGroup.CollapsedNavPaneItemsTemplate>
+                            <DataTemplate>
+                                <ContentControl>
+                                    <dxn:NavBarItem Content="{Binding DisplayText}" />
+                                </ContentControl>
+                            </DataTemplate>
+                        </controls:AdvancedNavBarGroup.CollapsedNavPaneItemsTemplate>
+                        <controls:AdvancedNavBarGroup.Content>
+                            <ContentControl prism:RegionManager.RegionName="{Binding RegionName}" />
+                        </controls:AdvancedNavBarGroup.Content>
+                    </controls:AdvancedNavBarGroup>
+                </ContentControl>
+            </DataTemplate>
+        </dxn:NavBarControl.ItemTemplate>
+        <dxn:NavBarControl.View>
+            <dxn:NavigationPaneView IsExpanded="{Binding NavigationPaneViewIsExpanded, Mode=TwoWay}" IsPopupOpen="{Binding NavigationPaneViewIsPopupOpen, Mode=TwoWay}">
+                <dxmvvm:Interaction.Behaviors>
+                    <infrastructure:NavBarViewSelectionPreventBehavior Resolver="{Binding SelectionPreventResolver}" />
+                </dxmvvm:Interaction.Behaviors>
+            </dxn:NavigationPaneView>
+        </dxn:NavBarControl.View>
+    </dxn:NavBarControl>
+
+
+</UserControl>
+
+

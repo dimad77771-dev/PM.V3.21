@@ -1,0 +1,390 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.InsuranceArticleInfoView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             Width="{x:Static infrastructure:WindowInfo.Width95}"
+             Height="600"
+             Title="Information"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <local:PictureConverter x:Key="PictureConverter" />
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <!--<dx:DXSplashScreenService ViewTemplate="{StaticResource WaitIndicatorDataTemplate}"/>-->
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Visibility="Collapsed"
+                  Background="Transparent"
+                  ShowGridLines="False">
+                <dx:DXBorder Margin="0"
+                             BorderThickness="0 0 0 1"
+                             BorderBrush="#A0A0A0">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <dxlc:LayoutItemLabel Grid.Row="0"
+                                              Grid.Column="0"
+                                              Content="Order Date"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:DateEdit Grid.Row="0"
+                                      Grid.Column="1"
+                                      Width="100"
+                                      HorizontalAlignment="Left"
+                                      EditValue="{Binding Entity.OrderDate,
+                                                          Mode=TwoWay,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnExceptions=True}"
+                                      IsReadOnly="{Binding ReadOnly}"
+                                      MaskType="DateTimeAdvancingCaret"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+
+                        <dxlc:LayoutItemLabel Grid.Row="0"
+                                              Grid.Column="2"
+                                              Content="Order Number"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="0"
+                                      Grid.Column="3"
+                                      Width="100"
+                                      HorizontalAlignment="Left"
+                                      EditValue="{Binding Entity.OrderNumber,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+
+
+
+                        <dxlc:LayoutItemLabel Grid.Row="2"
+                                              Grid.Column="0"
+                                              Content="Supplier"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:ComboBoxEdit Grid.Row="2"
+                                          Grid.Column="1"
+                                          Grid.ColumnSpan="3"
+                                          EditValue="{Binding Entity.SupplierRowId,
+                                                              UpdateSourceTrigger=PropertyChanged,
+                                                              ValidatesOnDataErrors=True,
+                                                              NotifyOnSourceUpdated=True}"
+                                          IsTextEditable="False"
+                                          DisplayMember="Name"
+                                          ValueMember="RowId"
+                                          NullValueButtonPlacement="EditBox"
+                                          PopupContentTemplate="{StaticResource popupFormExtentedContentTemplate}"
+                                          ItemsSource="{Binding Suppliers,
+                                                                Source={StaticResource lookupDataProvider}}"
+                                          Style="{StaticResource baseEditStyle1}" />
+
+                        <dxlc:LayoutItemLabel Grid.Row="3"
+                                              Grid.Column="0"
+                                              Content="Description"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="3"
+                                      Grid.Column="1"
+                                      Grid.ColumnSpan="3"
+                                      EditValue="{Binding Entity.Description,
+                                                          NotifyOnSourceUpdated=True,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True}"
+                                      IsReadOnly="{Binding IsReadOnly}"
+                                      Style="{StaticResource baseEditStyle1}"
+                                      Height="40"
+                                      TextWrapping="Wrap"
+                                      AcceptsReturn="True"
+                                      VerticalScrollBarVisibility="Auto"
+                                      VerticalContentAlignment="Top" />
+
+
+
+
+
+
+                    </Grid>
+                    <!--</dxlc:LayoutGroup>-->
+                </dx:DXBorder>
+            </Grid>
+
+
+            <infrastructure:ExtraLayoutGroup Grid.Row="1"
+                                             Background="Transparent"
+                                             Orientation="Vertical"
+                                             View="Group">
+
+                <infrastructure:ExtraLayoutGroup Header="DETAILS"
+                                                 Margin="5"
+                                                 GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                                 Background="Transparent"
+                                                 IsCollapsible="False"
+                                                 View="Group">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <dxg:GridControl Grid.Row="0"
+                                         AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding ItemEntities}"
+                                         SelectedItem="{Binding ItemSelectedEntity}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+
+                            <dxg:GridControl.Resources>
+                                <Style x:Key="cellInvoiceStyle" TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="Background" Value="#DDEBF7" />
+                                </Style>
+                                <Style x:Key="cellOrderItemsStyle" TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="Background" Value="#FCE4D6" />
+                                </Style>
+                                <Style x:Key="cellCoordinationsStyle" TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="Background" Value="#FFF2CC" />
+                                </Style>
+                                <Style x:Key="cellClaimsStyle" TargetType="dxg:LightweightCellEditor">
+                                    <Setter Property="Background" Value="#E2EFDA" />
+                                </Style>
+                            </dxg:GridControl.Resources>
+
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolOrderItem}" />
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding OpenRowCommand}"
+                                                       EventName="MouseDoubleClick">
+                                    <dxmvvm:EventToCommand.EventArgsConverter>
+                                        <dx:EventArgsToDataRowConverter />
+                                    </dxmvvm:EventToCommand.EventArgsConverter>
+                                </dxmvvm:EventToCommand>
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="{Binding ReadOnly,
+                                                                      Converter={StaticResource BooleanNegationConverter}}"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="False"
+                                               EditorShowMode="MouseDown"
+                                               EnableImmediatePosting="True"
+                                               ShowTotalSummary="True"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="None"
+                                               AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                                               TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}">
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+
+                            <dxg:GridControl.Bands>
+
+                                <dxg:GridControlBand Header="INVOICE" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="Invoice.InvoiceDate"
+                                                    Header="INVOICE&#10;DATE"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                    <dxg:GridColumn FieldName="Invoice.PatientFullName"
+                                                    Header="PATIENT"
+                                                    AllowCellMerge="True"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    Width="120" />
+                                    <dxg:GridColumn FieldName="Invoice.ServiceProvidersList"
+                                                    Header="SPECIALIST"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    Width="100" />
+                                    <dxg:GridColumn FieldName="Invoice.CategoriesList"
+                                                    Header="TREATMENT"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    Width="100" />
+                                    <dxg:GridColumn FieldName="Invoice.MinInvoiceItemDate"
+                                                    Header="START&#10;DATE"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                    <dxg:GridColumn FieldName="Invoice.MaxInvoiceItemDate"
+                                                    Header="FINISH&#10;DATE"
+                                                    CellStyle="{StaticResource cellInvoiceStyle}"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                </dxg:GridControlBand>
+
+
+                                <dxg:GridControlBand Header="ORDER ITEMS" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="InvoiceItems.SumUnits"
+                                                    Header="QTY"
+                                                    CellStyle="{StaticResource cellOrderItemsStyle}"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    Width="58" />
+                                    <dxg:GridColumn FieldName="InvoiceItems.SumAmount"
+                                                    Header="AMOUNT"
+                                                    CellStyle="{StaticResource cellOrderItemsStyle}"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    Width="78" />
+                                </dxg:GridControlBand>
+
+                                <dxg:GridControlBand Header="COORDINATIONS" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="InsuranceCoverage.InsuranceProviderCode"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="INS."
+                                                    Width="35" />
+                                    <dxg:GridColumn FieldName="InsuranceCoverage.PolicyOwnerFullName"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="POLICY&#10;HOLDER"
+                                                    ReadOnly="True"
+                                                    Width="150" />
+                                    <dxg:GridColumn FieldName="InsuranceCoverage.PolicyNumber"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="POLICY&#10;NUMBER"
+                                                    ReadOnly="True"
+                                                    Width="88" />
+                                    <dxg:GridColumn FieldName="InsuranceCoverage.CoverageStartDate"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="POLICY&#10;START"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                    <dxg:GridColumn FieldName="InsuranceCoverage.CoverageValidUntil"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="POLICY&#10;END"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                    <dxg:GridColumn FieldName="InvoiceClaim.SentAmont"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="SENT&#10;AMOUNT"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    Width="88" />
+                                    <dxg:GridColumn FieldName="InvoiceClaim.SentDate"
+                                                    CellStyle="{StaticResource cellCoordinationsStyle}"
+                                                    Header="SENT&#10;DATE"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                </dxg:GridControlBand>
+
+                                <dxg:GridControlBand Header="APPROVALS" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="InvoiceClaim.ApproveDate"
+                                                    CellStyle="{StaticResource cellClaimsStyle}"
+                                                    Header="APPROVED&#10;DATE"
+                                                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateYYColumnInGrid}" />
+                                    <dxg:GridColumn FieldName="InvoiceClaimDetail.MedicalServiceOrSupplyName"
+                                                    CellStyle="{StaticResource cellClaimsStyle}"
+                                                    Header="ITEM NAME"
+                                                    Width="150" />
+                                    <dxg:GridColumn FieldName="InvoiceClaimDetail.Units"
+                                                    CellStyle="{StaticResource cellClaimsStyle}"
+                                                    Header="QTY"
+                                                    EditSettings="{StaticResource unitEditSettings}"
+                                                    Width="58" />
+                                    <dxg:GridColumn FieldName="InvoiceClaimDetail.Amount"
+                                                    CellStyle="{StaticResource cellClaimsStyle}"
+                                                    Header="AMOUNT"
+                                                    EditSettings="{StaticResource moneyEditSettings}"
+                                                    Width="78" />
+                                    <dxg:GridColumn FieldName="InvoiceClaimDetail.Description"
+                                                    CellStyle="{StaticResource cellClaimsStyle}"
+                                                    Header="DESCRIPTION"
+                                                    Width="110" />
+                                </dxg:GridControlBand>
+
+                                <dxg:GridControlBand OverlayHeaderByChildren="True">
+                                    <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+                                </dxg:GridControlBand>
+                            </dxg:GridControl.Bands>
+
+                            <dxg:GridControl.TotalSummary>
+                                <dxg:GridSummaryItem FieldName="InvoiceClaim.SentAmont"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                                <dxg:GridSummaryItem FieldName="InvoiceClaimDetail.Units" SummaryType="Sum" />
+                                <dxg:GridSummaryItem FieldName="InvoiceClaimDetail.Amount"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                                <dxg:GridSummaryItem FieldName="InvoiceItems.Units" SummaryType="Sum" />
+                                <dxg:GridSummaryItem FieldName="InvoiceItems.Amount"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                            </dxg:GridControl.TotalSummary>
+                        </dxg:GridControl>
+                    </Grid>
+                </infrastructure:ExtraLayoutGroup>
+            </infrastructure:ExtraLayoutGroup>
+
+            <Grid Grid.Row="2" Margin="5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <dxe:CheckEdit Grid.Column="0"
+                               Content="SHOW ALL YEARS"
+                               IsChecked="{Binding IsShowAllYears,
+                                                   Mode=TwoWay}"
+                               Margin="5" />
+                <dx:DialogButton Grid.Column="1"
+                                 Command="{Binding CloseCommand}"
+                                 Content="Close"
+                                 Margin="5" />
+            </Grid>
+
+        </Grid>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

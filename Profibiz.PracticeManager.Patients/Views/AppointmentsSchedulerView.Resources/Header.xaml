@@ -1,0 +1,105 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cs="colorscheme_ignorable_uri"
+    xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+    xmlns:dxschd="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/internal"
+    xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/themekeys"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="cs">
+    <!--  BEGIN WPF  -->
+    <ResourceDictionary.MergedDictionaries>
+        <dxdst:ResourceDictionaryEx Source="/DevExpress.Xpf.Themes.Office2013DarkGray.v16.2;component/DevExpress.Xpf.Scheduler/Office2013DarkGray/Colors.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    <!--  END WPF  -->
+
+    <local:AppointmentDayInfoConverter x:Key="AppointmentDayInfoConverter" />
+
+    <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Office2013DarkGray\BaseView\Header.xaml  -->
+    <!--  взято уже с версии 16.2  -->
+    <ControlTemplate x:Key="{dxscht:WeekViewThemeKey ResourceKey=WeekCellNormalTemplate, ThemeName=Office2013DarkGray}" TargetType="{x:Type dxschd:VisualDateCell}">
+        <Grid
+            Background="Red"
+            SnapsToDevicePixels="True"
+            UseLayoutRounding="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <dxschd:MultiColorBorder
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Background="{TemplateBinding Background}"
+                DefaultBorderThickness="1,0,1,1"
+                ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                InnerBorderBrush="{TemplateBinding BorderBrush}"
+                OuterBorderBrush="{StaticResource DefaultBorderBrush}" />
+            <dxschd:CellContent
+                x:Name="PART_CONTENT"
+                Grid.Row="1"
+                cs:Name="CellContent_0001"
+                dxsch:SchedulerControl.HitTestType="Cell"
+                ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                IsHitTestVisible="True">
+                <dxschd:CellContent.Background>
+                    <MultiBinding Converter="{StaticResource AppointmentDayInfoConverter}" ConverterParameter="Background">
+                        <Binding Path="IntervalStart" />
+                        <Binding Path="ResourceId" />
+                        <Binding Path="DataContext.DaysInfo" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type dxsch:SchedulerControl}}" />
+                    </MultiBinding>
+                </dxschd:CellContent.Background>
+            </dxschd:CellContent>
+            <dxschd:VisualDateCellHeader
+                dxsch:SchedulerControl.HitTestType="DayHeader"
+                dxschd:SchedulerItemsControl.ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                Content="{TemplateBinding Content}"
+                IsAlternate="{Binding Content.IsAlternate, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{Binding Path=Content.View.HorizontalWeekDateHeaderStyle, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Grid>
+    </ControlTemplate>
+
+
+    <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Office2013DarkGray\BaseView\Header.xaml  -->
+    <!--  взято уже с версии 16.2  -->
+    <ControlTemplate x:Key="{dxscht:WeekViewThemeKey ResourceKey=VerticalWeekCellNormalTemplate, ThemeName=Office2013DarkGray}" TargetType="{x:Type dxschd:VisualDateCell}">
+        <Grid SnapsToDevicePixels="True" UseLayoutRounding="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <dxschd:MultiColorBorder
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Background="{TemplateBinding Background}"
+                DefaultBorderThickness="1,0,1,1"
+                ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                InnerBorderBrush="{TemplateBinding BorderBrush}"
+                OuterBorderBrush="{StaticResource DefaultBorderBrush}" />
+            <dxschd:CellContent
+                x:Name="PART_CONTENT"
+                Grid.Row="1"
+                cs:Name="CellContent_0003"
+                dxsch:SchedulerControl.HitTestType="Cell"
+                ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                IsHitTestVisible="True">
+                <dxschd:CellContent.Background>
+                    <MultiBinding Converter="{StaticResource AppointmentDayInfoConverter}" ConverterParameter="Background">
+                        <Binding Path="IntervalStart" />
+                        <Binding Path="ResourceId" />
+                        <Binding Path="DataContext.DaysInfo" RelativeSource="{RelativeSource FindAncestor, AncestorType={x:Type dxsch:SchedulerControl}}" />
+                    </MultiBinding>
+                </dxschd:CellContent.Background>
+            </dxschd:CellContent>
+            <dxschd:VisualDateCellHeader
+                dxsch:SchedulerControl.HitTestType="DayHeader"
+                dxschd:SchedulerItemsControl.ElementPosition="{Binding Path=(dxschd:SchedulerItemsControl.ElementPosition), RelativeSource={RelativeSource TemplatedParent}}"
+                Content="{TemplateBinding Content}"
+                IsAlternate="{Binding Content.IsAlternate, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{Binding Path=Content.View.VerticalWeekDateHeaderStyle, RelativeSource={RelativeSource TemplatedParent}}" />
+        </Grid>
+    </ControlTemplate>
+
+</ResourceDictionary>

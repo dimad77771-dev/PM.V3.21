@@ -1,0 +1,579 @@
+<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.RefundOneView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             d:DesignHeight="400"
+             d:DesignWidth="800"
+             prism:ViewModelLocator.AutoWireViewModel="False"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <UserControl.Resources>
+        <local:PictureConverter x:Key="PictureConverter" />
+        <infrastructure:ColorToStringConverter x:Key="ColorToStringConverter" />
+
+        <Style x:Key="FocusedRowStyle" TargetType="dxg:RowControl">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Path=Row.CellBackgroundAmount.IsActive}" Value="True">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <SolidColorBrush Color="{Binding Path=Row.CellBackgroundAmount.Color}" />
+                        </Setter.Value>
+                    </Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid Background="Transparent" ShowGridLines="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="{Binding HeightGridInvoice}" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="{Binding HeightGridPayment}" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Margin="5"
+                      HorizontalAlignment="Stretch">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <dxlc:LayoutItemLabel Grid.Row="0"
+                                          Grid.Column="0"
+                                          Content="Patient"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <Grid Grid.Row="0"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="5">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <dxe:TextEdit Grid.Column="0"
+                                      EditValue="{Binding Entity.PatientFullName,
+                                                          Mode=OneWay,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      IsReadOnly="True"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+                        <Button Grid.Column="1"
+                                Margin="5 0 5 0"
+                                Command="{Binding OpenPatientCommand}">
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="{dx:DXImage Image=AllowUsersToEditRanges_16x16.png}" Stretch="Uniform" />
+                                <TextBlock Text="Open Patient"
+                                           VerticalAlignment="Center"
+                                           Margin="10 0 0 0" />
+                            </StackPanel>
+                        </Button>
+                    </Grid>
+
+
+
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="2"
+                                          Grid.Column="0"
+                                          Content="Amount"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="2"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Entity.Amount,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  MaskType="Numeric"
+                                  Mask="c"
+                                  MaskUseAsDisplayFormat="True"
+                                  IsReadOnly="True"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="2"
+                                          Grid.Column="2"
+                                          Content="Payment Date"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:DateEdit Grid.Row="2"
+                                  Grid.Column="3"
+                                  EditValue="{Binding Entity.PaymentDate,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="2"
+                                          Grid.Column="4"
+                                          Content="Payment Type"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:ComboBoxEdit Grid.Row="2"
+                                      Grid.Column="5"
+                                      EditValue="{Binding Entity.PaymentType,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      IsTextEditable="False"
+                                      NullValueButtonPlacement="EditBox"
+                                      ItemsSource="{Binding PaymentTypes,
+                                                            Source={StaticResource lookupDataProvider}}"
+                                      IsReadOnly="{Binding ReadOnly}"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="3"
+                                          Grid.Column="0"
+                                          Content="Bank Name"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="3"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Entity.BankName,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="3"
+                                          Grid.Column="2"
+                                          Content="Cheque Number"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="3"
+                                  Grid.Column="3"
+                                  EditValue="{Binding Entity.ChequeNumber,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="3"
+                                          Grid.Column="4"
+                                          Content="Brunch Number"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="3"
+                                  Grid.Column="5"
+                                  EditValue="{Binding Entity.BrunchNumber,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel Grid.Row="4"
+                                          Grid.Column="0"
+                                          Content="Transit Number"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="4"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Entity.TransitNumber,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+                    <dxlc:LayoutItemLabel Grid.Row="4"
+                                          Grid.Column="2"
+                                          Content="Account Number"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="4"
+                                  Grid.Column="3"
+                                  EditValue="{Binding Entity.AccountNumber,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+
+                    <dxlc:LayoutItemLabel Grid.Row="4"
+                                          Grid.Column="4"
+                                          Content="Transaction Id"
+                                          Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit Grid.Row="4"
+                                  Grid.Column="5"
+                                  EditValue="{Binding Entity.TransactionId,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  IsReadOnly="{Binding ReadOnly}"
+                                  Style="{StaticResource baseEditStyle1}" />
+                </Grid>
+
+                <dxlc:LayoutGroup Grid.Row="1"
+                                  Header="REFUND ITEMS"
+                                  Margin="5"
+                                  GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                  Background="Transparent"
+                                  Visibility="{Binding IsVisibleGridInvoice,
+                                                       Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  View="GroupBox">
+                    <dxg:GridControl x:Name="gridControl1"
+                                     AutoExpandAllGroups="True"
+                                     ItemsSource="{Binding InvoiceRefundEntities}"
+                                     SelectedItem="{Binding InvoiceRefundSelectedEntity}"
+                                     AllowLiveDataShaping="False"
+                                     ShowBorder="True">
+                        <dxmvvm:Interaction.Behaviors>
+                            <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolInvoiceItem}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxg:GridControl.Resources>
+                            <Style x:Key="AmountCellStyle"
+                                   BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle,
+                                                                                  ThemeName=Office2013DarkGray}}"
+                                   TargetType="{x:Type dxg:LightweightCellEditor}">
+                                <Setter Property="TextBlock.Foreground" Value="Green" />
+                                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                            </Style>
+                        </dxg:GridControl.Resources>
+                        <dxg:GridControl.View>
+                            <dxg:TableView AllowEditing="{Binding ReadOnly,
+                                                                  Converter={StaticResource BooleanNegationConverter}}"
+                                           AllowPerPixelScrolling="True"
+                                           AutoWidth="False"
+                                           EditorShowMode="MouseDown"
+                                           EnableImmediatePosting="True"
+                                           ShowTotalSummary="True"
+                                           ShowGroupPanel="False"
+                                           NavigationStyle="Cell"
+                                           AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                                           RowStyle="{StaticResource FocusedRowStyle}"
+                                           TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}"/>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="Invoice.InvoiceDate"
+                                            Header="INVOICE&#10;DATE"
+                                            Width="{x:Static infrastructure:WidthInfo.DateColumn}"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <dxg:GridColumn FieldName="Invoice.InvoiceNumber"
+                                            Header="INVOICE&#10;NUMBER"
+                                            Width="120"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <dxg:GridColumn FieldName="Invoice.DueByPatient"
+                                            Header="DUE&#10;BY PATIENT"
+                                            Width="100"
+                                            EditSettings="{StaticResource moneyEditSettings}"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <dxg:GridColumn FieldName="Invoice.PaymentTotal"
+                                            Header="TOTAL&#10;PAID"
+                                            Width="100"
+                                            EditSettings="{StaticResource moneyEditSettings}"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <!--<dxg:GridColumn FieldName="TotalRefundWithoutCurrnet"
+                                            Header="TOTAL&#10;REFUND WITHOUT CURRENT"
+                                            Width="100"
+                                            EditSettings="{StaticResource moneyEditSettings}"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />-->                            
+                            
+                            
+                            <!--<dxg:GridColumn FieldName="Invoice.PaymentRequest"
+                                            Header="BALANCE&#10;DUE"
+                                            Width="100"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            EditSettings="{StaticResource moneyEditSettings}" />-->
+                            <!--<dxg:GridColumn FieldName="Test123456"
+                                            Header="BALANCE&#10;DUE-?"
+                                            Width="100"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            EditSettings="{StaticResource moneyEditSettings}" />-->
+
+                            <dxg:GridColumn FieldName="TotalRefundWithoutCurrnet"
+                                            Header="OTHER&#10;REFUNDS"
+                                            Width="100"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            CellStyle="{StaticResource AmountCellStyle}"
+                                            EditSettings="{StaticResource moneyEditSettings}" />                            
+
+                            <dxg:GridColumn FieldName="Amount"
+                                            Header="CURRENT&#10;REFUND"
+                                            Width="100"
+                                            CellStyle="{StaticResource AmountCellStyle}"
+                                            EditSettings="{StaticResource moneyEditSettings}" />
+                            
+                            
+                            <!--<dxg:GridColumn FieldName="NewBalanceDue"
+                                            Header="NEW BALANCE&#10;DUE"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            Width="100"
+                                            EditSettings="{StaticResource moneyEditSettings}" />-->
+                            <dxg:GridColumn FieldName="NewBalanceDue2"
+                                            Header="BALANCE&#10;DUE"
+                                            Width="100"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            EditSettings="{StaticResource moneyEditSettings}" />
+
+                            <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+                        </dxg:GridControl.Columns>
+
+                        <dxg:GridControl.TotalSummary>
+                            <!--<dxg:GridSummaryItem FieldName="PaymentDate" SummaryType="Custom" DisplayFormat="Totals:{0}"  />-->
+                            <dxg:GridSummaryItem FieldName="Amount"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="NewBalanceDue"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.PaymentRequest"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.PaymentTotal"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.Total"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="NewBalanceDue2"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />                            
+                        </dxg:GridControl.TotalSummary>
+
+                    </dxg:GridControl>
+                </dxlc:LayoutGroup>
+                <Grid Grid.Row="2"
+                      Grid.Column="1"
+                      Margin="5,0,5,5"
+                      Visibility="{Binding Path=IsVisibleGridControlInvoice,
+                                           Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Margin="5 0 5 0"
+                            Command="{Binding InvoiceRefundNewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Add_16x16.png}" Stretch="Uniform" />
+                            <TextBlock Text="New Item"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="1"
+                            Margin="5 0 5 0"
+                            Command="{Binding InvoiceRefundDeleteCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                            <TextBlock Text="Delete Item"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+
+
+                </Grid>
+
+
+                <dxlc:LayoutGroup Grid.Row="3"
+                                  Header="REFUND PAYMENTS"
+                                  Margin="5"
+                                  GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                  Background="Transparent"
+                                  Visibility="{Binding IsVisibleGridPayment,
+                                                       Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  View="GroupBox">
+                    <dxg:GridControl x:Name="gridControl2"
+                                     AutoExpandAllGroups="True"
+                                     ItemsSource="{Binding PaymentRefundEntities}"
+                                     SelectedItem="{Binding PaymentRefundSelectedEntity}"
+                                     AllowLiveDataShaping="False"
+                                     ShowBorder="True">
+                        <dxmvvm:Interaction.Behaviors>
+                            <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolPaymentItem}" />
+                        </dxmvvm:Interaction.Behaviors>
+                        <dxg:GridControl.Resources>
+                            <Style x:Key="AmountCellStyle"
+                                   BasedOn="{StaticResource {dxgt:GridRowThemeKey ResourceKey=LightweightCellStyle,
+                                                                                  ThemeName=Office2013DarkGray}}"
+                                   TargetType="{x:Type dxg:LightweightCellEditor}">
+                                <Setter Property="TextBlock.Foreground" Value="Green" />
+                                <Setter Property="TextBlock.FontWeight" Value="Bold" />
+                            </Style>
+                        </dxg:GridControl.Resources>
+                        <dxg:GridControl.View>
+                            <dxg:TableView AllowEditing="{Binding ReadOnly,
+                                                                  Converter={StaticResource BooleanNegationConverter}}"
+                                           AllowPerPixelScrolling="True"
+                                           AutoWidth="False"
+                                           EditorShowMode="MouseDown"
+                                           EnableImmediatePosting="True"
+                                           ShowTotalSummary="True"
+                                           ShowGroupPanel="False"
+                                           NavigationStyle="Cell"
+                                           AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                                           RowStyle="{StaticResource FocusedRowStyle}"
+                                           TotalSummaryElementStyle="{StaticResource GridTotalSummaryElementStyle}">
+                            </dxg:TableView>
+                        </dxg:GridControl.View>
+                        <dxg:GridControl.Columns>
+                            <dxg:GridColumn FieldName="Payment.PaymentDate"
+                                            Header="PAYMENT&#10;DATE"
+                                            Width="{x:Static infrastructure:WidthInfo.DateColumn}"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <dxg:GridColumn FieldName="Payment.PaymentType"
+                                            Header="PAYMENT&#x0a;TYPE"
+                                            Width="120"
+                                            AllowFocus="False"
+                                            ReadOnly="True" />
+                            <dxg:GridColumn FieldName="Payment.Amount"
+                                            Header="PAYMENT&#x0a;AMOUNT"
+                                            ReadOnly="True"
+                                            EditSettings="{StaticResource moneyEditSettings}" />
+                            <dxg:GridColumn FieldName="Amount"
+                                            Header="PROPOSED&#10;REFUND"
+                                            Width="100"
+                                            CellStyle="{StaticResource AmountCellStyle}"
+                                            EditSettings="{StaticResource moneyEditSettings}" />
+                            <dxg:GridColumn FieldName="NewBalanceDue"
+                                            Header="NEW BALANCE&#10;DUE"
+                                            ReadOnly="True"
+                                            AllowFocus="False"
+                                            Width="100"
+                                            EditSettings="{StaticResource moneyEditSettings}" />
+                            <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+                        </dxg:GridControl.Columns>
+
+                        <dxg:GridControl.TotalSummary>
+                            <dxg:GridSummaryItem FieldName="Amount"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="NewBalanceDue"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.PaymentRequest"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.PaymentTotal"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                            <dxg:GridSummaryItem FieldName="Invoice.Total"
+                                                 SummaryType="Sum"
+                                                 DisplayFormat="c"
+                                                 TextBlock.FontWeight="Bold" />
+                        </dxg:GridControl.TotalSummary>
+
+                    </dxg:GridControl>
+                </dxlc:LayoutGroup>
+                <Grid Grid.Row="4"
+                      Grid.Column="1"
+                      Margin="5,0,5,5"
+                      Visibility="{Binding Path=IsVisibleGridControlPayment,
+                                           Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0"
+                            Margin="5 0 5 0"
+                            Command="{Binding PaymentRefundNewCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Add_16x16.png}" Stretch="Uniform" />
+                            <TextBlock Text="New Item"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="1"
+                            Margin="5 0 5 0"
+                            Command="{Binding PaymentRefundDeleteCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                            <TextBlock Text="Delete Item"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+                <infrastructure:CommandPanelView Grid.Row="5"
+                                                 CloseOnly="{Binding ReadOnly}"
+                                                 Visibility="{Binding IsShowCommandPanel,
+                                                                      Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+
+
+            </Grid>
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

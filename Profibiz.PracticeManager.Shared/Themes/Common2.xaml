@@ -1,0 +1,329 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+    xmlns:local="clr-namespace:Profibiz.PracticeManager.Infrastructure"
+    xmlns:model="clr-namespace:Profibiz.PracticeManager.Model;assembly=Profibiz.PracticeManager.Model"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Themes/Templates.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Themes/Common.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Segoe Script" />
+    </Style>
+
+    <model:LookupDataProvider x:Key="lookupDataProvider" />
+    <local:InsuranceProviderConverter x:Key="insuranceProviderConverter" />
+    <local:InsuranceProviderCodeConverter x:Key="insuranceProviderCodeConverter" />
+    <local:InvoiceStatusConverter x:Key="invoiceStatusConverter" />
+    <local:ChargeoutStatusConverter x:Key="chargeoutStatusConverter" />
+    <local:ChargeoutRecipientConverter x:Key="chargeoutRecipientConverter" />
+    <local:InvoiceTypeConverter x:Key="invoiceTypeConverter" />
+    <local:ProvinceToCityConverter x:Key="ProvinceToCityConverter" />
+    <local:ServiceProviderConverter x:Key="ServiceProviderConverter" />
+    <local:CategoryConverter x:Key="CategoryConverter" />
+    <local:ReferrerConverter x:Key="ReferrerConverter" />
+    <local:MedicalServiceConverter x:Key="MedicalServiceConverter" />
+    <local:EventCalendarRemainderConverter x:Key="EventCalendarRemainderConverter" />
+    <local:PatientNoteStatusConverter x:Key="PatientNoteStatusConverter" />
+    <local:InvoicePaidProblemImageConverter x:Key="InvoicePaidProblemImageConverter" />
+    <local:ChargeoutPaidProblemImageConverter x:Key="ChargeoutPaidProblemImageConverter" />
+
+
+
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxMedicalServices"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding MedicalServices, Source={StaticResource lookupDataProvider}}"
+        ValueMember="RowId" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxMedicalServices_Service"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding MedicalServices_Service, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxProfessionalAssociations"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding ProfessionalAssociations, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxReferrers"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding Referrers, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxChargeModels"
+        AutoComplete="True"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding ChargeModels, Source={StaticResource lookupDataProvider}}" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxMedicalItemTypes"
+        AutoComplete="True"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding MedicalItemType, Source={StaticResource lookupDataProvider}}" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxServiceProviderServiceTypes"
+        AutoComplete="True"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding ServiceProviderServiceTypes, Source={StaticResource lookupDataProvider}}" />
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxServiceProviderEmploymentType"
+        AutoComplete="True"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding ServiceProviderEmploymentType, Source={StaticResource lookupDataProvider}}" />
+
+
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxCategories"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding Categories, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+    <Style
+        x:Key="comboBoxEditAppointmentStatusStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding AppointmentStatuses, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="ValueMember" Value="RowId" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="EditBox" />
+        <Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Column="0"
+                            Margin="2"
+                            Background="{Binding Path=BackgroundColor}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="2"
+                            Text="{Binding Path=Name}" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EditNonEditableTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Background="{Binding SelectedItem.BackgroundColor}">
+                        <TextBlock
+                            Padding="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{Binding SelectedItem.ForegroundColor}"
+                            Text="{Binding Path=SelectedItem.Name}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="comboBoxEditPatientNoteStatusStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding PatientNoteStatuses, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="ValueMember" Value="RowId" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="EditBox" />
+        <Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Column="0"
+                            Margin="2"
+                            Background="{Binding Path=BackgroundColor}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="2"
+                            Text="{Binding Path=Name}" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EditNonEditableTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Background="{Binding SelectedItem.BackgroundColor}">
+                        <TextBlock
+                            Padding="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{Binding SelectedItem.ForegroundColor}"
+                            Text="{Binding Path=SelectedItem.Name}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="comboBoxEditCalendarEventStatusStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding CalendarEventStatuses, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="ValueMember" Value="RowId" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="EditBox" />
+        <Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
+        <Setter Property="ItemTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            Grid.Column="0"
+                            Margin="2"
+                            Background="{Binding Path=BackgroundColor}" />
+                        <TextBlock
+                            Grid.Column="1"
+                            Margin="2"
+                            Text="{Binding Path=Name}" />
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EditNonEditableTemplate">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid Background="{Binding SelectedItem.BackgroundColor}">
+                        <TextBlock
+                            Padding="2"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Foreground="{Binding SelectedItem.ForegroundColor}"
+                            Text="{Binding Path=SelectedItem.Name}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style
+        x:Key="comboBoxEditEventCalendarRemainderStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding EventCalendarRemainderEnum, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="ValueMember" Value="Value" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="None" />
+    </Style>
+
+    <Style
+        x:Key="comboBoxEditEventCalendarSnoozedStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding EventCalendarSnoozedEnum, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="None" />
+    </Style>
+
+
+    <dxe:ComboBoxEditSettings
+        x:Key="comboBoxMedicalServices_ThirdPartyService"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding MedicalServices_ThirdPartyService, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+
+    <Style
+        x:Key="comboBoxReferrerStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding Referrers, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="ValueMember" Value="RowId" />
+        <Setter Property="DisplayMember" Value="Name" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="EditBox" />
+        <Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
+    </Style>
+
+
+    <Style
+        x:Key="comboBoxInsuranceCoverageYearTypeStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+        <Setter Property="ItemsSource" Value="{Binding InsuranceCoverageYearTypes, Source={StaticResource lookupDataProvider}}" />
+        <Setter Property="IsTextEditable" Value="False" />
+        <Setter Property="NullValueButtonPlacement" Value="EditBox" />
+    </Style>
+
+
+    <SolidColorBrush x:Key="AppointmentRowBackgroundInInvoice" Color="#DDEBF7" />
+    <SolidColorBrush x:Key="AppointmentRowBackgroundOutInvoice" Color="#FCE4D6" />
+
+    <SolidColorBrush x:Key="AppointmentRowBackgroundInChargeout" Color="#DDEBF7" />
+    <SolidColorBrush x:Key="AppointmentRowBackgroundOutChargeout" Color="#FCE4D6" />
+
+
+
+    <model:AccountAgingToColorConverterConverter x:Key="AccountAgingToColorConverter" />
+    <model:AccountAgingToForegrondColorConverterConverter x:Key="AccountAgingToForegrondColorConverterConverter" />
+
+</ResourceDictionary>

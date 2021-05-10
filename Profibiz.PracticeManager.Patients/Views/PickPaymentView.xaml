@@ -1,0 +1,129 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.PickPaymentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             Height="Auto"
+             Width="800"
+             Title="{Binding WindowTitle}"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             WindowStartupLocation="CenterScreen"
+             d:DesignHeight="600"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                
+                <dxg:GridControl x:Name="tableViewGridControl"
+                                 Grid.Row="0"
+                                 ItemsSource="{Binding Entities}"
+                                 ShowBorder="True"
+                                 SelectedItem="{Binding SelectedEntity}"
+                                 SelectedItems="{Binding SelectedEntities}"
+                                 SelectionMode="{Binding IsMultiSelect, Converter={StaticResource BooleanToGridSelectionMode}}"
+                                 AllowLiveDataShaping="True"
+                                 AutoExpandAllGroups="True">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                               Command="{Binding PickCommand}"
+                                               EventName="MouseDoubleClick">
+                            <dxmvvm:EventToCommand.EventArgsConverter>
+                                <dx:EventArgsToDataRowConverter />
+                            </dxmvvm:EventToCommand.EventArgsConverter>
+                        </dxmvvm:EventToCommand>
+                        <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrol}" />
+                    </dxmvvm:Interaction.Behaviors>                    
+
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowEditing="False"
+                                       AllowPerPixelScrolling="True"
+                                       ShowSearchPanelMode="Always"
+                                       SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                       ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                       ShowGroupPanel="False"
+                                       AutoWidth="False"
+                                       SearchPanelHorizontalAlignment="Right"
+                                       NavigationStyle="Row"
+                                       ShowCheckBoxSelectorColumn="{Binding IsMultiSelect}"
+                                       AlternateRowBackground="{StaticResource GridEvenRowBrush}"
+                                       SearchPanelNullText="Search (Ctrl + F)">
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="PaymentDate"
+                                            Header="PAYMENT DATE"
+                                            IsEnabled="False"
+                                            ReadOnly="True"
+                                            />
+                        <!--Width="{x:Static infrastructure:WidthInfo.DateColumn}"-->
+                        <dxg:GridColumn FieldName="Amount"
+                                            Header="AMOUNT"
+                                            EditSettings="{StaticResource moneyEditSettings}"
+                                            Width="88" />
+                        <dxg:GridColumn FieldName="FullDescription"
+                                            Header="PAYMENT INFORMATION"
+                                            IsEnabled="False"
+                                            ReadOnly="True"
+                                            Width="*" />
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+
+
+                <StackPanel Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Right"
+                            Margin="5">
+                    <dx:DialogButton Command="{Binding SubmitCommand}"
+                                     Content="OK"
+                                     Margin="5" />
+                    <dx:DialogButton Command="{Binding CancelCommand}"
+                                     Content="Cancel"
+                                     Margin="5" />
+                </StackPanel>
+
+                <!--<StackPanel Grid.Row="1"
+                            Orientation="Horizontal"
+                            HorizontalAlignment="Left"
+                            Margin="5">
+                    <dx:DialogButton Command="{Binding NewRowCommand}"
+                                     Content="{Binding NewRowButtonText}"
+                                     Margin="5" />
+                </StackPanel>-->
+            </Grid>
+        </Grid>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

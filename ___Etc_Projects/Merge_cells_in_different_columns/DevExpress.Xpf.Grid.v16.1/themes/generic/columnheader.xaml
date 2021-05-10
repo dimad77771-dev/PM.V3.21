@@ -1,0 +1,96 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxgcore="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dxght="clr-namespace:DevExpress.Xpf.Grid.HitTest"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes"
+                    xmlns:dxei="http://schemas.devexpress.com/winfx/2008/xaml/editors/internal"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys">
+  <dx:EnumToVisibilityConverter x:Key="EnumToVisibilityConverter"/>
+  <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+  <dxg:GridColumnToGridColumnDataConverter x:Key="GridColumnToGridColumnDataConverter"/>
+  <dxgcore:DefaultDataTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=ContentTemplate}">
+    <ContentPresenter Name="textBlock" Content="{Binding}"
+                      dxgcore:BaseGridHeader.GridColumn="{Binding Path=(dxg:GridColumnHeader.GridColumn), RelativeSource={RelativeSource TemplatedParent}}">
+      <FrameworkElement.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+          <Setter Property="TextBlock.TextTrimming" Value="CharacterEllipsis"/>
+          <Setter Property="dxei:TextBlockService.AllowIsTextTrimmed" Value="true"/>
+          <Style.Triggers>
+            <MultiDataTrigger>
+              <MultiDataTrigger.Conditions>
+                <Condition Binding="{Binding Path=(dxg:GridColumnHeader.GridColumn).HeaderToolTip, RelativeSource={RelativeSource TemplatedParent}}"
+                           Value="{x:Null}"/>
+                <Condition Binding="{Binding Path=(dxei:TextBlockService.IsTextTrimmed), RelativeSource={RelativeSource Self}}"
+                           Value="True"/>
+              </MultiDataTrigger.Conditions>
+              <Setter Property="ToolTipService.ToolTip" Value="{Binding RelativeSource={RelativeSource Self}, Path=Text}"/>
+            </MultiDataTrigger>
+          </Style.Triggers>
+        </Style>
+      </FrameworkElement.Resources>
+    </ContentPresenter>
+  </dxgcore:DefaultDataTemplate>
+  <dxgcore:DefaultDataTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=CustomizationAreaTemplate}"/>
+  <Style TargetType="{x:Type dxg:GridThumb}">
+    <Setter Property="FrameworkElement.MinWidth"
+            Value="{DynamicResource {x:Static SystemParameters.ResizeFrameVerticalBorderWidthKey}}"/>
+    <Setter Property="FrameworkElement.MinHeight"
+            Value="{DynamicResource {x:Static SystemParameters.ResizeFrameHorizontalBorderHeightKey}}"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:GridThumb}">
+          <Grid Background="Transparent" dx:DragManager.IsStartDragPlace="false"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="dxg:GridViewHitInfoBase.HitTestAcceptor">
+      <Setter.Value>
+        <dxght:ColumnEdgeTableViewHitTestAcceptor/>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <ControlTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=FilterAreaTemplate}"
+                   TargetType="{x:Type dxe:PopupBaseEdit}">
+    <ToggleButton HorizontalAlignment="Left" VerticalAlignment="Top" Focusable="false" IsTabStop="false"
+                  Template="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=ColumnFilterTemplate}}"
+                  IsChecked="{Binding Path=IsPopupOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                  Foreground="{Binding Path=Parent.(TextElement.Foreground), RelativeSource={RelativeSource TemplatedParent}}"/>
+  </ControlTemplate>
+  <Style TargetType="{x:Type dxg:DesignTimeSelectionControl}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate>
+          <Border Background="Red" IsHitTestVisible="false" Opacity="0.3"/>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:SortIndicatorControl}">
+    <Setter Property="FrameworkElement.HorizontalAlignment" Value="Right"/>
+    <Setter Property="FrameworkElement.Width"
+            Value="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=SortIndicatorWidth}}"/>
+    <Setter Property="FrameworkElement.Margin"
+            Value="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=SortIndicatorUpMargin}}"/>
+    <Setter Property="Control.Template"
+            Value="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=SortArrowUpTemplate}}"/>
+    <Style.Triggers>
+      <Trigger Property="dxg:SortIndicatorControl.SortOrder" Value="Descending">
+        <Setter Property="Control.Template"
+                Value="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=SortArrowDownTemplate}}"/>
+        <Setter Property="FrameworkElement.Margin"
+                Value="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=SortIndicatorDownMargin}}"/>
+      </Trigger>
+    </Style.Triggers>
+  </Style>
+  <DataTemplate x:Key="{dxgt:GridColumnHeaderThemeKey ResourceKey=CheckBoxSelectorColumnHeaderTemplate}">
+    <Border Padding="0,0,1,0"
+            Margin="{DynamicResource {dxgt:GridColumnHeaderThemeKey ResourceKey=CheckBoxSelectorMargin}}">
+      <dxe:CheckEdit IsHitTestVisible="false"
+                     EditValue="{Binding Path=(dxgcore:DataControlBase.ActiveView).AllItemsSelected, RelativeSource={RelativeSource Self}, Mode=OneWay}"/>
+    </Border>
+  </DataTemplate>
+</ResourceDictionary>

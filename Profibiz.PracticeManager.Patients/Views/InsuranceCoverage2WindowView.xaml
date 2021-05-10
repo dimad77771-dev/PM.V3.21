@@ -1,0 +1,43 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.InsuranceCoverage2WindowView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+             xmlns:localview="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             DataContext="{dxmvvm:ViewModelSource Type={x:Type local:InsuranceCoverage2ViewModel}}"
+             MaxWidth="1600"
+             Width="{x:Static infrastructure:WindowInfo.Width90}"
+             Height="{x:Static infrastructure:WindowInfo.Height85}"
+             MinHeight="800"
+             Title="Insurance Coverage"
+             WindowStartupLocation="CenterScreen"
+             ResizeMode="NoResize"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             d:DesignHeight="1200"
+             d:DesignWidth="1483"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+    <localview:InsuranceCoverage2View x:Name="innerView" />
+
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+</dx:DXWindow>

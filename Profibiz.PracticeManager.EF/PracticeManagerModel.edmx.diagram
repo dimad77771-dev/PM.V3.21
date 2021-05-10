@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="50133023e51c4f8d8b1ab06b5d856daf" Name="_Main" ZoomLevel="100">
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalServicesOrSupply" Width="2.875" PointX="4.5" PointY="21.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientMedicalCondition" Width="2.375" PointX="1" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="2.5" PointX="4.25" PointY="9" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientMedicalConditions_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageHolder" Width="2.25" PointX="13.375" PointY="13.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageHolderService" Width="1.5" PointX="15.5" PointY="16.375" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverage" Width="1.5" PointX="10.875" PointY="13.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageService" Width="1.5" PointX="12.875" PointY="17" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceProvider" Width="1.5" PointX="8.375" PointY="14.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolders_InsuranceCoverages" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolders_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolderServices_InsuranceCoverageHolders" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolderServices_InsuranceCoverageServices1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverages_InsuranceProviders" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageServices_InsuranceCoverages" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ProfessionalAssociation" Width="2.125" PointX="5.5" PointY="2.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalCondition" Width="3.25" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientMedicalConditions_MedicalConditions" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderAssociation" Width="2.5" PointX="7.75" PointY="11.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderAssociations_ProfessionalAssociations" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientPhoto" Width="1.5" PointX="10.5" PointY="4.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK__PatientPh__Patie__00DF2177" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceProvidersViewGroupMapping" Width="1.5" PointX="10.625" PointY="18.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceProvidersViewGroup" Width="1.5" PointX="8.375" PointY="19.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK__Insurance__Insur__14E61A24" />
+        <AssociationConnector Association="PracticeManagerModel.FK__Insurance__Insur__13F1F5EB" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentBook" Width="1.5" PointX="2.125" PointY="25.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentInsuranceProvider" Width="2.125" PointX="10.625" PointY="21.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentInsuranceProviders_InsuranceProviders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientInsuranceCoverageView" Width="1.5" PointX="7.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientInsuranceProvidersViewGroupView" Width="2.375" PointX="7.875" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientFamilyMemberView" Width="1.5" PointX="4.375" PointY="6.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentT" Width="2.625" PointX="15.875" PointY="22" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_AppointmentBooks" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentInsuranceProviders_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.FK__Appointme__Medic__0D0FEE32" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceItem" Width="2.875" PointX="41.875" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="2.125" PointX="17.5" PointY="31.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentT" Width="1.5" PointX="9" PointY="25.375" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_MedicalServicesOrSupplies" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceV" Width="1.5" PointX="37.625" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="2.25" PointX="52.5" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Category" Width="1.5" PointX="1.125" PointY="29.25" />
+        <AssociationConnector Association="PracticeManagerModel.FK_MedicalServicesOrSupplies_Categories" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentV" Width="1.5" PointX="58.75" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePayment_InvoiceV" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVInvoicePayment" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentV" Width="2.875" PointX="12.125" PointY="7.5" />
+        <AssociationConnector Association="PracticeManagerModel.PatientAppointmentV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ThirdPartyServiceProvider" Width="1.5" PointX="16.375" PointY="7" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderV" PointX="17.375" PointY="12.125" Width="2.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderService" Width="3" PointX="11" PointY="24.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderServices_MedicalServicesOrSupplies" />
+        <AssociationConnector Association="PracticeManagerModel.ServiceProviderVServiceProviderService" />
+        <AssociationConnector Association="PracticeManagerModel.ServiceProviderVServiceProviderAssociation" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentStatus" Width="2.125" PointX="12.875" PointY="21.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_AppointmentStatuses_1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_AppointmentStatuses_2" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Referrer" Width="1.5" PointX="0.75" PointY="7.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_ReferrerRowId" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientsListView" Width="2" PointX="13.375" PointY="0.625" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageServices_Categories" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ClientError" Width="1.5" PointX="9.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientAllFamilyMemberView" Width="2.375" PointX="10.625" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.NLogItem" Width="1.5" PointX="16.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceStatus" Width="2.5" PointX="13.125" PointY="4.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProvider" Width="3.875" PointX="4.375" PointY="26" />
+        <AssociationConnector Association="PracticeManagerModel.FK__ServicePr__Appoi__24285DB4" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_ServiceProviders" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderAssociations_ServiceProviders" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderServices_ServiceProviders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceT" Width="1.5" PointX="23.625" PointY="8.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_Invoices" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_InvoiceStatuses_1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_InvoiceStatuses_2" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_Tpsp" />
+        <EntityTypeShape EntityType="PracticeManagerModel.UserSetting" Width="1.5" PointX="16.375" PointY="3.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Template" Width="1.5" PointX="18.375" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_InsuranceCoverages" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageV" Width="2.375" PointX="24.5" PointY="0.625" />
+        <AssociationConnector Association="PracticeManagerModel.InsuranceCoverageVPatient" />
+        <AssociationConnector Association="PracticeManagerModel.InsuranceCoverageHolderInsuranceCoverageV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimStatus" Width="1.875" PointX="23.625" PointY="15.75" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVPatientsView" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVInvoiceItem" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVPatientV" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Invoices" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Payments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Payments_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.City" Width="1.5" PointX="0.75" PointY="11.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimV" Width="1.5" PointX="31.125" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceClaimVInvoiceV" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceClaimVInsuranceCoverageV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimT" Width="2.625" PointX="28.75" PointY="11.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_InsuranceCoverages" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_InvoiceClaimStatuses1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_InvoiceClaimStatuses2" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_Invoices" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceItemAppointmentV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageItemCategory" Width="1.5" PointX="19.375" PointY="28.375" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageItemHolder" Width="1.5" PointX="19.375" PointY="21.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceCoverageItem" Width="1.5" PointX="13.125" PointY="29.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemCategories_Categories" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemHolders_InsuranceCoverageHolders" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemCategories_InsuranceCoverageItems" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemHolders_InsuranceCoverageItems" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItems_InsuranceCoverages" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePaymentByDoctorsV" Width="2.5" PointX="0.5" PointY="15" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePaymentByDoctorsVInvoiceV" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePaymentByDoctorsVPaymentV" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_ServiceProviders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PublicHoliday" Width="1.5" PointX="0.75" PointY="18.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Supplier" Width="2" PointX="20.5" PointY="3" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentClinicalNote" Width="1.5" PointX="19.25" PointY="35.25" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentClinicalNotes_Appointments" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimDetail" Width="2.5" PointX="32.125" PointY="17.625" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentClinicalNotes_InvoiceClaims" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaimDetails_MedicalServicesOrSupplies" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceClaimDetailInvoiceClaimV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsuranceArticleV" Width="3.875" PointX="18.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsurancePatientCategory2InsuranceArticleV" Width="2.25" PointX="20.375" PointY="11.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InsurancePatientCategory2InvoiceClaimDetailV" Width="2.375" PointX="20.375" PointY="14.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderPayment" Width="1.5" PointX="16" PointY="42.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierPaymentV" Width="1.5" PointX="18.25" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierPaymentVOrderPayment" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierPaymentVSupplier" />
+        <AssociationConnector Association="PracticeManagerModel.OrderPaymentSupplierPaymentV" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceItemAppointmentV1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentRemainder" Width="2.625" PointX="20.75" PointY="38.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentRemainders_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.AppointmentVAppointmentRemainder" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentRemaindersForProcessed" Width="3.5" PointX="26.5" PointY="21.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentTreatmentNote" Width="3" PointX="19.25" PointY="42.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentTreatmentNotes_Appointments" />
+        </Diagram>
+      <Diagram DiagramId="91f349ae33a3493786f4eb2a0e83ee6d" Name="InvoiceClaim" ZoomLevel="85" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimT" Width="3" PointX="0.5" PointY="6.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimDetail" Width="2.375" PointX="3.875" PointY="2.125" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentClinicalNotes_InvoiceClaims" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimV" Width="1.5" PointX="10" PointY="1.125" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceClaimDetailInvoiceClaimV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimDetail2InsurancePatientCategoryV" Width="1.5" PointX="0.75" PointY="3.75" />
+      </Diagram>
+      <Diagram DiagramId="f94cb8ac78114439a78a703af26593b1" Name="Payroll" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PayrollPaymentAllocationV" Width="2.875" PointX="10.125" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PayrollPaymentAllocationT" Width="2.75" PointX="1" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PayrollPaymentT" Width="2.5" PointX="1.25" PointY="6.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PayrollPaymentAllocations_PayrollPayments" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PayrollPaymentV" Width="2.75" PointX="4.625" PointY="0.5" />
+        <AssociationConnector Association="PracticeManagerModel.PayrollPaymentVPayrollPaymentAllocationV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePaymentByDoctorAndPeriodView" Width="3.5" PointX="10.125" PointY="3.375" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PayrollPaymentByDoctorAndPeriodView" Width="3.5" PointX="9.75" PointY="5.375" />
+      </Diagram>
+      <Diagram DiagramId="3240bbdb319b41c1acfcbc58c743aa46" Name="Refund" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceRefundT" Width="2" PointX="11.75" PointY="0.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefundT" Width="1.5" PointX="8.375" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceRefundV" Width="2.125" PointX="4" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefundV" Width="1.5" PointX="0.875" PointY="0.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceRefunds_Refunds" />
+        <AssociationConnector Association="PracticeManagerModel.RefundVInvoiceRefundV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="1.5" PointX="5.25" PointY="4.125" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.RefundVPatientV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceV" Width="1.5" PointX="6.875" PointY="17" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVPatientsView" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceRefundVInvoiceV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentRefundT" Width="2.25" PointX="10.625" PointY="5.125" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PaymentRefunds_Refunds" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentRefundV" Width="2.5" PointX="0.75" PointY="6.75" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentRefundsVRefundV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentV" Width="1.5" PointX="4" PointY="16.875" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVPatientV" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentRefundsVPaymentV" />
+      </Diagram>
+      <Diagram DiagramId="f2f2c5a76bf74506abeea8f2924d9f29" Name="Payment" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentV" Width="1.5" PointX="3.125" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentT" Width="1.5" PointX="0.75" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="2.625" PointX="6.75" PointY="1.5" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVInvoicePayment" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Payments" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="1.5" PointX="6.25" PointY="7.75" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVPatientV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePaymentByDoctorsV" Width="1.5" PointX="0.875" PointY="6.125" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePaymentByDoctorsVPaymentV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentRefundV" Width="2" PointX="0.875" PointY="9.375" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentRefundsVPaymentV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefundV" Width="1.5" PointX="10.5" PointY="2.25" />
+        <AssociationConnector Association="PracticeManagerModel.RefundVPatientV" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentRefundsVRefundV" />
+      </Diagram>
+      <Diagram DiagramId="46faee4cbf8642f78e4aa3678f356667" Name="Invoice" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceT" Width="1.5" PointX="7.875" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceV" Width="2" PointX="0.875" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceAdvinfoV" Width="2.25" PointX="4.25" PointY="0.875" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVInvoiceAdvinfoV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="12.75" PointY="4.25" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="1.5" PointX="0.875" PointY="9.875" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePayment_InvoiceV" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Invoices" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="1.5" PointX="3.625" PointY="11.75" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVPatientsView" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceItem" Width="1.5" PointX="10.125" PointY="2.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_Invoices" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceVInvoiceItem" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimV" Width="1.5" PointX="0.875" PointY="13.5" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceClaimVInvoiceV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePaymentByDoctorsV" Width="1.5" PointX="0.875" PointY="18.5" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePaymentByDoctorsVInvoiceV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceRefundV" Width="1.5" PointX="0.875" PointY="21.625" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceRefundVInvoiceV" />
+      </Diagram>
+      <Diagram DiagramId="0690fb1e7b1445e4b51fe40ef042d9c5" Name="CalendarEvent" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="3.375" PointX="15.75" PointY="3.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="6.25" PointX="5.375" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.CalendarEventT" Width="2.25" PointX="12.75" PointY="8.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.CalendarEventStatus" Width="2" PointX="0.75" PointY="1.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.CalendarEventV" Width="2.125" PointX="5.625" PointY="0.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_CalendarEvents_CalendarEventStatuses_1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_CalendarEvents_CalendarEventStatuses_2" />
+        <AssociationConnector Association="PracticeManagerModel.FK_CalendarEvents_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.CalendarEventVPatientV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.CalendarEventsForRemainder" Width="2.625" PointX="0.75" PointY="5.75" />
+      </Diagram>
+      <Diagram DiagramId="9c18944812ab40229e8c1e009b080ae0" Name="Inventory" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InventoryT" Width="2" PointX="4.375" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InventoryV" Width="2.25" PointX="11.75" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderV" Width="2.375" PointX="6.75" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderT" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderItemT" Width="1.5" PointX="3" PointY="5.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderItems_Orders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderItemV" Width="2.375" PointX="8.875" PointY="4.75" />
+        <AssociationConnector Association="PracticeManagerModel.OrderVOrderItemV" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Inventory_OrderItems" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceItem" Width="1.5" PointX="3" PointY="10" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Inventory_InvoiceItems" />
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalServicesOrSupply" Width="1.5" PointX="0.75" PointY="5.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_MedicalServicesOrSupplies" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Inventory_MedicalServicesOrSuppliers" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderItems_MedicalServicesOrSuppliers" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InventoryBalance" Width="2.125" PointX="5.375" PointY="5.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Supplier" Width="1.5" PointX="9.75" PointY="0.5" IsExpanded="true" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Orders_Suppliers" />
+        <AssociationConnector Association="PracticeManagerModel.OrderVSupplier" />
+      </Diagram>
+      <Diagram DiagramId="85900de03d784069b8f65a9fa18ca692" Name="MedicalHistory" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalHistoryRecordT" Width="2.375" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalHistoryRecordV" Width="2.75" PointX="4.375" PointY="0.75" />
+      </Diagram>
+      <Diagram DiagramId="1aa2327abe3149bf98f25378cd20d71b" Name="PrintDocument" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PrintDocument" Width="1.5" PointX="0.75" PointY="0.75" />
+      </Diagram>
+      <Diagram DiagramId="c10e655395674bada45fdf620f7eb136" Name="PatientNote" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientNote" Width="2.125" PointX="4.625" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientNoteStatus" Width="2.375" PointX="0.5" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientNotes_PatientNoteStatuses" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientDocument" Width="3.25" PointX="0.75" PointY="3.75" />
+      </Diagram>
+      <Diagram DiagramId="5424f0aa6c29441b99bcdd081bd52a23" Name="SchedulerRecord" >
+        <EntityTypeShape EntityType="PracticeManagerModel.SchedulerRecordItem" Width="2.625" PointX="5.75" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SchedulerRecord" Width="2.375" PointX="1.625" PointY="1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_SchedulerRecordItems__SchedulerRecords" />
+      </Diagram>
+      <Diagram DiagramId="026fc282b6414917a22a3cd9b80f7103" Name="SupplierPayment" >
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierPaymentRefundT" Width="2.125" PointX="8.125" PointY="1.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierPaymentT" Width="2.125" PointX="0.625" PointY="0.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierRefundT" Width="2.25" PointX="11.5" PointY="1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_SupplierPaymentRefunds_SupplierPayments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_SupplierPaymentRefunds_SupplierRefunds" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderPayment" Width="2.25" PointX="4.375" PointY="0.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderPayments_SupplierPayments" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierPaymentV" Width="2.25" PointX="0.625" PointY="6.125" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierPaymentVOrderPayment" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierPaymentRefundV" Width="2.875" PointX="9.75" PointY="6.125" />
+        <EntityTypeShape EntityType="PracticeManagerModel.SupplierRefundV" Width="2.625" PointX="5.375" PointY="5.75" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierRefundVSupplierPaymentRefundV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Supplier" Width="1.5" PointX="8.75" PointY="10.125" />
+        <AssociationConnector Association="PracticeManagerModel.FK_SupplierPayments_Suppliers" />
+        <AssociationConnector Association="PracticeManagerModel.FK_SupplierRefunds_Suppliers" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierRefundVSupplier" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierPaymentVSupplier" />
+        <AssociationConnector Association="PracticeManagerModel.SupplierPaymentVSupplierPaymentRefundV" />
+        <AssociationConnector Association="PracticeManagerModel.OrderPaymentSupplierPaymentV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderT" Width="1.5" PointX="11" PointY="10.625" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Orders_Suppliers" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderPayments_Orders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.OrderV" Width="1.5" PointX="7.375" PointY="15.25" />
+        <AssociationConnector Association="PracticeManagerModel.OrderVSupplier" />
+        <AssociationConnector Association="PracticeManagerModel.OrderPaymentOrderV" />
+      </Diagram>
+      <Diagram DiagramId="9c92ef55d9be4ef5a63fa4714398a200" Name="InsuranceCoverageView" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InsurancePatientCategory2InsuranceArticleV" Width="3.625" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.CHECKVIEW_InsuranceCoverages" Width="1.5" PointX="0.75" PointY="3.75" />
+      </Diagram>
+      <Diagram DiagramId="43a6669fcaa64006b785c0ce559ae91d" Name="EmailSend" >
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailSendAttachment" Width="2.75" PointX="4.5" PointY="1" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailSendRecipient" Width="2.625" PointX="4.625" PointY="3.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailSendT" Width="2.75" PointX="0.75" PointY="2.125" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailSendAttachments_EmailSends" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailSendRecipients_EmailSends" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailSendV" Width="2.375" PointX="8.375" PointY="1.625" />
+      </Diagram>
+      <Diagram DiagramId="b9b60a4a185c4a42a756f14fd4621692" Name="Chargeout" >
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutItem" Width="3.875" PointX="8.625" PointY="11.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutPaycharge" Width="2.375" PointX="13" PointY="7.125" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeT" Width="2.5" PointX="6.125" PointY="7.125" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutT" Width="1.5" PointX="3.25" PointY="5.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutStatus" Width="2.125" PointX="0.5" PointY="5.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeT" Width="2.625" PointX="10" PointY="0.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeT" Width="2.5" PointX="5.25" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefchargeT" Width="1.5" PointX="1.25" PointY="0.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutItems_Chargeouts" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutPaycharges_Chargeouts" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutPaycharges_Paycharges" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutRefcharges_Chargeouts" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutRefcharges_Refcharges" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Chargeouts_ChargeoutStatuses_1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Chargeouts_ChargeoutStatuses_2" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PaychargeRefcharges_Paycharges" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PaychargeRefcharges_Refcharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="2" PointX="0.625" PointY="12.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="2.5" PointX="4.75" PointY="12.25" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutItem" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeV" Width="2.375" PointX="0.5" PointY="8.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutPaychargeV" Width="2.875" PointX="13.375" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutPaycharge" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutRefchargeV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="1.5" PointX="9.375" PointY="4.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Chargeouts_ChargeoutRecipients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutVChargeoutRecipient" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Paycharges_ChargeoutRecipients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Refcharges_ChargeoutRecipients" />
+      </Diagram>
+      <Diagram DiagramId="08bb80c8ed7c4372acc5954ca507cc90" Name="EmailCharge" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailChargeAttachment" Width="2.25" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailChargeRecipient" Width="2.375" PointX="4.625" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailChargeT" Width="1.5" PointX="0.75" PointY="1.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeAttachments_EmailCharges" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_EmailCharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="6.375" PointY="6.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProvider" Width="1.5" PointX="0.75" PointY="6.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_ServiceProviders" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="1.5" PointX="0.75" PointY="14.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_ChargeoutRecipients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.EmailChargeV" Width="2.25" PointX="9.125" PointY="3.875" />
+      </Diagram>
+      <Diagram DiagramId="88a00608c8c9408eb167fa8c30c58cdd" Name="Paycharge" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeT" Width="2" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeT" Width="2.375" PointX="4.5" PointY="0.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PaychargeRefcharges_Paycharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeV" Width="2.625" PointX="8" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutPaycharge" Width="2.125" PointX="3.25" PointY="28.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutPaycharges_Paycharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="1.75" PointY="13" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="2.25" PointX="3.625" PointY="4.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Paycharges_ChargeoutRecipients" />
+        <AssociationConnector Association="PracticeManagerModel.PaychargeVChargeoutRecipient" />
+        <AssociationConnector Association="PracticeManagerModel.PaychargeVChargeoutPaycharge" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeV" Width="2.25" PointX="11.625" PointY="0.875" />
+        <AssociationConnector Association="PracticeManagerModel.PaychargeVPaychargeRefchargeV" />
+      </Diagram>
+      <Diagram DiagramId="4bd2805b537b4b5c9421a7546f35ec01" Name="Refcharge" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.RefchargeT" Width="1.875" PointX="1.125" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefchargeV" Width="2.625" PointX="12.25" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="2.375" PointX="4.375" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeV" Width="2.5" PointX="8.125" PointY="0.5" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutRefchargeV" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutRefchargeVRefchargeV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="4.625" PointX="10.25" PointY="10.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeT" Width="2.375" PointX="3.75" PointY="9.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutRefcharges_Refcharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="1.125" PointY="24.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeT" Width="2.5" PointX="3.75" PointY="13" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PaychargeRefcharges_Refcharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="2.375" PointX="9.5" PointY="4.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutVChargeoutRecipient" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Refcharges_ChargeoutRecipients" />
+        <AssociationConnector Association="PracticeManagerModel.RefchargeVChargeoutRecipient" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeV" Width="2.25" PointX="6.5" PointY="13" />
+        <AssociationConnector Association="PracticeManagerModel.RefchargeVPaychargeRefchargeV" />
+      </Diagram>
+      <Diagram DiagramId="4e220ba4f6954ac584e4616b0cb12129" Name="Chargeout2" ZoomLevel="78" >
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="3.125" PointX="0.75" PointY="2.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutItem" Width="2.625" PointX="4.625" PointY="1.375" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutItem" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutPaycharge" Width="2.625" PointX="4.625" PointY="5.875" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutPaycharge" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeV" Width="2.625" PointX="4.625" PointY="9.5" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutRefchargeV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="2.625" PointX="8.875" PointY="1.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutVChargeoutRecipient" />
+      </Diagram>
+      <Diagram DiagramId="79915a21277341deb15d4419c91c1287" Name="Chargeout3" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutItem" Width="3" PointX="5.25" PointY="3.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentT" Width="1.5" PointX="2.125" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceItem" Width="1.5" PointX="10.125" PointY="1.125" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutItems_InvoiceItems" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutT" Width="1.5" PointX="3.875" PointY="10.625" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutItems_Chargeouts" />
+        <EntityTypeShape EntityType="PracticeManagerModel.MedicalServicesOrSupply" Width="1.5" PointX="12.5" PointY="0.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK__Appointme__Medic__0D0FEE32" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_MedicalServicesOrSupplies" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="1.5" PointX="3.875" PointY="17.5" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutItem" />
+      </Diagram>
+      <Diagram DiagramId="3841948d9b86424090abeb1e5ce901e8" Name="ZZZ_Tmp" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="2.5" PointX="0.75" PointY="1.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceV" Width="1.5" PointX="4" PointY="12" />
+        <AssociationConnector Association="PracticeManagerModel.InvoicePayment_InvoiceV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentV" Width="1.5" PointX="0.75" PointY="11" />
+        <AssociationConnector Association="PracticeManagerModel.PaymentVInvoicePayment" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceT" Width="1.5" PointX="0.75" PointY="16.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Invoices" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaymentT" Width="1.5" PointX="0.75" PointY="23.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Payments" />
+      </Diagram>
+      <Diagram DiagramId="fb7ed3b0e0754891bb67b6a35dd625f8" Name="Chargeout4" >
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutT" Width="2.375" PointX="1.125" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentT" Width="1.5" PointX="4.375" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="2.75" PointX="6.875" PointY="0.5" />
+      </Diagram>
+      <Diagram DiagramId="567d74c994c146baa8a238ce30321200" Name="ZZZ_Tmp2" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutPaycharge" Width="4" PointX="4.625" PointY="1.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutT" Width="1.5" PointX="2.375" PointY="10" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutPaycharges_Chargeouts" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeT" Width="1.5" PointX="2.375" PointY="16.75" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutPaycharges_Paycharges" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="1.5" PointX="2.375" PointY="21.75" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutPaycharge" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeV" Width="1.5" PointX="2.375" PointY="30" />
+        <AssociationConnector Association="PracticeManagerModel.PaychargeVChargeoutPaycharge" />
+      </Diagram>
+      <Diagram DiagramId="a8506f787df1450787cd3c9791bd372c" Name="ChargeoutRefcharge" >
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceRefundT" Width="2.625" PointX="0.5" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceRefundV" Width="2.375" PointX="3.375" PointY="0.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeT" Width="2.75" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRefchargeV" Width="2.125" PointX="11.125" PointY="0.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoiceV" Width="1.5" PointX="3.625" PointY="4.375" />
+        <AssociationConnector Association="PracticeManagerModel.InvoiceRefundVInvoiceV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefundV" Width="1.5" PointX="5.875" PointY="4.375" />
+        <AssociationConnector Association="PracticeManagerModel.RefundVInvoiceRefundV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefchargeV" Width="1.5" PointX="10.125" PointY="4.625" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutRefchargeVRefchargeV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutV" Width="2.5" PointX="12.25" PointY="4.25" />
+        <AssociationConnector Association="PracticeManagerModel.ChargeoutVChargeoutRefchargeV" />
+      </Diagram>
+      <Diagram DiagramId="1126555e71b64db99d0d3d8b540805df" Name="ZZZ_Tmp3" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeRefchargeV" Width="3.125" PointX="2.375" PointY="1.25" />
+        <EntityTypeShape EntityType="PracticeManagerModel.RefchargeV" Width="1.5" PointX="10.375" PointY="2" />
+        <AssociationConnector Association="PracticeManagerModel.RefchargeVPaychargeRefchargeV" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PaychargeV" Width="1.5" PointX="10.375" PointY="7.5" />
+        <AssociationConnector Association="PracticeManagerModel.PaychargeVPaychargeRefchargeV" />
+      </Diagram>
+      <Diagram DiagramId="02f43ff85f3645478b938df2fc3a3f89" Name="TreatmentPlan" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.TreatmentPlanRecordT" Width="2.625" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.TreatmentPlanRecordV" Width="5.375" PointX="4.5" PointY="0.625" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

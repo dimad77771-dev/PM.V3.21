@@ -1,0 +1,97 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dxgc="clr-namespace:DevExpress.Xpf.Grid.Native;assembly=DevExpress.Xpf.Grid.v16.1.Core"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes"
+                    xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  <Style TargetType="{x:Type dxg:FormatPreviewControl}" BasedOn="{StaticResource {x:Type ContentControl}}">
+    <Setter Property="Control.Foreground"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=TextUnfocusedBrush}}"/>
+    <Setter Property="Control.Background"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=BorderNoneBrush}}"/>
+    <Setter Property="Control.BorderBrush"
+            Value="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=GridDataRowDelimiterBrush}}"/>
+    <Setter Property="dxg:FormatPreviewControl.Format"
+            Value="{Binding Path=Content, RelativeSource={RelativeSource Self}}"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type ContentControl}">
+          <Border Background="{TemplateBinding Control.Background}">
+            <ContentPresenter/>
+          </Border>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="ContentControl.ContentTemplateSelector">
+      <Setter.Value>
+        <dxgc:PreviewTemplateSelector>
+          <dxgc:PreviewTemplateSelector.IconSetTemplate>
+            <DataTemplate>
+              <ItemsControl ItemsSource="{Binding Icons}">
+                <ItemsControl.ItemTemplate>
+                  <DataTemplate>
+                    <dx:DXImage Stretch="None" HorizontalAlignment="Center" Margin="1" Source="{Binding}"/>
+                  </DataTemplate>
+                </ItemsControl.ItemTemplate>
+                <ItemsControl.ItemsPanel>
+                  <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+                  </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+              </ItemsControl>
+            </DataTemplate>
+          </dxgc:PreviewTemplateSelector.IconSetTemplate>
+          <dxgc:PreviewTemplateSelector.ColorTemplate>
+            <DataTemplate>
+              <Rectangle Fill="{Binding Converter={dxgc:ColorScalePreviewConverter}}"/>
+            </DataTemplate>
+          </dxgc:PreviewTemplateSelector.ColorTemplate>
+          <dxgc:PreviewTemplateSelector.DataBarTemplate>
+            <DataTemplate>
+              <Border BorderThickness="1" Padding="2,2,20,2"
+                      BorderBrush="{Binding BorderBrush, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type dxg:FormatPreviewControl}}}">
+                <Rectangle Fill="{Binding Fill}" Stroke="{Binding BorderBrush}"/>
+              </Border>
+            </DataTemplate>
+          </dxgc:PreviewTemplateSelector.DataBarTemplate>
+          <dxgc:PreviewTemplateSelector.FormatTemplate>
+            <DataTemplate>
+              <Border>
+                <Grid>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                  </Grid.ColumnDefinitions>
+                  <TextBlock Text="AaBbCcYyZz" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <TextBlock.TextDecorations>
+                      <Binding>                        <!-- constructor argument:
+                             TextDecorations
+                        -->
+
+                      </Binding>
+                    </TextBlock.TextDecorations>
+                  </TextBlock>
+                  <ContentPresenter Grid.Column="1" Content="{Binding Icon}">
+                    <ContentPresenter.ContentTemplate>
+                      <DataTemplate>
+                        <dx:DXImage Stretch="None" HorizontalAlignment="Center" Margin="1" Source="{Binding}"/>
+                      </DataTemplate>
+                    </ContentPresenter.ContentTemplate>
+                  </ContentPresenter>
+                </Grid>
+              </Border>
+            </DataTemplate>
+          </dxgc:PreviewTemplateSelector.FormatTemplate>
+          <dxgc:PreviewTemplateSelector.EmptyTemplate>
+            <DataTemplate>
+              <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center"
+                         Text="{dx:DataControlStringId ConditionalFormatting_Manager_NoFormatSet}"/>
+            </DataTemplate>
+          </dxgc:PreviewTemplateSelector.EmptyTemplate>
+        </dxgc:PreviewTemplateSelector>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

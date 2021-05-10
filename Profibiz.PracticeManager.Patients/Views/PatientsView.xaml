@@ -1,0 +1,344 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.PatientsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:localconv="clr-namespace:Profibiz.PracticeManager.Patients.Converters"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:localconver="clr-namespace:Profibiz.PracticeManager.Patients.Converters"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             x:Name="MainUserControlPatientsView"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <infrastructure:ShowRibbonBehavior Name="RibbonPatientsView" />
+    </i:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="PatientsView.Resources/DefaultGridViewStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <localconv:InvoiceFamilyBalanceConverter x:Key="InvoiceFamilyBalanceConverter" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <!--<dx:LoadingDecorator.LayoutTransform>
+            <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
+        </dx:LoadingDecorator.LayoutTransform>-->
+
+        <dxdo:DockLayoutManager Name="dockLayoutManager" BorderThickness="0">
+            <dxdo:LayoutGroup ItemHeight="*" Orientation="Horizontal">
+                <dxdo:LayoutPanel AllowClose="False"
+                                  AllowFloat="False"
+                                  ItemWidth="*"
+                                  ShowBorder="False"
+                                  ShowCaption="False"
+                                  Visibility="Visible"
+                                  ShowPinButton="False">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+
+                        <Grid.Resources>
+                            <convertext:PictureConverter x:Key="PictureConverter" />
+                            <localconver:PatientPhotosConverter x:Key="patientPhotosConverter" />
+
+                            <dxg:TableView x:Key="tableView"
+                                           AllowEditing="False"
+                                           AllowPerPixelScrolling="True"
+                                           ShowSearchPanelMode="Always"
+                                           SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                           ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                           ShowGroupPanel="False"
+                                           AutoWidth="False"
+                                           SearchPanelHorizontalAlignment="Right"
+                                           NavigationStyle="Row"
+                                           SearchPanelNullText="Search Patients (Ctrl + F)"
+                                           ShowFixedTotalSummary="True">
+                                <dxg:TableView.RowCellMenuCustomizations>
+                                    <dxb:BarButtonItem Content="New"
+                                                       Command="{Binding View.DataContext.NewCommand}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                                    <dxb:BarButtonItem Content="Edit"
+                                                       Command="{Binding View.DataContext.EditCommand}"
+                                                       CommandParameter="{Binding Row.Row}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+                                    <dxb:BarButtonItem Content="Delete"
+                                                       Command="{Binding View.DataContext.DeleteCommand}"
+                                                       CommandParameter="{Binding Row.Row}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                                </dxg:TableView.RowCellMenuCustomizations>
+                                <dxg:TableView.FormatConditions>
+                                    <dxg:FormatCondition ApplyToRow="True" Expression="[FamilyMemberType] = 'Head'">
+                                        <dx:Format FontWeight="Bold" />
+                                    </dxg:FormatCondition>
+                                </dxg:TableView.FormatConditions>
+                            </dxg:TableView>
+
+                            <dxg:TreeListView x:Key="treeListView"
+                                              AllowEditing="False"
+                                              ShowSearchPanelMode="Always"
+                                              SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                              ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                              AllowPerPixelScrolling="True"
+                                              AutoWidth="False"
+                                              AutoExpandAllNodes="True"
+                                              SearchPanelHorizontalAlignment="Right"
+                                              SearchPanelNullText="Search Patients (Ctrl + F)"
+                                              KeyFieldName="RowId"
+                                              NavigationStyle="Row"
+                                              ParentFieldName="FamilyHeadRowId"
+                                              TreeDerivationMode="Selfreference"
+                                              ExpandStateFieldName="IsExpanded"
+                                              CheckBoxFieldName="IsCheckBox"
+                                              FilterMode="Extended"
+                                              ShowCheckboxes="{Binding IsMultiSelectMode}"
+                                              ShowFixedTotalSummary="True">
+                                <dxg:TreeListView.RowCellMenuCustomizations>
+                                    <dxb:BarButtonItem Content="New"
+                                                       Command="{Binding View.DataContext.NewCommand}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                                    <dxb:BarButtonItem Content="Edit"
+                                                       Command="{Binding View.DataContext.EditCommand}"
+                                                       CommandParameter="{Binding Row.Row}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+                                    <dxb:BarButtonItem Content="Delete"
+                                                       Command="{Binding View.DataContext.DeleteCommand}"
+                                                       CommandParameter="{Binding Row.Row}"
+                                                       Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                                </dxg:TreeListView.RowCellMenuCustomizations>
+                                <dxmvvm:Interaction.Behaviors>
+                                    <infrastructure:TreeListViewBehavior Actions="{Binding TreeListViewActions}" />
+                                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding CustomNodeFilterCommand}"
+                                                       EventName="CustomNodeFilter"/>
+                                </dxmvvm:Interaction.Behaviors>
+                                <dxg:TreeListView.FormatConditions>
+                                    <dxg:FormatCondition ApplyToRow="True" Expression="[FamilyMemberType] = 'Head'">
+                                        <dx:Format FontWeight="Bold" />
+                                    </dxg:FormatCondition>
+                                </dxg:TreeListView.FormatConditions>
+                            </dxg:TreeListView>
+
+
+                            <dxg:CardView x:Key="cardView"
+                                          CardLayout="Rows"
+                                          ShowSearchPanelMode="Always"
+                                          SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                          ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                          ShowGroupPanel="False"
+                                          SearchPanelHorizontalAlignment="Right"
+                                          CardHeaderBinding="{Binding Data.FullName,
+                                                                      RelativeSource={RelativeSource Mode=Self}}"
+                                          ShowColumnHeaders="False"
+                                          SearchPanelNullText="Search Patients (Ctrl + F)"
+                                          ShowFixedTotalSummary="True">
+                                <dxg:CardView.CardTemplate>
+                                    <DataTemplate>
+                                        <Grid Width="295" Height="151">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+
+                                            <!--<Image Source="{Binding DataContext.Pho, IsAsync=True, Mode=OneWay}"
+                                   Stretch="Uniform"
+                                   Width="100"
+                                   Margin="0,0,12,17" />-->
+                                            <!--<dxe:ImageEdit IsReadOnly="True"
+                                           EditValue="{Binding DataContext.Pho, IsAsync=True, Mode=OneWay}"
+                                           Stretch="Uniform"
+                                           Width="100"
+                                           Margin="0,0,12,17" />-->
+                                            <dxe:ImageEdit IsReadOnly="True"
+                                                           EditValue="{Binding DataContext.Photo,
+                                                                               Converter={StaticResource PictureConverter}}"
+                                                           Stretch="Uniform"
+                                                           Width="100"
+                                                           Margin="0,0,12,17" />
+                                            <StackPanel Grid.Column="1">
+                                                <TextBlock Text="{Binding DataContext.FirstName}" />
+                                                <TextBlock Text="{Binding DataContext.LastName}" />
+                                                <TextBlock Text="{Binding DataContext.BirthDate}" />
+                                                <TextBlock Text="EMAIL" Margin="0,13,0,0" />
+                                                <TextBlock Text="{Binding DataContext.EmailAddress}" />
+                                                <TextBlock Text="PHONE" Margin="0,13,0,0" />
+                                                <TextBlock Text="{Binding DataContext.HomePhoneNumber}" />
+                                                <TextBlock Text="{Binding DataContext.MobileNumber}" />
+                                            </StackPanel>
+                                        </Grid>
+                                    </DataTemplate>
+                                </dxg:CardView.CardTemplate>
+                            </dxg:CardView>
+
+
+                            <dxmvvm:ObjectToObjectConverter x:Key="currentViewConverter">
+                                <dxmvvm:MapItem Target="{StaticResource tableView}" Source="TableView" />
+                                <dxmvvm:MapItem Target="{StaticResource treeListView}" Source="TreeListView" />
+                                <dxmvvm:MapItem Target="{StaticResource cardView}" Source="CardView" />
+                            </dxmvvm:ObjectToObjectConverter>
+
+
+                        </Grid.Resources>
+
+                        <dxg:GridControl x:Name="tableViewGridControl"
+                                         Grid.Row="0"
+                                         ItemsSource="{Binding Entities}"
+                                         View="{Binding CurrentView,
+                                                        Converter={StaticResource currentViewConverter}}"
+                                         ShowBorder="True"
+                                         SelectedItem="{Binding SelectedEntity}"
+                                         AutoExpandAllGroups="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrol}" />
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding EditCommand}"
+                                                       EventName="MouseDoubleClick">
+                                    <dxmvvm:EventToCommand.EventArgsConverter>
+                                        <dx:EventArgsToDataRowConverter />
+                                    </dxmvvm:EventToCommand.EventArgsConverter>
+                                </dxmvvm:EventToCommand>
+                                <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                       Command="{Binding CustomRowFilterCommand}"
+                                                       EventName="CustomRowFilter"/>                                
+                            </dxmvvm:Interaction.Behaviors>
+
+
+                            <dxg:GridControl.Columns>
+                                <dxg:GridColumn FieldName="Rowtype9b"
+                                                Header=" "
+                                                Width="40"
+                                                FixedWidth="True">
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Image Source="{Binding Value, Converter={StaticResource patientRowtype9bToImageConverter}}" Stretch="None" />
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>
+                                <dxg:GridColumn FieldName="LastName"
+                                                Header="LAST NAME"
+                                                SortOrder="Ascending"
+                                                SortIndex="0"
+                                                Width="30*" />
+                                <dxg:GridColumn FieldName="FirstName"
+                                                Header="FIRST NAME"
+                                                SortOrder="Ascending"
+                                                SortIndex="1"
+                                                Width="30*" />
+                                <dxg:GridColumn FieldName="FamilyMemberType"
+                                                Header="HEAD/MEMBER"
+                                                Width="100" />
+                                <dxg:GridColumn FieldName="BirthDate"
+                                                Header="DOB"
+                                                Width="100" />
+
+                                <dxg:GridColumn FieldName="ReferrerName"
+                                                Header="REFERRER"
+                                                Width="100" />
+
+                                <dxg:GridColumn FieldName="PrimaryPolicies"
+                                                Header="INS.PRIM"
+                                                Width="80" />
+
+                                <dxg:GridColumn FieldName="SecondaryPolicies"
+                                                Header="INS.SEC"
+                                                Width="80" />
+
+                                <!--
+                    <dxg:GridColumn FieldName="EmailAddress"
+                                    Header="EMAIL"
+                                    Width="30*" />
+                                -->
+                                <dxg:GridColumn FieldName="HomePhoneNumber"
+                                                Header="HOME PHONE"
+                                                Width="140" />
+                                <dxg:GridColumn FieldName="MobileNumber"
+                                                Header="CELL"
+                                                Width="140" />
+                                <dxg:GridColumn FieldName="FamilyDoctor"
+                                                Header="FAMILY DOCTOR"
+                                                Width="100" />
+                                <dxg:GridColumn FieldName="InvoiceFamilyBalance"
+                                                Header="B"
+                                                Width="40">
+                                    <dxg:GridColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Grid>
+                                                <Border Height="16"
+                                                        Width="16"
+                                                        HorizontalAlignment="Center"
+                                                        VerticalAlignment="Center"
+                                                        TextBlock.FontWeight="Normal"
+                                                        ToolTip="{Binding Path=Value, Converter={StaticResource InvoiceFamilyBalanceConverter}, ConverterParameter=ToolTip}">
+                                                    <Border.Background>
+                                                        <SolidColorBrush Color="{Binding Path=Value, Converter={StaticResource InvoiceFamilyBalanceConverter}, ConverterParameter=BackgroundColor}" />
+                                                    </Border.Background>
+                                                </Border>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </dxg:GridColumn.CellTemplate>
+                                </dxg:GridColumn>
+
+
+
+                                <!--<dxg:GridColumn IsSmart="True" FieldName="_DoubleID" Header="ID * 2" UnboundType="String" UnboundExpression="[FirstName] + '-AAA'" />-->
+                            </dxg:GridControl.Columns>
+                            <dxg:GridControl.GroupSummary>
+                                <dxg:GridSummaryItem SummaryType="Count" />
+                            </dxg:GridControl.GroupSummary>
+                            <dxg:GridControl.TotalSummary>
+                                <dxg:GridSummaryItem SummaryType="Count"
+                                                     Alignment="Right"
+                                                     DisplayFormat="Count: {0}" />
+                            </dxg:GridControl.TotalSummary>
+                        </dxg:GridControl>
+
+                    </Grid>
+                </dxdo:LayoutPanel>
+
+                <dxdo:LayoutPanel AllowClose="False"
+                                  AllowFloat="False"
+                                  ItemWidth="400"
+                                  ShowBorder="False"
+                                  ShowCaption="False"
+                                  Visibility="{Binding IsVisibleAppointmentsScheduler,
+                                                       Converter={StaticResource BooleanToVisibilityConverter}}"
+                                  ShowPinButton="False">
+                    <local:AppointmentsSchedulerView>
+                        <dxmvvm:Interaction.Behaviors>
+                            <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.AppointmentsSchedulerModel, Mode=OneWayToSource, ElementName=MainUserControlPatientsView}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </local:AppointmentsSchedulerView>
+                </dxdo:LayoutPanel>
+
+            </dxdo:LayoutGroup>
+        </dxdo:DockLayoutManager>
+    </dx:LoadingDecorator>
+</UserControl>

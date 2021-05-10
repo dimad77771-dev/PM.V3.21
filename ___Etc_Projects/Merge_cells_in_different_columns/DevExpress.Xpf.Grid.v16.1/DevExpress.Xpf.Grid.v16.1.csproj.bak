@@ -1,0 +1,1082 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <!--Project was exported from assembly: H:\DOWNLOADS\T145231\T145231\bin\Debug\DevExpress.Xpf.Grid.v16.1.dll-->
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{47A45530-AA7D-43E5-AC5E-7A547193FFE9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>DevExpress.Xpf.Grid.v16.1</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <ApplicationVersion>16.1.6.0</ApplicationVersion>
+    <FileAlignment>512</FileAlignment>
+    <RootNamespace>DevExpress.Xpf</RootNamespace>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Xpf.Core.v16.1" />
+    <Reference Include="DevExpress.Data.v16.1" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="DevExpress.Xpf.Grid.v16.1.Core" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="DevExpress.Printing.v16.1.Core" />
+    <Reference Include="System" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="DevExpress.Mvvm.v16.1" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DevExpressXpfGridLocalizedDescriptionAttribute.cs" />
+    <Compile Include="Data\StateGridDataController.cs" />
+    <Compile Include="Data\ChunkListDataController.cs" />
+    <Compile Include="Data\SummaryCache`1.cs" />
+    <Compile Include="Data\AsyncOperationWaitHandle.cs" />
+    <Compile Include="Data\AsyncOperationBase`1.cs" />
+    <Compile Include="Data\SingleRowAsyncOperation`1.cs" />
+    <Compile Include="Data\LoadRowAsyncOperation`1.cs" />
+    <Compile Include="Data\GetRowsAsyncOperation.cs" />
+    <Compile Include="Data\FindRowByValueAsyncOperation.cs" />
+    <Compile Include="Data\AsyncServerModeGridDataController.cs" />
+    <Compile Include="Data\AsyncGridDataControllerHelper.cs" />
+    <Compile Include="Data\GridDataControllerThreadClient.cs" />
+    <Compile Include="Data\IDataProviderOwner.cs" />
+    <Compile Include="Data\IDataProviderEvents.cs" />
+    <Compile Include="Data\GridSelectionController.cs" />
+    <Compile Include="Data\GridDataProviderBase.cs" />
+    <Compile Include="Data\GridDataProvider.cs" />
+    <Compile Include="Data\EmptyDataProvider.cs" />
+    <Compile Include="Data\VisibleIndicesProvider.cs" />
+    <Compile Include="Data\GridServerModeDataControllerPrintInfo.cs" />
+    <Compile Include="Data\DummyColumnInfo.cs" />
+    <Compile Include="Data\RowTypeDescriptorListIndex.cs" />
+    <Compile Include="Data\NullDataProviderOwner.cs" />
+    <Compile Include="Data\RowStateCollection.cs" />
+    <Compile Include="Data\DetailInfoCollection.cs" />
+    <Compile Include="Data\CollapsedRowsKeeper.cs" />
+    <Compile Include="Data\DetailInfoKeeper.cs" />
+    <Compile Include="Data\RowStateKeeper.cs" />
+    <Compile Include="Data\RowStateController.cs" />
+    <Compile Include="Data\StateServerModeDataController.cs" />
+    <Compile Include="Data\CollectionViewDataController.cs" />
+    <Compile Include="Data\CollectionViewCurrentAndSelectedRowsKeeper.cs" />
+    <Compile Include="Data\Native\GridDesignTimeDataSource.cs" />
+    <Compile Include="Grid\BandHeaderControl.cs" />
+    <Compile Include="Grid\BandData.cs" />
+    <Compile Include="Grid\GridControlBandsLayout.cs" />
+    <Compile Include="Grid\TreeListControlBandsLayout.cs" />
+    <Compile Include="Grid\GridControlBand.cs" />
+    <Compile Include="Grid\TreeListControlBand.cs" />
+    <Compile Include="Grid\BandsColumnHeadersPanel.cs" />
+    <Compile Include="Grid\BandsNoneDropPanel.cs" />
+    <Compile Include="Grid\BandsGroupSummaryAlignByColumnsPanel.cs" />
+    <Compile Include="Grid\BandsCellsPanel.cs" />
+    <Compile Include="Grid\FixedNoneBandsColumnBorder.cs" />
+    <Compile Include="Grid\BandsContainerControl.cs" />
+    <Compile Include="Grid\BandsPanelBase.cs" />
+    <Compile Include="Grid\BandsPanel.cs" />
+    <Compile Include="Grid\BandedViewContentSelector.cs" />
+    <Compile Include="Grid\IBestFitGroupRow.cs" />
+    <Compile Include="Grid\BestFitGroupControl.cs" />
+    <Compile Include="Grid\CustomBestFitEventArgs.cs" />
+    <Compile Include="Grid\CustomBestFitEventHandler.cs" />
+    <Compile Include="Grid\BestFitControl.cs" />
+    <Compile Include="Grid\ColumnChooserControl.cs" />
+    <Compile Include="Grid\FormatPreviewControl.cs" />
+    <Compile Include="Grid\GroupDetailNameConverter.cs" />
+    <Compile Include="Grid\DetailLevelToObjectConverter.cs" />
+    <Compile Include="Grid\DetailMarginVisibilityConverter.cs" />
+    <Compile Include="Grid\SelectionModeHelper.cs" />
+    <Compile Include="Grid\FootersPanelMarginConverter.cs" />
+    <Compile Include="Grid\DoubleToVisibilityConverter.cs" />
+    <Compile Include="Grid\DoubleToVisibilityInverseConverter.cs" />
+    <Compile Include="Grid\NavigationRowConverter.cs" />
+    <Compile Include="Grid\DisplayedNavigationConverter.cs" />
+    <Compile Include="Grid\CardViewTopContrlsIsVisibileToRowSpanCoverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarGridColumnSpanConverter.cs" />
+    <Compile Include="Grid\FitContentContainerConverter.cs" />
+    <Compile Include="Grid\ScrollCornerCardViewConverter.cs" />
+    <Compile Include="Grid\VerticalScrollBarRowSpanConverter.cs" />
+    <Compile Include="Grid\ScrollViewerContentRowSpanConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarMarginConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarLeftCornerBorderThicknessConver.cs" />
+    <Compile Include="Grid\HorizontalScrollBarIndicatorVisibilityConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarFixedLeftThumbVisibilityConvert.cs" />
+    <Compile Include="Grid\HorizontalScrollBarFixedLeftThumbWidthConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarRowConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarRowSpanConverter.cs" />
+    <Compile Include="Grid\HorizontalScrollBarColumnSpanConverter.cs" />
+    <Compile Include="Grid\VerticalScrollBarRowSpanCardViewConverter.cs" />
+    <Compile Include="Grid\TotalSummaryMarginConverter.cs" />
+    <Compile Include="Grid\InverseBooleanConverter.cs" />
+    <Compile Include="Grid\AddNewRowVisibleConverter.cs" />
+    <Compile Include="Grid\NavigationStyleToBoolean.cs" />
+    <Compile Include="Grid\SelectionStateToMarginBackgroundConverter.cs" />
+    <Compile Include="Grid\DataControllerLazyValuesContainer.cs" />
+    <Compile Include="Grid\CardHeaderData.cs" />
+    <Compile Include="Grid\GroupRowData.cs" />
+    <Compile Include="Grid\GroupSummaryRowData.cs" />
+    <Compile Include="Grid\GroupColumnSummaryRowData.cs" />
+    <Compile Include="Grid\GroupNode.cs" />
+    <Compile Include="Grid\GroupSummaryRowNode.cs" />
+    <Compile Include="Grid\GroupFooterRowControl.cs" />
+    <Compile Include="Grid\GroupFooterSummaryControl.cs" />
+    <Compile Include="Grid\GroupSummaryLayoutCalculator.cs" />
+    <Compile Include="Grid\GroupFooterBandsNoneDropPanel.cs" />
+    <Compile Include="Grid\EditFormControl.cs" />
+    <Compile Include="Grid\PopupEditFormContainer.cs" />
+    <Compile Include="Grid\EditFormContainer.cs" />
+    <Compile Include="Grid\EditFormEditor.cs" />
+    <Compile Include="Grid\EditFormCellTemplateSelector.cs" />
+    <Compile Include="Grid\GridGroupValueData.cs" />
+    <Compile Include="Grid\EditorEventArgs.cs" />
+    <Compile Include="Grid\ShowingEditorEventArgs.cs" />
+    <Compile Include="Grid\ShowingEditorEventHandler.cs" />
+    <Compile Include="Grid\EditorEventHandler.cs" />
+    <Compile Include="Grid\GridRowValidationError.cs" />
+    <Compile Include="Grid\GridCellValidationError.cs" />
+    <Compile Include="Grid\GridCellValidationEventArgs.cs" />
+    <Compile Include="Grid\GridCellValidationEventHandler.cs" />
+    <Compile Include="Grid\GridRowValidationEventHandler.cs" />
+    <Compile Include="Grid\RowEventArgs.cs" />
+    <Compile Include="Grid\InvalidRowExceptionEventArgs.cs" />
+    <Compile Include="Grid\RowAllowEventArgs.cs" />
+    <Compile Include="Grid\CellValueEventArgs.cs" />
+    <Compile Include="Grid\CellValueChangedEventArgs.cs" />
+    <Compile Include="Grid\CustomGroupDisplayTextEventArgs.cs" />
+    <Compile Include="Grid\InitNewRowEventArgs.cs" />
+    <Compile Include="Grid\RowEventHandler.cs" />
+    <Compile Include="Grid\RowAllowEventHandler.cs" />
+    <Compile Include="Grid\CellValueEventHandler.cs" />
+    <Compile Include="Grid\CellValueChangedEventHandler.cs" />
+    <Compile Include="Grid\InvalidRowExceptionEventHandler.cs" />
+    <Compile Include="Grid\CustomGroupDisplayTextEventHandler.cs" />
+    <Compile Include="Grid\InitNewRowEventHandler.cs" />
+    <Compile Include="Grid\NewItemRowPosition.cs" />
+    <Compile Include="Grid\CopyingToClipboardEventHandler.cs" />
+    <Compile Include="Grid\CopyingToClipboardEventArgs.cs" />
+    <Compile Include="Grid\GridSerializationPropertiesNames.cs" />
+    <Compile Include="Grid\GridSerializationOrders.cs" />
+    <Compile Include="Grid\GridSerializationOptions.cs" />
+    <Compile Include="Grid\GridCell.cs" />
+    <Compile Include="Grid\RowDoubleClickEventArgs.cs" />
+    <Compile Include="Grid\RowDoubleClickEventHandler.cs" />
+    <Compile Include="Grid\DynamicLocalizationStringValueConvertor.cs" />
+    <Compile Include="Grid\GridCustomSummaryEventArgs.cs" />
+    <Compile Include="Grid\GridCustomSummaryExistEventArgs.cs" />
+    <Compile Include="Grid\ShowingGroupFooterEventArgs.cs" />
+    <Compile Include="Grid\ShowingGroupFooterEventHandler.cs" />
+    <Compile Include="Grid\CustomColumnDisplayTextEventArgs.cs" />
+    <Compile Include="Grid\CustomColumnDisplayTextEventHandler.cs" />
+    <Compile Include="Grid\CellMergeEventArgs.cs" />
+    <Compile Include="Grid\CellMergeEventHandler.cs" />
+    <Compile Include="Grid\CalendarFilterControl.cs" />
+    <Compile Include="Grid\DateColumnFilterInfoBase.cs" />
+    <Compile Include="Grid\DateCompactColumnFilterInfo.cs" />
+    <Compile Include="Grid\DateAltColumnFilterInfo.cs" />
+    <Compile Include="Grid\DateColumnFilterInfo.cs" />
+    <Compile Include="Grid\DateSmartColumnFilterInfo.cs" />
+    <Compile Include="Grid\CellMergingPanel.cs" />
+    <Compile Include="Grid\DataNavigator.cs" />
+    <Compile Include="Grid\DXGridThemesLoader.cs" />
+    <Compile Include="Grid\ErrorPanel.cs" />
+    <Compile Include="Grid\FilterCriteriaControl.cs" />
+    <Compile Include="Grid\FilterPanelControl.cs" />
+    <Compile Include="Grid\FilterPanelCaptionConverter.cs" />
+    <Compile Include="Grid\AdditionalRowContainerControl.cs" />
+    <Compile Include="Grid\AutoFilterRowControl.cs" />
+    <Compile Include="Grid\NewItemRowControl.cs" />
+    <Compile Include="Grid\FixedTotalSummaryControl.cs" />
+    <Compile Include="Grid\FixedTotalSummaryContentPresenter.cs" />
+    <Compile Include="Grid\FixedTotalSummaryPrintPanel.cs" />
+    <Compile Include="Grid\GridCardPanel.cs" />
+    <Compile Include="Grid\RowDetailContainerControl.cs" />
+    <Compile Include="Grid\OptionsToggleButton.cs" />
+    <Compile Include="Grid\RowSplitter.cs" />
+    <Compile Include="Grid\GridNavigatorButton.cs" />
+    <Compile Include="Grid\GridSearchControl.cs" />
+    <Compile Include="Grid\ChildMinWidthPanel.cs" />
+    <Compile Include="Grid\GridThumb.cs" />
+    <Compile Include="Grid\ScrollBarAnnotationsControl.cs" />
+    <Compile Include="Grid\DefaultColumnMenuItemNamesBase.cs" />
+    <Compile Include="Grid\DefaultColumnMenuItemNames.cs" />
+    <Compile Include="Grid\DefaultSummaryMenuItemNames.cs" />
+    <Compile Include="Grid\GridGroupSummaryHelper.cs" />
+    <Compile Include="Grid\ColumnMenuInfoBase.cs" />
+    <Compile Include="Grid\GridColumnMenuInfo.cs" />
+    <Compile Include="Grid\GridBandMenuInfo.cs" />
+    <Compile Include="Grid\GridGroupRowMenuInfo.cs" />
+    <Compile Include="Grid\GridTotalSummaryMenuInfo.cs" />
+    <Compile Include="Grid\GridGroupFooterSummaryMenuInfo.cs" />
+    <Compile Include="Grid\GridGroupPanelMenuInfo.cs" />
+    <Compile Include="Grid\GridTotalSummaryPanelMenuInfo.cs" />
+    <Compile Include="Grid\GridPopupMenu.cs" />
+    <Compile Include="Grid\ImageHelper.cs" />
+    <Compile Include="Grid\CustomColumnSortEventArgs.cs" />
+    <Compile Include="Grid\CustomColumnSortEventHandler.cs" />
+    <Compile Include="Grid\GridViewHitInfoBase.cs" />
+    <Compile Include="Grid\TableViewHitInfo.cs" />
+    <Compile Include="Grid\CardViewHitInfo.cs" />
+    <Compile Include="Grid\GridViewHitTestVisitorBase.cs" />
+    <Compile Include="Grid\TableViewHitTestVisitorBase.cs" />
+    <Compile Include="Grid\HitInfoTableViewHitTestVisitor.cs" />
+    <Compile Include="Grid\CardViewHitTestVisitorBase.cs" />
+    <Compile Include="Grid\HitInfoCardViewHitTestVisitor.cs" />
+    <Compile Include="Grid\CardViewHitTest.cs" />
+    <Compile Include="Grid\RowControl.cs" />
+    <Compile Include="Grid\BestFitRowControl.cs" />
+    <Compile Include="Grid\LightweightBestFitControl.cs" />
+    <Compile Include="Grid\CellsControl.cs" />
+    <Compile Include="Grid\BestFitCellsControl.cs" />
+    <Compile Include="Grid\LightweightCellEditorBase.cs" />
+    <Compile Include="Grid\LightweightCellEditor.cs" />
+    <Compile Include="Grid\BestFitCellEditor.cs" />
+    <Compile Include="Grid\IGroupRow.cs" />
+    <Compile Include="Grid\IGroupRowStateClient.cs" />
+    <Compile Include="Grid\IFixedGroupElement.cs" />
+    <Compile Include="Grid\GroupRowControl.cs" />
+    <Compile Include="Grid\BestFitGroupRowControl.cs" />
+    <Compile Include="Grid\LightweightBestFitGroupRowControl.cs" />
+    <Compile Include="Grid\GroupCardRowControl.cs" />
+    <Compile Include="Grid\GroupRowCheckBoxSelector.cs" />
+    <Compile Include="Grid\GroupRowControlPanel.cs" />
+    <Compile Include="Grid\GridExpandButtonBase.cs" />
+    <Compile Include="Grid\GroupRowExpandButton.cs" />
+    <Compile Include="Grid\RowFixedLineSeparatorControl.cs" />
+    <Compile Include="Grid\GroupRowFixedLineSeparatorControl.cs" />
+    <Compile Include="Grid\GroupRowDefaultSummaryControl.cs" />
+    <Compile Include="Grid\IGroupValueClient.cs" />
+    <Compile Include="Grid\GroupValuePresenterControllerBase`1.cs" />
+    <Compile Include="Grid\GroupRowDefaultSummaryItemController.cs" />
+    <Compile Include="Grid\IDefaultGroupSummaryItem.cs" />
+    <Compile Include="Grid\GroupRowDefaultSummaryItemControl.cs" />
+    <Compile Include="Grid\GroupRowAlignByColumnsSummaryControl.cs" />
+    <Compile Include="Grid\IGroupRowColumnSummaryClient.cs" />
+    <Compile Include="Grid\GroupRowColumnSummaryControl.cs" />
+    <Compile Include="Grid\SummaryAlignByColumnsController.cs" />
+    <Compile Include="Grid\IGroupValuePresenter.cs" />
+    <Compile Include="Grid\GroupValuePresenter.cs" />
+    <Compile Include="Grid\NullGroupValuePresenter.cs" />
+    <Compile Include="Grid\GroupValuePresenterController.cs" />
+    <Compile Include="Grid\RowDetailsControl.cs" />
+    <Compile Include="Grid\RowFitBorder.cs" />
+    <Compile Include="Grid\ToolTipHelper.cs" />
+    <Compile Include="Grid\RowIndicatorBase.cs" />
+    <Compile Include="Grid\RowIndicator.cs" />
+    <Compile Include="Grid\GroupRowIndicator.cs" />
+    <Compile Include="Grid\DetailHeaderControl.cs" />
+    <Compile Include="Grid\DetailContentControl.cs" />
+    <Compile Include="Grid\DetailTabHeadersControl.cs" />
+    <Compile Include="Grid\DetailTabHeaderContentControl.cs" />
+    <Compile Include="Grid\DetailColumnHeadersControl.cs" />
+    <Compile Include="Grid\DetailSummaryControlBase.cs" />
+    <Compile Include="Grid\DetailTotalSummaryControl.cs" />
+    <Compile Include="Grid\DetailFixedTotalSummaryControl.cs" />
+    <Compile Include="Grid\GroupPanelContainer.cs" />
+    <Compile Include="Grid\FilterPanelContainer.cs" />
+    <Compile Include="Grid\GroupPanelCaptionControl.cs" />
+    <Compile Include="Grid\DetailRowsIndentControl.cs" />
+    <Compile Include="Grid\DetailRowsIndentRightControl.cs" />
+    <Compile Include="Grid\DetailRowsContentControl.cs" />
+    <Compile Include="Grid\DetailTabControl.cs" />
+    <Compile Include="Grid\DetailDescriptorContentBorder.cs" />
+    <Compile Include="Grid\BackgroundBorderControl.cs" />
+    <Compile Include="Grid\DetailNewItemRowControl.cs" />
+    <Compile Include="Grid\OuterBorderElement.cs" />
+    <Compile Include="Grid\CardViewPrintingHelper.cs" />
+    <Compile Include="Grid\PrintInfoBase.cs" />
+    <Compile Include="Grid\CardViewPrintCellInfo.cs" />
+    <Compile Include="Grid\PrintTotalSummaryItem.cs" />
+    <Compile Include="Grid\PrintRowInfoBase.cs" />
+    <Compile Include="Grid\CardViewPrintRowInfo.cs" />
+    <Compile Include="Grid\CardViewPrintingCellItemsControl.cs" />
+    <Compile Include="Grid\PrintCellEditorBase.cs" />
+    <Compile Include="Grid\PrintCardCellEditor.cs" />
+    <Compile Include="Grid\CardViewPrintRowPanel.cs" />
+    <Compile Include="Grid\GroupRowOuterMarginConverter.cs" />
+    <Compile Include="Grid\CardViewPrintFixedTotalSummaryBorderConverter.cs" />
+    <Compile Include="Grid\PrintCardMarginConverter.cs" />
+    <Compile Include="Grid\CardViewPrintGroupPositionToBorderConverter.cs" />
+    <Compile Include="Grid\CardCellContentPresenter.cs" />
+    <Compile Include="Grid\CardPrintCellContentPresenter.cs" />
+    <Compile Include="Grid\GridPrintingHelper.cs" />
+    <Compile Include="Grid\PrintCellEditor.cs" />
+    <Compile Include="Grid\PrintTextEdit.cs" />
+    <Compile Include="Grid\PrintFixedTotalSummarySeparator.cs" />
+    <Compile Include="Grid\FillControl.cs" />
+    <Compile Include="Grid\PartialGroupingLineControl.cs" />
+    <Compile Include="Grid\RowDataBottomIndentControl.cs" />
+    <Compile Include="Grid\RowDataBottomLastIndentControl.cs" />
+    <Compile Include="Grid\HeaderFillControl.cs" />
+    <Compile Include="Grid\RowDataFillControl.cs" />
+    <Compile Include="Grid\CellFillControl.cs" />
+    <Compile Include="Grid\GroupRowContentControl.cs" />
+    <Compile Include="Grid\PrintingCellItemsControl.cs" />
+    <Compile Include="Grid\PrintingHeaderItemsControl.cs" />
+    <Compile Include="Grid\PrintingFooterItemsControl.cs" />
+    <Compile Include="Grid\PrintingGroupItemsControl.cs" />
+    <Compile Include="Grid\PrintingGroupFooterItemsControl.cs" />
+    <Compile Include="Grid\LastOnPageUpdater.cs" />
+    <Compile Include="Grid\InfoProviderOnPageUpdaterBase.cs" />
+    <Compile Include="Grid\TopBorderUpdaterBase.cs" />
+    <Compile Include="Grid\TopBorderOnPageUpdater.cs" />
+    <Compile Include="Grid\FooterRowTobBorgerOnPageUpdater.cs" />
+    <Compile Include="Grid\InfoProviderOnPageUpdater.cs" />
+    <Compile Include="Grid\PrintGroupRowCellInfo.cs" />
+    <Compile Include="Grid\PrintGroupCellPosition.cs" />
+    <Compile Include="Grid\PrintGroupRowInfoBase.cs" />
+    <Compile Include="Grid\PrintGroupRowInfo.cs" />
+    <Compile Include="Grid\PrintGroupSummaryInfoBase.cs" />
+    <Compile Include="Grid\PrintGroupSummaryInfo.cs" />
+    <Compile Include="Grid\PrintRowInfo.cs" />
+    <Compile Include="Grid\PrintCellInfo.cs" />
+    <Compile Include="Grid\PrintBandInfo.cs" />
+    <Compile Include="Grid\PrintLayoutAssigner.cs" />
+    <Compile Include="Grid\FixedTotalSummaryBorderThicknessConverter.cs" />
+    <Compile Include="Grid\PrintHeaderBorderConverter.cs" />
+    <Compile Include="Grid\PrintFixedTotalSummaryBorderConverter.cs" />
+    <Compile Include="Grid\PrintGroupSummaryBorderConverter.cs" />
+    <Compile Include="Grid\PrintGroupPositionToBorderConverter.cs" />
+    <Compile Include="Grid\PrintGroupPositionToBorderConverterInverted.cs" />
+    <Compile Include="Grid\PrintTotalSummaryCellConverter.cs" />
+    <Compile Include="Grid\BandsLayoutTemplateConverter.cs" />
+    <Compile Include="Grid\FixedTotalSummaryLeftVisibilityConverter.cs" />
+    <Compile Include="Grid\PrintRowStackPanel.cs" />
+    <Compile Include="Grid\PrintBandsPanel.cs" />
+    <Compile Include="Grid\PrintBandsColumnsPanel.cs" />
+    <Compile Include="Grid\PrintBandsCellsPanel.cs" />
+    <Compile Include="Grid\ProgressControl.cs" />
+    <Compile Include="Grid\TreeBuilderPrintingHelper.cs" />
+    <Compile Include="Grid\RowIndicatorViewInfo.cs" />
+    <Compile Include="Grid\RowIndicatorControl.cs" />
+    <Compile Include="Grid\DetailRowIndicatorControl.cs" />
+    <Compile Include="Grid\RowOffsetBase.cs" />
+    <Compile Include="Grid\RowOffset.cs" />
+    <Compile Include="Grid\GroupRowOffset.cs" />
+    <Compile Include="Grid\RowOffsetPresenter.cs" />
+    <Compile Include="Grid\GroupRowOffsetPresenter.cs" />
+    <Compile Include="Grid\RowFilterEventArgs.cs" />
+    <Compile Include="Grid\RowFilterEventHandler.cs" />
+    <Compile Include="Grid\ScrollBarAnnotationsAppearanceDefault.cs" />
+    <Compile Include="Grid\DataViewVisualInitializerBase.cs" />
+    <Compile Include="Grid\HeadersPanelInitializer.cs" />
+    <Compile Include="Grid\BandsContainerInitializer.cs" />
+    <Compile Include="Grid\NewItemRowInitializer.cs" />
+    <Compile Include="Grid\VerticalScrollBarBlendCustomizationExtension.cs" />
+    <Compile Include="Grid\GroupPanelInitializer.cs" />
+    <Compile Include="Grid\ScrollContentPresenterInitializer.cs" />
+    <Compile Include="Grid\BestFitControlDecoratorInitializer.cs" />
+    <Compile Include="Grid\NewItemRowPositionToVisibilityConverter.cs" />
+    <Compile Include="Grid\ValidationErrorToIsEnabledConverter.cs" />
+    <Compile Include="Grid\SelectionStateToVisibilityConverter.cs" />
+    <Compile Include="Grid\GroupLevelToMarginConverter.cs" />
+    <Compile Include="Grid\SelectionStateToBooleanConverter.cs" />
+    <Compile Include="Grid\SummaryToTextConverter.cs" />
+    <Compile Include="Grid\CellValueBinding.cs" />
+    <Compile Include="Grid\GridColumn.cs" />
+    <Compile Include="Grid\GridControl.cs" />
+    <Compile Include="Grid\GridControlSerializationProvider.cs" />
+    <Compile Include="Grid\GridViewBase.cs" />
+    <Compile Include="Grid\TableView.cs" />
+    <Compile Include="Grid\TableViewDataAwareExportHelper.cs" />
+    <Compile Include="Grid\ExportHelper`1.cs" />
+    <Compile Include="Grid\XlsExportHelper`1.cs" />
+    <Compile Include="Grid\CsvExportHelper.cs" />
+    <Compile Include="Grid\GridControlStringIdExtension.cs" />
+    <Compile Include="Grid\TreeListView.cs" />
+    <Compile Include="Grid\TreeListViewDataAwareExportHelper.cs" />
+    <Compile Include="Grid\RowPropertyValueConverter.cs" />
+    <Compile Include="Grid\GridSummaryItem.cs" />
+    <Compile Include="Grid\CardViewCheckConverter.cs" />
+    <Compile Include="Grid\CardViewCheckToVisibilityConverter.cs" />
+    <Compile Include="Grid\DragIndicatorPanel.cs" />
+    <Compile Include="Grid\DragGridColumnHeader.cs" />
+    <Compile Include="Grid\GridCardExpandButton.cs" />
+    <Compile Include="Grid\GridGroupExpandButton.cs" />
+    <Compile Include="Grid\GridDetailExpandButton.cs" />
+    <Compile Include="Grid\GridDetailExpandButtonContainer.cs" />
+    <Compile Include="Grid\GridToggleStateButton.cs" />
+    <Compile Include="Grid\GridGroupSummaryData.cs" />
+    <Compile Include="Grid\GridGroupSummaryColumnData.cs" />
+    <Compile Include="Grid\CardItemsControl.cs" />
+    <Compile Include="Grid\CellItemsControl.cs" />
+    <Compile Include="Grid\RowItemsControl.cs" />
+    <Compile Include="Grid\BandedCachedItemsControl.cs" />
+    <Compile Include="Grid\BandedViewAdditionalRowControl.cs" />
+    <Compile Include="Grid\BandedViewTotalSummaryControl.cs" />
+    <Compile Include="Grid\BandedViewGroupSummaryItemsControl.cs" />
+    <Compile Include="Grid\HeaderItemsControl.cs" />
+    <Compile Include="Grid\BandedViewHeaderItemsControl.cs" />
+    <Compile Include="Grid\TotalSummaryItemsControl.cs" />
+    <Compile Include="Grid\ColumnItemsControl.cs" />
+    <Compile Include="Grid\GroupPanelColumnItemsControl.cs" />
+    <Compile Include="Grid\CardSeparatorItemsControl.cs" />
+    <Compile Include="Grid\CardsResizer.cs" />
+    <Compile Include="Grid\CardData.cs" />
+    <Compile Include="Grid\CardsContainer.cs" />
+    <Compile Include="Grid\GridRow.cs" />
+    <Compile Include="Grid\GridCard.cs" />
+    <Compile Include="Grid\GridCardContentPresenter.cs" />
+    <Compile Include="Grid\GridCardHeaderContentPresenter.cs" />
+    <Compile Include="Grid\GridCardHeaderControl.cs" />
+    <Compile Include="Grid\GridDataPresenterBase.cs" />
+    <Compile Include="Grid\DataPresenterManipulation.cs" />
+    <Compile Include="Grid\CardDataPresenter.cs" />
+    <Compile Include="Grid\GridDataIterator.cs" />
+    <Compile Include="Grid\DataPresenter.cs" />
+    <Compile Include="Grid\CardDataPresenterScrollBehavior.cs" />
+    <Compile Include="Grid\GridScrollBarHelper.cs" />
+    <Compile Include="Grid\GridBorderHelper.cs" />
+    <Compile Include="Grid\GridVerticalLinesHelper.cs" />
+    <Compile Include="Grid\FadeSelectionHelper.cs" />
+    <Compile Include="Grid\GridRowHelper.cs" />
+    <Compile Include="Grid\GridRowContent.cs" />
+    <Compile Include="Grid\TotalSummaryLeftIndentControl.cs" />
+    <Compile Include="Grid\GridScrollablePart.cs" />
+    <Compile Include="Grid\GridTotalSummaryScrollablePart.cs" />
+    <Compile Include="Grid\GridGroupFooterScrollablePart.cs" />
+    <Compile Include="Grid\FitContentContainer.cs" />
+    <Compile Include="Grid\GroupValueContentPresenter.cs" />
+    <Compile Include="Grid\GroupSummaryContentPresenter.cs" />
+    <Compile Include="Grid\TotalSummaryContentPresenter.cs" />
+    <Compile Include="Grid\FitRowContentPresenter.cs" />
+    <Compile Include="Grid\FitRowLeftContentPresenter.cs" />
+    <Compile Include="Grid\FixedDelimiter.cs" />
+    <Compile Include="Grid\RowsDelimiter.cs" />
+    <Compile Include="Grid\GroupGridControl.cs" />
+    <Compile Include="Grid\GroupCardRow.cs" />
+    <Compile Include="Grid\GroupGridRow.cs" />
+    <Compile Include="Grid\GroupGridRowContent.cs" />
+    <Compile Include="Grid\GroupPanelControl.cs" />
+    <Compile Include="Grid\FixedGroupElement.cs" />
+    <Compile Include="Grid\FixedGroupsAdorner.cs" />
+    <Compile Include="Grid\GridCellContentPresenter.cs" />
+    <Compile Include="Grid\BestFitGridCellContentPresenter.cs" />
+    <Compile Include="Grid\FilterCellContentPresenter.cs" />
+    <Compile Include="Grid\NewItemRowCellContentPresenter.cs" />
+    <Compile Include="Grid\GroupGridRowPresenter.cs" />
+    <Compile Include="Grid\GroupSummaryContainer.cs" />
+    <Compile Include="Grid\GroupSummaryDefaultLayoutControl.cs" />
+    <Compile Include="Grid\GroupColumnSummaryControl.cs" />
+    <Compile Include="Grid\GroupBandSummaryControl.cs" />
+    <Compile Include="Grid\GroupSummaryAlignByColumnsLayoutControl.cs" />
+    <Compile Include="Grid\GroupSummaryItemsControl.cs" />
+    <Compile Include="Grid\GroupRowNodePrintInfo.cs" />
+    <Compile Include="Grid\StandaloneGroupRowData.cs" />
+    <Compile Include="Grid\GridSummaryItemCollection.cs" />
+    <Compile Include="Grid\CollapsedCardOrientation.cs" />
+    <Compile Include="Grid\CardViewSelectMode.cs" />
+    <Compile Include="Grid\CardLayout.cs" />
+    <Compile Include="Grid\ScrollMode.cs" />
+    <Compile Include="Grid\CardLayoutToOrientationConverter.cs" />
+    <Compile Include="Grid\CardView.cs" />
+    <Compile Include="Grid\GridColumnCollection.cs" />
+    <Compile Include="Grid\GridColumnHeader.cs" />
+    <Compile Include="Grid\FitColumnHeader.cs" />
+    <Compile Include="Grid\IndicatorColumnHeader.cs" />
+    <Compile Include="Grid\ExpandButtonColumnHeader.cs" />
+    <Compile Include="Grid\DesignTimeSelectionControl.cs" />
+    <Compile Include="Grid\HeaderContentControl.cs" />
+    <Compile Include="Grid\ColumnHeaderPanel.cs" />
+    <Compile Include="Grid\SortIndicatorControl.cs" />
+    <Compile Include="Grid\GridColumnToGridColumnDataConverter.cs" />
+    <Compile Include="Grid\GroupPanelPaddingConverter.cs" />
+    <Compile Include="Grid\GridColumnDataEventArgs.cs" />
+    <Compile Include="Grid\GridColumnDataEventHandler.cs" />
+    <Compile Include="Grid\GridCommands.cs" />
+    <Compile Include="Grid\GridViewCommandsBase.cs" />
+    <Compile Include="Grid\TableViewCommands.cs" />
+    <Compile Include="Grid\CardViewCommands.cs" />
+    <Compile Include="Grid\GroupPanelColumnHeaderDropTargetFactory.cs" />
+    <Compile Include="Grid\GroupPanelColumnHeaderDropTargetFactoryExtension.cs" />
+    <Compile Include="Grid\GridTotalSummary.cs" />
+    <Compile Include="Grid\FixedTotalSummaryContainerControl.cs" />
+    <Compile Include="Grid\FixedTotalSummaryItemsControl.cs" />
+    <Compile Include="Grid\IFixedTotalSummary.cs" />
+    <Compile Include="Grid\FixedTotalSummaryItemsTextBlock.cs" />
+    <Compile Include="Grid\GridGroupSummarySortInfo.cs" />
+    <Compile Include="Grid\GridSortInfoCollection.cs" />
+    <Compile Include="Grid\GridGroupSummarySortInfoCollection.cs" />
+    <Compile Include="Grid\GridTableViewBehaviorBase.cs" />
+    <Compile Include="Grid\DefaultStyle.cs" />
+    <Compile Include="Grid\GridTableViewBehavior.cs" />
+    <Compile Include="Grid\GridViewSelectionControlWrapper.cs" />
+    <Compile Include="Grid\TreeListRowAutomationPeer.cs" />
+    <Compile Include="Grid\TreeListControlAutomationPeer.cs" />
+    <Compile Include="Grid\TreeListControl.cs" />
+    <Compile Include="Grid\TreeListSummaryItemCollection.cs" />
+    <Compile Include="Grid\TreeListSummaryItem.cs" />
+    <Compile Include="Grid\TreeListSortInfoCollection.cs" />
+    <Compile Include="Grid\TreeListColumnCollection.cs" />
+    <Compile Include="Grid\TreeListColumn.cs" />
+    <Compile Include="Grid\TreeListFilterColumn.cs" />
+    <Compile Include="Grid\TreeListBandMenuInfo.cs" />
+    <Compile Include="Grid\TreeListColumnMenuInfo.cs" />
+    <Compile Include="Grid\TreeListPopupMenu.cs" />
+    <Compile Include="Grid\TreeListIndentType.cs" />
+    <Compile Include="Grid\TreeListNodeExpandButton.cs" />
+    <Compile Include="Grid\RowMarginControl.cs" />
+    <Compile Include="Grid\IndentsPanel.cs" />
+    <Compile Include="Grid\IndentScroller.cs" />
+    <Compile Include="Grid\TreeListNode.cs" />
+    <Compile Include="Grid\RootTreeListNode.cs" />
+    <Compile Include="Grid\NodeChangeType.cs" />
+    <Compile Include="Grid\TreeListNodeCollection.cs" />
+    <Compile Include="Grid\TreeListNodeComparer.cs" />
+    <Compile Include="Grid\TreeListNodeIterator.cs" />
+    <Compile Include="Grid\TreeListLineStyle.cs" />
+    <Compile Include="Grid\TreeDerivationMode.cs" />
+    <Compile Include="Grid\TreeListFilterMode.cs" />
+    <Compile Include="Grid\IChildNodesSelector.cs" />
+    <Compile Include="Grid\TreeListViewCommands.cs" />
+    <Compile Include="Grid\TreeListViewBehavior.cs" />
+    <Compile Include="Grid\TreeListBestFitRowControl.cs" />
+    <Compile Include="Grid\TreeListLightweightBestFitControl.cs" />
+    <Compile Include="Grid\TreeListRowTemplateSelectorWrapper.cs" />
+    <Compile Include="Grid\TreeListViewInfo.cs" />
+    <Compile Include="Grid\TreeListPrintViewInfo.cs" />
+    <Compile Include="Grid\TreeListRowsClipboardController.cs" />
+    <Compile Include="Grid\TreeListNodeImageSelector.cs" />
+    <Compile Include="Grid\Automation\GridControlVirtualElementAutomationPeerBase.cs" />
+    <Compile Include="Grid\Automation\GroupFooterAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GroupFooterSummaryAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridRowAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\CardRowAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\ColumnHeaderAutomationPeerBase.cs" />
+    <Compile Include="Grid\Automation\ColumnHeaderAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\DataPanelAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\FooterPanelAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridControlAutomationPeerHelper.cs" />
+    <Compile Include="Grid\Automation\GridCellAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridDataControlAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridControlAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridGroupRowAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GridElementAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\GroupInfoAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\HeaderPanelAutomationPeerBase.cs" />
+    <Compile Include="Grid\Automation\HeaderPanelAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\HeaderPanelScrollViewerAutomationPeerBase.cs" />
+    <Compile Include="Grid\Automation\HeaderPanelScrollViewerAutomationPeer.cs" />
+    <Compile Include="Grid\Automation\PeerCache.cs" />
+    <Compile Include="Grid\Automation\TotalSummaryAutomationPeer.cs" />
+    <Compile Include="Grid\Native\ClipboardController.cs" />
+    <Compile Include="Grid\Native\CellComparer.cs" />
+    <Compile Include="Grid\Native\CardViewBehavior.cs" />
+    <Compile Include="Grid\Native\DefaultColumnWrapperGenerator.cs" />
+    <Compile Include="Grid\Native\ScaffoldingColumnWrapperGenerator.cs" />
+    <Compile Include="Grid\Native\ScaffoldingGenerateBandWrapper.cs" />
+    <Compile Include="Grid\Native\GridControlHelper.cs" />
+    <Compile Include="Grid\Native\IDesignTimeGridAdorner.cs" />
+    <Compile Include="Grid\Native\EmptyDesignTimeGridAdorner.cs" />
+    <Compile Include="Grid\Native\MouseMoveSelectionCardBase.cs" />
+    <Compile Include="Grid\Native\MouseMoveSelectionCardNone.cs" />
+    <Compile Include="Grid\Native\MouseMoveSelectionRectangleCard.cs" />
+    <Compile Include="Grid\Native\SelectionRectangleCardViewHelper.cs" />
+    <Compile Include="Grid\Native\ScrollModeToBoolConverter.cs" />
+    <Compile Include="Grid\Native\ScrollBarAttachedBehavior.cs" />
+    <Compile Include="Grid\Native\SelectionActionBase.cs" />
+    <Compile Include="Grid\Native\AddRowsToSelectionAction.cs" />
+    <Compile Include="Grid\Native\AddOneRowToSelectionAction.cs" />
+    <Compile Include="Grid\Native\OnlyThisSelectionAction.cs" />
+    <Compile Include="Grid\Native\OnlyThisSelectionMouseUpAction.cs" />
+    <Compile Include="Grid\Native\InvertSelectionOnMouseUpAction.cs" />
+    <Compile Include="Grid\Native\CellMergeSelectionStrategy.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyCellBase.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyCell.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyCellRectangle.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyRow.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyCheckBoxRow.cs" />
+    <Compile Include="Grid\Native\SelectionAnchor.cs" />
+    <Compile Include="Grid\Native\TableViewSelectionStrategyNone.cs" />
+    <Compile Include="Grid\Native\SelectionStrategyRowRange.cs" />
+    <Compile Include="Grid\Native\CheckBoxColumnTemplateSelector.cs" />
+    <Compile Include="Grid\Native\CardViewCellNavigation.cs" />
+    <Compile Include="Grid\Native\CardViewRowNavigation.cs" />
+    <Compile Include="Grid\Native\ExpandRowWithAnimationAction.cs" />
+    <Compile Include="Grid\Native\GroupPanelDropTarget.cs" />
+    <Compile Include="Grid\Native\GridGroupSummarySortInfoDeserializable.cs" />
+    <Compile Include="Grid\Native\TreeListNodeExtensions.cs" />
+    <Compile Include="Grid\Filtering\ICalendarFilter.cs" />
+    <Compile Include="Grid\Filtering\ICalendarFilterOwner.cs" />
+    <Compile Include="Grid\Filtering\DateFilterCache.cs" />
+    <Compile Include="Grid\Filtering\FilterData.cs" />
+    <Compile Include="Grid\Filtering\DateFiltersHelper.cs" />
+    <Compile Include="Grid\Filtering\FilterDateType.cs" />
+    <Compile Include="Grid\Filtering\FilterFactory.cs" />
+    <Compile Include="Grid\Filtering\FilterFactoryExtensions.cs" />
+    <Compile Include="Grid\Helpers\BaseGridColumnData.cs" />
+    <Compile Include="Grid\Helpers\GridFilterData.cs" />
+    <Compile Include="Grid\Helpers\GridSearchFilterData.cs" />
+    <Compile Include="Grid\Helpers\GridColumnSortData.cs" />
+    <Compile Include="Grid\Helpers\GridDataColumnInfo.cs" />
+    <Compile Include="Grid\Helpers\GridDataColumnSortInfo.cs" />
+    <Compile Include="Grid\HitTest\GridViewHitTestAcceptorBase.cs" />
+    <Compile Include="Grid\HitTest\RowCellTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\RowTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\ColumnHeaderTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\ColumnHeaderFilterButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\ColumnHeaderPanelTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\VerticalScrollBarTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\HorizontalScrollBarTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FilterPanelTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GridSearchPanelHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FilterPanelCloseButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FilterPanelCustomizeButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FilterPanelActiveButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FilterPanelTextTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\TotalSummaryPanelTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\TotalSummaryTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FixedTotalSummaryTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\MRUFilterListComboBoxHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\DataAreaTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupFooterRowTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupFooterSummaryTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupRowTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupRowButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupRowCheckBoxTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupPanelTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupPanelColumnHeaderTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupPanelColumnHeaderFilterButtonTableViewHitTest.cs" />
+    <Compile Include="Grid\HitTest\GroupValueTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\GroupSummaryTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\TableViewHitTestAcceptorBase.cs" />
+    <Compile Include="Grid\HitTest\ColumnEdgeTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\BandEdgeTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FixedLeftDivTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\FixedRightDivTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\RowIndicatorTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\ColumnButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\BandHeaderTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\BandHeaderPanelTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\BandButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\MasterRowButtonTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\DataNavigatorTableViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\CardViewHitTestAcceptorBase.cs" />
+    <Compile Include="Grid\HitTest\FieldCaptionCardViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\CardHeaderCardViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\CardHeaderButtonCardViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\SeparatorCardViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\HitTest\ColumnPanelShowButtonCardViewHitTestAcceptor.cs" />
+    <Compile Include="Grid\GroupRowLayout\IGroupPanelItemOwner.cs" />
+    <Compile Include="Grid\GroupRowLayout\IGroupPanelItem.cs" />
+    <Compile Include="Grid\GroupRowLayout\GroupPanelVisualItemOwner.cs" />
+    <Compile Include="Grid\GroupRowLayout\GroupPanelItemContainer`1.cs" />
+    <Compile Include="Grid\GroupRowLayout\GroupContainer.cs" />
+    <Compile Include="Grid\GroupRowLayout\Group.cs" />
+    <Compile Include="Grid\GroupRowLayout\Layer.cs" />
+    <Compile Include="Grid\GroupRowLayout\Column.cs" />
+    <Compile Include="Grid\GroupRowLayout\IndexDefinition.cs" />
+    <Compile Include="Grid\Printing\ColumnWrapper.cs" />
+    <Compile Include="Grid\Printing\UnboundColumnInfoWrapper.cs" />
+    <Compile Include="Grid\Printing\BandedColumnWrapper.cs" />
+    <Compile Include="Grid\Printing\BandWrapper.cs" />
+    <Compile Include="Grid\Printing\DataViewExportHelperBase`2.cs" />
+    <Compile Include="Grid\Printing\GridViewExportHelperBase`2.cs" />
+    <Compile Include="Grid\Printing\GridViewClipboardHelper.cs" />
+    <Compile Include="Grid\Printing\BandedGridViewClipboardHelper.cs" />
+    <Compile Include="Grid\Printing\ClipboardSelectionProvider`2.cs" />
+    <Compile Include="Grid\Printing\GridViewClipboardSelectionProvider.cs" />
+    <Compile Include="Grid\Printing\AppearanceHelper.cs" />
+    <Compile Include="Grid\Printing\GridViewExportHelper`2.cs" />
+    <Compile Include="Grid\Printing\GridViewReportHelper`2.cs" />
+    <Compile Include="Grid\Printing\BandedGridViewExportHelper`2.cs" />
+    <Compile Include="Grid\Printing\AdvBandedGridViewExportHelper`2.cs" />
+    <Compile Include="Grid\Printing\BandedGridViewReportHelper`2.cs" />
+    <Compile Include="Grid\Printing\GridOptionsViewWrapper`2.cs" />
+    <Compile Include="Grid\Printing\BandedGridOptionsViewWrapper`2.cs" />
+    <Compile Include="Grid\Printing\GridOptionsBehaviorWrapper.cs" />
+    <Compile Include="Grid\Printing\GridAppearanceWrapper.cs" />
+    <Compile Include="Grid\Printing\GridAppearancePrintWrapper.cs" />
+    <Compile Include="Grid\Printing\SummaryItemExportWrapper.cs" />
+    <Compile Include="Grid\Printing\AdditionalSheetInfoWrapper.cs" />
+    <Compile Include="Grid\Printing\FormatRuleExportWrapper.cs" />
+    <Compile Include="Grid\Printing\GridReportHelper.cs" />
+    <Compile Include="Grid\Printing\ServerModeItemsSourceWrapperBase.cs" />
+    <Compile Include="Grid\Printing\CollectionViewItemsSourceWrapper.cs" />
+    <Compile Include="Grid\Printing\ServerModeItemsSourceWrapper.cs" />
+    <Compile Include="Grid\Printing\AsyncServerModeItemsSourceWrapper.cs" />
+    <Compile Include="Grid\Printing\ReportsAsyncResult.cs" />
+    <Compile Include="Grid\Printing\RowBaseWrapper.cs" />
+    <Compile Include="Grid\Printing\DataRowWrapper.cs" />
+    <Compile Include="Grid\Printing\GroupRowWrapper.cs" />
+    <Compile Include="Grid\Printing\PrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\CardViewPrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\ContainerPrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\CardViewContainerPrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\CardViewGroupPrintingNode.cs" />
+    <Compile Include="Grid\Printing\CardViewGroupRootPrintingNode.cs" />
+    <Compile Include="Grid\Printing\CardViewRootPrintingNode.cs" />
+    <Compile Include="Grid\Printing\GridCardViewPrintingNode.cs" />
+    <Compile Include="Grid\Printing\SparklineInfo.cs" />
+    <Compile Include="Grid\Printing\EmptySparklineStyleSettings.cs" />
+    <Compile Include="Grid\Printing\PrintingDataTreeBuilder.cs" />
+    <Compile Include="Grid\Printing\GridPrintingDataTreeBuilderBase.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationSimpleStrategy.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationPrintAllGroupsStrategy.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationServerStrategy.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationServerModeStrategy.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationAsyncServerModeStrategy.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationAsyncServerModeStrategyAsync.cs" />
+    <Compile Include="Grid\Printing\ItemsGenerationSelectedRowsStrategy.cs" />
+    <Compile Include="Grid\Printing\PrintSelectedRowsInfo.cs" />
+    <Compile Include="Grid\Printing\PrintSelectedRowsHelper.cs" />
+    <Compile Include="Grid\Printing\PrintingDataClient.cs" />
+    <Compile Include="Grid\Printing\PrintingVisualClient.cs" />
+    <Compile Include="Grid\Printing\CardViewPrintingDataTreeBuilder.cs" />
+    <Compile Include="Grid\Printing\GridPrintingDataTreeBuilder.cs" />
+    <Compile Include="Grid\Printing\GridPrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\GridContainerPrintingNodeBase.cs" />
+    <Compile Include="Grid\Printing\GridGroupRootPrintingNode.cs" />
+    <Compile Include="Grid\Printing\GridRootPrintingNode.cs" />
+    <Compile Include="Grid\Printing\MasterDetailPrintHelper.cs" />
+    <Compile Include="Grid\Printing\DescriptorAndGridControl.cs" />
+    <Compile Include="Grid\Printing\StubNode.cs" />
+    <Compile Include="Grid\Printing\GridMasterDetailPrintingNode.cs" />
+    <Compile Include="Grid\Printing\GridDetailPrintingNode.cs" />
+    <Compile Include="Grid\Printing\GridGroupPrintingNode.cs" />
+    <Compile Include="Grid\Printing\GridGroupSummaryPrintingNode.cs" />
+    <Compile Include="Grid\Themes\RowIndicatorThemeKeys.cs" />
+    <Compile Include="Grid\Themes\RowIndicatorThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\GridRowThemeKeys.cs" />
+    <Compile Include="Grid\Themes\GridRowThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\GroupRowThemeKeys.cs" />
+    <Compile Include="Grid\Themes\GroupRowThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\TotalSummaryThemeKeys.cs" />
+    <Compile Include="Grid\Themes\TotalSummaryThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\TreeListViewThemeKeys.cs" />
+    <Compile Include="Grid\Themes\TreeListViewThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\LookUpEditThemeKeys.cs" />
+    <Compile Include="Grid\Themes\LookUpEditThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\CardViewThemeKeys.cs" />
+    <Compile Include="Grid\Themes\CardViewThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\GridColumnHeaderThemeKeys.cs" />
+    <Compile Include="Grid\Themes\GridColumnHeaderThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\CardTemplatesThemeKeys.cs" />
+    <Compile Include="Grid\Themes\CardTemplatesThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\GridCardThemeKeys.cs" />
+    <Compile Include="Grid\Themes\GridCardThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\TableViewThemeKeys.cs" />
+    <Compile Include="Grid\Themes\TableViewThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\GridControlThemeKeys.cs" />
+    <Compile Include="Grid\Themes\GridControlThemeKeyExtension.cs" />
+    <Compile Include="Grid\Themes\ScrollBarThemeKeys.cs" />
+    <Compile Include="Grid\Themes\ScrollBarThemeKeyExtension.cs" />
+    <Compile Include="Grid\LookUp\LookUpEdit.cs" />
+    <Compile Include="Grid\LookUp\LookUpEditSettings.cs" />
+    <Compile Include="Grid\LookUp\LookUpEditStrategy.cs" />
+    <Compile Include="Grid\LookUp\LookUpEditStyleSettings.cs" />
+    <Compile Include="Grid\LookUp\TokenLookUpEditStyleSettings.cs" />
+    <Compile Include="Grid\LookUp\MultiSelectLookUpEditStyleSettings.cs" />
+    <Compile Include="Grid\LookUp\SearchLookUpEditStyleSettings.cs" />
+    <Compile Include="Grid\LookUp\SearchTokenLookUpEditStyleSettings.cs" />
+    <Compile Include="Grid\LookUp\Native\GridControlVisualClientOwner.cs" />
+    <Compile Include="Grid\LookUp\Native\GridControlColumnProvider.cs" />
+    <Compile Include="Grid\Properties\Resources.cs" />
+    <Compile Include="Grid\Properties\Settings.cs" />
+    <Compile Include="Grid\TreeList\TreeListDataHelperBase.cs" />
+    <Compile Include="Grid\TreeList\TreeListBoundDataHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListHierarchicalDataHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListHierarchicalDataTemplateHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelfReferenceDataHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListUnboundDataHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewExportHelperBase.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewClipboardHelper.cs" />
+    <Compile Include="Grid\TreeList\BandedTreeListViewClipboardHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewClipboardSelectionProvider.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeWrapper.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewExportHelper.cs" />
+    <Compile Include="Grid\TreeList\BandedTreeListViewExportHelper.cs" />
+    <Compile Include="Grid\TreeList\AdvBandedTreeListViewExportHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeObject.cs" />
+    <Compile Include="Grid\TreeList\TreeListVisibleNodesProvider.cs" />
+    <Compile Include="Grid\TreeList\TreeListFilterHelper.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeValuesCache.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewHitTestAcceptorBase.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeExpandButtonHitTestAcceptor.cs" />
+    <Compile Include="Grid\TreeList\RowMarginControlHitTestAcceptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeImageHitTestAcceptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeCheckboxHitTestAcceptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewHitTestVisitorBase.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewHitTestVisitor.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewCellNavigation.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewRowNavigation.cs" />
+    <Compile Include="Grid\TreeList\PrintRowState.cs" />
+    <Compile Include="Grid\TreeList\TreeListPrintRowInfo.cs" />
+    <Compile Include="Grid\TreeList\TreeListPrintingDataTreeBuilder.cs" />
+    <Compile Include="Grid\TreeList\TreeListUnboundPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListValuePropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListDisplayTextPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListSearchDisplayTextPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListComplexPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\UnitypeComplexPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\UnitypeDataPropertyDescriptor.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionController.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionStrageryCell.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionStrageryCellRectangle.cs" />
+    <Compile Include="Grid\TreeList\TreeListCell.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionStrategyRow.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionStrategyRowRange.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewSelectionControlWrapper.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummarySettings.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryCountValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryMinValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryMaxValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummarySumValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryAvgValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryCustomValue.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummarySortedList.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryUniqueDuplicate.cs" />
+    <Compile Include="Grid\TreeList\TreeListSummaryDateTimeAvarage.cs" />
+    <Compile Include="Grid\TreeList\TreeListRowState.cs" />
+    <Compile Include="Grid\TreeList\TreeListDataProvider.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodesInfo.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodesState.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeAllowEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeChangedEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListUnboundColumnDataEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeFilterEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomColumnSortEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomColumnDisplayTextEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomSummaryEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListInvalidNodeExceptionEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeValidationEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValidationEventArgs.cs" />
+    <Compile Include="Grid\TreeList\CustomColumnFilterListEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValueEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValueChangedEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionChangedEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCopyingToClipboardEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomBestFitEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListEditorEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListShowingEditorEventArgs.cs" />
+    <Compile Include="Grid\TreeList\TreeListSerializationOptions.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValueChangedEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValidationEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeValidationEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListInvalidNodeExceptionEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomSummaryEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomColumnDisplayTextEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomColumnSortEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeFilterEventHandler.cs" />
+    <Compile Include="Grid\TreeList\CustomColumnFilterListEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeAllowEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeChangedEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListUnboundColumnDataEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListSelectionChangedEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCopyingToClipboardEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListCustomBestFitEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListShowingEditorEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListEditorEventHandler.cs" />
+    <Compile Include="Grid\TreeList\TreeListRowData.cs" />
+    <Compile Include="Grid\TreeList\TreeListUtils.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewHitInfo.cs" />
+    <Compile Include="Grid\TreeList\TreeListViewHitTest.cs" />
+    <Compile Include="Grid\TreeList\TreeListNodeValidationError.cs" />
+    <Compile Include="Grid\TreeList\TreeListCellValidationError.cs" />
+    <Compile Include="Grid\TreeList\Native\TreeListDataIterator.cs" />
+    <Compile Include="Core\GridCategories.cs" />
+    <Compile Include="Core\ConditionalFormattingManager\GridManagerFactory.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Grid\Descriptions.resx" />
+    <EmbeddedResource Include="Grid\Images\BestFit.png" />
+    <EmbeddedResource Include="Grid\Images\ClearFilter.png" />
+    <EmbeddedResource Include="Grid\Images\FilterEditor.png" />
+    <EmbeddedResource Include="Grid\Images\FixedLeft.png" />
+    <EmbeddedResource Include="Grid\Images\FixedNone.png" />
+    <EmbeddedResource Include="Grid\Images\FixedRight.png" />
+    <EmbeddedResource Include="Grid\Images\ItemAverage.png" />
+    <EmbeddedResource Include="Grid\Images\ItemClearGrouping.png" />
+    <EmbeddedResource Include="Grid\Images\ItemClearSorting.png" />
+    <EmbeddedResource Include="Grid\Images\ItemColumnChooser.png" />
+    <EmbeddedResource Include="Grid\Images\ItemCount.png" />
+    <EmbeddedResource Include="Grid\Images\ItemFullCollapse.png" />
+    <EmbeddedResource Include="Grid\Images\ItemFullExpand.png" />
+    <EmbeddedResource Include="Grid\Images\ItemGroupBox.png" />
+    <EmbeddedResource Include="Grid\Images\ItemGroupColumn.png" />
+    <EmbeddedResource Include="Grid\Images\ItemMax.png" />
+    <EmbeddedResource Include="Grid\Images\ItemMin.png" />
+    <EmbeddedResource Include="Grid\Images\ItemSortAscending.png" />
+    <EmbeddedResource Include="Grid\Images\ItemSortDescending.png" />
+    <EmbeddedResource Include="Grid\Images\ItemSum.png" />
+    <EmbeddedResource Include="Grid\Images\ItemUnGroupColumn.png" />
+    <EmbeddedResource Include="Grid\Images\SearchPanel.png" />
+    <EmbeddedResource Include="Grid\Images\UnboundExpressionEditor.png" />
+    <EmbeddedResource Include="Grid\Properties\Resources.resx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="grid\frameworkelements\progresscontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\cardtemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\cardview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\columnheader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\columnheaderdragindicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\conditionalformatting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\constants.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\expandbuttons.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\gridcard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\gridcontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\gridcontrolelements.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\gridview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\lightweightstyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\lookupedit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\rowindicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\rows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\scrollbars.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\totalsummary.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\treelistindentitems.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\deepblue\waitindicators.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\cardtemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\cardviewprintingtemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\columnheader.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\conditionalformatting.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\defaultgridviewstyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\gridcontrol.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\gridview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\headerfooteritemscontrolstyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\lightweightstyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\lookupedit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\printingtemplates.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\rowindicator.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="themes\generic\rows.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

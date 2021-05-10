@@ -1,0 +1,58 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: DevExpress.Xpf.Grid.BandedViewHeaderItemsControl
+// Assembly: DevExpress.Xpf.Grid.v16.1, Version=16.1.6.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a
+// MVID: BB681040-0474-4C7D-BB3E-E6E5DFDDD1F8
+// Assembly location: H:\DOWNLOADS\T145231\T145231\bin\Debug\DevExpress.Xpf.Grid.v16.1.dll
+
+using DevExpress.Xpf.Core.Native;
+using System.Windows;
+
+namespace DevExpress.Xpf.Grid
+{
+  public class BandedViewHeaderItemsControl : HeaderItemsControl, ILayoutNotificationHelperOwner
+  {
+    private LayoutNotificationHelper layoutNotificationHelper;
+
+    protected override bool CanSyncWidth
+    {
+      get
+      {
+        return false;
+      }
+    }
+
+    private DataViewBase View
+    {
+      get
+      {
+        return DataControlBase.GetCurrentView((DependencyObject) this);
+      }
+    }
+
+    DependencyObject ILayoutNotificationHelperOwner.NotificationManager
+    {
+      get
+      {
+        if (this.View == null)
+          return (DependencyObject) null;
+        return (DependencyObject) this.View.DataControl;
+      }
+    }
+
+    public BandedViewHeaderItemsControl()
+    {
+      this.layoutNotificationHelper = new LayoutNotificationHelper((ILayoutNotificationHelperOwner) this);
+    }
+
+    protected override Size MeasureOverride(Size constraint)
+    {
+      this.layoutNotificationHelper.Subscribe();
+      return base.MeasureOverride(constraint);
+    }
+
+    void ILayoutNotificationHelperOwner.InvalidateMeasure()
+    {
+      this.InvalidateMeasure();
+    }
+  }
+}

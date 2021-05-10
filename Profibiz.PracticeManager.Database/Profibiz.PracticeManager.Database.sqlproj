@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <Name>Profibiz.PracticeManager.Database</Name>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectVersion>4.1</ProjectVersion>
+    <ProjectGuid>{b830dd47-829d-4887-b67f-7eb9713c4da0}</ProjectGuid>
+    <DSP>Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider</DSP>
+    <OutputType>Database</OutputType>
+    <RootPath>
+    </RootPath>
+    <RootNamespace>Profibiz.PracticeManager.Database</RootNamespace>
+    <AssemblyName>Profibiz.PracticeManager.Database</AssemblyName>
+    <ModelCollation>1049,CI</ModelCollation>
+    <DefaultFileStructure>BySchemaAndSchemaType</DefaultFileStructure>
+    <DeployToDatabase>True</DeployToDatabase>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetLanguage>CS</TargetLanguage>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SqlServerVerification>False</SqlServerVerification>
+    <IncludeCompositeObjects>True</IncludeCompositeObjects>
+    <TargetDatabaseSet>True</TargetDatabaseSet>
+    <SccProjectName>SAK</SccProjectName>
+    <SccProvider>SAK</SccProvider>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccLocalPath>SAK</SccLocalPath>
+    <DefaultCollation>Cyrillic_General_CI_AS</DefaultCollation>
+    <DefaultFilegroup>PRIMARY</DefaultFilegroup>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
+    <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
+    <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
+  <ItemGroup>
+    <Folder Include="Properties" />
+    <Folder Include="dbo\" />
+    <Folder Include="dbo\Tables\" />
+    <Folder Include="dbo\Views\" />
+    <Folder Include="Security\" />
+    <Folder Include="dbo\Functions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="dbo\Tables\Patients.sql" />
+    <Build Include="dbo\Tables\PatientPhotos.sql" />
+    <Build Include="dbo\Tables\ServiceProviders.sql" />
+    <Build Include="dbo\Tables\InsuranceProvidersViewGroups.sql" />
+    <Build Include="dbo\Tables\InsuranceProvidersViewGroupMappings.sql" />
+    <Build Include="dbo\Tables\Categories.sql" />
+    <Build Include="dbo\Tables\InvoiceItems.sql" />
+    <Build Include="dbo\Tables\InsuranceProviders.sql" />
+    <Build Include="dbo\Tables\Invoices.sql" />
+    <Build Include="dbo\Tables\AppointmentBooks.sql" />
+    <Build Include="dbo\Tables\MedicalServicesOrSupplies.sql" />
+    <Build Include="dbo\Tables\AppointmentInsuranceProviders.sql" />
+    <Build Include="dbo\Tables\PatientMedicalConditions.sql" />
+    <Build Include="dbo\Tables\ServiceProviderServices.sql" />
+    <Build Include="dbo\Tables\Payments.sql" />
+    <Build Include="dbo\Tables\ProfessionalAssociations.sql" />
+    <Build Include="dbo\Tables\AppointmentStatuses.sql" />
+    <Build Include="dbo\Tables\Referrers.sql" />
+    <Build Include="dbo\Tables\InvoicePayments.sql" />
+    <Build Include="dbo\Tables\PatientCoverage.sql" />
+    <Build Include="dbo\Tables\QB.sql" />
+    <Build Include="dbo\Tables\Q1.sql" />
+    <Build Include="dbo\Tables\ClientErrors.sql" />
+    <Build Include="dbo\Tables\ztest001.sql" />
+    <Build Include="dbo\Tables\NLogItems.sql" />
+    <Build Include="dbo\Tables\QB2_FULL.sql" />
+    <Build Include="dbo\Tables\QB2.sql" />
+    <Build Include="dbo\Tables\Appointments.sql" />
+    <Build Include="dbo\Tables\InsuranceCoverageHolders.sql" />
+    <Build Include="dbo\Tables\InsuranceCoverages.sql" />
+    <Build Include="dbo\Tables\ThirdPartyServiceProviders.sql" />
+    <Build Include="dbo\Tables\MedicalConditions.sql" />
+    <Build Include="dbo\Tables\InsuranceCoverageServices.sql" />
+    <Build Include="dbo\Tables\InsuranceCoverageHolderServices.sql" />
+    <Build Include="dbo\Tables\ServiceProviderAssociations.sql" />
+    <Build Include="dbo\Tables\_patients.sql" />
+    <Build Include="dbo\Views\InvoicesView.sql" />
+    <Build Include="dbo\Views\PaymentsView.sql" />
+    <Build Include="dbo\Views\PatientsView.sql" />
+    <Build Include="dbo\Views\ServiceProvidersListView.sql" />
+    <Build Include="dbo\Views\PatientAllFamilyMemberView.sql" />
+    <Build Include="dbo\Views\AppointmentsView.sql" />
+    <Build Include="dbo\Views\PatientsListView.sql" />
+    <Build Include="dbo\Views\PatientInsuranceCoverageView.sql" />
+    <Build Include="dbo\Views\PatientInsuranceProvidersViewGroupView.sql" />
+    <Build Include="dbo\Views\PatientFamilyMemberView.sql" />
+    <Build Include="dbo\Functions\f_Patient_FullName.sql" />
+    <Build Include="dbo\Functions\f_Payment_FullDescription.sql" />
+  </ItemGroup>
+</Project>

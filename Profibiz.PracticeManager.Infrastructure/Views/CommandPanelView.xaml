@@ -1,0 +1,72 @@
+﻿<UserControl
+    x:Class="Profibiz.PracticeManager.Infrastructure.CommandPanelView"
+    xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:inter="http://www.codeplex.com/prism"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+    xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+    Margin="3"
+    UseLayoutRounding="True"
+    mc:Ignorable="d">
+
+    <UniformGrid
+        HorizontalAlignment="Right"
+        Columns="3"
+        Rows="1">
+
+        <Button
+            x:Name="butSaveAndClose"
+            Grid.Column="0"
+            Margin="5,0,5,0"
+            Command="{Binding SaveAndCloseCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-save-close-32.png" Stretch="Uniform" />
+                <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Save &amp; Close" />
+            </StackPanel>
+        </Button>
+        <Button
+            x:Name="butSave"
+            Grid.Column="1"
+            Margin="5,0,5,0"
+            Command="{Binding SaveCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-save-32.png" Stretch="Uniform" />
+                <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Save" />
+            </StackPanel>
+        </Button>
+        <Button
+            Grid.Column="2"
+            Margin="5,0,5,0"
+            Command="{Binding CloseCommand}">
+            <StackPanel Orientation="Horizontal">
+                <Image Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-close-32.png" Stretch="Uniform" />
+                <TextBlock
+                    Margin="10,0,0,0"
+                    VerticalAlignment="Center"
+                    Text="Close" />
+            </StackPanel>
+        </Button>
+    </UniformGrid>
+
+
+
+
+</UserControl>

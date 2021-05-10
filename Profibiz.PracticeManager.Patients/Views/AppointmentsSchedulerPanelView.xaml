@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.AppointmentsSchedulerPanelView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             x:Name="MainUserControl"
+             d:DesignHeight="300"
+             d:DesignWidth="300">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <dx:DXTabControl Margin="0" Padding="0" SelectedIndex="{Binding SelectedIndex}">
+                
+                <dx:DXTabItem Header="Appointment Books">
+                    <local:AppointmentsSchedulerView>
+                        <dxmvvm:Interaction.Behaviors>
+                            <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.SubViewModel1, Mode=OneWayToSource, ElementName=MainUserControl}" />
+                            <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                   Command="{Binding DataContextChanged1Command}"
+                                                   EventName="DataContextChanged" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </local:AppointmentsSchedulerView>
+
+                </dx:DXTabItem>
+
+                <dx:DXTabItem Header="Insurance View Groups">
+                    <local:AppointmentsSchedulerView>
+                        <dxmvvm:Interaction.Behaviors>
+                            <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.SubViewModel2, Mode=OneWayToSource, ElementName=MainUserControl}" />
+                            <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                                   Command="{Binding DataContextChanged1Command}"
+                                                   EventName="DataContextChanged" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </local:AppointmentsSchedulerView>
+                </dx:DXTabItem>
+
+            </dx:DXTabControl>
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

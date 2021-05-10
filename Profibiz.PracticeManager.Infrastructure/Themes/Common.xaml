@@ -1,0 +1,515 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=System"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxgt="http://schemas.devexpress.com/winfx/2008/xaml/grid/themekeys"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Themes/Templates.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style x:Key="defaultWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="FontFamily" Value="Tahoma" />
+        <Setter Property="FontSize" Value="11" />
+    </Style>
+
+    <infrastructure:EnumToNameConverter x:Key="EnumToNameConverter" />
+
+    <ControlTemplate x:Key="ReadOnlyBaseEditBorderTemplate" TargetType="{x:Type ContentControl}">
+        <Border
+            Background="{Binding Path=Background, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type dxe:TextEdit}}}"
+            BorderBrush="DarkGray"
+            BorderThickness="1"
+            CornerRadius="1">
+            <ContentPresenter />
+        </Border>
+    </ControlTemplate>
+
+    <SolidColorBrush x:Key="ReadOnlyBackground" Color="LightGray" />
+    <SolidColorBrush x:Key="RedLightBackground" Color="#FFC7CE" />
+    <SolidColorBrush x:Key="GreenLightBackground" Color="#C6EFCE" />
+
+    <dxmvvm:ObjectToObjectConverter x:Key="BooleanToGridSelectionMode">
+        <dxmvvm:MapItem Source="True" Target="MultipleRow" />
+        <dxmvvm:MapItem Source="False" Target="Row" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxg:Format x:Key="ReadOnlyField" Background="{StaticResource ReadOnlyBackground}" />
+    <dxg:Format x:Key="RedBackgroundField" Background="{StaticResource RedLightBackground}" />
+    <dxg:Format x:Key="GreenBackgroundField" Background="{StaticResource GreenLightBackground}" />
+
+    <Style x:Key="baseEditStyle0" TargetType="dxe:BaseEdit">
+        <Style.Setters>
+            <Setter Property="Margin" Value="2" />
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="baseEditStyle1" TargetType="dxe:BaseEdit">
+        <Style.Setters>
+            <Setter Property="Margin" Value="2" />
+        </Style.Setters>
+        <Style.Triggers>
+            <Trigger Property="IsReadOnly" Value="True">
+                <Setter Property="Background" Value="{StaticResource ReadOnlyBackground}" />
+                <Setter Property="BorderTemplate" Value="{StaticResource ReadOnlyBaseEditBorderTemplate}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style
+        x:Key="phoneEditStyle1"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ButtonEdit">
+        <Style.Setters>
+            <Setter Property="MaskType" Value="RegEx" />
+            <Setter Property="Mask" Value="\((\d{3})\)-(\d{3})-(\d{4})" />
+        </Style.Setters>
+    </Style>
+
+
+    <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+    <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityWithHiddenConverter" HiddenInsteadOfCollapsed="True" />
+    <dxmvvm:BooleanToVisibilityConverter x:Key="BooleanToVisibilityInverseConverter" Inverse="True" />
+    <dxmvvm:BooleanToVisibilityConverter
+        x:Key="BooleanToVisibilityInverseWithHiddenConverter"
+        HiddenInsteadOfCollapsed="True"
+        Inverse="True" />
+    <dxmvvm:BooleanNegationConverter x:Key="BooleanNegationConverter" />
+    <infrastructure:ObjectToThicknessConverter x:Key="ObjectToThicknessConverter" />
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="sexToImageConverter">
+        <dxmvvm:MapItem Source="Male" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Mrs.png" />
+        <dxmvvm:MapItem Source="Female" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Miss.png" />
+        <dxmvvm:MapItem Source="Other" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Doctor.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="sexToNameConverter">
+        <dxmvvm:MapItem Source="Male" Target="Male" />
+        <dxmvvm:MapItem Source="Female" Target="Female" />
+        <dxmvvm:MapItem Source="Other" Target="Other" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+
+    <!--<dxmvvm:ObjectToObjectConverter x:Key="patientRowtype9ToImageConverter">
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Mrs9.png" Source="Head-Male" />
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Miss9.png" Source="Head-Female" />
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Doctor9.png" Source="Head-Other" />
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Mrs.png" Source="Member-Male" />
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Miss.png" Source="Member-Female" />
+        <dxmvvm:MapItem Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Doctor.png" Source="Member-Other" />
+    </dxmvvm:ObjectToObjectConverter>-->
+    <dxmvvm:ObjectToObjectConverter x:Key="patientRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="Head" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Header.png" />
+        <dxmvvm:MapItem Source="Member" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Member.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="patientRowtype9bToImageConverter">
+        <dxmvvm:MapItem Source="Single" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Single.png" />
+        <dxmvvm:MapItem Source="Head" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Header.png" />
+        <dxmvvm:MapItem Source="Member" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Member.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="medicalRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="MedicalSupply" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/MedicalSupply.png" />
+        <dxmvvm:MapItem Source="MedicalService" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/MedicalService.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="patientAndmedicalRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="Head-Male" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Mrs9.png" />
+        <dxmvvm:MapItem Source="Head-Female" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Miss9.png" />
+        <dxmvvm:MapItem Source="Head-Other" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Doctor9.png" />
+        <dxmvvm:MapItem Source="Member-Male" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Mrs.png" />
+        <dxmvvm:MapItem Source="Member-Female" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Miss.png" />
+        <dxmvvm:MapItem Source="Member-Other" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Doctor.png" />
+        <dxmvvm:MapItem Source="MedicalSupply" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/MedicalSupply.png" />
+        <dxmvvm:MapItem Source="MedicalService" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/MedicalService.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="specialistRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/specialist-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="insuranceProviderRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/insurance-provider-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="insuranceProvidersViewGroupRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/insurance-providers-view-group-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="professionalAssociationRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/professional-association-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="appointmentBookRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-book-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="appointmentStatusRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-status-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="patientNoteStatusRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-status-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="referrerRowtype9ToImageConverter">
+        <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/referrer-16.png" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+
+
+
+
+    <dxe:TextEditSettings
+        x:Key="moneyEditSettings"
+        AllowNullInput="True"
+        Mask="c"
+        MaskType="Numeric"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="percentEditSettings"
+        Mask="P"
+        MaskType="Numeric"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="unitEditSettings"
+        DisplayFormat="#,##0.####"
+        Mask="###,###,###,###,##0.####"
+        MaskType="Numeric"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings x:Key="unitEditSettingsDisplay" DisplayFormat="#,##0.####" />
+    <dxe:TextEditSettings
+        x:Key="multilineEditSettings"
+        AcceptsReturn="True"
+        TextTrimming="None"
+        TextWrapping="Wrap" />
+    <dxe:TextEditSettings
+        x:Key="dateGridEditSettings"
+        AllowNullInput="True"
+        Mask="d"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="dateYYGridEditSettings"
+        AllowNullInput="True"
+        Mask="MM\/dd\/yy"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="dateGridEditSettingsCenter"
+        HorizontalContentAlignment="Center"
+        AllowNullInput="True"
+        Mask="d"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="timeHHMMGridEditSettings"
+        AllowNullInput="True"
+        Mask="HH:mm"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:TextEditSettings
+        x:Key="timeHHMMGridEditSettingsCenter"
+        HorizontalContentAlignment="Center"
+        AllowNullInput="True"
+        Mask="HH:mm"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+    <dxe:DateEditSettings
+        x:Key="monthYearGridEditSettings"
+        AllowNullInput="True"
+        Mask="MM\/yyyy"
+        MaskUseAsDisplayFormat="True">
+        <dxe:DateEditSettings.StyleSettings>
+            <dxe:DateEditPickerStyleSettings />
+        </dxe:DateEditSettings.StyleSettings>
+    </dxe:DateEditSettings>
+    <dxe:DateEditSettings
+        x:Key="dateCalendarGridEditSettingsCenter"
+        HorizontalContentAlignment="Center"
+        AllowNullInput="True"
+        Mask="d"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+
+
+    <!--  Mask="0.####"  -->
+
+
+
+
+
+
+
+
+    <Style x:Key="layoutGroupGroupBoxStyle" TargetType="dxlc:GroupBox">
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style x:Key="layoutItemLabelStyle1" TargetType="dxlc:LayoutItemLabel">
+        <Style.Setters>
+            <Setter Property="VerticalContentAlignment" Value="Center" />
+            <Setter Property="HorizontalContentAlignment" Value="Right" />
+            <Setter Property="Margin" Value="5" />
+        </Style.Setters>
+    </Style>
+
+    <Style
+        x:Key="layoutItemLabelStyle1Left"
+        BasedOn="{StaticResource layoutItemLabelStyle1}"
+        TargetType="dxlc:LayoutItemLabel">
+        <Style.Setters>
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+        </Style.Setters>
+    </Style>
+
+
+
+
+    <Style x:Key="loadingDecoratorMain" TargetType="dx:LoadingDecorator">
+        <Style.Setters>
+            <Setter Property="SplashScreenLocation" Value="CenterScreen" />
+            <Setter Property="SplashScreenDataContext" Value="{Binding}" />
+            <Setter Property="IsSplashScreenShown" Value="{Binding ShowWaitIndicator.IsShow}" />
+            <Setter Property="SplashScreenTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <!--<Grid Background="Yellow">-->
+                        <dx:WaitIndicator Content="{Binding ShowWaitIndicator.ShowText}" DeferedVisibility="True" />
+                        <!--</Grid>-->
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+    <Style x:Key="loadingDecoratorEmpty" TargetType="dx:LoadingDecorator">
+        <Style.Setters>
+            <Setter Property="SplashScreenDataContext" Value="{Binding}" />
+            <Setter Property="IsSplashScreenShown" Value="{Binding ShowWaitIndicator.IsShow}" />
+            <Setter Property="SplashScreenTemplate">
+                <Setter.Value>
+                    <DataTemplate>
+                        <dx:WaitIndicator
+                            Content="{Binding ShowWaitIndicator.ShowText}"
+                            DeferedVisibility="True"
+                            Visibility="Hidden" />
+                    </DataTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style.Setters>
+    </Style>
+
+
+    <Style x:Key="GridTotalSummaryElementStyle" TargetType="Run">
+        <Setter Property="FontWeight" Value="Bold" />
+    </Style>
+
+    <Style x:Key="GridTotalSummaryContentStyle" TargetType="dxg:TotalSummaryContentPresenter">
+        <!--<Style.Triggers>
+            <DataTrigger  Binding="{Binding Path=Column.Tag}" Value="TotalSummary-align-left;" >
+                <Setter Property="HorizontalAlignment" Value="Left"/>
+            </DataTrigger>
+        </Style.Triggers>-->
+    </Style>
+
+    <SolidColorBrush x:Key="GridOddRowBrush" Color="White" />
+    <SolidColorBrush x:Key="GridEvenRowBrush" Color="#F2F2F2" />
+
+
+
+    <Style
+        x:Key="TimeButtonEditStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ButtonEdit">
+        <Setter Property="MaskType" Value="DateTimeAdvancingCaret" />
+        <!--<Setter Property="Mask" Value="t" />-->
+        <Setter Property="Mask" Value="HH:mm" />
+        <Setter Property="MaskUseAsDisplayFormat" Value="True" />
+    </Style>
+
+
+    <DataTemplate x:Key="OpenDetailColumnHeaderTemplate">
+        <StackPanel HorizontalAlignment="Stretch" Orientation="Horizontal">
+            <Image
+                Width="16"
+                Height="16"
+                HorizontalAlignment="Center"
+                Source="{dx:DXImage Image=Open2_16x16.png}" />
+        </StackPanel>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OpenDetailColumnCellTemplate">
+        <Grid>
+            <Button
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding RowData.Row.OpenDetailCommand}"
+                Content="..." />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="OpenDetail2ColumnCellTemplate">
+        <Grid>
+            <Button
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Command="{Binding RowData.Row.OpenDetail2Command}"
+                Content="..." />
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="OpenDetailColumnStyle" TargetType="dxg:GridColumn">
+        <Style.Setters>
+            <Setter Property="AllowResizing" Value="false" />
+            <Setter Property="AllowFocus" Value="false" />
+            <Setter Property="AllowSorting" Value="false" />
+            <Setter Property="AllowColumnFiltering" Value="false" />
+            <Setter Property="Width" Value="34" />
+            <Setter Property="HeaderTemplate" Value="{StaticResource OpenDetailColumnHeaderTemplate}" />
+            <Setter Property="CellTemplate" Value="{StaticResource OpenDetailColumnCellTemplate}" />
+        </Style.Setters>
+    </Style>
+
+    <Style
+        x:Key="OpenDetail2ColumnStyle"
+        BasedOn="{StaticResource OpenDetailColumnStyle}"
+        TargetType="dxg:GridColumn">
+        <Style.Setters>
+            <Setter Property="CellTemplate" Value="{StaticResource OpenDetail2ColumnCellTemplate}" />
+        </Style.Setters>
+    </Style>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="IsAlternateRow2BackgroundConverter">
+        <dxmvvm:MapItem Source="False" Target="White" />
+        <dxmvvm:MapItem Source="True" Target="#F2F2F2" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <dxmvvm:ObjectToObjectConverter x:Key="InvoiceClaimStatusInfo2ForegroundConvertor">
+        <dxmvvm:MapItem Source="Sent" Target="Blue" />
+        <dxmvvm:MapItem Source="Rejected" Target="Red" />
+        <dxmvvm:MapItem Source="Partially" Target="#FF00DC" />
+        <dxmvvm:MapItem Source="Approved" Target="Green" />
+    </dxmvvm:ObjectToObjectConverter>
+
+    <dxmvvm:ObjectToObjectConverter x:Key="ChargeoutClaimStatusInfo2ForegroundConvertor">
+        <dxmvvm:MapItem Source="Sent" Target="Blue" />
+        <dxmvvm:MapItem Source="Rejected" Target="Red" />
+        <dxmvvm:MapItem Source="Partially" Target="#FF00DC" />
+        <dxmvvm:MapItem Source="Approved" Target="Green" />
+    </dxmvvm:ObjectToObjectConverter>
+
+
+    <Style x:Key="BoldTotalSummaryElementStyle" TargetType="Inline">
+        <Style.Setters>
+            <Setter Property="FontWeight" Value="Bold" />
+        </Style.Setters>
+    </Style>
+
+
+    <DrawingBrush
+        x:Key="AppointmentDayBackground_Holiday"
+        TileMode="Tile"
+        Viewport="0,0,4,4"
+        ViewportUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#20FF0000" Geometry="M2,2 L0,2 0,4 2,4 2,2 4,2 4,0 2,0 Z" />
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush
+        x:Key="AppointmentDayBackground_Work"
+        TileMode="Tile"
+        Viewport="0,0,4,4"
+        ViewportUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#404CFF00" Geometry="M2,2 L0,2 0,4 2,4 2,2 4,2 4,0 2,0 Z" />
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush
+        x:Key="AppointmentDayBackground_Nowork"
+        TileMode="Tile"
+        Viewport="0,0,4,4"
+        ViewportUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Brush="#00000000" Geometry="M2,2 L0,2 0,4 2,4 2,2 4,2 4,0 2,0 Z" />
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+
+
+    <ControlTemplate x:Key="gridFamilyMemberDataTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn Width="*" FieldName="FirstName" />
+                <dxg:GridColumn Width="*" FieldName="LastName" />
+                <dxg:GridColumn Width="*" FieldName="FamilyMemberType" />
+                <dxg:GridColumn Width="*" FieldName="RelationToFamilyHead" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView Name="view" AutoWidth="True" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="gridInsuranceCoverageDataTemplate">
+        <dxg:GridControl x:Name="PART_GridControl">
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn
+                    Width="60"
+                    FieldName="InsuranceProvider.Code"
+                    Header="Provider" />
+                <dxg:GridColumn
+                    Width="*"
+                    FieldName="PolicyOwnerFullName"
+                    Header="Policy Holder" />
+                <dxg:GridColumn
+                    Width="100"
+                    FieldName="PolicyNumber"
+                    Header="Policy Number" />
+                <dxg:GridColumn
+                    Width="70"
+                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                    FieldName="CoverageStartDate"
+                    Header="Start" />
+                <dxg:GridColumn
+                    Width="70"
+                    EditSettings="{StaticResource dateYYGridEditSettings}"
+                    FieldName="CoverageValidUntil"
+                    Header="End" />
+            </dxg:GridControl.Columns>
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    Name="view"
+                    AutoWidth="False"
+                    ShowGroupPanel="False" />
+            </dxg:GridControl.View>
+        </dxg:GridControl>
+    </ControlTemplate>
+
+</ResourceDictionary>

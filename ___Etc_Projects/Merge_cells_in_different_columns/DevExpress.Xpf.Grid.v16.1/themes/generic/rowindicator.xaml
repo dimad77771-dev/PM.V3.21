@@ -1,0 +1,78 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxgcore="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dxght="clr-namespace:DevExpress.Xpf.Grid.HitTest"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes">
+  <dx:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+  <ControlTemplate x:Key="{dxgt:RowIndicatorThemeKey ResourceKey=ItemsControlItemPanelTemplate}">
+    <dx:StackVisibleIndexPanel Orientation="Vertical" ArrangeAccordingToVisibleIndex="true"/>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxgt:RowIndicatorThemeKey ResourceKey=ItemTemplate}">
+    <ContentPresenter x:Name="PART_Indicator" dxgcore:DataControlPopupMenu.GridMenuType="RowCell" Content="{Binding}"
+                      ContentTemplate="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=RowTemplate}}"
+                      dxb:BarManager.DXContextMenu="{Binding Path=View.DataControlMenu}"/>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxgt:RowIndicatorThemeKey ResourceKey=GroupPresenterTemplate}">
+    <ContentPresenter x:Name="PART_Indicator" Content="{Binding}"
+                      ContentTemplate="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=GroupRowTemplate}}"/>
+  </ControlTemplate>
+  <ControlTemplate x:Key="{dxgt:RowIndicatorThemeKey ResourceKey=AdditionalTemplate}">
+    <ContentPresenter x:Name="PART_Indicator" Content="{Binding}"
+                      ContentTemplate="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=RowTemplate}}"/>
+  </ControlTemplate>
+  <dxgcore:DefaultDataTemplate x:Key="{dxgt:RowIndicatorThemeKey ResourceKey=IconPresenterTemplate}">
+    <Border x:Name="errorIndicatorBorder" Background="Transparent"
+            dxg:ToolTipHelper.ShowTooltip="{Binding Path=(dxe:BaseEdit.HasValidationError)}"
+            dxg:ToolTipHelper.Content="{Binding Path=(dxe:BaseEdit.ValidationError)}"
+            dxg:ToolTipHelper.ContentTemplate="{DynamicResource {dxgt:GridRowThemeKey ResourceKey=RowToolTipTemplate}}">
+      <ContentPresenter x:Name="iconPresenter" Content="{Binding}">
+        <ContentPresenter.ContentTemplate>
+          <DataTemplate>
+            <Grid/>
+          </DataTemplate>
+        </ContentPresenter.ContentTemplate>
+      </ContentPresenter>
+    </Border>
+    <DataTemplate.Triggers>
+      <DataTrigger Value="Focused" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=FocusedIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="Changed" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=ChangedIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="NewItemRow" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=NewItemRowIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="Editing" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=EditingIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="Error" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=ErrorIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="FocusedError" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=FocusedErrorIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+      <DataTrigger Value="AutoFilterRow" Binding="{Binding Path=IndicatorState}">
+        <Setter TargetName="iconPresenter"
+                Value="{DynamicResource {dxgt:RowIndicatorThemeKey ResourceKey=AutoFilterRowIconTemplate}}"
+                Property="ContentPresenter.ContentTemplate"/>
+      </DataTrigger>
+    </DataTemplate.Triggers>
+  </dxgcore:DefaultDataTemplate>
+</ResourceDictionary>

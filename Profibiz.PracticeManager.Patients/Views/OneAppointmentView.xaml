@@ -1,0 +1,648 @@
+﻿<dx:DXWindow
+    x:Class="Profibiz.PracticeManager.Patients.Views.OneAppointmentView"
+    xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:inter="http://www.codeplex.com/prism"
+    xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+    xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+    Title="Appointment"
+    Width="650"
+    Height="680"
+    d:DesignHeight="1060"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    Left="50"
+    ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+    SizeToContent="Height"
+    Top="200"
+    UseLayoutRounding="True"
+    WindowStartupLocation="Manual"
+    mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <local:AppointmentStatusToColorConverter x:Key="AppointmentStatusToColorConverter" />
+            <infrastructure:GuidNullConverter x:Key="GuidNullConverter" />
+            <dxre:RichEditUICommand x:Key="commands" />
+            <dxre:RichEditStringIdConverter x:Key="stringIdConverter" />
+            <dxre:ContentToOpenXmlConverter x:Key="contentToOpenXmlConverter" />
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+
+
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <infrastructure:UIElementBehavior Manager="{Binding UIManagerWindow}" />
+        <dxmvvm:EventToCommand
+            Command="{Binding ClosingEventCommand}"
+            EventName="Closing"
+            PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid Background="Transparent" ShowGridLines="False">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Margin="5,5,5,16">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="10" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="Patient"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:TextEdit
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    Margin="4"
+                    EditValue="{Binding Entity.Patient.FullName, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="True"
+                    Style="{StaticResource baseEditStyle1}" />
+                <Grid Grid.Row="1" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Margin="5,0,5,0"
+                        Command="{Binding FindPatientCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=FindCustomers_16x16.png}" Stretch="Uniform" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="Find Patient" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Grid.Column="1"
+                        Margin="5,0,5,0"
+                        Command="{Binding NewPatientCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=AddFile_16x16.png}" Stretch="Uniform" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="New Patient" />
+                        </StackPanel>
+                    </Button>
+                    <Button
+                        Grid.Column="2"
+                        Margin="5,0,5,0"
+                        Command="{Binding OpenPatientCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=AllowUsersToEditRanges_16x16.png}" Stretch="Uniform" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="Open Patient" />
+                        </StackPanel>
+                    </Button>
+                </Grid>
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    Content="Insurance Coverage"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxg:LookUpEdit
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="4"
+                    AutoComplete="True"
+                    AutoPopulateColumns="False"
+                    DisplayMember="PolicyFullName"
+                    EditValue="{Binding Entity.InsuranceCoverageRowId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                    ImmediatePopup="True"
+                    IncrementalFiltering="False"
+                    IsPopupAutoWidth="False"
+                    IsTextEditable="False"
+                    ItemsSource="{Binding GoodInsuranceCoverages}"
+                    NullValueButtonPlacement="EditBox"
+                    PopupContentTemplate="{StaticResource gridInsuranceCoverageDataTemplate}"
+                    PopupMaxWidth="500"
+                    ShowSizeGrip="True"
+                    Style="{StaticResource baseEditStyle1}"
+                    ValueMember="RowId"
+                    Visibility="{Binding Entity.HasNoCoverage, Converter={StaticResource BooleanToVisibilityInverseWithHiddenConverter}}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Margin="6,4"
+                    FontStyle="Italic"
+                    Style="{StaticResource layoutItemLabelStyle1Left}"
+                    Visibility="{Binding Entity.HasNoCoverage, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}">
+                    <TextBlock FontWeight="Bold">No Insurance Coverage</TextBlock>
+                </dxlc:LayoutItemLabel>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    Content=" "
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Grid
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Visibility="{Binding Entity.IsExistInsuranceCoverageInfo, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="0"
+                        Content="Total"
+                        FontWeight="Bold"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit
+                        Grid.Column="1"
+                        Width="75"
+                        HorizontalContentAlignment="Right"
+                        Background="#FFFFCC"
+                        DisplayFormatString="c"
+                        EditValue="{Binding Entity.InsuranceCoverageInfoTotalAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        FontWeight="Bold"
+                        IsReadOnly="True"
+                        Style="{StaticResource baseEditStyle1}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="2"
+                        Content="Approved"
+                        FontWeight="Bold"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit
+                        Grid.Column="3"
+                        Width="75"
+                        HorizontalContentAlignment="Right"
+                        Background="#C6EFCE"
+                        DisplayFormatString="c"
+                        EditValue="{Binding Entity.InsuranceCoverageInfoApproveAmount, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        FontWeight="Bold"
+                        IsReadOnly="True"
+                        Style="{StaticResource baseEditStyle1}" />
+
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="4"
+                        Content="Remaining"
+                        FontWeight="Bold"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:TextEdit
+                        Grid.Column="5"
+                        Width="75"
+                        HorizontalContentAlignment="Right"
+                        Background="White"
+                        DisplayFormatString="c"
+                        EditValue="{Binding Entity.InsuranceCoverageInfoRemaindAmount, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        FontWeight="Bold"
+                        Foreground="{Binding Entity.InsuranceCoverageInfoRemaindAmountForegroundColor}"
+                        IsReadOnly="True"
+                        Style="{StaticResource baseEditStyle1}" />
+                    <Button
+                        Grid.Column="6"
+                        Margin="5,5,5,5"
+                        Command="{Binding OpenInsuranceCoverageCommand}"
+                        Content="..." />
+
+
+                </Grid>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Margin="6,4"
+                    FontStyle="Italic"
+                    Style="{StaticResource layoutItemLabelStyle1Left}"
+                    Visibility="{Binding Entity.IsExistInsuranceCoverageInfo, Converter={StaticResource BooleanToVisibilityInverseWithHiddenConverter}}">
+                    <TextBlock FontWeight="Bold">-</TextBlock>
+                </dxlc:LayoutItemLabel>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    Content="Appointment Book"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:ComboBoxEdit
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Margin="4"
+                    DisplayMember="Name"
+                    EditValue="{Binding Entity.AppointmentBookRowId, Converter={StaticResource GuidNullConverter}, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="{Binding IsReadOnlyAppointmentBookRowId}"
+                    IsTextEditable="False"
+                    ItemsSource="{Binding AllAppointmentBooks}"
+                    NullValueButtonPlacement="EditBox"
+                    Style="{StaticResource baseEditStyle1}"
+                    ValueMember="RowId" />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Content="Specialist"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:ComboBoxEdit
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Margin="4"
+                    DisplayMember="FullName"
+                    EditValue="{Binding Entity.ServiceProviderRowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    IsTextEditable="False"
+                    ItemsSource="{Binding ServiceProviders}"
+                    NullValueButtonPlacement="EditBox"
+                    Style="{StaticResource baseEditStyle1}"
+                    ValueMember="RowId" />
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Content="Service"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:ComboBoxEdit
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Margin="4"
+                    DisplayMember="FullNameWithPriceInfo"
+                    EditValue="{Binding Entity.MedicalServicesOrSupplyRowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    IsTextEditable="False"
+                    ItemsSource="{Binding MedicalServicesOrSupplies}"
+                    NullValueButtonPlacement="EditBox"
+                    Style="{StaticResource baseEditStyle1}"
+                    ValueMember="RowId" />
+
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Content="Start/End time"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Grid Grid.Row="8" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <dxe:DateEdit
+                        Grid.Column="0"
+                        Width="100"
+                        Margin="4"
+                        EditValue="{Binding Entity.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsEnabled="{Binding IsEnabledStartDate}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Style="{StaticResource baseEditStyle1}">
+                        <dxmvvm:Interaction.Behaviors>
+                            <!--<infrastructure:UIElementBehavior Manager="{Binding UIManagerStartDate}" />-->
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:DateEdit>
+                    <dxe:ButtonEdit
+                        x:Name="w900"
+                        Grid.Column="1"
+                        Width="100"
+                        Margin="4"
+                        AllowDefaultButton="False"
+                        EditValue="{Binding Entity.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        EditValuePostMode="Immediate"
+                        IsEnabled="{Binding Entity.IsEnabledStartFinishTime}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Style="{StaticResource TimeButtonEditStyle}"
+                        ValidateOnEnterKeyPressed="True"
+                        ValidateOnTextInput="True">
+                        <dxe:ButtonEdit.Buttons>
+                            <dxe:SpinButtonInfo IsDefaultButton="true" SpinStyle="Vertical" />
+                        </dxe:ButtonEdit.Buttons>
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand
+                                Command="{Binding SpinStartTimeCommand}"
+                                EventName="Spin"
+                                PassEventArgsToCommand="True" />
+                            <infrastructure:UIElementBehavior Manager="{Binding UIManagerStartTime}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ButtonEdit>
+                    <dxe:ButtonEdit
+                        Grid.Column="2"
+                        Width="100"
+                        Margin="4"
+                        AllowDefaultButton="False"
+                        EditValue="{Binding Entity.FinishTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsEnabled="{Binding Entity.IsEnabledStartFinishTime}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Style="{StaticResource TimeButtonEditStyle}">
+                        <dxe:ButtonEdit.Buttons>
+                            <dxe:SpinButtonInfo IsDefaultButton="true" SpinStyle="Vertical" />
+                        </dxe:ButtonEdit.Buttons>
+                        <dxmvvm:Interaction.Behaviors>
+                            <dxmvvm:EventToCommand
+                                Command="{Binding SpinFinishTimeCommand}"
+                                EventName="Spin"
+                                PassEventArgsToCommand="True" />
+                            <infrastructure:UIElementBehavior Manager="{Binding UIManagerFinishTime}" />
+                        </dxmvvm:Interaction.Behaviors>
+                    </dxe:ButtonEdit>
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="3"
+                        Width="52"
+                        Margin="10,5,5,5"
+                        HorizontalAlignment="Left"
+                        Content="Completed"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:CheckEdit
+                        Grid.Column="4"
+                        IsChecked="{Binding Entity.Completed, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsReadOnly="{Binding IsReadOnly}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="5"
+                        Margin="10,5,5,5"
+                        Content="Billed"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+                    <dxe:CheckEdit
+                        Grid.Column="6"
+                        IsChecked="{Binding Entity.InInvoice, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsReadOnly="True" />
+
+                    <Button
+                        Grid.Column="7"
+                        Margin="5,5,5,5"
+                        Command="{Binding Entity.OpenInvoiceDetailCommand}"
+                        Content="..."
+                        Visibility="{Binding Entity.InInvoice, Converter={StaticResource BooleanToVisibilityConverter}}" />
+
+                </Grid>
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Content="Multi Date"
+                    Style="{StaticResource layoutItemLabelStyle1Left}"
+                    Visibility="{Binding IsMultiDateVisibile, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <Grid
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Visibility="{Binding IsMultiDateVisibile, Converter={StaticResource BooleanToVisibilityConverter}}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <dxe:TextEdit
+                        Grid.Column="0"
+                        Margin="4,4,0,4"
+                        EditValue="{Binding Entity.MultiDatesText, Mode=OneWay}"
+                        IsReadOnly="True"
+                        Style="{StaticResource baseEditStyle1}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="1"
+                        Margin="25,5,5,5"
+                        Content="Auto-allocate"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+                    <dxe:CheckEdit Grid.Column="2" IsChecked="{Binding Entity.IsAutoAllocate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+
+
+                    <Button
+                        Grid.Column="3"
+                        Margin="5,5,5,5"
+                        Command="{Binding MultiDateOpenCommand}"
+                        Content="..." />
+                </Grid>
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Content="Statuses"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Grid Grid.Row="10" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+
+                    <dxe:ComboBoxEdit
+                        Grid.Column="0"
+                        Margin="4"
+                        EditValue="{Binding Entity.Status1RowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Style="{StaticResource comboBoxEditAppointmentStatusStyle}" />
+
+                    <dxe:ComboBoxEdit
+                        Grid.Column="1"
+                        Margin="4"
+                        EditValue="{Binding Entity.Status2RowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        Style="{StaticResource comboBoxEditAppointmentStatusStyle}" />
+
+
+
+                </Grid>
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Content="Notes"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:TextEdit
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Height="90"
+                    Margin="4"
+                    VerticalContentAlignment="Top"
+                    AcceptsReturn="True"
+                    EditValue="{Binding Entity.Notes, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    Style="{StaticResource baseEditStyle1}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    Content="Description"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <dxe:TextEdit
+                    Grid.Row="12"
+                    Grid.Column="1"
+                    Height="90"
+                    Margin="4"
+                    VerticalContentAlignment="Top"
+                    AcceptsReturn="True"
+                    EditValue="{Binding Entity.Description, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                    IsReadOnly="{Binding IsReadOnly}"
+                    Style="{StaticResource baseEditStyle1}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    Content="Reminder"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Grid Grid.Row="13" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="300" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <dxe:ComboBoxEdit
+                        Grid.Column="0"
+                        Margin="4"
+                        DisplayMember="Name"
+                        EditValue="{Binding RemainderInMinutesSet, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={infrastructure:DebugConverter}}"
+                        IsReadOnly="{Binding IsReadOnly}"
+                        IsTextEditable="False"
+                        ItemsSource="{Binding AppointmentRemainderEnumAll, Source={StaticResource lookupDataProvider}}"
+                        NullValueButtonPlacement="None"
+                        ShowCustomItems="False"
+                        Style="{StaticResource baseEditStyle1}">
+                        <dxe:ComboBoxEdit.StyleSettings>
+                            <dxe:TokenComboBoxStyleSettings NewTokenPosition="Far" />
+                        </dxe:ComboBoxEdit.StyleSettings>
+                    </dxe:ComboBoxEdit>
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="3"
+                        Margin="20,5,5,5"
+                        HorizontalAlignment="Left"
+                        Content="Email"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+                    <dxe:CheckEdit
+                        Grid.Column="4"
+                        IsChecked="{Binding Entity.IsRemainderEmail, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsReadOnly="{Binding IsReadOnly}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="5"
+                        Margin="20,5,5,5"
+                        HorizontalAlignment="Left"
+                        Content="SMS"
+                        Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+                    <dxe:CheckEdit
+                        Grid.Column="6"
+                        IsChecked="{Binding Entity.IsRemainderSms, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                        IsReadOnly="{Binding IsReadOnly}" />
+
+                    <!--<Button
+						Grid.Column="7"
+						Margin="5,5,5,5"
+						Command="{Binding Entity.OpenInvoiceDetailCommand}"
+						Content="..."
+						Visibility="{Binding Entity.InInvoice, Converter={StaticResource BooleanToVisibilityConverter}}" />-->
+
+                </Grid>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="14"
+                    Grid.Column="0"
+                    Content="Clinical Notes"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Button
+                    Grid.Row="14"
+                    Grid.Column="1"
+                    Margin="30,3,30,3"
+                    Command="{Binding AddOpenClinicalNoteCommand}"
+                    Content="{Binding AddOpenClinicalNoteButtonText}" />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="15"
+                    Grid.Column="0"
+                    Content="Treatment Notes"
+                    Style="{StaticResource layoutItemLabelStyle1Left}" />
+                <Button
+                    Grid.Row="15"
+                    Grid.Column="1"
+                    Margin="30,3,30,3"
+                    Command="{Binding AddOpenTreatmentNoteCommand}"
+                    Content="{Binding AddOpenTreatmentNoteButtonText}" />
+
+
+
+
+
+
+            </Grid>
+            <infrastructure:CommandPanelView
+                Grid.Row="1"
+                Background="Transparent"
+                CloseOnly="{Binding IsReadOnly}"
+                SaveEnabled="{Binding IsButtonSaveEnabled}" />
+        </Grid>
+
+    </dx:LoadingDecorator>
+</dx:DXWindow>

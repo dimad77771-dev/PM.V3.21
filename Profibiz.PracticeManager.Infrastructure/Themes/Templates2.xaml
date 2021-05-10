@@ -1,0 +1,44 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:assembly="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+    xmlns:assembly0="http://schemas.devexpress.com/winfx/2008/xaml/editors/internal"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors">
+
+
+    <ControlTemplate x:Key="popupExtentedContentTemplate" TargetType="ContentControl">
+        <Grid
+            Width="Auto"
+            Height="Auto"
+            Background="Yellow"
+            SnapsToDevicePixels="True">
+            <Grid.Resources>
+                <assembly0:PopupListBoxDisplayMemberPathConverter x:Key="DisplayMemberPathConverter" />
+            </Grid.Resources>
+            <dxe:PopupListBox
+                Name="PART_Content"
+                HorizontalContentAlignment="Left"
+                VerticalContentAlignment="Top"
+                dx:FocusHelper2.Focusable="False"
+                AllowItemHighlighting="False"
+                BorderBrush="{x:Null}"
+                BorderThickness="0,0,0,0"
+                DisplayMemberPath=""
+                FocusVisualStyle="{x:Null}"
+                Focusable="False"
+                IsSynchronizedWithCurrentItem="False"
+                IsTextSearchEnabled="False"
+                ItemTemplate="{x:Null}"
+                Style="{DynamicResource {assembly:EditorListBoxThemeKey ResourceKey=PopupStyle}}">
+                <dxe:PopupListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <VirtualizingStackPanel IsItemsHost="True" />
+                    </ItemsPanelTemplate>
+                </dxe:PopupListBox.ItemsPanel>
+            </dxe:PopupListBox>
+        </Grid>
+    </ControlTemplate>
+
+
+</ResourceDictionary>

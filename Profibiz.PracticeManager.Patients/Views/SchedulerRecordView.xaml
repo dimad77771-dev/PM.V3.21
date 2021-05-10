@@ -1,0 +1,468 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Patients.Views.SchedulerRecordView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             Width="1200"
+             Height="900"
+             Title="Schedule"
+             ResizeMode="NoResize"
+             WindowStartupLocation="CenterScreen"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <local:PictureConverter x:Key="PictureConverter" />
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="2*" />
+                <RowDefinition Height="3*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Visibility="Collapsed"
+                  Background="Transparent"
+                  ShowGridLines="False">
+                <dx:DXBorder Margin="0"
+                             BorderThickness="0 0 0 1"
+                             BorderBrush="#A0A0A0">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <dxlc:LayoutItemLabel Grid.Row="3"
+                                              Grid.Column="0"
+                                              Content="Description"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="3"
+                                      Grid.Column="1"
+                                      Grid.ColumnSpan="3"
+                                      EditValue="{Binding Entity.Description,
+                                                          NotifyOnSourceUpdated=True,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True}"
+                                      Style="{StaticResource baseEditStyle1}"
+                                      Height="40"
+                                      TextWrapping="Wrap"
+                                      AcceptsReturn="True"
+                                      VerticalScrollBarVisibility="Auto"
+                                      VerticalContentAlignment="Top" />
+
+
+
+
+
+
+                    </Grid>
+                </dx:DXBorder>
+            </Grid>
+
+
+            <infrastructure:ExtraLayoutGroup Grid.Row="1"
+                                             Background="Transparent"
+                                             Orientation="Vertical"
+                                             View="Group">
+                <infrastructure:ExtraLayoutGroup Header="BASE SCHEDULE"
+                                                 Margin="5"
+                                                 GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                                 Background="Transparent"
+                                                 IsCollapsible="False"
+                                                 View="GroupBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <dxg:GridControl Grid.Row="0"
+                                         AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding AllEntities[0]}"
+                                         SelectedItem="{Binding AllSelectedEntity[0]}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolEntities[0]}" />
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="True"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="False"
+                                               EditorShowMode="MouseDown"
+                                               EnableImmediatePosting="True"
+                                               ShowTotalSummary="False"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell"
+                                               AlternateRowBackground="{StaticResource GridEvenRowBrush}">
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Bands>
+                                <dxg:GridControlBand Header="PERIOD"
+                                                     HorizontalHeaderContentAlignment="Center"
+                                                     Fixed="Left">
+                                    <dxg:GridColumn FieldName="SchedulerRecord.StartPeriod"
+                                                    Header="START"
+                                                    Fixed="Left"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource dateCalendarGridEditSettingsCenter}"
+                                                    Width="80" />
+                                    <dxg:GridColumn FieldName="SchedulerRecord.FinishPeriod"
+                                                    Header="FINISH"
+                                                    Fixed="Left"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource dateCalendarGridEditSettingsCenter}"
+                                                    Width="80" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="MONDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime1"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime1"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="TUESDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime2"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime2"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="WEDNESDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime3"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime3"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="THURSDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime4"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime4"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="FRIDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime5"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime5"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="SATURDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime6"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime6"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="SUNDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime0"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime0"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                            </dxg:GridControl.Bands>
+                        </dxg:GridControl>
+
+                        <Grid Grid.Row="1" Margin="5,10,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                    Margin="5 0 5 0"
+                                    CommandParameter="0"
+                                    Command="{Binding SchedulerRecordNewCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Add_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="New Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1"
+                                    Margin="5 0 5 0"
+                                    CommandParameter="0"
+                                    Command="{Binding SchedulerRecordDeleteCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="Delete Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </infrastructure:ExtraLayoutGroup>
+            </infrastructure:ExtraLayoutGroup>
+
+            <infrastructure:ExtraLayoutGroup Grid.Row="2"
+                                             Background="Transparent"
+                                             Orientation="Vertical"
+                                             View="Group">
+                <infrastructure:ExtraLayoutGroup Header="SCHEDULE EXCEPTIONS"
+                                                 Margin="5"
+                                                 GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+                                                 Background="Transparent"
+                                                 IsCollapsible="False"
+                                                 View="GroupBox">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <dxg:GridControl Grid.Row="0"
+                                         AutoExpandAllGroups="True"
+                                         ItemsSource="{Binding AllEntities[1]}"
+                                         SelectedItem="{Binding AllSelectedEntity[1]}"
+                                         AllowLiveDataShaping="False"
+                                         ShowBorder="True">
+                            <dxmvvm:Interaction.Behaviors>
+                                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolEntities[1]}" />
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxg:GridControl.View>
+                                <dxg:TableView AllowEditing="True"
+                                               AllowPerPixelScrolling="True"
+                                               AutoWidth="False"
+                                               EditorShowMode="MouseDown"
+                                               EnableImmediatePosting="True"
+                                               ShowTotalSummary="False"
+                                               ShowGroupPanel="False"
+                                               NavigationStyle="Cell"
+                                               AlternateRowBackground="{StaticResource GridEvenRowBrush}">
+                                </dxg:TableView>
+                            </dxg:GridControl.View>
+                            <dxg:GridControl.Bands>
+                                <dxg:GridControlBand Header="PERIOD"
+                                                     HorizontalHeaderContentAlignment="Center"
+                                                     Fixed="Left">
+                                    <dxg:GridColumn FieldName="SchedulerRecord.StartPeriod"
+                                                    Header="START"
+                                                    Fixed="Left"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource dateCalendarGridEditSettingsCenter}"
+                                                    Width="80" />
+                                    <dxg:GridColumn FieldName="SchedulerRecord.FinishPeriod"
+                                                    Header="FINISH"
+                                                    Fixed="Left"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource dateCalendarGridEditSettingsCenter}"
+                                                    Width="80" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="MONDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime1"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime1"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="TUESDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime2"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime2"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="WEDNESDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime3"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime3"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="THURSDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime4"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime4"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="FRIDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime5"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime5"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="SATURDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime6"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime6"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                                <dxg:GridControlBand Header="SUNDAY" HorizontalHeaderContentAlignment="Center">
+                                    <dxg:GridColumn FieldName="StartTime0"
+                                                    Header="FROM"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                    <dxg:GridColumn FieldName="FinishTime0"
+                                                    EditSettings="{StaticResource timeHHMMGridEditSettingsCenter}"
+                                                    Header="TO"
+                                                    HorizontalHeaderContentAlignment="Center"
+                                                    Width="{x:Static infrastructure:WidthInfo.DateColumn}" />
+                                </dxg:GridControlBand>
+                            </dxg:GridControl.Bands>
+                        </dxg:GridControl>
+
+                        <Grid Grid.Row="1" Margin="5,10,5,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Button Grid.Column="0"
+                                    Margin="5 0 5 0"
+                                    CommandParameter="1"
+                                    Command="{Binding SchedulerRecordNewCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Add_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="New Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+                            <Button Grid.Column="1"
+                                    Margin="5 0 5 0"
+                                    CommandParameter="1"
+                                    Command="{Binding SchedulerRecordDeleteCommand}">
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="{dx:DXImage Image=Delete_16x16.png}" Stretch="Uniform" />
+                                    <TextBlock Text="Delete Item"
+                                               VerticalAlignment="Center"
+                                               Margin="10 0 0 0" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </Grid>
+                </infrastructure:ExtraLayoutGroup>
+            </infrastructure:ExtraLayoutGroup>
+
+            <infrastructure:CommandPanelView Grid.Row="3" />
+        </Grid>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

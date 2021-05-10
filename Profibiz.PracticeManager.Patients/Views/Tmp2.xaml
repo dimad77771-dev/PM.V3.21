@@ -1,0 +1,107 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.OneSpecialistView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             d:DesignHeight="400"
+             d:DesignWidth="600"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <Border BorderBrush="Black" BorderThickness="1" CornerRadius="10">
+        <Grid Grid.Row="0" Margin="5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <dxlc:LayoutItemLabel Grid.Row="0"
+                                  Grid.Column="0"
+                                  Content="Start/Finish Time"
+                                  Style="{StaticResource layoutItemLabelStyle1Left}" />
+            <dxe:TextEdit Grid.Row="0"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="3"
+                          EditValue="{Binding Entity.FirstName}"
+                          IsReadOnly="True"
+                          Style="{StaticResource baseEditStyle1}"
+                          />
+
+
+
+
+            <dxlc:LayoutItemLabel Grid.Row="1"
+                                  Grid.Column="0"
+                                  Content="Patient"
+                                  Style="{StaticResource layoutItemLabelStyle1Left}" />
+            <dxe:TextEdit Grid.Row="1"
+                          Grid.Column="1"
+                          EditValue="{Binding Entity.FirstName}"
+                          IsReadOnly="True"
+                          Style="{StaticResource baseEditStyle1}"
+                          />
+            <dxlc:LayoutItemLabel Grid.Row="1"
+                                  Grid.Column="2"
+                                  Content="Phone"
+                                  Style="{StaticResource layoutItemLabelStyle1Left}" />
+            <dxe:TextEdit Grid.Row="1"
+                          Grid.Column="3"
+                          EditValue="{Binding Entity.FirstName}"
+                          IsReadOnly="True"
+                          Style="{StaticResource baseEditStyle1}"
+                          />
+
+            <dxlc:LayoutItemLabel Grid.Row="2"
+                                  Grid.Column="0"
+                                  Content="Specialist"
+                                  Style="{StaticResource layoutItemLabelStyle1Left}" />
+            <dxe:TextEdit Grid.Row="2"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="3"
+                          EditValue="{Binding Entity.Specialist}"
+                          IsReadOnly="True"
+                          Style="{StaticResource baseEditStyle1}"
+                          />
+
+            <dxlc:LayoutItemLabel Grid.Row="3"
+                                  Grid.Column="0"
+                                  Content="Notes"
+                                  Style="{StaticResource layoutItemLabelStyle1Left}" />
+            <dxe:TextEdit Grid.Row="3"
+                          Grid.Column="1"
+                          Grid.ColumnSpan="3"
+                          EditValue="{Binding Entity.Specialist}"
+                          IsReadOnly="True"
+                          Style="{StaticResource baseEditStyle1}"
+                          Height="100"
+                          TextWrapping="Wrap"
+                          AcceptsReturn="True"
+                          VerticalScrollBarVisibility="Auto"
+                          VerticalContentAlignment="Top" />
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,1243 @@
+
+<UserControl
+    x:Class="Profibiz.PracticeManager.Patients.Views.MedicalHistoryRecordView"
+    xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:inter="http://www.codeplex.com/prism"
+    xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+    xmlns:localv="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+    xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+    d:DesignHeight="800"
+    d:DesignWidth="1100"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    UseLayoutRounding="True"
+    mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="style1" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="2,0" />
+                </Style.Setters>
+            </Style>
+
+            <Style x:Key="style2" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="VerticalAlignment" Value="Top" />
+                    <Setter Property="Margin" Value="2,2" />
+                </Style.Setters>
+            </Style>
+
+            <Style x:Key="styleHeader" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                    <Setter Property="HorizontalContentAlignment" Value="Left" />
+                    <Setter Property="Margin" Value="4" />
+                    <Setter Property="FontWeight" Value="Bold" />
+                </Style.Setters>
+            </Style>
+
+
+            <Style x:Key="styleCheckbox1" TargetType="dxe:CheckEdit">
+                <Style.Setters>
+                    <Setter Property="Margin" Value="2,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style.Setters>
+            </Style>
+
+            <Style
+                x:Key="styleTextEdit1"
+                BasedOn="{StaticResource baseEditStyle1}"
+                TargetType="dxe:TextEdit">
+                <Style.Setters>
+                    <Setter Property="Margin" Value="2,0" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style.Setters>
+            </Style>
+
+
+
+            <Style
+                x:Key="styleTextEdit2"
+                BasedOn="{StaticResource baseEditStyle1}"
+                TargetType="dxe:TextEdit">
+                <Style.Setters>
+                    <Setter Property="Margin" Value="2,2" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style.Setters>
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+
+        <dxg:GridControl
+            Grid.Column="0"
+            AllowLiveDataShaping="True"
+            AutoExpandAllGroups="True"
+            ItemsSource="{Binding Entities}"
+            SelectedItem="{Binding Entity}"
+            SelectionMode="Row"
+            ShowBorder="True">
+            <dxmvvm:Interaction.Behaviors>
+                <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrol}" />
+            </dxmvvm:Interaction.Behaviors>
+
+            <dxg:GridControl.View>
+                <dxg:TableView
+                    AllowEditing="False"
+                    AllowPerPixelScrolling="True"
+                    AutoWidth="False"
+                    ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                    EditorShowMode="MouseDown"
+                    NavigationStyle="Row"
+                    SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                    SearchPanelHorizontalAlignment="Right"
+                    ShowCheckBoxSelectorColumn="False"
+                    ShowCheckBoxSelectorInGroupRow="False"
+                    ShowGroupPanel="False"
+                    ShowSearchPanelMode="Never">
+                    <dxmvvm:Interaction.Behaviors>
+                        <dxmvvm:EventToCommand
+                            Command="{Binding MouseClickCommand}"
+                            EventName="MouseLeftButtonDown"
+                            PassEventArgsToCommand="True" />
+                        <dxmvvm:EventToCommand
+                            Command="{Binding BeforeLayoutRefreshCommand}"
+                            EventName="BeforeLayoutRefresh"
+                            PassEventArgsToCommand="True" />
+                    </dxmvvm:Interaction.Behaviors>
+                </dxg:TableView>
+            </dxg:GridControl.View>
+
+            <dxg:GridControl.Columns>
+                <dxg:GridColumn
+                    Width="*"
+                    FieldName="RecordDate"
+                    Header="DATE" />
+            </dxg:GridControl.Columns>
+        </dxg:GridControl>
+
+        <Grid Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0" Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="0"
+                    Grid.Column="1"
+                    VerticalAlignment="Top"
+                    Content="Record Date:"
+                    FontWeight="Bold"
+                    Style="{StaticResource style2}" />
+                <dxe:DateEdit
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Width="100"
+                    Margin="2,2"
+                    HorizontalAlignment="Left"
+                    EditValue="{Binding Entity.RecordDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                    Style="{StaticResource baseEditStyle1}" />
+            </Grid>
+
+
+            <Grid Grid.Column="0" Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <dxlc:LayoutItemLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="HEAD"
+                    Style="{StaticResource styleHeader}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Headaches, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="headaches"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Migraines, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Content="migraines"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.VisionProblemsLoss, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Content="vision problems/loss"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.EarachesHearingLoss, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Content="earaches/hearing loss"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.JawProblems, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Content="jaw problems"
+                    Style="{StaticResource style1}" />
+                <FrameworkElement
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    Height="10 " />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="RESPIRATOR"
+                    Style="{StaticResource styleHeader}" />
+                <dxe:CheckEdit
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Smoking, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Content="smoking"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.ChronicCough, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Content="chronic cough"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Emphysema, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    Content="emphysema"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Asthma, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Content="asthma"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Bronchitis, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="12"
+                    Grid.Column="1"
+                    Content="bronchitis"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.ShortnessOfBreath, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="13"
+                    Grid.Column="1"
+                    Content="shortness of breath"
+                    Style="{StaticResource style1}" />
+                <FrameworkElement
+                    Grid.Row="14"
+                    Grid.Column="0"
+                    Height="10 " />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="20"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="CARDIOVASCULAR"
+                    Style="{StaticResource styleHeader}" />
+                <dxe:CheckEdit
+                    Grid.Row="21"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.HighBloodPressure, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="21"
+                    Grid.Column="1"
+                    Content="high blood pressure"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="22"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.LowBloodPressure, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="22"
+                    Grid.Column="1"
+                    Content="low blood pressure"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="23"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.ChronicCongestiveHeartFailure, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="23"
+                    Grid.Column="1"
+                    Content="chronic congestive heart failure"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="24"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.HistoryOfHeartDiseaseMl, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="24"
+                    Grid.Column="1"
+                    Content="history of heart disease/MI"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="25"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.PhlebitisVaricoseVeins, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="25"
+                    Grid.Column="1"
+                    Content="phlebitis/varicose veins"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="26"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.StrokeCva, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="26"
+                    Grid.Column="1"
+                    Content="stroke/CVA"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="27"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.PacemakerOrSimilarDevice, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="27"
+                    Grid.Column="1"
+                    Content="pacemaker or similar device"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="28"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.HeartAttack, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="28"
+                    Grid.Column="1"
+                    Content="heart attack"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="29"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.CardiovascularOther, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <Grid Grid.Row="29" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="0"
+                        Content="other:"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.CardiovascularOtherText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}" />
+                </Grid>
+                <FrameworkElement
+                    Grid.Row="30"
+                    Grid.Column="0"
+                    Height="10 " />
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="31"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="WOMEN"
+                    Style="{StaticResource styleHeader}" />
+                <dxe:CheckEdit
+                    Grid.Row="32"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.PregnantDue, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <Grid Grid.Row="32" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="0"
+                        Content="pregnant, due:"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.PregnantDueText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}" />
+                </Grid>
+                <dxe:CheckEdit
+                    Grid.Row="33"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.GynecologicalConditions, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="33"
+                    Grid.Column="1"
+                    Content="high blood pressure"
+                    Style="{StaticResource style1}" />
+
+                <Grid
+                    Grid.Row="34"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="0"
+                        Content="what?"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.GynecologicalConditionsText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}" />
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <dxlc:LayoutItemLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="MUSCLES/JOINTS"
+                    Style="{StaticResource styleHeader}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Neck, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="neck"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.MidBack, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Content="mid-back"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.LowerBack, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Content="lower back"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Shoulders, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Content="shoulders"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.LegLeftRight, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Content="leg: left/right"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    VerticalAlignment="Top"
+                    IsChecked="{Binding Entity.MusclesJointsOther, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <Grid Grid.Row="6" Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <dxlc:LayoutItemLabel
+                        Grid.Column="0"
+                        Margin="2,5,2,0"
+                        VerticalAlignment="Top"
+                        Content="other:"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Column="1"
+                        Height="50"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True"
+                        EditValue="{Binding Entity.MusclesJointsOtherText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+                </Grid>
+                <FrameworkElement
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    Height="10 " />
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="2,0,0,0"
+                    Content="INFECTIONS"
+                    Style="{StaticResource styleHeader}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="2,0,0,2"
+                    Content="(Hepatitis, TB, HIV, AIDS and other)"
+                    FontStyle="Italic"
+                    Style="{StaticResource style1}" />
+                <dxe:TextEdit
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Height="50"
+                    VerticalContentAlignment="Top"
+                    AcceptsReturn="True"
+                    EditValue="{Binding Entity.Infections, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                    Style="{StaticResource styleTextEdit1}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+                <FrameworkElement
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    Height="10 " />
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="14"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="2,0,0,0"
+                    Content="SKIN CONDITIONS"
+                    Style="{StaticResource styleHeader}" />
+                <dxe:TextEdit
+                    Grid.Row="15"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Height="50"
+                    VerticalContentAlignment="Top"
+                    AcceptsReturn="True"
+                    EditValue="{Binding Entity.SkinConditions, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                    Style="{StaticResource styleTextEdit1}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+                <FrameworkElement
+                    Grid.Row="16"
+                    Grid.Column="0"
+                    Height="10 " />
+
+                <Grid
+                    Grid.Row="20"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Content="SURGERY"
+                        Style="{StaticResource styleHeader}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="type:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.SurgeryType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="date:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.SurgeryDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="current&#10;symptoms:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        Height="50"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True"
+                        EditValue="{Binding Entity.SurgeryCurrentSymptoms, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+                    <FrameworkElement
+                        Grid.Row="4"
+                        Grid.Column="0"
+                        Height="10 " />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="5"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Content="INJURY"
+                        Style="{StaticResource styleHeader}" />
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="6"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="type:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="6"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.InjuryType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="7"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="date:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="7"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.InjuryDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="8"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="current&#10;symptoms:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="8"
+                        Grid.Column="1"
+                        Height="50"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True"
+                        EditValue="{Binding Entity.InjuryCurrentSymptoms, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+
+                </Grid>
+
+            </Grid>
+
+            <Grid Grid.Column="2" Margin="4">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <dxlc:LayoutItemLabel
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Content="MUSCLES/JOINTS"
+                    Style="{StaticResource styleHeader}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.DigestiveProblems, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="1"
+                    Grid.Column="1"
+                    Content="digestive problems"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Constipation, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="2"
+                    Grid.Column="1"
+                    Content="constipation"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Epilepsy, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    Content="epilepsy"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="4"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.LossOfSensation, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="4"
+                    Grid.Column="1"
+                    Content="loss of sensation"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="5"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.LiverGallBladderProblems, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="5"
+                    Grid.Column="1"
+                    Content="liver/gall bladder problems"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="6"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.KidneyProblems, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="6"
+                    Grid.Column="1"
+                    Content="kidney problems"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="7"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Diabetes, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="7"
+                    Grid.Column="1"
+                    Content="diabetes"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="8"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.AllergiesHypersensitivityReaction, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="8"
+                    Grid.Column="1"
+                    Content="allergies/hypersensitivity reaction"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="9"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Cancer, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="9"
+                    Grid.Column="1"
+                    Content="cancer"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="10"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Arthritis, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="10"
+                    Grid.Column="1"
+                    Content="arthritis"
+                    Style="{StaticResource style1}" />
+                <dxe:CheckEdit
+                    Grid.Row="11"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Hemophilia, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="11"
+                    Grid.Column="1"
+                    Content="hemophilia"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="12"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.Osteoporosis, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="12"
+                    Grid.Column="1"
+                    Content="osteoporosis"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="13"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.MentalIllness, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="13"
+                    Grid.Column="1"
+                    Content="mental illness"
+                    Style="{StaticResource style1}" />
+
+                <dxe:CheckEdit
+                    Grid.Row="14"
+                    Grid.Column="0"
+                    IsChecked="{Binding Entity.InternalPinsWiresArtificialJoints, Mode=TwoWay}"
+                    Style="{StaticResource styleCheckbox1}" />
+                <dxlc:LayoutItemLabel
+                    Grid.Row="14"
+                    Grid.Column="1"
+                    Content="internal pins, wires, artificial joints&#10;or special equipment"
+                    Style="{StaticResource style1}" />
+
+                <Grid
+                    Grid.Row="15"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="0"
+                        Grid.Column="1"
+                        Margin="2,5,2,0"
+                        VerticalAlignment="Top"
+                        Content="where?"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Row="0"
+                        Grid.Column="2"
+                        Height="50"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True"
+                        EditValue="{Binding Entity.OtherConditionsWhere, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+
+                    <dxe:CheckEdit
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        IsChecked="{Binding Entity.OtherConditionsOther, Mode=TwoWay}"
+                        Style="{StaticResource styleCheckbox1}" />
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        Margin="2,5,2,0"
+                        VerticalAlignment="Top"
+                        Content="other:"
+                        Style="{StaticResource style1}" />
+                    <dxe:TextEdit
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Height="50"
+                        VerticalContentAlignment="Top"
+                        AcceptsReturn="True"
+                        EditValue="{Binding Entity.OtherConditionsOtherText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit1}"
+                        TextWrapping="Wrap"
+                        VerticalScrollBarVisibility="Auto" />
+
+                </Grid>
+
+
+
+
+
+
+
+
+
+
+
+
+                <FrameworkElement
+                    Grid.Row="18"
+                    Grid.Column="0"
+                    Height="10 " />
+
+
+                <dxlc:LayoutItemLabel
+                    Grid.Row="20"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Margin="2,0,0,0"
+                    Content="CURRENT MEDICATION"
+                    Style="{StaticResource styleHeader}" />
+                <dxe:TextEdit
+                    Grid.Row="21"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2"
+                    Height="50"
+                    VerticalContentAlignment="Top"
+                    AcceptsReturn="True"
+                    EditValue="{Binding Entity.CurrentMedication, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                    Style="{StaticResource styleTextEdit1}"
+                    TextWrapping="Wrap"
+                    VerticalScrollBarVisibility="Auto" />
+                <FrameworkElement
+                    Grid.Row="22"
+                    Grid.Column="0"
+                    Height="10 " />
+
+                <Grid
+                    Grid.Row="25"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Grid.ColumnSpan="2"
+                        Content="MEDICAL DOCTOR"
+                        Style="{StaticResource styleHeader}" />
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="Name:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.MedicalDoctorName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="2"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="Address:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="2"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.MedicalDoctorAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+
+                    <dxlc:LayoutItemLabel
+                        Grid.Row="3"
+                        Grid.Column="0"
+                        VerticalAlignment="Top"
+                        Content="Phone #:"
+                        Style="{StaticResource style2}" />
+                    <dxe:TextEdit
+                        Grid.Row="3"
+                        Grid.Column="1"
+                        EditValue="{Binding Entity.MedicalDoctorPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                        Style="{StaticResource styleTextEdit2}" />
+                    <!--<dxlc:LayoutItemLabel Grid.Row="4"
+                                          Grid.Column="0"
+                                          Content="Record Date:"
+                                          VerticalAlignment="Top"
+                                          Style="{StaticResource style2}" />
+                    <dxe:DateEdit Grid.Row="4"
+                                  Grid.Column="1"
+                                  EditValue="{Binding Entity.RecordDate,
+                                                      UpdateSourceTrigger=PropertyChanged,
+                                                      ValidatesOnDataErrors=True,
+                                                      NotifyOnSourceUpdated=True}"
+                                  Margin="2,2"
+                                  Width="100"
+                                  HorizontalAlignment="Left"
+                                  Style="{StaticResource baseEditStyle1}" />-->
+                </Grid>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

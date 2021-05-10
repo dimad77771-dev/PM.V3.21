@@ -1,0 +1,127 @@
+﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Navigation.Views.OneCategoryView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:localview="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             Width="500"
+             Height="200"
+             Title="Category"
+             WindowStartupLocation="CenterScreen"
+             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <local:PictureConverter x:Key="PictureConverter" />
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand EventName="Closing"
+                               Command="{Binding ClosingEventCommand}"
+                               PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0"
+                  Background="Transparent"
+                  ShowGridLines="False">
+                <dx:DXBorder Margin="0"
+                             BorderThickness="0 0 0 1"
+                             BorderBrush="#A0A0A0">
+                    <Grid Margin="10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <dxlc:LayoutItemLabel Grid.Row="0"
+                                              Grid.Column="0"
+                                              Content="Name"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:TextEdit Grid.Row="0"
+                                      Grid.Column="1"
+                                      EditValue="{Binding Entity.Name,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+                        <dxlc:LayoutItemLabel Grid.Row="1"
+                                              Grid.Column="0"
+                                              Content="Type"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+                        <dxe:ComboBoxEdit Grid.Row="1"
+                                          Grid.Column="1"
+                                          EditValue="{Binding Entity.CategoryType,
+                                                              UpdateSourceTrigger=PropertyChanged,
+                                                              ValidatesOnDataErrors=True,
+                                                              NotifyOnSourceUpdated=True}"
+                                          IsTextEditable="False"
+                                          ItemsSource="{Binding CategoryType,
+                                                                Source={StaticResource lookupDataProvider}}"
+                                          IsReadOnly="{Binding ReadOnlyItemType}"
+                                          Style="{StaticResource baseEditStyle1}" />
+
+ 
+ 
+
+
+
+
+
+
+
+
+                    </Grid>
+                </dx:DXBorder>
+            </Grid>
+
+            <infrastructure:CommandPanelView Grid.Row="1" />
+        </Grid>
+
+    </dx:LoadingDecorator>
+</dx:DXWindow>

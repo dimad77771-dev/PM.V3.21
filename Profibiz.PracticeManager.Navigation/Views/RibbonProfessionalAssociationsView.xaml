@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.RibbonProfessionalAssociationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="False"
+             mc:Ignorable="d"
+             d:DesignHeight="138.621"
+             d:DesignWidth="477.932">
+    <Grid>
+        <dxr:RibbonControl RibbonStyle="Office2010"
+                           DockPanel.Dock="Top"
+                           ShowApplicationButton="False"
+                           RibbonTitleBarVisibility="Collapsed"
+                           Name="ribbonControl">
+            <dxr:RibbonControl.PageHeaderItems>
+
+            </dxr:RibbonControl.PageHeaderItems>
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="HOME">
+                    <dxr:RibbonPageGroup Caption="Actions">
+                        <dxb:BarButtonItem Content="New Association"
+                                           Command="{Binding NewCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png" />
+                        <dxb:BarButtonItem Content="Edit Association"
+                                           Command="{Binding EditCommand}"
+                                           CommandParameter="{Binding SelectedEntity}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png" />
+                        <dxb:BarButtonItem Content="Delete Association"
+                                           Command="{Binding DeleteCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+    </Grid>
+</UserControl>

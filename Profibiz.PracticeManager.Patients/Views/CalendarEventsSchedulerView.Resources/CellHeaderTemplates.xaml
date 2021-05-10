@@ -1,0 +1,60 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cs="colorscheme_ignorable_uri"
+    xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+    xmlns:dxschd="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/internal"
+    xmlns:dxscht="http://schemas.devexpress.com/winfx/2008/xaml/scheduler/themekeys"
+    xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.ViewModels"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="cs">
+
+    <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Office2013DarkGray\BaseView\Header.xaml  -->
+    <!--  взято уже с версии 16.2  -->
+    <ControlTemplate x:Key="{dxscht:WeekViewThemeKey ResourceKey=CellHeaderNormalTemplate, ThemeName=Office2013DarkGray}" TargetType="{x:Type Control}">
+        <Grid cs:Name="Grid_0001" Background="#00000000">
+            <local:MyMonthViewDayHeaderControl
+                x:Name="MonthViewDayHeaderControl"
+                Margin="5,0,5,0"
+                Date="{Binding IntervalStart}"
+                DateFormats="{Binding DateFormats}"
+                SnapsToDevicePixels="True">
+                <!--<TextBlock Foreground="#BF262626"
+                           HorizontalAlignment="Right"
+                           Opacity="0.5"
+                           SnapsToDevicePixels="True"
+                           cs:Name="TextBlock_0001" />-->
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    cs:Name="TextBlock_0001"
+                    FontWeight="Bold"
+                    Foreground="Black"
+                    Opacity="1.0"
+                    SnapsToDevicePixels="True" />
+            </local:MyMonthViewDayHeaderControl>
+        </Grid>
+    </ControlTemplate>
+
+    <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Office2013DarkGray\BaseView\Header.xaml  -->
+    <!--  взято уже с версии 16.2  -->
+    <ControlTemplate x:Key="{dxscht:WeekViewThemeKey ResourceKey=CellHeaderAlternateTemplate, ThemeName=Office2013DarkGray}" TargetType="{x:Type Control}">
+        <Grid cs:Name="Grid_0002" Background="#FFABABAB">
+            <local:MyMonthViewDayHeaderControl
+                x:Name="MonthViewDayHeaderControl"
+                Margin="5,0,5,0"
+                Date="{Binding IntervalStart}"
+                DateFormats="{Binding DateFormats}"
+                SnapsToDevicePixels="True">
+                <TextBlock
+                    HorizontalAlignment="Right"
+                    cs:Name="TextBlock_0002"
+                    Foreground="#BF262626"
+                    Opacity="0.5"
+                    SnapsToDevicePixels="True" />
+            </local:MyMonthViewDayHeaderControl>
+        </Grid>
+    </ControlTemplate>
+
+
+</ResourceDictionary>

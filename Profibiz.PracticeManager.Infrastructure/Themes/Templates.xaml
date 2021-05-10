@@ -1,0 +1,187 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxdst="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxec="clr-namespace:DevExpress.Xpf.Editors.Controls;assembly=DevExpress.Xpf.Core.v16.2"
+    xmlns:dxeh="http://schemas.devexpress.com/winfx/2008/xaml/editors/internal"
+    xmlns:dxei="http://schemas.devexpress.com/winfx/2008/xaml/editors/internal"
+    xmlns:dxep="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxepc="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxet="http://schemas.devexpress.com/winfx/2008/xaml/editors/themekeys"
+    xmlns:dxt="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:dxtEx="http://schemas.devexpress.com/winfx/2008/xaml/core/themekeys"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!--
+        from file
+        "Devexpress Universal 16.1.4 Source Code\Components\Sources\DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Core\DevExpress.Xpf.Core\Editors\Themes\Generic\ComboBoxEdit.xaml"
+    -->
+
+    <ControlTemplate x:Key="popupExtentedContentTemplate" TargetType="{x:Type ContentControl}">
+        <Grid
+            Width="Auto"
+            Height="Auto"
+            SnapsToDevicePixels="True">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <dxeh:PopupListBoxDisplayMemberPathConverter x:Key="DisplayMemberPathConverter" />
+            </Grid.Resources>
+            <dxepc:PopupListBox
+                x:Name="PART_Content"
+                Grid.Row="0"
+                HorizontalContentAlignment="{Binding Path=Tag.HorizontalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}"
+                VerticalContentAlignment="{Binding Path=Tag.VerticalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}"
+                dxc:FocusHelper2.Focusable="False"
+                AllowItemHighlighting="{Binding Path=(dxe:BaseEdit.OwnerEdit).AllowItemHighlighting, RelativeSource={RelativeSource TemplatedParent}}"
+                BorderBrush="{x:Null}"
+                BorderThickness="0,0,0,0"
+                DisplayMemberPath="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DisplayMemberPathConverter}}"
+                FocusVisualStyle="{x:Null}"
+                ItemTemplate="{Binding Path=Tag.ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                ItemsPanel="{Binding Path=Tag.ItemsPanel, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{DynamicResource {dxet:EditorListBoxThemeKey ResourceKey=PopupStyle}}">
+                <dxepc:PopupListBox.ItemTemplateSelector>
+                    <Binding Path="Tag.ItemTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </dxepc:PopupListBox.ItemTemplateSelector>
+            </dxepc:PopupListBox>
+
+            <StackPanel Grid.Row="1">
+                <Button
+                    Margin="5"
+                    Command="{Binding Path=RowData.Row.AddRowFromPopupCommand}"
+                    CommandParameter="{Binding Path=Column.FieldName}"
+                    Content="Add" />
+            </StackPanel>
+        </Grid>
+    </ControlTemplate>
+
+    <infrastructure:ComboBoxEdit2SourcePropertyNameConverter x:Key="ComboBoxEdit2SourcePropertyNameConverter" />
+
+    <ControlTemplate x:Key="popupFormExtentedContentTemplate" TargetType="{x:Type ContentControl}">
+        <Grid
+            Width="Auto"
+            Height="Auto"
+            SnapsToDevicePixels="True">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.Resources>
+                <dxeh:PopupListBoxDisplayMemberPathConverter x:Key="DisplayMemberPathConverter" />
+            </Grid.Resources>
+            <dxepc:PopupListBox
+                x:Name="PART_Content"
+                Grid.Row="0"
+                HorizontalContentAlignment="{Binding Path=Tag.HorizontalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}"
+                VerticalContentAlignment="{Binding Path=Tag.VerticalContentAlignment, RelativeSource={RelativeSource TemplatedParent}}"
+                dxc:FocusHelper2.Focusable="False"
+                AllowItemHighlighting="{Binding Path=(dxe:BaseEdit.OwnerEdit).AllowItemHighlighting, RelativeSource={RelativeSource TemplatedParent}}"
+                BorderBrush="{x:Null}"
+                BorderThickness="0,0,0,0"
+                DisplayMemberPath="{Binding Path=Tag, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource DisplayMemberPathConverter}}"
+                FocusVisualStyle="{x:Null}"
+                ItemTemplate="{Binding Path=Tag.ItemTemplate, RelativeSource={RelativeSource TemplatedParent}}"
+                ItemsPanel="{Binding Path=Tag.ItemsPanel, RelativeSource={RelativeSource TemplatedParent}}"
+                Style="{DynamicResource {dxet:EditorListBoxThemeKey ResourceKey=PopupStyle}}">
+                <dxepc:PopupListBox.ItemTemplateSelector>
+                    <Binding Path="Tag.ItemTemplateSelector" RelativeSource="{RelativeSource TemplatedParent}" />
+                </dxepc:PopupListBox.ItemTemplateSelector>
+            </dxepc:PopupListBox>
+
+            <StackPanel Grid.Row="1">
+                <Button
+                    Margin="5"
+                    Command="{Binding Path=AddRowFromPopupCommand}"
+                    CommandParameter="{Binding Path=., RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type dxe:ComboBoxEdit}}, Converter={StaticResource ComboBoxEdit2SourcePropertyNameConverter}}"
+                    Content="Add" />
+                <!--  Converter={}  -->
+            </StackPanel>
+        </Grid>
+    </ControlTemplate>
+
+    <SolidColorBrush x:Key="{dxt:DXWindowThemeKey ThemeName=Office2013DarkGray, ResourceKey=ActiveHeaderBackground}" Color="White" />
+
+    <!--<ControlTemplate x:Key="{dxt:DXWindowThemeKey ThemeName=Office2013DarkGray,  ResourceKey=FloatingActiveBorder}">
+            <Border Background="Red" />
+    </ControlTemplate>
+
+
+    <DataTemplate x:Key="{dxt:FloatingContainerThemeKey ThemeName=Office2013DarkGray, ResourceKey=FloatingContainerTemplate}">
+        <Grid>
+            <Control x:Name="PART_ActiveBorder" Template="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=FloatingActiveBorder}}" />
+            <Control x:Name="PART_InactiveBorder"
+                     Visibility="Collapsed"
+                     Template="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=FloatingInactiveBorder}}" />
+            <Grid Margin="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=FloatingContainerBorderPadding}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <ContentControl x:Name="Header" Template="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=HeaderTemplate}}" />
+                <Grid Grid.Row="1"
+                      x:Name="PART_ContentOffset"
+                      Margin="{Binding Path=(dxc:FloatingContainerControl.ContentOffset),
+                                       RelativeSource={RelativeSource Self}}">
+                    <Control x:Name="PART_ContentBackground" Template="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=FloatingBackground}}" />
+                    <Control x:Name="PART_InactiveContentBackground"
+                             Visibility="Collapsed"
+                             Template="{DynamicResource {dxt:DXWindowThemeKey ResourceKey=InactiveFloatingBackground}}" />
+                    <Grid Margin="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <ContentPresenter x:Name="PART_ContainerContent"
+                                          Content="{Binding}"
+                                          Grid.Row="0" />
+
+                        <StackPanel x:Name="PART_StatusPanel"
+                                    Grid.Row="1"
+                                    Visibility="Collapsed">
+                            <Thumb x:Name="PART_SizeGrip"
+                                   Template="{DynamicResource {dxt:FloatingContainerThemeKey IsVisibleInBlend=True,
+                                                                                             ResourceKey=FloatingContainerSizeGripTemplate}}"
+                                   Cursor="SizeNWSE"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Bottom"
+                                   Width="16"
+                                   Height="16" />
+                        </StackPanel>
+                    </Grid>
+                </Grid>
+            </Grid>
+            <Control x:Name="PART_ResizeFrame"
+                     Template="{DynamicResource {dxt:FloatingContainerThemeKey ResourceKey=FloatingContainerResizeFrame}}"
+                     Focusable="False"
+                     Visibility="{Binding Path=(dxc:FloatingContainer.IsMaximized),
+                                          Converter={dxc:BooleanToVisibilityConverter Invert=True}}" />
+        </Grid>
+        <DataTemplate.Triggers>
+            <DataTrigger Binding="{Binding Path=(dxc:FloatingContainer.IsActive)}" Value="False">
+                <Setter Property="Visibility" TargetName="PART_InactiveBorder" Value="Visible" />
+                <Setter Property="Visibility" TargetName="PART_ActiveBorder" Value="Collapsed" />
+                <Setter Property="Visibility" TargetName="PART_InactiveContentBackground" Value="Visible" />
+                <Setter Property="Visibility" TargetName="PART_ContentBackground" Value="Collapsed" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding Path=(dxc:FloatingContainer.FloatingContainer).AllowSizing, RelativeSource={RelativeSource Self}}" Value="false">
+                <Setter Property="Visibility" TargetName="PART_StatusPanel" Value="Collapsed" />
+                <Setter Property="Visibility" TargetName="PART_ResizeFrame" Value="Collapsed" />
+            </DataTrigger>
+        </DataTemplate.Triggers>
+    </DataTemplate>-->
+
+
+    <DataTemplate x:Key="WaitIndicatorDataTemplate">
+        <dx:WaitIndicator Content="1111111112121212" DeferedVisibility="True" />
+    </DataTemplate>
+
+</ResourceDictionary>

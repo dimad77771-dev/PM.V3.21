@@ -1,0 +1,106 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+                    xmlns:dxgcore="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+                    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+                    xmlns:dxg="clr-namespace:DevExpress.Xpf.Grid"
+                    xmlns:dxgt="clr-namespace:DevExpress.Xpf.Grid.Themes">
+  <Style TargetType="{x:Type dxg:RowDetailContainerControl}">
+    <Setter Property="Control.Background">
+      <Setter.Value>
+        <LinearGradientBrush EndPoint="0.5,0.992" StartPoint="0.5,0.003" SpreadMethod="Pad">
+          <GradientStop Color="White" Offset="0"/>
+          <GradientStop Color="White" Offset="1"/>
+        </LinearGradientBrush>
+      </Setter.Value>
+    </Setter>
+    <Setter Property="Control.Foreground" Value="#FF6486B6"/>
+    <Setter Property="Control.BorderBrush" Value="#FFC3CEDC"/>
+  </Style>
+  <Style TargetType="{x:Type dxg:OptionsToggleButton}">
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:OptionsToggleButton}">
+          <Grid SnapsToDevicePixels="true" Background="Transparent">
+            <Path Name="path" Stretch="Fill"
+                  Data="F1 M 1410.67,764.811 L 1408.32,767.495 C 1407.59,768.323 1406.36,768.364 1405.59,767.586 L 1405.41,767.414 C 1404.64,766.636 1404.68,765.407 1405.51,764.683 L 1408.19,762.334 C 1407.67,762.122 1407.1,762 1406.5,762 1404.01,762 1402,764.015 1402,766.5 1402,767.145 1402.14,767.755 1402.38,768.309 L 1397.64,772.525 C 1396.82,773.257 1396.78,774.491 1397.56,775.269 L 1397.73,775.44 C 1398.51,776.218 1399.74,776.182 1400.47,775.359 L 1404.69,770.616 C 1405.25,770.86 1405.86,771.001 1406.5,771.001 1408.98,771.001 1411,768.985 1411,766.5 1411,765.902 1410.88,765.333 1410.67,764.811 Z"
+                  Width="14" Height="14" HorizontalAlignment="Center" VerticalAlignment="Center" Fill="#FFCDE4EF"/>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <MultiTrigger>
+              <MultiTrigger.Conditions>
+                <Condition Property="UIElement.IsMouseOver" Value="true"/>
+                <Condition Property="ToggleButton.IsChecked" Value="False"/>
+              </MultiTrigger.Conditions>
+              <Setter TargetName="path" Property="Shape.Fill" Value="#FFFFFDCA"/>
+            </MultiTrigger>
+            <Trigger Property="ToggleButton.IsChecked" Value="True">
+              <Setter TargetName="path" Property="Shape.Fill" Value="#FFFFFDCA"/>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+  <Style TargetType="{x:Type dxg:RowSplitter}">
+    <Setter Property="FrameworkElement.Height" Value="7"/>
+    <Setter Property="Control.Template">
+      <Setter.Value>
+        <ControlTemplate TargetType="{x:Type dxg:RowSplitter}">
+          <FrameworkTemplate.Resources>
+            <Storyboard x:Key="Storyboard1">
+              <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFC8DBF5"/>
+              </ColorAnimationUsingKeyFrames>
+              <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00.2500000" Value="#FFDDEBFD"/>
+              </ColorAnimationUsingKeyFrames>
+              <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border"
+                                             Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Offset)">
+                <SplineDoubleKeyFrame KeyTime="00:00:00.2500000" Value="1"/>
+              </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="Storyboard2">
+              <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[1].(GradientStop.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FFBCD5F6"/>
+              </ColorAnimationUsingKeyFrames>
+              <ColorAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="border"
+                                            Storyboard.TargetProperty="(Panel.Background).(GradientBrush.GradientStops)[0].(GradientStop.Color)">
+                <SplineColorKeyFrame KeyTime="00:00:00.5000000" Value="#FF9DBBE4"/>
+              </ColorAnimationUsingKeyFrames>
+            </Storyboard>
+          </FrameworkTemplate.Resources>
+          <Grid Cursor="SizeNS">
+            <Border x:Name="border" BorderBrush="#FF6984AE" BorderThickness="0,1,0,1">
+              <Border.Background>
+                <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                  <GradientStop Color="#FF9DBBE4" Offset="0"/>
+                  <GradientStop Color="#FFBCD5F6" Offset="1"/>
+                </LinearGradientBrush>
+              </Border.Background>
+              <StackPanel Width="16" VerticalAlignment="Top" Margin="0,2,0,0">
+                <Rectangle x:Name="rectangle" Fill="#FF698AB9" StrokeThickness="0" HorizontalAlignment="Stretch" Height="1"
+                           Stroke="{x:Null}"/>
+                <Rectangle x:Name="rectangle_Copy" Width="Auto" Height="1" Fill="#FFE2EFFF" StrokeThickness="0"
+                           HorizontalAlignment="Stretch" Opacity="0.495" Stroke="{x:Null}"/>
+              </StackPanel>
+            </Border>
+          </Grid>
+          <ControlTemplate.Triggers>
+            <Trigger Property="UIElement.IsMouseOver" Value="true">
+              <TriggerBase.ExitActions>
+                <BeginStoryboard x:Name="Storyboard2_BeginStoryboard" Storyboard="{StaticResource Storyboard2}"/>
+              </TriggerBase.ExitActions>
+              <TriggerBase.EnterActions>
+                <BeginStoryboard Storyboard="{StaticResource Storyboard1}"/>
+              </TriggerBase.EnterActions>
+            </Trigger>
+          </ControlTemplate.Triggers>
+        </ControlTemplate>
+      </Setter.Value>
+    </Setter>
+  </Style>
+</ResourceDictionary>

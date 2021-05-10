@@ -1,0 +1,408 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.InsuranceProvidersViewGroupsView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             d:DesignHeight="1200"
+             d:DesignWidth="1483"
+             prism:ViewModelLocator.AutoWireViewModel="False"
+             UseLayoutRounding="True"
+             mc:Ignorable="d">
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+    <UserControl.Resources>
+        <DataTemplate x:Key="rowInfoTemplate">
+            <TextBlock Text="{Binding DragDropRowText}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="dragInfoTemplate">
+            <Border Padding="12,8,24,10"
+                    >
+                <StackPanel>
+                    <ContentPresenter Name="rowInfoDragPresenter"
+                                      Content="{Binding FirstDraggingObject}"
+                                      ContentTemplate="{StaticResource rowInfoTemplate}">
+                        <ContentPresenter.Visibility>
+                            <Binding Path="DataContext.DraggingRows.Count" RelativeSource="{RelativeSource TemplatedParent}">
+                            </Binding>
+                        </ContentPresenter.Visibility>
+                    </ContentPresenter>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+
+        <DataTemplate x:Key="dropInfoTemplate">
+            <Border Name="border"
+                    CornerRadius="0,0,5,5"
+                    Padding="12,8,24,10"
+                    BorderThickness="0,1,0,0"
+                    Background="#FFF0F0F0">
+                <StackPanel>
+                    <TextBlock Name="dropInfoText" FontWeight="Bold">
+                        <TextBlock.Visibility>
+                            <Binding Path="DropTargetType">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="Collapsed">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="None" Value="Visible" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Visibility>
+                        <TextBlock.Text>
+                            <Binding Path="DropTargetType">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter>
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="None" Value="Cannot drop here" />
+                                            <dx:EnumObjectProvider x:Key="DataArea" Value="Add row" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsIntoGroup" Value="Move to group:" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsIntoNode" Value="Add to:" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsAfter" Value="Insert after row:" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsBefore" Value="Insert before row:" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Text>
+                        <TextBlock.Foreground>
+                            <Binding Path="DropTargetType">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="#FF949494">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="None" Value="#FFB34242" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </TextBlock.Foreground>
+                    </TextBlock>
+                    <ContentPresenter Name="rowInfoPresenter"
+                                      Content="{Binding DropTargetRow}"
+                                      ContentTemplate="{StaticResource rowInfoTemplate}">
+                        <ContentPresenter.Visibility>
+                            <Binding Path="DataContext.DropTargetType" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="Collapsed">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="InsertRowsAfter" Value="Visible" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsBefore" Value="Visible" />
+                                            <dx:EnumObjectProvider x:Key="InsertRowsIntoNode" Value="Visible" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </ContentPresenter.Visibility>
+                    </ContentPresenter>
+                    <ItemsControl Name="groupInfoItemsControl" ItemsSource="{Binding GroupInfo}">
+                        <ItemsControl.Visibility>
+                            <Binding Path="DataContext.DropTargetType" RelativeSource="{RelativeSource TemplatedParent}">
+                                <Binding.Converter>
+                                    <dx:EnumToObjectConverter DefaultValue="Collapsed">
+                                        <dx:EnumToObjectConverter.Values>
+                                            <dx:EnumObjectProvider x:Key="InsertRowsIntoGroup" Value="Visible" />
+                                        </dx:EnumToObjectConverter.Values>
+                                    </dx:EnumToObjectConverter>
+                                </Binding.Converter>
+                            </Binding>
+                        </ItemsControl.Visibility>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <dxg:NameTextControl x:Name="groupInfoControl"
+                                                     NameValue="{Binding FieldName}"
+                                                     TextValue="{Binding Value}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </Border>
+            <DataTemplate.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Static interop:BrowserInteropHelper.IsBrowserHosted}}"
+                             Value="True"
+                             xmlns:interop="clr-namespace:System.Windows.Interop;assembly=PresentationFramework">
+                    <Setter Property="CornerRadius" TargetName="border" Value="0,0,0,0" />
+                </DataTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+
+
+        <DataTemplate x:Key="dragElementTemplate">
+            <dxg:HintControl>
+                <StackPanel>
+                    <ContentPresenter Name="dragInfo"
+                                      Content="{Binding}"
+                                      ContentTemplate="{StaticResource dragInfoTemplate}" />
+                    <ContentPresenter Name="dropInfo"
+                                      Content="{Binding}"
+                                      ContentTemplate="{StaticResource dropInfoTemplate}" />
+                </StackPanel>
+            </dxg:HintControl>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="55*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="45*" />
+            </Grid.ColumnDefinitions>
+
+            <dxg:TreeListControl Grid.Column="0"
+                                 EnableSmartColumnsGeneration="True"
+                                 ItemsSource="{Binding TreeItems}"
+                                 SelectedItem="{Binding SelectedTreeItem,
+                                                        Mode=TwoWay}"
+                                 Margin="5">
+                <dxmvvm:Interaction.Behaviors>
+                    <infrastructure:TreeListDragDropManagerEx Reference="{Binding TreeDragDropManager,
+                                                                                  Mode=OneWayToSource}"
+                                                              AllowDrag="True"
+                                                              AllowDrop="True"
+                                                              AllowScrolling="True"
+                                                              DragElementTemplate="{StaticResource dragElementTemplate}" />
+                </dxmvvm:Interaction.Behaviors>
+
+                <dxg:TreeListControl.Resources>
+                    <Style x:Key="tasksCommonGridRowStyle" TargetType="{x:Type dxg:RowControl}">
+                    </Style>
+                    <dxe:ComboBoxEditSettings x:Key="comboBoxMode2"
+                                              AutoComplete="False"
+                                              ImmediatePopup="False"
+                                              IsTextEditable="False"
+                                              ItemsSource="{Binding Mode2List}"
+                                              ValueMember="Value"
+                                              DisplayMember="Name" />
+                </dxg:TreeListControl.Resources>
+
+                <dxg:TreeListControl.View>
+                    <dxg:TreeListView AllowPerPixelScrolling="True"
+                                      ShowTotalSummary="False"
+                                      KeyFieldName="Id"
+                                      ParentFieldName="ParentId"
+                                      EditorShowMode="MouseDown"
+                                      RowStyle="{StaticResource tasksCommonGridRowStyle}"
+                                      ExpandStateFieldName="IsExpanded"
+                                      AutoExpandAllNodes="True"
+                                      EnableImmediatePosting="True"
+                                      AutoWidth="False">
+                    </dxg:TreeListView>
+                </dxg:TreeListControl.View>
+
+                <dxg:TreeListControl.Columns>
+                    <dxg:TreeListColumn FieldName="ObjName"
+                                        Header="VIEW GROUP/INSURANCE PROVIDER"
+                                        SortIndex="0"
+                                        SortOrder="Ascending"
+                                        Width="*">
+                        <dxg:TreeListColumn.CellTemplate>
+                            <DataTemplate>
+                                <Grid ShowGridLines="False">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Image Width="20"
+                                           Grid.Column="0"
+                                           Source="{Binding RowData.Row.ImageForRow}"
+                                           Stretch="None" />
+                                    <TextBlock Grid.Column="1"
+                                               VerticalAlignment="Center"
+                                               Text="{Binding Value}"
+                                               Margin="4,0,0,0" />
+                                </Grid>
+                            </DataTemplate>
+                        </dxg:TreeListColumn.CellTemplate>
+                    </dxg:TreeListColumn>
+
+                </dxg:TreeListControl.Columns>
+            </dxg:TreeListControl>
+
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="45*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="15" />
+                    <RowDefinition Height="55*" />
+                </Grid.RowDefinitions>
+
+                <dxg:GridControl x:Name="tableViewGridControl"
+                                 Grid.Row="0"
+                                 Margin="5"
+                                 ItemsSource="{Binding InsuranceProvidersViewGroups}"
+                                 ShowBorder="True"
+                                 SelectedItem="{Binding SelectedInsuranceProvidersViewGroup}"
+                                 AutoExpandAllGroups="True">
+
+                    <dxmvvm:Interaction.Behaviors>
+                        <!--<infrastructure:ReferenceBehavior Source="{Binding bbb, Mode=OneWayToSource}" />-->
+                        <infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolInsuranceProvidersViewGroups}" />
+                        <infrastructure:GridDragDropManagerEx Reference="{Binding DragDropManagerViewGroups,
+                                                                                  Mode=OneWayToSource}"
+                                                              AllowDrag="True"
+                                                              AllowDrop="True"
+                                                              AllowScrolling="True"
+                                                              DragElementTemplate="{StaticResource dragElementTemplate}" />
+                    </dxmvvm:Interaction.Behaviors>
+
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowEditing="True"
+                                       AllowPerPixelScrolling="True"
+                                       ShowSearchPanelMode="Never"
+                                       ShowGroupPanel="False"
+                                       ShowColumnHeaders="True"
+                                       AutoWidth="False"
+                                       EnableImmediatePosting="True"
+                                       EditorShowMode="MouseDownFocused"
+                                       SearchPanelHorizontalAlignment="Right"
+                                       NavigationStyle="Cell">
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+
+
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="Rowtype9"
+                                        Header=" "
+                                        Width="20">
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Grid.Column="0"
+                                           Source="{Binding Value,
+                                                            Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
+                                           Stretch="None" />
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="Name"
+                                        Header="VIEW GROUP"
+                                        Width="*"
+                                        SortOrder="Ascending"
+                                        SortIndex="0" />
+                    </dxg:GridControl.Columns>
+                    <dxg:GridControl.GroupSummary>
+                        <dxg:GridSummaryItem SummaryType="Count" />
+                    </dxg:GridControl.GroupSummary>
+                </dxg:GridControl>
+
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"
+                            Margin="5 0 5 0"
+                            Command="{Binding AddViewGroupCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Add_32x32.png}" Stretch="Uniform" />
+                            <TextBlock Text="New View Group"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+                    <Button Grid.Column="1"
+                            Margin="5 0 5 0"
+                            Command="{Binding DeleteViewGroupCommand}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="{dx:DXImage Image=Delete_32x32.png}" Stretch="Uniform" />
+                            <TextBlock Text="Delete View Group"
+                                       VerticalAlignment="Center"
+                                       Margin="10 0 0 0" />
+                        </StackPanel>
+                    </Button>
+
+
+
+                </Grid>
+
+                <dxg:GridControl Grid.Row="3"
+                                 Margin="5"
+                                 ItemsSource="{Binding InsuranceProviders}"
+                                 ShowBorder="True"
+                                 SelectedItem="{Binding SelectedInsuranceProvider}"
+                                 AutoExpandAllGroups="True">
+
+                    <dxmvvm:Interaction.Behaviors>
+                        <infrastructure:GridDragDropManagerEx Reference="{Binding DragDropManagerInsuranceProviders,
+                                                                                  Mode=OneWayToSource}"
+                                                              AllowDrag="True"
+                                                              AllowDrop="True"
+                                                              AllowScrolling="True"
+                                                              DragElementTemplate="{StaticResource dragElementTemplate}" />
+                    </dxmvvm:Interaction.Behaviors>
+
+                    <dxg:GridControl.View>
+                        <dxg:TableView AllowEditing="False"
+                                       AllowPerPixelScrolling="True"
+                                       ShowSearchPanelMode="Never"
+                                       ShowGroupPanel="False"
+                                       ShowColumnHeaders="True"
+                                       AutoWidth="False"
+                                       SearchPanelHorizontalAlignment="Right"
+                                       NavigationStyle="Row">
+                        </dxg:TableView>
+                    </dxg:GridControl.View>
+
+
+                    <dxg:GridControl.Columns>
+                        <dxg:GridColumn FieldName="Rowtype9"
+                                        Header=" "
+                                        Width="20">
+                            <dxg:GridColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Grid.Column="0"
+                                           Source="{Binding Value,
+                                                            Converter={StaticResource insuranceProviderRowtype9ToImageConverter}}"
+                                           Stretch="None" />
+                                </DataTemplate>
+                            </dxg:GridColumn.CellTemplate>
+                        </dxg:GridColumn>
+                        <dxg:GridColumn FieldName="CompanyName"
+                                        Header="INSURANCE PROVIDER"
+                                        Width="*"
+                                        SortOrder="Ascending"
+                                        SortIndex="0" />
+                    </dxg:GridControl.Columns>
+                </dxg:GridControl>
+            </Grid>
+
+
+            <GridSplitter Grid.Row="0"
+                          Grid.Column="1"
+                          Grid.RowSpan="2"
+                          Width="5"
+                          VerticalAlignment="Stretch"
+                          HorizontalAlignment="Center" />
+
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

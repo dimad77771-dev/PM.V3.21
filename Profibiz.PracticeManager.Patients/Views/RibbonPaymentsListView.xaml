@@ -1,0 +1,139 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.RibbonPaymentsListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="False"
+             mc:Ignorable="d"
+             d:DesignHeight="138.621"
+             d:DesignWidth="477.932">
+    <Grid>
+        <dxr:RibbonControl RibbonStyle="Office2010"
+                           DockPanel.Dock="Top"
+                           ShowApplicationButton="False"
+                           RibbonTitleBarVisibility="Collapsed"
+                           Name="ribbonControl">
+            <dxr:RibbonControl.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="RibbonFinancesView.Resources/GalleryItemControl.xaml" />
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </dxr:RibbonControl.Resources>
+
+            <dxr:RibbonControl.PageHeaderItems>
+
+            </dxr:RibbonControl.PageHeaderItems>
+            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+                <dxr:RibbonPage Caption="HOME">
+                    <dxr:RibbonPageGroup Caption="Actions">
+                        <dxb:BarButtonItem Content="New Payment"
+                                           Command="{Binding NewCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png" />
+                        <dxb:BarButtonItem Content="Save"
+                                           Command="{Binding SaveCommand}"
+                                           CommandParameter="{Binding SelectedEntity}"
+                                           LargeGlyph="{dx:DXImage Image=Save_32x32.png}"
+                                           Glyph="{dx:DXImage Image=Save_16x16.png}" />
+                        <dxb:BarButtonItem Content="Delete Payment"
+                                           Command="{Binding DeleteCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
+                    </dxr:RibbonPageGroup>
+
+
+                    <dxr:RibbonPageGroup Caption="Payment Date Filter">
+
+                        <dxb:BarEditItem Content="From" EditValue="{Binding FilterFrom}" EditSettings="{StaticResource RibbonDateEditSettings}"/>
+                        <dxb:BarEditItem Content="To" EditValue="{Binding FilterTo}" EditSettings="{StaticResource RibbonDateEditSettings}"/>
+
+                        <dxb:BarButtonItem Content="Apply Filter"
+                                           Command="{Binding FilterCommand}"
+                                           LargeGlyph="{dx:DXImage Image=Filter_32x32.png}"
+                                           Glyph="{dx:DXImage Image=Filter_16x16.png}" />
+
+                        <dxb:BarButtonItem Content="Previous Month"
+                                           Command="{Binding FilterCommand}"
+                                           CommandParameter="PreviousMonth"
+                                           LargeGlyph="{dx:DXImage Image=DoublePrev_32x32.png}"
+                                           Glyph="{dx:DXImage Image=DoublePrev_16x16.png}" />
+                        <dxb:BarButtonItem Content="Next Month"
+                                           Command="{Binding FilterCommand}"
+                                           CommandParameter="NextMonth"
+                                           LargeGlyph="{dx:DXImage Image=DoubleNext_32x32.png}"
+                                           Glyph="{dx:DXImage Image=DoubleNext_16x16.png}" />
+                        <infrastructure:FinanceDateFieldsBarSubItem/>
+
+
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Account Aging Legend">
+                        <dxr:RibbonPageGroup.Resources>
+                            <DataTemplate x:Key="galleryItemSpecialistListTemplate">
+                                <ContentControl>
+                                    <dxb:GalleryItem Caption="{Binding Name}"
+                                                     Command="{Binding SelectUnselectCommand}" />
+                                    <!--Glyph="{Binding IsSelected,
+                                                                     Converter={StaticResource SpecialistGalleryItemGlyph}}"-->
+                                </ContentControl>
+                            </DataTemplate>
+                        </dxr:RibbonPageGroup.Resources>
+                        <dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}" Content="Account Aging">
+                            <dxr:RibbonGalleryBarItem.DropDownGallery>
+                                <dxb:Gallery ColCount="{Binding RibbonSpAccountAgingListColumnCount}"
+                                             RowCount="2"
+                                             ItemGlyphSize="16,16"
+                                             IsItemDescriptionVisible="True"
+                                             IsItemCaptionVisible="True"
+                                             AllowFilter="True"
+                                             IsGroupCaptionVisible="False"
+                                             SizeMode="None">
+                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpAccountAgingListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
+                                </dxb:Gallery>
+                            </dxr:RibbonGalleryBarItem.DropDownGallery>
+                            <dxr:RibbonGalleryBarItem.Gallery>
+                                <dxb:Gallery ColCount="{Binding RibbonSpAccountAgingListColumnCount}"
+                                             RowCount="2"
+                                             ItemGlyphSize="16,16"
+                                             IsItemDescriptionVisible="True"
+                                             IsItemCaptionVisible="True"
+                                             ItemMargin="0">
+                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpAccountAgingListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
+                                </dxb:Gallery>
+                            </dxr:RibbonGalleryBarItem.Gallery>
+                        </dxr:RibbonGalleryBarItem>
+                    </dxr:RibbonPageGroup>
+
+                    <dxr:RibbonPageGroup Caption="Refund">
+                        <dxb:BarButtonItem Content="New Refund"
+                                           Command="{Binding RefundNewCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-refund-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-refund-16.png" />
+                        <dxb:BarEditItem Content="Show eligible refunds only"
+                                         EditValue="{Binding IsShowAllowRefundOnly,
+                                                             Mode=TwoWay}"
+                                         RibbonStyle="SmallWithText">
+                            <dxb:BarEditItem.EditSettings>
+                                <dxe:CheckEditSettings>
+                                </dxe:CheckEditSettings>
+                            </dxb:BarEditItem.EditSettings>
+                        </dxb:BarEditItem>
+                    </dxr:RibbonPageGroup>
+                </dxr:RibbonPage>
+            </dxr:RibbonDefaultPageCategory>
+        </dxr:RibbonControl>
+    </Grid>
+</UserControl>

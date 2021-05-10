@@ -1,0 +1,203 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.InsuranceArticleSummaryView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1300">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <infrastructure:ShowRibbonBehavior Name="RibbonInsuranceArticleSummaryView" />
+    </i:Interaction.Behaviors>
+
+
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <dxg:GridControl x:Name="tableViewGridControl"
+                             Grid.Row="0"
+                             ItemsSource="{Binding Entities}"
+                             ShowBorder="True"
+                             SelectedItem="{Binding SelectedEntity}"
+                             AllowLiveDataShaping="True"
+                             AutoExpandAllGroups="True">
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowEditing="False"
+                                   AllowPerPixelScrolling="True"
+                                   ShowSearchPanelMode="Always"
+                                   SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                   ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                   ShowGroupPanel="False"
+                                   ShowTotalSummary="True"
+                                   AutoWidth="False"
+                                   SearchPanelHorizontalAlignment="Right"
+                                   NavigationStyle="Row"
+                                   SearchPanelNullText="Search (Ctrl + F)">
+                        <dxg:TableView.RowStyle>
+                            <Style TargetType="{x:Type dxg:RowControl}">
+                                <Style.Setters>
+                                    <Setter Property="MaxHeight" Value="100" />
+                                </Style.Setters>
+                            </Style>
+                        </dxg:TableView.RowStyle>
+                        <dxg:TableView.FormatConditions>
+                            <dxg:FormatCondition ApplyToRow="True" Expression="[IsSuccess] == 'False'">
+                                <dx:Format Foreground="Red" />
+                            </dxg:FormatCondition>
+                        </dxg:TableView.FormatConditions>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding EditCommand}"
+                                           EventName="MouseDoubleClick">
+                        <dxmvvm:EventToCommand.EventArgsConverter>
+                            <dx:EventArgsToDataRowConverter />
+                        </dxmvvm:EventToCommand.EventArgsConverter>
+                    </dxmvvm:EventToCommand>
+                </dxmvvm:Interaction.Behaviors>
+
+                <dxg:GridControl.Bands>
+                    <dxg:GridControlBand Header="INSURANCE COVERAGE" HorizontalHeaderContentAlignment="Center">
+                        <dxg:GridColumn FieldName="InsuranceCoverage.PolicyNumber"
+                                        Header="POLICY&#10;NUMBER"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        Width="80" />
+                        <dxg:GridColumn FieldName="InsuranceCoverage.InsuranceProviderCode"
+                                        Header="INSURANCE&#10;PROVIDER"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        Width="75" />
+
+
+                        <dxg:GridColumn FieldName="PatientsName"
+                                        Header="PATIENTS"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        Width="280">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:TextEditSettings TextWrapping="Wrap" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+
+                        <dxg:GridColumn FieldName="PatientReferrerName"
+                                        Header="REFERRER"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        Width="70">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:TextEditSettings TextWrapping="NoWrap" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+
+                        <dxg:GridColumn FieldName="CategoriesName"
+                                        Header="CATEGORIES"
+                                        HorizontalHeaderContentAlignment="Center"
+                                        Width="240">
+                            <dxg:GridColumn.EditSettings>
+                                <dxe:TextEditSettings TextWrapping="Wrap" />
+                            </dxg:GridColumn.EditSettings>
+                        </dxg:GridColumn>
+                        
+                    </dxg:GridControlBand>
+
+                    <dxg:GridControlBand HorizontalHeaderContentAlignment="Center" OverlayHeaderByChildren="True">
+                        <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetail2ColumnStyle}" />
+                    </dxg:GridControlBand>
+
+
+                    <dxg:GridControlBand Header="AMOUNT COVERED" HorizontalHeaderContentAlignment="Center">
+                        <dxg:GridColumn FieldName="AnnualAmountCovered"
+                                    Header="TOTAL"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource moneyEditSettings}"
+                                    Width="100" />
+                        <dxg:GridColumn FieldName="ApproveAmount"
+                                    Header="APPROVED"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource moneyEditSettings}"
+                                    Width="100" />
+                        <dxg:GridColumn FieldName="RemaindedAmount"
+                                    Header="REMAINING"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource moneyEditSettings}"
+                                    Width="100" />
+                    </dxg:GridControlBand>
+
+                    <dxg:GridControlBand Header="QUANTITY COVERED" HorizontalHeaderContentAlignment="Center">
+                        <dxg:GridColumn FieldName="MaximumQuantity"
+                                    Header="TOTAL"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource unitEditSettings}"
+                                    Width="70" />
+                        <dxg:GridColumn FieldName="ApproveUnits"
+                                    Header="APPROVED"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource unitEditSettings}"
+                                    Width="70" />
+                        <dxg:GridColumn FieldName="RemaindedUnits"
+                                    Header="REMAINING"
+                                        HorizontalHeaderContentAlignment="Center"
+                                    EditSettings="{StaticResource unitEditSettings}"
+                                    Width="70" />
+                    </dxg:GridControlBand>
+
+                    <dxg:GridControlBand HorizontalHeaderContentAlignment="Center" OverlayHeaderByChildren="True">
+                        <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+                    </dxg:GridControlBand>
+                </dxg:GridControl.Bands>
+
+                <dxg:GridControl.TotalSummary>
+                    <dxg:GridSummaryItem SummaryType="Count" />
+                    
+                    <dxg:GridSummaryItem FieldName="AnnualAmountCovered"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                    <dxg:GridSummaryItem FieldName="ApproveAmount"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+                    <dxg:GridSummaryItem FieldName="RemaindedAmount"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="c" />
+
+                    <dxg:GridSummaryItem FieldName="MaximumQuantity"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="#,##0.####" />
+                    <dxg:GridSummaryItem FieldName="ApproveUnits"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="#,##0.####"  />
+                    <dxg:GridSummaryItem FieldName="RemaindedUnits"
+                                                     SummaryType="Sum"
+                                                     DisplayFormat="#,##0.####"  />
+
+                </dxg:GridControl.TotalSummary>
+            </dxg:GridControl>
+        </Grid>
+    </dx:LoadingDecorator>
+</UserControl>

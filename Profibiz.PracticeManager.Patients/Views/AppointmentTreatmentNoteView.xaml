@@ -1,0 +1,1599 @@
+﻿<dx:DXWindow
+    x:Class="Profibiz.PracticeManager.Patients.Views.AppointmentTreatmentNoteView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+    xmlns:dxre="http://schemas.devexpress.com/winfx/2008/xaml/richedit"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+    xmlns:inter="http://www.codeplex.com/prism"
+    xmlns:local="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+    Title="Clinical Notes"
+    Width="1600"
+    Height="728"
+    prism:ViewModelLocator.AutoWireViewModel="True"
+    ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+    WindowStartupLocation="CenterScreen"
+    WindowState="Normal"
+    mc:Ignorable="d">
+
+    <dx:DXWindow.Resources>
+        <ResourceDictionary>
+            <dxre:RichEditUICommand x:Key="commands" />
+            <dxre:DefaultBarItemDataTemplates x:Key="defaultBarItemTemplates" />
+            <dxre:RichEditStringIdConverter x:Key="stringIdConverter" />
+            <dxre:OpenXmlToContentConverter x:Key="openXmlToContentConverter" />
+
+            <Style x:Key="style1" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters>
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="10,0,0,0" />
+                </Style.Setters>
+            </Style>
+
+            <Style x:Key="style2" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters>
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                </Style.Setters>
+            </Style>
+
+            <Style x:Key="styleCheckbox1" TargetType="dxe:CheckEdit">
+                <Style.Setters />
+            </Style>
+
+            <Style x:Key="styleHeader" TargetType="dxlc:LayoutItemLabel">
+                <Style.Setters />
+            </Style>
+
+
+        </ResourceDictionary>
+    </dx:DXWindow.Resources>
+
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+            <infrastructure:CloseDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+        <dxmvvm:EventToCommand
+            Command="{Binding ClosingEventCommand}"
+            EventName="Closing"
+            PassEventArgsToCommand="True" />
+    </dxmvvm:Interaction.Behaviors>
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+
+
+                <Grid Grid.Row="0">
+                    <Grid ShowGridLines="False">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Grid
+                            Grid.Column="0"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Top"
+                                Content="INFORMED CONTENT RECEIVED"
+                                FontWeight="Bold"
+                                Style="{StaticResource style2}" />
+                            <dxe:ListBoxEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                DisplayMember="Name"
+                                EditValue="{Binding Entity.InformedConsentReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding YesNo, Source={StaticResource lookupDataProvider}}"
+                                ShowBorder="False"
+                                ValueMember="Value">
+
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+
+                                <dxe:ListBoxEdit.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </dxe:ListBoxEdit.ItemsPanel>
+                            </dxe:ListBoxEdit>
+
+                            <FrameworkElement
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Height="10 " />
+
+                            <dxe:CheckEdit
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Treatment, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Content="Treatment"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Assessment, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Content="Assessment"
+                                Style="{StaticResource style1}" />
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Top"
+                                Content="PAIN SCALE"
+                                FontWeight="Bold"
+                                Style="{StaticResource style2}" />
+                            <dxe:ListBoxEdit
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                DisplayMember="Name"
+                                EditValue="{Binding Entity.Subjectiveinfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding YesNo10, Source={StaticResource lookupDataProvider}}"
+                                ShowBorder="False"
+                                ValueMember="Value">
+
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+
+                                <dxe:ListBoxEdit.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Vertical" />
+                                    </ItemsPanelTemplate>
+                                </dxe:ListBoxEdit.ItemsPanel>
+                            </dxe:ListBoxEdit>
+
+                            <FrameworkElement
+                                Grid.Row="7"
+                                Grid.Column="0"
+                                Height="10 " />
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="8"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="OBJECTIVE INFO"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="9"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.CervicalSpine, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="9"
+                                Grid.Column="1"
+                                Content="Cervical Spine"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="10"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.ThoracicSpine, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="10"
+                                Grid.Column="1"
+                                Content="Thoracic Spine"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="11"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.LumbarSpine, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="11"
+                                Grid.Column="1"
+                                Content="Lumbar spine"
+                                Style="{StaticResource style1}" />
+
+                            <FrameworkElement
+                                Grid.Row="15"
+                                Grid.Column="0"
+                                Height="10 " />
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="18"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="AFFECTED JOINTS"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="19"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsGlenohumeral, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="19"
+                                Grid.Column="1"
+                                Content="Glenohumeral"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="20"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsElbow, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="20"
+                                Grid.Column="1"
+                                Content="Elbow"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="21"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsWrist, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="21"
+                                Grid.Column="1"
+                                Content="Wrist"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="22"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsHip, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="22"
+                                Grid.Column="1"
+                                Content="Hip"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="23"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsKnee, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="23"
+                                Grid.Column="1"
+                                Content="Knee"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="24"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AffectedJointsAnkle, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="24"
+                                Grid.Column="1"
+                                Content="Ankle"
+                                Style="{StaticResource style1}" />
+
+                            <FrameworkElement
+                                Grid.Row="25"
+                                Grid.Column="0"
+                                Height="10 " />
+
+                        </Grid>
+
+                        <Grid
+                            Grid.Column="1"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Top"
+                                Content="AFFECTED DAILY ACTIVITIES"
+                                FontWeight="Bold"
+                                Style="{StaticResource style2}" />
+                            <dxe:ListBoxEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                DisplayMember="Name"
+                                EditValue="{Binding Entity.AffectedDailyActivities, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding YesNo, Source={StaticResource lookupDataProvider}}"
+                                ShowBorder="False"
+                                ValueMember="Value">
+
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+
+                                <dxe:ListBoxEdit.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </dxe:ListBoxEdit.ItemsPanel>
+                            </dxe:ListBoxEdit>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                VerticalAlignment="Top"
+                                Content="HYDROTHEPARY"
+                                FontWeight="Bold"
+                                Style="{StaticResource style2}" />
+                            <dxe:ListBoxEdit
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                DisplayMember="Name"
+                                EditValue="{Binding Entity.Hydrotherapy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                ItemsSource="{Binding HeatIceEnum, Source={StaticResource lookupDataProvider}}"
+                                ShowBorder="False"
+                                ValueMember="Value">
+
+                                <dxe:ListBoxEdit.StyleSettings>
+                                    <dxe:RadioListBoxEditStyleSettings />
+                                </dxe:ListBoxEdit.StyleSettings>
+
+                                <dxe:ListBoxEdit.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <StackPanel Orientation="Horizontal" />
+                                    </ItemsPanelTemplate>
+                                </dxe:ListBoxEdit.ItemsPanel>
+                            </dxe:ListBoxEdit>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="18"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="AREAS TREATED"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="19"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedUpperBody, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="19"
+                                Grid.Column="1"
+                                Content="Upper Body"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="20"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedLowerBody, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="20"
+                                Grid.Column="1"
+                                Content="Lower Body"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="21"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedFullBody, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="21"
+                                Grid.Column="1"
+                                Content="Full Body"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="22"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedBack, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="22"
+                                Grid.Column="1"
+                                Content="Back"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="23"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedHipArea, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="23"
+                                Grid.Column="1"
+                                Content="Hip area"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="24"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedNeck, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="24"
+                                Grid.Column="1"
+                                Content="Neck"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="25"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedShoulders, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="25"
+                                Grid.Column="1"
+                                Content="Shoulders"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="26"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedAbdominals, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="26"
+                                Grid.Column="1"
+                                Content="Abdominals"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="27"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedChest, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="27"
+                                Grid.Column="1"
+                                Content="Chest"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="28"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedFace, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="28"
+                                Grid.Column="1"
+                                Content="Face"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="29"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedScalp, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="29"
+                                Grid.Column="1"
+                                Content="Scalp"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="30"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedArmLR, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="30"
+                                Grid.Column="1"
+                                Content="Arm (L or R)"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="31"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.AreasTreatedLegLR, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="31"
+                                Grid.Column="1"
+                                Content="Leg (L or R)"
+                                Style="{StaticResource style1}" />
+
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="32"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Left"
+                                Content="Other"
+                                Style="{StaticResource style1}" />
+                            <dxe:TextEdit
+                                Grid.Row="33"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Width="130"
+                                HorizontalAlignment="Left"
+                                EditValue="{Binding Entity.AreasTreatedOther, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+                                Style="{StaticResource baseEditStyle1}"
+                                TabIndex="20" />
+                            <FrameworkElement
+                                Grid.Row="35"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="40"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="FOCUS OF TREATMENT"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="41"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.StressReductionPain, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="41"
+                                Grid.Column="1"
+                                Content="Stress Reduction Pain"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="42"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.ROMImprovRelaxation, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="42"
+                                Grid.Column="1"
+                                Content="ROM improvRelaxation"
+                                Style="{StaticResource style1}" />
+
+                            <FrameworkElement
+                                Grid.Row="45"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+                        </Grid>
+
+                        <Grid
+                            Grid.Column="2"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="TECHNIQUES AMOUNT OF PRESSURE USED"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesDeepTissue, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Content="Deep Tissue"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesModeratePressure, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Content="Moderate pressure"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesLightPressure, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Content="Light pressure"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesSwedish, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Content="Swedish"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesThaiOil, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Content="Thai oil"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesThai, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Content="Thai"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="7"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesAshiatsu, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Content="Ashiatsu"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="8"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesLymphaticDrainage, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                Content="Lymphatic Drainage"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="9"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesStroking, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="9"
+                                Grid.Column="1"
+                                Content="Stroking"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="10"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesRocking, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="10"
+                                Grid.Column="1"
+                                Content="Rocking"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="11"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesEffleurage, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="11"
+                                Grid.Column="1"
+                                Content="Effleurage"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="12"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesPetrissage, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="12"
+                                Grid.Column="1"
+                                Content="Petrissage"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="13"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesTriggerPoint, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="13"
+                                Grid.Column="1"
+                                Content="Trigger Point"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="14"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesPressurePoints, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="14"
+                                Grid.Column="1"
+                                Content="Pressure points"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="15"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesJointMobilization, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="15"
+                                Grid.Column="1"
+                                Content="Joint Mobilization"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="16"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesFriction, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="16"
+                                Grid.Column="1"
+                                Content="Friction"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="17"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesPassiveStretching, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="17"
+                                Grid.Column="1"
+                                Content="Passive Stretching"
+                                Style="{StaticResource style1}" />
+
+                            <FrameworkElement
+                                Grid.Row="20"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+
+
+                        </Grid>
+
+                        <Grid
+                            Grid.Column="3"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="CLIENTS REACTION / FEEDBACK"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackRelaxation, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Content="Relaxation"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackStressReduction, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Content="Stress Reduction"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackMuscleRelaxation, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Content="Muscle Relaxation"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackIncreaseROM, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Content="Increase ROM"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackPainReduction, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Content="Pain Reduction"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackPostureImprovement, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Content="Posture improvement"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="7"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackTenstionReduction, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Content="Tenstion Reduction"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="8"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.FeedbackStiffnessReduction, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                Content="Stiffness Reduction"
+                                Style="{StaticResource style1}" />
+
+
+                            <FrameworkElement
+                                Grid.Row="10"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+
+
+                        </Grid>
+
+                        <Grid
+                            Grid.Column="4"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="RECOMMECNED SELF CARE"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedHeatPacks, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="1"
+                                Grid.Column="1"
+                                Content="heat packs to the affected area"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="2"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedColdPacks, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="2"
+                                Grid.Column="1"
+                                Content="Cold packs to the affected area"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="3"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedContrastHydrotherapy, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="3"
+                                Grid.Column="1"
+                                Content="contrast Hydrotherapy"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="4"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedHotBaths, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="4"
+                                Grid.Column="1"
+                                Content="hot baths with Epsom salt"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="5"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedSelfMassage, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="5"
+                                Grid.Column="1"
+                                Content="self-massage of the affected area"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="6"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedStretching, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="6"
+                                Grid.Column="1"
+                                Content="Stretching and strengthening exercises demonstrated"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="7"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedDiaphragmaticBreathing, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="7"
+                                Grid.Column="1"
+                                Content="Diaphragmatic breathing"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="8"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedYoga, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="8"
+                                Grid.Column="1"
+                                Content="Yoga"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="9"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedPilates, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="9"
+                                Grid.Column="1"
+                                Content="Pilates"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="10"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedWalkingSwimmingCycling, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="10"
+                                Grid.Column="1"
+                                Content="walking/swimming/cycling"
+                                Style="{StaticResource style1}" />
+
+                            <dxe:CheckEdit
+                                Grid.Row="11"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.RecommendedNonWeightBbearing, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+                            <dxlc:LayoutItemLabel
+                                Grid.Row="11"
+                                Grid.Column="1"
+                                Content="non- weight bearing exercises demonstrated"
+                                Style="{StaticResource style1}" />
+
+
+                            <FrameworkElement
+                                Grid.Row="20"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+
+
+                        </Grid>
+
+                        <Grid
+                            Grid.Column="5"
+                            Margin="4,4,20,4"
+                            ShowGridLines="False">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+
+                            <dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="0"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="COMMENTS"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+
+
+                            <dxe:TextEdit
+                                Grid.Row="1"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Height="250"
+                                Margin="0"
+                                VerticalContentAlignment="Top"
+                                AcceptsReturn="True"
+                                EditValue="{Binding Entity.Comments, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+                                Style="{StaticResource baseEditStyle1}"
+                                TextWrapping="Wrap"
+                                VerticalScrollBarVisibility="Auto" />
+
+                            <FrameworkElement
+                                Grid.Row="10"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+
+                            <FrameworkElement
+                                Grid.Row="20"
+                                Grid.Column="0"
+                                Height="10 " />
+
+
+
+
+
+                        </Grid>
+                    </Grid>
+                </Grid>
+
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Button
+                        Grid.Column="0"
+                        Margin="5,3,5,3"
+                        Command="{Binding DeleteCommand}"
+                        Visibility="{Binding ShowDeleteButton, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" Stretch="Uniform" />
+                            <TextBlock
+                                Margin="10,0,0,0"
+                                VerticalAlignment="Center"
+                                Text="Delete" />
+                        </StackPanel>
+                    </Button>
+                    <infrastructure:CommandPanelView
+                        Grid.Column="1"
+                        Margin="0,5,0,0"
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Right"
+                        CloseOnly="{Binding IsReadOnly}"
+                        HideSave="{Binding IsHideSaveButton}" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </dx:LoadingDecorator>
+</dx:DXWindow>

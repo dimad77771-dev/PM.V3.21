@@ -1,0 +1,14 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Profibiz.PracticeManager.Navigation" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="PatientsStaticFilters" Type="DevExpress.DevAV.ViewModels.FilterInfoList" Scope="User">
+      <Value Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
+&lt;ArrayOfFilterInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;
+  &lt;FilterInfo&gt;
+    &lt;Name&gt;All&lt;/Name&gt;
+  &lt;/FilterInfo&gt;
+&lt;/ArrayOfFilterInfo&gt;</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

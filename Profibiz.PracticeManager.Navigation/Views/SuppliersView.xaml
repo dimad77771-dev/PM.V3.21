@@ -1,0 +1,147 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.SuppliersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:convertext="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d"
+             d:DesignHeight="600"
+             d:DesignWidth="1200">
+
+    <i:Interaction.Triggers>
+        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+            <infrastructure:ShowDXWindowsAction />
+        </inter:InteractionRequestTrigger>
+    </i:Interaction.Triggers>
+    <i:Interaction.Behaviors>
+        <infrastructure:ShowRibbonBehavior Name="RibbonSuppliersView" />
+    </i:Interaction.Behaviors>
+
+
+    <dxmvvm:Interaction.Behaviors>
+        <dx:DXMessageBoxService />
+    </dxmvvm:Interaction.Behaviors>
+
+
+    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.Resources>
+                <convertext:PictureConverter x:Key="PictureConverter" />
+            </Grid.Resources>
+
+
+
+
+            <dxg:GridControl x:Name="tableViewGridControl"
+                             Grid.Row="0"
+                             ItemsSource="{Binding Entities}"
+                             ShowBorder="True"
+                             SelectedItem="{Binding SelectedEntity}"
+                             AllowLiveDataShaping="True"
+                             AutoExpandAllGroups="True">
+                <dxmvvm:Interaction.Behaviors>
+                    <dxmvvm:EventToCommand PassEventArgsToCommand="True"
+                                           Command="{Binding EditCommand}"
+                                           EventName="MouseDoubleClick">
+                        <dxmvvm:EventToCommand.EventArgsConverter>
+                            <dx:EventArgsToDataRowConverter />
+                        </dxmvvm:EventToCommand.EventArgsConverter>
+                    </dxmvvm:EventToCommand>
+                </dxmvvm:Interaction.Behaviors>
+
+                <dxg:GridControl.View>
+                    <dxg:TableView AllowEditing="False"
+                                   AllowPerPixelScrolling="True"
+                                   ShowSearchPanelMode="Always"
+                                   SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+                                   ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+                                   ShowGroupPanel="False"
+                                   AutoWidth="False"
+                                   SearchPanelHorizontalAlignment="Right"
+                                   NavigationStyle="Row"
+                                   SearchPanelNullText="Search (Ctrl + F)">
+                        <dxg:TableView.RowCellMenuCustomizations>
+                            <dxb:BarButtonItem Content="New"
+                                               Command="{Binding View.DataContext.NewCommand}"
+                                               Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+                            <dxb:BarButtonItem Content="Edit"
+                                               Command="{Binding View.DataContext.EditCommand}"
+                                               Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+                            <dxb:BarButtonItem Content="Delete"
+                                               Command="{Binding View.DataContext.DeleteCommand}"
+                                               Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+                        </dxg:TableView.RowCellMenuCustomizations>
+                    </dxg:TableView>
+                </dxg:GridControl.View>
+
+                <dxg:GridControl.Columns>
+                    <dxg:GridColumn FieldName="Rowtype9"
+                                    Header=" "
+                                    Width="40"
+                                    FixedWidth="True">
+                        <dxg:GridColumn.CellTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding Value, Converter={StaticResource referrerRowtype9ToImageConverter}}" Stretch="None" />
+                            </DataTemplate>
+                        </dxg:GridColumn.CellTemplate>
+                    </dxg:GridColumn>
+                    <dxg:GridColumn FieldName="Name"
+                                    Header="NAME"
+                                    MinWidth="150"
+                                    Width="150*" />
+                    <dxg:GridColumn FieldName="ContactName"
+                                    Header="CONTACT&#10;NAME"
+                                    Width="150" />
+                    <dxg:GridColumn FieldName="ContactPhoneNumber"
+                                    Header="CONTACT&#10;PHONE"
+                                    Width="120" />
+                    <dxg:GridColumn FieldName="ContactEmailAddress"
+                                    Header="CONTACT&#10;EMAIL"
+                                    Width="120" />
+                    <dxg:GridColumn FieldName="AddressLine"
+                                    Header="ADDRESS"
+                                    Width="150" />
+                    <dxg:GridColumn FieldName="Province"
+                                    Header="PROVINCE"
+                                    Width="80" />
+                    <dxg:GridColumn FieldName="City"
+                                    Header="CITY"
+                                    Width="130" />
+                    <dxg:GridColumn FieldName="Postcode"
+                                    Header="POSTCODE"
+                                    Width="100" />
+                    <dxg:GridColumn FieldName="PhoneNumber"
+                                    Header="PHONE"
+                                    Width="120" />
+                    <dxg:GridColumn FieldName="MobilePhoneNumber"
+                                    Header="CELL"
+                                    Width="120" />
+                    <dxg:GridColumn FieldName="EmailAddress"
+                                    Header="EMAIL"
+                                    Width="120" />
+                    <dxg:GridColumn FieldName="HSTRegNo"
+                                    Header="HST REGNO"
+                                    Width="80" />
+                </dxg:GridControl.Columns>
+                <dxg:GridControl.GroupSummary>
+                    <dxg:GridSummaryItem SummaryType="Count" />
+                </dxg:GridControl.GroupSummary>
+            </dxg:GridControl>
+        </Grid>
+
+    </dx:LoadingDecorator>
+</UserControl>

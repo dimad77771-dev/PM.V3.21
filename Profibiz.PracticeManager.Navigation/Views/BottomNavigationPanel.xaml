@@ -1,0 +1,62 @@
+﻿<UserControl x:Class="Profibiz.PracticeManager.Navigation.Views.BottomNavigationPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:inf="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+             xmlns:controls="clr-namespace:DevExpress.DevAV.Controls;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+             xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:inter="http://www.codeplex.com/prism"
+             xmlns:local="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             xmlns:local2="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+             xmlns:views="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+             d:DesignHeight="138.621"
+             d:DesignWidth="477.932"
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             mc:Ignorable="d">
+    <dxnav:OfficeNavigationBar x:Name="officeNavigationBar"
+                               AllowItemDragDrop="True"
+                               NavigationClient="{Binding ElementName=navBarControl}">
+        <dxmvvm:Interaction.Behaviors>
+            <inf:OfficeNavigationBarSelectionPreventBehavior Resolver="{Binding SelectionPreventResolver}" />
+        </dxmvvm:Interaction.Behaviors>
+
+        <dxnav:OfficeNavigationBar.ItemContainerStyle>
+            <Style TargetType="dxnav:NavigationBarItem">
+                <Setter Property="Padding" Value="13,0,4,0" />
+                <Setter Property="ContentTemplate">
+                    <Setter.Value>
+                        <DataTemplate>
+                            <Grid>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding Header}" />
+                                    <Grid VerticalAlignment="Top">
+                                        <Border Background="#FFED1C24" CornerRadius="9" Visibility="Hidden">
+                                            <TextBlock Margin="5,0,5,0"
+                                                       FontSize="12"
+                                                       Foreground="#FFFFFFFF"
+                                                       Text="{Binding AdvancedDisplayText}" />
+                                        </Border>
+                                    </Grid>
+                                </StackPanel>
+                            </Grid>
+                        </DataTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </dxnav:OfficeNavigationBar.ItemContainerStyle>
+    </dxnav:OfficeNavigationBar>
+</UserControl>

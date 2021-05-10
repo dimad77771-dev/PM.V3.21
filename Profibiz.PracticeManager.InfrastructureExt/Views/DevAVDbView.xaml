@@ -1,0 +1,479 @@
+﻿<UserControl x:Class="DevExpress.DevAV.Views.DevAVDbView"
+             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:common="clr-namespace:DevExpress.DevAV.Common.View"
+             xmlns:controls="clr-namespace:DevExpress.DevAV.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+             xmlns:dxdo="http://schemas.devexpress.com/winfx/2008/xaml/docking"
+             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+             xmlns:dxn="http://schemas.devexpress.com/winfx/2008/xaml/navbar"
+             xmlns:dxnav="http://schemas.devexpress.com/winfx/2008/xaml/navigation"
+             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+             xmlns:dxwui="http://schemas.devexpress.com/winfx/2008/xaml/windowsui"
+             xmlns:dxwuin="http://schemas.devexpress.com/winfx/2008/xaml/windowsui/navigation"
+             xmlns:local="clr-namespace:DevExpress.DevAV"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:view="clr-namespace:DevExpress.DevAV.Views"
+             xmlns:viewmodel="clr-namespace:DevExpress.DevAV.ViewModels"
+             d:DesignHeight="600"
+             d:DesignWidth="800"
+             DataContext="{dxmvvm:ViewModelSource viewmodel:DevAVDbViewModel}"
+             mc:Ignorable="d">
+    <dxmvvm:Interaction.Behaviors>
+        <dxmvvm:CurrentWindowService ClosingCommand="{Binding OnClosingCommand}" />
+        <dxmvvm:NotificationService PredefinedNotificationDuration="Long"
+                                    PredefinedNotificationTemplate="ShortHeaderAndLongText"
+                                    UseWin8NotificationsIfAvailable="False" />
+        <dxmvvm:EventToCommand Command="{Binding OnLoadedCommand}" />
+        <dx:DXSplashScreenService x:Name="SplashScreenService"
+                                  FadeOutDuration="0:0:1.0"
+                                  ShowSplashScreenOnLoading="True"
+                                  SplashScreenType="local:SplashScreenWindow" />
+        <common:MainWindowService />
+        <dx:WindowedDocumentUIService Name="SignleObjectDocumentManagerService"
+                                      DocumentShowMode="Dialog"
+                                      WindowType="dxr:DXRibbonWindow">
+            <dx:WindowedDocumentUIService.WindowStyle>
+                <Style TargetType="dx:DXWindow">
+                    <Setter Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap" />
+                    <Setter Property="Icon" Value="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/AppIcon.ico" />
+                    <Setter Property="Width" Value="1154" />
+                    <Setter Property="Height" Value="740" />
+                </Style>
+            </dx:WindowedDocumentUIService.WindowStyle>
+        </dx:WindowedDocumentUIService>
+        <dxmvvm:DispatcherService x:Name="FinishModuleChangingDispatcherService"
+                                  Delay="0:0:0.975"
+                                  DispatcherPriority="ApplicationIdle" />
+        <dxmvvm:ApplicationJumpListService />
+        <dxmvvm:TaskbarButtonService>
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[0]}"
+                                           Description="Employees"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-employees-32.png" />
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[1]}"
+                                           Description="Tasks"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-tasks-32.png" />
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[2]}"
+                                           Description="Customers"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-customers-32.png" />
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[3]}"
+                                           Description="Products"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-products-32.png" />
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[4]}"
+                                           Description="Sales"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-sales-32.png" />
+            <dxmvvm:TaskbarThumbButtonInfo Command="{Binding ShowCommand}"
+                                           CommandParameter="{Binding Modules[5]}"
+                                           Description="Opportunities"
+                                           ImageSource="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-opportunities-32.png" />
+        </dxmvvm:TaskbarButtonService>
+        <dx:WindowedDocumentUIService x:Name="AnalysisWindowedDocumentUIService"
+                                      DocumentShowMode="Dialog"
+                                      WindowType="dxr:DXRibbonWindow">
+            <dx:WindowedDocumentUIService.WindowStyle>
+                <Style TargetType="dx:DXWindow">
+                    <Setter Property="dx:ScrollBarExtensions.ScrollBarMode" Value="TouchOverlap" />
+                    <Setter Property="Icon" Value="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/AppIcon.ico" />
+                    <Setter Property="Width" Value="1300" />
+                    <Setter Property="Height" Value="740" />
+                </Style>
+            </dx:WindowedDocumentUIService.WindowStyle>
+        </dx:WindowedDocumentUIService>
+        <dx:DialogService x:Name="FilterDialogService">
+            <dx:DialogService.DialogStyle>
+                <Style TargetType="dx:DXDialogWindow">
+                    <Setter Property="Icon" Value="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/AppIcon.ico" />
+                    <Setter Property="SizeToContent" Value="WidthAndHeight" />
+                    <Setter Property="MinWidth" Value="500" />
+                    <Setter Property="MinHeight" Value="370" />
+                </Style>
+            </dx:DialogService.DialogStyle>
+        </dx:DialogService>
+    </dxmvvm:Interaction.Behaviors>
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Themes/Common.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <dxmvvm:BooleanNegationConverter x:Key="booleanNegationConverter" />
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsMinimizedConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="True" />
+                <dxmvvm:MapItem Source="Normal" Target="False" />
+                <dxmvvm:MapItem Source="Off" Target="False" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsNormalConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="True" />
+                <dxmvvm:MapItem Source="Off" Target="False" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneOffConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="False" />
+                <dxmvvm:MapItem Source="Off" Target="True" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneIsExpandedConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="False" />
+                <dxmvvm:MapItem Source="Normal" Target="True" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NavigationPaneVisibilityConverter">
+                <dxmvvm:MapItem Source="Minimized" Target="Visible" />
+                <dxmvvm:MapItem Source="Normal" Target="Visible" />
+                <dxmvvm:MapItem Source="Off" Target="Collapsed" />
+            </dxmvvm:ObjectToObjectConverter>
+            <dxmvvm:ObjectToObjectConverter x:Key="NullToVisibilityConverter" DefaultTarget="Visible">
+                <dxmvvm:MapItem Source="{x:Null}" Target="Collapsed" />
+                <dxmvvm:MapItem Source="0" Target="Collapsed" />
+            </dxmvvm:ObjectToObjectConverter>
+            <Style x:Key="collapsedNavPaneItemsStyle" TargetType="{x:Type dxn:NavBarItem}">
+                <Style.Triggers>
+                    <Trigger Property="IsSelected" Value="True">
+                        <Setter Property="FontSettings" Value="{dxn:NavBarFontSettings FontWeight=Bold}" />
+                    </Trigger>
+                </Style.Triggers>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <dx:BackgroundPanel>
+        <common:WorkspaceService>
+            <DockPanel>
+                <dxr:RibbonControl x:Name="ribbonControl"
+                                   DockPanel.Dock="Top"
+                                   RibbonStyle="Office2010">
+                    <dxr:RibbonControl.ApplicationMenu>
+                        <dxr:BackstageViewControl Name="backStageView">
+                            <dxr:BackstageViewControl.Items>
+                                <dxr:BackstageTabItem Content="About">
+                                    <dxr:BackstageTabItem.ControlPane>
+                                        <view:AboutView />
+                                    </dxr:BackstageTabItem.ControlPane>
+                                </dxr:BackstageTabItem>
+                                <dxr:BackstageTabItem Content="Export">
+                                    <dxr:BackstageTabItem.ControlPane>
+                                        <controls:CustomBackstageDocumentPreview CustomSettingsHeader="Settings" OptionsMode="Export" />
+                                    </dxr:BackstageTabItem.ControlPane>
+                                </dxr:BackstageTabItem>
+                                <dxr:BackstageTabItem Content="Print">
+                                    <dxr:BackstageTabItem.ControlPane>
+                                        <controls:CustomBackstageDocumentPreview CustomSettingsHeader="Settings" />
+                                    </dxr:BackstageTabItem.ControlPane>
+                                </dxr:BackstageTabItem>
+                                <dxr:BackstageSeparatorItem />
+                                <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GettingStartedCommand}" Content="Get Started" />
+                                <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GetFreeSupportCommand}" Content="Get Support" />
+                                <dxr:BackstageButtonItem Command="{Binding LinksViewModel.BuyNowCommand}" Content="Buy Now" />
+                            </dxr:BackstageViewControl.Items>
+                        </dxr:BackstageViewControl>
+                    </dxr:RibbonControl.ApplicationMenu>
+                    <dxr:RibbonControl.PageHeaderItems>
+                        <view:RibbonStyleSelectorItem IsVisible="{Binding ElementName=ribbonControl, Path=IsBackStageViewOpen, Converter={dxmvvm:BooleanNegationConverter}}" SelectedRibbonStyle="{Binding RibbonStyle, ElementName=ribbonControl, Mode=OneWayToSource}" />
+                    </dxr:RibbonControl.PageHeaderItems>
+                    <dxmvvm:Interaction.Behaviors>
+                        <common:BackstageDocumentPreviewReportService x:Name="ExportService"
+                                                                      BackstageDocumentPreview="{Binding ElementName=ribbonControl,
+                                                                                                         Path=ApplicationMenu.Items[1].ControlPane}"
+                                                                      BackstageItem="{Binding ElementName=ribbonControl,
+                                                                                              Path=ApplicationMenu.Items[1]}"
+                                                                      BackstageViewIsOpen="{Binding ElementName=ribbonControl,
+                                                                                                    Path=ApplicationMenu.IsOpen}" />
+                        <common:BackstageDocumentPreviewReportService x:Name="PrintService"
+                                                                      BackstageDocumentPreview="{Binding ElementName=ribbonControl,
+                                                                                                         Path=ApplicationMenu.Items[2].ControlPane}"
+                                                                      BackstageItem="{Binding ElementName=ribbonControl,
+                                                                                              Path=ApplicationMenu.Items[2]}"
+                                                                      BackstageViewIsOpen="{Binding ElementName=ribbonControl,
+                                                                                                    Path=ApplicationMenu.IsOpen}" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxr:RibbonDefaultPageCategory Caption="Default Category">
+                        <dxr:RibbonPage Caption="HOME" MergeType="Replace">
+                            <dxr:RibbonPageGroup Caption="DevExpress" MergeOrder="10">
+                                <dxb:BarButtonItem x:Name="GettingStartedBarButtonItem"
+                                                   Command="{Binding LinksViewModel.GettingStartedCommand}"
+                                                   Content="Getting Started"
+                                                   Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-getting-started-16.png"
+                                                   LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-getting-started-32.png"
+                                                   RibbonStyle="Large" />
+                                <dxb:BarButtonItem x:Name="GetSupportBarButtonItem"
+                                                   Command="{Binding LinksViewModel.GetFreeSupportCommand}"
+                                                   Content="Get Free Support"
+                                                   Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-support-16.png"
+                                                   LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-support-32.png"
+                                                   RibbonStyle="Large" />
+                                <dxb:BarButtonItem x:Name="BuyNowBarButtonItem"
+                                                   Command="{Binding LinksViewModel.BuyNowCommand}"
+                                                   Content="Buy Now"
+                                                   Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-buy-16.png"
+                                                   LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-buy-32.png"
+                                                   RibbonStyle="Large" />
+                                <dxb:BarButtonItem x:Name="AboutBarButtonItem"
+                                                   Command="{Binding LinksViewModel.AboutCommand}"
+                                                   Content="About"
+                                                   Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-about-16.png"
+                                                   LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-about-32.png"
+                                                   RibbonStyle="Large" />
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                        <dxr:RibbonPage Caption="VIEW" MergeType="Replace">
+                            <dxr:RibbonPageGroup Caption="Module">
+                                <dxb:BarSubItem Content="Navigation"
+                                                Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-navigate-16.png"
+                                                LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-navigate-32.png">
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[0]}"
+                                                      Content="EMPLOYEES"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-employees-32.png"
+                                                      GroupIndex="3" />
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[1]}"
+                                                      Content="TASKS"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-tasks-32.png"
+                                                      GroupIndex="3" />
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[2]}"
+                                                      Content="CUSTOMERS"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-customers-32.png"
+                                                      GroupIndex="3" />
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[3]}"
+                                                      Content="PRODUCTS"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-products-32.png"
+                                                      GroupIndex="3" />
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[4]}"
+                                                      Content="SALES"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-sales-32.png"
+                                                      GroupIndex="3" />
+                                    <dxb:BarCheckItem Command="{Binding ShowCommand}"
+                                                      CommandParameter="{Binding Modules[5]}"
+                                                      Content="OPPORTUNITIES"
+                                                      Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/Modules/icon-nav-opportunities-32.png"
+                                                      GroupIndex="3" />
+                                </dxb:BarSubItem>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup Caption="Layout" MergeOrder="1">
+                                <dxb:BarSubItem Content="Folder Pane"
+                                                Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-folder-panel-16.png"
+                                                LargeGlyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-folder-panel-32.png">
+                                    <dxb:BarCheckItem x:Name="IsFilterPaneNormalBarCheckItem"
+                                                      Content="Normal"
+                                                      IsChecked="{Binding NavigationPaneVisibility,
+                                                                          Mode=TwoWay,
+                                                                          Converter={StaticResource NavigationPaneIsNormalConverter}}" />
+                                    <dxb:BarCheckItem x:Name="IsFilterPaneMinimizedBarCheckItem"
+                                                      Content="Minimized"
+                                                      IsChecked="{Binding NavigationPaneVisibility,
+                                                                          Mode=TwoWay,
+                                                                          Converter={StaticResource NavigationPaneIsMinimizedConverter}}" />
+                                    <dxb:BarCheckItem x:Name="IsFilterPaneOffBarCheckItem"
+                                                      Content="Off"
+                                                      IsChecked="{Binding NavigationPaneVisibility,
+                                                                          Mode=TwoWay,
+                                                                          Converter={StaticResource NavigationPaneOffConverter}}" />
+                                </dxb:BarSubItem>
+                            </dxr:RibbonPageGroup>
+                            <dxr:RibbonPageGroup Caption="Appearance" MergeOrder="{x:Static sys:Int32.MaxValue}">
+                                <dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Colors_16x16.png}">
+                                    <dxr:RibbonGalleryBarItem.DropDownGallery>
+                                        <dxb:Gallery RowCount="6" />
+                                    </dxr:RibbonGalleryBarItem.DropDownGallery>
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxr:RibbonGalleryItemThemeSelectorBehavior />
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxr:RibbonGalleryBarItem>
+                            </dxr:RibbonPageGroup>
+                        </dxr:RibbonPage>
+                    </dxr:RibbonDefaultPageCategory>
+                </dxr:RibbonControl>
+                <dxr:RibbonStatusBarControl x:Name="ribbonStatusBarControl" DockPanel.Dock="Bottom">
+                    <dxr:RibbonStatusBarControl.RightItems>
+                        <dxb:BarCheckItem Content="Normal"
+                                          Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-normal-bottom-16.png"
+                                          IsChecked="{Binding NavigationPaneVisibility,
+                                                              Mode=TwoWay,
+                                                              Converter={StaticResource NavigationPaneIsNormalConverter}}"
+                                          RibbonStyle="SmallWithoutText" />
+                        <dxb:BarCheckItem Content="Minimized"
+                                          Glyph="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-reading-bottom-16.png"
+                                          IsChecked="{Binding NavigationPaneVisibility,
+                                                              Mode=TwoWay,
+                                                              Converter={StaticResource NavigationPaneIsMinimizedConverter}}"
+                                          RibbonStyle="SmallWithoutText" />
+                    </dxr:RibbonStatusBarControl.RightItems>
+                </dxr:RibbonStatusBarControl>
+                <dxdo:DockLayoutManager Name="dockLayoutManager" BorderThickness="0">
+                    <dxmvvm:Interaction.Behaviors>
+                        <common:WorkspaceRegionBehavior Id="Root" />
+                    </dxmvvm:Interaction.Behaviors>
+                    <dxdo:LayoutGroup ItemHeight="*" Orientation="Vertical">
+                        <dxdo:LayoutGroup>
+                            <dxmvvm:Interaction.Behaviors>
+                                <dxdo:DockingDocumentUIService x:Name="WorkspaceDocumentManagerService">
+                                    <dxdo:DockingDocumentUIService.LayoutPanelStyle>
+                                        <Style TargetType="dxdo:LayoutPanel">
+                                            <Setter Property="AllowFloat" Value="False" />
+                                            <Setter Property="AllowMove" Value="True" />
+                                            <Setter Property="ShowPinButton" Value="False" />
+                                            <Setter Property="ItemWidth" Value="250" />
+                                            <Setter Property="Padding" Value="10,0" />
+                                        </Style>
+                                    </dxdo:DockingDocumentUIService.LayoutPanelStyle>
+                                </dxdo:DockingDocumentUIService>
+                            </dxmvvm:Interaction.Behaviors>
+                            <dxdo:LayoutPanel MaxWidth="200"
+                                              AllowClose="False"
+                                              AllowFloat="False"
+                                              ItemWidth="Auto"
+                                              ShowBorder="False"
+                                              ShowCaption="False"
+                                              ShowPinButton="False"
+                                              Visibility="{Binding NavigationPaneVisibility,
+                                                                   Converter={StaticResource NavigationPaneVisibilityConverter}}">
+                                <dxn:NavBarControl x:Name="navBarControl"
+                                                   Compact="False"
+                                                   ItemsSource="{Binding Modules}"
+                                                   SelectedGroup="{Binding SelectedModule,
+                                                                           Mode=TwoWay}">
+                                    <dxn:NavBarControl.Resources>
+                                        <dxmvvm:ObjectToObjectConverter x:Key="PeekFormTemplateConverter">
+                                            <dxmvvm:MapItem Source="{x:Null}" Target="{x:Null}" />
+                                            <dxmvvm:ObjectToObjectConverter.DefaultTarget>
+                                                <DataTemplate>
+                                                    <dxwui:Flyout Command="{Binding DataContext.PinPeekCollectionViewCommand,
+                                                                                    RelativeSource={RelativeSource FindAncestor,
+                                                                                                                   AncestorType=UserControl}}"
+                                                                  CommandParameter="{Binding}"
+                                                                  ShowIndicator="True">
+                                                        <Grid x:Name="grid"
+                                                              Width="250"
+                                                              Height="400">
+                                                            <view:PeekCollectionView Margin="10"
+                                                                                     dxmvvm:ViewModelExtensions.DocumentTitle="{Binding DataContext.ModuleTitle,
+                                                                                                                                        ElementName=grid}"
+                                                                                     dxmvvm:ViewModelExtensions.ParentViewModel="{Binding DataContext,
+                                                                                                                                          ElementName=grid}"
+                                                                                     DataContext="{Binding PeekCollectionViewModel}" />
+                                                        </Grid>
+                                                    </dxwui:Flyout>
+                                                </DataTemplate>
+                                            </dxmvvm:ObjectToObjectConverter.DefaultTarget>
+                                        </dxmvvm:ObjectToObjectConverter>
+                                    </dxn:NavBarControl.Resources>
+                                    <dxn:NavBarControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <ContentControl>
+                                                <controls:AdvancedNavBarGroup CollapsedNavPaneItemsSource="{Binding FilterTreeViewModel.StaticFilters}"
+                                                                              CollapsedNavPaneItemsStyle="{StaticResource collapsedNavPaneItemsStyle}"
+                                                                              CollapsedNavPaneSelectedItem="{Binding FilterTreeViewModel.SelectedItem}"
+                                                                              DisplayMode="Text"
+                                                                              DisplaySource="Content"
+                                                                              Header="{Binding ModuleTitle}"
+                                                                              ImageSource="{Binding ImageSource}"
+                                                                              NavPaneShowMode="All"
+                                                                              NavigationPaneVisible="True"
+                                                                              PeekFormTemplate="{Binding PeekCollectionViewModel,
+                                                                                                         Converter={StaticResource PeekFormTemplateConverter}}">
+                                                    <dxmvvm:Interaction.Behaviors>
+                                                        <local:AdvancedDisplayTextBehavior DisplayProperty="Overdue Tasks" Filters="{Binding FilterTreeViewModel.StaticFilters}" />
+                                                    </dxmvvm:Interaction.Behaviors>
+                                                    <controls:AdvancedNavBarGroup.CollapsedNavPaneItemsTemplate>
+                                                        <DataTemplate>
+                                                            <ContentControl>
+                                                                <dxn:NavBarItem Content="{Binding DisplayText}" />
+                                                            </ContentControl>
+                                                        </DataTemplate>
+                                                    </controls:AdvancedNavBarGroup.CollapsedNavPaneItemsTemplate>
+                                                    <controls:AdvancedNavBarGroup.Content>
+                                                        <view:FilterTreeView DataContext="{Binding FilterTreeViewModel}" />
+                                                    </controls:AdvancedNavBarGroup.Content>
+                                                </controls:AdvancedNavBarGroup>
+                                            </ContentControl>
+                                        </DataTemplate>
+                                    </dxn:NavBarControl.ItemTemplate>
+                                    <dxn:NavBarControl.View>
+                                        <dxn:NavigationPaneView IsExpanded="{Binding NavigationPaneVisibility, Mode=TwoWay, Converter={StaticResource NavigationPaneIsExpandedConverter}}" />
+                                    </dxn:NavBarControl.View>
+                                </dxn:NavBarControl>
+                            </dxdo:LayoutPanel>
+                            <dxdo:LayoutPanel dxb:MergingProperties.ElementMergingBehavior="InternalWithExternal"
+                                              AllowClose="False"
+                                              AllowFloat="False"
+                                              ShowBorder="False"
+                                              ShowCaption="False"
+                                              ShowPinButton="False">
+                                <dxwui:NavigationFrame x:Name="zzz20"
+                                                       AllowMerging="True"
+                                                       AnimationType="SlideHorizontal">
+                                    <dxmvvm:Interaction.Behaviors>
+                                        <dxwuin:FrameDocumentUIService x:Name="FrameDocumentManagerService" ShowSplashScreen="True">
+                                            <dxwuin:FrameDocumentUIService.SplashScreenService>
+                                                <dx:DXSplashScreenService x:Name="WaitScreenService"
+                                                                          OwnerSearchMode="IgnoreAssociatedObject"
+                                                                          SplashScreenStartupLocation="CenterOwner"
+                                                                          ViewTemplate="{StaticResource waitIndicator}" />
+                                            </dxwuin:FrameDocumentUIService.SplashScreenService>
+                                            <dxwuin:FrameDocumentUIService.PageAdornerControlStyle>
+                                                <Style TargetType="dxwui:PageAdornerControl">
+                                                    <Setter Property="Template">
+                                                        <Setter.Value>
+                                                            <ControlTemplate TargetType="dxwui:PageAdornerControl">
+                                                                <ContentPresenter />
+                                                            </ControlTemplate>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Style>
+                                            </dxwuin:FrameDocumentUIService.PageAdornerControlStyle>
+                                        </dxwuin:FrameDocumentUIService>
+                                    </dxmvvm:Interaction.Behaviors>
+                                </dxwui:NavigationFrame>
+                            </dxdo:LayoutPanel>
+                        </dxdo:LayoutGroup>
+                        <dxdo:LayoutPanel AllowClose="False"
+                                          AllowFloat="False"
+                                          ItemHeight="Auto"
+                                          ShowBorder="False"
+                                          ShowCaption="False"
+                                          ShowPinButton="False">
+                            <dxnav:OfficeNavigationBar x:Name="zzz21" AllowItemDragDrop="True" NavigationClient="{Binding ElementName=navBarControl}">
+                                <dxnav:OfficeNavigationBar.ItemContainerStyle>
+                                    <Style TargetType="dxnav:NavigationBarItem">
+                                        <Setter Property="Padding" Value="13,0,4,0" />
+                                        <Setter Property="ContentTemplate">
+                                            <Setter.Value>
+                                                <DataTemplate>
+                                                    <Grid>
+                                                        <StackPanel Orientation="Horizontal">
+                                                            <TextBlock Text="{Binding Header}" />
+                                                            <Grid VerticalAlignment="Top" Visibility="{Binding AdvancedDisplayText, Converter={StaticResource NullToVisibilityConverter}}">
+                                                                <Border Background="#FFED1C24" CornerRadius="9">
+                                                                    <TextBlock Margin="5,0,5,0"
+                                                                               FontSize="12"
+                                                                               Foreground="#FFFFFFFF"
+                                                                               Text="{Binding AdvancedDisplayText}" />
+                                                                </Border>
+                                                            </Grid>
+                                                        </StackPanel>
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </dxnav:OfficeNavigationBar.ItemContainerStyle>
+                            </dxnav:OfficeNavigationBar>
+                        </dxdo:LayoutPanel>
+                    </dxdo:LayoutGroup>
+                </dxdo:DockLayoutManager>
+            </DockPanel>
+        </common:WorkspaceService>
+    </dx:BackgroundPanel>
+</UserControl>
