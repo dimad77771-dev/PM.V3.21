@@ -23,7 +23,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void TestBuildBigDb001()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			
 			var allPatients = db.Patients.ToArray();

@@ -48,5 +48,7 @@ namespace Profibiz.PracticeManager.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InsuranceCoverageItemHolder> InsuranceCoverageItemHolders { get; set; }
         public virtual InsuranceCoverage InsuranceCoverage { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

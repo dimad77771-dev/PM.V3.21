@@ -16,11 +16,35 @@ using System.Net;
 using LinqKit;
 using System.Linq.Expressions;
 using Profibiz.PracticeManager.SharedCode;
+using System.Web.Http.Controllers;
 
 namespace Profibiz.PracticeManager.BL
 {
     public partial class WebApiRepository : IWebApiRepository
     {
+		public WebApiRepository()
+		{
+			var g = 10;
+		}
+
+		public Guid? CurrentUserRowId { get; set; }
+		public void SetCurrentUserRowId(HttpControllerContext controllerContext)
+		{
+			var headers = controllerContext?.Request?.Headers;
+			if (headers != null)
+			{
+				var pair = headers.FirstOrDefault(q => q.Key == "CurrentUserRowId");
+				if (pair.Key != null)
+				{
+					var currentUserRowId = pair.Value.FirstOrDefault();
+					if (!String.IsNullOrEmpty(currentUserRowId))
+					{
+						this.CurrentUserRowId = new Guid(currentUserRowId);
+					}
+				}
+			}
+		}
+
 		public DTO.Patient GetPatient(Guid id, bool isShortForm, bool isAddressOnly)
 		{
 			if (isAddressOnly)
@@ -28,7 +52,7 @@ namespace Profibiz.PracticeManager.BL
 				isShortForm = true;
 			}
 
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var patient = db.Patients.FirstOrDefault(p => p.RowId == id);
 
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Patient), typeof(DTO.InsuranceCoverage), typeof(DTO.PatientNote), typeof(DTO.PatientDocument), typeof(EF.AppointmentV));
@@ -100,7 +124,7 @@ namespace Profibiz.PracticeManager.BL
 		public byte[] GetPatientPhoto(Guid id)
 		{
 			//throw new Exception("11");
-			var _db = EF.PracticeManagerEntities.Connection;
+			var _db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			//var _db = db;
 			//_db.Database.Connection.
 			var photo = _db.PatientPhotos.FirstOrDefault(q => q.PatientRowId == id)?.Photo;
@@ -111,7 +135,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PatientsListView>();
 			if (insuranceProviderRowId != null)
@@ -149,7 +173,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public Guid[] PatientRowId2InsuranceProviders(Guid patientRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var insuranceProviderRowIds = 
 				db.InsuranceCoverageHolders
@@ -164,7 +188,7 @@ namespace Profibiz.PracticeManager.BL
 
 		private Guid[] PatientRowId2InsuranceCoverageRowIds(Guid patientRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var insuranceCoverageRowIds =
 				db.InsuranceCoverageHolders
@@ -178,7 +202,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public List<DTO.InsuranceCoverage> PatientRowId2InsuranceCoverages(Guid patientRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var list =
 				db.InsuranceCoverageHolders
@@ -209,7 +233,7 @@ namespace Profibiz.PracticeManager.BL
 
 		private void UpdatePatientAll(DTO.Patient entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -276,7 +300,7 @@ namespace Profibiz.PracticeManager.BL
 		
 		private void UpdateFamilyMember(DTO.Patient entity)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
                 if (!db.Cities.Any(p => p.CityName == entity.City1 && p.Province == entity.Province1))
@@ -330,7 +354,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PatientBuildFamily(List<DTO.Patient> nrows)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var rowIds = nrows.Select(z => z.RowId).ToList();

@@ -29,6 +29,7 @@ namespace Profibiz.PracticeManager.Model
 		public ObservableCollection<ProfessionalAssociation> ProfessionalAssociations { get; set; }
 		public ObservableCollection<ThirdPartyServiceProvider> ThirdPartyServiceProviders { get; set; }
 		public ObservableCollection<Referrer> Referrers { get; set; }
+		public ObservableCollection<User> Users { get; set; }
 		public ObservableCollection<Supplier> Suppliers { get; set; }
 		public ObservableCollection<AppointmentBook> AppointmentBooks { get; set; }
 		public ObservableCollection<ServiceProvider> ServiceProviders { get; set; }
@@ -84,6 +85,11 @@ namespace Profibiz.PracticeManager.Model
 		public void UpdateReferrers(IEnumerable<Referrer> newData)
 		{
 			Referrers = new ObservableCollection<Referrer>(newData.OrderBy(q => q.Name));
+		}
+
+		public void UpdateUsers(IEnumerable<User> newData)
+		{
+			Users = new ObservableCollection<User>(newData.OrderBy(q => q.Name));
 		}
 
 		public void UpdateSuppliers(IEnumerable<Supplier> newData)
@@ -188,6 +194,11 @@ namespace Profibiz.PracticeManager.Model
 		public static Referrer FindReferrer(Guid rowId)
 		{
 			return Instance.Referrers.SingleOrDefault(q => q.RowId == rowId);
+		}
+
+		public static User FindUser(Guid rowId)
+		{
+			return Instance.Users.SingleOrDefault(q => q.RowId == rowId);
 		}
 
 		public static Supplier FindSupplier(Guid rowId)
@@ -330,11 +341,24 @@ namespace Profibiz.PracticeManager.Model
 			return Instance.Referrers.SingleOrDefault(q => q.RowId == rowId)?.Name;
 		}
 
+		public static String User2Name(Guid? rowId)
+		{
+			if (Instance.Users == null) return "";
+			return Instance.Users.SingleOrDefault(q => q.RowId == rowId)?.Name;
+		}
+
 		public static String Referrer2Address(Guid? rowId)
 		{
 			if (Instance.Referrers == null) return "";
 			return Instance.Referrers.SingleOrDefault(q => q.RowId == rowId)?.GetAddress();
 		}
+
+		public static String User2Address(Guid? rowId)
+		{
+			if (Instance.Users == null) return "";
+			return Instance.Users.SingleOrDefault(q => q.RowId == rowId)?.GetAddress();
+		}
+
 
 		public static String Supplier2Name(Guid? rowId)
 		{

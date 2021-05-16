@@ -36,5 +36,9 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> SnoozedTo { get; set; }
         public bool IsVacation { get; set; }
         public Nullable<System.Guid> ServiceProviderRowId { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     }
 }

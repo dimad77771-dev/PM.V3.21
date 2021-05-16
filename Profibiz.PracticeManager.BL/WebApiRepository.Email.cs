@@ -25,7 +25,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.EmailSend> GetEmailSendList(DateTime? sendDateFrom, DateTime? sendDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.EmailSendV>();
 			if (sendDateFrom != null)
@@ -48,7 +48,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.EmailSendAttachment> GetEmailSendAttachmentList(Guid emailSendRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.EmailSendAttachment>();
 			wh = PredicateBuilder.And(wh, q => q.EmailSendRowId == emailSendRowId);
@@ -112,7 +112,7 @@ namespace Profibiz.PracticeManager.BL
 				isSuccess = false;
 			}
 
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(

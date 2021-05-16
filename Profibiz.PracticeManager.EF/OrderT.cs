@@ -40,5 +40,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<OrderItemT> OrderItems { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderPayment> OrderPayments { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

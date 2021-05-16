@@ -59,6 +59,9 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PutReferrers(IEnumerable<Referrer> entities);
 		Task<UpdateReturn> DeleteReferrer(Referrer entity);
 
+		Task<UpdateReturn> PutUsers(IEnumerable<User> entities);
+		Task<UpdateReturn> DeleteUser(User entity);
+
 		Task<UpdateReturn> PutSuppliers(IEnumerable<Supplier> entities);
 		Task<UpdateReturn> DeleteSupplier(Supplier entity);
 
@@ -67,5 +70,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 
 		Task<UserSetting> GetUserSettings(String userCode);
 		Task<UpdateReturn> PostUserSettings(UserSetting userSetting);
+
+		Task<LoginInfo> GetLoginInfo(string name, string password);
 	}
 }

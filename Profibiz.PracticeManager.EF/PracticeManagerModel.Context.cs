@@ -154,6 +154,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual DbSet<TreatmentPlanRecordT> TreatmentPlanRecordsT { get; set; }
         public virtual DbSet<TreatmentPlanRecordV> TreatmentPlanRecordsV { get; set; }
         public virtual DbSet<AppointmentTreatmentNote> AppointmentTreatmentNotes { get; set; }
+        public virtual DbSet<User> Users { get; set; }
     
         public virtual ObjectResult<PayrollInfoResult> sp_PayrollInfo(Nullable<System.DateTime> periodStart, Nullable<System.DateTime> periodFinish, Nullable<System.Guid> serviceProviderRowId)
         {

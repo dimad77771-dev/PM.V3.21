@@ -37,6 +37,10 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<decimal> DueByPatient { get; set; }
         public string Forms { get; set; }
         public bool HasNoCoverage { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         public virtual InvoiceV Invoice { get; set; }
         public virtual InsuranceCoverageV InsuranceCoverage { get; set; }

@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Paycharge> GetPaychargeList(Guid? rowId, Guid? chargeoutRecipientRowId, int? hasNoDistributedAmount, DateTime? paychargeDateFrom, DateTime? paychargeDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PaychargeV>();
 			if (rowId != null)
@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Paycharge GetPaycharge(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.PaychargesV
 				.Include(q => q.ChargeoutRecipient)
@@ -78,7 +78,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdatePaychargeCore(DTO.Paycharge entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -112,7 +112,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(ChargeoutPaycharges, nChargeoutPaycharges, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(ChargeoutPaycharges, nChargeoutPaycharges, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

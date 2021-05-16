@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.SupplierRefund> GetSupplierRefundList(Guid? rowId, Guid? supplierRowId, int? hasNoDistributedAmount, DateTime? paymentDateFrom, DateTime? paymentDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.SupplierRefundV>();
 			if (rowId != null)
@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.SupplierRefund GetSupplierRefund(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.SupplierRefundsV
 				.Include(q => q.Supplier)
@@ -75,7 +75,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateSupplierRefundCore(DTO.SupplierRefund entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -109,7 +109,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(SupplierPaymentRefunds, nSupplierPaymentRefunds, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(SupplierPaymentRefunds, nSupplierPaymentRefunds, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

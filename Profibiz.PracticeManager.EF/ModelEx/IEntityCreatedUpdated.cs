@@ -91,6 +91,7 @@ namespace Profibiz.PracticeManager.EF
 	public partial class Template : IEntityCreatedUpdated { }
 	public partial class ThirdPartyServiceProvider : IEntityCreatedUpdated { }
 	public partial class TreatmentPlanRecordT : IEntityCreatedUpdated { }
+	public partial class User : IEntityCreatedUpdated { }
 	public partial class UserSetting : IEntityCreatedUpdated { }
 
 

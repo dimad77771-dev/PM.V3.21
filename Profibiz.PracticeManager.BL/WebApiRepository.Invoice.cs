@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Invoice> GetInvoiceList(Guid? rowId, Guid? patientRowId, bool? useFamilyHead, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? invoiceDateFrom, DateTime? invoiceDateTo, bool includeInvoiceClaims, bool isShowSentOnly, bool isShowPaidOnly, Guid? referrerRowId, Guid? insuranceProviderRowId, DateTime? createdDateFrom, DateTime? createdDateTo, bool isCoordinationProblemOnly)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			//var qparm = JsonHelper.DeserializeObject<QueryParamGetInvoicesList>(query);
 
@@ -130,7 +130,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Invoice GetInvoice(Guid id, bool includeAppointment)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var sqlquery = db.InvoicesV
 				.Include(q => q.Patient)
@@ -177,7 +177,7 @@ namespace Profibiz.PracticeManager.BL
 			lock (GlobalLocker.InvoiceUpdate)
 			{
 				var result = new ServerReturnUpdateInvoice();
-				var db = EF.PracticeManagerEntities.Connection;
+				var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 				using (var scope = new TransactionScope())
 				{
 					var invoiceRowId = entity.RowId;
@@ -234,10 +234,10 @@ namespace Profibiz.PracticeManager.BL
 						else throw new AggregateException(ex);
 					}
 
-					DbUpdateRowsHelper.UpdateList(invoiceItems, nInvoiceItems, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(invoiceClaims, nInvoiceClaims, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(invoiceClaimDetails, nInvoiceClaimDetails, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(invoicePayments, nInvoicePayments, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(invoiceItems, nInvoiceItems, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(invoiceClaims, nInvoiceClaims, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(invoiceClaimDetails, nInvoiceClaimDetails, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(invoicePayments, nInvoicePayments, q => q.RowId, db, this);
 
 					InventoryFunc.AfterUpdateInvoice(db, invoiceRowId);
 
@@ -252,7 +252,7 @@ namespace Profibiz.PracticeManager.BL
 			lock (GlobalLocker.InvoiceUpdate)
 			{
 				var result = new ServerReturnUpdateInvoice();
-				var db = EF.PracticeManagerEntities.Connection;
+				var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 				using (var scope = new TransactionScope())
 				{
 					foreach(var invoiceRowId in invoiceRowIds)

@@ -28,5 +28,7 @@ namespace Profibiz.PracticeManager.EF
     
         public virtual AppointmentT AppointmentT { get; set; }
         public virtual AppointmentV AppointmentV { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

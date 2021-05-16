@@ -255,5 +255,9 @@ namespace Profibiz.PracticeManager.EF
         public string MedicalDoctorPhone { get; set; }
         public Nullable<int> ReassessmentScheduledOther { get; set; }
         public Nullable<int> Duration { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     }
 }

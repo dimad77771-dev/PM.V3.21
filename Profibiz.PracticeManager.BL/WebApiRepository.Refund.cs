@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Refund> GetRefundList(Guid? rowId, Guid? patientRowId, int? hasNoDistributedAmount, DateTime? paymentDateFrom, DateTime? paymentDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.RefundV>();
 			if (rowId != null)
@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Refund GetRefund(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.RefundsV
 				.Include(q => q.Patient)
@@ -78,7 +78,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateRefundCore(DTO.Refund entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -117,8 +117,8 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(InvoiceRefunds, nInvoiceRefunds, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(PaymentRefunds, nPaymentRefunds, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(InvoiceRefunds, nInvoiceRefunds, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(PaymentRefunds, nPaymentRefunds, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

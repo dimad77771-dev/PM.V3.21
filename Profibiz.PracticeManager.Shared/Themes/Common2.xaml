@@ -32,6 +32,7 @@
     <local:ServiceProviderConverter x:Key="ServiceProviderConverter" />
     <local:CategoryConverter x:Key="CategoryConverter" />
     <local:ReferrerConverter x:Key="ReferrerConverter" />
+	<local:UserConverter x:Key="UserConverter" />
     <local:MedicalServiceConverter x:Key="MedicalServiceConverter" />
     <local:EventCalendarRemainderConverter x:Key="EventCalendarRemainderConverter" />
     <local:PatientNoteStatusConverter x:Key="PatientNoteStatusConverter" />
@@ -80,7 +81,17 @@
         PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
         ValueMember="RowId" />
 
-    <dxe:ComboBoxEditSettings
+	<dxe:ComboBoxEditSettings
+        x:Key="comboBoxUsers"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding Users, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+	<dxe:ComboBoxEditSettings
         x:Key="comboBoxChargeModels"
         AutoComplete="True"
         ImmediatePopup="True"
@@ -303,9 +314,23 @@
         <Setter Property="NullValueButtonPlacement" Value="EditBox" />
         <Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
     </Style>
+	
+
+	<Style
+        x:Key="comboBoxUserStyle"
+        BasedOn="{StaticResource baseEditStyle1}"
+        TargetType="dxe:ComboBoxEdit">
+		<Setter Property="ItemsSource" Value="{Binding Users, Source={StaticResource lookupDataProvider}}" />
+		<Setter Property="ValueMember" Value="RowId" />
+		<Setter Property="DisplayMember" Value="Name" />
+		<Setter Property="IsTextEditable" Value="False" />
+		<Setter Property="NullValueButtonPlacement" Value="EditBox" />
+		<Setter Property="PopupContentTemplate" Value="{StaticResource popupFormExtentedContentTemplate}" />
+	</Style>
 
 
-    <Style
+
+	<Style
         x:Key="comboBoxInsuranceCoverageYearTypeStyle"
         BasedOn="{StaticResource baseEditStyle1}"
         TargetType="dxe:ComboBoxEdit">

@@ -31,5 +31,7 @@ namespace Profibiz.PracticeManager.EF
     
         public virtual InvoiceT Invoice { get; set; }
         public virtual RefundT Refund { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, string rowIds)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var includeAppointmentRemainders = (rowId != null);
 
@@ -112,7 +112,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateAppointmentCore(List<DTO.Appointment> entities, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				//update
@@ -147,7 +147,7 @@ namespace Profibiz.PracticeManager.BL
 								return q;
 							}
 						}).ToArray();
-						DbUpdateRowsHelper.UpdateList(exRemainders, newRemainders, q => q.RowId, db);
+						DbUpdateRowsHelper.UpdateList(exRemainders, newRemainders, q => q.RowId, db, this);
 					}
 
 
@@ -244,7 +244,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.AppointmentInsuranceProviderDayInfo> GetAppointmentInsuranceProviderDayInfo(DateTime dat, Guid serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var edat = dat.AddDays(1);
 

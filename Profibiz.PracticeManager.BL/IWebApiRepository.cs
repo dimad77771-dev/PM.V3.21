@@ -6,11 +6,15 @@ using System.Threading.Tasks;
 using Profibiz.PracticeManager.DTO;
 using System.Data.Entity;
 using Profibiz.PracticeManager.SharedCode;
+using System.Web.Http.Controllers;
 
 namespace Profibiz.PracticeManager.BL
 {
     public interface IWebApiRepository
     {
+		Guid? CurrentUserRowId { get; set; }
+		void SetCurrentUserRowId(HttpControllerContext controllerContext);
+
 		IEnumerable<PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember);
 		Guid[] PatientRowId2InsuranceProviders(Guid patientRowId);
 		List<InsuranceCoverage> PatientRowId2InsuranceCoverages(Guid patientRowId);
@@ -48,6 +52,7 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<ProfessionalAssociation> GetProfessionalAssociations();
 		IEnumerable<ThirdPartyServiceProvider> GetThirdPartyServiceProviders();
 		IEnumerable<Referrer> GetReferrers();
+		IEnumerable<User> GetUsers();
 		IEnumerable<Supplier> GetSuppliers();
 		IEnumerable<AppointmentBook> GetAppointmentBooks();
 		UserSetting GetUserSettings(string userCode);
@@ -62,7 +67,9 @@ namespace Profibiz.PracticeManager.BL
 		void PutThirdPartyServiceProviders(IEnumerable<ThirdPartyServiceProvider> entities);
 		void DeleteThirdPartyServiceProvider(Guid id);
 		void PutReferrers(IEnumerable<Referrer> entities);
+		void PutUsers(IEnumerable<User> entities);
 		void DeleteReferrer(Guid id);
+		void DeleteUser(Guid id);
 		void PutSuppliers(IEnumerable<Supplier> entities);
 		void DeleteSupplier(Guid id);
 		void PutAppointmentBooks(IEnumerable<AppointmentBook> entities);
@@ -187,5 +194,7 @@ namespace Profibiz.PracticeManager.BL
 		Chargeout GetChargeout(Guid id);
 		ServerReturnUpdateChargeout UpdateChargeoutCore(Chargeout entity);
 		ServerReturnUpdateChargeout DeleteChargeoutCore(List<Guid> entity);
+
+		LoginInfo GetLoginInfo(string name, string password);
 	}
 }

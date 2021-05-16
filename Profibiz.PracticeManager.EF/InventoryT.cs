@@ -37,5 +37,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual InvoiceItem InvoiceItem { get; set; }
         public virtual MedicalServicesOrSupply MedicalServicesOrSupply { get; set; }
         public virtual OrderItemT OrderItem { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

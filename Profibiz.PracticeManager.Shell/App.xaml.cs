@@ -7,6 +7,7 @@ using System.Data;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -37,15 +38,20 @@ namespace Profibiz.PracticeManager.Shell
 
 			NLog.Init();
 			NLog.Trace("Start App...");
-			
+
 			//NLog.Trace("TryStartNoGCRegion=" + GC.TryStartNoGCRegion(100000));
 			//DispatcherUIHelper.Run(async () => await UnhandledExceptionProccesing.SendErrorToServer("eeeeeeeeeeee1111111"));
 
 			XamlSpyServiceStart();
-			if (!System.Diagnostics.Debugger.IsAttached)
-			{
-                DXSplashScreen.Show<SplashScreenWindow>();
-			}
+
+			//Login();
+			//System.Threading.Thread.Sleep(10000);
+
+
+			//if (!System.Diagnostics.Debugger.IsAttached)
+			//{
+			//	DXSplashScreen.Show<SplashScreenWindow>();
+			//}
 			//MainWindow.Visibility = Visibility.Hidden;
 			//MainWindow.WindowState = WindowState.Minimized;
 
@@ -73,9 +79,11 @@ namespace Profibiz.PracticeManager.Shell
 			MainWindow.Visibility = Visibility.Hidden;
 			MainWindow.WindowState = WindowState.Minimized;
 
-		
+
 			NLog.vv();
 		}
+
+		
 
 
 

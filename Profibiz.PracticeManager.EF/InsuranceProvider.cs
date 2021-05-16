@@ -46,5 +46,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<InsuranceProvidersViewGroupMapping> InsuranceProvidersViewGroupMappings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentInsuranceProvider> AppointmentInsuranceProviders { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

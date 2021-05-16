@@ -34,5 +34,7 @@ namespace Profibiz.PracticeManager.EF
     
         public virtual ChargeoutT Chargeout { get; set; }
         public virtual InvoiceItem InvoiceItem { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

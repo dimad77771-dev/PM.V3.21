@@ -17,7 +17,7 @@ namespace Profibiz.PracticeManager.BL
 {
 	public static class DbUpdateRowsHelper
 	{
-		public static void UpdateList<T>(T[] dbrows, T[] newrows, Func<T, object> keyfunc, DbContext db) where T : class
+		public static void UpdateList<T>(T[] dbrows, T[] newrows, Func<T, object> keyfunc, DbContext db, WebApiRepository webApiRepository) where T : class
 		{
 			var delrows = dbrows.Where(q => !newrows.Any(z => Object.Equals(keyfunc(z), keyfunc(q)))).ToList();
 			foreach(var delrow in delrows)

@@ -38,6 +38,10 @@ namespace Profibiz.PracticeManager.EF
         public bool IsVacation { get; set; }
         public Nullable<System.Guid> ServiceProviderRowId { get; set; }
         public string ServiceProviderFullName { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         public virtual PatientV Patient { get; set; }
     }

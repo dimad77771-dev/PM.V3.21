@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public DTO.PrintdocInfo GetPrintdocInfo(Guid invoiceRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var invoice = db.InvoicesV.Single(q => q.RowId == invoiceRowId);
 			var patientRowId = invoice.PatientRowId;
@@ -53,7 +53,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.PrintDocument[] GetPrintDocuments()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var list = db.PrintDocuments.ToArray();
 

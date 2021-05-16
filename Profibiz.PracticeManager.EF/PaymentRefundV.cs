@@ -24,6 +24,10 @@ namespace Profibiz.PracticeManager.EF
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> Updated { get; set; }
         public string UpdatedBy { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         public virtual RefundV Refund { get; set; }
         public virtual PaymentV Payment { get; set; }

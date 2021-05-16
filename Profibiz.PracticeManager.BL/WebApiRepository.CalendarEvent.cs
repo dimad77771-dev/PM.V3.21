@@ -24,7 +24,7 @@ namespace Profibiz.PracticeManager.BL
 		{
 			//Thread.Sleep(5000);
 
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.CalendarEventV>();
 			if (patientRowId != null)
@@ -77,7 +77,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateCalendarEventCore(List<DTO.CalendarEvent> entities, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				//update

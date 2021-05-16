@@ -49,6 +49,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			AllCategoriesItems.Add(ChargeoutRecipientesFilter);
 			AllCategoriesItems.Add(ThirdPartyServiceProvidersFilter);
 			AllCategoriesItems.Add(ReferrersFilter);
+			AllCategoriesItems.Add(UsersFilter);
 			AllCategoriesItems.Add(SuppliersFilter);
 			AllCategoriesItems.Add(PublicHolidaysFilter);
 			StaticFilterItems = AllCategoriesItems.ToObservableCollection();
@@ -63,6 +64,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 		public FilterItem ProfessionalAssociationsFilter { get; set; } = new FilterItem { Name = "Professional Associations", LookupType = FilterItem.LookupTypeEnum.ProfessionalAssociations };
 		public FilterItem ThirdPartyServiceProvidersFilter { get; set; } = new FilterItem { Name = "Service Providers (TP)", LookupType = FilterItem.LookupTypeEnum.ThirdPartyServiceProviders };
 		public FilterItem ReferrersFilter { get; set; } = new FilterItem { Name = "Referrers", LookupType = FilterItem.LookupTypeEnum.Referrers };
+		public FilterItem UsersFilter { get; set; } = new FilterItem { Name = "Users", LookupType = FilterItem.LookupTypeEnum.Users };
 		public FilterItem SuppliersFilter { get; set; } = new FilterItem { Name = "Suppliers", LookupType = FilterItem.LookupTypeEnum.Suppliers };
 		public FilterItem AppointmentBooksFilter { get; set; } = new FilterItem { Name = "Appointment Books", LookupType = FilterItem.LookupTypeEnum.AppointmentBooks };
 		public FilterItem AppointmentStatusesFilter { get; set; } = new FilterItem { Name = "Appointment Statuses", LookupType = FilterItem.LookupTypeEnum.AppointmentStatusesFilter };
@@ -109,6 +111,10 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 					else if (lookupType == FilterItem.LookupTypeEnum.Referrers)
 					{
 						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.ReferrersView, null);
+					}
+					else if (lookupType == FilterItem.LookupTypeEnum.Users)
+					{
+						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.UsersView, null);
 					}
 					else if (lookupType == FilterItem.LookupTypeEnum.Suppliers)
 					{
@@ -169,7 +175,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				InsuranceProviders, MedicalServices, Categories, ProfessionalAssociations, ThirdPartyServiceProviders,
 				AppointmentBooks, AppointmentStatusesFilter, PatientNoteStatusesFilter, CalendarEventStatusesFilter, PublicHolidaysFilter,
 				InvoiceStatusesFilter, ChargeoutStatusesFilter, ChargeoutRecipientesFilter,
-				Referrers, Suppliers,
+				Referrers, Suppliers, Users,
 			}
 
 			public static bool IsEqual(FilterItem item1, FilterItem item2)

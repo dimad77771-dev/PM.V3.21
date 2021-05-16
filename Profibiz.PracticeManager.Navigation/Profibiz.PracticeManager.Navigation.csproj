@@ -229,6 +229,8 @@
     <Compile Include="ViewModels\OneChargeoutRecipientViewModel.cs" />
     <Compile Include="ViewModels\OneChargeoutStatusViewModel.cs" />
     <Compile Include="ViewModels\OnePatientNoteStatusViewModel.cs" />
+    <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\OneUserViewModel.cs" />
     <Compile Include="ViewModels\PatientNoteStatusesViewModel.cs" />
     <Compile Include="ViewModels\OnePublicHolidayViewModel.cs" />
     <Compile Include="ViewModels\OneSupplierViewModel.cs" />
@@ -248,6 +250,7 @@
     <Compile Include="ViewModels\OneThirdPartyServiceProviderViewModel.cs" />
     <Compile Include="ViewModels\OneProfessionalAssociationViewModel.cs" />
     <Compile Include="ViewModels\AppointmentBooksViewModel.cs" />
+    <Compile Include="ViewModels\UsersViewModel.cs" />
     <Compile Include="ViewModels\SuppliersViewModel.cs" />
     <Compile Include="ViewModels\ReferrersViewModel.cs" />
     <Compile Include="ViewModels\ThirdPartyServiceProvidersViewModel.cs" />
@@ -273,6 +276,12 @@
     </Compile>
     <Compile Include="Views\OnePatientNoteStatusView.xaml.cs">
       <DependentUpon>OnePatientNoteStatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\OneUserView.xaml.cs">
+      <DependentUpon>OneUserView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\PatientNoteStatusesView.xaml.cs">
       <DependentUpon>PatientNoteStatusesView.xaml</DependentUpon>
@@ -327,6 +336,12 @@
     </Compile>
     <Compile Include="Views\AppointmentBooksView.xaml.cs">
       <DependentUpon>AppointmentBooksView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonUsersView.xaml.cs">
+      <DependentUpon>RibbonUsersView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UsersView.xaml.cs">
+      <DependentUpon>UsersView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RibbonChargeoutRecipientesView.xaml.cs">
       <DependentUpon>RibbonChargeoutRecipientesView.xaml</DependentUpon>
@@ -452,6 +467,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\LoginView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\OneUserView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\PatientNoteStatusesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -521,6 +544,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\AppointmentBooksView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonUsersView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\UsersView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

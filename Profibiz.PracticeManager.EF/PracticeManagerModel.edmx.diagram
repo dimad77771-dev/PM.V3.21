@@ -471,6 +471,9 @@
         <EntityTypeShape EntityType="PracticeManagerModel.TreatmentPlanRecordT" Width="2.625" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="PracticeManagerModel.TreatmentPlanRecordV" Width="5.375" PointX="4.5" PointY="0.625" />
       </Diagram>
+      <Diagram DiagramId="188d84ad2ab14394a72d34de9c39da2b" Name="Users" >
+        <EntityTypeShape EntityType="PracticeManagerModel.User" Width="2.75" PointX="0.75" PointY="0.75" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

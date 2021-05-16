@@ -48,5 +48,7 @@ namespace Profibiz.PracticeManager.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PaychargeRefchargeT> PaychargeRefcharges { get; set; }
         public virtual ChargeoutRecipient ChargeoutRecipient { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

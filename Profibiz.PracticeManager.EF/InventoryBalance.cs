@@ -31,5 +31,9 @@ namespace Profibiz.PracticeManager.EF
         public string MeasurementUnit { get; set; }
         public string PrintLabel { get; set; }
         public bool UsePrintLabel { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     }
 }

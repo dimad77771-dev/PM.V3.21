@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Inventory> GetInventoryList(Guid? rowId, Guid? orderRowId, Guid? invoiceRowId, DateTime? transactionDateFrom, DateTime? transactionDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.InventoryV>();
 			if (rowId != null)
@@ -59,7 +59,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InventoryBalance> GetInventoryBalanceList(Guid? rowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.InventoryBalance>();
 			if (rowId != null)
@@ -79,7 +79,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Order GetOrder(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var sqlquery = db.OrdersV
 				.Include(q => q.OrderItems);
@@ -95,7 +95,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.Order> GetOrderList(Guid? rowId, Guid? supplierRowId, DateTime? orderDateFrom, DateTime? orderDateTo, Boolean? noPaidOnly)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.OrderV>();
 			if (rowId != null)
@@ -130,7 +130,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateOrderCore(DTO.Order entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				InventoryFunc.BeforeUpdateOrder(db, entity.RowId);
@@ -164,7 +164,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(orderItems, nOrderItems, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(orderItems, nOrderItems, q => q.RowId, db, this);
 				}
 
 				InventoryFunc.AfterUpdateOrder(db, entity.RowId);
@@ -175,7 +175,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PostInventoryBalances(List<DTO.InventoryBalance> rows)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				foreach(var row in rows)
@@ -201,10 +201,9 @@ namespace Profibiz.PracticeManager.BL
 			}
 		}
 
-
 		public void UpdateInventoryCore(DTO.Inventory entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -290,7 +289,7 @@ namespace Profibiz.PracticeManager.BL
 					};
 					db.InventoriesT.Add(inventory);
 				}
-				db.SaveChanges();
+				db.SaveChangesEx();
 			}
 		}
 

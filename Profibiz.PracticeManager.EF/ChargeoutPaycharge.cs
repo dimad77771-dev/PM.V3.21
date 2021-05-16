@@ -33,5 +33,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ChargeoutV Chargeout { get; set; }
         public virtual PaychargeT PaychargeT { get; set; }
         public virtual ChargeoutT ChargeoutT { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

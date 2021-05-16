@@ -24,5 +24,7 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         public virtual EmailChargeT EmailCharge { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

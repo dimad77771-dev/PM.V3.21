@@ -23,7 +23,7 @@ namespace Profibiz.PracticeManager.Service
     {
 		public void OneCycle()
 		{
-			var db = new EF.PracticeManagerEntities(useLogFile: false);
+			var db = EF.PracticeManagerEntities.GetConnection(null, useLogFile: false);
 
 			var qry =
 				from a in db.AppointmentRemaindersForProcesseds

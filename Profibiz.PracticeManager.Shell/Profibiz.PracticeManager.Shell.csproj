@@ -246,6 +246,10 @@
       <Project>{85e2a96b-ad25-46ca-b501-f5eee1ab1345}</Project>
       <Name>Profibiz.PracticeManager.Navigation</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Patients.BusinessServiceInterface\Profibiz.PracticeManager.Patients.BusinessServiceInterface.csproj">
+      <Project>{8806DB9E-7610-4F41-A4AB-D48650BD727B}</Project>
+      <Name>Profibiz.PracticeManager.Patients.BusinessServiceInterface</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Profibiz.PracticeManager.Patients.BusinessService\Profibiz.PracticeManager.Patients.BusinessService.csproj">
       <Project>{7c5749bb-5021-4f07-bfd0-ac67ac9e34e8}</Project>
       <Name>Profibiz.PracticeManager.Patients.BusinessService</Name>

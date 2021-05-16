@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.Payment> GetPaymentList(Guid? rowId, Guid? patientRowId, int? hasNoDistributedAmount, DateTime? paymentDateFrom, DateTime? paymentDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PaymentV>();
 			if (rowId != null)
@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Payment GetPayment(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.PaymentsV
 				.Include(q => q.Patient)
@@ -79,7 +79,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdatePaymentCore(DTO.Payment entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -113,7 +113,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(InvoicePayments, nInvoicePayments, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(InvoicePayments, nInvoicePayments, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

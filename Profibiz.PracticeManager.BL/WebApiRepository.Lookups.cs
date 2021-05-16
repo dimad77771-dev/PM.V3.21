@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public DTO.UserSetting GetUserSettings(string userCode)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var row = db.UserSettings.SingleOrDefault(q => q.UserCode == userCode);
 			if (row == null)
 			{
@@ -33,7 +33,7 @@ namespace Profibiz.PracticeManager.BL
 
         public IEnumerable<DTO.Category> GetCategories()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.Categories;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Category));
 			return mapper.Map<List<DTO.Category>>(list);
@@ -41,14 +41,14 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<string> GetOntarioCities()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.Cities.Where(p => p.Province == "ON").Select(q => q.CityName).ToList();
 			return list;
 		}
 
 		public IEnumerable<DTO.AppointmentStatus> GetAppointmentStatuses()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.AppointmentStatuses;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.AppointmentStatus));
 			return mapper.Map<List<DTO.AppointmentStatus>>(list);
@@ -56,7 +56,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.PatientNoteStatus> GetPatientNoteStatuses()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.PatientNoteStatuses;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PatientNoteStatus));
 			return mapper.Map<List<DTO.PatientNoteStatus>>(list);
@@ -64,7 +64,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.CalendarEventStatus> GetCalendarEventStatuses()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.CalendarEventStatuses;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.CalendarEventStatus));
 			return mapper.Map<List<DTO.CalendarEventStatus>>(list);
@@ -72,7 +72,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.PublicHoliday> GetPublicHolidays()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.PublicHolidays;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PublicHoliday));
 			return mapper.Map<List<DTO.PublicHoliday>>(list);
@@ -80,7 +80,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InvoiceStatus> GetInvoiceStatuses()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.InvoiceStatuses;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InvoiceStatus));
 			return mapper.Map<List<DTO.InvoiceStatus>>(list);
@@ -88,7 +88,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.ChargeoutStatus> GetChargeoutStatuses()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.ChargeoutStatuses;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ChargeoutStatus));
 			return mapper.Map<List<DTO.ChargeoutStatus>>(list);
@@ -96,7 +96,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.ChargeoutRecipient> GetChargeoutRecipientes()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.ChargeoutRecipients;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ChargeoutRecipient));
 			return mapper.Map<List<DTO.ChargeoutRecipient>>(list);
@@ -104,7 +104,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.Template> GetTemplates()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.Templates.Where(q => q.IsEnabled).ToArray();
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Template));
 			return mapper.Map<List<DTO.Template>>(list);
@@ -116,7 +116,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InsuranceProvider> GetInsuranceProviders()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.InsuranceProviders;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InsuranceProvider));
 			return mapper.Map<List<DTO.InsuranceProvider>>(list);
@@ -124,7 +124,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.MedicalServicesOrSupply> GetMedicalServicesOrSupplies()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.MedicalServicesOrSupplies;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.MedicalServicesOrSupply));
 			return mapper.Map<List<DTO.MedicalServicesOrSupply>>(list);
@@ -132,7 +132,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.ProfessionalAssociation> GetProfessionalAssociations()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.ProfessionalAssociations;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ProfessionalAssociation));
 			return mapper.Map<List<DTO.ProfessionalAssociation>>(list);
@@ -140,7 +140,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.ThirdPartyServiceProvider> GetThirdPartyServiceProviders()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.ThirdPartyServiceProviders;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ThirdPartyServiceProvider));
 			return mapper.Map<List<DTO.ThirdPartyServiceProvider>>(list);
@@ -148,15 +148,23 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.Referrer> GetReferrers()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.Referrers;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Referrer));
 			return mapper.Map<List<DTO.Referrer>>(list);
 		}
 
+		public IEnumerable<DTO.User> GetUsers()
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			var list = db.Users;
+			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.User));
+			return mapper.Map<List<DTO.User>>(list);
+		}
+
 		public IEnumerable<DTO.Supplier> GetSuppliers()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var list = db.Suppliers;
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Supplier));
 			return mapper.Map<List<DTO.Supplier>>(list);
@@ -164,19 +172,19 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.AppointmentBook> GetAppointmentBooks()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var list = db.AppointmentBooks.ToArray();
 
 			var options = AutoMapperHelper.CreateOptions()
 				.AddIncludeProp<DTO.AppointmentBook>((q) => q.ServiceProviders);
 			var mapper = AutoMapperHelper.GetPocoMapperWithOptions(options, typeof(DTO.AppointmentBook), typeof(DTO.ServiceProvider));
-			return mapper.Map<List<DTO.AppointmentBook>>(list);
+			return mapper.Map<List<DTO.AppointmentBook>>(list.OrderBy(q => q.Name));
 		}
 
 		public void PutMedicalServicesOrSupplies(IEnumerable<DTO.MedicalServicesOrSupply> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.MedicalServicesOrSupply));
@@ -204,7 +212,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteMedicalServicesOrSupply(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.MedicalServicesOrSupplies.Single(q => q.RowId == id);
@@ -228,7 +236,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutCategories(IEnumerable<DTO.Category> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Category));
@@ -256,7 +264,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteCategory(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.Categories.Single(q => q.RowId == id);
@@ -282,7 +290,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutInsuranceProviders(IEnumerable<DTO.InsuranceProvider> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InsuranceProvider));
@@ -310,7 +318,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteInsuranceProvider(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.InsuranceProviders.Single(q => q.RowId == id);
@@ -335,7 +343,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutProfessionalAssociations(IEnumerable<DTO.ProfessionalAssociation> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ProfessionalAssociation));
@@ -363,7 +371,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteProfessionalAssociation(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.ProfessionalAssociations.Single(q => q.RowId == id);
@@ -388,7 +396,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutThirdPartyServiceProviders(IEnumerable<DTO.ThirdPartyServiceProvider> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ThirdPartyServiceProvider));
@@ -416,7 +424,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteThirdPartyServiceProvider(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.ThirdPartyServiceProviders.Single(q => q.RowId == id);
@@ -440,7 +448,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutReferrers(IEnumerable<DTO.Referrer> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Referrer));
@@ -468,7 +476,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteReferrer(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.Referrers.Single(q => q.RowId == id);
@@ -490,9 +498,61 @@ namespace Profibiz.PracticeManager.BL
 			}
 		}
 
+		public void PutUsers(IEnumerable<DTO.User> entities)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.User));
+
+				var oldRows = db.Users.ToArray();
+
+				foreach (var entity in entities)
+				{
+					var oldRow = oldRows.SingleOrDefault(q => q.RowId == entity.RowId);
+					if (oldRow == null)
+					{
+						var newRow = mapper.Map<EF.User>(entity);
+						db.Users.Add(newRow);
+						db.SaveChangesEx();
+					}
+					else
+					{
+						mapper.Map(entity, oldRow);
+						db.SaveChangesEx();
+					}
+				}
+
+				scope.Complete();
+			}
+		}
+		public void DeleteUser(Guid id)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var row = db.Users.Single(q => q.RowId == id);
+				db.Users.Remove(row);
+				try
+				{
+					db.SaveChangesEx();
+				}
+				catch (Exception ex)
+				{
+					if (ExceptionHelper.IsDeleteReferenceConstraintException(ex))
+					{
+						ExceptionHelper.UserUpdateError(UserErrorCodes.DeleteForeignKey, "Row \"" + row.Name + "\" is used in database and cannot be deleted");
+					}
+					else throw ex;
+				}
+
+				scope.Complete();
+			}
+		}
+
 		public void PutSuppliers(IEnumerable<DTO.Supplier> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Supplier));
@@ -520,7 +580,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteSupplier(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.Suppliers.Single(q => q.RowId == id);
@@ -544,7 +604,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutAppointmentBooks(IEnumerable<DTO.AppointmentBook> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.AppointmentBook));
@@ -572,7 +632,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteAppointmentBook(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.AppointmentBooks.Single(q => q.RowId == id);
@@ -596,7 +656,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutAppointmentStatuses(IEnumerable<DTO.AppointmentStatus> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.AppointmentStatus));
@@ -624,7 +684,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteAppointmentStatus(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.AppointmentStatuses.Single(q => q.RowId == id);
@@ -649,7 +709,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutPatientNoteStatuses(IEnumerable<DTO.PatientNoteStatus> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PatientNoteStatus));
@@ -677,7 +737,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeletePatientNoteStatus(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.PatientNoteStatuses.Single(q => q.RowId == id);
@@ -701,7 +761,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutCalendarEventStatuses(IEnumerable<DTO.CalendarEventStatus> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.CalendarEventStatus));
@@ -729,7 +789,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteCalendarEventStatus(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.CalendarEventStatuses.Single(q => q.RowId == id);
@@ -754,7 +814,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutPublicHolidays(IEnumerable<DTO.PublicHoliday> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PublicHoliday));
@@ -782,7 +842,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeletePublicHoliday(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.PublicHolidays.Single(q => q.RowId == id);
@@ -806,7 +866,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutInvoiceStatuses(IEnumerable<DTO.InvoiceStatus> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InvoiceStatus));
@@ -834,7 +894,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteInvoiceStatus(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.InvoiceStatuses.Single(q => q.RowId == id);
@@ -858,7 +918,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutChargeoutStatuses(IEnumerable<DTO.ChargeoutStatus> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ChargeoutStatus));
@@ -886,7 +946,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteChargeoutStatus(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.ChargeoutStatuses.Single(q => q.RowId == id);
@@ -910,7 +970,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutChargeoutRecipientes(IEnumerable<DTO.ChargeoutRecipient> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ChargeoutRecipient));
@@ -938,7 +998,7 @@ namespace Profibiz.PracticeManager.BL
 		}
 		public void DeleteChargeoutRecipient(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.ChargeoutRecipients.Single(q => q.RowId == id);
@@ -962,7 +1022,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InsuranceProvidersViewGroup> GetInsuranceProvidersViewGroups()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InsuranceProvidersViewGroup), typeof(DTO.InsuranceProvidersViewGroupMapping));
 
 			foreach (var row in db.InsuranceProvidersViewGroups)
@@ -976,7 +1036,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutInsuranceProvidersViewGroups(IEnumerable<DTO.InsuranceProvidersViewGroup> entities)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.InsuranceProvidersViewGroup), typeof(DTO.InsuranceProvidersViewGroupMapping));
@@ -1016,7 +1076,7 @@ namespace Profibiz.PracticeManager.BL
 		public void PostErrorToServer(DTO.ClientError errorInfo)
 		{
 			//db
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.ClientError));
@@ -1087,7 +1147,7 @@ namespace Profibiz.PracticeManager.BL
 		{
 			//System.Threading.Thread.Sleep(10000);
 
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var row = new EF.NLogItem
 			{
 				RowId = Guid.NewGuid(),
@@ -1113,7 +1173,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PostUserSettings(DTO.UserSetting userSetting)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var row = db.UserSettings.SingleOrDefault(q => q.UserCode == userSetting.UserCode);
@@ -1135,5 +1195,32 @@ namespace Profibiz.PracticeManager.BL
 				scope.Complete();
 			}
 		}
+
+		public DTO.LoginInfo GetLoginInfo(string name, string password)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+
+			name = (name ?? "").ToLower().Trim();
+
+			var userRowId = db.Users.FirstOrDefault(q => (q.Name.ToLower().Trim() == name || q.Email.ToLower().Trim() == name) && q.Password == password)?.RowId;
+
+			if (userRowId != null)
+			{
+				return new DTO.LoginInfo
+				{
+					IsSuccess = true,
+					UserRowId = userRowId.Value,
+				};
+			}
+			else
+			{
+				return new DTO.LoginInfo
+				{
+					IsSuccess = false,
+					Error = "Invalid username or password",
+				};
+			}
+		}
+
 	}
 }

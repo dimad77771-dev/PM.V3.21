@@ -26,5 +26,7 @@ namespace Profibiz.PracticeManager.EF
     
         public virtual Patient Patients { get; set; }
         public virtual MedicalCondition MedicalCondition { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

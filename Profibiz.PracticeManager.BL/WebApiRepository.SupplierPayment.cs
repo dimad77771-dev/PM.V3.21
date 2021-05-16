@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.SupplierPayment> GetSupplierPaymentList(Guid? rowId, Guid? supplierRowId, int? hasNoDistributedAmount, DateTime? paymentDateFrom, DateTime? paymentDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.SupplierPaymentV>();
 			if (rowId != null)
@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.SupplierPayment GetSupplierPayment(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.SupplierPaymentsV
 				.Include(q => q.Supplier)
@@ -79,7 +79,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateSupplierPaymentCore(DTO.SupplierPayment entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -113,7 +113,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(OrderPayments, nOrderPayments, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(OrderPayments, nOrderPayments, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

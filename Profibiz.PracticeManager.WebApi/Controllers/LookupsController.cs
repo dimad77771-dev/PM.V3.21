@@ -14,6 +14,7 @@ using Newtonsoft.Json;
 using System.Text;
 using Profibiz.PracticeManager.BL;
 using Profibiz.PracticeManager.DTO;
+using System.Web.Http.Controllers;
 
 namespace Profibiz.PracticeManager.WebApi.Controllers
 {
@@ -25,7 +26,13 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			_repository = repository;
 		}
 
-        public IHttpActionResult GetOntarioCities()
+		protected override void Initialize(HttpControllerContext controllerContext)
+		{
+			base.Initialize(controllerContext);
+			_repository.SetCurrentUserRowId(controllerContext);
+		}
+
+		public IHttpActionResult GetOntarioCities()
         {
             var result = _repository.GetOntarioCities();
             return Ok(result);
@@ -137,6 +144,12 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			return Ok(list);
 		}
 
+		public IHttpActionResult GetUsers()
+		{
+			var list = _repository.GetUsers();
+			return Ok(list);
+		}
+
 		public IHttpActionResult GetSuppliers()
 		{
 			var list = _repository.GetSuppliers();
@@ -218,6 +231,18 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			_repository.DeleteReferrer(id);
 			return StatusCode(HttpStatusCode.NoContent);
 		}
+
+		public IHttpActionResult PutUsers([FromBody] IEnumerable<User> entities)
+		{
+			_repository.PutUsers(entities);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult DeleteUser(Guid id)
+		{
+			_repository.DeleteUser(id);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+
 
 		public IHttpActionResult PutSuppliers([FromBody]IEnumerable<Supplier> entities)
 		{
@@ -350,6 +375,13 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			_repository.PostUserSettings(userSetting);
 			return StatusCode(HttpStatusCode.NoContent);
 		}
+
+		public IHttpActionResult GetLoginInfo(string name, string password)
+		{
+			var entities = _repository.GetLoginInfo(name, password);
+			return Ok(entities);
+		}
+
 
 
 	}

@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using DevExpress.Mvvm.DataAnnotations;
 using DevExpress.Mvvm.POCO;
+using DevExpress.Xpf.Core;
 using Prism.Autofac;
 using Prism.Modularity;
 using Prism.Mvvm;
@@ -21,15 +22,33 @@ namespace Profibiz.PracticeManager.Shell
         protected override DependencyObject CreateShell()
         {
             return new Shell();
-        }
+		}
 
         //TODO: 03. Override the InitializeShell setting the MainWindow on the application and showing the shell.
         protected override void InitializeShell()
         {
             base.InitializeShell();
-            Application.Current.MainWindow = (Window)this.Shell;
+			//Login();
+			if (!System.Diagnostics.Debugger.IsAttached)
+			{
+				DXSplashScreen.Show<SplashScreenWindow>();
+			}
+			Application.Current.MainWindow = (Window)this.Shell;
             Application.Current.MainWindow.Show();
         }
+
+
+		void Login()
+		{
+			var wnd = new Navigation.Views.LoginView();
+			var patientsBusinessService = new Patients.BusinessService.PatientsBusinessService();
+			var lookupsBusinessService = new Patients.BusinessService.LookupsBusinessService();
+			var viewmodel = new Navigation.ViewModels.LoginViewModel(patientsBusinessService, lookupsBusinessService);
+			viewmodel.View = wnd;
+			viewmodel.OnOpen();
+			wnd.DataContext = viewmodel;
+			wnd.ShowDialog();
+		}
 
 
 		// User this in case ViewModel doesnot get registred 
@@ -81,7 +100,6 @@ namespace Profibiz.PracticeManager.Shell
 				return type;
 			});
 		}
-
 
 		//TODO: 04. Override the ConfigureModuleCatalog 
 		protected override void ConfigureModuleCatalog()

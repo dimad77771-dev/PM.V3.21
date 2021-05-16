@@ -47,5 +47,9 @@ namespace Profibiz.PracticeManager.EF
         public string InvoicePatientName { get; set; }
         public Nullable<System.Guid> OrderSupplierRowId { get; set; }
         public string OrderSupplierName { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     }
 }

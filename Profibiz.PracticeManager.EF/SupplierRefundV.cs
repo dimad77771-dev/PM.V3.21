@@ -40,6 +40,10 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<decimal> Amount { get; set; }
         public string SupplierFullName { get; set; }
         public string FullDescription { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<SupplierPaymentRefundV> SupplierPaymentRefunds { get; set; }

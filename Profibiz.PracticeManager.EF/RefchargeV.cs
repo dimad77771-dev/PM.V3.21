@@ -41,6 +41,10 @@ namespace Profibiz.PracticeManager.EF
         public string FullDescription { get; set; }
         public System.Guid ChargeoutRecipientRowId { get; set; }
         public string ChargeoutRecipientName { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ChargeoutRefchargeV> ChargeoutRefcharges { get; set; }

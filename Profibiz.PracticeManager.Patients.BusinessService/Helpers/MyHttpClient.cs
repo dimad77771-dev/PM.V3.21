@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 		{
 			if (UserManager.UserRowId != null)
 			{
-				this.DefaultRequestHeaders.Add("UserRowId", UserManager.UserRowId.ToString());
+				this.DefaultRequestHeaders.Add("CurrentUserRowId", UserManager.UserRowId.ToString());
 			}
 		}
 	}

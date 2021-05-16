@@ -24,7 +24,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public DTO.InsuranceCoverage GetInsuranceCoverage(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var insuranceCoverage = 
 				db
 				.InsuranceCoverages
@@ -72,7 +72,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateInsuranceCoverageCore(DTO.InsuranceCoverage entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -151,7 +151,7 @@ namespace Profibiz.PracticeManager.BL
 		public DTO.InsuranceCoverageInvoiceClaimsInfo[] GetInsuranceCoverageInvoiceClaimsInfo(String insuranceCoverageRowIdsStr)
 		{
 			return null;
-			//var db = EF.PracticeManagerEntities.Connection;
+			//var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			//var insuranceCoverageRowIds = WebQueryHelper.Guids(insuranceCoverageRowIdsStr);
 			//var qry =
@@ -182,7 +182,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.InsurancePatientCategoryInfo GetInsurancePatientCategoryInfo(String insuranceCoverageRowIdsStr)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var insuranceCoverageRowIds = WebQueryHelper.GuidsNull(insuranceCoverageRowIdsStr);
 
@@ -215,7 +215,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.InsuranceArticleInfo GetInsuranceArticleInfo(Guid insuranceCoverageRowId, Guid patientRowId, Guid categoryRowId, Boolean isShowAllYears, Boolean showProblemOnly)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var ret = new DTO.InsuranceArticleInfo();
 
@@ -300,7 +300,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.InsuranceArticleSummary GetInsuranceArticleSummary(string categoriesRowIds)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var categoriesRowIdSet = WebQueryHelper.Guids(categoriesRowIds);
 
@@ -334,7 +334,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public ServerReturnCloneInsuranceCoverage CloneInsuranceCoverage(DTO.InsuranceCoverage row)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var rowId = row.RowId;
 
@@ -443,7 +443,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void BatchCloneInsuranceCoverage()
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var yy = 2019;
 			var yy2 = yy + 1;
 

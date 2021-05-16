@@ -38,5 +38,7 @@ namespace Profibiz.PracticeManager.EF
     
         public virtual InsuranceCoverageHolder InsuranceCoverageHolder { get; set; }
         public virtual InsuranceCoverageItem InsuranceCoverageItem { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

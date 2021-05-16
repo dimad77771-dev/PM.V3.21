@@ -21,7 +21,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.Refcharge> GetRefchargeList(Guid? rowId, Guid? chargeoutRecipientRowId, int? hasNoDistributedAmount, DateTime? paychargeDateFrom, DateTime? paychargeDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.RefchargeV>();
 			if (rowId != null)
@@ -49,7 +49,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Refcharge GetRefcharge(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.RefchargesV
 				.Include(q => q.ChargeoutRecipient)
@@ -73,7 +73,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateRefchargeCore(DTO.Refcharge entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -112,8 +112,8 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(ChargeoutRefcharges, nChargeoutRefcharges, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(PaychargeRefcharges, nPaychargeRefcharges, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(ChargeoutRefcharges, nChargeoutRefcharges, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(PaychargeRefcharges, nPaychargeRefcharges, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

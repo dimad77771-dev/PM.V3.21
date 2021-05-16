@@ -42,5 +42,7 @@ namespace Profibiz.PracticeManager.EF
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmailSendRecipient> EmailSendRecipients { get; set; }
         public virtual InvoiceT Invoice { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

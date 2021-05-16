@@ -44,5 +44,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<InsuranceCoverageHolderService> InsuranceCoverageHolderServices { get; set; }
         public virtual InsuranceCoverage InsuranceCoverage { get; set; }
         public virtual Category Category { get; set; }
+        public virtual User User { get; set; }
+        public virtual User User1 { get; set; }
     }
 }

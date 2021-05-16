@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.SchedulerRecord> GetSchedulerRecords(Guid serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.SchedulerRecord>();
 			wh = PredicateBuilder.And(wh, q => q.ServiceProviderRowId == serviceProviderRowId);
@@ -46,7 +46,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void PutSchedulerRecords(List<DTO.SchedulerRecord> rows)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var serviceProviderRowId = rows[0].ServiceProviderRowId;
@@ -79,7 +79,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<CalculateAppointmentStartFinishResult> CalculateAppointmentStartFinish(Guid serviceProviderRowId, DateTime[] dates)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var resultList = new List<CalculateAppointmentStartFinishResult>();
 			var serviceProvider = db.ServiceProviders.Single(q => q.RowId == serviceProviderRowId);

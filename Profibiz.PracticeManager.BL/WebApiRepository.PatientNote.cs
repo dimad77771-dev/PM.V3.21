@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.PatientNote> GetPatientNoteList(Guid? rowId, Guid? patientRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PatientNote>();
 			if (rowId != null)
@@ -46,7 +46,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdatePatientNoteCore(DTO.PatientNote entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);

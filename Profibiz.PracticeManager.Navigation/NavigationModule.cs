@@ -56,6 +56,10 @@ namespace Profibiz.PracticeManager.Navigation
 			_container.RegisterView<OneReferrerView>();
 			_container.RegisterView<ReferrersView>();
 			_container.RegisterView<RibbonReferrersView>();
+			_container.RegisterView<OneUserView>();
+			_container.RegisterView<LoginView>();
+			_container.RegisterView<UsersView>();
+			_container.RegisterView<RibbonUsersView>();
 			_container.RegisterView<OneSupplierView>();
 			_container.RegisterView<SuppliersView>();
 			_container.RegisterView<RibbonSuppliersView>();

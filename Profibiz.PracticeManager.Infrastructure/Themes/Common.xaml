@@ -169,17 +169,19 @@
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-status-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 
-
     <dxmvvm:ObjectToObjectConverter x:Key="referrerRowtype9ToImageConverter">
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/referrer-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 
+	<dxmvvm:ObjectToObjectConverter x:Key="userRowtype9ToImageConverter">
+		<dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/user-16.png" />
+	</dxmvvm:ObjectToObjectConverter>
 
 
 
 
 
-    <dxe:TextEditSettings
+	<dxe:TextEditSettings
         x:Key="moneyEditSettings"
         AllowNullInput="True"
         Mask="c"

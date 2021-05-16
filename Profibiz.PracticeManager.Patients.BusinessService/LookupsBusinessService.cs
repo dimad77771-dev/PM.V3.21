@@ -133,6 +133,13 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var patients = await response.Content.ReadAsAsync<IEnumerable<Referrer>>();
 			return patients.ToList();
 		}
+		async public Task<List<User>> GetUsers()
+		{
+			var client = new MyHttpClient();
+			var response = await client.GetResponse(_baseUrl, "api/lookups/GetUsers");
+			var patients = await response.Content.ReadAsAsync<IEnumerable<User>>();
+			return patients.ToList();
+		}
 		async public Task<List<Supplier>> GetSuppliers()
 		{
 			var client = new MyHttpClient();
@@ -274,6 +281,26 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var response = await _client.DeleteAsync("api/lookups/DeleteReferrer/" + entity.RowId);
 			return await response.ValidateResponse();
 		}
+
+		async public Task<UpdateReturn> PutUsers(IEnumerable<User> entities)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entities);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/lookups/PutUsers", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteUser(User entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/lookups/DeleteUser/" + entity.RowId);
+			return await response.ValidateResponse();
+		}
+
 
 		async public Task<UpdateReturn> PutSuppliers(IEnumerable<Supplier> entities)
 		{
@@ -481,6 +508,15 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			return await response.ValidateResponse();
 		}
 
+		async public Task<LoginInfo> GetLoginInfo(string name, string password)
+		{
+			var client = new MyHttpClient();
+			var response = await client.GetResponse(_baseUrl, "api/lookups/GetLoginInfo?name=" + Uri.EscapeUriString(name) + "&password=" + Uri.EscapeUriString(password));
+			var result = await response.Content.ReadAsAsync<LoginInfo>();
+			return result;
+		}
+
+
 		async public Task UpdateAllLookups()
 		{
 			var taskCategories = GetCategories();
@@ -499,6 +535,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var taskInsuranceProvidersViewGroups = GetInsuranceProvidersViewGroups();
 			var taskThirdPartyServiceProviders = GetThirdPartyServiceProviders();
 			var taskReferrers = GetReferrers();
+			var taskUsers = GetUsers();
 			var taskSuppliers = GetSuppliers();
 			var taskTemplates = GetTemplates();
 			var taskOntarioCities = GetOntarioCities();
@@ -508,7 +545,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 					taskInsuranceProviders, taskMedicalServicesOrSupplies, 
 					taskProfessionalAssociations, taskAppointmentBooks, taskTemplates, 
 					taskServiceProviders, taskInsuranceProvidersViewGroups, taskThirdPartyServiceProviders, 
-					taskReferrers, taskSuppliers, taskOntarioCities);
+					taskReferrers, taskSuppliers, taskOntarioCities, taskUsers);
 			await taskAll;
 
 			var lookupDataProvider = LookupDataProvider.Instance;
@@ -527,6 +564,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			lookupDataProvider.UpdateServiceProviders(taskServiceProviders.Result);
 			lookupDataProvider.UpdateThirdPartyServiceProviders(taskThirdPartyServiceProviders.Result);
 			lookupDataProvider.UpdateReferrers(taskReferrers.Result);
+			lookupDataProvider.UpdateUsers(taskUsers.Result);
 			lookupDataProvider.UpdateSuppliers(taskSuppliers.Result);
 			lookupDataProvider.UpdateInsuranceProvidersViewGroups(taskInsuranceProvidersViewGroups.Result);
 			lookupDataProvider.UpdateTemplates(taskTemplates.Result);

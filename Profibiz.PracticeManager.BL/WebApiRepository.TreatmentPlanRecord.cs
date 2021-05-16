@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.TreatmentPlanRecord> GetTreatmentPlanRecordList(Guid? rowId, Guid? patientRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.TreatmentPlanRecordV>();
 			if (rowId != null)
@@ -47,7 +47,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdateTreatmentPlanRecordCore(DTO.TreatmentPlanRecord entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);

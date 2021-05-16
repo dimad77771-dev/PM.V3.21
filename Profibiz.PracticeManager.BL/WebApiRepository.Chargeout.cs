@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.Chargeout> GetChargeoutList(Guid? rowId, Guid? chargeoutRecipientRowId, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? chargeoutDateFrom, DateTime? chargeoutDateTo, bool isShowSentOnly, bool isShowPaidOnly, DateTime? createdDateFrom, DateTime? createdDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 
 			var wh = ExpressionFunc.True<EF.ChargeoutV>();
@@ -84,7 +84,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.Chargeout GetChargeout(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var sqlquery = db.ChargeoutsV
 				.Include(q => q.ChargeoutRecipient)
@@ -122,7 +122,7 @@ namespace Profibiz.PracticeManager.BL
 			lock (GlobalLocker.ChargeoutUpdate)
 			{
 				var result = new ServerReturnUpdateChargeout();
-				var db = EF.PracticeManagerEntities.Connection;
+				var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 				using (var scope = new TransactionScope())
 				{
 					var chargeoutRowId = entity.RowId;
@@ -170,8 +170,8 @@ namespace Profibiz.PracticeManager.BL
 						else throw new AggregateException(ex);
 					}
 
-					DbUpdateRowsHelper.UpdateList(chargeoutItems, nChargeoutItems, q => q.RowId, db);
-					DbUpdateRowsHelper.UpdateList(chargeoutPaycharges, nChargeoutPaycharges, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(chargeoutItems, nChargeoutItems, q => q.RowId, db, this);
+					DbUpdateRowsHelper.UpdateList(chargeoutPaycharges, nChargeoutPaycharges, q => q.RowId, db, this);
 
 					InventoryFunc.AfterUpdateChargeout(db, chargeoutRowId);
 
@@ -187,7 +187,7 @@ namespace Profibiz.PracticeManager.BL
 			lock (GlobalLocker.ChargeoutUpdate)
 			{
 				var result = new ServerReturnUpdateChargeout();
-				var db = EF.PracticeManagerEntities.Connection;
+				var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 				using (var scope = new TransactionScope())
 				{
 					foreach (var chargeoutRowId in chargeoutRowIds)

@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
     {
 		public IEnumerable<DTO.PayrollInfoResult> GetPayrollInfo(DateTime periodStart, DateTime periodFinish, Guid? serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var list = db.sp_PayrollInfo(periodStart, periodFinish, serviceProviderRowId).ToList();
 
@@ -33,7 +33,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.PayrollPaymentByDoctorAndPeriodView> GetPayrollPaymentByDoctorAndPeriod(Guid? serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PayrollPaymentByDoctorAndPeriodView>();
 			if (serviceProviderRowId != null)
@@ -50,7 +50,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InvoicePaymentByDoctorAndPeriodView> GetInvoicePaymentByDoctorAndPeriod(Guid? serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.InvoicePaymentByDoctorAndPeriodView>();
 			if (serviceProviderRowId != null)
@@ -68,7 +68,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.InvoicePaymentByDoctors> GetPayrollDetail(DateTime periodStart, DateTime periodFinish, Guid serviceProviderRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.InvoicePaymentByDoctorsV>();
 			wh = PredicateBuilder.And(wh, q => q.PaymentDate >= periodStart);
@@ -96,7 +96,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public IEnumerable<DTO.PayrollPayment> GetPayrollPaymentList(Guid? serviceProviderRowId, DateTime? paymentDateFrom, DateTime? paymentDateTo)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.PayrollPaymentV>();
 			if (serviceProviderRowId != null)
@@ -121,7 +121,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public DTO.PayrollPayment GetPayrollPayment(Guid id)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var row = db.PayrollPaymentsV
 				.Include(q => q.PayrollPaymentAllocations)
@@ -137,7 +137,7 @@ namespace Profibiz.PracticeManager.BL
 
 		public void UpdatePayrollPaymentCore(DTO.PayrollPayment entity, EntityState state)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				var isDelete = (state == EntityState.Deleted);
@@ -171,7 +171,7 @@ namespace Profibiz.PracticeManager.BL
 					}
 					db.SaveChangesEx();
 
-					DbUpdateRowsHelper.UpdateList(InvoicePayrollPayments, nInvoicePayrollPayments, q => q.RowId, db);
+					DbUpdateRowsHelper.UpdateList(InvoicePayrollPayments, nInvoicePayrollPayments, q => q.RowId, db, this);
 				}
 
 				scope.Complete();

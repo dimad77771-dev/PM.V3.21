@@ -19,6 +19,10 @@ namespace Profibiz.PracticeManager.EF
         public System.DateTime PeriodStart { get; set; }
         public System.DateTime PeriodFinish { get; set; }
         public decimal Amount { get; set; }
+        public Nullable<System.Guid> CreatedByUserRowId { get; set; }
+        public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
+        public Nullable<System.DateTime> CreatedByDateTime { get; set; }
+        public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
     
         public virtual PayrollPaymentV PayrollPayment { get; set; }
     }

@@ -17,6 +17,7 @@ using System.Diagnostics;
 using Profibiz.PracticeManager.BL;
 using Profibiz.PracticeManager.DTO;
 using System.Net.Http.Headers;
+using System.Web.Http.Controllers;
 
 namespace Profibiz.PracticeManager.WebApi.Controllers
 {
@@ -28,6 +29,11 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 	        _repository = repository;
 	    }
 
+		protected override void Initialize(HttpControllerContext controllerContext)
+		{
+			base.Initialize(controllerContext);
+			_repository.SetCurrentUserRowId(controllerContext);
+		}
 
 		public IHttpActionResult GetPatientsList(Guid? insuranceProviderRowId = null, Guid? insuranceProvidersViewGroupRowId = null, bool hasNoInsuranceProvider = false, bool includeAllFamilyMember = false)
         {

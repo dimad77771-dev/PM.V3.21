@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Profibiz.PracticeManager.Infrastructure;
+using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.IO;
@@ -8,8 +9,10 @@ namespace Profibiz.PracticeManager.EF
 {
 	public partial class PracticeManagerEntities
 	{
-		public PracticeManagerEntities(bool useLogFile) : this()
+		public PracticeManagerEntities(Guid? currentUserRowId, bool useLogFile) : this()
 		{
+			CurrentUserRowId = currentUserRowId;
+
 			if (useLogFile)
 			{
 				this.Database.Log = (q) =>
@@ -30,17 +33,13 @@ namespace Profibiz.PracticeManager.EF
 			}
 		}
 
-
-		public static PracticeManagerEntities Connection
+		public static PracticeManagerEntities GetConnection(Guid? currentUserRowId, bool useLogFile = true)
 		{
-			get
-			{
-				var _db = new EF.PracticeManagerEntities(useLogFile: true);
-				return _db;
-			}
+			var _db = new EF.PracticeManagerEntities(currentUserRowId, useLogFile: useLogFile);
+			return _db;
 		}
 
-		Guid? UserRowId;
+		Guid? CurrentUserRowId { get; set; }
 
 		public override int SaveChanges()
 		{
@@ -53,14 +52,14 @@ namespace Profibiz.PracticeManager.EF
 					if (entry.State == EntityState.Added)
 					{
 						entity.CreatedByDateTime = now;
-						entity.CreatedByUserRowId = UserRowId;
+						entity.CreatedByUserRowId = CurrentUserRowId;
 						entity.UpdatedByDateTime = now;
-						entity.UpdatedByUserRowId = UserRowId;
+						entity.UpdatedByUserRowId = CurrentUserRowId;
 					}
 					else if (entry.State == EntityState.Modified)
 					{
 						entity.UpdatedByDateTime = now;
-						entity.UpdatedByUserRowId = UserRowId;
+						entity.UpdatedByUserRowId = CurrentUserRowId;
 					}
 
 				}

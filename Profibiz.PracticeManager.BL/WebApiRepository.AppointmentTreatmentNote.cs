@@ -22,7 +22,7 @@ namespace Profibiz.PracticeManager.BL
 	{
 		public IEnumerable<DTO.AppointmentTreatmentNote> GetAppointmentTreatmentNoteList(Guid? rowId, Guid? appointmentRowId)
 		{
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
 			var wh = ExpressionFunc.True<EF.AppointmentTreatmentNote>();
 			if (rowId != null)
@@ -48,7 +48,7 @@ namespace Profibiz.PracticeManager.BL
 		public void UpdateAppointmentTreatmentNoteCore(DTO.AppointmentTreatmentNote[] entities, EntityState state)
 		{
 			//entity
-			var db = EF.PracticeManagerEntities.Connection;
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			using (var scope = new TransactionScope())
 			{
 				foreach (var entity in entities)

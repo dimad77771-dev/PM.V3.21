@@ -489,6 +489,9 @@
     <Compile Include="TreatmentPlanRecordV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="User.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="UserSetting.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
@@ -527,6 +530,15 @@
       <DependentUpon>PracticeManagerModel.edmx</DependentUpon>
       <LastGenOutput>PracticeManagerModel.cs</LastGenOutput>
     </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Profibiz.PracticeManager.InfrastructureExt\Profibiz.PracticeManager.InfrastructureExt.csproj">
+      <Project>{d3b37908-de44-4835-b539-18633c8f6647}</Project>
+      <Name>Profibiz.PracticeManager.InfrastructureExt</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
