@@ -508,6 +508,21 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="FormDocuments">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="DocxBytes" Type="varbinary(max)" Nullable="false" />
+          <Property Name="TemplateName" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="TemplatePath" Type="nvarchar" MaxLength="4000" Nullable="false" />
+          <Property Name="AppointmentRowId" Type="uniqueidentifier" />
+          <Property Name="PatientRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="InsuranceCoverageHolders">
           <Key>
             <PropertyRef Name="RowId" />
@@ -995,6 +1010,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="TemplateFolder" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="NLogItems">
           <Key>
@@ -2446,6 +2462,7 @@ warning 6002: The table/view 'PM_V3.dbo.InventoryBalanceView' does not have a pr
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="TemplateFolder" Type="nvarchar" MaxLength="1000" />
           <Property Name="Balance" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -5023,6 +5040,54 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FormDocuments_Appointments">
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointments">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="AppointmentRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_CreatedByUserRowId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_Patients">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_UpdatedByUserRowId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_InsuranceCoverageHolders_CreatedByUserRowId">
           <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
           <End Role="InsuranceCoverageHolders" Type="Self.InsuranceCoverageHolders" Multiplicity="*" />
@@ -7177,6 +7242,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySet Name="EmailSendAttachments" EntityType="Self.EmailSendAttachments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailSendRecipients" EntityType="Self.EmailSendRecipients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailSends" EntityType="Self.EmailSends" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormDocuments" EntityType="Self.FormDocuments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageHolders" EntityType="Self.InsuranceCoverageHolders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageHolderServices" EntityType="Self.InsuranceCoverageHolderServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageItemCategories" EntityType="Self.InsuranceCoverageItemCategories" Schema="dbo" store:Type="Tables" />
@@ -7577,6 +7643,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
     [InventoryBalanceView].[UpdatedByUserRowId] AS [UpdatedByUserRowId], 
     [InventoryBalanceView].[CreatedByDateTime] AS [CreatedByDateTime], 
     [InventoryBalanceView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
+    [InventoryBalanceView].[TemplateFolder] AS [TemplateFolder], 
     [InventoryBalanceView].[Balance] AS [Balance]
     FROM [dbo].[InventoryBalanceView] AS [InventoryBalanceView]</DefiningQuery>
           </EntitySet>
@@ -8930,6 +8997,22 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="Users" EntitySet="Users" />
             <End Role="EmailSends" EntitySet="EmailSends" />
           </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Appointments" Association="Self.FK_FormDocuments_Appointments">
+            <End Role="Appointments" EntitySet="Appointments" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_CreatedByUserRowId" Association="Self.FK_FormDocuments_CreatedByUserRowId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Patients" Association="Self.FK_FormDocuments_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_UpdatedByUserRowId" Association="Self.FK_FormDocuments_UpdatedByUserRowId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
           <AssociationSet Name="FK_InsuranceCoverageHolders_CreatedByUserRowId" Association="Self.FK_InsuranceCoverageHolders_CreatedByUserRowId">
             <End Role="Users" EntitySet="Users" />
             <End Role="InsuranceCoverageHolders" EntitySet="InsuranceCoverageHolders" />
@@ -9676,6 +9759,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_MedicalServicesOrSupplies_CreatedByUserRowId" FromRole="MedicalServicesOrSupply" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_MedicalServicesOrSupplies_UpdatedByUserRowId" FromRole="MedicalServicesOrSupply" ToRole="User" />
+          <Property Name="TemplateFolder" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           </EntityType>
         <EntityType Name="PatientMedicalCondition">
           <Key>
@@ -11089,6 +11173,23 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="User" EntitySet="Users" />
             <End Role="UserSetting" EntitySet="UserSettings" />
           </AssociationSet>
+          <EntitySet Name="FormDocuments" EntityType="PracticeManagerModel.FormDocument" />
+          <AssociationSet Name="FK_FormDocuments_CreatedByUserRowId" Association="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_UpdatedByUserRowId" Association="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Appointments" Association="PracticeManagerModel.FK_FormDocuments_Appointments">
+            <End Role="AppointmentT" EntitySet="AppointmentsT" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Patients" Association="PracticeManagerModel.FK_FormDocuments_Patients">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -11181,6 +11282,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_Patients_CreatedByUserRowId" FromRole="Patient" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Patients_UpdatedByUserRowId" FromRole="Patient" ToRole="User" />
+          <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_Patients" FromRole="Patient" ToRole="FormDocument" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -11714,6 +11816,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_Appointments_CreatedByUserRowId" FromRole="AppointmentT" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Appointments_UpdatedByUserRowId" FromRole="AppointmentT" ToRole="User" />
+          <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_Appointments" FromRole="AppointmentT" ToRole="FormDocument" />
         </EntityType>
         <Association Name="FK_Appointments_AppointmentBooks">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="1" />
@@ -14164,6 +14267,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="TemplateFolder" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="OrderVSupplier">
           <End Type="PracticeManagerModel.OrderV" Role="OrderV" Multiplicity="*" />
@@ -17181,7 +17285,9 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
-        </EntityType>
+          <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId" FromRole="User" ToRole="FormDocument" />
+          <NavigationProperty Name="FormDocuments1" Relationship="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId" FromRole="User" ToRole="FormDocument" />
+          </EntityType>
         <Association Name="FK_AppointmentBooks_CreatedByUserRowId">
           <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="*" />
@@ -19102,6 +19208,73 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="FormDocument">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="DocxBytes" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="TemplateName" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId" FromRole="FormDocument" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId" FromRole="FormDocument" ToRole="User" />
+          <Property Name="TemplatePath" Type="String" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="AppointmentRowId" Type="Guid" />
+          <Property Name="PatientRowId" Type="Guid" />
+          <NavigationProperty Name="Appointment" Relationship="PracticeManagerModel.FK_FormDocuments_Appointments" FromRole="FormDocument" ToRole="AppointmentT" />
+          <NavigationProperty Name="Patient" Relationship="PracticeManagerModel.FK_FormDocuments_Patients" FromRole="FormDocument" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_FormDocuments_CreatedByUserRowId">
+          <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_UpdatedByUserRowId">
+          <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_Appointments">
+          <End Type="PracticeManagerModel.AppointmentT" Role="AppointmentT" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentT">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="AppointmentRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_Patients">
+          <End Type="PracticeManagerModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -19111,6 +19284,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="MedicalServicesOrSupplies">
             <EntityTypeMapping TypeName="PracticeManagerModel.MedicalServicesOrSupply">
               <MappingFragment StoreEntitySet="MedicalServicesOrSupplies">
+                <ScalarProperty Name="TemplateFolder" ColumnName="TemplateFolder" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -20898,6 +21072,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="InventoryBalances">
             <EntityTypeMapping TypeName="PracticeManagerModel.InventoryBalance">
               <MappingFragment StoreEntitySet="InventoryBalanceView">
+                <ScalarProperty Name="TemplateFolder" ColumnName="TemplateFolder" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -22614,6 +22789,22 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
                 <ScalarProperty Name="IsAdmin" ColumnName="IsAdmin" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormDocuments">
+            <EntityTypeMapping TypeName="PracticeManagerModel.FormDocument">
+              <MappingFragment StoreEntitySet="FormDocuments">
+                <ScalarProperty Name="PatientRowId" ColumnName="PatientRowId" />
+                <ScalarProperty Name="AppointmentRowId" ColumnName="AppointmentRowId" />
+                <ScalarProperty Name="TemplatePath" ColumnName="TemplatePath" />
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
+                <ScalarProperty Name="DocxBytes" ColumnName="DocxBytes" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -17,6 +17,8 @@ namespace Profibiz.PracticeManager.Infrastructure
 		public static bool Debuger => System.Diagnostics.Debugger.IsAttached;
 		public static bool Release => !Debuger;
 		public static bool IsMachineD => (GetMachineUniq() == "beb37e45-3470-4d05-8e19-382a94c41ab3");
+		public static string BaseRegKey { get; set; } = @"HKEY_CURRENT_USER\Software\Profibiz.PracticeManager.V3";
+		public static string CurrentUserNameKey { get; set; } = @"CurrentUserName";
 
 		public static string GetUserCode()
 		{

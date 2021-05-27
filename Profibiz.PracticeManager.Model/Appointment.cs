@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -81,7 +83,7 @@ namespace Profibiz.PracticeManager.Model
 
 		public InvoiceItem InvoiceItem { get; set; }
 		public AppointmentRemainder[] AppointmentRemainders { get; set; } = new AppointmentRemainder[0];
-
+		public ObservableCollection<FormDocument> FormDocuments { get; set; } = new FormDocument[0].ToObservableCollection();
 
 		public class MultiDateInfo
 		{
@@ -203,5 +205,66 @@ namespace Profibiz.PracticeManager.Model
 			OnOpenDetail?.Invoke();
 		});
 		public Action OnOpenDetail;
+
+		public class ButtonAppointmentForm
+		{
+			public FormDocument FormDocument { get; set; }
+			public String ButtonText { get; set; }
+			public Color ButtonColor { get; set; }
+			public String FontStyle { get; set; }
+			public String FontWeight { get; set; }
+			public DelegateCommand OnClickCommand { get; set; }
+		}
+
+		public Action<Appointment, FormDocument> OnClickButtonAppointmentForm;
+		public ButtonAppointmentForm[] ButtonsAppointmentForm
+		{
+			get
+			{
+				if (this.RowId == default(Guid))
+				{
+					var b = 100;
+				}
+
+				var buttons = new List<ButtonAppointmentForm>();
+
+				foreach(var formDocument in FormDocuments)
+				{
+					var filename = formDocument.TemplateName;
+					buttons.Add(new ButtonAppointmentForm
+					{
+						ButtonText = filename,
+						FontStyle = "Regular",
+						FontWeight = "Normal",
+						OnClickCommand = new DelegateCommand(() => OnClickButtonAppointmentForm(this, formDocument)),
+					});
+				}
+
+				buttons.Add(new ButtonAppointmentForm
+				{
+					ButtonText = " Add new form... ",
+					FontStyle = "Italic",
+					FontWeight = "Bold",
+					OnClickCommand = new DelegateCommand(() => OnClickButtonAppointmentForm(this, null)),
+				});
+
+				//AppointmentFormDocumentMappings
+				return buttons.ToArray();
+			}
+		}
 	}
+
+
+	public static class AppointmentExtensions
+	{
+		public static void SetOnClickButtonAppointmentForm(this IEnumerable<Appointment> appointments, Action<Appointment, FormDocument> onClickButtonAppointmentForm)
+		{
+			appointments.ForEach(q => q.OnClickButtonAppointmentForm = onClickButtonAppointmentForm);
+		}
+		public static void SetOnClickButtonAppointmentForm(this Appointment appointments, Action<Appointment, FormDocument> onClickButtonAppointmentForm)
+		{
+			appointments.OnClickButtonAppointmentForm = onClickButtonAppointmentForm;
+		}
+	}
+
 }

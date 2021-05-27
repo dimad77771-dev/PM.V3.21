@@ -177,6 +177,8 @@ namespace Profibiz.PracticeManager.EF
             this.TreatmentPlanRecords1 = new HashSet<TreatmentPlanRecordT>();
             this.UserSettings = new HashSet<UserSetting>();
             this.UserSettings1 = new HashSet<UserSetting>();
+            this.FormDocuments = new HashSet<FormDocument>();
+            this.FormDocuments1 = new HashSet<FormDocument>();
         }
     
         public System.Guid RowId { get; set; }
@@ -524,5 +526,9 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<UserSetting> UserSettings { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<UserSetting> UserSettings1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormDocument> FormDocuments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormDocument> FormDocuments1 { get; set; }
     }
 }

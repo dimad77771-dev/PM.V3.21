@@ -45,6 +45,7 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public string TemplateFolder { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentT> Appointments { get; set; }

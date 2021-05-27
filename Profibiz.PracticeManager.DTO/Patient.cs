@@ -80,6 +80,7 @@ namespace Profibiz.PracticeManager.DTO
 		public List<PatientDocument> PatientDocuments { get; set; }
 		public List<Appointment> AppointmentWithClinicalNotes { get; set; }
 		public List<Appointment> AppointmentWithTreatmentNotes { get; set; }
+		public Appointment PatientFormDocuments { get; set; }
 
 		public ChangeFamilyMemberInfo ChangeFamilyMember { get; set; }
 		public class ChangeFamilyMemberInfo

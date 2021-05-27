@@ -114,6 +114,7 @@
                                     Header="CATEGORY"
                                     EditSettings="{StaticResource comboBoxCategories}" />
                     <dxg:GridColumn FieldName="PrintLabel" Header="PRINT LABEL" />
+					<dxg:GridColumn FieldName="TemplateFolder" Header="TEMPLATE FOLDER" />
 
                     <dxg:GridColumn FieldName="ItemType"
                                     Header="ITEM TYPE"

@@ -25,6 +25,7 @@ using System.Diagnostics;
 using Profibiz.PracticeManager.Patients.BusinessService;
 using Profibiz.PracticeManager.Navigation.Views;
 using System.Windows;
+using Microsoft.Win32;
 
 namespace Profibiz.PracticeManager.Navigation.ViewModels
 {
@@ -63,8 +64,22 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			var entity = new User()
 			{
 				//Name = "User 1", Password = "12345",
-				Name = "1", Password = "1",
+				//Name = "1", Password = "1",
 			};
+
+			var currentUserName = (Registry.GetValue(RuntimeHelper.BaseRegKey, RuntimeHelper.CurrentUserNameKey, (object)"") ?? "").ToString();
+			if (!String.IsNullOrEmpty(currentUserName))
+			{
+				entity.Name = currentUserName;
+			}
+
+			if (RuntimeHelper.IsMachineD)
+			{
+				//entity.Name = "1"; entity.Password = "1";
+			}
+
+
+
 			Entity = entity;
 		}
 
@@ -95,7 +110,8 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 
 			//save
 			ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Custom, "Connecting...");
-			var uret = await lookupsBusinessService.GetLoginInfo(Entity.Name, Entity.Password);
+			var username = (Entity.Name ?? "");
+			var uret = await lookupsBusinessService.GetLoginInfo(username, Entity.Password);
 			ShowWaitIndicator.Hide();
 			if (!uret.IsSuccess)
 			{
@@ -103,6 +119,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				return false;
 			}
 
+			Registry.SetValue(RuntimeHelper.BaseRegKey, RuntimeHelper.CurrentUserNameKey, (object)username);
 			UserManager.UserRowId = uret.UserRowId;
 			IsConnect = true;
 			View.Close();

@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainCycle.cs" />
+    <Compile Include="SmsFunc.cs" />
     <Compile Include="ServiceApi.cs" />
     <Compile Include="WindowsService.cs">
       <SubType>Component</SubType>

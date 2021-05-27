@@ -180,6 +180,9 @@
     <Compile Include="EmailSendV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="FormDocument.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="InsuranceArticleV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>

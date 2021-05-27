@@ -190,11 +190,13 @@
     <Compile Include="Converters\InvoiceFamilyBalanceConverter.cs" />
     <Compile Include="Converters\AnnualAmountCoveredConverter.cs" />
     <Compile Include="Converters\PatientPhotosConverter.cs" />
+    <Compile Include="Helpers\FormDocumentHelper.cs" />
     <Compile Include="ModuleInit.cs" />
-    <Compile Include="Printdocs\PrintdocProccessing.cs" />
+    <Compile Include="Helpers\PrintdocProccessing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModels\FormDocumentViewModel.cs" />
     <Compile Include="ViewModels\AppointmentTreatmentNoteViewModel.cs" />
     <Compile Include="ViewModels\CalendarEventsScheduler\CalendarEventsScheduler.MonthViewDayHeaderControl.cs" />
     <Compile Include="ViewModels\CalendarEventsScheduler\CalendarEventsScheduler.Convertors.cs" />
@@ -215,6 +217,7 @@
     <Compile Include="ViewModels\ChargeoutWindowViewModel.cs" />
     <Compile Include="ViewModels\ChargeoutPrintViewModel.cs" />
     <Compile Include="ViewModels\LeftFilterChargeoutsViewModel.cs" />
+    <Compile Include="ViewModels\PickTemplateNameViewModel.cs" />
     <Compile Include="ViewModels\TreatmentPlanRecordViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryRecordViewModel.cs" />
     <Compile Include="ViewModels\LeftFilterInventoryViewModel.cs" />
@@ -287,6 +290,9 @@
     <Compile Include="ViewModels\SpecialistsViewModel.cs" />
     <Compile Include="ViewModels\PatientsViewModel.cs" />
     <Compile Include="ViewModels\InventoryListViewModel.cs" />
+    <Compile Include="Views\FormDocumentView.xaml.cs">
+      <DependentUpon>FormDocumentView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AppointmentTreatmentNoteView.xaml.cs">
       <DependentUpon>AppointmentTreatmentNoteView.xaml</DependentUpon>
     </Compile>
@@ -340,6 +346,9 @@
     </Compile>
     <Compile Include="Views\LeftFilterInventoryView.xaml.cs">
       <DependentUpon>LeftFilterInventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PickTemplateNameView.xaml.cs">
+      <DependentUpon>PickTemplateNameView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TreatmentPlanRecordView.xaml.cs">
       <DependentUpon>TreatmentPlanRecordView.xaml</DependentUpon>
@@ -702,6 +711,124 @@
     <None Include="Templates\Docs753\753%289%29.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Include="Templates\Forms\Acupuncture\Arms_legs_and_back_pain 6 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\Back Pain 2 8 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\Back pain 6 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\Back pain, head pain.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\back_pain_with_sciatica1 8 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\Low back pain with sciatica 10 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\back\Low_back_pain 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Bilateral_tennis_elbow 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Carpal tunnel.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Headache 4 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Knee pain.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Legs and feet, head as well migraines 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck , back and back of the knees pain 10 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck and shoulder pain 4 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck and shoulder right side 7 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck, Shoulder and Upper Back Pain 9 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck, shoulders and upper back 7 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\neck_and_upper_back_pain 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Neck\Neck_back_and_knees.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Right_and_left_leg_pain_thigh.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Right_hip_pain.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\shoulder\Bilateral shoulder pain 6 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\shoulder\Shoulder and back pain 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\shoulder\Shoulder and elbow pain 4 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\shoulder\Shoulder and knee 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\shoulder\Shoulder pain 5 sessions.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Tennis elbow.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Acupuncture\Varicose, Veins Pain in Legs.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiropodist\custom made orthopedic shoes kapil.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiropodist\KAPIL DESWAL ORTHOTICS BIO. MECH..docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiropodist\OFF THE SHELVES ORTHOPEDIC SHOES.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiropodist\PROGRESS NOTES.DOCX.lnk" />
+    <None Include="Templates\Forms\Chiro\CHRIO CLINICAL NOTES.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiro\Patient_With_Practitioner\Astra CONSENT TO CHIROPRACTIC TREATMENT NEW.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Chiro\Patient_With_Practitioner\INITIAL ASSESSMENT FORM CHIRO.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Patient\custom made orthopedic shoes kapil.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Patient\KAPIL DESWAL ORTHOTICS BIO. MECH..docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Patient\OFF THE SHELVES ORTHOPEDIC SHOES.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Physio\PHYSIO INTIAL.pdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\Forms\Physio\PROGRESS NOTES.DOCX.lnk">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\INVOICE_TEMPLATE_01.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
@@ -719,6 +846,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Views\FormDocumentView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\AppointmentsSchedulerView.Resources\DayHeader__DayView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -852,6 +983,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LeftFilterInventoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\PickTemplateNameView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -1334,6 +1469,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="..\Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />

@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FormDocument.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="AppointmentTreatmentNote.cs" />
     <Compile Include="AppointmentRemainder.cs" />

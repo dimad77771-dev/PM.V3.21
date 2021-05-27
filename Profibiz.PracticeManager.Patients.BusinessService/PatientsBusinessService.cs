@@ -1115,6 +1115,44 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			return await response.ValidateResponse();
 		}
 
+
+		async public Task<List<FormDocument>> GetFormDocumentList(string query)
+		{
+			var _client = new MyHttpClient();
+			var response = await _client.GetResponse(_baseUrl, "api/patients/GetFormDocumentList?" + query);
+			var list = await response.Content.ReadAsAsync<IEnumerable<FormDocument>>();
+			return list.ToList();
+		}
+		async public Task<UpdateReturn> PutFormDocument(FormDocument entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/patients/PutFormDocument", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> PostFormDocument(FormDocument entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PostAsync("api/patients/PostFormDocument", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteFormDocument(Guid rowId)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/patients/DeleteFormDocument/" + rowId);
+			return await response.ValidateResponse();
+		}
+
+
 		async public Task<List<AppointmentTreatmentNote>> GetAppointmentTreatmentNoteList(string query)
 		{
 			var _client = new MyHttpClient();

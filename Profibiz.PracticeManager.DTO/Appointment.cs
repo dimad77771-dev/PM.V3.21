@@ -54,5 +54,7 @@ namespace Profibiz.PracticeManager.DTO
 		public Patient Patient { get; set; }
 		public InvoiceItem InvoiceItem { get; set; }
 		public AppointmentRemainder[] AppointmentRemainders { get; set; }
+
+		public FormDocument[] FormDocuments { get; set; }
 	}
 }

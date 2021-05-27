@@ -1,318 +1,314 @@
-﻿<dx:DXWindow x:Class="Profibiz.PracticeManager.Navigation.Views.OneMedicalServiceView"
-             xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-             xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
-             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
-             xmlns:inter="http://www.codeplex.com/prism"
-             xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
-             xmlns:localview="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
-             xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
-             Width="500"
-             Height="510"
-             Title="Medical Service/Supply"
-             WindowStartupLocation="CenterScreen"
-             ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
-             d:DesignWidth="400"
-             d:DesignHeight="250"
-             prism:ViewModelLocator.AutoWireViewModel="True"
-             UseLayoutRounding="True"
-             mc:Ignorable="d">
+﻿<dx:DXWindow
+	x:Class="Profibiz.PracticeManager.Navigation.Views.OneMedicalServiceView"
+	xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+	xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+	xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+	xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+	xmlns:inter="http://www.codeplex.com/prism"
+	xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	xmlns:localview="clr-namespace:Profibiz.PracticeManager.Navigation.Views"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	Width="600"
+	Height="710"
+	Title="Medical Service/Supply"
+	WindowStartupLocation="CenterScreen"
+	ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+	d:DesignWidth="400"
+	d:DesignHeight="250"
+	prism:ViewModelLocator.AutoWireViewModel="True"
+	UseLayoutRounding="True"
+	mc:Ignorable="d">
 
-    <i:Interaction.Triggers>
-        <inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
-            <infrastructure:ShowDXWindowsAction />
-        </inter:InteractionRequestTrigger>
-        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
-            <infrastructure:CloseDXWindowsAction />
-        </inter:InteractionRequestTrigger>
-    </i:Interaction.Triggers>
-    <dx:DXWindow.Resources>
-        <ResourceDictionary>
-            <local:PictureConverter x:Key="PictureConverter" />
-        </ResourceDictionary>
-    </dx:DXWindow.Resources>
-    <dxmvvm:Interaction.Behaviors>
-        <dx:DXMessageBoxService />
-        <dxmvvm:EventToCommand EventName="Closing"
-                               Command="{Binding ClosingEventCommand}"
-                               PassEventArgsToCommand="True" />
-    </dxmvvm:Interaction.Behaviors>
+	<i:Interaction.Triggers>
+		<inter:InteractionRequestTrigger SourceObject="{Binding OpenWindowInteractionRequest}">
+			<infrastructure:ShowDXWindowsAction />
+		</inter:InteractionRequestTrigger>
+		<inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+			<infrastructure:CloseDXWindowsAction />
+		</inter:InteractionRequestTrigger>
+	</i:Interaction.Triggers>
+	<dx:DXWindow.Resources>
+		<ResourceDictionary>
+			<local:PictureConverter x:Key="PictureConverter" />
+		</ResourceDictionary>
+	</dx:DXWindow.Resources>
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DXMessageBoxService />
+		<dxmvvm:EventToCommand
+			EventName="Closing"
+			Command="{Binding ClosingEventCommand}"
+			PassEventArgsToCommand="True" />
+	</dxmvvm:Interaction.Behaviors>
 
-    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Grid Grid.Row="0"
-                  Background="Transparent"
-                  ShowGridLines="False">
-                <dx:DXBorder Margin="0"
-                             BorderThickness="0 0 0 1"
-                             BorderBrush="#A0A0A0">
-                    <Grid Margin="10">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="Auto" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+	<dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+		<Grid>
+			<Grid.RowDefinitions>
+				<RowDefinition Height="*" />
+				<RowDefinition Height="Auto" />
+			</Grid.RowDefinitions>
+			<Grid
+				Grid.Row="0"
+				Background="Transparent"
+				ShowGridLines="False">
+				<dx:DXBorder
+					Margin="0"
+					BorderThickness="0,0,0,1"
+					BorderBrush="#A0A0A0">
+					<Grid Margin="10">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="*" />
+						</Grid.ColumnDefinitions>
 
-                        <dxlc:LayoutItemLabel Grid.Row="0"
-                                              Grid.Column="0"
-                                              Content="Name"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="0"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Name,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      Style="{StaticResource baseEditStyle1}" />
-                        <dxlc:LayoutItemLabel Grid.Row="1"
-                                              Grid.Column="0"
-                                              Content="Code"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="1"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Code,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      Style="{StaticResource baseEditStyle1}" />
-                        <dxlc:LayoutItemLabel Grid.Row="2"
-                                              Grid.Column="0"
-                                              Content="Item Type"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:ComboBoxEdit Grid.Row="2"
-                                          Grid.Column="1"
-                                          EditValue="{Binding Entity.ItemType,
-                                                              UpdateSourceTrigger=PropertyChanged,
-                                                              ValidatesOnDataErrors=True,
-                                                              NotifyOnSourceUpdated=True}"
-                                          IsTextEditable="False"
-                                          ItemsSource="{Binding MedicalItemType,
-                                                                Source={StaticResource lookupDataProvider}}"
-                                          IsReadOnly="{Binding ReadOnlyItemType}"
-                                          Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="0"
+							Grid.Column="0"
+							Content="Name"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="0"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="1"
+							Grid.Column="0"
+							Content="Code"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="1"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Code, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="2"
+							Grid.Column="0"
+							Content="Item Type"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:ComboBoxEdit
+							Grid.Row="2"
+							Grid.Column="1"
+							EditValue="{Binding Entity.ItemType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsTextEditable="False"
+							ItemsSource="{Binding MedicalItemType, Source={StaticResource lookupDataProvider}}"
+							IsReadOnly="{Binding ReadOnlyItemType}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="3"
-                                              Grid.Column="0"
-                                              Content="Unit Price"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="3"
-                                      Grid.Column="1"
-                                      MaskType="Numeric"
-                                      Mask="c"
-                                      MaskUseAsDisplayFormat="True"
-                                      Width="100"
-                                      HorizontalAlignment="Left"
-                                      EditValue="{Binding Entity.UnitPrice,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyPrice}"
-                                      AllowNullInput="True"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="3"
+							Grid.Column="0"
+							Content="Unit Price"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="3"
+							Grid.Column="1"
+							MaskType="Numeric"
+							Mask="c"
+							MaskUseAsDisplayFormat="True"
+							Width="100"
+							HorizontalAlignment="Left"
+							EditValue="{Binding Entity.UnitPrice, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyPrice}"
+							AllowNullInput="True"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="4"
-                                              Grid.Column="0"
-                                              Content="Tax Rate"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="4"
-                                      Grid.Column="1"
-                                      MaskType="Numeric"
-                                      Mask="P"
-                                      MaskUseAsDisplayFormat="True"
-                                      Width="100"
-                                      HorizontalAlignment="Left"
-                                      EditValue="{Binding Entity.TaxRate,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyPrice}"
-                                      AllowNullInput="True"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="4"
+							Grid.Column="0"
+							Content="Tax Rate"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="4"
+							Grid.Column="1"
+							MaskType="Numeric"
+							Mask="P"
+							MaskUseAsDisplayFormat="True"
+							Width="100"
+							HorizontalAlignment="Left"
+							EditValue="{Binding Entity.TaxRate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyPrice}"
+							AllowNullInput="True"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="5"
-                                              Grid.Column="0"
-                                              Content="Model"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="5"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Model,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="5"
+							Grid.Column="0"
+							Content="Model"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="5"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Model, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="6"
-                                              Grid.Column="0"
-                                              Content="Supplier"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="6"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Supplier,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="6"
+							Grid.Column="0"
+							Content="Supplier"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="6"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Supplier, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="7"
-                                              Grid.Column="0"
-                                              Content="Size"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="7"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Size,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="7"
+							Grid.Column="0"
+							Content="Size"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="7"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Size, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
 
-                        <dxlc:LayoutItemLabel Grid.Row="8"
-                                              Grid.Column="0"
-                                              Content="Category"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:ComboBoxEdit Grid.Row="8"
-                                          Grid.Column="1"
-                                          EditValue="{Binding Entity.CategoryRowId,
-                                                              UpdateSourceTrigger=PropertyChanged,
-                                                              ValidatesOnDataErrors=True,
-                                                              NotifyOnSourceUpdated=True}"
-                                          IsTextEditable="False"
-                                          ItemsSource="{Binding AllCategories}"
-                                          DisplayMember="Name"
-                                          ValueMember="RowId"
-                                          NullValueButtonPlacement="EditBox"
-                                          Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="8"
+							Grid.Column="0"
+							Content="Category"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:ComboBoxEdit
+							Grid.Row="8"
+							Grid.Column="1"
+							EditValue="{Binding Entity.CategoryRowId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsTextEditable="False"
+							ItemsSource="{Binding AllCategories}"
+							DisplayMember="Name"
+							ValueMember="RowId"
+							NullValueButtonPlacement="EditBox"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="9"
-                                              Grid.Column="0"
-                                              Content="Factory"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="9"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Factory,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="9"
+							Grid.Column="0"
+							Content="Factory"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="9"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Factory, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="10"
-                                              Grid.Column="0"
-                                              Content="Article"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="10"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Article,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="10"
+							Grid.Column="0"
+							Content="Article"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="10"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Article, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="11"
-                                              Grid.Column="0"
-                                              Content="Measurement Unit"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="11"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.MeasurementUnit,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="11"
+							Grid.Column="0"
+							Content="Measurement Unit"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="11"
+							Grid.Column="1"
+							EditValue="{Binding Entity.MeasurementUnit, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding Entity.IsReadOnlyModelSupplierSize}"
+							Style="{StaticResource baseEditStyle1}" />
 
 
-                        <dxlc:LayoutItemLabel Grid.Row="12"
-                                              Grid.Column="0"
-                                              Content="Print Label"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="12"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.PrintLabel,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      Style="{StaticResource baseEditStyle1}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="12"
+							Grid.Column="0"
+							Content="Print Label"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="12"
+							Grid.Column="1"
+							EditValue="{Binding Entity.PrintLabel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}" />
 
-                        <dxlc:LayoutItemLabel Grid.Row="13"
-                                              Grid.Column="0"
-                                              Content="Use Print Label"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:CheckEdit Grid.Row="13"
-                                       Grid.Column="1"
-                                       IsChecked="{Binding Entity.UsePrintLabel,
-                                                           Mode=TwoWay,
-                                                           UpdateSourceTrigger=PropertyChanged,
-                                                           ValidatesOnExceptions=True}" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="13"
+							Grid.Column="0"
+							Content="Use Print Label"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="13"
+							Grid.Column="1"
+							IsChecked="{Binding Entity.UsePrintLabel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
 
 
 
-                        <dxlc:LayoutItemLabel Grid.Row="14"
-                                              Grid.Column="0"
-                                              Content="Notes"
-                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
-                        <dxe:TextEdit Grid.Row="14"
-                                      Grid.Column="1"
-                                      EditValue="{Binding Entity.Notes,
-                                                          UpdateSourceTrigger=PropertyChanged,
-                                                          ValidatesOnDataErrors=True,
-                                                          NotifyOnSourceUpdated=True}"
-                                      Style="{StaticResource baseEditStyle1}"
-                                      Height="100"
-                                      TextWrapping="Wrap"
-                                      AcceptsReturn="True"
-                                      VerticalScrollBarVisibility="Auto"
-                                      VerticalContentAlignment="Top" />
+						<dxlc:LayoutItemLabel
+							Grid.Row="14"
+							Grid.Column="0"
+							Content="Notes"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="14"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Notes, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}"
+							Height="100"
+							TextWrapping="Wrap"
+							AcceptsReturn="True"
+							VerticalScrollBarVisibility="Auto"
+							VerticalContentAlignment="Top" />
+
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="15"
+							Grid.Column="0"
+							Content="Template Folder"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="15"
+							Grid.Column="1"
+							EditValue="{Binding Entity.TemplateFolder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}" />
 
 
 
+					</Grid>
+				</dx:DXBorder>
+			</Grid>
 
+			<infrastructure:CommandPanelView Grid.Row="1" />
+		</Grid>
 
-
-
-
-                    </Grid>
-                </dx:DXBorder>
-            </Grid>
-
-            <infrastructure:CommandPanelView Grid.Row="1" />
-        </Grid>
-
-    </dx:LoadingDecorator>
+	</dx:LoadingDecorator>
 </dx:DXWindow>

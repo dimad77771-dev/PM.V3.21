@@ -55,8 +55,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsVisibilityPatientNote { get; set; } = true;
 		public virtual bool IsVisibilityPatientDocument { get; set; } = true;
 		public virtual bool IsVisibilityAppointmentClinicalNote { get; set; } = true;
-		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = true;
-
+		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = false;
+		public virtual bool IsVisibilityTreatmentPlan { get; set; } = false;
 
 
 
@@ -92,6 +92,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			isLoadTreatmentPlanModel = false;
 			ShowWaitIndicator.Show();
 
+			BehaviorGridConrolAppointmentClinicalNoteEntities.Control.Loaded += Control_Loaded;
+
 			IsNew = OpenParam.IsNew;
 			Patient entity;
 			if (!IsNew)
@@ -99,6 +101,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity = await businessService.GetPatient(OpenParam.RowId);
 				entity.AppointmentWithClinicalNotes.ForEach(q => SubscribeClinicalAppointmentRow(q));
 				entity.AppointmentWithTreatmentNotes.ForEach(q => SubscribeTreatmentAppointmentRow(q));
+				entity.AppointmentWithClinicalNotes.SetOnClickButtonAppointmentForm(AppointmentClinicalNoteClick);
+				entity.PatientFormDocuments.SetOnClickButtonAppointmentForm(AppointmentClinicalNoteClick);
 			}
 			else
 			{
@@ -153,11 +157,16 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			await LoadMedicalHistoryModel();
 			await LoadTreatmentPlanModel();
 			ResetHasChange();
-			
+
 			ShowWaitIndicator.Hide();
 			RegisterMessenges();
 		}
 
+		private void Control_Loaded(object sender, System.Windows.RoutedEventArgs e)
+		{
+			//BehaviorGridConrolAppointmentClinicalNoteEntities.Control.Ex
+			var a = 10;
+		}
 
 		void ReloadData()
 		{
@@ -176,6 +185,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				MessengerHelper.Register<MsgRowChange<InsuranceCoverage>>(this, OnMsgRowChangeInsuranceCoverage);
 				MessengerHelper.Register<MsgRowChange<PatientNote>>(this, OnMsgRowChangePatientNote);
 				MessengerHelper.Register<MsgRowChange<AppointmentTreatmentNote>>(this, OnMsgRowChangeTreatmentNote);
+				MessengerHelper.Register<MsgRowChange<FormDocument>>(this, OnMsgRowChangeFormDocument);
 				isRegisterMessenges = true;
 			}
 		}
@@ -291,6 +301,36 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 		}
 
+		void OnMsgRowChangeFormDocument(MsgRowChange<FormDocument> msg)
+		{
+			var msgAppointmentRowId = msg.Row.AppointmentRowId ?? default(Guid);
+			var appointmentWithClinicalNote = 
+				Entity.AppointmentWithClinicalNotes.Union(new[] { Entity.PatientFormDocuments }).SingleOrDefault(q => q.RowId == msgAppointmentRowId);
+			if (appointmentWithClinicalNote == null)
+			{
+				return;
+			}
+
+			var isChanged = Entity.IsChanged;
+
+			if (msg.RowAction == RowAction.Delete)
+			{
+				var formDocument = appointmentWithClinicalNote.FormDocuments.SingleOrDefault(q => q.RowId == msg.Row.RowId);
+				if (formDocument != null)
+				{
+					appointmentWithClinicalNote.FormDocuments.Remove(formDocument);
+					BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
+				}
+			}
+			else if (msg.RowAction == RowAction.Insert)
+			{
+				appointmentWithClinicalNote.FormDocuments.Insert(0, msg.Row);
+				BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
+			}
+
+			Entity.IsChanged = isChanged;
+		}
+
 
 
 		public void Save() => DispatcherUIHelper.Run(async () => await SaveCore(andClose: false));
@@ -349,7 +389,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			if (errors.Count > 0)
 			{
-				Entity.Ra111isePropertyChanged("FirstName");
+				Entity.BaseRaisePropertyChanged("FirstName");
 
 				var err = string.Join("\n", errors.ToArray());
 				MessageBoxService.ShowMessage(err, CommonResources.Validation_Error, MessageButton.OK, MessageIcon.Error);
@@ -756,10 +796,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 			});
 		}
-		public bool CanPatientDocumentNew() => (SelectedIndex == 8);
-		public bool CanPatientDocumentEdit() => (SelectedIndex == 8 && PatientDocumentSelectedEntity != null);
-		public bool CanPatientDocumentDelete() => (SelectedIndex == 8 && PatientDocumentSelectedEntity != null);
-		public bool ShowRibbonPatientDocument => (SelectedIndex == 8);
+		public bool CanPatientDocumentNew() => (SelectedIndex == 10);
+		public bool CanPatientDocumentEdit() => (SelectedIndex == 10 && PatientDocumentSelectedEntity != null);
+		public bool CanPatientDocumentDelete() => (SelectedIndex == 10 && PatientDocumentSelectedEntity != null);
+		public bool ShowRibbonPatientDocument => (SelectedIndex == 10);
 		#endregion
 
 
@@ -769,6 +809,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual ObservableCollection<Appointment> AppointmentClinicalNoteEntities => Entity?.AppointmentWithClinicalNotes;
 		public virtual Appointment AppointmentClinicalNoteSelectedEntity { get; set; }
 		public virtual ObservableCollection<Appointment> AppointmentClinicalNoteSelectedEntities { get; set; } = new ObservableCollection<Appointment>();
+		public virtual GridControlBehaviorManager BehaviorGridConrolAppointmentClinicalNoteEntities { get; set; } = new GridControlBehaviorManager();
 		public void AppointmentClinicalNoteEdit(Appointment row)
 		{
 			if (row == null) return;
@@ -791,7 +832,57 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				AppointmentClinicalNoteEdit(row);
 			};
 		}
+		public void AppointmentClinicalNoteClick(Appointment appointment, FormDocument formDocument)
+		{
+			DispatcherUIHelper.Run(async () =>
+			{
+				FormDocumentViewModel.OpenParams parm;
+				if (formDocument == null)
+				{
+					Guid? patientRowId = null;
+					Guid? appointmentRowId = null;
+					if (appointment.RowId == default(Guid))
+					{
+						patientRowId = Entity.RowId;
+					}
+					else
+					{
+						appointmentRowId = appointment.RowId;
+					}
 
+					var template = await FormDocumentHelper.PickTemplateName(appointment, MessageBoxService, ShowDXWindowsInteractionRequest);
+					if (template == null)
+					{
+						return;
+					}
+
+					parm = new FormDocumentViewModel.OpenParams
+					{
+						IsNew = true,
+						RowId = default(Guid),
+						TemplatePath = template.TemplatePath,
+						TemplateName = template.TemplateName,
+						AppointmentRowId = appointmentRowId,
+						PatientRowId = patientRowId,
+					};
+				}
+				else
+				{
+					parm = new FormDocumentViewModel.OpenParams
+					{
+						IsNew = false,
+						RowId = formDocument.RowId,
+						AppointmentRowId = appointment.RowId,
+					};
+				}
+
+				ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+				{
+					ViewCode = ViewCodes.FormDocumentView,
+					Param = parm,
+				});
+			});
+		}
 
 		public void AppointmentClinicalNotePrint() => AppointmentClinicalNotePdfCore(AppointmentClinicalNotePdfCoreMode.PrintPdf);
 		public bool CanAppointmentClinicalNotePrint() => AppointmentClinicalNoteSelectedEntities.Any();

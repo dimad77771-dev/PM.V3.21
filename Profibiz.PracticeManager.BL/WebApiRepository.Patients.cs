@@ -55,7 +55,8 @@ namespace Profibiz.PracticeManager.BL
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 			var patient = db.Patients.FirstOrDefault(p => p.RowId == id);
 
-			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Patient), typeof(DTO.InsuranceCoverage), typeof(DTO.PatientNote), typeof(DTO.PatientDocument), typeof(EF.AppointmentV));
+			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Patient), typeof(DTO.InsuranceCoverage), typeof(DTO.PatientNote), 
+															typeof(DTO.PatientDocument), typeof(EF.AppointmentV), typeof(EF.FormDocument));
 			var ret = mapper.Map<DTO.Patient>(patient);
 
 			if (!isShortForm)
@@ -105,9 +106,27 @@ namespace Profibiz.PracticeManager.BL
 
 				var appointmentWithClinicalNotes = 
 					db.AppointmentsV
-					.Where(q => q.PatientRowId == id && q.AppointmentClinicalNoteRowId != null)
+					.Where(q => q.PatientRowId == id)	// && q.AppointmentClinicalNoteRowId != null)
 					.OrderByDescending(q => q.Start);
 				ret.AppointmentWithClinicalNotes = mapper.Map<List<DTO.Appointment>>(appointmentWithClinicalNotes);
+				var appointmentRowIds = appointmentWithClinicalNotes.Select(z => (Guid?)z.RowId).ToArray();
+
+				var formDocumentsAll = db.FormDocuments
+					.Where(q => appointmentRowIds.Contains(q.AppointmentRowId))
+					.ToArray()
+					.Select(q => mapper.Map<DTO.FormDocument>(q))
+					.ToArray();
+				foreach(var appointmentWithClinicalNote in ret.AppointmentWithClinicalNotes)
+				{
+					appointmentWithClinicalNote.FormDocuments = formDocumentsAll.Where(q => q.AppointmentRowId == appointmentWithClinicalNote.RowId).ToArray();
+				}
+
+				var patientFormDocuments = db.FormDocuments
+					.Where(q => q.PatientRowId == id)
+					.ToArray()
+					.Select(q => mapper.Map<DTO.FormDocument>(q))
+					.ToArray();
+				ret.PatientFormDocuments = new DTO.Appointment { FormDocuments = patientFormDocuments };
 
 				var appointmentWithTreatmentNotes =
 					db.AppointmentsV

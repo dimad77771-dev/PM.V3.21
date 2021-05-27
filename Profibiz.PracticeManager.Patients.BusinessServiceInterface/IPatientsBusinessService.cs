@@ -140,6 +140,11 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PostAppointmentClinicalNote(AppointmentClinicalNote entity);
 		Task<UpdateReturn> DeleteAppointmentClinicalNote(Guid rowId);
 
+		Task<List<FormDocument>> GetFormDocumentList(string query);
+		Task<UpdateReturn> PutFormDocument(FormDocument entity);
+		Task<UpdateReturn> PostFormDocument(FormDocument entity);
+		Task<UpdateReturn> DeleteFormDocument(Guid rowId);
+
 		Task<List<AppointmentTreatmentNote>> GetAppointmentTreatmentNoteList(string query);
 		Task<UpdateReturn> PutAppointmentTreatmentNote(AppointmentTreatmentNote[] entity);
 		Task<UpdateReturn> PostAppointmentTreatmentNote(AppointmentTreatmentNote[] entity);

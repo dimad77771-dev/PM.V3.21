@@ -36,6 +36,7 @@ namespace Profibiz.PracticeManager.EF
 	public partial class EmailSendAttachment : IEntityCreatedUpdated { }
 	public partial class EmailSendRecipient : IEntityCreatedUpdated { }
 	public partial class EmailSendT : IEntityCreatedUpdated { }
+	public partial class FormDocument : IEntityCreatedUpdated { }
 	public partial class InsuranceCoverage : IEntityCreatedUpdated { }
 	public partial class InsuranceCoverageHolder : IEntityCreatedUpdated { }
 	public partial class InsuranceCoverageHolderService : IEntityCreatedUpdated { }

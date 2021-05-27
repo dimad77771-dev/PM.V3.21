@@ -92,6 +92,7 @@ namespace Profibiz.PracticeManager.Model
 		public virtual ObservableCollection<PatientDocument> PatientDocuments { get; set; } = new ObservableCollection<PatientDocument>();
 		public virtual ObservableCollection<Appointment> AppointmentWithClinicalNotes { get; set; } = new ObservableCollection<Appointment>();
 		public virtual ObservableCollection<Appointment> AppointmentWithTreatmentNotes { get; set; } = new ObservableCollection<Appointment>();
+		public virtual Appointment PatientFormDocuments { get; set; } = new Appointment();
 
 
 		public ChangeFamilyMemberInfo ChangeFamilyMember { get; set; }

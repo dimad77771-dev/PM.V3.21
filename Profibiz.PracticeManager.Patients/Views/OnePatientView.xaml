@@ -1,979 +1,979 @@
 <dx:DXWindow
-    x:Class="Profibiz.PracticeManager.Patients.Views.OnePatientView"
-    xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-    xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-    xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-    xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-    xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-    xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-    xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
-    xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-    xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
-    xmlns:inter="http://www.codeplex.com/prism"
-    xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
-    xmlns:localv="clr-namespace:Profibiz.PracticeManager.Patients.Views"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
-    xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
-    xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
-    Title="Patient"
-    Width="1300"
-    Height="1000"
-    prism:ViewModelLocator.AutoWireViewModel="True"
-    ResizeMode="NoResize"
-    ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
-    Style="{StaticResource defaultWindowStyle}"
-    UseLayoutRounding="True"
-    WindowStartupLocation="CenterScreen"
-    mc:Ignorable="d">
-    <!--<Window.LayoutTransform>
+	x:Class="Profibiz.PracticeManager.Patients.Views.OnePatientView"
+	xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+	xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+	xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+	xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+	xmlns:inter="http://www.codeplex.com/prism"
+	xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	xmlns:localv="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	Title="Patient"
+	Width="1300"
+	Height="1000"
+	prism:ViewModelLocator.AutoWireViewModel="True"
+	ResizeMode="NoResize"
+	ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
+	Style="{StaticResource defaultWindowStyle}"
+	UseLayoutRounding="True"
+	WindowStartupLocation="CenterScreen"
+	mc:Ignorable="d">
+	<!--<Window.LayoutTransform>
         <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
     </Window.LayoutTransform>-->
 
-    <i:Interaction.Triggers>
-        <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
-            <infrastructure:ShowDXWindowsAction />
-        </inter:InteractionRequestTrigger>
-        <inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
-            <infrastructure:CloseDXWindowsAction />
-        </inter:InteractionRequestTrigger>
-    </i:Interaction.Triggers>
+	<i:Interaction.Triggers>
+		<inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
+			<infrastructure:ShowDXWindowsAction />
+		</inter:InteractionRequestTrigger>
+		<inter:InteractionRequestTrigger SourceObject="{Binding CloseInteractionRequest}">
+			<infrastructure:CloseDXWindowsAction />
+		</inter:InteractionRequestTrigger>
+	</i:Interaction.Triggers>
 
 
-    <dx:DXWindow.Resources>
-        <ResourceDictionary>
-            <local:PictureConverter x:Key="PictureConverter" />
+	<dx:DXWindow.Resources>
+		<ResourceDictionary>
+			<local:PictureConverter x:Key="PictureConverter" />
 
-            <Style x:Key="layoutItemLabelStyle1b" TargetType="dxlc:LayoutItemLabel">
-                <Style.Setters>
-                    <Setter Property="VerticalContentAlignment" Value="Center" />
-                    <Setter Property="HorizontalContentAlignment" Value="Left" />
-                    <Setter Property="Margin" Value="8,5,5,5" />
-                </Style.Setters>
-            </Style>
+			<Style x:Key="layoutItemLabelStyle1b" TargetType="dxlc:LayoutItemLabel">
+				<Style.Setters>
+					<Setter Property="VerticalContentAlignment" Value="Center" />
+					<Setter Property="HorizontalContentAlignment" Value="Left" />
+					<Setter Property="Margin" Value="8,5,5,5" />
+				</Style.Setters>
+			</Style>
 
-        </ResourceDictionary>
-    </dx:DXWindow.Resources>
+		</ResourceDictionary>
+	</dx:DXWindow.Resources>
 
-    <dxmvvm:Interaction.Behaviors>
-        <dx:DXMessageBoxService />
-        <dxmvvm:EventToCommand
-            Command="{Binding ClosingEventCommand}"
-            EventName="Closing"
-            PassEventArgsToCommand="True" />
-        <dxmvvm:EventToCommand
-            Command="{Binding PreviewKeyDownCommand}"
-            EventName="PreviewKeyDown"
-            PassEventArgsToCommand="True" />
-    </dxmvvm:Interaction.Behaviors>
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DXMessageBoxService />
+		<dxmvvm:EventToCommand
+			Command="{Binding ClosingEventCommand}"
+			EventName="Closing"
+			PassEventArgsToCommand="True" />
+		<dxmvvm:EventToCommand
+			Command="{Binding PreviewKeyDownCommand}"
+			EventName="PreviewKeyDown"
+			PassEventArgsToCommand="True" />
+	</dxmvvm:Interaction.Behaviors>
 
-    <dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
-        <DockPanel>
-            <!--<DockPanel.LayoutTransform>
+	<dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+		<DockPanel>
+			<!--<DockPanel.LayoutTransform>
                 <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
             </DockPanel.LayoutTransform>-->
-            <!--<DockPanel.RenderTransform>
+			<!--<DockPanel.RenderTransform>
                 <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
             </DockPanel.RenderTransform>-->
 
 
-            <dxr:RibbonControl
-                x:Name="ribbonControl"
-                DockPanel.Dock="Top"
-                RibbonStyle="Office2010">
-                <dxr:RibbonControl.PageHeaderItems>
-                    <view:RibbonStyleSelectorItem IsVisible="{Binding ElementName=ribbonControl, Path=IsBackStageViewOpen, Converter={dxmvvm:BooleanNegationConverter}}" SelectedRibbonStyle="{Binding RibbonStyle, ElementName=ribbonControl, Mode=OneWayToSource}" />
-                </dxr:RibbonControl.PageHeaderItems>
-                <dxr:RibbonControl.ApplicationMenu>
-                    <dxr:BackstageViewControl x:Name="backstageView">
-                        <dxr:BackstageViewControl.Items>
-                            <dxr:BackstageSeparatorItem />
-                            <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GettingStartedCommand}" Content="Get Started" />
-                            <dxr:BackstageButtonItem Command="{Binding LinksViewModel.GetFreeSupportCommand}" Content="Get Support" />
-                            <dxr:BackstageButtonItem Command="{Binding LinksViewModel.BuyNowCommand}" Content="Buy Now" />
-                        </dxr:BackstageViewControl.Items>
-                    </dxr:BackstageViewControl>
-                </dxr:RibbonControl.ApplicationMenu>
-                <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                    <dxr:RibbonPage Caption="HOME">
-                        <dxr:RibbonPageGroup Caption="Actions">
-                            <dxb:BarButtonItem
-                                Command="{Binding SaveCommand}"
-                                Content="Save"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding SaveAndCloseCommand}"
-                                Content="Save &amp; Close"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding RefreshDataCommand}"
-                                Content="Refresh"
-                                Glyph="{dx:DXImage Image=Refresh_16x16.png}"
-                                LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" />
-                            <dxb:BarButtonItem
-                                Command="{Binding FamilyMemberNewCommand}"
-                                Content="Add Family Member"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-new-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-new-32.png" />
-                        </dxr:RibbonPageGroup>
-                        <dxr:RibbonPageGroup Caption="Close">
-                            <dxb:BarButtonItem
-                                Command="{Binding CloseCommand}"
-                                Content="Close"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-32.png" />
-                        </dxr:RibbonPageGroup>
-                        <dxr:RibbonPageGroup Caption="Family Members">
-                            <dxr:RibbonPageGroup.Resources>
-                                <DataTemplate x:Key="galleryItemFamilyMemberTemplate">
-                                    <ContentControl>
-                                        <dxb:GalleryItem
-                                            Caption="{Binding Entity.FullName}"
-                                            Command="{Binding SubmitCommand}"
-                                            Glyph="{Binding Entity.Rowtype9, Converter={StaticResource patientRowtype9ToImageConverter}}"
-                                            IsChecked="{Binding IsCurrent}" />
-                                    </ContentControl>
-                                </DataTemplate>
-                            </dxr:RibbonPageGroup.Resources>
-                            <dxr:RibbonGalleryBarItem Content="Family Members" Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}">
-                                <dxr:RibbonGalleryBarItem.DropDownGallery>
-                                    <dxb:Gallery
-                                        AllowFilter="True"
-                                        ColCount="{Binding RibbonFamilyMemberColumnCount}"
-                                        IsGroupCaptionVisible="False"
-                                        IsItemCaptionVisible="True"
-                                        IsItemDescriptionVisible="True"
-                                        ItemGlyphSize="16,16"
-                                        RowCount="2"
-                                        SizeMode="None">
-                                        <dxb:GalleryItemGroup ItemTemplate="{StaticResource galleryItemFamilyMemberTemplate}" ItemsSource="{Binding RibbonFamilyMemberItems}" />
-                                    </dxb:Gallery>
-                                </dxr:RibbonGalleryBarItem.DropDownGallery>
-                                <dxr:RibbonGalleryBarItem.Gallery>
-                                    <dxb:Gallery
-                                        ColCount="{Binding RibbonFamilyMemberColumnCount}"
-                                        IsItemCaptionVisible="True"
-                                        IsItemDescriptionVisible="True"
-                                        ItemGlyphSize="16,16"
-                                        ItemMargin="0"
-                                        RowCount="2">
-                                        <dxb:GalleryItemGroup ItemTemplate="{StaticResource galleryItemFamilyMemberTemplate}" ItemsSource="{Binding RibbonFamilyMemberItems}" />
-                                    </dxb:Gallery>
-                                </dxr:RibbonGalleryBarItem.Gallery>
-                            </dxr:RibbonGalleryBarItem>
+			<dxr:RibbonControl
+				x:Name="ribbonControl"
+				DockPanel.Dock="Top"
+				RibbonStyle="Office2010">
+				<dxr:RibbonControl.PageHeaderItems>
+					<view:RibbonStyleSelectorItem IsVisible="{Binding ElementName=ribbonControl, Path=IsBackStageViewOpen, Converter={dxmvvm:BooleanNegationConverter}}" SelectedRibbonStyle="{Binding RibbonStyle, ElementName=ribbonControl, Mode=OneWayToSource}" />
+				</dxr:RibbonControl.PageHeaderItems>
+				<dxr:RibbonControl.ApplicationMenu>
+					<dxr:BackstageViewControl x:Name="backstageView">
+						<dxr:BackstageViewControl.Items>
+							<dxr:BackstageSeparatorItem />
+							<dxr:BackstageButtonItem Command="{Binding LinksViewModel.GettingStartedCommand}" Content="Get Started" />
+							<dxr:BackstageButtonItem Command="{Binding LinksViewModel.GetFreeSupportCommand}" Content="Get Support" />
+							<dxr:BackstageButtonItem Command="{Binding LinksViewModel.BuyNowCommand}" Content="Buy Now" />
+						</dxr:BackstageViewControl.Items>
+					</dxr:BackstageViewControl>
+				</dxr:RibbonControl.ApplicationMenu>
+				<dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+					<dxr:RibbonPage Caption="HOME">
+						<dxr:RibbonPageGroup Caption="Actions">
+							<dxb:BarButtonItem
+								Command="{Binding SaveCommand}"
+								Content="Save"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding SaveAndCloseCommand}"
+								Content="Save &amp; Close"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-save-close-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding RefreshDataCommand}"
+								Content="Refresh"
+								Glyph="{dx:DXImage Image=Refresh_16x16.png}"
+								LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}" />
+							<dxb:BarButtonItem
+								Command="{Binding FamilyMemberNewCommand}"
+								Content="Add Family Member"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-new-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-new-32.png" />
+						</dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Close">
+							<dxb:BarButtonItem
+								Command="{Binding CloseCommand}"
+								Content="Close"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-close-32.png" />
+						</dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Family Members">
+							<dxr:RibbonPageGroup.Resources>
+								<DataTemplate x:Key="galleryItemFamilyMemberTemplate">
+									<ContentControl>
+										<dxb:GalleryItem
+											Caption="{Binding Entity.FullName}"
+											Command="{Binding SubmitCommand}"
+											Glyph="{Binding Entity.Rowtype9, Converter={StaticResource patientRowtype9ToImageConverter}}"
+											IsChecked="{Binding IsCurrent}" />
+									</ContentControl>
+								</DataTemplate>
+							</dxr:RibbonPageGroup.Resources>
+							<dxr:RibbonGalleryBarItem Content="Family Members" Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}">
+								<dxr:RibbonGalleryBarItem.DropDownGallery>
+									<dxb:Gallery
+										AllowFilter="True"
+										ColCount="{Binding RibbonFamilyMemberColumnCount}"
+										IsGroupCaptionVisible="False"
+										IsItemCaptionVisible="True"
+										IsItemDescriptionVisible="True"
+										ItemGlyphSize="16,16"
+										RowCount="2"
+										SizeMode="None">
+										<dxb:GalleryItemGroup ItemTemplate="{StaticResource galleryItemFamilyMemberTemplate}" ItemsSource="{Binding RibbonFamilyMemberItems}" />
+									</dxb:Gallery>
+								</dxr:RibbonGalleryBarItem.DropDownGallery>
+								<dxr:RibbonGalleryBarItem.Gallery>
+									<dxb:Gallery
+										ColCount="{Binding RibbonFamilyMemberColumnCount}"
+										IsItemCaptionVisible="True"
+										IsItemDescriptionVisible="True"
+										ItemGlyphSize="16,16"
+										ItemMargin="0"
+										RowCount="2">
+										<dxb:GalleryItemGroup ItemTemplate="{StaticResource galleryItemFamilyMemberTemplate}" ItemsSource="{Binding RibbonFamilyMemberItems}" />
+									</dxb:Gallery>
+								</dxr:RibbonGalleryBarItem.Gallery>
+							</dxr:RibbonGalleryBarItem>
 
-                            <dxb:BarSubItem
-                                Content="Family Actions"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-actions-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-actions-32.png">
-                                <dxb:BarButtonItem
-                                    Command="{Binding FamilyMemberDeleteCommand}"
-                                    Content="Remove From Family"
-                                    Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-delete-16.png"
-                                    LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-delete-32.png" />
-                                <dxb:BarButtonItem
-                                    Command="{Binding FamilyMemberMakeHeaderCommand}"
-                                    Content="Make Head of Family"
-                                    Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-make-header-16.png"
-                                    LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-make-header-32.png" />
-                                <dxb:BarButtonItem
-                                    Command="{Binding FamilyMemberMoveToAnotherFamilyCommand}"
-                                    Content="Move To Another Family"
-                                    Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-move-another-family-16.png"
-                                    LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-move-another-family-32.png" />
-                            </dxb:BarSubItem>
-                        </dxr:RibbonPageGroup>
+							<dxb:BarSubItem
+								Content="Family Actions"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-actions-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-actions-32.png">
+								<dxb:BarButtonItem
+									Command="{Binding FamilyMemberDeleteCommand}"
+									Content="Remove From Family"
+									Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-delete-16.png"
+									LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-family-member-delete-32.png" />
+								<dxb:BarButtonItem
+									Command="{Binding FamilyMemberMakeHeaderCommand}"
+									Content="Make Head of Family"
+									Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-make-header-16.png"
+									LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-make-header-32.png" />
+								<dxb:BarButtonItem
+									Command="{Binding FamilyMemberMoveToAnotherFamilyCommand}"
+									Content="Move To Another Family"
+									Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-move-another-family-16.png"
+									LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-family-move-another-family-32.png" />
+							</dxb:BarSubItem>
+						</dxr:RibbonPageGroup>
 
 
-                        <dxr:RibbonPageGroup Caption="Insurance Coverage" IsVisible="{Binding ShowRibbonInsuranceCoverage}">
-                            <dxb:BarButtonItem
-                                Command="{Binding InsuranceCoverageNewCommand}"
-                                Content="New Insurance Coverage"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding InsuranceCoverageEditCommand}"
-                                Content="Edit Insurance Coverage"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding InsuranceCoverageDeleteCommand}"
-                                Content="Delete Insurance Coverage"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
-                        </dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Insurance Coverage" IsVisible="{Binding ShowRibbonInsuranceCoverage}">
+							<dxb:BarButtonItem
+								Command="{Binding InsuranceCoverageNewCommand}"
+								Content="New Insurance Coverage"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding InsuranceCoverageEditCommand}"
+								Content="Edit Insurance Coverage"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding InsuranceCoverageDeleteCommand}"
+								Content="Delete Insurance Coverage"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+						</dxr:RibbonPageGroup>
 
-                        <dxr:RibbonPageGroup Caption="Medical History" IsVisible="{Binding ShowRibbonMedicalHistory}">
-                            <dxb:BarButtonItem
-                                Command="{Binding MedicalHistoryModel.NewCommand}"
-                                Content="New Record"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding MedicalHistoryModel.DeleteCommand}"
-                                Content="Delete Record"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
-                        </dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Medical History" IsVisible="{Binding ShowRibbonMedicalHistory}">
+							<dxb:BarButtonItem
+								Command="{Binding MedicalHistoryModel.NewCommand}"
+								Content="New Record"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding MedicalHistoryModel.DeleteCommand}"
+								Content="Delete Record"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+						</dxr:RibbonPageGroup>
 
-                        <dxr:RibbonPageGroup Caption="Treatment Plan" IsVisible="{Binding ShowRibbonTreatmentPlan}">
-                            <dxb:BarButtonItem
-                                Command="{Binding TreatmentPlanModel.NewCommand}"
-                                Content="New Record"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding TreatmentPlanModel.DeleteCommand}"
-                                Content="Delete Record"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
-                        </dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Treatment Plan" IsVisible="{Binding ShowRibbonTreatmentPlan}">
+							<dxb:BarButtonItem
+								Command="{Binding TreatmentPlanModel.NewCommand}"
+								Content="New Record"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding TreatmentPlanModel.DeleteCommand}"
+								Content="Delete Record"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+						</dxr:RibbonPageGroup>
 
-                        <dxr:RibbonPageGroup Caption="Notes" IsVisible="{Binding ShowRibbonPatientNote}">
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientNoteNewCommand}"
-                                Content="New Note"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientNoteEditCommand}"
-                                Content="Edit Note"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientNoteDeleteCommand}"
-                                Content="Delete Note"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
-                        </dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Notes" IsVisible="{Binding ShowRibbonPatientNote}">
+							<dxb:BarButtonItem
+								Command="{Binding PatientNoteNewCommand}"
+								Content="New Note"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding PatientNoteEditCommand}"
+								Content="Edit Note"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding PatientNoteDeleteCommand}"
+								Content="Delete Note"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+						</dxr:RibbonPageGroup>
 
-                        <dxr:RibbonPageGroup Caption="Documents" IsVisible="{Binding ShowRibbonPatientDocument}">
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientDocumentPasteCommand}"
-                                Content="Paste Document"
-                                Glyph="{dx:DXImage Image=Paste_16x16.png}"
-                                LargeGlyph="{dx:DXImage Image=Paste_32x32.png}" />
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientDocumentNewCommand}"
-                                Content="New Document"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientDocumentEditCommand}"
-                                Content="Open Document"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
-                            <dxb:BarButtonItem
-                                Command="{Binding PatientDocumentDeleteCommand}"
-                                Content="Delete Document"
-                                Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
-                                LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
-                        </dxr:RibbonPageGroup>
+						<dxr:RibbonPageGroup Caption="Documents" IsVisible="{Binding ShowRibbonPatientDocument}">
+							<dxb:BarButtonItem
+								Command="{Binding PatientDocumentPasteCommand}"
+								Content="Paste Document"
+								Glyph="{dx:DXImage Image=Paste_16x16.png}"
+								LargeGlyph="{dx:DXImage Image=Paste_32x32.png}" />
+							<dxb:BarButtonItem
+								Command="{Binding PatientDocumentNewCommand}"
+								Content="New Document"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding PatientDocumentEditCommand}"
+								Content="Open Document"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding PatientDocumentDeleteCommand}"
+								Content="Delete Document"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+						</dxr:RibbonPageGroup>
 
-                    </dxr:RibbonPage>
-                </dxr:RibbonDefaultPageCategory>
-            </dxr:RibbonControl>
+					</dxr:RibbonPage>
+				</dxr:RibbonDefaultPageCategory>
+			</dxr:RibbonControl>
 
-            <Grid>
-                <!--<Grid.LayoutTransform>
+			<Grid>
+				<!--<Grid.LayoutTransform>
                     <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
                 </Grid.LayoutTransform>-->
 
-                <dx:DXTabControl
-                    Margin="3"
-                    Padding="2"
-                    SelectedIndex="{Binding SelectedIndex}">
-                    <dxmvvm:Interaction.Behaviors>
-                        <dxmvvm:EventToCommand
-                            Command="{Binding PageSelectionChangingCommand}"
-                            EventName="SelectionChanging"
-                            PassEventArgsToCommand="True" />
-                    </dxmvvm:Interaction.Behaviors>
-
-                    <dx:DXTabItem Header="Patient">
-                        <dxmvvm:Interaction.Behaviors>
-                            <dxmvvm:EventToCommand Command="{Binding UpdateCommand}" Event="{x:Static Binding.SourceUpdatedEvent}" />
-                        </dxmvvm:Interaction.Behaviors>
-                        <StackPanel Orientation="Vertical">
-                            <Grid Grid.Column="0" Margin="5">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="82" />
-
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="82" />
-                                </Grid.ColumnDefinitions>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="0"
-                                    Grid.Column="0"
-                                    Content="Title"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="0"
-                                    Grid.Column="1"
-                                    EditValue="{Binding Entity.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsTextEditable="True"
-                                    ItemsSource="{Binding PatientTitle, Source={StaticResource lookupDataProvider}}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="10">
-                                    <dxmvvm:Interaction.Behaviors>
-                                        <dxmvvm:FocusBehavior />
-                                    </dxmvvm:Interaction.Behaviors>
-                                </dxe:ComboBoxEdit>
-
-
-                                <dxe:ImageEdit
-                                    Grid.Row="0"
-                                    Grid.RowSpan="5"
-                                    Grid.Column="2"
-                                    EditValue="{Binding Entity.Photo, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    KeyboardNavigation.IsTabStop="False"
-                                    Stretch="Uniform"
-                                    Style="{StaticResource baseEditStyle1}" />
-
-
-
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="0"
-                                    Grid.Column="3"
-                                    Content="Member Type"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="0"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.FamilyMemberType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsReadOnly="{Binding Entity.ReadOnlyFamilyMemberType}"
-                                    IsTextEditable="False"
-                                    ItemsSource="{Binding FamilyMemberType, Source={StaticResource lookupDataProvider}}"
-                                    KeyboardNavigation.IsTabStop="False"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="140" />
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="1"
-                                    Grid.Column="0"
-                                    Content="First Name"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="1"
-                                    Grid.Column="1"
-                                    EditValue="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="20" />
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="1"
-                                    Grid.Column="3"
-                                    Content="Relation To Head"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="1"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="75" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="1"
-                                        Content="Rate"
-                                        Style="{StaticResource layoutItemLabelStyle1b}"
-                                        Visibility="{Binding IsVisibilityRate, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}" />
-                                    <dxe:ComboBoxEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.RelationToFamilyHead, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsTextEditable="True"
-                                        ItemsSource="{Binding RelationToFamilyHeadVariants, Source={StaticResource lookupDataProvider}}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="150" />
-
-
-                                    <dxe:TextEdit
-                                        Grid.Column="2"
-                                        EditValue="{Binding Entity.Rate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Mask="P"
-                                        MaskType="Numeric"
-                                        MaskUseAsDisplayFormat="True"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="35"
-                                        Visibility="{Binding IsVisibilityRate, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}" />
-
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="2"
-                                    Grid.Column="0"
-                                    Content="Last Name"
-                                    FontWeight="Bold"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="2"
-                                    Grid.Column="1"
-                                    EditValue="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    FontWeight="Bold"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="30" />
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="2"
-                                    Grid.Column="3"
-                                    Content="First Seen"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="2"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="75" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxe:DateEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.FirstSeen, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="160" />
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="1"
-                                        Content="Birth Date"
-                                        Style="{StaticResource layoutItemLabelStyle1b}" />
-                                    <dxe:DateEdit
-                                        Grid.Column="2"
-                                        EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="170" />
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="3"
-                                    Grid.Column="0"
-                                    Content="Middle Name"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="3"
-                                    Grid.Column="1"
-                                    EditValue="{Binding Entity.MiddleName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="35" />
-
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="3"
-                                    Grid.Column="3"
-                                    Content="Card Number"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="3"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.CardNo, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="180" />
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="4"
-                                    Grid.Column="0"
-                                    Content="Sex"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="4"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="1">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxe:ComboBoxEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.Sex, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsTextEditable="False"
-                                        ItemsSource="{Binding Sexes, Source={StaticResource lookupDataProvider}}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="40">
-                                        <dxe:ComboBoxEdit.EditNonEditableTemplate>
-                                            <ControlTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image
-                                                        Margin="2,0"
-                                                        Source="{Binding SelectedItem, Converter={StaticResource sexToImageConverter}}"
-                                                        Stretch="None" />
-                                                    <TextBlock VerticalAlignment="Center" Text="{Binding SelectedItem}" />
-                                                </StackPanel>
-                                            </ControlTemplate>
-                                        </dxe:ComboBoxEdit.EditNonEditableTemplate>
-                                        <dxe:ComboBoxEdit.ItemTemplate>
-                                            <DataTemplate>
-                                                <StackPanel Orientation="Horizontal">
-                                                    <Image Source="{Binding Path=., Converter={StaticResource sexToImageConverter}}" Stretch="None" />
-                                                    <TextBlock Text="{Binding Path=.}" />
-                                                </StackPanel>
-                                            </DataTemplate>
-                                        </dxe:ComboBoxEdit.ItemTemplate>
-                                    </dxe:ComboBoxEdit>
-
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="1"
-                                        HorizontalContentAlignment="Right"
-                                        Content="No Insurance Coverage"
-                                        FontWeight="Bold"
-                                        Style="{StaticResource layoutItemLabelStyle1b}" />
-                                    <dxe:CheckEdit
-                                        Grid.Column="2"
-                                        IsChecked="{Binding Entity.HasNoCoverage, Mode=TwoWay}"
-                                        Style="{StaticResource baseEditStyle0}" />
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="4"
-                                    Grid.Column="3"
-                                    Content="Referrer"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="4"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.ReferrerRowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-                                    Style="{StaticResource comboBoxReferrerStyle}"
-                                    TabIndex="190" />
-
-                                <Label Grid.Row="5" Height="40" />
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="6"
-                                    Grid.Column="0"
-                                    Content="Province 1"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="6"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxe:ComboBoxEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.Province1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                        IsTextEditable="False"
-                                        ItemsSource="{Binding Provinces, Source={StaticResource lookupDataProvider}}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="55" />
-
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="1"
-                                        Content="Use Head Address"
-                                        Style="{StaticResource layoutItemLabelStyle1}"
-                                        Visibility="{Binding Entity.IsVisibleUseHeadAddress, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                    <dxe:CheckEdit
-                                        Grid.Column="2"
-                                        IsChecked="{Binding Entity.UseHeadAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        KeyboardNavigation.IsTabStop="False"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        Visibility="{Binding Entity.IsVisibleUseHeadAddress, Converter={StaticResource BooleanToVisibilityConverter}}" />
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="6"
-                                    Grid.Column="3"
-                                    Content="Province 2"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="6"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <dxe:ComboBoxEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.Province2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                        IsTextEditable="False"
-                                        ItemsSource="{Binding Provinces, Source={StaticResource lookupDataProvider}}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="195" />
-
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="7"
-                                    Grid.Column="0"
-                                    Content="Address 1"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="7"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.Address1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="60" />
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="7"
-                                    Grid.Column="3"
-                                    Content="Address 2"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:TextEdit
-                                    Grid.Row="7"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.Address2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="200" />
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="8"
-                                    Grid.Column="0"
-                                    Content="City 1"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="8"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.City1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                    IsTextEditable="True"
-                                    ItemsSource="{Binding Entity.Province1, Converter={StaticResource ProvinceToCityConverter}}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="70" />
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="8"
-                                    Grid.Column="3"
-                                    Content="City 2"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="8"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.City2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                    IsTextEditable="True"
-                                    ItemsSource="{Binding Entity.Province2, Converter={StaticResource ProvinceToCityConverter}}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="210" />
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="9"
-                                    Grid.Column="0"
-                                    Content="Postcode 1"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="9"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxe:TextEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.Postcode1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="80" />
-
-
-                                </Grid>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="9"
-                                    Grid.Column="3"
-                                    Content="Postcode 2"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <Grid
-                                    Grid.Row="9"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxe:TextEdit
-                                        Grid.Column="0"
-                                        EditValue="{Binding Entity.Postcode2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="220" />
-
-
-
-                                </Grid>
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="10"
-                                    Grid.Column="0"
-                                    Content="Address To Use"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ComboBoxEdit
-                                    Grid.Row="10"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    EditValue="{Binding Entity.AddressToUse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    IsTextEditable="False"
-                                    ItemsSource="{Binding AddressToUse, Source={StaticResource lookupDataProvider}}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="100" />
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="10"
-                                    Grid.Column="3"
-                                    Content="Send Account To"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxg:LookUpEdit
-                                    Grid.Row="10"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    AutoComplete="True"
-                                    AutoPopulateColumns="False"
-                                    DisplayMember="FirstName"
-                                    EditValue="{Binding Entity.SendAccountToFamilyMember, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    ImmediatePopup="True"
-                                    IncrementalFiltering="False"
-                                    IsPopupAutoWidth="False"
-                                    IsTextEditable="False"
-                                    ItemsSource="{Binding FamilyMembersEntities}"
-                                    PopupContentTemplate="{StaticResource gridFamilyMemberDataTemplate}"
-                                    PopupMaxWidth="600"
-                                    ShowSizeGrip="True"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="240"
-                                    ValueMember="RowId" />
-
-                                <Label Grid.Row="11" Height="40" />
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="12"
-                                    Grid.Column="0"
-                                    Content="Home Phone"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="12"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.HomePhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource phoneEditStyle1}"
-                                    TabIndex="110">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="12"
-                                    Grid.Column="3"
-                                    Content="Work Phone"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="12"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.WorkPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource phoneEditStyle1}"
-                                    TabIndex="250">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="13"
-                                    Grid.Column="0"
-                                    Content="Cell"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="13"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.MobileNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource phoneEditStyle1}"
-                                    TabIndex="120">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-mobile-phone-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="13"
-                                    Grid.Column="3"
-                                    Content="Occupation"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="13"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.Occupation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="260">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-item-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="14"
-                                    Grid.Column="0"
-                                    Content="Email"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="14"
-                                    Grid.Column="1"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.EmailAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="130">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-email-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-                                <dxlc:LayoutItemLabel
-                                    Grid.Row="14"
-                                    Grid.Column="3"
-                                    Content="Fax"
-                                    Style="{StaticResource layoutItemLabelStyle1b}" />
-                                <dxe:ButtonEdit
-                                    Grid.Row="14"
-                                    Grid.Column="4"
-                                    Grid.ColumnSpan="2"
-                                    AllowDefaultButton="False"
-                                    EditValue="{Binding Entity.Fax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                    Style="{StaticResource baseEditStyle1}"
-                                    TabIndex="270">
-                                    <dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
-                                        <Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
-                                    </dxe:ButtonInfo>
-                                </dxe:ButtonEdit>
-
-
-
-
-
-                            </Grid>
-
-
-
-                            <dxlc:LayoutGroup
-                                Margin="5,35,5,5"
-                                VerticalAlignment="Top"
-                                GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
-                                Header="FAMILY DOCTOR"
-                                View="GroupBox">
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="30" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="30" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="*" />
-                                    </Grid.ColumnDefinitions>
-
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="0"
-                                        Content="Name"
-                                        Style="{StaticResource layoutItemLabelStyle1b}" />
-                                    <dxe:TextEdit
-                                        Grid.Column="1"
-                                        EditValue="{Binding Entity.FamilyDoctor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="300">
-                                        <!--
-                                            MaskType="RegEx"
-                                            Mask="(DR)?(.*)"
-                                        -->
-
-                                        <dxmvvm:Interaction.Behaviors>
-                                            <infrastructure:UIElementBehavior Manager="{Binding UIManagerFamilyDoctor}" />
-                                            <dxmvvm:EventToCommand
-                                                Command="{Binding OnGotFocusFamilyDoctorCommand}"
-                                                EventName="GotFocus"
-                                                PassEventArgsToCommand="False" />
-                                            <dxmvvm:EventToCommand
-                                                Command="{Binding OnLostFocusFamilyDoctorCommand}"
-                                                EventName="LostFocus"
-                                                PassEventArgsToCommand="False" />
-                                        </dxmvvm:Interaction.Behaviors>
-                                    </dxe:TextEdit>
-
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="3"
-                                        Content="Address"
-                                        Style="{StaticResource layoutItemLabelStyle1b}" />
-                                    <dxe:TextEdit
-                                        Grid.Column="4"
-                                        EditValue="{Binding Entity.FamilyDoctorAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Style="{StaticResource baseEditStyle1}"
-                                        TabIndex="310" />
-
-                                    <dxlc:LayoutItemLabel
-                                        Grid.Column="6"
-                                        Content="Telephone"
-                                        Style="{StaticResource layoutItemLabelStyle1b}" />
-                                    <dxe:ButtonEdit
-                                        Grid.Column="7"
-                                        EditValue="{Binding Entity.FamilyDoctorPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-                                        Style="{StaticResource phoneEditStyle1}"
-                                        TabIndex="320" />
-                                </Grid>
-                            </dxlc:LayoutGroup>
-
-
-                            <!--<dxlc:LayoutGroup VerticalAlignment="Top"
+				<dx:DXTabControl
+					Margin="3"
+					Padding="2"
+					SelectedIndex="{Binding SelectedIndex}">
+					<dxmvvm:Interaction.Behaviors>
+						<dxmvvm:EventToCommand
+							Command="{Binding PageSelectionChangingCommand}"
+							EventName="SelectionChanging"
+							PassEventArgsToCommand="True" />
+					</dxmvvm:Interaction.Behaviors>
+
+					<dx:DXTabItem Header="Patient">
+						<dxmvvm:Interaction.Behaviors>
+							<dxmvvm:EventToCommand Command="{Binding UpdateCommand}" Event="{x:Static Binding.SourceUpdatedEvent}" />
+						</dxmvvm:Interaction.Behaviors>
+						<StackPanel Orientation="Vertical">
+							<Grid Grid.Column="0" Margin="5">
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="82" />
+
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+									<ColumnDefinition Width="82" />
+								</Grid.ColumnDefinitions>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="0"
+									Grid.Column="0"
+									Content="Title"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="0"
+									Grid.Column="1"
+									EditValue="{Binding Entity.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsTextEditable="True"
+									ItemsSource="{Binding PatientTitle, Source={StaticResource lookupDataProvider}}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="10">
+									<dxmvvm:Interaction.Behaviors>
+										<dxmvvm:FocusBehavior />
+									</dxmvvm:Interaction.Behaviors>
+								</dxe:ComboBoxEdit>
+
+
+								<dxe:ImageEdit
+									Grid.Row="0"
+									Grid.RowSpan="5"
+									Grid.Column="2"
+									EditValue="{Binding Entity.Photo, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									KeyboardNavigation.IsTabStop="False"
+									Stretch="Uniform"
+									Style="{StaticResource baseEditStyle1}" />
+
+
+
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="0"
+									Grid.Column="3"
+									Content="Member Type"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="0"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.FamilyMemberType, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.ReadOnlyFamilyMemberType}"
+									IsTextEditable="False"
+									ItemsSource="{Binding FamilyMemberType, Source={StaticResource lookupDataProvider}}"
+									KeyboardNavigation.IsTabStop="False"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="140" />
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="1"
+									Grid.Column="0"
+									Content="First Name"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="1"
+									Grid.Column="1"
+									EditValue="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="20" />
+								<dxlc:LayoutItemLabel
+									Grid.Row="1"
+									Grid.Column="3"
+									Content="Relation To Head"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="1"
+									Grid.Column="4"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="75" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<dxlc:LayoutItemLabel
+										Grid.Column="1"
+										Content="Rate"
+										Style="{StaticResource layoutItemLabelStyle1b}"
+										Visibility="{Binding IsVisibilityRate, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}" />
+									<dxe:ComboBoxEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.RelationToFamilyHead, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsTextEditable="True"
+										ItemsSource="{Binding RelationToFamilyHeadVariants, Source={StaticResource lookupDataProvider}}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="150" />
+
+
+									<dxe:TextEdit
+										Grid.Column="2"
+										EditValue="{Binding Entity.Rate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Mask="P"
+										MaskType="Numeric"
+										MaskUseAsDisplayFormat="True"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="35"
+										Visibility="{Binding IsVisibilityRate, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}" />
+
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="2"
+									Grid.Column="0"
+									Content="Last Name"
+									FontWeight="Bold"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="2"
+									Grid.Column="1"
+									EditValue="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									FontWeight="Bold"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="30" />
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="2"
+									Grid.Column="3"
+									Content="First Seen"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="2"
+									Grid.Column="4"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="75" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<dxe:DateEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.FirstSeen, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="160" />
+									<dxlc:LayoutItemLabel
+										Grid.Column="1"
+										Content="Birth Date"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:DateEdit
+										Grid.Column="2"
+										EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="170" />
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="3"
+									Grid.Column="0"
+									Content="Middle Name"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="3"
+									Grid.Column="1"
+									EditValue="{Binding Entity.MiddleName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="35" />
+
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="3"
+									Grid.Column="3"
+									Content="Card Number"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="3"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.CardNo, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="180" />
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="4"
+									Grid.Column="0"
+									Content="Sex"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="4"
+									Grid.Column="1"
+									Grid.ColumnSpan="1">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="120" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<dxe:ComboBoxEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.Sex, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsTextEditable="False"
+										ItemsSource="{Binding Sexes, Source={StaticResource lookupDataProvider}}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="40">
+										<dxe:ComboBoxEdit.EditNonEditableTemplate>
+											<ControlTemplate>
+												<StackPanel Orientation="Horizontal">
+													<Image
+														Margin="2,0"
+														Source="{Binding SelectedItem, Converter={StaticResource sexToImageConverter}}"
+														Stretch="None" />
+													<TextBlock VerticalAlignment="Center" Text="{Binding SelectedItem}" />
+												</StackPanel>
+											</ControlTemplate>
+										</dxe:ComboBoxEdit.EditNonEditableTemplate>
+										<dxe:ComboBoxEdit.ItemTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<Image Source="{Binding Path=., Converter={StaticResource sexToImageConverter}}" Stretch="None" />
+													<TextBlock Text="{Binding Path=.}" />
+												</StackPanel>
+											</DataTemplate>
+										</dxe:ComboBoxEdit.ItemTemplate>
+									</dxe:ComboBoxEdit>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="1"
+										HorizontalContentAlignment="Right"
+										Content="No Insurance Coverage"
+										FontWeight="Bold"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:CheckEdit
+										Grid.Column="2"
+										IsChecked="{Binding Entity.HasNoCoverage, Mode=TwoWay}"
+										Style="{StaticResource baseEditStyle0}" />
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="4"
+									Grid.Column="3"
+									Content="Referrer"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="4"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.ReferrerRowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+									Style="{StaticResource comboBoxReferrerStyle}"
+									TabIndex="190" />
+
+								<Label Grid.Row="5" Height="40" />
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="6"
+									Grid.Column="0"
+									Content="Province 1"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="6"
+									Grid.Column="1"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="120" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+									</Grid.ColumnDefinitions>
+									<dxe:ComboBoxEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.Province1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+										IsTextEditable="False"
+										ItemsSource="{Binding Provinces, Source={StaticResource lookupDataProvider}}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="55" />
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="1"
+										Content="Use Head Address"
+										Style="{StaticResource layoutItemLabelStyle1}"
+										Visibility="{Binding Entity.IsVisibleUseHeadAddress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+									<dxe:CheckEdit
+										Grid.Column="2"
+										IsChecked="{Binding Entity.UseHeadAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										KeyboardNavigation.IsTabStop="False"
+										Style="{StaticResource baseEditStyle1}"
+										Visibility="{Binding Entity.IsVisibleUseHeadAddress, Converter={StaticResource BooleanToVisibilityConverter}}" />
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="6"
+									Grid.Column="3"
+									Content="Province 2"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="6"
+									Grid.Column="4"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="120" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<dxe:ComboBoxEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.Province2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+										IsTextEditable="False"
+										ItemsSource="{Binding Provinces, Source={StaticResource lookupDataProvider}}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="195" />
+
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="7"
+									Grid.Column="0"
+									Content="Address 1"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="7"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.Address1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="60" />
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="7"
+									Grid.Column="3"
+									Content="Address 2"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:TextEdit
+									Grid.Row="7"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.Address2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="200" />
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="8"
+									Grid.Column="0"
+									Content="City 1"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="8"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.City1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+									IsTextEditable="True"
+									ItemsSource="{Binding Entity.Province1, Converter={StaticResource ProvinceToCityConverter}}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="70" />
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="8"
+									Grid.Column="3"
+									Content="City 2"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="8"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.City2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+									IsTextEditable="True"
+									ItemsSource="{Binding Entity.Province2, Converter={StaticResource ProvinceToCityConverter}}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="210" />
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="9"
+									Grid.Column="0"
+									Content="Postcode 1"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="9"
+									Grid.Column="1"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="120" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<dxe:TextEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.Postcode1, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="80" />
+
+
+								</Grid>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="9"
+									Grid.Column="3"
+									Content="Postcode 2"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<Grid
+									Grid.Row="9"
+									Grid.Column="4"
+									Grid.ColumnSpan="2">
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="120" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+									<dxe:TextEdit
+										Grid.Column="0"
+										EditValue="{Binding Entity.Postcode2, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnlyAddress}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="220" />
+
+
+
+								</Grid>
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="10"
+									Grid.Column="0"
+									Content="Address To Use"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ComboBoxEdit
+									Grid.Row="10"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									EditValue="{Binding Entity.AddressToUse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsTextEditable="False"
+									ItemsSource="{Binding AddressToUse, Source={StaticResource lookupDataProvider}}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="100" />
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="10"
+									Grid.Column="3"
+									Content="Send Account To"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxg:LookUpEdit
+									Grid.Row="10"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									AutoComplete="True"
+									AutoPopulateColumns="False"
+									DisplayMember="FirstName"
+									EditValue="{Binding Entity.SendAccountToFamilyMember, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									ImmediatePopup="True"
+									IncrementalFiltering="False"
+									IsPopupAutoWidth="False"
+									IsTextEditable="False"
+									ItemsSource="{Binding FamilyMembersEntities}"
+									PopupContentTemplate="{StaticResource gridFamilyMemberDataTemplate}"
+									PopupMaxWidth="600"
+									ShowSizeGrip="True"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="240"
+									ValueMember="RowId" />
+
+								<Label Grid.Row="11" Height="40" />
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="12"
+									Grid.Column="0"
+									Content="Home Phone"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="12"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.HomePhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource phoneEditStyle1}"
+									TabIndex="110">
+									<dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="12"
+									Grid.Column="3"
+									Content="Work Phone"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="12"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.WorkPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource phoneEditStyle1}"
+									TabIndex="250">
+									<dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="13"
+									Grid.Column="0"
+									Content="Cell"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="13"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.MobileNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource phoneEditStyle1}"
+									TabIndex="120">
+									<dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-mobile-phone-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="13"
+									Grid.Column="3"
+									Content="Occupation"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="13"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.Occupation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="260">
+									<dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-item-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="14"
+									Grid.Column="0"
+									Content="Email"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="14"
+									Grid.Column="1"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.EmailAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="130">
+									<dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-email-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+								<dxlc:LayoutItemLabel
+									Grid.Row="14"
+									Grid.Column="3"
+									Content="Fax"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
+								<dxe:ButtonEdit
+									Grid.Row="14"
+									Grid.Column="4"
+									Grid.ColumnSpan="2"
+									AllowDefaultButton="False"
+									EditValue="{Binding Entity.Fax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									Style="{StaticResource baseEditStyle1}"
+									TabIndex="270">
+									<dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
+										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
+									</dxe:ButtonInfo>
+								</dxe:ButtonEdit>
+
+
+
+
+
+							</Grid>
+
+
+
+							<dxlc:LayoutGroup
+								Margin="5,35,5,5"
+								VerticalAlignment="Top"
+								GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+								Header="FAMILY DOCTOR"
+								View="GroupBox">
+								<Grid>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="30" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="30" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="0"
+										Content="Name"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="1"
+										EditValue="{Binding Entity.FamilyDoctor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="300">
+										<!--
+											MaskType="RegEx"
+											Mask="(DR)?(.*)"
+										-->
+
+										<dxmvvm:Interaction.Behaviors>
+											<infrastructure:UIElementBehavior Manager="{Binding UIManagerFamilyDoctor}" />
+											<dxmvvm:EventToCommand
+												Command="{Binding OnGotFocusFamilyDoctorCommand}"
+												EventName="GotFocus"
+												PassEventArgsToCommand="False" />
+											<dxmvvm:EventToCommand
+												Command="{Binding OnLostFocusFamilyDoctorCommand}"
+												EventName="LostFocus"
+												PassEventArgsToCommand="False" />
+										</dxmvvm:Interaction.Behaviors>
+									</dxe:TextEdit>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="3"
+										Content="Address"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="4"
+										EditValue="{Binding Entity.FamilyDoctorAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="310" />
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="6"
+										Content="Telephone"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:ButtonEdit
+										Grid.Column="7"
+										EditValue="{Binding Entity.FamilyDoctorPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										Style="{StaticResource phoneEditStyle1}"
+										TabIndex="320" />
+								</Grid>
+							</dxlc:LayoutGroup>
+
+
+							<!--<dxlc:LayoutGroup VerticalAlignment="Top"
                                               Header="HEALTH HISTORY"
                                               Margin="5"
                                               GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
@@ -1125,9 +1125,9 @@
 
 
 
-                            -->
-                            <!--  qqqqqqqqqqqqqqqqqqqqqqqqqqqq  -->
-                            <!--
+							-->
+							<!--  qqqqqqqqqqqqqqqqqqqqqqqqqqqq  -->
+							<!--
                                     <dxlc:LayoutItemLabel Grid.Row="2"
                                                           Grid.Column="0"
                                                           Content="Hip pain"
@@ -1207,412 +1207,476 @@
                                                   Style="{StaticResource baseEditStyle1}" />
                                 </Grid>
                             </dxlc:LayoutGroup>-->
-                        </StackPanel>
-                    </dx:DXTabItem>
+						</StackPanel>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Medical History">
-                        <dxlc:LayoutControl>
-                            <localv:MedicalHistoryRecordView>
-                                <dxmvvm:Interaction.Behaviors>
-                                    <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.MedicalHistoryModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
-                                </dxmvvm:Interaction.Behaviors>
-                            </localv:MedicalHistoryRecordView>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+					<dx:DXTabItem Header="Medical History">
+						<dxlc:LayoutControl>
+							<localv:MedicalHistoryRecordView>
+								<dxmvvm:Interaction.Behaviors>
+									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.MedicalHistoryModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
+								</dxmvvm:Interaction.Behaviors>
+							</localv:MedicalHistoryRecordView>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Treatment Plan">
-                        <dxlc:LayoutControl>
-                            <localv:TreatmentPlanRecordView>
-                                <dxmvvm:Interaction.Behaviors>
-                                    <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.TreatmentPlanModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
-                                </dxmvvm:Interaction.Behaviors>
-                            </localv:TreatmentPlanRecordView>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+					<dx:DXTabItem Header="Treatment Plan" Visibility="{Binding IsVisibilityTreatmentPlan, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<localv:TreatmentPlanRecordView>
+								<dxmvvm:Interaction.Behaviors>
+									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.TreatmentPlanModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
+								</dxmvvm:Interaction.Behaviors>
+							</localv:TreatmentPlanRecordView>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Insurance Coverage" Visibility="{Binding IsVisibilityInsuranceCoverage, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <dxlc:LayoutControl>
+					<dx:DXTabItem Header="Insurance Coverage" Visibility="{Binding IsVisibilityInsuranceCoverage, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
 
-                            <dxg:GridControl
-                                AutoExpandAllGroups="True"
-                                ItemsSource="{Binding InsuranceCoverageEntities}"
-                                SelectedItem="{Binding InsuranceCoverageSelectedEntity}"
-                                ShowBorder="True">
-                                <dxmvvm:Interaction.Behaviors>
-                                    <dxmvvm:EventToCommand
-                                        Command="{Binding InsuranceCoverageEditCommand}"
-                                        EventName="MouseDoubleClick"
-                                        PassEventArgsToCommand="True">
-                                        <dxmvvm:EventToCommand.EventArgsConverter>
-                                            <dx:EventArgsToDataRowConverter />
-                                        </dxmvvm:EventToCommand.EventArgsConverter>
-                                    </dxmvvm:EventToCommand>
-                                </dxmvvm:Interaction.Behaviors>
-                                <dxg:GridControl.View>
-                                    <dxg:TableView
-                                        AllowEditing="False"
-                                        AllowPerPixelScrolling="True"
-                                        AutoWidth="True"
-                                        EnableImmediatePosting="True"
-                                        NavigationStyle="Row"
-                                        ShowGroupPanel="False">
-                                        <dxg:TableView.FormatConditions>
-                                            <dxg:FormatCondition ApplyToRow="True" Expression="[IsOnlyForOtherFamilyMember] == 'True'">
-                                                <dx:Format FontStyle="Italic" />
-                                            </dxg:FormatCondition>
-                                        </dxg:TableView.FormatConditions>
-                                        <dxg:TableView.RowCellMenuCustomizations>
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.InsuranceCoverageNewCommand}"
-                                                Content="New"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.InsuranceCoverageEditCommand}"
-                                                CommandParameter="{Binding Row.Row}"
-                                                Content="Edit"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.InsuranceCoverageDeleteCommand}"
-                                                Content="Delete"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
-                                        </dxg:TableView.RowCellMenuCustomizations>
-                                    </dxg:TableView>
-                                </dxg:GridControl.View>
-                                <dxg:GridControl.Columns>
-                                    <dxg:GridColumn Binding="{Binding InsuranceProviderRowId, Converter={StaticResource insuranceProviderConverter}}" Header="INSURANCE&#10;PROVIDER" />
-                                    <dxg:GridColumn FieldName="PolicyNumber" Header="POLICY NUMBER" />
-                                    <dxg:GridColumn FieldName="PlanNumber" Header="PLAN NUMBER" />
-                                    <dxg:GridColumn
-                                        FieldName="CoverageStartDate"
-                                        Header="COVERAGE&#10;START DATE"
-                                        SortIndex="0"
-                                        SortOrder="Descending" />
-                                    <dxg:GridColumn FieldName="CoverageValidUntil" Header="COVERAGE&#10;VALID UNTIL" />
-                                    <dxg:GridColumn FieldName="PolicyOwner.FullName" Header="POLICY OWNER" />
-                                </dxg:GridControl.Columns>
-                                <dxg:GridControl.GroupSummary>
-                                    <dxg:GridSummaryItem SummaryType="Count" />
-                                </dxg:GridControl.GroupSummary>
-                            </dxg:GridControl>
+							<dxg:GridControl
+								AutoExpandAllGroups="True"
+								ItemsSource="{Binding InsuranceCoverageEntities}"
+								SelectedItem="{Binding InsuranceCoverageSelectedEntity}"
+								ShowBorder="True">
+								<dxmvvm:Interaction.Behaviors>
+									<dxmvvm:EventToCommand
+										Command="{Binding InsuranceCoverageEditCommand}"
+										EventName="MouseDoubleClick"
+										PassEventArgsToCommand="True">
+										<dxmvvm:EventToCommand.EventArgsConverter>
+											<dx:EventArgsToDataRowConverter />
+										</dxmvvm:EventToCommand.EventArgsConverter>
+									</dxmvvm:EventToCommand>
+								</dxmvvm:Interaction.Behaviors>
+								<dxg:GridControl.View>
+									<dxg:TableView
+										AllowEditing="False"
+										AllowPerPixelScrolling="True"
+										AutoWidth="True"
+										EnableImmediatePosting="True"
+										NavigationStyle="Row"
+										ShowGroupPanel="False">
+										<dxg:TableView.FormatConditions>
+											<dxg:FormatCondition ApplyToRow="True" Expression="[IsOnlyForOtherFamilyMember] == 'True'">
+												<dx:Format FontStyle="Italic" />
+											</dxg:FormatCondition>
+										</dxg:TableView.FormatConditions>
+										<dxg:TableView.RowCellMenuCustomizations>
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.InsuranceCoverageNewCommand}"
+												Content="New"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.InsuranceCoverageEditCommand}"
+												CommandParameter="{Binding Row.Row}"
+												Content="Edit"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.InsuranceCoverageDeleteCommand}"
+												Content="Delete"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+										</dxg:TableView.RowCellMenuCustomizations>
+									</dxg:TableView>
+								</dxg:GridControl.View>
+								<dxg:GridControl.Columns>
+									<dxg:GridColumn Binding="{Binding InsuranceProviderRowId, Converter={StaticResource insuranceProviderConverter}}" Header="INSURANCE&#10;PROVIDER" />
+									<dxg:GridColumn FieldName="PolicyNumber" Header="POLICY NUMBER" />
+									<dxg:GridColumn FieldName="PlanNumber" Header="PLAN NUMBER" />
+									<dxg:GridColumn
+										FieldName="CoverageStartDate"
+										Header="COVERAGE&#10;START DATE"
+										SortIndex="0"
+										SortOrder="Descending" />
+									<dxg:GridColumn FieldName="CoverageValidUntil" Header="COVERAGE&#10;VALID UNTIL" />
+									<dxg:GridColumn FieldName="PolicyOwner.FullName" Header="POLICY OWNER" />
+								</dxg:GridControl.Columns>
+								<dxg:GridControl.GroupSummary>
+									<dxg:GridSummaryItem SummaryType="Count" />
+								</dxg:GridControl.GroupSummary>
+							</dxg:GridControl>
 
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Invoices">
-                        <dxlc:LayoutControl>
-                            <localv:InvoicesListView>
-                                <dxmvvm:Interaction.Behaviors>
-                                    <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.InvoiceListModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
-                                </dxmvvm:Interaction.Behaviors>
-                            </localv:InvoicesListView>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+					<dx:DXTabItem Header="Invoices">
+						<dxlc:LayoutControl>
+							<localv:InvoicesListView>
+								<dxmvvm:Interaction.Behaviors>
+									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.InvoiceListModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
+								</dxmvvm:Interaction.Behaviors>
+							</localv:InvoicesListView>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Calendar Events">
-                        <dxlc:LayoutControl>
-                            <localv:CalendarEventsSchedulerView>
-                                <dxmvvm:Interaction.Behaviors>
-                                    <infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.CalendarEventsModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
-                                </dxmvvm:Interaction.Behaviors>
-                            </localv:CalendarEventsSchedulerView>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+					<dx:DXTabItem Header="Calendar Events">
+						<dxlc:LayoutControl>
+							<localv:CalendarEventsSchedulerView>
+								<dxmvvm:Interaction.Behaviors>
+									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.CalendarEventsModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
+								</dxmvvm:Interaction.Behaviors>
+							</localv:CalendarEventsSchedulerView>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Notes" Visibility="{Binding IsVisibilityPatientNote, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <dxlc:LayoutControl>
-                            <dxg:GridControl
-                                ItemsSource="{Binding PatientNoteEntities}"
-                                SelectedItem="{Binding PatientNoteSelectedEntity}"
-                                ShowBorder="True">
-                                <dxmvvm:Interaction.Behaviors>
-                                    <dxmvvm:EventToCommand
-                                        Command="{Binding PatientNoteEditCommand}"
-                                        EventName="MouseDoubleClick"
-                                        PassEventArgsToCommand="True">
-                                        <dxmvvm:EventToCommand.EventArgsConverter>
-                                            <dx:EventArgsToDataRowConverter />
-                                        </dxmvvm:EventToCommand.EventArgsConverter>
-                                    </dxmvvm:EventToCommand>
-                                </dxmvvm:Interaction.Behaviors>
-                                <dxg:GridControl.View>
-                                    <dxg:TableView
-                                        AllowEditing="False"
-                                        AllowPerPixelScrolling="True"
-                                        AutoWidth="False"
-                                        EnableImmediatePosting="True"
-                                        NavigationStyle="Row"
-                                        ShowGroupPanel="False">
-                                        <dxg:TableView.RowCellMenuCustomizations>
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientNoteNewCommand}"
-                                                Content="New"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientNoteEditCommand}"
-                                                CommandParameter="{Binding Row.Row}"
-                                                Content="Edit"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientNoteDeleteCommand}"
-                                                Content="Delete"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
-                                        </dxg:TableView.RowCellMenuCustomizations>
-                                    </dxg:TableView>
-                                </dxg:GridControl.View>
-                                <dxg:GridControl.Columns>
-                                    <dxg:GridColumn
-                                        Width="80"
-                                        FieldName="NoteDate"
-                                        Header="DATE"
-                                        SortIndex="0"
-                                        SortOrder="Descending" />
-                                    <dxg:GridColumn
-                                        Width="150"
-                                        Binding="{Binding NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Text}"
-                                        Header="STATUS">
-                                        <dxg:GridColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Border
-                                                    Grid.Column="2"
-                                                    Margin="0,0"
-                                                    Background="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Background}">
-                                                    <dxlc:LayoutItemLabel
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Center"
-                                                        Content="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Text}"
-                                                        Foreground="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Foreground}" />
-                                                </Border>
-                                            </DataTemplate>
-                                        </dxg:GridColumn.CellTemplate>
-                                    </dxg:GridColumn>
-                                    <dxg:GridColumn
-                                        Width="*"
-                                        FieldName="NoteText"
-                                        Header="NOTE">
-                                        <dxg:GridColumn.EditSettings>
-                                            <dxe:TextEditSettings TextWrapping="Wrap" />
-                                        </dxg:GridColumn.EditSettings>
-                                    </dxg:GridColumn>
-                                </dxg:GridControl.Columns>
-                            </dxg:GridControl>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+					<dx:DXTabItem Header="Notes" Visibility="{Binding IsVisibilityPatientNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<dxg:GridControl
+								ItemsSource="{Binding PatientNoteEntities}"
+								SelectedItem="{Binding PatientNoteSelectedEntity}"
+								ShowBorder="True">
+								<dxmvvm:Interaction.Behaviors>
+									<dxmvvm:EventToCommand
+										Command="{Binding PatientNoteEditCommand}"
+										EventName="MouseDoubleClick"
+										PassEventArgsToCommand="True">
+										<dxmvvm:EventToCommand.EventArgsConverter>
+											<dx:EventArgsToDataRowConverter />
+										</dxmvvm:EventToCommand.EventArgsConverter>
+									</dxmvvm:EventToCommand>
+								</dxmvvm:Interaction.Behaviors>
+								<dxg:GridControl.View>
+									<dxg:TableView
+										AllowEditing="False"
+										AllowPerPixelScrolling="True"
+										AutoWidth="False"
+										EnableImmediatePosting="True"
+										NavigationStyle="Row"
+										ShowGroupPanel="False">
+										<dxg:TableView.RowCellMenuCustomizations>
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientNoteNewCommand}"
+												Content="New"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientNoteEditCommand}"
+												CommandParameter="{Binding Row.Row}"
+												Content="Edit"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientNoteDeleteCommand}"
+												Content="Delete"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+										</dxg:TableView.RowCellMenuCustomizations>
+									</dxg:TableView>
+								</dxg:GridControl.View>
+								<dxg:GridControl.Columns>
+									<dxg:GridColumn
+										Width="80"
+										FieldName="NoteDate"
+										Header="DATE"
+										SortIndex="0"
+										SortOrder="Descending" />
+									<dxg:GridColumn
+										Width="150"
+										Binding="{Binding NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Text}"
+										Header="STATUS">
+										<dxg:GridColumn.CellTemplate>
+											<DataTemplate>
+												<Border
+													Grid.Column="2"
+													Margin="0,0"
+													Background="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Background}">
+													<dxlc:LayoutItemLabel
+														HorizontalAlignment="Center"
+														VerticalAlignment="Center"
+														Content="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Text}"
+														Foreground="{Binding RowData.Row.NoteStatusRowId, Converter={StaticResource PatientNoteStatusConverter}, ConverterParameter=Foreground}" />
+												</Border>
+											</DataTemplate>
+										</dxg:GridColumn.CellTemplate>
+									</dxg:GridColumn>
+									<dxg:GridColumn
+										Width="*"
+										FieldName="NoteText"
+										Header="NOTE">
+										<dxg:GridColumn.EditSettings>
+											<dxe:TextEditSettings TextWrapping="Wrap" />
+										</dxg:GridColumn.EditSettings>
+									</dxg:GridColumn>
+								</dxg:GridControl.Columns>
+							</dxg:GridControl>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Clinical Notes" Visibility="{Binding IsVisibilityAppointmentClinicalNote, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <dxlc:LayoutControl>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <dxg:GridControl
-                                    ItemsSource="{Binding AppointmentClinicalNoteEntities}"
-                                    SelectedItem="{Binding AppointmentClinicalNoteSelectedEntity}"
-                                    SelectedItems="{Binding AppointmentClinicalNoteSelectedEntities}"
-                                    SelectionMode="MultipleRow"
-                                    ShowBorder="True">
-                                    <dxmvvm:Interaction.Behaviors>
-                                        <dxmvvm:EventToCommand
-                                            Command="{Binding AppointmentClinicalNoteEditCommand}"
-                                            EventName="MouseDoubleClick"
-                                            PassEventArgsToCommand="True">
-                                            <dxmvvm:EventToCommand.EventArgsConverter>
-                                                <dx:EventArgsToDataRowConverter />
-                                            </dxmvvm:EventToCommand.EventArgsConverter>
-                                        </dxmvvm:EventToCommand>
-                                    </dxmvvm:Interaction.Behaviors>
-                                    <dxg:GridControl.View>
-                                        <dxg:TableView
-                                            AllowEditing="False"
-                                            AllowPerPixelScrolling="True"
-                                            AutoWidth="False"
-                                            EnableImmediatePosting="True"
-                                            NavigationStyle="Row"
-                                            SearchPanelHorizontalAlignment="Right"
-                                            ShowCheckBoxSelectorColumn="True"
-                                            ShowGroupPanel="False"
-                                            ShowSearchPanelMode="Always" />
-                                    </dxg:GridControl.View>
-                                    <dxg:GridControl.Columns>
-                                        <dxg:GridColumn
-                                            Width="150"
-                                            FieldName="StartEndDateString"
-                                            Header="APPOINTMENT START/FINISH" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="AppointmentBookName"
-                                            Header="APPOINTMENT BOOK" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="ServiceProviderName"
-                                            Header="SPECIALIST" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="MedicalServiceName"
-                                            Header="SERVICE" />
-                                        <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
-                                    </dxg:GridControl.Columns>
-                                </dxg:GridControl>
+					<dx:DXTabItem Header="Appontment Notes" Visibility="{Binding IsVisibilityAppointmentClinicalNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="Auto" />
+									<RowDefinition Height="*" />
+								</Grid.RowDefinitions>
+								<Grid Grid.Row="1">
+									<Grid.RowDefinitions>
+										<RowDefinition Height="*" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<dxg:GridControl
+										ItemsSource="{Binding AppointmentClinicalNoteEntities}"
+										SelectedItem="{Binding AppointmentClinicalNoteSelectedEntity}"
+										SelectedItems="{Binding AppointmentClinicalNoteSelectedEntities}"
+										SelectionMode="None"
+										ShowBorder="True">
+										<dxmvvm:Interaction.Behaviors>
+											<dxmvvm:EventToCommand
+												Command="{Binding AppointmentClinicalNoteEditCommand}"
+												EventName="MouseDoubleClick"
+												PassEventArgsToCommand="True">
+												<dxmvvm:EventToCommand.EventArgsConverter>
+													<dx:EventArgsToDataRowConverter />
+												</dxmvvm:EventToCommand.EventArgsConverter>
+											</dxmvvm:EventToCommand>
+											<infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolAppointmentClinicalNoteEntities}" />
+										</dxmvvm:Interaction.Behaviors>
+										<dxg:GridControl.View>
+											<dxg:TableView
+												AllowEditing="False"
+												AllowPerPixelScrolling="True"
+												AutoWidth="False"
+												EnableImmediatePosting="True"
+												NavigationStyle="Row"
+												SearchPanelHorizontalAlignment="Right"
+												ShowCheckBoxSelectorColumn="True"
+												ShowGroupPanel="False"
+												ShowSearchPanelMode="Always" />
+										</dxg:GridControl.View>
+										<dxg:GridControl.Columns>
+											<dxg:GridColumn
+												Width="150"
+												FieldName="StartEndDateString"
+												Header="APPOINTMENT START/FINISH" />
+											<dxg:GridColumn
+												Width="10*"
+												FieldName="AppointmentBookName"
+												Header="APPOINTMENT BOOK" />
+											<dxg:GridColumn
+												Width="10*"
+												FieldName="ServiceProviderName"
+												Header="SPECIALIST" />
+											<dxg:GridColumn
+												Width="10*"
+												FieldName="MedicalServiceName"
+												Header="SERVICE" />
+											<dxg:GridColumn
+												Visible="False"
+												FieldName="Button"
+												Style="{StaticResource OpenDetailColumnStyle}" />
+										</dxg:GridControl.Columns>
+										<dxg:GridControl.DetailDescriptor>
+											<dxg:ContentDetailDescriptor>
+												<dxg:ContentDetailDescriptor.ContentTemplate>
+													<DataTemplate>
+														<dx:MeasurePixelSnapper>
+															<ItemsControl ItemsSource="{Binding ButtonsAppointmentForm}" Margin="2">
+																<ItemsControl.ItemTemplate>
+																	<DataTemplate>
+																		<Button
+																			Margin="5"
+																			Content="{Binding ButtonText}"
+																			Background="{Binding ButtonColor}"
+																			FontStyle="{Binding FontStyle}"
+																			FontWeight="{Binding FontWeight}"
+																			Command="{Binding OnClickCommand}" />
+																	</DataTemplate>
+																</ItemsControl.ItemTemplate>
+																<ItemsControl.ItemsPanel>
+																	<ItemsPanelTemplate>
+																		<WrapPanel />
+																	</ItemsPanelTemplate>
+																</ItemsControl.ItemsPanel>
+															</ItemsControl>
+														</dx:MeasurePixelSnapper>
+													</DataTemplate>
+												</dxg:ContentDetailDescriptor.ContentTemplate>
+											</dxg:ContentDetailDescriptor>
+										</dxg:GridControl.DetailDescriptor>
+									</dxg:GridControl>
 
-                                <StackPanel
-                                    Grid.Row="1"
-                                    HorizontalAlignment="Right"
-                                    Orientation="Horizontal">
-                                    <Button
-                                        Margin="5,3,5,0"
-                                        Command="{Binding AppointmentClinicalNotePdfBuildCommand}"
-                                        Content="Build pdf for selected notes" />
-                                    <Button
-                                        Margin="5,3,5,0"
-                                        Command="{Binding AppointmentClinicalNotePrintCommand}"
-                                        Content="Print selected notes" />
-                                </StackPanel>
-                            </Grid>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+									<StackPanel
+										Visibility="Collapsed"
+										Grid.Row="1"
+										HorizontalAlignment="Right"
+										Orientation="Horizontal">
+										<Button
+											Margin="5,3,5,0"
+											Command="{Binding AppointmentClinicalNotePdfBuildCommand}"
+											Content="Build pdf for selected notes" />
+										<Button
+											Margin="5,3,5,0"
+											Command="{Binding AppointmentClinicalNotePrintCommand}"
+											Content="Print selected notes" />
+									</StackPanel>
+								</Grid>
+							</Grid>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                    <dx:DXTabItem Header="Treatment Notes" Visibility="{Binding IsVisibilityAppointmentTreatmentNote, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <dxlc:LayoutControl>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <dxg:GridControl
-                                    ItemsSource="{Binding AppointmentTreatmentNoteEntities}"
-                                    SelectedItem="{Binding AppointmentTreatmentNoteSelectedEntity}"
-                                    SelectedItems="{Binding AppointmentTreatmentNoteSelectedEntities}"
-                                    SelectionMode="MultipleRow"
-                                    ShowBorder="True">
-                                    <dxmvvm:Interaction.Behaviors>
-                                        <dxmvvm:EventToCommand
-                                            Command="{Binding AppointmentTreatmentNoteEditCommand}"
-                                            EventName="MouseDoubleClick"
-                                            PassEventArgsToCommand="True">
-                                            <dxmvvm:EventToCommand.EventArgsConverter>
-                                                <dx:EventArgsToDataRowConverter />
-                                            </dxmvvm:EventToCommand.EventArgsConverter>
-                                        </dxmvvm:EventToCommand>
-                                    </dxmvvm:Interaction.Behaviors>
-                                    <dxg:GridControl.View>
-                                        <dxg:TableView
-                                            AllowEditing="False"
-                                            AllowPerPixelScrolling="True"
-                                            AutoWidth="False"
-                                            EnableImmediatePosting="True"
-                                            NavigationStyle="Row"
-                                            SearchPanelHorizontalAlignment="Right"
-                                            ShowCheckBoxSelectorColumn="True"
-                                            ShowGroupPanel="False"
-                                            ShowSearchPanelMode="Always" />
-                                    </dxg:GridControl.View>
-                                    <dxg:GridControl.Columns>
-                                        <dxg:GridColumn
-                                            Width="150"
-                                            FieldName="StartEndDateString"
-                                            Header="APPOINTMENT&#x0a;START/FINISH" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="AppointmentBookName"
-                                            Header="APPOINTMENT BOOK" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="ServiceProviderName"
-                                            Header="SPECIALIST" />
-                                        <dxg:GridColumn
-                                            Width="10*"
-                                            FieldName="MedicalServiceName"
-                                            Header="SERVICE" />
-                                        <dxg:GridColumn
-                                            Width="80"
-                                            FieldName="AppointmentTreatmentNoteExists"
-                                            Header="TREATMENT&#x0a;EXISTS" />
-                                        <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
-                                    </dxg:GridControl.Columns>
-                                </dxg:GridControl>
+					<dx:DXTabItem Header="Patient Notes" Visibility="{Binding IsVisibilityAppointmentClinicalNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<dx:MeasurePixelSnapper>
+								<ItemsControl ItemsSource="{Binding Entity.PatientFormDocuments.ButtonsAppointmentForm}" Margin="2">
+									<ItemsControl.ItemTemplate>
+										<DataTemplate>
+											<Button
+												Margin="5"
+												Content="{Binding ButtonText}"
+												Background="{Binding ButtonColor}"
+												FontStyle="{Binding FontStyle}"
+												FontWeight="{Binding FontWeight}"
+												Command="{Binding OnClickCommand}" />
+										</DataTemplate>
+									</ItemsControl.ItemTemplate>
+									<ItemsControl.ItemsPanel>
+										<ItemsPanelTemplate>
+											<WrapPanel />
+										</ItemsPanelTemplate>
+									</ItemsControl.ItemsPanel>
+								</ItemsControl>
+							</dx:MeasurePixelSnapper>
 
-                                <StackPanel
-                                    Grid.Row="1"
-                                    HorizontalAlignment="Left"
-                                    Orientation="Horizontal">
-                                    <Button
-                                        Margin="5,3,5,0"
-                                        Command="{Binding AppointmentTreatmentNoteAddCommand}"
-                                        Content="Add Treatment Notes for selected appointments" />
-                                </StackPanel>
-                            </Grid>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
+					<dx:DXTabItem Header="Treatment Notes" Visibility="{Binding IsVisibilityAppointmentTreatmentNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<Grid>
+								<Grid.RowDefinitions>
+									<RowDefinition Height="*" />
+									<RowDefinition Height="Auto" />
+								</Grid.RowDefinitions>
+								<dxg:GridControl
+									ItemsSource="{Binding AppointmentTreatmentNoteEntities}"
+									SelectedItem="{Binding AppointmentTreatmentNoteSelectedEntity}"
+									SelectedItems="{Binding AppointmentTreatmentNoteSelectedEntities}"
+									SelectionMode="MultipleRow"
+									ShowBorder="True">
+									<dxmvvm:Interaction.Behaviors>
+										<dxmvvm:EventToCommand
+											Command="{Binding AppointmentTreatmentNoteEditCommand}"
+											EventName="MouseDoubleClick"
+											PassEventArgsToCommand="True">
+											<dxmvvm:EventToCommand.EventArgsConverter>
+												<dx:EventArgsToDataRowConverter />
+											</dxmvvm:EventToCommand.EventArgsConverter>
+										</dxmvvm:EventToCommand>
+									</dxmvvm:Interaction.Behaviors>
+									<dxg:GridControl.View>
+										<dxg:TableView
+											AllowEditing="False"
+											AllowPerPixelScrolling="True"
+											AutoWidth="False"
+											EnableImmediatePosting="True"
+											NavigationStyle="Row"
+											SearchPanelHorizontalAlignment="Right"
+											ShowCheckBoxSelectorColumn="True"
+											ShowGroupPanel="False"
+											ShowSearchPanelMode="Always" />
+									</dxg:GridControl.View>
+									<dxg:GridControl.Columns>
+										<dxg:GridColumn
+											Width="150"
+											FieldName="StartEndDateString"
+											Header="APPOINTMENT&#x0a;START/FINISH" />
+										<dxg:GridColumn
+											Width="10*"
+											FieldName="AppointmentBookName"
+											Header="APPOINTMENT BOOK" />
+										<dxg:GridColumn
+											Width="10*"
+											FieldName="ServiceProviderName"
+											Header="SPECIALIST" />
+										<dxg:GridColumn
+											Width="10*"
+											FieldName="MedicalServiceName"
+											Header="SERVICE" />
+										<dxg:GridColumn
+											Width="80"
+											FieldName="AppointmentTreatmentNoteExists"
+											Header="TREATMENT&#x0a;EXISTS" />
+										<dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+									</dxg:GridControl.Columns>
+								</dxg:GridControl>
 
-                    <dx:DXTabItem Header="Documents" Visibility="{Binding IsVisibilityPatientDocument, Converter={StaticResource BooleanToVisibilityConverter}}">
-                        <dxlc:LayoutControl>
-                            <dxg:GridControl
-                                ItemsSource="{Binding PatientDocumentEntities}"
-                                SelectedItem="{Binding PatientDocumentSelectedEntity}"
-                                ShowBorder="True">
-                                <dxmvvm:Interaction.Behaviors>
-                                    <dxmvvm:EventToCommand
-                                        Command="{Binding PatientDocumentEditCommand}"
-                                        EventName="MouseDoubleClick"
-                                        PassEventArgsToCommand="True">
-                                        <dxmvvm:EventToCommand.EventArgsConverter>
-                                            <dx:EventArgsToDataRowConverter />
-                                        </dxmvvm:EventToCommand.EventArgsConverter>
-                                    </dxmvvm:EventToCommand>
-                                </dxmvvm:Interaction.Behaviors>
-                                <dxg:GridControl.View>
-                                    <dxg:TableView
-                                        AllowEditing="False"
-                                        AllowPerPixelScrolling="True"
-                                        AutoWidth="False"
-                                        EnableImmediatePosting="True"
-                                        NavigationStyle="Row"
-                                        ShowGroupPanel="False">
-                                        <dxg:TableView.RowCellMenuCustomizations>
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientDocumentPasteCommand}"
-                                                Content="Paste"
-                                                Glyph="{dx:DXImage Image=Paste_16x16.png}" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientDocumentNewCommand}"
-                                                Content="New"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientDocumentEditCommand}"
-                                                CommandParameter="{Binding Row.Row}"
-                                                Content="Edit"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
-                                            <dxb:BarButtonItem
-                                                Command="{Binding View.DataContext.PatientDocumentDeleteCommand}"
-                                                Content="Delete"
-                                                Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
-                                        </dxg:TableView.RowCellMenuCustomizations>
-                                    </dxg:TableView>
-                                </dxg:GridControl.View>
-                                <dxg:GridControl.Columns>
-                                    <dxg:GridColumn
-                                        Width="80"
-                                        FieldName="CreateDateTime"
-                                        Header="DATE"
-                                        SortIndex="0"
-                                        SortOrder="Descending" />
-                                    <dxg:GridColumn
-                                        Width="120"
-                                        FieldName="DocumentType"
-                                        Header="TYPE" />
-                                    <dxg:GridColumn
-                                        Width="200"
-                                        FieldName="DocumentName"
-                                        Header="NAME" />
-                                    <dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
-                                </dxg:GridControl.Columns>
-                            </dxg:GridControl>
-                        </dxlc:LayoutControl>
-                    </dx:DXTabItem>
+								<StackPanel
+									Grid.Row="1"
+									HorizontalAlignment="Left"
+									Orientation="Horizontal">
+									<Button
+										Margin="5,3,5,0"
+										Command="{Binding AppointmentTreatmentNoteAddCommand}"
+										Content="Add Treatment Notes for selected appointments" />
+								</StackPanel>
+							</Grid>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
 
-                </dx:DXTabControl>
-            </Grid>
-        </DockPanel>
-    </dx:LoadingDecorator>
+					<dx:DXTabItem Header="Documents" Visibility="{Binding IsVisibilityPatientDocument, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<dxg:GridControl
+								ItemsSource="{Binding PatientDocumentEntities}"
+								SelectedItem="{Binding PatientDocumentSelectedEntity}"
+								ShowBorder="True">
+								<dxmvvm:Interaction.Behaviors>
+									<dxmvvm:EventToCommand
+										Command="{Binding PatientDocumentEditCommand}"
+										EventName="MouseDoubleClick"
+										PassEventArgsToCommand="True">
+										<dxmvvm:EventToCommand.EventArgsConverter>
+											<dx:EventArgsToDataRowConverter />
+										</dxmvvm:EventToCommand.EventArgsConverter>
+									</dxmvvm:EventToCommand>
+								</dxmvvm:Interaction.Behaviors>
+								<dxg:GridControl.View>
+									<dxg:TableView
+										AllowEditing="False"
+										AllowPerPixelScrolling="True"
+										AutoWidth="False"
+										EnableImmediatePosting="True"
+										NavigationStyle="Row"
+										ShowGroupPanel="False">
+										<dxg:TableView.RowCellMenuCustomizations>
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientDocumentPasteCommand}"
+												Content="Paste"
+												Glyph="{dx:DXImage Image=Paste_16x16.png}" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientDocumentNewCommand}"
+												Content="New"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientDocumentEditCommand}"
+												CommandParameter="{Binding Row.Row}"
+												Content="Edit"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png" />
+											<dxb:BarButtonItem
+												Command="{Binding View.DataContext.PatientDocumentDeleteCommand}"
+												Content="Delete"
+												Glyph="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-delete-16.png" />
+										</dxg:TableView.RowCellMenuCustomizations>
+									</dxg:TableView>
+								</dxg:GridControl.View>
+								<dxg:GridControl.Columns>
+									<dxg:GridColumn
+										Width="80"
+										FieldName="CreateDateTime"
+										Header="DATE"
+										SortIndex="0"
+										SortOrder="Descending" />
+									<dxg:GridColumn
+										Width="120"
+										FieldName="DocumentType"
+										Header="TYPE" />
+									<dxg:GridColumn
+										Width="200"
+										FieldName="DocumentName"
+										Header="NAME" />
+									<dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
+								</dxg:GridControl.Columns>
+							</dxg:GridControl>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
+
+				</dx:DXTabControl>
+			</Grid>
+		</DockPanel>
+	</dx:LoadingDecorator>
 </dx:DXWindow>

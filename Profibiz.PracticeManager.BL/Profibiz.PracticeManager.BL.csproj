@@ -115,6 +115,7 @@
     <Compile Include="Lock\GlobalLocker.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Query.cs" />
+    <Compile Include="WebApiRepository.FormDocument.cs" />
     <Compile Include="WebApiRepository.AppointmentTreatmentNote.cs" />
     <Compile Include="WebApiRepository.CalendarEvent.cs" />
     <Compile Include="WebApiRepository.EmailCharge.cs" />

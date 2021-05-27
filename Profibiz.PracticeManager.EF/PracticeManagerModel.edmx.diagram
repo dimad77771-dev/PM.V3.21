@@ -474,6 +474,22 @@
       <Diagram DiagramId="188d84ad2ab14394a72d34de9c39da2b" Name="Users" >
         <EntityTypeShape EntityType="PracticeManagerModel.User" Width="2.75" PointX="0.75" PointY="0.75" />
       </Diagram>
+      <Diagram DiagramId="178680f5d5394fb190b1f554ca82ff15" Name="FormDocument" ZoomLevel="100" >
+        <EntityTypeShape EntityType="PracticeManagerModel.FormDocument" Width="2.875" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.User" Width="1.5" PointX="5.875" PointY="0.75" IsExpanded="false" />
+        <AssociationConnector Association="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentT" Width="1.5" PointX="5.875" PointY="3" IsExpanded="false" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_CreatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_UpdatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_FormDocuments_Appointments" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="6" PointY="2.25" IsExpanded="false" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_Patients" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_CreatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_UpdatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_FormDocuments_Patients" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

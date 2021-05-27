@@ -27,6 +27,7 @@ namespace Profibiz.PracticeManager.Model
 		public string MeasurementUnit { get; set; }
 		public string PrintLabel { get; set; }
 		public bool UsePrintLabel { get; set; }
+		public string TemplateFolder { get; set; }
 
 
 		public string FullName => Name;

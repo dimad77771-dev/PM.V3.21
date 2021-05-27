@@ -19,7 +19,7 @@ namespace Profibiz.PracticeManager.Model
 			return other;
 		}
 
-		public void Ra111isePropertyChanged(string col)
+		public void BaseRaisePropertyChanged(string col)
 		{
 			var tp = this.GetType();
 			var prop = tp.GetMethod("OnPropertyChanged");

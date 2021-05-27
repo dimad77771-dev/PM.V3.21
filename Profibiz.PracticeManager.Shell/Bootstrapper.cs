@@ -5,6 +5,7 @@ using DevExpress.Xpf.Core;
 using Prism.Autofac;
 using Prism.Modularity;
 using Prism.Mvvm;
+using Profibiz.PracticeManager.Infrastructure;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -28,7 +29,7 @@ namespace Profibiz.PracticeManager.Shell
         protected override void InitializeShell()
         {
             base.InitializeShell();
-			//Login();
+			Login();
 			if (!System.Diagnostics.Debugger.IsAttached)
 			{
 				DXSplashScreen.Show<SplashScreenWindow>();
@@ -40,6 +41,11 @@ namespace Profibiz.PracticeManager.Shell
 
 		void Login()
 		{
+			if (RuntimeHelper.IsMachineD)
+			{
+				return;
+			}
+
 			var wnd = new Navigation.Views.LoginView();
 			var patientsBusinessService = new Patients.BusinessService.PatientsBusinessService();
 			var lookupsBusinessService = new Patients.BusinessService.LookupsBusinessService();

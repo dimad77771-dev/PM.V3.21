@@ -91,10 +91,10 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				//SelectedModule = Modules.Single(q => q.Code == "Specialists");
 				//SelectedModule = Modules.Single(q => q.Code == "Finances");
 				//SelectedModule = Modules.Single(q => q.Code == "Chargeouts");
-				//SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
+				SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
 				//SelectedModule = Modules.Single(q => q.Code == "CalendarEventsScheduler");
 				//SelectedModule = Modules.Single(q => q.Code == "Inventory");
-				SelectedModule = Modules.Single(q => q.Code == "Lookups");
+				//SelectedModule = Modules.Single(q => q.Code == "Lookups");
 			}
 			else if (RuntimeHelper.Release)
 			{

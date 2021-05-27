@@ -166,8 +166,26 @@ namespace Profibiz.PracticeManager.Service
 			}
 		}
 
-
 		static string SendSms(string phone, string text)
+		{
+			try
+			{
+				if (!SmsFunc.SendSms(phone, text))
+				{
+					return "error send SMS";
+				}
+			}
+			catch (Exception ex)
+			{
+				var errorMessage = ex.ToString();
+				//return "";
+				return errorMessage;
+			}
+
+			return "";
+		}
+
+		static string SendSms__old(string phone, string text)
 		{
 			try
 			{
@@ -217,12 +235,8 @@ namespace Profibiz.PracticeManager.Service
 				return errorMessage;
 			}
 		}
-	
 
-
-
-
-	enum ReminderType { Email, Sms }
+		enum ReminderType { Email, Sms }
 
 		string GetTemplate(string template)
 		{

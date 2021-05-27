@@ -237,7 +237,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (values[0] == DependencyProperty.UnsetValue) return null;
 				var date = (DateTime)values[0];
 				var resourceId = values[1];
-				var daysInfo = (AppointmentsSchedulerViewModel.DaysInfoClass)values[2];
+				//var daysInfo = (AppointmentsSchedulerViewModel.DaysInfoClass)values[2];
+				var daysInfo = values[2] as AppointmentsSchedulerViewModel.DaysInfoClass;
 				if (daysInfo == null) return null;
 
 				//if (resourceId is Guid && (Guid)resourceId == default(Guid))

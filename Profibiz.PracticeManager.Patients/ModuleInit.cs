@@ -81,6 +81,7 @@ namespace Profibiz.PracticeManager.Patients
 			_container.RegisterView<PatientBuildFamilyView>();
 			_container.RegisterView<PickInsuranceCoverageView>();
 			_container.RegisterView<PickCategoryView>();
+			_container.RegisterView<PickTemplateNameView>();
 			_container.RegisterView<PickAppointmentMultiDateView>();
 			_container.RegisterView<PayrollAllDoctorsView>();
 			_container.RegisterView<RibbonPayrollAllDoctorsView>();
@@ -115,6 +116,7 @@ namespace Profibiz.PracticeManager.Patients
 			_container.RegisterView<RibbonEmailSendsView>();
 			_container.RegisterView<RibbonEmailChargesView>();
 			_container.RegisterView<AppointmentClinicalNoteView>();
+			_container.RegisterView<FormDocumentView>();
 			_container.RegisterView<AppointmentTreatmentNoteView>();
 			_container.RegisterView<InvoiceClaimDetailsView>();
 			_container.RegisterView<InsuranceArticleInfoView>();

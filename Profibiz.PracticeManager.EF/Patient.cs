@@ -30,6 +30,7 @@ namespace Profibiz.PracticeManager.EF
             this.EmailSendRecipients = new HashSet<EmailSendRecipient>();
             this.PatientDocuments = new HashSet<PatientDocument>();
             this.TreatmentPlanRecords = new HashSet<TreatmentPlanRecordT>();
+            this.FormDocuments = new HashSet<FormDocument>();
         }
     
         public System.Guid RowId { get; set; }
@@ -133,5 +134,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<TreatmentPlanRecordT> TreatmentPlanRecords { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormDocument> FormDocuments { get; set; }
     }
 }
