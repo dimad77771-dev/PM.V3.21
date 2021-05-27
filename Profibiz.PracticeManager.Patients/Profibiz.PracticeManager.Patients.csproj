@@ -217,6 +217,8 @@
     <Compile Include="ViewModels\ChargeoutWindowViewModel.cs" />
     <Compile Include="ViewModels\ChargeoutPrintViewModel.cs" />
     <Compile Include="ViewModels\LeftFilterChargeoutsViewModel.cs" />
+    <Compile Include="ViewModels\OneWorkInoutViewModel.cs" />
+    <Compile Include="ViewModels\WorkInoutsListViewModel.cs" />
     <Compile Include="ViewModels\PickTemplateNameViewModel.cs" />
     <Compile Include="ViewModels\TreatmentPlanRecordViewModel.cs" />
     <Compile Include="ViewModels\MedicalHistoryRecordViewModel.cs" />
@@ -347,8 +349,17 @@
     <Compile Include="Views\LeftFilterInventoryView.xaml.cs">
       <DependentUpon>LeftFilterInventoryView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OneWorkInoutView.xaml.cs">
+      <DependentUpon>OneWorkInoutView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkInoutsListView.xaml.cs">
+      <DependentUpon>WorkInoutsListView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\PickTemplateNameView.xaml.cs">
       <DependentUpon>PickTemplateNameView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonWorkInoutsView.xaml.cs">
+      <DependentUpon>RibbonWorkInoutsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\TreatmentPlanRecordView.xaml.cs">
       <DependentUpon>TreatmentPlanRecordView.xaml</DependentUpon>
@@ -986,7 +997,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\OneWorkInoutView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\WorkInoutsListView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\PickTemplateNameView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonWorkInoutsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

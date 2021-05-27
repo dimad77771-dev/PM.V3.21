@@ -179,6 +179,8 @@ namespace Profibiz.PracticeManager.EF
             this.UserSettings1 = new HashSet<UserSetting>();
             this.FormDocuments = new HashSet<FormDocument>();
             this.FormDocuments1 = new HashSet<FormDocument>();
+            this.WorkInouts = new HashSet<WorkInout>();
+            this.WorkInouts1 = new HashSet<WorkInout>();
         }
     
         public System.Guid RowId { get; set; }
@@ -530,5 +532,9 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<FormDocument> FormDocuments { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormDocument> FormDocuments1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkInout> WorkInouts { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkInout> WorkInouts1 { get; set; }
     }
 }

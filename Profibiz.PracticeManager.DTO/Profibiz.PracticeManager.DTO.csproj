@@ -76,6 +76,7 @@
     <Compile Include="ChargeoutRefcharge.cs" />
     <Compile Include="ChargeoutPaycharge.cs" />
     <Compile Include="ChargeoutStatus.cs" />
+    <Compile Include="WorkInout.cs" />
     <Compile Include="User.cs" />
     <Compile Include="TreatmentPlanRecord.cs" />
     <Compile Include="OrderPayment.cs" />

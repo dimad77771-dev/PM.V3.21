@@ -489,6 +489,9 @@
         <AssociationConnector Association="PracticeManagerModel.FK_Patients_CreatedByUserRowId" />
         <AssociationConnector Association="PracticeManagerModel.FK_Patients_UpdatedByUserRowId" />
         <AssociationConnector Association="PracticeManagerModel.FK_FormDocuments_Patients" />
+        <EntityTypeShape EntityType="PracticeManagerModel.WorkInout" Width="2.125" PointX="10.25" PointY="1.5" />
+        <AssociationConnector Association="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId" />
+        <AssociationConnector Association="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

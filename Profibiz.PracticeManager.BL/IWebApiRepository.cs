@@ -193,6 +193,10 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<AppointmentTreatmentNote> GetAppointmentTreatmentNoteList(Guid? rowId, Guid? patientRowId);
 		void UpdateAppointmentTreatmentNoteCore(AppointmentTreatmentNote[] entity, EntityState state);
 
+		WorkInout GetWorkInout(Guid id);
+		IEnumerable<WorkInout> GetWorkInoutList(Guid? rowId, DateTime? workInoutDateFrom, DateTime? workInoutDateTo);
+		void UpdateWorkInoutCore(WorkInout entity, EntityState state);
+
 		IEnumerable<Chargeout> GetChargeoutList(Guid? rowId, Guid? chargeoutRecipientRowId, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? chargeoutDateFrom, DateTime? chargeoutDateTo, bool isShowSentOnly, bool isShowPaidOnly, DateTime? createdDateFrom, DateTime? createdDateTo);
 		Chargeout GetChargeout(Guid id);
 		ServerReturnUpdateChargeout UpdateChargeoutCore(Chargeout entity);

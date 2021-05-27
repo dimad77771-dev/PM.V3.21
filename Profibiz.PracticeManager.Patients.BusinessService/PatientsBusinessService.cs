@@ -1323,5 +1323,51 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var response = await _client.DeleteAsync("api/patients/DeleteRefcharge/" + rowId);
 			return await response.ValidateResponse();
 		}
+
+
+		async public Task<WorkInout> GetWorkInout(Guid? rowId)
+		{
+			var _client = new MyHttpClient();
+			var response = await _client.GetResponse(_baseUrl, "api/patients/GetWorkInout?id=" + rowId);
+			var rez = await response.Content.ReadAsAsync<WorkInout>();
+			return rez;
+		}
+		async public Task<List<WorkInout>> GetWorkInoutList(string query)
+		{
+			var _client = new MyHttpClient();
+			var response = await _client.GetResponse(_baseUrl, "api/patients/GetWorkInoutList?" + query);
+			var rez = await response.Content.ReadAsAsync<List<WorkInout>>();
+			return rez;
+		}
+		async public Task<UpdateReturn> PutWorkInout(WorkInout entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/patients/PutWorkInout", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> PostWorkInout(WorkInout entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PostAsync("api/patients/PostWorkInout", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteWorkInout(Guid rowId)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/patients/DeleteWorkInout/" + rowId);
+			return await response.ValidateResponse();
+		}
+
+
 	}
 }

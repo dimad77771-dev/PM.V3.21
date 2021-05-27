@@ -167,5 +167,11 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PutRefcharge(Refcharge entity);
 		Task<UpdateReturn> PostRefcharge(Refcharge entity);
 		Task<UpdateReturn> DeleteRefcharge(Guid rowId);
+
+		Task<WorkInout> GetWorkInout(Guid? id);
+		Task<List<WorkInout>> GetWorkInoutList(string query);
+		Task<UpdateReturn> PutWorkInout(WorkInout entity);
+		Task<UpdateReturn> PostWorkInout(WorkInout entity);
+		Task<UpdateReturn> DeleteWorkInout(Guid rowId);
 	}
 }

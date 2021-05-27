@@ -78,6 +78,13 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 					ImageSource = new Uri("pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Modules/icon-nav-products-32.png"),
 					//IsOpenModalWindow = true,
 				},
+
+				new ProfibizModuleDescription
+				{
+					Code = "WorkInout",
+					ModuleTitle = "?????",
+					ImageSource = new Uri("pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Modules/icon-nav-customers-32.png"),
+				},
 			};
 
 			if (!GlobalSettings.Instance.UserSettings.ShowChargeout)
@@ -91,10 +98,11 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				//SelectedModule = Modules.Single(q => q.Code == "Specialists");
 				//SelectedModule = Modules.Single(q => q.Code == "Finances");
 				//SelectedModule = Modules.Single(q => q.Code == "Chargeouts");
-				SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
+				//SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
 				//SelectedModule = Modules.Single(q => q.Code == "CalendarEventsScheduler");
 				//SelectedModule = Modules.Single(q => q.Code == "Inventory");
 				//SelectedModule = Modules.Single(q => q.Code == "Lookups");
+				SelectedModule = Modules.Single(q => q.Code == "WorkInout");
 			}
 			else if (RuntimeHelper.Release)
 			{
@@ -164,6 +172,10 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				{
 					view = RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.CalendarEventsSchedulerView, null);
 				}
+				else if (SelectedModule.Code == "WorkInout")
+				{
+					view = RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.WorkInoutsListView, null);
+				}
 				else
 				{
 					view = RegionHelper.OpenViewInRegion(SelectedModule.RegionName, SelectedModule.LeftFilterView, null);
@@ -172,7 +184,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				((ILeftPanelViewModel)viewmodel).Init();
 
 
-				ShellViewModel.Instance.ShowLeftNavigationPanelRegion = (SelectedModule.Code != "AppointmentsScheduler" && SelectedModule.Code != "CalendarEventsScheduler");
+				ShellViewModel.Instance.ShowLeftNavigationPanelRegion = (SelectedModule.Code != "AppointmentsScheduler" && SelectedModule.Code != "CalendarEventsScheduler" && SelectedModule.Code != "WorkInout");
 			});
 		}
 

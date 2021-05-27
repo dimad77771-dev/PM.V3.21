@@ -852,5 +852,35 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			return Ok(result);
 		}
 		#endregion
+
+		#region WorkInout
+		public IHttpActionResult GetWorkInout(Guid id)
+		{
+			var rezult = _repository.GetWorkInout(id);
+			return Ok(rezult);
+		}
+		public IHttpActionResult GetWorkInoutList(Guid? rowId = null, DateTime? workInoutDateFrom = null, DateTime? workInoutDateTo = null)
+		{
+			var rezult = _repository.GetWorkInoutList(rowId, workInoutDateFrom, workInoutDateTo);
+			return Ok(rezult);
+		}
+		public IHttpActionResult PutWorkInout([FromBody] WorkInout entity)
+		{
+			_repository.UpdateWorkInoutCore(entity, EntityState.Modified);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult PostWorkInout([FromBody] WorkInout entity)
+		{
+			_repository.UpdateWorkInoutCore(entity, EntityState.Added);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult DeleteWorkInout(Guid id)
+		{
+			_repository.UpdateWorkInoutCore(new WorkInout { RowId = id }, EntityState.Deleted);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		#endregion
+
+
 	}
 }

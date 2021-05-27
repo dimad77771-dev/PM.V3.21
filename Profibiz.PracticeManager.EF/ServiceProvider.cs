@@ -27,6 +27,7 @@ namespace Profibiz.PracticeManager.EF
             this.EmailSendRecipients = new HashSet<EmailSendRecipient>();
             this.Chargeouts = new HashSet<ChargeoutT>();
             this.EmailChargeRecipients = new HashSet<EmailChargeRecipient>();
+            this.WorkInouts = new HashSet<WorkInout>();
         }
     
         public System.Guid RowId { get; set; }
@@ -84,5 +85,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<EmailChargeRecipient> EmailChargeRecipients { get; set; }
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<WorkInout> WorkInouts { get; set; }
     }
 }

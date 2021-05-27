@@ -2007,6 +2007,20 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="WorkInouts">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceProviderRowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Finish" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3.dbo.AppointmentRemaindersForProcessed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppointmentRemaindersForProcessed">
@@ -7212,6 +7226,42 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_WorkInouts_CreatedByUserRowId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="WorkInouts" Type="Self.WorkInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInouts">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkInouts_ServiceProviders">
+          <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="1" />
+          <End Role="WorkInouts" Type="Self.WorkInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviders">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInouts">
+              <PropertyRef Name="ServiceProviderRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkInouts_UpdatedByUserRowId">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="WorkInouts" Type="Self.WorkInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInouts">
+              <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="sp_PayrollInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PeriodStart" Type="datetime" Mode="In" />
           <Parameter Name="PeriodFinish" Type="datetime" Mode="In" />
@@ -7301,6 +7351,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySet Name="TreatmentPlanRecords" EntityType="Self.TreatmentPlanRecords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserSettings" EntityType="Self.UserSettings" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="WorkInouts" EntityType="Self.WorkInouts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppointmentRemaindersForProcessed" EntityType="Self.AppointmentRemaindersForProcessed" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [AppointmentRemaindersForProcessed].[vnow] AS [vnow], 
@@ -9721,6 +9772,18 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="Users" EntitySet="Users" />
             <End Role="UserSettings" EntitySet="UserSettings" />
           </AssociationSet>
+          <AssociationSet Name="FK_WorkInouts_CreatedByUserRowId" Association="Self.FK_WorkInouts_CreatedByUserRowId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WorkInouts" EntitySet="WorkInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkInouts_ServiceProviders" Association="Self.FK_WorkInouts_ServiceProviders">
+            <End Role="ServiceProviders" EntitySet="ServiceProviders" />
+            <End Role="WorkInouts" EntitySet="WorkInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkInouts_UpdatedByUserRowId" Association="Self.FK_WorkInouts_UpdatedByUserRowId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="WorkInouts" EntitySet="WorkInouts" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -11190,6 +11253,19 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="Patient" EntitySet="Patients" />
             <End Role="FormDocument" EntitySet="FormDocuments" />
           </AssociationSet>
+          <EntitySet Name="WorkInouts" EntityType="PracticeManagerModel.WorkInout" />
+          <AssociationSet Name="FK_WorkInouts_ServiceProviders" Association="PracticeManagerModel.FK_WorkInouts_ServiceProviders">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="WorkInout" EntitySet="WorkInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkInouts_CreatedByUserRowId" Association="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WorkInout" EntitySet="WorkInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_WorkInouts_UpdatedByUserRowId" Association="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId">
+            <End Role="User" EntitySet="Users" />
+            <End Role="WorkInout" EntitySet="WorkInouts" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -12614,6 +12690,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_ServiceProviders_CreatedByUserRowId" FromRole="ServiceProvider" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_ServiceProviders_UpdatedByUserRowId" FromRole="ServiceProvider" ToRole="User" />
+          <NavigationProperty Name="WorkInouts" Relationship="PracticeManagerModel.FK_WorkInouts_ServiceProviders" FromRole="ServiceProvider" ToRole="WorkInout" />
         </EntityType>
         <Association Name="FK__ServicePr__Appoi__24285DB4">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="0..1" />
@@ -17287,6 +17364,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId" FromRole="User" ToRole="FormDocument" />
           <NavigationProperty Name="FormDocuments1" Relationship="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId" FromRole="User" ToRole="FormDocument" />
+          <NavigationProperty Name="WorkInouts" Relationship="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId" FromRole="User" ToRole="WorkInout" />
+          <NavigationProperty Name="WorkInouts1" Relationship="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId" FromRole="User" ToRole="WorkInout" />
           </EntityType>
         <Association Name="FK_AppointmentBooks_CreatedByUserRowId">
           <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
@@ -19272,6 +19351,59 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Principal>
             <Dependent Role="FormDocument">
               <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="WorkInout">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="ServiceProviderRowId" Type="Guid" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Finish" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_WorkInouts_ServiceProviders" FromRole="WorkInout" ToRole="ServiceProvider" />
+          <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId" FromRole="WorkInout" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId" FromRole="WorkInout" ToRole="User" />
+        </EntityType>
+        <Association Name="FK_WorkInouts_ServiceProviders">
+          <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="PracticeManagerModel.WorkInout" Role="WorkInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInout">
+              <PropertyRef Name="ServiceProviderRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkInouts_CreatedByUserRowId">
+          <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.WorkInout" Role="WorkInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInout">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_WorkInouts_UpdatedByUserRowId">
+          <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.WorkInout" Role="WorkInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="WorkInout">
+              <PropertyRef Name="UpdatedByUserRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -22805,6 +22937,21 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
                 <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
                 <ScalarProperty Name="TemplateName" ColumnName="TemplateName" />
                 <ScalarProperty Name="DocxBytes" ColumnName="DocxBytes" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WorkInouts">
+            <EntityTypeMapping TypeName="PracticeManagerModel.WorkInout">
+              <MappingFragment StoreEntitySet="WorkInouts">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="ServiceProviderRowId" ColumnName="ServiceProviderRowId" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
               </MappingFragment>
             </EntityTypeMapping>

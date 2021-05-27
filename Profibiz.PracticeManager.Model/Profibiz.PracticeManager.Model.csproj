@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel\BaseModelHelper.cs" />
+    <Compile Include="WorkInout.cs" />
     <Compile Include="TemplateNameModel.cs" />
     <Compile Include="FormDocument.cs" />
     <Compile Include="LoginInfo.cs" />

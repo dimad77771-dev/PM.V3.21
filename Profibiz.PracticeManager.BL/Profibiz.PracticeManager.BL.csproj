@@ -122,6 +122,7 @@
     <Compile Include="WebApiRepository.Email.cs" />
     <Compile Include="WebApiRepository.AppointmentClinicalNote.cs" />
     <Compile Include="WebApiRepository.Chargeout.cs" />
+    <Compile Include="WebApiRepository.WorkInout.cs" />
     <Compile Include="WebApiRepository.TreatmentPlanRecord.cs" />
     <Compile Include="WebApiRepository.PatientDocument.cs" />
     <Compile Include="WebApiRepository.Paycharge.cs" />
