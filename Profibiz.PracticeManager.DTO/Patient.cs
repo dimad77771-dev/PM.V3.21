@@ -72,6 +72,7 @@ namespace Profibiz.PracticeManager.DTO
         public DateTime? UpdatedDateTime { get; set; }
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
+		public bool IsNotRegistered { get; set; }
 
 		public List<Patient> FamilyMembers { get; set; }
 		public Patient FamilyHead { get; set; }

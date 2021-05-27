@@ -126,6 +126,42 @@ namespace Profibiz.PracticeManager.BL
 					{
 						var row = mapper.Map<EF.AppointmentT>(entity);
 
+						if (entity.Patient?.IsNotRegistered == true)
+						{
+							EF.Patient findPatient = null;
+							if (findPatient == null)
+							{
+								var mobileNumber = entity.Patient.MobileNumber?.Trim();
+								if (!string.IsNullOrEmpty(mobileNumber))
+								{
+									findPatient = db.Patients.FirstOrDefault(q => q.IsNotRegistered && q.MobileNumber.Trim() == mobileNumber);
+								}
+							}
+							if (findPatient == null)
+							{
+								var emailAddress = entity.Patient.EmailAddress?.Trim();
+								if (!string.IsNullOrEmpty(emailAddress))
+								{
+									findPatient = db.Patients.FirstOrDefault(q => q.IsNotRegistered && q.EmailAddress.Trim() == emailAddress);
+								}
+							}
+
+							if (findPatient == null)
+							{
+								var mapper2 = AutoMapperHelper.GetPocoMapper(typeof(EF.Patient));
+								var patient = mapper2.Map<EF.Patient>(entity.Patient);
+								patient.FamilyHeadRowId = patient.RowId;
+								if (patient.FirstName == null) patient.FirstName = "";
+								if (patient.LastName == null) patient.LastName = "";
+								db.Patients.Add(patient);
+								db.SaveChanges();
+							}
+							else
+							{
+								row.PatientRowId = findPatient.RowId;
+							}
+						}
+
 						var entry = db.Entry(row);
 						entry.State = state;
 						db.SaveChangesEx();

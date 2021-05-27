@@ -28,5 +28,6 @@ namespace Profibiz.PracticeManager.Model
 		public decimal? InvoiceFamilyBalance { get; set; }
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
+		public bool IsNotRegistered { get; set; }
 	}
 }

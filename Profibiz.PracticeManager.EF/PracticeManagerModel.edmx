@@ -1230,6 +1230,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="PaychargeRefcharges">
           <Key>
@@ -2951,6 +2952,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsListView' does not have a primar
             
             
             
+            <PropertyRef Name="IsNotRegistered" />
           </Key>
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PatientId" Type="int" Nullable="false" />
@@ -2973,38 +2975,13 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsListView' does not have a primar
           <Property Name="ReferrerName" Type="nvarchar" MaxLength="255" Nullable="false" />
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="InvoiceFamilyBalance" Type="decimal" Precision="38" Scale="4" />
+          <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientsView">
           <Key>
             <PropertyRef Name="RowId" />
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
           </Key>
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="255" />
@@ -3076,6 +3053,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsView' does not have a primary ke
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8042,7 +8020,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
     [PatientsListView].[FamilyDoctor] AS [FamilyDoctor], 
     [PatientsListView].[ReferrerName] AS [ReferrerName], 
     [PatientsListView].[Photo] AS [Photo], 
-    [PatientsListView].[InvoiceFamilyBalance] AS [InvoiceFamilyBalance]
+    [PatientsListView].[InvoiceFamilyBalance] AS [InvoiceFamilyBalance], 
+    [PatientsListView].[IsNotRegistered] AS [IsNotRegistered]
     FROM [dbo].[PatientsListView] AS [PatientsListView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PatientsView" EntityType="Self.PatientsView" store:Type="Views" store:Schema="dbo">
@@ -8116,7 +8095,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
     [PatientsView].[CreatedByUserRowId] AS [CreatedByUserRowId], 
     [PatientsView].[UpdatedByUserRowId] AS [UpdatedByUserRowId], 
     [PatientsView].[CreatedByDateTime] AS [CreatedByDateTime], 
-    [PatientsView].[UpdatedByDateTime] AS [UpdatedByDateTime]
+    [PatientsView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
+    [PatientsView].[IsNotRegistered] AS [IsNotRegistered]
     FROM [dbo].[PatientsView] AS [PatientsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PaychargeRefchargesView" EntityType="Self.PaychargeRefchargesView" store:Type="Views" store:Schema="dbo">
@@ -11359,6 +11339,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <NavigationProperty Name="User" Relationship="PracticeManagerModel.FK_Patients_CreatedByUserRowId" FromRole="Patient" ToRole="User" />
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Patients_UpdatedByUserRowId" FromRole="Patient" ToRole="User" />
           <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_Patients" FromRole="Patient" ToRole="FormDocument" />
+          <Property Name="IsNotRegistered" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -12181,6 +12162,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsNotRegistered" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -12543,6 +12525,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
         <EntityType Name="PatientsListView">
           <Key>
             <PropertyRef Name="RowId" />
+            <PropertyRef Name="IsNotRegistered" />
           </Key>
           <Property Name="RowId" Type="Guid" Nullable="false" />
           <Property Name="FirstName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
@@ -12565,6 +12548,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="PatientId" Type="Int32" Nullable="false" />
           <Property Name="ParentId" Type="Int32" />
           <Property Name="FamilyHeadLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsNotRegistered" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_InsuranceCoverageServices_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -19458,6 +19442,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="PracticeManagerModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -19958,6 +19943,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="PatientsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientV">
               <MappingFragment StoreEntitySet="PatientsView">
+                <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -20253,6 +20239,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="PatientsListView">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientsListView">
               <MappingFragment StoreEntitySet="PatientsListView">
+                <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="FamilyHeadLastName" ColumnName="FamilyHeadLastName" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />
                 <ScalarProperty Name="PatientId" ColumnName="PatientId" />

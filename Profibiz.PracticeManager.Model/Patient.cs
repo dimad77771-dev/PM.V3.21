@@ -83,6 +83,7 @@ namespace Profibiz.PracticeManager.Model
 		public decimal? InvoiceFamilyBalance { get; set; }
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
+		public bool IsNotRegistered { get; set; }
 
 		public virtual ObservableCollection<Patient> FamilyMembers { get; set; }
 		public virtual Patient FamilyHead { get; set; }
@@ -135,6 +136,22 @@ namespace Profibiz.PracticeManager.Model
 					ret = "<Empty>";
 				}
 				return ret;
+			}
+		}
+
+		public string FullNameForAppointment
+		{
+			get
+			{
+				if (IsNotRegistered)
+				{
+					var name = string.Join(" / ", new[] { FirstName, EmailAddress, MobileNumber }.Where(q => !string.IsNullOrEmpty(q)));
+					return name;
+				}
+				else
+				{
+					return FullName;
+				}
 			}
 		}
 

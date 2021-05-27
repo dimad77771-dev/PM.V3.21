@@ -43,7 +43,7 @@ namespace Profibiz.PracticeManager.Shell
 		{
 			if (RuntimeHelper.IsMachineD)
 			{
-				return;
+				//return;
 			}
 
 			var wnd = new Navigation.Views.LoginView();

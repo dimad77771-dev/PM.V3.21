@@ -409,10 +409,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			});
 		}
 
-		
 
 
-		public void NewEntity() => AddEditEntity(null);
+
+		public void NewEntity(bool isNotRegisteredMode = false) => AddEditEntity(null, isNotRegisteredMode);
 		public void EditEntity()
 		{
 			if (SelectedAppointment != null)
@@ -425,7 +425,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			e.Handled = true;
 			EditEntity();
 		}
-		void AddEditEntity(Appointment row)
+		void AddEditEntity(Appointment row, bool isNotRegisteredMode = false)
 		{
 			var param = new OneAppointmentViewModel.OpenParams
 			{
@@ -434,6 +434,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				AppointmentBookRowId = SelectedAppointmentBook.RowId,
 				DaysInfo = DaysInfo,
 				InsuranceProvidersViewGroupRowId = (ViewMode == ViewModeEnum.InsuranceGroups ? SelectedInsuranceProvidersViewGroup?.RowId : null),
+				IsNotRegisteredMode = isNotRegisteredMode,
 			};
 			if (row == null)
 			{
@@ -642,14 +643,24 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			//add
 			if (e.Menu.Name == "DefaultMenu")
 			{
-				var myMenuItem = new DevExpress.Xpf.Bars.BarButtonItem()
+				var myMenuItem1 = new DevExpress.Xpf.Bars.BarButtonItem()
 				{
 					Name = "UserNewAppointment",
 					Content = "New Appointment",
 					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png")),
 				};
-				myMenuItem.ItemClick += (a,b) => NewEntity();
-				e.Customizations.Add(myMenuItem);
+				myMenuItem1.ItemClick += (a,b) => NewEntity();
+				e.Customizations.Add(myMenuItem1);
+				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
+
+				var myMenuItem2 = new DevExpress.Xpf.Bars.BarButtonItem()
+				{
+					Name = "UserNewAppointmentForNotRegistered",
+					Content = "Send Appointment Link",
+					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-mail-merge-16.png")),
+				};
+				myMenuItem2.ItemClick += (a, b) => NewEntity(isNotRegisteredMode: true);
+				e.Customizations.Add(myMenuItem2);
 				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
 			}
 			else if (e.Menu.Name == "AppointmentMenu")

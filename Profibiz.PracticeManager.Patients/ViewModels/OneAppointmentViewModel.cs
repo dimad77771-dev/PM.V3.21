@@ -44,8 +44,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsReadOnlyAppointmentBookRowId { get; set; }
 		public virtual bool IsReadOnly { get; set; }
 		public virtual bool IsMultiDateVisibile => IsNew;
+		public virtual bool IsNotRegisteredMode => OpenParam.IsNotRegisteredMode;
+		public virtual string VisibilityIsNotRegisteredMode => IsNotRegisteredMode ? "Collapsed" : "Visible";
+		public virtual string RowHeightIsNotRegisteredMode => IsNotRegisteredMode ? "0" : "Auto";
+		public virtual string RowHeightIsNotRegisteredModeReverse => IsNotRegisteredMode ? "Auto" : "0";
 		public virtual bool IsEnabledStartDate { get; set; } = true;
 		public virtual bool IsButtonSaveEnabled { get; set; } = true;
+		public virtual bool IsButtonSaveHide => IsNotRegisteredMode;
 		public virtual bool AppointmentClinicalNoteExists => (Entity?.AppointmentClinicalNoteRowId != null);
 		public virtual string AddOpenClinicalNoteButtonText => (AppointmentClinicalNoteExists ? "Edit Clinical Notes..." : "Add Clinical Notes...");
 		public virtual bool AppointmentTreatmentNoteExists => (Entity?.AppointmentTreatmentNoteRowId != null);
@@ -125,7 +130,19 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			if (IsNew && GuidHelper.IsNullOrEmpty(Entity.PatientRowId))
 			{
-				FindPatient();
+				if (IsNotRegisteredMode)
+				{
+					Entity.Patient = new Patient 
+					{
+						RowId = Guid.NewGuid(),
+						IsNotRegistered = true
+					};
+					Entity.PatientRowId = Entity.Patient.RowId;
+				}
+				else
+				{
+					FindPatient();
+				}
 			}
 		}
 
@@ -411,7 +428,16 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ValidateHelper.Empty(Entity.PatientRowId, "Patient", errors);
 			ValidateGetWorkWeekDays(errors);
 
-			if (Entity.Completed)
+			if (IsNotRegisteredMode)
+			{
+				ValidateHelper.Empty(Entity.ServiceProviderRowId, "Specialist", errors);
+				ValidateHelper.Empty(Entity.MedicalServicesOrSupplyRowId, "Service", errors);
+				if (ValidateHelper.IsEmpty(Entity.Patient.EmailAddress) && ValidateHelper.IsEmpty(Entity.Patient.MobileNumber))
+				{
+					errors.Add("You must specify Email or Phone");
+				}
+			}
+			else if (Entity.Completed)
 			{
 				if (!Entity.HasNoCoverage)
 				{
@@ -536,6 +562,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var updateEntity = Entity.GetPocoClone();
 			var updateEntities = new List<Appointment>() { updateEntity };
 			updateEntities[0].AppointmentRemainders = Entity.AppointmentRemainders;
+			if (IsNotRegisteredMode)
+			{
+				var updatePatient = Entity.Patient.GetPocoClone();
+				updateEntity.Patient = updatePatient;
+			}
 
 			//MultiDates
 			if (HasMultiDates)
@@ -937,6 +968,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			public Boolean IsLockPatient { get; set; }
 			public Boolean IsReadOnly { get; set; }
 
+			public Boolean IsNotRegisteredMode { get; set; }
 
 			public Guid? InsuranceProvidersViewGroupRowId { get; set; }
 		}

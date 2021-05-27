@@ -40,7 +40,14 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var appointment = (AppointmentsSchedulerViewModel.HospitalAppointment)value;
 			if ((string)parameter == "Foreground")
 			{
-				return appointment.Doctor.ForegroundColor;
+				if (appointment?.Patient?.IsNotRegistered == true)
+				{
+					return "Blue";
+				}
+				else
+				{
+					return appointment.Doctor.ForegroundColor;
+				}
 			}
 			else if ((string)parameter == "Background")
 			{
@@ -151,7 +158,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 			else
 			{
-				return appointment.Patient.FullName;
+				return appointment.Patient.FullNameForAppointment;
 			}
 		}
 		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

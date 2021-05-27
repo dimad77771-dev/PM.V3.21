@@ -181,7 +181,8 @@ namespace Profibiz.PracticeManager.BL
 				var patientsQry = db.PatientsListView.Where(wh.Expand()).Select(q => q.RowId);
 				wh2 = (q) => db.PatientFamilyMemberViews.Any(z => z.FamilyMemberPatientRowId == q.RowId && patientsQry.Contains(z.PatientRowId));
 			}
-			
+
+			wh2 = PredicateBuilder.And(wh2, q => !q.IsNotRegistered);
 
 			var list = db.PatientsListView.Where(wh2.Expand()).ToArray();
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PatientsListView));

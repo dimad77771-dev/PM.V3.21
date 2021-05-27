@@ -35,5 +35,6 @@ namespace Profibiz.PracticeManager.EF
         public int PatientId { get; set; }
         public Nullable<int> ParentId { get; set; }
         public string FamilyHeadLastName { get; set; }
+        public bool IsNotRegistered { get; set; }
     }
 }
