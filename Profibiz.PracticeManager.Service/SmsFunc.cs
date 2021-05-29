@@ -7,7 +7,8 @@ using System.Configuration;
 using System.Threading.Tasks;
 using System.Net;
 using RestSharp;
-
+using Vonage;
+using Vonage.Request;
 
 namespace Profibiz.PracticeManager.Service
 {
@@ -19,7 +20,50 @@ namespace Profibiz.PracticeManager.Service
 		public static string SendRealSMS { get; set; } = ConfigurationManager.AppSettings["SendRealSMS"];
 
 
-		public static bool SendSms(string phone, string message)
+		public static string SendSms(string phone, string message)
+		{
+			if (SendRealSMS != "1")
+			{
+				return "";
+			}
+
+			if (phone == @"(111) 111-1111" || phone == @"(222) 222-2222")
+			{
+				phone = "+380675099163";
+			}
+			else
+			{
+				phone = string.Join("", (phone ?? "").Where(q => char.IsDigit(q)));
+				phone = phone.Length == 10 ? "+1" + phone : "+" + phone;
+			}
+
+			var credentials = Credentials.FromApiKeyAndSecret(
+			"d13c9efd",
+			"OvTDoIEmWnYIwg65"
+			);
+
+			var vonageClient = new VonageClient(credentials);
+
+			try
+			{
+				var response = vonageClient.SmsClient.SendAnSms(new Vonage.Messaging.SendSmsRequest()
+				{
+					//To = "14168758075",
+					To = "380675099163",
+					From = "16136673170",
+					Text = message,
+				});
+			}
+			catch (Exception ex)
+			{
+				return ex.ToString();
+			}
+
+			return "";
+		}
+
+
+		public static bool SendSms__old(string phone, string message)
 		{
 			System.Diagnostics.Debug.WriteLine("SMS=" + message);
 

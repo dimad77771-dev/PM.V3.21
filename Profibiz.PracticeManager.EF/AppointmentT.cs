@@ -54,6 +54,8 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public bool IsEmailWhenRegistered { get; set; }
+        public bool IsSmsWhenRegistered { get; set; }
     
         public virtual AppointmentBook AppointmentBook { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -76,5 +78,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual User User1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<FormDocument> FormDocuments { get; set; }
+        public virtual ServiceProvider ServiceProvider1 { get; set; }
+        public virtual ServiceProvider ServiceProvider2 { get; set; }
     }
 }

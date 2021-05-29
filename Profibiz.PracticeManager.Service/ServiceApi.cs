@@ -132,36 +132,12 @@ namespace Profibiz.PracticeManager.Service
 		{
 			try
 			{
-				var message = new MimeMessage();
-				var fromName = ConfigurationManager.AppSettings["smtp.from.name"];
-				var fromAddress = ConfigurationManager.AppSettings["smtp.from.address"];
-				message.From.Add(new MailboxAddress(fromName, fromAddress));
-				message.Subject = subject ?? "";
-
-				var builder = new BodyBuilder();
-				builder.HtmlBody = html ?? "";
-				message.Body = builder.ToMessageBody();
-
-
-
-				var url = ConfigurationManager.AppSettings["smtp.url"];
-				var port = Int32.Parse(ConfigurationManager.AppSettings["smtp.port"]);
-				var username = ConfigurationManager.AppSettings["smtp.username"];
-				var password = ConfigurationManager.AppSettings["smtp.password"];
-
-				var client = new SmtpClient();
-				client.Connect(url, port);
-				//client.AuthenticationMechanisms.Remove("XOAUTH2");
-				client.Authenticate(username, password);
-
-				client.Send(message);
-
-				return "";
+				var result = EmailFunc.SendEmail(email, subject, html);
+				return result;
 			}
 			catch (Exception ex)
 			{
 				var errorMessage = ex.ToString();
-				//return "";
 				return errorMessage;
 			}
 		}
@@ -170,7 +146,8 @@ namespace Profibiz.PracticeManager.Service
 		{
 			try
 			{
-				if (!SmsFunc.SendSms(phone, text))
+				var result = SmsFunc.SendSms(phone, text);
+				if (string.IsNullOrEmpty(result))
 				{
 					return "error send SMS";
 				}
@@ -178,7 +155,6 @@ namespace Profibiz.PracticeManager.Service
 			catch (Exception ex)
 			{
 				var errorMessage = ex.ToString();
-				//return "";
 				return errorMessage;
 			}
 

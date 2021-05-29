@@ -11,8 +11,11 @@ namespace Profibiz.PracticeManager.Shell
 {
     public partial class Shell 
     {
-        public Shell()
+		public static Shell Instance { get; set; }
+
+		public Shell()
         {
+			Instance = this;
 			GlobalSettings.ReadSettingsFromServer2();
 			InitializeComponent();
 

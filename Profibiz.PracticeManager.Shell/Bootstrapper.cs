@@ -6,6 +6,7 @@ using Prism.Autofac;
 using Prism.Modularity;
 using Prism.Mvvm;
 using Profibiz.PracticeManager.Infrastructure;
+using Profibiz.PracticeManager.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -43,7 +44,7 @@ namespace Profibiz.PracticeManager.Shell
 		{
 			if (RuntimeHelper.IsMachineD)
 			{
-				//return;
+				UserManager.Role = User.GetFullRole(); return;
 			}
 
 			var wnd = new Navigation.Views.LoginView();
@@ -54,6 +55,11 @@ namespace Profibiz.PracticeManager.Shell
 			viewmodel.OnOpen();
 			wnd.DataContext = viewmodel;
 			wnd.ShowDialog();
+			if (!string.IsNullOrEmpty(UserManager.UserName))
+			{
+				Profibiz.PracticeManager.Shell.Shell.Instance.Title += " (" + UserManager.UserName + ")";
+			}
+
 		}
 
 

@@ -38,7 +38,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		#endregion
 		public OpenParams OpenParam { get; set; }
 		public virtual WorkInout Entity { get; set; }
+		public virtual List<WorkInout> TodayRows { get; set; }
 		public bool IsNew { get; set; }
+		public bool IsSimpleMode => OpenParam.IsSimpleMode;
+		public bool HideSaveAndClose => IsSimpleMode;
 
 
 		public OneWorkInoutViewModel(IPatientsBusinessService _businessService, ILookupsBusinessService _lookupsBusinessService) : base()
@@ -77,18 +80,56 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				entity = new WorkInout();
 				entity.RowId = Guid.NewGuid();
-				//entity.WorkInoutDate = DateTime.Today;
-				//entity.MedicalServiceOrSupplyRowId = OpenParam.NewMedicalServiceOrSupplyRowIdRowId;
 			}
 			Entity = entity;
 			Entity.DateTimePropsBuild();
+			if (IsSimpleMode)
+			{
+				await LoadDataForSimpleMode();
+			}
+
 
 			ResetHasChange();
 			ShowWaitIndicator.Hide();
 			DXSplashScreenHelper.Hide();
 		}
 
+		async Task LoadDataForSimpleMode()
+		{
+			var today = DateTime.Today;
+			Entity.StartDate = today;
+			var query = "workInoutDateFrom=" + today.ToWebQuery() + "&" + "workInoutDateTo=" + today.ToWebQuery() + "&";
+			TodayRows = await lookupsBusinessService.RunTaskAndUpdateAllLookups(businessService.GetWorkInoutList(query));
 
+			(Entity as INotifyPropertyChanged).PropertyChanged += (s, e) =>
+			{
+				if (e.PropertyName == nameof(Entity.ServiceProviderRowId))
+				{
+					OnServiceProviderRowIdChanged();
+				}
+			};
+		}
+
+		void OnServiceProviderRowIdChanged()
+		{
+			if (Entity.ServiceProviderRowId != null)
+			{
+				var lastRow = TodayRows.Where(q => q.ServiceProviderRowId == Entity.ServiceProviderRowId).OrderByDescending(q => q.Start).FirstOrDefault();
+				var isCheckout = (lastRow != null && lastRow.Finish == null);
+				if (isCheckout)
+				{
+					IsNew = false;
+					Entity = lastRow;
+					Entity.Finish = DateTime.Now;
+					Entity.DateTimePropsBuild();
+				}
+				else
+				{
+					Entity.StartTime = DateTime.Now;
+					Entity.FinishTime = null;
+				}
+			}
+		}
 
 
 		public void Close() => CloseCore();
@@ -133,6 +174,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		async Task<bool> SaveCore(bool andClose)
 		{
+			if (IsSimpleMode)
+			{
+				andClose = true;
+			}
+
 			if (!DateTimePropsUpdate()) return false;
 			if (!Validate()) return false;
 			
@@ -246,6 +292,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			public Boolean IsNew { get; set; }
 			public Guid RowId { get; set; }
 			public Boolean ReadOnly { get; set; }
+			public Boolean IsSimpleMode { get; set; }
 		}
 	}
 }

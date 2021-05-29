@@ -75,7 +75,7 @@
 					<RowDefinition Height="{Binding RowHeightIsNotRegisteredModeReverse}" />
 					<RowDefinition Height="{Binding RowHeightIsNotRegisteredModeReverse}" />
 					<RowDefinition Height="{Binding RowHeightIsNotRegisteredModeReverse}" />
-					<RowDefinition Height="Auto" />
+					<RowDefinition Height="{Binding RowHeightIsNotRegisteredModeReverse}" />
 					<RowDefinition Height="{Binding RowHeightIsNotRegisteredMode}" />
 					<RowDefinition Height="{Binding RowHeightIsNotRegisteredMode}" />
 					<RowDefinition Height="10" />
@@ -140,13 +140,6 @@
 					Grid.Column="0"
 					Content="Phone"
 					Style="{StaticResource layoutItemLabelStyle1Left}" />
-				<!--<dxe:TextEdit
-					Grid.Row="2"
-					Grid.Column="1"
-					Margin="4"
-					EditValue="{Binding Entity.Patient.MobileNumber, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
-					IsReadOnly="{Binding IsReadOnly}"
-					Style="{StaticResource baseEditStyle1}" />-->
 				<dxe:ButtonEdit
 					Grid.Row="2"
 					Grid.Column="1"
@@ -158,6 +151,47 @@
 						<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-mobile-phone-16.png" Stretch="None" />
 					</dxe:ButtonInfo>
 				</dxe:ButtonEdit>
+
+				<dxlc:LayoutItemLabel
+					Grid.Row="3"
+					Grid.Column="0"
+					Content="Notify"
+					Style="{StaticResource layoutItemLabelStyle1Left}" />
+				<Grid Grid.Row="3" Grid.Column="1">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+					</Grid.ColumnDefinitions>
+
+					<dxlc:LayoutItemLabel
+						Grid.Column="3"
+						Margin="20,5,5,5"
+						HorizontalAlignment="Left"
+						Content="Email"
+						Style="{StaticResource layoutItemLabelStyle1Left}" />
+					<dxe:CheckEdit
+						Grid.Column="4"
+						IsChecked="{Binding Entity.IsEmailWhenRegistered, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+						IsReadOnly="{Binding IsReadOnly}" />
+
+					<dxlc:LayoutItemLabel
+						Grid.Column="5"
+						Margin="20,5,5,5"
+						HorizontalAlignment="Left"
+						Content="SMS"
+						Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+					<dxe:CheckEdit
+						Grid.Column="6"
+						IsChecked="{Binding Entity.IsSmsWhenRegistered, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+						IsReadOnly="{Binding IsReadOnly}" />
+				</Grid>
+
 
 				<dxlc:LayoutItemLabel
 					Grid.Row="4"
@@ -677,11 +711,13 @@
 				</Grid>
 
 				<dxlc:LayoutItemLabel
+					Visibility="Collapsed"
 					Grid.Row="18"
 					Grid.Column="0"
 					Content="Clinical Notes"
 					Style="{StaticResource layoutItemLabelStyle1Left}" />
 				<Button
+					Visibility="Collapsed"
 					Grid.Row="18"
 					Grid.Column="1"
 					Margin="30,3,30,3"
@@ -689,11 +725,13 @@
 					Content="{Binding AddOpenClinicalNoteButtonText}" />
 
 				<dxlc:LayoutItemLabel
+					Visibility="Collapsed"
 					Grid.Row="19"
 					Grid.Column="0"
 					Content="Treatment Notes"
 					Style="{StaticResource layoutItemLabelStyle1Left}" />
 				<Button
+					Visibility="Collapsed"
 					Grid.Row="19"
 					Grid.Column="1"
 					Margin="30,3,30,3"

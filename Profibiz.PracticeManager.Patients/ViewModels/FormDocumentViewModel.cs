@@ -26,6 +26,7 @@ using Profibiz.PracticeManager.Patients.BusinessService;
 using System.IO;
 using DevExpress.XtraRichEdit.Services;
 using DevExpress.Xpf.RichEdit;
+using System.Windows.Media.Imaging;
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -42,6 +43,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		#endregion
 		public OpenParams OpenParam { get; set; }
 		public virtual FormDocument Entity { get; set; }
+		public virtual Patient Patient { get; set; }
+		public virtual Appointment Appointment { get; set; }
 		public bool IsReadOnly { get; set; }
 		public bool IsNew { get; set; }
 		public bool ShowDeleteButton => !IsNew && !IsReadOnly;
@@ -51,6 +54,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			businessService = _businessService;
 			lookupsBusinessService = _lookupsBusinessService;
 		}
+
 
 		public void OnOpen(OpenParams param)
 		{
@@ -87,6 +91,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			RichEditConrolManager.ReadOnly = IsReadOnly;
 			ResetHasChange();
 
+			if (Entity.AppointmentRowId != null)
+			{
+				Appointment = (await businessService.GetAppointmentList(rowId: Entity.AppointmentRowId.Value)).FirstOrDefault();
+			}
+
+			var patientRowId = Entity.PatientRowId ?? Appointment?.PatientRowId;
+			if (patientRowId != null)
+			{
+				Patient = await businessService.GetPatient(patientRowId.Value);
+			}
+			
+
 			if (IsNew)
 			{
 				LoadFromTemplate();
@@ -96,6 +112,94 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ShowWaitIndicator.Hide();
 			DXSplashScreenHelper.Hide();
 		}
+
+		public void PasteApply(string arg)
+		{
+			var oldClipboardText = System.Windows.Clipboard.GetText();
+
+			var document = RichEditConrolManager.Control.Document;
+			var text = "";
+			byte[] imagebytes = null;
+
+			if (arg == "Patient_Name")
+			{
+				if (Patient != null)
+				{
+					text = Patient.FullName ?? "";
+				}
+			}
+
+			if (arg == "Appointment_Date")
+			{
+				if (Appointment != null)
+				{
+					text = Appointment.Start.Date.FormatShortDate();
+				}
+			}
+			if (arg == "Appointment_StartTime")
+			{
+				if (Appointment != null)
+				{
+					text = Appointment.Start.FormatHHMM();
+				}
+			}
+			if (arg == "Appointment_FinishTime")
+			{
+				if (Appointment != null)
+				{
+					text = Appointment.Finish.FormatHHMM();
+				}
+			}
+			if (arg == "ServiceName")
+			{
+				if (Appointment != null)
+				{
+					text = Appointment.MedicalServiceName;
+				}
+			}
+
+			if (arg == "Patient_Signature")
+			{
+				if (Patient != null && Patient.Signature != null && Patient.Signature.Length > 0)
+				{
+					imagebytes = Patient.Signature;
+				}
+			}
+
+
+			if (!string.IsNullOrEmpty(text) || imagebytes != null)
+			{
+				if (!string.IsNullOrEmpty(text))
+				{
+					System.Windows.Clipboard.SetText(text);
+				}
+				else if (imagebytes != null)
+				{
+					using (var ms = new MemoryStream(imagebytes))
+					{
+						var bitmapImage = new BitmapImage();
+						bitmapImage.BeginInit();
+						bitmapImage.StreamSource = ms;
+						bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+						bitmapImage.EndInit();
+						System.Windows.Clipboard.SetImage(bitmapImage);
+					}
+				}
+
+
+				try
+				{
+					document.Paste();
+				}
+				catch (Exception) { }
+
+				if (!string.IsNullOrEmpty(oldClipboardText))
+				{
+					System.Windows.Clipboard.SetText(oldClipboardText);
+				}
+			}
+		}
+
 
 		private void Control_DocumentLoaded(object sender, EventArgs e)
 		{

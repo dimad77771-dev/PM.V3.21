@@ -50,8 +50,10 @@ namespace Profibiz.PracticeManager.Model
 		public string ServiceType { get; set; }
 		public string EmploymentType { get; set; }
 
-		
-
+		public string Username { get; set; }
+		public string Password { get; set; }
+		public Guid? RoleRowId { get; set; }
+		public bool IsOfficeEmployee { get; set; }
 
 		public virtual ObservableCollection<ServiceProviderAssociation> ServiceProviderAssociations { get; set; } = new ObservableCollection<ServiceProviderAssociation>();
 		public virtual ObservableCollection<ServiceProviderService> ServiceProviderServices { get; set; } = new ObservableCollection<ServiceProviderService>();

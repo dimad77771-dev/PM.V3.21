@@ -58,6 +58,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = false;
 		public virtual bool IsVisibilityTreatmentPlan { get; set; } = false;
 
+		#region Role
+		public virtual User Role { get; set; } = UserManager.Role;
+		public virtual bool IsTabVisibile_Patient => true;// Role.Patient_Patient;
+		public virtual bool IsTabVisibile_MedicalHistory => Role.Patient_MedicalHistory;
+		public virtual bool IsTabVisibile_InsuranceCoverage => Role.Patient_InsuranceCoverage && IsVisibilityInsuranceCoverage;
+		public virtual bool IsTabVisibile_Invoices => Role.Patient_Invoices;
+		public virtual bool IsTabVisibile_CalendarEvents => Role.Patient_CalendarEvents;
+		public virtual bool IsTabVisibile_Notes => Role.Patient_Notes && IsVisibilityPatientNote;
+		public virtual bool IsTabVisibile_AppontmentNotes => Role.Patient_AppontmentNotes && IsVisibilityAppointmentClinicalNote;
+		public virtual bool IsTabVisibile_PatientNotes => Role.Patient_PatientNotes && IsVisibilityAppointmentClinicalNote;
+		public virtual bool IsTabVisibile_Documents => Role.Patient_Documents && IsVisibilityPatientDocument;
+		#endregion
 
 
 
@@ -984,7 +996,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public PageEnum CurrentPage => GetPage(SelectedIndex);
 		public PageEnum GetPage(int index) => EnumFunc.GetValues<PageEnum>()[index];
 		public bool IsGroupPage => (CurrentPage == PageEnum.Insurances);
-		public enum PageEnum { Property, MedicalHistory, TreatmentPlan, Insurances, Invoices, CalendarEvents, PatientNote, AppointmentClinicalNote, AppointmentTreatmentNote, Document }
+		public enum PageEnum { Property, MedicalHistory, TreatmentPlan, Insurances, Invoices, CalendarEvents, Notes, AppointmentClinicalNote, PatientNotes, TreatmentNotes, Document }
 
 
 		public virtual ObservableCollection<Patient> FamilyMembersEntities { get; set; }

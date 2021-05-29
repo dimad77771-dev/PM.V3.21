@@ -15,6 +15,10 @@ using System.Data.Entity;
 using System.Diagnostics;
 using Profibiz.PracticeManager.SharedCode;
 using System.Threading;
+using MimeKit;
+using System.Configuration;
+using System.Net.Mail;
+using Profibiz.PracticeManager.Service;
 
 namespace Profibiz.PracticeManager.BL
 {
@@ -160,6 +164,8 @@ namespace Profibiz.PracticeManager.BL
 							{
 								row.PatientRowId = findPatient.RowId;
 							}
+
+							AppointmentRegisteredNotify(entity);
 						}
 
 						var entry = db.Entry(row);
@@ -277,6 +283,47 @@ namespace Profibiz.PracticeManager.BL
 				scope.Complete();
 			}
 		}
+
+		void AppointmentRegisteredNotify(DTO.Appointment appointment)
+		{
+			var url = "dsddsad";
+			var patient = appointment.Patient;
+
+			var email = patient.EmailAddress;
+			if (appointment.IsEmailWhenRegistered && !string.IsNullOrEmpty(email))
+			{
+				var subject = "";
+				var html = "url=" + url;
+				var err = EmailFunc.SendEmail(email, subject, html);
+				if (!string.IsNullOrEmpty(err))
+				{
+					//Service.NLog.Error("send email=" + email + "\n" + err);
+					throw new Exception("error when sending email");
+				}
+				else
+				{
+					//Service.NLog.Info("send email=" + email);
+				}
+			}
+
+			var phone = patient.MobileNumber;
+			if (appointment.IsSmsWhenRegistered && !string.IsNullOrEmpty(phone))
+			{
+				var html = "url=" + url;
+				var err = SmsFunc.SendSms(phone, html);
+				if (!string.IsNullOrEmpty(err))
+				{
+					//Service.NLog.Error("send email=" + email + "\n" + err);
+					throw new Exception("error when sending email");
+				}
+				else
+				{
+					//Service.NLog.Info("send email=" + email);
+				}
+			}
+		}
+
+		
 
 		public IEnumerable<DTO.AppointmentInsuranceProviderDayInfo> GetAppointmentInsuranceProviderDayInfo(DateTime dat, Guid serviceProviderRowId)
 		{

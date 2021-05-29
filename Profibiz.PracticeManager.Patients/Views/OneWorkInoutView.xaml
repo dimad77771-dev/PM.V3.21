@@ -93,7 +93,7 @@
 						<dxlc:LayoutItemLabel
 							Grid.Row="0"
 							Grid.Column="0"
-							Content="Specialist"
+							Content="STAFF"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:ComboBoxEdit
 							Grid.Row="0"
@@ -116,6 +116,7 @@
 						<dxe:DateEdit
 							Grid.Row="1"
 							Grid.Column="1"
+							IsReadOnly="{Binding IsSimpleMode}"
 							Width="100"
 							Margin="4"
 							EditValue="{Binding Entity.StartDate, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
@@ -131,13 +132,13 @@
 						<dxe:ButtonEdit
 							Grid.Row="2"
 							Grid.Column="1"
+							IsReadOnly="{Binding IsSimpleMode}"
 							Width="100"
 							Margin="4"
 							AllowDefaultButton="False"
 							EditValue="{Binding Entity.StartTime, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
 							EditValuePostMode="Immediate"
 							IsEnabled="{Binding Entity.IsEnabledStartFinishTime}"
-							IsReadOnly="{Binding IsReadOnly}"
 							Style="{StaticResource TimeButtonEditStyle}"
 							ValidateOnEnterKeyPressed="True"
 							ValidateOnTextInput="True">
@@ -161,6 +162,7 @@
 						<dxe:ButtonEdit
 							Grid.Row="3"
 							Grid.Column="1"
+							IsReadOnly="{Binding IsSimpleMode}"
 							Width="100"
 							Margin="4"
 							AllowDefaultButton="False"
@@ -169,7 +171,6 @@
 							AllowNullInput="True"
 							NullValueButtonPlacement="EditBox"
 							IsEnabled="{Binding Entity.IsEnabledStartFinishTime}"
-							IsReadOnly="{Binding IsReadOnly}"
 							Style="{StaticResource TimeButtonEditStyle}"
 							ValidateOnEnterKeyPressed="True"
 							ValidateOnTextInput="True">
@@ -215,7 +216,7 @@
 
 
 
-			<infrastructure:CommandPanelView Grid.Row="1" />
+			<infrastructure:CommandPanelView Grid.Row="1" HideSaveAndClose="{Binding HideSaveAndClose}" />
 		</Grid>
 	</dx:LoadingDecorator>
 </dx:DXWindow>
