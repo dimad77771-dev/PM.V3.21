@@ -81,9 +81,6 @@ namespace Profibiz.PracticeManager.Model
 		public string MedicalDoctorName { get; set; }
 		public string MedicalDoctorAddress { get; set; }
 		public string MedicalDoctorPhone { get; set; }
-
-
-
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }
 	}
