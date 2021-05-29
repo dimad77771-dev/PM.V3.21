@@ -296,7 +296,7 @@
 							PassEventArgsToCommand="True" />
 					</dxmvvm:Interaction.Behaviors>
 
-					<dx:DXTabItem Header="Patient">
+					<dx:DXTabItem Header="Patient" Visibility="{Binding IsTabVisibile_Patient, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxmvvm:Interaction.Behaviors>
 							<dxmvvm:EventToCommand Command="{Binding UpdateCommand}" Event="{x:Static Binding.SourceUpdatedEvent}" />
 						</dxmvvm:Interaction.Behaviors>
@@ -896,14 +896,7 @@
 										<Image Source="pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-home-phone-16.png" Stretch="None" />
 									</dxe:ButtonInfo>
 								</dxe:ButtonEdit>
-
-
-
-
-
 							</Grid>
-
-
 
 							<dxlc:LayoutGroup
 								Margin="5,35,5,5"
@@ -972,245 +965,35 @@
 								</Grid>
 							</dxlc:LayoutGroup>
 
+							<Grid Grid.Column="0" Margin="5">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="Auto" />
+									<ColumnDefinition Width="*" />
+								</Grid.ColumnDefinitions>
 
-							<!--<dxlc:LayoutGroup VerticalAlignment="Top"
-                                              Header="HEALTH HISTORY"
-                                              Margin="5"
-                                              GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
-                                              View="GroupBox">
-                                <Grid>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                        <RowDefinition Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="10*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="10*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="10*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="14*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="14*" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="10*" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="0"
-                                                          Content="High Blood Pressure"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="1"
-                                                   IsChecked="{Binding Entity.HasHighBloodPressure,
-                                                                       Mode=TwoWay}" />
+								<dxlc:LayoutItemLabel
+									Grid.Row="0"
+									Grid.Column="0"
+									Content="Signature"
+									Style="{StaticResource layoutItemLabelStyle1b}" />
 
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="2"
-                                                          Content="Pacemaker"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="3"
-                                                   IsChecked="{Binding Entity.HasPacemaker,
-                                                                       Mode=TwoWay}" />
+								<dxe:ImageEdit
+									Grid.Row="0"
+									Grid.Column="1"
+									Width="150"
+									Height="75"
+									HorizontalAlignment="Left"
+									EditValue="{Binding Entity.Signature, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									KeyboardNavigation.IsTabStop="False"
+									Stretch="Uniform"
+									Style="{StaticResource baseEditStyle1}" />
 
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="4"
-                                                          Content="Diabetes"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="5"
-                                                   IsChecked="{Binding Entity.HasDiabetes,
-                                                                       Mode=TwoWay}" />
+							</Grid>
 
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="6"
-                                                          Content="Hepatitis"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="7"
-                                                   IsChecked="{Binding Entity.HasHepatitis,
-                                                                       Mode=TwoWay}" />
-
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="8"
-                                                          Content="Headaches"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="9"
-                                                   IsChecked="{Binding Entity.HasHeadaches,
-                                                                       Mode=TwoWay}" />
-
-                                    <dxlc:LayoutItemLabel Grid.Row="0"
-                                                          Grid.Column="10"
-                                                          Content="Surgeries"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="0"
-                                                   Grid.Column="11"
-                                                   IsChecked="{Binding Entity.HasSurgeries,
-                                                                       Mode=TwoWay}" />
-
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="0"
-                                                          Content="Metal Implants"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="1"
-                                                   IsChecked="{Binding Entity.HasMetalImplants,
-                                                                       Mode=TwoWay}" />
-
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="2"
-                                                          Content="Fractures"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="3"
-                                                   IsChecked="{Binding Entity.HasFractures,
-                                                                       Mode=TwoWay}" />
-
-
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="4"
-                                                          Content="Neck Pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="5"
-                                                   IsChecked="{Binding Entity.HasNeckPain,
-                                                                       Mode=TwoWay}" />
-
-
-
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="6"
-                                                          Content="Shoulder pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="7"
-                                                   IsChecked="{Binding Entity.HasShoulderPain,
-                                                                       Mode=TwoWay}" />
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="8"
-                                                          Content="Elbow pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="9"
-                                                   IsChecked="{Binding Entity.HasElbowPain,
-                                                                       Mode=TwoWay}" />
-                                    <dxlc:LayoutItemLabel Grid.Row="1"
-                                                          Grid.Column="10"
-                                                          Content="Hand pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="1"
-                                                   Grid.Column="11"
-                                                   IsChecked="{Binding Entity.HasHandPain,
-                                                                       Mode=TwoWay}" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-							-->
-							<!--  qqqqqqqqqqqqqqqqqqqqqqqqqqqq  -->
-							<!--
-                                    <dxlc:LayoutItemLabel Grid.Row="2"
-                                                          Grid.Column="0"
-                                                          Content="Hip pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="2"
-                                                   Grid.Column="1"
-                                                   IsChecked="{Binding Entity.HasHipPain,
-                                                                       Mode=TwoWay}" />
-                                    <dxlc:LayoutItemLabel Grid.Row="2"
-                                                          Grid.Column="2"
-                                                          Content="Knee pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="2"
-                                                   Grid.Column="3"
-                                                   IsChecked="{Binding Entity.HasKneePain,
-                                                                       Mode=TwoWay}" />
-                                    <dxlc:LayoutItemLabel Grid.Row="2"
-                                                          Grid.Column="4"
-                                                          Content="Foot pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="2"
-                                                   Grid.Column="5"
-                                                   IsChecked="{Binding Entity.HasFootPain,
-                                                                       Mode=TwoWay}" />
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    <dxlc:LayoutItemLabel Grid.Row="2"
-                                                          Grid.Column="6"
-                                                          Content="Back Pain"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:CheckEdit Grid.Row="2"
-                                                   Grid.Column="7"
-                                                   IsChecked="{Binding Entity.HasBackPain,
-                                                                       Mode=TwoWay}" />
-
-                                    <dxlc:LayoutItemLabel Grid.Row="3"
-                                                          Grid.Column="0"
-                                                          Content="Other Medical Conditions"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:TextEdit Grid.Row="3"
-                                                  Grid.Column="1"
-                                                  Grid.ColumnSpan="5"
-                                                  EditValue="{Binding Entity.OtherMedicalConditions,
-                                                                      UpdateSourceTrigger=PropertyChanged,
-                                                                      ValidatesOnDataErrors=True,
-                                                                      NotifyOnSourceUpdated=True}"
-                                                  Style="{StaticResource baseEditStyle1}" />
-
-
-                                    <dxlc:LayoutItemLabel Grid.Row="3"
-                                                          Grid.Column="6"
-                                                          Content="Health History Notes"
-                                                          Style="{StaticResource layoutItemLabelStyle1}" />
-                                    <dxe:TextEdit Grid.Row="3"
-                                                  Grid.Column="7"
-                                                  Grid.ColumnSpan="5"
-                                                  EditValue="{Binding Entity.HealthHistoryNotes,
-                                                                      UpdateSourceTrigger=PropertyChanged,
-                                                                      ValidatesOnDataErrors=True,
-                                                                      NotifyOnSourceUpdated=True}"
-                                                  Style="{StaticResource baseEditStyle1}" />
-                                </Grid>
-                            </dxlc:LayoutGroup>-->
 						</StackPanel>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Medical History">
+					<dx:DXTabItem Header="Medical History" Visibility="{Binding IsTabVisibile_MedicalHistory, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<localv:MedicalHistoryRecordView>
 								<dxmvvm:Interaction.Behaviors>
@@ -1230,7 +1013,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Insurance Coverage" Visibility="{Binding IsVisibilityInsuranceCoverage, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Insurance Coverage" Visibility="{Binding IsTabVisibile_InsuranceCoverage, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 
 							<dxg:GridControl
@@ -1298,7 +1081,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Invoices">
+					<dx:DXTabItem Header="Invoices" Visibility="{Binding IsTabVisibile_Invoices, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<localv:InvoicesListView>
 								<dxmvvm:Interaction.Behaviors>
@@ -1308,7 +1091,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Calendar Events">
+					<dx:DXTabItem Header="Calendar Events" Visibility="{Binding IsTabVisibile_CalendarEvents, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<localv:CalendarEventsSchedulerView>
 								<dxmvvm:Interaction.Behaviors>
@@ -1318,7 +1101,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Notes" Visibility="{Binding IsVisibilityPatientNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Notes" Visibility="{Binding IsTabVisibile_Notes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<dxg:GridControl
 								ItemsSource="{Binding PatientNoteEntities}"
@@ -1398,7 +1181,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Appontment Notes" Visibility="{Binding IsVisibilityAppointmentClinicalNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Appontment Notes" Visibility="{Binding IsTabVisibile_AppontmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<Grid>
 								<Grid.RowDefinitions>
@@ -1510,7 +1293,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Patient Notes" Visibility="{Binding IsVisibilityAppointmentClinicalNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Patient Notes" Visibility="{Binding IsTabVisibile_PatientNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<dx:MeasurePixelSnapper>
 								<ItemsControl ItemsSource="{Binding Entity.PatientFormDocuments.ButtonsAppointmentForm}" Margin="2">
@@ -1609,7 +1392,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Documents" Visibility="{Binding IsVisibilityPatientDocument, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Documents" Visibility="{Binding IsTabVisibile_Documents, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<dxg:GridControl
 								ItemsSource="{Binding PatientDocumentEntities}"

@@ -99,25 +99,9 @@
 							</DataTemplate>
 						</dxg:GridColumn.CellTemplate>
 					</dxg:GridColumn>
-					<dxg:GridColumn FieldName="Email"
-                                    Header="EMAIL"
-                                    Width="200" />
 					<dxg:GridColumn FieldName="Name"
-                                    Header="NAME"
-                                    Width="200" />
-					<!--<dxg:GridColumn FieldName="AdrdessLine1" Header="ADDRESS" Width="100*" />
-					<dxg:GridColumn FieldName="Province"
-                                    Header="PROVINCE"
-                                    Width="80" />
-					<dxg:GridColumn FieldName="City"
-                                    Header="CITY"
-                                    Width="130" />
-					<dxg:GridColumn FieldName="Postcode"
-                                    Header="POSTCODE"
-                                    Width="100" />
-					<dxg:GridColumn FieldName="Phone"
-                                    Header="PHONE"
-                                    Width="120" />-->
+                                    Header="ROLE"
+                                    Width="400" />
 				</dxg:GridControl.Columns>
 				<dxg:GridControl.GroupSummary>
 					<dxg:GridSummaryItem SummaryType="Count" />

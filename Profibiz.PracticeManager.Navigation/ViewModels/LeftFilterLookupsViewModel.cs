@@ -64,7 +64,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 		public FilterItem ProfessionalAssociationsFilter { get; set; } = new FilterItem { Name = "Professional Associations", LookupType = FilterItem.LookupTypeEnum.ProfessionalAssociations };
 		public FilterItem ThirdPartyServiceProvidersFilter { get; set; } = new FilterItem { Name = "Service Providers (TP)", LookupType = FilterItem.LookupTypeEnum.ThirdPartyServiceProviders };
 		public FilterItem ReferrersFilter { get; set; } = new FilterItem { Name = "Referrers", LookupType = FilterItem.LookupTypeEnum.Referrers };
-		public FilterItem UsersFilter { get; set; } = new FilterItem { Name = "Users", LookupType = FilterItem.LookupTypeEnum.Users };
+		public FilterItem UsersFilter { get; set; } = new FilterItem { Name = "Roles", LookupType = FilterItem.LookupTypeEnum.Users };
 		public FilterItem SuppliersFilter { get; set; } = new FilterItem { Name = "Suppliers", LookupType = FilterItem.LookupTypeEnum.Suppliers };
 		public FilterItem AppointmentBooksFilter { get; set; } = new FilterItem { Name = "Appointment Books", LookupType = FilterItem.LookupTypeEnum.AppointmentBooks };
 		public FilterItem AppointmentStatusesFilter { get; set; } = new FilterItem { Name = "Appointment Statuses", LookupType = FilterItem.LookupTypeEnum.AppointmentStatusesFilter };

@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="50133023e51c4f8d8b1ab06b5d856daf" Name="_Main" ZoomLevel="100">
+      <Diagram DiagramId="50133023e51c4f8d8b1ab06b5d856daf" Name="_Main" ZoomLevel="61">
         <EntityTypeShape EntityType="PracticeManagerModel.MedicalServicesOrSupply" Width="2.875" PointX="4.5" PointY="21.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PracticeManagerModel.PatientMedicalCondition" Width="2.375" PointX="1" PointY="4.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="2.5" PointX="4.25" PointY="9" />
@@ -59,7 +59,7 @@
         <AssociationConnector Association="PracticeManagerModel.PatientAppointmentV" />
         <EntityTypeShape EntityType="PracticeManagerModel.ThirdPartyServiceProvider" Width="1.5" PointX="16.375" PointY="7" />
         <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderV" PointX="17.375" PointY="12.125" Width="2.25" />
-        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderService" Width="3" PointX="11" PointY="24.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.ServiceProviderService" Width="3" PointX="7" PointY="22.875" />
         <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderServices_MedicalServicesOrSupplies" />
         <AssociationConnector Association="PracticeManagerModel.ServiceProviderVServiceProviderService" />
         <AssociationConnector Association="PracticeManagerModel.ServiceProviderVServiceProviderAssociation" />
@@ -143,6 +143,94 @@
         <EntityTypeShape EntityType="PracticeManagerModel.AppointmentRemaindersForProcessed" Width="3.5" PointX="26.5" PointY="21.875" />
         <EntityTypeShape EntityType="PracticeManagerModel.AppointmentTreatmentNote" Width="3" PointX="19.25" PointY="42.75" />
         <AssociationConnector Association="PracticeManagerModel.FK_AppointmentTreatmentNotes_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentBooks_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentBooks_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentClinicalNotes_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentClinicalNotes_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentInsuranceProviders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentInsuranceProviders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentRemainders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentRemainders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Appointments_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentStatuses_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentStatuses_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentTreatmentNotes_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentTreatmentNotes_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Categories_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Categories_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Cities_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Cities_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ClientErrors_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ClientErrors_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolderServices_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageHolderServices_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemCategories_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemCategories_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemHolders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItemHolders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItems_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageItems_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverages_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverages_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageServices_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceCoverageServices_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProviders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProviders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProvidersViewGroupMappings_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProvidersViewGroupMappings_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProvidersViewGroups_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InsuranceProvidersViewGroups_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaimDetails_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaimDetails_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaims_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaimStatuses_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceClaimStatuses_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceItems_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Invoices_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceStatuses_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_InvoiceStatuses_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_MedicalConditions_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_MedicalConditions_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_MedicalServicesOrSupplies_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_MedicalServicesOrSupplies_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderPayments_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_OrderPayments_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientMedicalConditions_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientMedicalConditions_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientPhotos_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientPhotos_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Payments_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Payments_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ProfessionalAssociations_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ProfessionalAssociations_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PublicHolidays_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PublicHolidays_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Referrers_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Referrers_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderAssociations_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderAssociations_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderServices_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviderServices_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Suppliers_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Suppliers_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Templates_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Templates_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ThirdPartyServiceProviders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ThirdPartyServiceProviders_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_UserSettings_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_UserSettings_UpdatedByUserRowId1" />
         </Diagram>
       <Diagram DiagramId="91f349ae33a3493786f4eb2a0e83ee6d" Name="InvoiceClaim" ZoomLevel="85" >
         <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimT" Width="3" PointX="0.5" PointY="6.625" />
@@ -356,6 +444,18 @@
         <EntityTypeShape EntityType="PracticeManagerModel.ChargeoutRecipient" Width="1.5" PointX="0.75" PointY="14.75" />
         <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_ChargeoutRecipients" />
         <EntityTypeShape EntityType="PracticeManagerModel.EmailChargeV" Width="2.25" PointX="9.125" PointY="3.875" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutRecipients_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ChargeoutRecipients_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeAttachments_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeAttachments_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailChargeRecipients_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailCharges_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_EmailCharges_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Patients_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviders_CreatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_ServiceProviders_UpdatedByUserRowId1" />
       </Diagram>
       <Diagram DiagramId="88a00608c8c9408eb167fa8c30c58cdd" Name="Paycharge" ZoomLevel="100" >
         <EntityTypeShape EntityType="PracticeManagerModel.PaychargeT" Width="2" PointX="0.5" PointY="0.5" />

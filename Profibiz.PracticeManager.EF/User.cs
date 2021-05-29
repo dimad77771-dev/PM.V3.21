@@ -181,6 +181,7 @@ namespace Profibiz.PracticeManager.EF
             this.FormDocuments1 = new HashSet<FormDocument>();
             this.WorkInouts = new HashSet<WorkInout>();
             this.WorkInouts1 = new HashSet<WorkInout>();
+            this.ServiceProviders11 = new HashSet<ServiceProvider>();
         }
     
         public System.Guid RowId { get; set; }
@@ -207,6 +208,24 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
         public string Password { get; set; }
+        public bool Main_Patients { get; set; }
+        public bool Main_Specialists { get; set; }
+        public bool Main_AppointmentsScheduler { get; set; }
+        public bool Main_CalendarEventsScheduler { get; set; }
+        public bool Main_Finances { get; set; }
+        public bool Main_Inventory { get; set; }
+        public bool Main_Chargeouts { get; set; }
+        public bool Main_Lookups { get; set; }
+        public bool Main_WorkInout { get; set; }
+        public bool Patient_Patient { get; set; }
+        public bool Patient_MedicalHistory { get; set; }
+        public bool Patient_InsuranceCoverage { get; set; }
+        public bool Patient_Invoices { get; set; }
+        public bool Patient_CalendarEvents { get; set; }
+        public bool Patient_Notes { get; set; }
+        public bool Patient_AppontmentNotes { get; set; }
+        public bool Patient_PatientNotes { get; set; }
+        public bool Patient_Documents { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentBook> AppointmentBooks { get; set; }
@@ -536,5 +555,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<WorkInout> WorkInouts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<WorkInout> WorkInouts1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ServiceProvider> ServiceProviders11 { get; set; }
     }
 }

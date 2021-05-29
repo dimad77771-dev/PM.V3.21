@@ -1,5 +1,4 @@
-﻿using Profibiz.PracticeManager.Infrastructure;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Data.Entity;
 using System.IO;
@@ -35,6 +34,7 @@ namespace Profibiz.PracticeManager.EF
 
 		public static PracticeManagerEntities GetConnection(Guid? currentUserRowId, bool useLogFile = true)
 		{
+			useLogFile = false;
 			var _db = new EF.PracticeManagerEntities(currentUserRowId, useLogFile: useLogFile);
 			return _db;
 		}

@@ -84,6 +84,7 @@ namespace Profibiz.PracticeManager.Model
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
 		public bool IsNotRegistered { get; set; }
+		public byte[] Signature { get; set; }
 
 		public virtual ObservableCollection<Patient> FamilyMembers { get; set; }
 		public virtual Patient FamilyHead { get; set; }
@@ -236,14 +237,14 @@ namespace Profibiz.PracticeManager.Model
 				if (_pho != null) return _pho;
 
 				//return null;
-				Debug.WriteLine("ManagedThreadId=" + Thread.CurrentThread.ManagedThreadId);
-				var dt1 = DateTime.Now;
+				//Debug.WriteLine("ManagedThreadId=" + Thread.CurrentThread.ManagedThreadId);
+				//var dt1 = DateTime.Now;
 				var service = ServiceLocator.Current.GetInstance<IPatientsBusinessSharedService>();
 				var photo = service.GetPatientPhoto(RowId);
-				var dt2 = DateTime.Now;
+				//var dt2 = DateTime.Now;
 				//Debug.WriteLine(FirstName + "." + LastName + "=11=" + dt1.ToString("mm:hh:ss.fff"));
 				//Debug.WriteLine(FirstName + "." + LastName + "=22=" + dt2.ToString("mm:hh:ss.fff"));
-				Debug.WriteLine(FirstName + "." + LastName + "=33=" + (dt2 - dt1).TotalMilliseconds);
+				//Debug.WriteLine(FirstName + "." + LastName + "=33=" + (dt2 - dt1).TotalMilliseconds);
 				_pho = photo;
 				return photo;
 

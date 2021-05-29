@@ -1202,14 +1202,24 @@ namespace Profibiz.PracticeManager.BL
 
 			name = (name ?? "").ToLower().Trim();
 
-			var userRowId = db.Users.FirstOrDefault(q => (q.Name.ToLower().Trim() == name || q.Email.ToLower().Trim() == name) && q.Password == password)?.RowId;
+			var user = db.ServiceProviders.FirstOrDefault(q => q.Username.ToLower().Trim() == name && q.Password == password);
+			var userRowId = user?.RowId;
 
 			if (userRowId != null)
 			{
+				var role = db.Users.SingleOrDefault(q => q.RowId == user.RoleRowId);
+				if (role == null)
+				{
+					role = new EF.User();
+				}
+				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.User));
+				var drole = mapper.Map<DTO.User>(role);
+
 				return new DTO.LoginInfo
 				{
 					IsSuccess = true,
 					UserRowId = userRowId.Value,
+					Role = drole,
 				};
 			}
 			else

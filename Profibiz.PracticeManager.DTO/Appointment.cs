@@ -41,6 +41,9 @@ namespace Profibiz.PracticeManager.DTO
 		public string InvoiceNumber { get; set; }
 		public bool IsRemainderEmail { get; set; }
 		public bool IsRemainderSms { get; set; }
+		public bool IsEmailWhenRegistered { get; set; }
+		public bool IsSmsWhenRegistered { get; set; }
+
 
 		public Guid? InsuranceProviderRowId { get; set; }
 		public string PolicyNumber { get; set; }

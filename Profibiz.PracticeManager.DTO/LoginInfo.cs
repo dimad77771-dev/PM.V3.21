@@ -13,5 +13,6 @@ namespace Profibiz.PracticeManager.DTO
 		public Guid UserRowId { get; set; }
 		public string Error { get; set; }
 		public Guid CodRowId { get; set; }
+		public User Role { get; set; }
 	}
 }

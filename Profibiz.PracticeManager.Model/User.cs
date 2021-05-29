@@ -31,6 +31,26 @@ namespace Profibiz.PracticeManager.Model
 		public string WinAccountName { get; set; }
 		public string Password { get; set; }
 
+		public bool Main_Patients { get; set; }
+		public bool Main_Specialists { get; set; }
+		public bool Main_AppointmentsScheduler { get; set; }
+		public bool Main_CalendarEventsScheduler { get; set; }
+		public bool Main_Finances { get; set; }
+		public bool Main_Inventory { get; set; }
+		public bool Main_Chargeouts { get; set; }
+		public bool Main_Lookups { get; set; }
+		public bool Main_WorkInout { get; set; }
+		public bool Patient_Patient { get; set; }
+		public bool Patient_MedicalHistory { get; set; }
+		public bool Patient_InsuranceCoverage { get; set; }
+		public bool Patient_Invoices { get; set; }
+		public bool Patient_CalendarEvents { get; set; }
+		public bool Patient_Notes { get; set; }
+		public bool Patient_AppontmentNotes { get; set; }
+		public bool Patient_PatientNotes { get; set; }
+		public bool Patient_Documents { get; set; }
+
+
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }
 
@@ -43,5 +63,32 @@ namespace Profibiz.PracticeManager.Model
 			adr = (adr ?? "").Trim();
 			return adr;
 		}
+
+		public static User GetFullRole()
+		{
+			return new User
+			{
+				IsAdmin = true,
+				Main_Patients = true,
+				Main_Specialists = true,
+				Main_AppointmentsScheduler = true,
+				Main_CalendarEventsScheduler = true,
+				Main_Finances = true,
+				Main_Inventory = true,
+				Main_Chargeouts = true,
+				Main_Lookups = true,
+				Main_WorkInout = true,
+				Patient_Patient = true,
+				Patient_MedicalHistory = true,
+				Patient_InsuranceCoverage = true,
+				Patient_Invoices = true,
+				Patient_CalendarEvents = true,
+				Patient_Notes = true,
+				Patient_AppontmentNotes = true,
+				Patient_PatientNotes = true,
+				Patient_Documents = true,
+			};
+		}
+
 	}
 }

@@ -307,6 +307,21 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			UpdateRibbonPatientsWithCheckBoxItems();
 		}
 
+		public void CheckingCheckout()
+		{
+			ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+			{
+				ViewCode = ViewCodes.OneWorkInoutView,
+				Param = new OneWorkInoutViewModel.OpenParams
+				{
+					IsNew = true,
+					RowId = default(Guid),
+					IsSimpleMode = true,
+				},
+			});
+		}
+
+
 		public void FamilyBuild()
 		{
 			DispatcherUIHelper.Run(async () =>

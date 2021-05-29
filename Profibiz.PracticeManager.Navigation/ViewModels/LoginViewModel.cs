@@ -121,6 +121,9 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 
 			Registry.SetValue(RuntimeHelper.BaseRegKey, RuntimeHelper.CurrentUserNameKey, (object)username);
 			UserManager.UserRowId = uret.UserRowId;
+			UserManager.UserName = username;
+			UserManager.Role = uret.Role;
+
 			IsConnect = true;
 			View.Close();
 			return true;

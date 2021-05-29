@@ -20,7 +20,7 @@
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
 	xmlns:dxmvvm1="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
 	Style="{StaticResource defaultWindowStyle}"
-	Title="Practice Manager 2016"
+	Title="Practice Manager.v3"
 	x:Name="mainShellWindow"
 	WindowState="Minimized"
 	Width="800"

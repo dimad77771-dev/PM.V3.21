@@ -54,6 +54,10 @@ namespace Profibiz.PracticeManager.EF
         public string ServiceType { get; set; }
         public string EmploymentType { get; set; }
         public int MaximumDayAppointments { get; set; }
+        public string Username { get; set; }
+        public string Password { get; set; }
+        public Nullable<System.Guid> RoleRowId { get; set; }
+        public bool IsOfficeEmployee { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ServiceProviderService> ServiceProviderServices { get; set; }

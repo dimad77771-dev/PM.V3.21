@@ -107,6 +107,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					Entity.Patient = OpenParam.NewPatient;
 					Entity.PatientRowId = Entity.Patient.RowId;
 				}
+				Entity.IsEmailWhenRegistered = true;
+				Entity.IsSmsWhenRegistered = true;
 			}
 			IsReadOnlyAppointmentBookRowId = (Entity.AppointmentBookRowId != default(Guid));
 			IsReadOnly = (Entity.InInvoice || OpenParam.IsReadOnly);

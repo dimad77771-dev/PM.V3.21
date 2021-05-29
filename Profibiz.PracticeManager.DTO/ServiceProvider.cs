@@ -45,6 +45,11 @@ namespace Profibiz.PracticeManager.DTO
 		public string EmploymentType { get; set; }
 		public string FullName { get; set; }
 
+		public string Username { get; set; }
+		public string Password { get; set; }
+		public Guid? RoleRowId { get; set; }
+		public bool IsOfficeEmployee { get; set; }
+
 		public List<ServiceProviderAssociation> ServiceProviderAssociations { get; set; }
 		public List<ServiceProviderService> ServiceProviderServices { get; set; }
 	}

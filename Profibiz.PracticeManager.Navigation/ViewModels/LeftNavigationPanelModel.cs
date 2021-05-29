@@ -11,6 +11,7 @@ using Prism.Regions;
 using Profibiz.PracticeManager.Navigation.Views;
 using System.ComponentModel;
 using System.Windows;
+using Profibiz.PracticeManager.Model;
 
 namespace Profibiz.PracticeManager.Navigation.ViewModels
 {
@@ -20,7 +21,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 	{
 		public LeftNavigationPanelViewModel(Autofac.IContainer container) : base()
 		{
-			Modules = new[]
+			var allModules = new[]
 			{
 				new ProfibizModuleDescription
 				{
@@ -31,7 +32,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				new ProfibizModuleDescription
 				{
 					Code = "Specialists",
-					ModuleTitle = "Specialists",
+					ModuleTitle = "Staffs/Specialists",
 					ImageSource = new Uri("pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Modules/icon-nav-customers-32.png"),
 				},
 				new ProfibizModuleDescription
@@ -82,39 +83,62 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				new ProfibizModuleDescription
 				{
 					Code = "WorkInout",
-					ModuleTitle = "?????",
+					ModuleTitle = "Staff Log",
 					ImageSource = new Uri("pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/Modules/icon-nav-customers-32.png"),
 				},
 			};
 
-			if (!GlobalSettings.Instance.UserSettings.ShowChargeout)
+			//if (!GlobalSettings.Instance.UserSettings.ShowChargeout)
+			//{
+			//	Modules = Modules.Where(q => q.Code != "Chargeouts").ToArray();
+			//}
+
+			var codes = new List<string>();
+			var role = UserManager.Role;
+			if (role.Main_Patients) codes.Add("Patients");
+			if (role.Main_Specialists) codes.Add("Specialists");
+			if (role.Main_AppointmentsScheduler) codes.Add("AppointmentsScheduler");
+			if (role.Main_CalendarEventsScheduler) codes.Add("CalendarEventsScheduler");
+			if (role.Main_Finances) codes.Add("Finances");
+			if (role.Main_Inventory) codes.Add("Inventory");
+			if (role.Main_Chargeouts) codes.Add("Chargeouts");
+			if (role.Main_Lookups) codes.Add("Lookups");
+			if (role.Main_WorkInout) codes.Add("WorkInout");
+			Modules = allModules.Where(q => codes.Contains(q.Code)).ToArray();
+			if (!Modules.Any())
 			{
-				Modules = Modules.Where(q => q.Code != "Chargeouts").ToArray();
+				Modules = new[] { allModules[0] };
 			}
+
 
 			if (RuntimeHelper.IsMachineD)
 			{
-				//SelectedModule = Modules.Single(q => q.Code == "Patients");
-				//SelectedModule = Modules.Single(q => q.Code == "Specialists");
-				//SelectedModule = Modules.Single(q => q.Code == "Finances");
-				//SelectedModule = Modules.Single(q => q.Code == "Chargeouts");
-				SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
-				//SelectedModule = Modules.Single(q => q.Code == "CalendarEventsScheduler");
-				//SelectedModule = Modules.Single(q => q.Code == "Inventory");
-				//SelectedModule = Modules.Single(q => q.Code == "Lookups");
-				//SelectedModule = Modules.Single(q => q.Code == "WorkInout");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Patients");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Specialists");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Finances");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Chargeouts");
+				SelectedModule = Modules.SingleOrDefault(q => q.Code == "AppointmentsScheduler");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "CalendarEventsScheduler");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Inventory");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Lookups");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "WorkInout");
 			}
 			else if (RuntimeHelper.Release)
 			{
-				SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
+				SelectedModule = Modules.SingleOrDefault(q => q.Code == "AppointmentsScheduler");
 			}
 			else
 			{
-				SelectedModule = Modules.Single(q => q.Code == "Patients");
-				//SelectedModule = Modules.Single(q => q.Code == "Specialists");
-				//SelectedModule = Modules.Single(q => q.Code == "Finances");
-				//SelectedModule = Modules.Single(q => q.Code == "Lookups");
-				//SelectedModule = Modules.Single(q => q.Code == "AppointmentsScheduler");
+				SelectedModule = Modules.SingleOrDefault(q => q.Code == "Patients");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Specialists");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Finances");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Lookups");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "AppointmentsScheduler");
+			}
+
+			if (SelectedModule == null)
+			{
+				SelectedModule = Modules[0];
 			}
 
 

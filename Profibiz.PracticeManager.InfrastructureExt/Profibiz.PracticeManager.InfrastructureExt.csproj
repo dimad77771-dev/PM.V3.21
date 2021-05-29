@@ -354,7 +354,6 @@
     <Compile Include="Services\PivotCustomFilterContainerService.cs" />
     <Compile Include="Services\MapPushpinsService.cs" />
     <Compile Include="Services\MapRouteService.cs" />
-    <Compile Include="UserManager\UserManager.cs" />
     <Compile Include="ViewModels\Analysis.cs" />
     <Compile Include="ViewModels\AnalysysTemplatesHelper.cs" />
     <Compile Include="ViewModels\CitiesMapViewModel.cs" />

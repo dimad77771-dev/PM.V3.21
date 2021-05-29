@@ -25,7 +25,11 @@ namespace Profibiz.PracticeManager.Infrastructure
             {
                 butSave.Visibility = Visibility.Collapsed;
             }
-        }
+			if (HideSaveAndClose)
+			{
+				butSaveAndClose.Visibility = Visibility.Collapsed;
+			}
+		}
 		public void UpdateSaveEnabled()
 		{
 			butSave.IsEnabled = SaveEnabled;
@@ -55,9 +59,20 @@ namespace Profibiz.PracticeManager.Infrastructure
             ((CommandPanelView)d).UpdateCloseOnly();
         }
 
+		public static readonly DependencyProperty HideSaveAndCloseProperty =
+			DependencyProperty.Register(nameof(HideSaveAndClose), typeof(Boolean), typeof(CommandPanelView), new PropertyMetadata(OnHideSaveAndCloseChange));
+		public Boolean HideSaveAndClose
+		{
+			get { return (Boolean)GetValue(HideSaveAndCloseProperty); }
+			set { SetValue(HideSaveAndCloseProperty, value); }
+		}
+		public static void OnHideSaveAndCloseChange(DependencyObject d, DependencyPropertyChangedEventArgs e)
+		{
+			((CommandPanelView)d).UpdateCloseOnly();
+		}
 
 
-        public static readonly DependencyProperty SaveEnabledProperty =
+		public static readonly DependencyProperty SaveEnabledProperty =
 			DependencyProperty.Register(nameof(SaveEnabled), typeof(Boolean), typeof(CommandPanelView), new PropertyMetadata(true, OnSaveEnabledChange));
 		public Boolean SaveEnabled
 		{

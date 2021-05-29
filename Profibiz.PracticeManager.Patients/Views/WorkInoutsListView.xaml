@@ -90,7 +90,7 @@
 
 				<dxg:GridControl.Columns>
 					<dxg:GridColumn FieldName="ServiceProviderName"
-                                    Header="SPECIALIST"
+                                    Header="STAFF"
                                     Width="250" />
 					<dxg:GridColumn FieldName="Date"
                                     Header="DATE"

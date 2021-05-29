@@ -242,6 +242,10 @@
       <Project>{5c312cc4-42df-4d16-86df-22bcc096dbdb}</Project>
       <Name>Profibiz.PracticeManager.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Profibiz.PracticeManager.Model\Profibiz.PracticeManager.Model.csproj">
+      <Project>{07BBD65A-F9C8-48D6-85B7-8782DF4F12DB}</Project>
+      <Name>Profibiz.PracticeManager.Model</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Profibiz.PracticeManager.Navigation\Profibiz.PracticeManager.Navigation.csproj">
       <Project>{85e2a96b-ad25-46ca-b501-f5eee1ab1345}</Project>
       <Name>Profibiz.PracticeManager.Navigation</Name>
