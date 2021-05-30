@@ -646,7 +646,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				var myMenuItem1 = new DevExpress.Xpf.Bars.BarButtonItem()
 				{
 					Name = "UserNewAppointment",
-					Content = "New Appointment",
+					Content = "New Appointment                        ",
 					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-new-employee-16.png")),
 				};
 				myMenuItem1.ItemClick += (a,b) => NewEntity();
@@ -656,7 +656,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				var myMenuItem2 = new DevExpress.Xpf.Bars.BarButtonItem()
 				{
 					Name = "UserNewAppointmentForNotRegistered",
-					Content = "Send Appointment Link",
+					Content = "Send Appointment Link                  ",
 					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-mail-merge-16.png")),
 				};
 				myMenuItem2.ItemClick += (a, b) => NewEntity(isNotRegisteredMode: true);
@@ -668,7 +668,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				var myMenuItem1 = new DevExpress.Xpf.Bars.BarButtonItem()
 				{
 					Name = "UserEditAppointment",
-					Content = "Edit Appointment",
+					Content = "Edit Appointment                       ",
 					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-edit-16.png")),
 				};
 				myMenuItem1.ItemClick += (a, b) => EditEntity();
