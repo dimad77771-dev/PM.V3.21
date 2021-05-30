@@ -58,7 +58,7 @@
                 </Grid.RowDefinitions>
                 <Border Width="475"
                         Height="180"
-                        Background="#FFF7941E">
+                        Background="#FFF7975E">
                     <Grid Margin="0,60,0,0">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
@@ -67,7 +67,7 @@
                         </Grid.RowDefinitions>
                         <TextBlock Foreground="White"
                                    HorizontalAlignment="Center"
-                                   Text="Profibiz Practice Manager"
+                                   Text="ProfiBiz Practice Manager"
                                    FontSize="36"
                                    FontFamily="Segoe UI Light" />
                         <TextBlock Name="Version"
@@ -75,7 +75,7 @@
                                    Opacity="0.5"
                                    Foreground="White"
                                    HorizontalAlignment="Center"
-                                   Text="Version: 2017.171503.001.Net.4.6.2.D.16.2"
+                                   Text="Version: 2021.210529.001.Net.4.8.D.16.2"
                                    FontSize="20"
                                    FontFamily="Segoe UI Light" />
                     </Grid>
@@ -106,7 +106,7 @@
                                Margin="20,0,0,0"
                                HorizontalAlignment="Left"
                                VerticalAlignment="Center">
-                        Copyright © 2016 PBS Inc.
+                        Copyright © 2021 PBS.
                         <LineBreak />
                         All Rights Reserved
                     </TextBlock>

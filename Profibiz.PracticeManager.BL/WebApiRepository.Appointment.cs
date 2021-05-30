@@ -19,6 +19,7 @@ using MimeKit;
 using System.Configuration;
 using System.Net.Mail;
 using Profibiz.PracticeManager.Service;
+using System.IO;
 
 namespace Profibiz.PracticeManager.BL
 {
@@ -286,13 +287,16 @@ namespace Profibiz.PracticeManager.BL
 
 		void AppointmentRegisteredNotify(DTO.Appointment appointment)
 		{
-			var url = "dsddsad";
+			var url = ConfigurationManager.AppSettings["base.url"];
+			var business = ConfigurationManager.AppSettings["base.name"];
 			var patient = appointment.Patient;
+
+			url = url + @"/#/client/appointment" + @"/" + appointment.RowId;
 
 			var email = patient.EmailAddress;
 			if (appointment.IsEmailWhenRegistered && !string.IsNullOrEmpty(email))
 			{
-				var subject = "";
+				var subject = "Registration with " + business;
 				var html = "url=" + url;
 				var err = EmailFunc.SendEmail(email, subject, html);
 				if (!string.IsNullOrEmpty(err))
@@ -322,9 +326,6 @@ namespace Profibiz.PracticeManager.BL
 				}
 			}
 		}
-
-		
-
 		public IEnumerable<DTO.AppointmentInsuranceProviderDayInfo> GetAppointmentInsuranceProviderDayInfo(DateTime dat, Guid serviceProviderRowId)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
@@ -352,6 +353,13 @@ namespace Profibiz.PracticeManager.BL
 			//var mapper = AutoMapperHelper.GetPocoMapperWithOptions(options, typeof(EF.AppointmentV), typeof(EF.Patient));
 			//return mapper.Map<List<DTO.Appointment>>(list);
 			return rows;
+		}
+
+		private string GetTemplateHtml(string templateId)
+		{
+			var path = ConfigurationManager.AppSettings["email.template.dir"];
+			string file = Path.Combine(path, templateId + ".html");
+			return File.ReadAllText(file);
 		}
 	}
 }

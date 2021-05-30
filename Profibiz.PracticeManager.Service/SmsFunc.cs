@@ -17,8 +17,7 @@ namespace Profibiz.PracticeManager.Service
 		public static string NexmoApiKey { get; set; } = ConfigurationManager.AppSettings["nexmo.api.key"];
 		public static string NexmoApiSecret { get; set; } = ConfigurationManager.AppSettings["nexmo.api.secret"];
 		public static string NexmoFrom { get; set; } = ConfigurationManager.AppSettings["nexmo.from"];
-		public static string SendRealSMS { get; set; } = ConfigurationManager.AppSettings["SendRealSMS"];
-
+		public static string SendRealSMS { get; set; } = ConfigurationManager.AppSettings["nexmo.sendRealSMS"];
 
 		public static string SendSms(string phone, string message)
 		{
@@ -38,8 +37,8 @@ namespace Profibiz.PracticeManager.Service
 			}
 
 			var credentials = Credentials.FromApiKeyAndSecret(
-			"d13c9efd",
-			"OvTDoIEmWnYIwg65"
+			NexmoApiKey,
+			NexmoApiSecret
 			);
 
 			var vonageClient = new VonageClient(credentials);
@@ -48,9 +47,8 @@ namespace Profibiz.PracticeManager.Service
 			{
 				var response = vonageClient.SmsClient.SendAnSms(new Vonage.Messaging.SendSmsRequest()
 				{
-					//To = "14168758075",
-					To = "380675099163",
-					From = "16136673170",
+					To = phone,
+					From = NexmoFrom,
 					Text = message,
 				});
 			}
@@ -61,76 +59,74 @@ namespace Profibiz.PracticeManager.Service
 
 			return "";
 		}
+   //     public static bool SendSms__old(string phone, string message)
+   //     {
+   //         System.Diagnostics.Debug.WriteLine("SMS=" + message);
 
+   //         if (SendRealSMS != "1")
+   //         {
+   //             return true;
+   //         }
 
-		public static bool SendSms__old(string phone, string message)
-		{
-			System.Diagnostics.Debug.WriteLine("SMS=" + message);
+   //         if (phone == @"(111) 111-1111" || phone == @"(222) 222-2222")
+   //         {
+   //             phone = "+380675099163";
+   //         }
+   //         else
+   //         {
+   //             phone = string.Join("", (phone ?? "").Where(q => char.IsDigit(q)));
+   //             phone = phone.Length == 10 ? "+1" + phone : "+" + phone;
+   //         }
 
-			if (SendRealSMS != "1")
-			{
-				return true;
-			}
-
-			if (phone == @"(111) 111-1111" || phone == @"(222) 222-2222")
-			{
-				phone = "+380675099163";
-			}
-			else
-			{
-				phone = string.Join("", (phone ?? "").Where(q => char.IsDigit(q)));
-				phone = phone.Length == 10 ? "+1" + phone : "+" + phone;
-			}
-
-			//         var savedSecurityProtocol = ServicePointManager.SecurityProtocol;
-			//         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-			//         var plivo = new RestAPI(auth_id, auth_token);
-			//         var resp = plivo.send_message(new Dictionary<string, string>()
-			//         {
-			//             { "src", phoneSrc },	// Sender's phone number with country code
+   //         var savedSecurityProtocol = ServicePointManager.SecurityProtocol;
+   //         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+   //         var plivo = new RestAPI(auth_id, auth_token);
+   //         var resp = plivo.send_message(new Dictionary<string, string>()
+   //                  {
+   //                      { "src", phoneSrc },	// Sender's phone number with country code
 			//	{ "dst", phone },		// Receiver's phone number wiht country code
 			//	{ "text", message }		// Your SMS text message
 			//});
-			//if (resp.StatusCode == HttpStatusCode.Accepted)
-			//{
-			//    return true;
-			//}
-			//else
-			//{
-			//    //LogFunc.WriteElmahException(new Exception($"SMS not sent. Phone: {phone}. Message: {message}", resp.ErrorException));
-			//    return false;
-			//}
+   //         if (resp.StatusCode == HttpStatusCode.Accepted)
+   //         {
+   //             return true;
+   //         }
+   //         else
+   //         {
+   //             //LogFunc.WriteElmahException(new Exception($"SMS not sent. Phone: {phone}. Message: {message}", resp.ErrorException));
+   //             return false;
+   //         }
 
 
-			var savedSecurityProtocol = ServicePointManager.SecurityProtocol;
-			ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
-			var client = new RestClient("https://rest.nexmo.com");
-			var request = new RestRequest("sms/json", Method.POST);
+   //         var savedSecurityProtocol = ServicePointManager.SecurityProtocol;
+   //         ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+   //         var client = new RestClient("https://rest.nexmo.com");
+   //         var request = new RestRequest("sms/json", Method.POST);
 
-			request.AddParameter("api_key", NexmoApiKey);
-			request.AddParameter("api_secret", NexmoApiSecret);
-			request.AddParameter("from", NexmoFrom);
-			//phone = "+380675099163";
-			//phone = "+14168758075";
-			//phone = "4168758075";
-			//phone = "4168759717";
-			request.AddParameter("to", phone);
-			request.AddParameter("text", message);
+   //         request.AddParameter("api_key", NexmoApiKey);
+   //         request.AddParameter("api_secret", NexmoApiSecret);
+   //         request.AddParameter("from", NexmoFrom);
+   //         phone = "+380675099163";
+   //         phone = "+14168758075";
+   //         phone = "4168758075";
+   //         phone = "4168759717";
+   //         request.AddParameter("to", phone);
+   //         request.AddParameter("text", message);
 
-			var response = client.Execute(request);
-			if (response.ErrorException != null)
-			{
-				NLog.Error(new Exception($"SMS not sent. Phone: {phone}. Message: {message}", response.ErrorException));
-				return false;
-			}
-			var content = response.Content ?? "";
-			if (!content.Contains("status\": \"0"))
-			{
-				NLog.Error(new Exception($"SMS not sent. Phone: {phone}. Message: {message}. Response: {response} ({content})"));
-				return false;
-			}
+   //         var response = client.Execute(request);
+   //         if (response.ErrorException != null)
+   //         {
+   //             NLog.Error(new Exception($"SMS not sent. Phone: {phone}. Message: {message}", response.ErrorException));
+   //             return false;
+   //         }
+   //         var content = response.Content ?? "";
+   //         if (!content.Contains("status\": \"0"))
+   //         {
+   //             NLog.Error(new Exception($"SMS not sent. Phone: {phone}. Message: {message}. Response: {response} ({content})"));
+   //             return false;
+   //         }
 
-			return true;
-		}
-	}
+   //         return true;
+   //     }
+    }
 }
