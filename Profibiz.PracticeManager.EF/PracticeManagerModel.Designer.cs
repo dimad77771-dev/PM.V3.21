@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\PROJECTS\Profibiz.PracticeManager.V3\Profibiz.PracticeManager.EF\PracticeManagerModel.edmx'. 
+﻿// T4 code generation is enabled for model 'G:\STORE\GOOGLE\PROFIBIZ2014\BUSINESS\PBS\PROJECTS\PM.V3.SB\WPF\Profibiz.PracticeManager.EF\PracticeManagerModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.
