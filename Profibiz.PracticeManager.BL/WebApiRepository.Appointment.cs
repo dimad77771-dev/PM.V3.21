@@ -291,14 +291,24 @@ namespace Profibiz.PracticeManager.BL
 			var business = ConfigurationManager.AppSettings["base.name"];
 			var patient = appointment.Patient;
 
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+
+			var service = db.MedicalServicesOrSupplies.First(p => p.RowId == appointment.MedicalServicesOrSupplyRowId);
+
 			url = url + @"/#/client/appointment" + @"/" + appointment.RowId;
 
 			var email = patient.EmailAddress;
 			if (appointment.IsEmailWhenRegistered && !string.IsNullOrEmpty(email))
 			{
 				var subject = "Registration with " + business;
-				var html = "url=" + url;
-				var err = EmailFunc.SendEmail(email, subject, html);
+				var message = GetTemplateHtml("appointment");
+
+				message = message.Replace("{{name}}", patient.FirstName);
+				message = message.Replace("{{appointment}}", appointment.Start.ToString("yyyy-MM-dd HH:mm"));
+				message = message.Replace("{{service}}", service.Name);
+				message = message.Replace("{{url}}", url);
+
+				var err = EmailFunc.SendEmail(email, subject, message);
 				if (!string.IsNullOrEmpty(err))
 				{
 					//Service.NLog.Error("send email=" + email + "\n" + err);

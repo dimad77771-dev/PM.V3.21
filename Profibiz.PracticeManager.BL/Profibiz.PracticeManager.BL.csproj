@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Profibiz.PracticeManager.BL</RootNamespace>
     <AssemblyName>Profibiz.PracticeManager.BL</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SccProjectName>
     </SccProjectName>
@@ -183,8 +183,9 @@
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="EmailTemplates\" />
+    <Content Include="EmailTemplates\appointment.html" />
   </ItemGroup>
   <Import Project="..\Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems" Label="Shared" />
   <Import Project="..\Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems" Label="Shared" />

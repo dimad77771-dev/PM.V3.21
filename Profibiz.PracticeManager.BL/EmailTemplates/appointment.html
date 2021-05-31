@@ -1,4 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -434,8 +434,8 @@
                 <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                     <tr>
                         <td class="email-masthead">
-                            <a href="https://mobion.ca" class="f-fallback email-masthead_name">
-                                MobiON Laboratories Inc.
+                            <a href="https://iflowmassage.ca" class="f-fallback email-masthead_name">
+                                Iflow Massage (RMT).
                             </a>
                         </td>
                     </tr>
@@ -447,66 +447,56 @@
                                 <tr>
                                     <td class="content-cell">
                                         <div class="f-fallback">
-                                            <h1>Dear {{firstName}} {{lastName}}</h1>
-                                            <p>Your appoinment details with MobiON Laboratories Inc. are listed below.</p>
+                                            <h1>Dear {{name}}</h1>
+                                            <p>Your appoinment details with Iflow Massage (RMT) are listed below.</p>
+                                            <p>Please complete registration by following this url</p>
+                                            <p>{{url}}</p>
 
                                             <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                                <tr>
-                                                    <td class="attributes_content">
-                                                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                                            <tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Institution:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{from}}
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Appoinment Date:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{date}}
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-                                                            <!--<tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Time:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{time}}
-                                                                    </span>
-                                                                </td>
-                                                        </tr>-->
-                                                            <tr />
-                                                            <tr />
-                                                            <tr>
-                                                                <td align="center" colspan="2">
-                                                                    <img style="width:124px;height:124px;" src="cid:{{qrcode-cid}}" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
+                                                    <tr>
+                                                        <td class="attributes_content">
+                                                            <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
+                                                                <tr>
+                                                                    <td class="attributes_item">
+                                                                        <span class="f-fallback">
+                                                                            <strong>Appointment:</strong>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td class="attributes_item">
+                                                                        <span class="f-fallback">
+                                                                            {{appointment}}
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="attributes_item">
+                                                                        <span class="f-fallback">
+                                                                            <strong>Service:</strong>
+                                                                        </span>
+                                                                    </td>
+                                                                    <td class="attributes_item">
+                                                                        <span class="f-fallback">
+                                                                            {{service}}
+                                                                        </span>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr />
+
+                                                                <!--<tr>
+        <td align="center" colspan="2">
+            <img style="width:124px;height:124px;" src="cid:{{qrcode-cid}}" />
+        </td>
+    </tr>-->
+                                                            </table>
+                                                        </td>
+                                                    </tr>
                                             </table>
 
 
-                                            <p>If you have any questions, feel free to email our customer service at <a href="mailto:register@mobion.ca">register@mobion.ca</a>.</p>
+                                            </p><p>If you have any questions, feel free to email our customer service at <a href="mailto:info@iflowmassage.ca">info@iflowmassage.ca</a>.</p>
                                             <p>
-                                                Thanks,
-                                                <br />MobiON Laboratories Inc
+                                                Thank you,
+                                                <br />Iflow Massage (RMT)
                                             </p>
                                         </div>
                                     </td>
@@ -519,107 +509,7 @@
                             <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
                                 <tr>
                                     <td class="content-cell" align="center">
-                                        <p class="f-fallback sub align-center">&copy; 2021 MobiON Laboratories Inc. All rights reserved.</p>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-        </tr>
-
-        <tr>
-            <td align="center">
-                <table class="email-content" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                    <tr>
-                        <td class="email-masthead">
-                            <a href="https://mobion.ca" class="f-fallback email-masthead_name">
-                                MobiON Laboratories Inc.
-                            </a>
-                        </td>
-                    </tr>
-                    <!-- Email Body -->
-                    <tr>
-                        <td class="email-body" width="570" cellpadding="0" cellspacing="0">
-                            <table class="email-body_inner" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
-                                <!-- Body content -->
-                                <tr>
-                                    <td class="content-cell">
-                                        <div class="f-fallback">
-                                            <h1>Cher/chère {{firstName}} {{lastName}}</h1>
-                                            <p>Les détails de votre rendez-vous chez MobiON Laboratories Inc. sont indiqués ci-dessous.</p>
-
-                                            <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                                <tr>
-                                                    <td class="attributes_content">
-                                                        <table width="100%" cellpadding="0" cellspacing="0" role="presentation">
-                                                            <tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Institution:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{from}}
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Date du rendez-vous:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{date}}
-                                                                    </span>
-                                                                </td>
-                                                            </tr>
-                                                            <!--<tr>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        <strong>Time:</strong>
-                                                                    </span>
-                                                                </td>
-                                                                <td class="attributes_item">
-                                                                    <span class="f-fallback">
-                                                                        {{time}}
-                                                                    </span>
-                                                                </td>
-                                                        </tr>-->
-                                                            <tr />
-                                                            <tr />
-                                                            <tr>
-                                                                <td align="center" colspan="2">
-                                                                    <img style="width:124px;height:124px;" src="cid:{{qrcode-cid}}" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </td>
-                                                </tr>
-                                            </table>
-
-
-                                            <p>Si vous avez des questions, n'hésitez pas à envoyer un courriel à notre service à la clientèle à <a href="mailto:register@mobion.ca">register@mobion.ca</a>.</p>
-                                            <p>
-                                                Merci,
-                                                <br />Le MobiON Laboratories Inc.
-                                            </p>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <table class="email-footer" align="center" width="570" cellpadding="0" cellspacing="0" role="presentation">
-                                <tr>
-                                    <td class="content-cell" align="center">
-                                        <p class="f-fallback sub align-center">&copy; 2021 MobiON Laboratories Inc. All rights reserved.</p>
+                                        <p class="f-fallback sub align-center">&copy; 2021 Iflow Massage (RMT). All rights reserved.</p>
                                     </td>
                                 </tr>
                             </table>
