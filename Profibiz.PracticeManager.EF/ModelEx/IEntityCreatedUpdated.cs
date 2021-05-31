@@ -95,6 +95,12 @@ namespace Profibiz.PracticeManager.EF
 	public partial class User : IEntityCreatedUpdated { }
 	public partial class UserSetting : IEntityCreatedUpdated { }
 	public partial class WorkInout : IEntityCreatedUpdated { }
+	public partial class AppointmentForm : IEntityCreatedUpdated { }
+	public partial class AppointmentFormItem : IEntityCreatedUpdated { }
+	public partial class PatientForm : IEntityCreatedUpdated { }
+	public partial class PatientFormItem : IEntityCreatedUpdated { }
+	public partial class Form : IEntityCreatedUpdated { }
+	public partial class FormItem : IEntityCreatedUpdated { }
 
 
 }

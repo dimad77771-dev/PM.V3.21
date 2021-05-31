@@ -798,6 +798,30 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 		}
 		#endregion
 
+		#region FormDocmodel
+		public IHttpActionResult GetFormDocmodelList(int? formDictionary = null, Guid? patientRowId = null, Guid? formRowId = null)
+		{
+			var rezult = _repository.GetFormDocmodelList(formDictionary, patientRowId, formRowId);
+			return Ok(rezult);
+		}
+
+		public IHttpActionResult PutFormDocmodel([FromBody] FormDocmodel entity)
+		{
+			_repository.UpdateFormDocmodelCore(entity, EntityState.Modified);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult PostFormDocmodel([FromBody] FormDocmodel entity)
+		{
+			_repository.UpdateFormDocmodelCore(entity, EntityState.Added);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult DeleteFormDocmodel(Guid id)
+		{
+			_repository.UpdateFormDocmodelCore(new FormDocmodel { RowId = id }, EntityState.Deleted);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		#endregion
+
 		#region AppointmentTreatmentNote
 		public IHttpActionResult GetAppointmentTreatmentNoteList(Guid? rowId = null, Guid? appointmentRowId = null)
 		{

@@ -94,6 +94,9 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
         public bool IsNotRegistered { get; set; }
         public byte[] Signature { get; set; }
+        public string FamilyDoctorEmail { get; set; }
+        public string SexIdentifyAs { get; set; }
+        public string InsuranceCompany { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<InvoiceV> Invoices { get; set; }

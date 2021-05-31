@@ -82,6 +82,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaseModel\BaseModelHelper.cs" />
+    <Compile Include="FormDocmodel.cs" />
     <Compile Include="UserManager\UserManager.cs" />
     <Compile Include="WorkInout.cs" />
     <Compile Include="TemplateNameModel.cs" />
@@ -194,6 +195,12 @@
     <Compile Include="LookupHelper\TypeHelper.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="AppointmentForm.cs" />
+    <Compile Include="AppointmentFormItem.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="FormItem.cs" />
+    <Compile Include="PatientForm.cs" />
+    <Compile Include="PatientFormItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />

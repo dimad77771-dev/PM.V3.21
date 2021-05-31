@@ -83,6 +83,12 @@
     <Compile Include="AppointmentClinicalNote.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="AppointmentForm.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="AppointmentFormItem.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppointmentInsuranceProvider.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
@@ -179,7 +185,13 @@
     <Compile Include="EmailSendV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Form.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="FormDocument.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="FormItem.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="InsuranceArticleV.cs">
@@ -320,6 +332,12 @@
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PatientFamilyMemberView.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientForm.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PatientFormItem.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
     <Compile Include="PatientInsuranceCoverageView.cs">

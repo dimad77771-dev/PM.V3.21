@@ -190,6 +190,9 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<FormDocument> GetFormDocumentList(Guid? rowId);
 		void UpdateFormDocumentCore(FormDocument entity, EntityState state);
 
+		IEnumerable<FormDocmodel> GetFormDocmodelList(int? formDictionary, Guid? patientRowId, Guid? formRowId);
+		void UpdateFormDocmodelCore(FormDocmodel entity, EntityState state);
+
 		IEnumerable<AppointmentTreatmentNote> GetAppointmentTreatmentNoteList(Guid? rowId, Guid? patientRowId);
 		void UpdateAppointmentTreatmentNoteCore(AppointmentTreatmentNote[] entity, EntityState state);
 

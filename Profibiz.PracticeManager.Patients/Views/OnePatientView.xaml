@@ -995,11 +995,11 @@
 
 					<dx:DXTabItem Header="Medical History" Visibility="{Binding IsTabVisibile_MedicalHistory, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
-							<localv:MedicalHistoryRecordView>
+							<localv:FormDocmodelView>
 								<dxmvvm:Interaction.Behaviors>
 									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.MedicalHistoryModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
 								</dxmvvm:Interaction.Behaviors>
-							</localv:MedicalHistoryRecordView>
+							</localv:FormDocmodelView>
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 

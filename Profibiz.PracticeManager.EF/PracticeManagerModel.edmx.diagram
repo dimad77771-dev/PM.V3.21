@@ -592,6 +592,21 @@
         <EntityTypeShape EntityType="PracticeManagerModel.WorkInout" Width="2.125" PointX="10.25" PointY="1.5" />
         <AssociationConnector Association="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId" />
         <AssociationConnector Association="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentFormItem" Width="1.5" PointX="10.375" PointY="10.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.AppointmentForm" Width="1.5" PointX="8.125" PointY="11.125" />
+        <EntityTypeShape EntityType="PracticeManagerModel.FormItem" Width="1.5" PointX="8.25" PointY="15.625" />
+        <EntityTypeShape EntityType="PracticeManagerModel.Form" Width="1.5" PointX="6" PointY="15.5" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientFormItem" Width="1.5" PointX="10.5" PointY="0.75" />
+        <EntityTypeShape EntityType="PracticeManagerModel.PatientForm" Width="1.5" PointX="8.25" PointY="1.375" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentFormItems_AppointmentForms" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentFormItems_FormItems" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentForms_Appointments" />
+        <AssociationConnector Association="PracticeManagerModel.FK_AppointmentForms_Forms" />
+        <AssociationConnector Association="PracticeManagerModel.FK_FormItems_Forms" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientFormItems_FormItems" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientForms_Forms1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientFormItems_PatientForms" />
+        <AssociationConnector Association="PracticeManagerModel.FK_PatientForms_Patients" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

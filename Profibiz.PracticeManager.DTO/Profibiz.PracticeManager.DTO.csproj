@@ -53,6 +53,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppointmentForm.cs" />
+    <Compile Include="AppointmentFormItem.cs" />
+    <Compile Include="Form.cs" />
+    <Compile Include="FormDocmodel.cs" />
+    <Compile Include="FormItem.cs" />
+    <Compile Include="PatientForm.cs" />
+    <Compile Include="PatientFormItem.cs" />
     <Compile Include="FormDocument.cs" />
     <Compile Include="LoginInfo.cs" />
     <Compile Include="AppointmentTreatmentNote.cs" />
@@ -152,6 +159,7 @@
     <Compile Include="ServiceProvider.cs" />
     <Compile Include="ServiceProviderAssociation.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

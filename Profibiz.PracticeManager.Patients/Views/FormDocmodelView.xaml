@@ -1,0 +1,175 @@
+<UserControl
+	x:Class="Profibiz.PracticeManager.Patients.Views.FormDocmodelView"
+	xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+	xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+	xmlns:dxp="http://schemas.devexpress.com/winfx/2008/xaml/printing"
+	xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+	xmlns:inter="http://www.codeplex.com/prism"
+	xmlns:local="clr-namespace:DevExpress.DevAV;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	xmlns:localv="clr-namespace:Profibiz.PracticeManager.Patients.Views"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
+	d:DesignHeight="800"
+	d:DesignWidth="1100"
+	prism:ViewModelLocator.AutoWireViewModel="True"
+	UseLayoutRounding="True"
+	mc:Ignorable="d">
+	<dxmvvm:Interaction.Behaviors>
+		<dx:DXMessageBoxService />
+	</dxmvvm:Interaction.Behaviors>
+
+	<UserControl.Resources>
+		<ResourceDictionary>
+			<Style x:Key="style1" TargetType="dxlc:LayoutItemLabel">
+				<Style.Setters>
+					<Setter Property="VerticalContentAlignment" Value="Center" />
+					<Setter Property="HorizontalContentAlignment" Value="Left" />
+					<Setter Property="VerticalAlignment" Value="Center" />
+					<Setter Property="Margin" Value="2,0" />
+				</Style.Setters>
+			</Style>
+
+			<Style x:Key="style2" TargetType="dxlc:LayoutItemLabel">
+				<Style.Setters>
+					<Setter Property="VerticalContentAlignment" Value="Center" />
+					<Setter Property="HorizontalContentAlignment" Value="Left" />
+					<Setter Property="VerticalAlignment" Value="Top" />
+					<Setter Property="Margin" Value="2,2" />
+				</Style.Setters>
+			</Style>
+
+			<Style x:Key="styleHeader" TargetType="dxlc:LayoutItemLabel">
+				<Style.Setters>
+					<Setter Property="VerticalContentAlignment" Value="Center" />
+					<Setter Property="HorizontalContentAlignment" Value="Left" />
+					<Setter Property="Margin" Value="4" />
+					<Setter Property="FontWeight" Value="Bold" />
+				</Style.Setters>
+			</Style>
+
+			<Style x:Key="styleCheckbox1" TargetType="dxe:CheckEdit">
+				<Style.Setters>
+					<Setter Property="Margin" Value="2,0" />
+					<Setter Property="VerticalAlignment" Value="Center" />
+				</Style.Setters>
+			</Style>
+
+			<Style
+				x:Key="styleTextEdit1"
+				BasedOn="{StaticResource baseEditStyle1}"
+				TargetType="dxe:TextEdit">
+				<Style.Setters>
+					<Setter Property="Margin" Value="2,0" />
+					<Setter Property="VerticalAlignment" Value="Center" />
+				</Style.Setters>
+			</Style>
+
+			<Style
+				x:Key="styleTextEdit2"
+				BasedOn="{StaticResource baseEditStyle1}"
+				TargetType="dxe:TextEdit">
+				<Style.Setters>
+					<Setter Property="Margin" Value="2,2" />
+					<Setter Property="VerticalAlignment" Value="Center" />
+				</Style.Setters>
+			</Style>
+
+			<local:PictureConverter x:Key="PictureConverter" />
+			<Style x:Key="layoutItemLabelStyle" TargetType="dxlc:LayoutItemLabel">
+				<Setter Property="HorizontalAlignment" Value="Right" />
+				<Setter Property="HorizontalContentAlignment" Value="Right" />
+				<Setter Property="Foreground" Value="Red" />
+			</Style>
+			<Style x:Key="SectionLabelStyle" TargetType="Label">
+				<Setter Property="FontWeight" Value="Bold" />
+			</Style>
+
+		</ResourceDictionary>
+	</UserControl.Resources>
+
+	<dx:LoadingDecorator Style="{StaticResource loadingDecoratorMain}">
+		<Grid>
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="120" />
+				<ColumnDefinition Width="*" />
+			</Grid.ColumnDefinitions>
+
+			<dxg:GridControl
+				Grid.Column="0"
+				AllowLiveDataShaping="True"
+				AutoExpandAllGroups="True"
+				ItemsSource="{Binding Entities}"
+				SelectedItem="{Binding Entity}"
+				SelectionMode="Row"
+				ShowBorder="True">
+				<dxmvvm:Interaction.Behaviors>
+					<infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrol}" />
+				</dxmvvm:Interaction.Behaviors>
+
+				<dxg:GridControl.View>
+					<dxg:TableView
+						AllowEditing="False"
+						AllowPerPixelScrolling="True"
+						AutoWidth="False"
+						ColumnFilterPopupMode="{x:Static infrastructure:GridDefaults.ColumnFilterPopupMode}"
+						EditorShowMode="MouseDown"
+						NavigationStyle="Row"
+						SearchDelay="{x:Static infrastructure:SearchPanelInfo.SearchDelay}"
+						SearchPanelHorizontalAlignment="Right"
+						ShowCheckBoxSelectorColumn="False"
+						ShowCheckBoxSelectorInGroupRow="False"
+						ShowGroupPanel="False"
+						ShowSearchPanelMode="Never">
+						<dxmvvm:Interaction.Behaviors>
+							<dxmvvm:EventToCommand
+								Command="{Binding MouseClickCommand}"
+								EventName="MouseLeftButtonDown"
+								PassEventArgsToCommand="True" />
+							<dxmvvm:EventToCommand
+								Command="{Binding BeforeLayoutRefreshCommand}"
+								EventName="BeforeLayoutRefresh"
+								PassEventArgsToCommand="True" />
+						</dxmvvm:Interaction.Behaviors>
+					</dxg:TableView>
+				</dxg:GridControl.View>
+
+				<dxg:GridControl.Columns>
+					<dxg:GridColumn
+						Width="*"
+						FieldName="Date"
+						Header="DATE" />
+				</dxg:GridControl.Columns>
+			</dxg:GridControl>
+
+
+			<Grid
+				Grid.Column="1"
+				Background="Transparent"
+				ShowGridLines="False">
+				<dx:DXBorder
+					Margin="0"
+					BorderThickness="0,0,0,1"
+					BorderBrush="#A0A0A0">
+					<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Visible">
+						<Grid Margin="3" x:Name="mainGrid">
+						</Grid>
+					</ScrollViewer>
+				</dx:DXBorder>
+			</Grid>
+
+
+
+		</Grid>
+	</dx:LoadingDecorator>
+</UserControl>

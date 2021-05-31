@@ -47,7 +47,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public bool IsNew { get; set; }
 		public InvoicesListViewModel InvoiceListModel { get; set; }
 		public CalendarEventsSchedulerViewModel CalendarEventsModel { get; set; }
-		public MedicalHistoryRecordViewModel MedicalHistoryModel { get; set; }
+		public FormDocmodelViewModel MedicalHistoryModel { get; set; }
 		public TreatmentPlanRecordViewModel TreatmentPlanModel { get; set; }
 		public virtual UIElementManager UIManagerFamilyDoctor { get; set; } = new UIElementManager();
 		public virtual bool IsVisibilityRate { get; set; }

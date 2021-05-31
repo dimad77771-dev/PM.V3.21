@@ -130,6 +130,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 		AppointmentClinicalNoteView,
 		AppointmentTreatmentNoteView,
 		FormDocumentView,
+		FormDocmodelView,
 		InsuranceArticleSummaryView,
 		PatientDocumentView,
 		ChargeoutsListView,

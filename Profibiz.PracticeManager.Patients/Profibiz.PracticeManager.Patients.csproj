@@ -217,6 +217,7 @@
     <Compile Include="ViewModels\ChargeoutWindowViewModel.cs" />
     <Compile Include="ViewModels\ChargeoutPrintViewModel.cs" />
     <Compile Include="ViewModels\LeftFilterChargeoutsViewModel.cs" />
+    <Compile Include="ViewModels\FormDocmodelViewModel.cs" />
     <Compile Include="ViewModels\OneWorkInoutViewModel.cs" />
     <Compile Include="ViewModels\WorkInoutsListViewModel.cs" />
     <Compile Include="ViewModels\PickTemplateNameViewModel.cs" />
@@ -348,6 +349,9 @@
     </Compile>
     <Compile Include="Views\LeftFilterInventoryView.xaml.cs">
       <DependentUpon>LeftFilterInventoryView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\FormDocmodelView.xaml.cs">
+      <DependentUpon>FormDocmodelView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\OneWorkInoutView.xaml.cs">
       <DependentUpon>OneWorkInoutView.xaml</DependentUpon>
@@ -994,6 +998,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\LeftFilterInventoryView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\FormDocmodelView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -120,6 +120,7 @@ namespace Profibiz.PracticeManager.Patients
 			_container.RegisterView<RibbonEmailChargesView>();
 			_container.RegisterView<AppointmentClinicalNoteView>();
 			_container.RegisterView<FormDocumentView>();
+			_container.RegisterView<FormDocmodelView>();
 			_container.RegisterView<AppointmentTreatmentNoteView>();
 			_container.RegisterView<InvoiceClaimDetailsView>();
 			_container.RegisterView<InsuranceArticleInfoView>();

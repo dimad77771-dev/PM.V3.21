@@ -35,6 +35,38 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="AppointmentFormItems">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AppointmentFormRowId" Type="uniqueidentifier" />
+          <Property Name="FormItemRowId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ValueText" Type="nvarchar" MaxLength="255" />
+          <Property Name="ValueDateTime" Type="datetime" />
+          <Property Name="ValueBoolean" Type="bit" />
+          <Property Name="ValueNumeric" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="ValueDetails" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="AppointmentForms">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FormRowId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="AppointmentRowId" Type="uniqueidentifier" />
+          <Property Name="IsComplete" Type="bit" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="AppointmentInsuranceProviders">
           <Key>
             <PropertyRef Name="RowId" />
@@ -520,6 +552,40 @@
           <Property Name="TemplatePath" Type="nvarchar" MaxLength="4000" Nullable="false" />
           <Property Name="AppointmentRowId" Type="uniqueidentifier" />
           <Property Name="PatientRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="FormItems">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FormRowId" Type="uniqueidentifier" />
+          <Property Name="Code" Type="nvarchar" MaxLength="255" />
+          <Property Name="SectionOrder" Type="int" />
+          <Property Name="SectionName" Type="nvarchar" MaxLength="255" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OrderInSection" Type="int" />
+          <Property Name="IsDetailsRequired" Type="bit" />
+          <Property Name="DetailsLabel" Type="nvarchar" MaxLength="255" />
+          <Property Name="IsBoolean" Type="bit" />
+          <Property Name="IsDateTime" Type="bit" />
+          <Property Name="IsText" Type="bit" />
+          <Property Name="IsNumeric" Type="bit" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Forms">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="255" />
+          <Property Name="Code" Type="varchar" MaxLength="50" />
           <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
@@ -1102,6 +1168,42 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
+        <EntityType Name="PatientFormItems">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PatientFormRowId" Type="uniqueidentifier" />
+          <Property Name="FormItemRowId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="ValueText" Type="varchar" MaxLength="255" />
+          <Property Name="ValueDateTime" Type="datetime" />
+          <Property Name="ValueBoolean" Type="bit" />
+          <Property Name="ValueNumeric" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="Created" Type="uniqueidentifier" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" />
+          <Property Name="Updated" Type="datetime" />
+          <Property Name="UpdatedBy" Type="uniqueidentifier" />
+          <Property Name="ValueDetails" Type="nvarchar" MaxLength="255" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="PatientForms">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PatientRowId" Type="uniqueidentifier" />
+          <Property Name="FormRowId" Type="uniqueidentifier" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="IsComplete" Type="bit" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
         <EntityType Name="PatientMedicalConditions">
           <Key>
             <PropertyRef Name="RowId" />
@@ -1195,6 +1297,7 @@
           <Property Name="FamilyDoctor" Type="nvarchar" MaxLength="255" />
           <Property Name="FamilyDoctorAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="FamilyDoctorPhoneNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="FamilyDoctorEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
@@ -1234,6 +1337,8 @@
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
           <Property Name="Signature" Type="varbinary(max)" />
+          <Property Name="SexIdentifyAs" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsuranceCompany" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="PaychargeRefcharges">
           <Key>
@@ -2048,7 +2153,7 @@
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.AppointmentRemaindersForProcessed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentRemaindersForProcessed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppointmentRemaindersForProcessed">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2080,7 +2185,7 @@ warning 6002: The table/view 'PM_V3.dbo.AppointmentRemaindersForProcessed' does 
           <Property Name="IsRemainderSms" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.AppointmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppointmentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2144,7 +2249,7 @@ warning 6002: The table/view 'PM_V3.dbo.AppointmentsView' does not have a primar
           <Property Name="InvoiceItemRowId" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.CalendarEventsForRemainder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsForRemainder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CalendarEventsForRemainder">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2184,7 +2289,7 @@ warning 6002: The table/view 'PM_V3.dbo.CalendarEventsForRemainder' does not hav
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.CalendarEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CalendarEventsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2226,7 +2331,7 @@ warning 6002: The table/view 'PM_V3.dbo.CalendarEventsView' does not have a prim
           <Property Name="ServiceProviderFullName" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.ChargeoutPaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutPaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutPaychargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2247,7 +2352,7 @@ warning 6002: The table/view 'PM_V3.dbo.ChargeoutPaychargesView' does not have a
           <Property Name="AllocateAmount" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.ChargeoutRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutRefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2271,7 +2376,7 @@ warning 6002: The table/view 'PM_V3.dbo.ChargeoutRefchargesView' does not have a
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.ChargeoutsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2322,7 +2427,7 @@ warning 6002: The table/view 'PM_V3.dbo.ChargeoutsView' does not have a primary 
           <Property Name="MinChargeoutItemDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.CHECKVIEW_InsuranceCoverages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.CHECKVIEW_InsuranceCoverages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CHECKVIEW_InsuranceCoverages">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2336,7 +2441,7 @@ warning 6002: The table/view 'PM_V3.dbo.CHECKVIEW_InsuranceCoverages' does not h
           <Property Name="CoverageStartDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.EmailChargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.EmailChargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmailChargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2365,7 +2470,7 @@ warning 6002: The table/view 'PM_V3.dbo.EmailChargesView' does not have a primar
           <Property Name="ChargeoutNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.EmailSendsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.EmailSendsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmailSendsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2394,7 +2499,7 @@ warning 6002: The table/view 'PM_V3.dbo.EmailSendsView' does not have a primary 
           <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsuranceArticleV">
           
           <Key>
@@ -2412,7 +2517,7 @@ warning 6002: The table/view 'PM_V3.dbo.InsuranceArticleV' does not have a prima
           <Property Name="ViewRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InsuranceCoveragesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceCoveragesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsuranceCoveragesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2443,7 +2548,7 @@ warning 6002: The table/view 'PM_V3.dbo.InsuranceCoveragesView' does not have a 
           <Property Name="PolicyOwnerFullName" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InsurancePatientCategory2InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsurancePatientCategory2InsuranceArticleV">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2462,7 +2567,7 @@ warning 6002: The table/view 'PM_V3.dbo.InsurancePatientCategory2InsuranceArticl
           <Property Name="MaximumQuantity" Type="decimal" Precision="18" Scale="5" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InsurancePatientCategory2InvoiceClaimDetailV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2InvoiceClaimDetailV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsurancePatientCategory2InvoiceClaimDetailV">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2476,7 +2581,7 @@ warning 6002: The table/view 'PM_V3.dbo.InsurancePatientCategory2InvoiceClaimDet
           <Property Name="InvoiceClaimDetailRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InventoryBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InventoryBalanceView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2510,7 +2615,7 @@ warning 6002: The table/view 'PM_V3.dbo.InventoryBalanceView' does not have a pr
           <Property Name="Balance" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InventoryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InventoryView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2561,7 +2666,7 @@ warning 6002: The table/view 'PM_V3.dbo.InventoryView' does not have a primary k
           <Property Name="OrderSupplierName" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoiceAdvinfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceAdvinfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceAdvinfoView">
           <Key>
             <PropertyRef Name="InvoiceRowId" />
@@ -2571,7 +2676,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoiceAdvinfoView' does not have a prim
           <Property Name="PolicyOwnersInClaimsList" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoiceClaimDetail2InsurancePatientCategoryV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimDetail2InsurancePatientCategoryV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceClaimDetail2InsurancePatientCategoryV">
           <Key>
             <PropertyRef Name="InvoiceClaimDetailRowId" />
@@ -2589,7 +2694,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoiceClaimDetail2InsurancePatientCateg
           <Property Name="cnt" Type="bigint" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoiceClaimsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceClaimsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2621,7 +2726,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoiceClaimsView' does not have a prima
           <Property Name="DueByPatient" Type="decimal" Precision="38" Scale="9" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoicePaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicePaymentByDoctorAndPeriodView">
           <Key>
             <PropertyRef Name="PaymentPeriod" />
@@ -2632,7 +2737,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoicePaymentByDoctorAndPeriodView' doe
           <Property Name="SumDueToDoctor" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoicePaymentByDoctorsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicePaymentByDoctorsView">
           <Key>
             <PropertyRef Name="InvoicePaymentRowId" />
@@ -2648,7 +2753,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoicePaymentByDoctorsView' does not ha
           <Property Name="ServiceProviderRowId" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoiceRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2672,7 +2777,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoiceRefundsView' does not have a prim
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.InvoicesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2727,7 +2832,7 @@ warning 6002: The table/view 'PM_V3.dbo.InvoicesView' does not have a primary ke
           <Property Name="HasCoordinationProblem" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.MedicalHistoryRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.MedicalHistoryRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MedicalHistoryRecordsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2847,7 +2952,7 @@ warning 6002: The table/view 'PM_V3.dbo.MedicalHistoryRecordsView' does not have
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.OrderItemsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.OrderItemsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderItemsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2874,7 +2979,7 @@ warning 6002: The table/view 'PM_V3.dbo.OrderItemsView' does not have a primary 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.OrdersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.OrdersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrdersView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2904,7 +3009,7 @@ warning 6002: The table/view 'PM_V3.dbo.OrdersView' does not have a primary key 
           <Property Name="OrderItemInfo" Type="xml" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientAllFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientAllFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientAllFamilyMemberView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -2920,7 +3025,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientAllFamilyMemberView' does not hav
           <Property Name="ParentId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientFamilyMemberView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -2932,7 +3037,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientFamilyMemberView' does not have a
           <Property Name="FamilyHeadRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientInsuranceCoverageView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceCoverageView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientInsuranceCoverageView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -2950,7 +3055,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientInsuranceCoverageView' does not h
           <Property Name="CoverageValidUntil" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientInsuranceProvidersViewGroupView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceProvidersViewGroupView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientInsuranceProvidersViewGroupView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -2970,7 +3075,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientInsuranceProvidersViewGroupView' 
           <Property Name="InsuranceProvidersViewGroupRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientsListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientsListView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3007,7 +3112,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsListView' does not have a primar
           <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3072,6 +3177,7 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsView' does not have a primary ke
           <Property Name="FamilyDoctor" Type="nvarchar" MaxLength="255" />
           <Property Name="FamilyDoctorAddress" Type="nvarchar" MaxLength="255" />
           <Property Name="FamilyDoctorPhoneNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="FamilyDoctorEmail" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedBy" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedDateTime" Type="datetime" />
           <Property Name="UpdatedBy" Type="nvarchar" MaxLength="255" />
@@ -3111,9 +3217,11 @@ warning 6002: The table/view 'PM_V3.dbo.PatientsView' does not have a primary ke
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
           <Property Name="Signature" Type="varbinary(max)" />
+          <Property Name="SexIdentifyAs" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsuranceCompany" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaychargeRefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3137,7 +3245,7 @@ warning 6002: The table/view 'PM_V3.dbo.PaychargeRefchargesView' does not have a
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaychargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3173,7 +3281,7 @@ warning 6002: The table/view 'PM_V3.dbo.PaychargesView' does not have a primary 
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaymentRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3197,7 +3305,7 @@ warning 6002: The table/view 'PM_V3.dbo.PaymentRefundsView' does not have a prim
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3233,7 +3341,7 @@ warning 6002: The table/view 'PM_V3.dbo.PaymentsView' does not have a primary ke
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentAllocationsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentAllocationsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentAllocationsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3253,7 +3361,7 @@ warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentAllocationsView' does not 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentByDoctorAndPeriodView">
           <Key>
             <PropertyRef Name="ServiceProviderRowId" />
@@ -3264,7 +3372,7 @@ warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentByDoctorAndPeriodView' doe
           <Property Name="SumPayrollAmount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3295,7 +3403,7 @@ warning 6002: The table/view 'PM_V3.dbo.PayrollPaymentsView' does not have a pri
           <Property Name="AllocationInfo" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.RefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.RefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3328,7 +3436,7 @@ warning 6002: The table/view 'PM_V3.dbo.RefchargesView' does not have a primary 
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.RefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.RefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3361,7 +3469,7 @@ warning 6002: The table/view 'PM_V3.dbo.RefundsView' does not have a primary key
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.ServiceProvidersListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.ServiceProvidersListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ServiceProvidersListView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3413,7 +3521,7 @@ warning 6002: The table/view 'PM_V3.dbo.ServiceProvidersListView' does not have 
           <Property Name="IsOfficeEmployee" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.SupplierPaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierPaymentRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3437,7 +3545,7 @@ warning 6002: The table/view 'PM_V3.dbo.SupplierPaymentRefundsView' does not hav
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.SupplierPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierPaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3473,7 +3581,7 @@ warning 6002: The table/view 'PM_V3.dbo.SupplierPaymentsView' does not have a pr
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.SupplierRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3506,7 +3614,7 @@ warning 6002: The table/view 'PM_V3.dbo.SupplierRefundsView' does not have a pri
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TreatmentPlanRecordsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -4143,6 +4251,54 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Principal>
             <Dependent Role="AppointmentClinicalNotes">
               <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentFormItems_AppointmentForms">
+          <End Role="AppointmentForms" Type="Self.AppointmentForms" Multiplicity="0..1" />
+          <End Role="AppointmentFormItems" Type="Self.AppointmentFormItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentForms">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentFormItems">
+              <PropertyRef Name="AppointmentFormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentFormItems_FormItems">
+          <End Role="FormItems" Type="Self.FormItems" Multiplicity="0..1" />
+          <End Role="AppointmentFormItems" Type="Self.AppointmentFormItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormItems">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentFormItems">
+              <PropertyRef Name="FormItemRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentForms_Appointments">
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="0..1" />
+          <End Role="AppointmentForms" Type="Self.AppointmentForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Appointments">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentForms">
+              <PropertyRef Name="AppointmentRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentForms_Forms">
+          <End Role="Forms" Type="Self.Forms" Multiplicity="0..1" />
+          <End Role="AppointmentForms" Type="Self.AppointmentForms" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentForms">
+              <PropertyRef Name="FormRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -5139,6 +5295,18 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Principal>
             <Dependent Role="FormDocuments">
               <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_formitems_forms">
+          <End Role="Forms" Type="Self.Forms" Multiplicity="0..1" />
+          <End Role="FormItems" Type="Self.FormItems" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Forms">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormItems">
+              <PropertyRef Name="FormRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7322,6 +7490,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
         <EntityContainer Name="PracticeManagerModelStoreContainer">
           <EntitySet Name="AppointmentBooks" EntityType="Self.AppointmentBooks" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppointmentClinicalNotes" EntityType="Self.AppointmentClinicalNotes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentFormItems" EntityType="Self.AppointmentFormItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AppointmentForms" EntityType="Self.AppointmentForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppointmentInsuranceProviders" EntityType="Self.AppointmentInsuranceProviders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="AppointmentRemainders" EntityType="Self.AppointmentRemainders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Appointments" EntityType="Self.Appointments" Schema="dbo" store:Type="Tables" />
@@ -7345,6 +7515,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySet Name="EmailSendRecipients" EntityType="Self.EmailSendRecipients" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmailSends" EntityType="Self.EmailSends" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormDocuments" EntityType="Self.FormDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="FormItems" EntityType="Self.FormItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Forms" EntityType="Self.Forms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageHolders" EntityType="Self.InsuranceCoverageHolders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageHolderServices" EntityType="Self.InsuranceCoverageHolderServices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InsuranceCoverageItemCategories" EntityType="Self.InsuranceCoverageItemCategories" Schema="dbo" store:Type="Tables" />
@@ -7372,6 +7544,8 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySet Name="OrderPayments" EntityType="Self.OrderPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientDocuments" EntityType="Self.PatientDocuments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientFormItems" EntityType="Self.PatientFormItems" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PatientForms" EntityType="Self.PatientForms" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientMedicalConditions" EntityType="Self.PatientMedicalConditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientNotes" EntityType="Self.PatientNotes" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PatientNoteStatuses" EntityType="Self.PatientNoteStatuses" Schema="dbo" store:Type="Tables" />
@@ -8135,6 +8309,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
     [PatientsView].[FamilyDoctor] AS [FamilyDoctor], 
     [PatientsView].[FamilyDoctorAddress] AS [FamilyDoctorAddress], 
     [PatientsView].[FamilyDoctorPhoneNumber] AS [FamilyDoctorPhoneNumber], 
+    [PatientsView].[FamilyDoctorEmail] AS [FamilyDoctorEmail], 
     [PatientsView].[CreatedBy] AS [CreatedBy], 
     [PatientsView].[CreatedDateTime] AS [CreatedDateTime], 
     [PatientsView].[UpdatedBy] AS [UpdatedBy], 
@@ -8173,7 +8348,9 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
     [PatientsView].[CreatedByDateTime] AS [CreatedByDateTime], 
     [PatientsView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
     [PatientsView].[IsNotRegistered] AS [IsNotRegistered], 
-    [PatientsView].[Signature] AS [Signature]
+    [PatientsView].[Signature] AS [Signature], 
+    [PatientsView].[SexIdentifyAs] AS [SexIdentifyAs], 
+    [PatientsView].[InsuranceCompany] AS [InsuranceCompany]
     FROM [dbo].[PatientsView] AS [PatientsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PaychargeRefchargesView" EntityType="Self.PaychargeRefchargesView" store:Type="Views" store:Schema="dbo">
@@ -8793,6 +8970,22 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="AppointmentClinicalNotes" EntitySet="AppointmentClinicalNotes" />
           </AssociationSet>
+          <AssociationSet Name="FK_AppointmentFormItems_AppointmentForms" Association="Self.FK_AppointmentFormItems_AppointmentForms">
+            <End Role="AppointmentForms" EntitySet="AppointmentForms" />
+            <End Role="AppointmentFormItems" EntitySet="AppointmentFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentFormItems_FormItems" Association="Self.FK_AppointmentFormItems_FormItems">
+            <End Role="FormItems" EntitySet="FormItems" />
+            <End Role="AppointmentFormItems" EntitySet="AppointmentFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentForms_Appointments" Association="Self.FK_AppointmentForms_Appointments">
+            <End Role="Appointments" EntitySet="Appointments" />
+            <End Role="AppointmentForms" EntitySet="AppointmentForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentForms_Forms" Association="Self.FK_AppointmentForms_Forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="AppointmentForms" EntitySet="AppointmentForms" />
+          </AssociationSet>
           <AssociationSet Name="FK_AppointmentInsuranceProviders_Appointments" Association="Self.FK_AppointmentInsuranceProviders_Appointments">
             <End Role="Appointments" EntitySet="Appointments" />
             <End Role="AppointmentInsuranceProviders" EntitySet="AppointmentInsuranceProviders" />
@@ -9124,6 +9317,10 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <AssociationSet Name="FK_FormDocuments_UpdatedByUserRowId" Association="Self.FK_FormDocuments_UpdatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="fk_formitems_forms" Association="Self.fk_formitems_forms">
+            <End Role="Forms" EntitySet="Forms" />
+            <End Role="FormItems" EntitySet="FormItems" />
           </AssociationSet>
           <AssociationSet Name="FK_InsuranceCoverageHolders_CreatedByUserRowId" Association="Self.FK_InsuranceCoverageHolders_CreatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
@@ -11995,6 +12192,48 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             <End Role="ServiceProvider" EntitySet="ServiceProviders" />
             <End Role="WorkInout" EntitySet="WorkInouts" />
           </AssociationSet>
+          <EntitySet Name="AppointmentFormItems" EntityType="PracticeManagerModel.AppointmentFormItem" />
+          <EntitySet Name="AppointmentForms" EntityType="PracticeManagerModel.AppointmentForm" />
+          <EntitySet Name="FormItems" EntityType="PracticeManagerModel.FormItem" />
+          <EntitySet Name="Forms" EntityType="PracticeManagerModel.Form" />
+          <EntitySet Name="PatientFormItems" EntityType="PracticeManagerModel.PatientFormItem" />
+          <EntitySet Name="PatientForms" EntityType="PracticeManagerModel.PatientForm" />
+          <AssociationSet Name="FK_AppointmentFormItems_AppointmentForms" Association="PracticeManagerModel.FK_AppointmentFormItems_AppointmentForms">
+            <End Role="AppointmentForm" EntitySet="AppointmentForms" />
+            <End Role="AppointmentFormItem" EntitySet="AppointmentFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentFormItems_FormItems" Association="PracticeManagerModel.FK_AppointmentFormItems_FormItems">
+            <End Role="FormItem" EntitySet="FormItems" />
+            <End Role="AppointmentFormItem" EntitySet="AppointmentFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentForms_Appointments" Association="PracticeManagerModel.FK_AppointmentForms_Appointments">
+            <End Role="AppointmentT" EntitySet="AppointmentsT" />
+            <End Role="AppointmentForm" EntitySet="AppointmentForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AppointmentForms_Forms" Association="PracticeManagerModel.FK_AppointmentForms_Forms">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="AppointmentForm" EntitySet="AppointmentForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormItems_Forms" Association="PracticeManagerModel.FK_FormItems_Forms">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="FormItem" EntitySet="FormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientFormItems_FormItems" Association="PracticeManagerModel.FK_PatientFormItems_FormItems">
+            <End Role="FormItem" EntitySet="FormItems" />
+            <End Role="PatientFormItem" EntitySet="PatientFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientForms_Forms1" Association="PracticeManagerModel.FK_PatientForms_Forms1">
+            <End Role="Form" EntitySet="Forms" />
+            <End Role="PatientForm" EntitySet="PatientForms" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientFormItems_PatientForms" Association="PracticeManagerModel.FK_PatientFormItems_PatientForms">
+            <End Role="PatientForm" EntitySet="PatientForms" />
+            <End Role="PatientFormItem" EntitySet="PatientFormItems" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PatientForms_Patients" Association="PracticeManagerModel.FK_PatientForms_Patients">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="PatientForm" EntitySet="PatientForms" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -12092,6 +12331,10 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_Patients_CreatedByUserRowId1" FromRole="Patient" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Patients_UpdatedByUserRowId1" FromRole="Patient" ToRole="ServiceProvider" />
           <Property Name="Signature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="PatientForms" Relationship="PracticeManagerModel.FK_PatientForms_Patients" FromRole="Patient" ToRole="PatientForm" />
+          <Property Name="FamilyDoctorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SexIdentifyAs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -12656,6 +12899,7 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="IsSmsWhenRegistered" Type="Boolean" Nullable="false" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Appointments_CreatedByUserRowId1" FromRole="AppointmentT" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider2" Relationship="PracticeManagerModel.FK_Appointments_UpdatedByUserRowId1" FromRole="AppointmentT" ToRole="ServiceProvider" />
+          <NavigationProperty Name="AppointmentForms" Relationship="PracticeManagerModel.FK_AppointmentForms_Appointments" FromRole="AppointmentT" ToRole="AppointmentForm" />
         </EntityType>
         <Association Name="FK_Appointments_AppointmentBooks">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="1" />
@@ -12952,6 +13196,9 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="IsNotRegistered" Type="Boolean" Nullable="false" />
           <Property Name="Signature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="FamilyDoctorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SexIdentifyAs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -22478,6 +22725,232 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AppointmentFormItem">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="AppointmentFormRowId" Type="Guid" />
+          <Property Name="FormItemRowId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ValueText" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="ValueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ValueBoolean" Type="Boolean" />
+          <Property Name="ValueNumeric" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AppointmentForm" Relationship="PracticeManagerModel.FK_AppointmentFormItems_AppointmentForms" FromRole="AppointmentFormItem" ToRole="AppointmentForm" />
+          <NavigationProperty Name="FormItem" Relationship="PracticeManagerModel.FK_AppointmentFormItems_FormItems" FromRole="AppointmentFormItem" ToRole="FormItem" />
+          <Property Name="ValueDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="AppointmentForm">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="FormRowId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="AppointmentRowId" Type="Guid" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AppointmentFormItems" Relationship="PracticeManagerModel.FK_AppointmentFormItems_AppointmentForms" FromRole="AppointmentForm" ToRole="AppointmentFormItem" />
+          <NavigationProperty Name="Appointment" Relationship="PracticeManagerModel.FK_AppointmentForms_Appointments" FromRole="AppointmentForm" ToRole="AppointmentT" />
+          <NavigationProperty Name="Form" Relationship="PracticeManagerModel.FK_AppointmentForms_Forms" FromRole="AppointmentForm" ToRole="Form" />
+        </EntityType>
+        <EntityType Name="FormItem">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="FormRowId" Type="Guid" />
+          <Property Name="Code" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="SectionOrder" Type="Int32" />
+          <Property Name="SectionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OrderInSection" Type="Int32" />
+          <Property Name="IsDetailsRequired" Type="Boolean" />
+          <Property Name="DetailsLabel" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="IsBoolean" Type="Boolean" />
+          <Property Name="IsDateTime" Type="Boolean" />
+          <Property Name="IsText" Type="Boolean" />
+          <Property Name="IsNumeric" Type="Boolean" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AppointmentFormItems" Relationship="PracticeManagerModel.FK_AppointmentFormItems_FormItems" FromRole="FormItem" ToRole="AppointmentFormItem" />
+          <NavigationProperty Name="Form" Relationship="PracticeManagerModel.FK_FormItems_Forms" FromRole="FormItem" ToRole="Form" />
+          <NavigationProperty Name="PatientFormItems" Relationship="PracticeManagerModel.FK_PatientFormItems_FormItems" FromRole="FormItem" ToRole="PatientFormItem" />
+        </EntityType>
+        <EntityType Name="Form">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Code" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="AppointmentForms" Relationship="PracticeManagerModel.FK_AppointmentForms_Forms" FromRole="Form" ToRole="AppointmentForm" />
+          <NavigationProperty Name="FormItems" Relationship="PracticeManagerModel.FK_FormItems_Forms" FromRole="Form" ToRole="FormItem" />
+          <NavigationProperty Name="PatientForms" Relationship="PracticeManagerModel.FK_PatientForms_Forms1" FromRole="Form" ToRole="PatientForm" />
+        </EntityType>
+        <EntityType Name="PatientFormItem">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="PatientFormRowId" Type="Guid" />
+          <Property Name="FormItemRowId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="ValueText" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="ValueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="ValueBoolean" Type="Boolean" />
+          <Property Name="ValueNumeric" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Created" Type="Guid" />
+          <Property Name="CreatedBy" Type="Guid" />
+          <Property Name="Updated" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedBy" Type="Guid" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="FormItem" Relationship="PracticeManagerModel.FK_PatientFormItems_FormItems" FromRole="PatientFormItem" ToRole="FormItem" />
+          <NavigationProperty Name="PatientForm" Relationship="PracticeManagerModel.FK_PatientFormItems_PatientForms" FromRole="PatientFormItem" ToRole="PatientForm" />
+          <Property Name="ValueDetails" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PatientForm">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="PatientRowId" Type="Guid" />
+          <Property Name="FormRowId" Type="Guid" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="IsComplete" Type="Boolean" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Form" Relationship="PracticeManagerModel.FK_PatientForms_Forms1" FromRole="PatientForm" ToRole="Form" />
+          <NavigationProperty Name="PatientFormItems" Relationship="PracticeManagerModel.FK_PatientFormItems_PatientForms" FromRole="PatientForm" ToRole="PatientFormItem" />
+          <NavigationProperty Name="Patient" Relationship="PracticeManagerModel.FK_PatientForms_Patients" FromRole="PatientForm" ToRole="Patient" />
+        </EntityType>
+        <Association Name="FK_AppointmentFormItems_AppointmentForms">
+          <End Type="PracticeManagerModel.AppointmentForm" Role="AppointmentForm" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.AppointmentFormItem" Role="AppointmentFormItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentForm">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentFormItem">
+              <PropertyRef Name="AppointmentFormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentFormItems_FormItems">
+          <End Type="PracticeManagerModel.FormItem" Role="FormItem" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.AppointmentFormItem" Role="AppointmentFormItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormItem">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentFormItem">
+              <PropertyRef Name="FormItemRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentForms_Appointments">
+          <End Type="PracticeManagerModel.AppointmentT" Role="AppointmentT" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.AppointmentForm" Role="AppointmentForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AppointmentT">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentForm">
+              <PropertyRef Name="AppointmentRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AppointmentForms_Forms">
+          <End Type="PracticeManagerModel.Form" Role="Form" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.AppointmentForm" Role="AppointmentForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentForm">
+              <PropertyRef Name="FormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormItems_Forms">
+          <End Type="PracticeManagerModel.Form" Role="Form" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormItem" Role="FormItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormItem">
+              <PropertyRef Name="FormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientFormItems_FormItems">
+          <End Type="PracticeManagerModel.FormItem" Role="FormItem" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.PatientFormItem" Role="PatientFormItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FormItem">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="PatientFormItem">
+              <PropertyRef Name="FormItemRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientForms_Forms1">
+          <End Type="PracticeManagerModel.Form" Role="Form" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.PatientForm" Role="PatientForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Form">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="PatientForm">
+              <PropertyRef Name="FormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientFormItems_PatientForms">
+          <End Type="PracticeManagerModel.PatientForm" Role="PatientForm" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.PatientFormItem" Role="PatientFormItem" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PatientForm">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="PatientFormItem">
+              <PropertyRef Name="PatientFormRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PatientForms_Patients">
+          <End Type="PracticeManagerModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.PatientForm" Role="PatientForm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="PatientForm">
+              <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22529,6 +23002,9 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="PracticeManagerModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
+                <ScalarProperty Name="SexIdentifyAs" ColumnName="SexIdentifyAs" />
+                <ScalarProperty Name="FamilyDoctorEmail" ColumnName="FamilyDoctorEmail" />
                 <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
@@ -23033,6 +23509,9 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
           <EntitySetMapping Name="PatientsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientV">
               <MappingFragment StoreEntitySet="PatientsView">
+                <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
+                <ScalarProperty Name="SexIdentifyAs" ColumnName="SexIdentifyAs" />
+                <ScalarProperty Name="FamilyDoctorEmail" ColumnName="FamilyDoctorEmail" />
                 <ScalarProperty Name="Signature" ColumnName="Signature" />
                 <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
@@ -26058,6 +26537,114 @@ warning 6002: The table/view 'PM_V3.dbo.TreatmentPlanRecordsView' does not have 
                 <ScalarProperty Name="Finish" ColumnName="Finish" />
                 <ScalarProperty Name="Start" ColumnName="Start" />
                 <ScalarProperty Name="ServiceProviderRowId" ColumnName="ServiceProviderRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentFormItems">
+            <EntityTypeMapping TypeName="PracticeManagerModel.AppointmentFormItem">
+              <MappingFragment StoreEntitySet="AppointmentFormItems">
+                <ScalarProperty Name="ValueDetails" ColumnName="ValueDetails" />
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="ValueNumeric" ColumnName="ValueNumeric" />
+                <ScalarProperty Name="ValueBoolean" ColumnName="ValueBoolean" />
+                <ScalarProperty Name="ValueDateTime" ColumnName="ValueDateTime" />
+                <ScalarProperty Name="ValueText" ColumnName="ValueText" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FormItemRowId" ColumnName="FormItemRowId" />
+                <ScalarProperty Name="AppointmentFormRowId" ColumnName="AppointmentFormRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AppointmentForms">
+            <EntityTypeMapping TypeName="PracticeManagerModel.AppointmentForm">
+              <MappingFragment StoreEntitySet="AppointmentForms">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="AppointmentRowId" ColumnName="AppointmentRowId" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FormRowId" ColumnName="FormRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FormItems">
+            <EntityTypeMapping TypeName="PracticeManagerModel.FormItem">
+              <MappingFragment StoreEntitySet="FormItems">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="IsNumeric" ColumnName="IsNumeric" />
+                <ScalarProperty Name="IsText" ColumnName="IsText" />
+                <ScalarProperty Name="IsDateTime" ColumnName="IsDateTime" />
+                <ScalarProperty Name="IsBoolean" ColumnName="IsBoolean" />
+                <ScalarProperty Name="DetailsLabel" ColumnName="DetailsLabel" />
+                <ScalarProperty Name="IsDetailsRequired" ColumnName="IsDetailsRequired" />
+                <ScalarProperty Name="OrderInSection" ColumnName="OrderInSection" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SectionName" ColumnName="SectionName" />
+                <ScalarProperty Name="SectionOrder" ColumnName="SectionOrder" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FormRowId" ColumnName="FormRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Forms">
+            <EntityTypeMapping TypeName="PracticeManagerModel.Form">
+              <MappingFragment StoreEntitySet="Forms">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientFormItems">
+            <EntityTypeMapping TypeName="PracticeManagerModel.PatientFormItem">
+              <MappingFragment StoreEntitySet="PatientFormItems">
+                <ScalarProperty Name="ValueDetails" ColumnName="ValueDetails" />
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="Updated" ColumnName="Updated" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="Created" ColumnName="Created" />
+                <ScalarProperty Name="ValueNumeric" ColumnName="ValueNumeric" />
+                <ScalarProperty Name="ValueBoolean" ColumnName="ValueBoolean" />
+                <ScalarProperty Name="ValueDateTime" ColumnName="ValueDateTime" />
+                <ScalarProperty Name="ValueText" ColumnName="ValueText" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FormItemRowId" ColumnName="FormItemRowId" />
+                <ScalarProperty Name="PatientFormRowId" ColumnName="PatientFormRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PatientForms">
+            <EntityTypeMapping TypeName="PracticeManagerModel.PatientForm">
+              <MappingFragment StoreEntitySet="PatientForms">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="IsComplete" ColumnName="IsComplete" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FormRowId" ColumnName="FormRowId" />
+                <ScalarProperty Name="PatientRowId" ColumnName="PatientRowId" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
               </MappingFragment>
             </EntityTypeMapping>

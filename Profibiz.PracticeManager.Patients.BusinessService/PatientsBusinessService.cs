@@ -1152,6 +1152,42 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			return await response.ValidateResponse();
 		}
 
+		async public Task<List<FormDocmodel>> GetFormDocmodelList(string query)
+		{
+			var _client = new MyHttpClient();
+			var response = await _client.GetResponse(_baseUrl, "api/patients/GetFormDocmodelList?" + query);
+			var list = await response.Content.ReadAsAsync<IEnumerable<FormDocmodel>>();
+			return list.ToList();
+		}
+		async public Task<UpdateReturn> PutFormDocmodel(FormDocmodel entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/patients/PutFormDocmodel", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> PostFormDocmodel(FormDocmodel entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entity);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PostAsync("api/patients/PostFormDocmodel", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteFormDocmodel(Guid rowId)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/patients/DeleteFormDocmodel/" + rowId);
+			return await response.ValidateResponse();
+		}
+
 
 		async public Task<List<AppointmentTreatmentNote>> GetAppointmentTreatmentNoteList(string query)
 		{

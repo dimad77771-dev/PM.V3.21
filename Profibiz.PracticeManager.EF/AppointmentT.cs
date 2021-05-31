@@ -23,6 +23,7 @@ namespace Profibiz.PracticeManager.EF
             this.AppointmentRemainders = new HashSet<AppointmentRemainder>();
             this.AppointmentTreatmentNotes = new HashSet<AppointmentTreatmentNote>();
             this.FormDocuments = new HashSet<FormDocument>();
+            this.AppointmentForms = new HashSet<AppointmentForm>();
         }
     
         public System.Guid RowId { get; set; }
@@ -80,5 +81,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<FormDocument> FormDocuments { get; set; }
         public virtual ServiceProvider ServiceProvider1 { get; set; }
         public virtual ServiceProvider ServiceProvider2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppointmentForm> AppointmentForms { get; set; }
     }
 }
