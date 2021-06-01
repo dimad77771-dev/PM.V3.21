@@ -284,6 +284,7 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="TemplateRowId" Type="uniqueidentifier" />
+          <Property Name="BookingGap" Type="int" />
         </EntityType>
         <EntityType Name="ChargeoutItems">
           <Key>
@@ -13245,6 +13246,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Categories_UpdatedByUserRowId1" FromRole="Category" ToRole="ServiceProvider" />
           <Property Name="TemplateRowId" Type="Guid" />
           <NavigationProperty Name="Template" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Category" ToRole="Template" />
+          <Property Name="BookingGap" Type="Int32" />
         </EntityType>
         <Association Name="FK_MedicalServicesOrSupplies_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -23632,6 +23634,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="PracticeManagerModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="BookingGap" ColumnName="BookingGap" />
                 <ScalarProperty Name="TemplateRowId" ColumnName="TemplateRowId" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />

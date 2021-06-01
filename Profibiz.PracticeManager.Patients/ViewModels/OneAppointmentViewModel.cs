@@ -221,10 +221,12 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			if (!Entity.HasMultiDates)
 			{
-				var qty = LookupDataProvider.FindMedicalService(Entity.MedicalServicesOrSupplyRowId)?.Qty;
-				if (qty != null && Entity.StartTime != null)
+				var medicalService = LookupDataProvider.FindMedicalService(Entity.MedicalServicesOrSupplyRowId);
+				var category = LookupDataProvider.FindCategory(medicalService?.CategoryRowId);
+				var total = (medicalService?.Qty ?? 0) + (category?.BookingGap ?? 0);
+				if (total > 0 && Entity.StartTime != null)
 				{
-					Entity.FinishTime = new DateTime(2000, 1, 1) + Entity.StartTime.Value.TimeOfDay.Add(TimeSpan.FromMinutes(qty.Value));
+					Entity.FinishTime = new DateTime(2000, 1, 1) + Entity.StartTime.Value.TimeOfDay.Add(TimeSpan.FromMinutes(total));
 				}
 			}
 				

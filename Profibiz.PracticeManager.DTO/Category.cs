@@ -16,5 +16,6 @@ namespace Profibiz.PracticeManager.DTO
 		public string Name { get; set; }
 		public string CategoryType { get; set; }
 		public Guid? TemplateRowId { get; set; }
+		public int? BookingGap { get; set; }
 	}
 }

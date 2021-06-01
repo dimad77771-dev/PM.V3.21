@@ -131,7 +131,17 @@
         PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
         ValueMember="RowId" />
 
-    <Style
+	<dxe:ComboBoxEditSettings
+        x:Key="comboBoxTemplates"
+        AutoComplete="True"
+        DisplayMember="Name"
+        ImmediatePopup="True"
+        IsTextEditable="False"
+        ItemsSource="{Binding Templates, Source={StaticResource lookupDataProvider}}"
+        PopupContentTemplate="{StaticResource popupExtentedContentTemplate}"
+        ValueMember="RowId" />
+
+	<Style
         x:Key="comboBoxEditAppointmentStatusStyle"
         BasedOn="{StaticResource baseEditStyle1}"
         TargetType="dxe:ComboBoxEdit">

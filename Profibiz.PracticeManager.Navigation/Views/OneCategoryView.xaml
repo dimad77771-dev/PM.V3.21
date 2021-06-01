@@ -21,7 +21,7 @@
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
 	Width="500"
-	Height="200"
+	Height="350"
 	Title="Category"
 	WindowStartupLocation="CenterScreen"
 	ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
@@ -122,6 +122,18 @@
 							ValueMember="RowId"
 							NullValueButtonPlacement="EditBox"
 							IsReadOnly="{Binding ReadOnlyItemType}"
+							Style="{StaticResource baseEditStyle1}" />
+
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="3"
+							Grid.Column="0"
+							Content="Booking Gap"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="3"
+							Grid.Column="1"
+							EditValue="{Binding Entity.BookingGap, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							Style="{StaticResource baseEditStyle1}" />
 
 					</Grid>

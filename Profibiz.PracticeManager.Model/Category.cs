@@ -20,6 +20,7 @@ namespace Profibiz.PracticeManager.Model
 		public string Name { get; set; }
 		public string CategoryType { get; set; }
 		public Guid? TemplateRowId { get; set; }
+		public int? BookingGap { get; set; }
 
 		public string FullName => Name;
 		public bool IsServiceOrSuppy => true;

@@ -116,7 +116,14 @@
                                     Header="TYPE"
                                     GroupIndex="0"
                                     EditSettings="{StaticResource comboBoxMedicalItemTypes}" />
-                </dxg:GridControl.Columns>
+
+					<dxg:GridColumn FieldName="TemplateRowId"
+                                    Header="TEMPLATE"
+                                    EditSettings="{StaticResource comboBoxTemplates}" />
+
+					<dxg:GridColumn FieldName="BookingGap" Header="BOOKING GAP" Width="150" />
+
+				</dxg:GridControl.Columns>
                 <dxg:GridControl.GroupSummary>
                     <dxg:GridSummaryItem SummaryType="Count" />
                 </dxg:GridControl.GroupSummary>
