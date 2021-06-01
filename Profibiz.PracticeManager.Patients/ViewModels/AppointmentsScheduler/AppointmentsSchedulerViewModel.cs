@@ -615,7 +615,6 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 				
 
-
 			//MessengerHelper.SendMsgRowChange(updateEntity, IsNew);
 			//IsNew = false;
 			//ResetHasChange();
