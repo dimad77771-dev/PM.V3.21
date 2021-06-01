@@ -29,6 +29,7 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public Nullable<System.Guid> TemplateRowId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<MedicalServicesOrSupply> MedicalServicesOrSupplies { get; set; }
@@ -40,5 +41,6 @@ namespace Profibiz.PracticeManager.EF
         public virtual User User1 { get; set; }
         public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual ServiceProvider ServiceProvider1 { get; set; }
+        public virtual Template Template { get; set; }
     }
 }

@@ -233,8 +233,6 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				SubscribeInvoiceItemRow(invoiceItem);
 			}
 			CalcInvoiceFields();
-
-
 		}
 
 
@@ -852,6 +850,36 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			
 
 			BuildLastInvoiceItemEntities();
+		}
+
+		public void CalcPrintTemplateFromAppointments(IEnumerable<Appointment> addedAppointments)
+		{
+			//var defaultPrintTemplate = Invoice.InvoiceType2DefaultPrintTemplate(TypeHelper.InvoiceType.Appointment);
+			//if (string.IsNullOrEmpty(Entity.PrintTemplate) || Entity.PrintTemplate == defaultPrintTemplate)
+			//{
+
+			var a1 = addedAppointments.Select(q => LookupDataProvider.MedicalService2CategoryRowId(q.MedicalServicesOrSupplyRowId));
+			var a2 = a1.Select(q => LookupDataProvider.FindCategory(q));
+			var a3 = a2.Select(q => LookupDataProvider.FindTemplate(q?.TemplateRowId));
+			var a4 = a3.Select(q => q?.Name);
+
+			var templateNames = addedAppointments
+					.Select(q => LookupDataProvider.MedicalService2CategoryRowId(q.MedicalServicesOrSupplyRowId))
+					.Select(q => LookupDataProvider.FindCategory(q))
+					.Select(q => LookupDataProvider.FindTemplate(q?.TemplateRowId))
+					.Select(q => q?.Code)
+					.Distinct()
+					.Where(q => !string.IsNullOrEmpty(q))
+					.ToArray();
+			if (templateNames.Length == 1)
+			{
+				var printTemplate = templateNames[0];
+				if (InvoiceTemplates.Any(q => q.Code == printTemplate))
+				{
+					Entity.PrintTemplate = printTemplate;
+				}
+			}
+			//}
 		}
 
 		void CalcInvoiceClaimsForHasNoCoverage()

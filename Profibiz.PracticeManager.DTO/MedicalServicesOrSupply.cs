@@ -25,5 +25,6 @@ namespace Profibiz.PracticeManager.DTO
 		public string PrintLabel { get; set; }
 		public bool UsePrintLabel { get; set; }
 		public string TemplateFolder { get; set; }
+		public int? Qty { get; set; }
 	}
 }

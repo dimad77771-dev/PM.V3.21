@@ -15,5 +15,6 @@ namespace Profibiz.PracticeManager.DTO
 		public Guid RowId { get; set; }
 		public string Name { get; set; }
 		public string CategoryType { get; set; }
+		public Guid? TemplateRowId { get; set; }
 	}
 }

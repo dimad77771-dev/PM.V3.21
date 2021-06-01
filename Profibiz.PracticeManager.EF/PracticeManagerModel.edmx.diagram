@@ -231,6 +231,7 @@
         <AssociationConnector Association="PracticeManagerModel.FK_ThirdPartyServiceProviders_UpdatedByUserRowId1" />
         <AssociationConnector Association="PracticeManagerModel.FK_UserSettings_CreatedByUserRowId1" />
         <AssociationConnector Association="PracticeManagerModel.FK_UserSettings_UpdatedByUserRowId1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Categories_Templates" />
         </Diagram>
       <Diagram DiagramId="91f349ae33a3493786f4eb2a0e83ee6d" Name="InvoiceClaim" ZoomLevel="85" >
         <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimT" Width="3" PointX="0.5" PointY="6.625" />

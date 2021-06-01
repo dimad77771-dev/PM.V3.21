@@ -270,6 +270,12 @@ namespace Profibiz.PracticeManager.Model
 			return Instance.Categories.SingleOrDefault(q => q.RowId == rowId);
 		}
 
+		public static Template FindTemplate(Guid? rowId)
+		{
+			return Instance.Templates.SingleOrDefault(q => q.RowId == rowId);
+		}
+
+
 		public static AppointmentStatus FindAppointmentStatus(Guid? rowId)
 		{
 			return Instance.AppointmentStatuses.SingleOrDefault(q => q.RowId == rowId);

@@ -14,6 +14,12 @@ namespace Profibiz.PracticeManager.EF
     
     public partial class Template
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Template()
+        {
+            this.Categories = new HashSet<Category>();
+        }
+    
         public System.Guid RowId { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
@@ -29,5 +35,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual User User1 { get; set; }
         public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual ServiceProvider ServiceProvider1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Category> Categories { get; set; }
     }
 }
