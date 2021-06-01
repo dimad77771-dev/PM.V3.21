@@ -19,6 +19,7 @@ namespace Profibiz.PracticeManager.Model
 		public Guid RowId { get; set; }
 		public string Name { get; set; }
 		public string CategoryType { get; set; }
+		public Guid? TemplateRowId { get; set; }
 
 		public string FullName => Name;
 		public bool IsServiceOrSuppy => true;

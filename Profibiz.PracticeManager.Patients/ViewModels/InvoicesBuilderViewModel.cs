@@ -307,6 +307,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 			}
 			OneModel.Entity.HasNoCoverage = hasNoCoverage;
+
+			OneModel.CalcPrintTemplateFromAppointments(allSelectedRows);
 		}
 
 		string GetInvoiceKey(Appointment row)

@@ -36,5 +36,6 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
         public string TemplateFolder { get; set; }
+        public Nullable<int> Qty { get; set; }
     }
 }

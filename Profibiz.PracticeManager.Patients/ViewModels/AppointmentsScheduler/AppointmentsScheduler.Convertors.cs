@@ -158,7 +158,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 			else
 			{
-				return appointment.Patient.FullNameForAppointment;
+				var medicalServiceName = LookupDataProvider.MedicalService2Name(appointment.MedicalServicesOrSupplyRowId);
+				var text = appointment.Patient.FullNameForAppointment;
+				if (!string.IsNullOrEmpty(medicalServiceName))
+				{
+					text += " (" + medicalServiceName + ")";
+				}
+				return text;
 			}
 		}
 		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

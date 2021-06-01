@@ -19,6 +19,7 @@ namespace Profibiz.PracticeManager.Model
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }
 
+		public string FullName => Name;
 		public string Rowtype9 => "-";
 	}
 }

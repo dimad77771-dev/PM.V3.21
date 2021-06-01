@@ -283,6 +283,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="TemplateRowId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="ChargeoutItems">
           <Key>
@@ -1079,6 +1080,7 @@
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="TemplateFolder" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Qty" Type="int" />
         </EntityType>
         <EntityType Name="NLogItems">
           <Key>
@@ -2612,6 +2614,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryBalanceView' does not hav
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="TemplateFolder" Type="nvarchar" MaxLength="1000" />
+          <Property Name="Qty" Type="int" />
           <Property Name="Balance" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
@@ -4647,6 +4650,18 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             </Principal>
             <Dependent Role="Categories">
               <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Categories_Templates">
+          <End Role="Templates" Type="Self.Templates" Multiplicity="0..1" />
+          <End Role="Categories" Type="Self.Categories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Templates">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="Categories">
+              <PropertyRef Name="TemplateRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7923,6 +7938,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
     [InventoryBalanceView].[CreatedByDateTime] AS [CreatedByDateTime], 
     [InventoryBalanceView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
     [InventoryBalanceView].[TemplateFolder] AS [TemplateFolder], 
+    [InventoryBalanceView].[Qty] AS [Qty], 
     [InventoryBalanceView].[Balance] AS [Balance]
     FROM [dbo].[InventoryBalanceView] AS [InventoryBalanceView]</DefiningQuery>
           </EntitySet>
@@ -9102,6 +9118,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Categories" EntitySet="Categories" />
           </AssociationSet>
+          <AssociationSet Name="FK_Categories_Templates" Association="Self.FK_Categories_Templates">
+            <End Role="Templates" EntitySet="Templates" />
+            <End Role="Categories" EntitySet="Categories" />
+          </AssociationSet>
           <AssociationSet Name="FK_Categories_UpdatedByUserRowId" Association="Self.FK_Categories_UpdatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Categories" EntitySet="Categories" />
@@ -10087,6 +10107,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="TemplateFolder" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_MedicalServicesOrSupplies_CreatedByUserRowId1" FromRole="MedicalServicesOrSupply" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_MedicalServicesOrSupplies_UpdatedByUserRowId1" FromRole="MedicalServicesOrSupply" ToRole="ServiceProvider" />
+          <Property Name="Qty" Type="Int32" />
           </EntityType>
         <EntityType Name="PatientMedicalCondition">
           <Key>
@@ -12234,6 +12255,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             <End Role="Patient" EntitySet="Patients" />
             <End Role="PatientForm" EntitySet="PatientForms" />
           </AssociationSet>
+          <AssociationSet Name="FK_Categories_Templates" Association="PracticeManagerModel.FK_Categories_Templates">
+            <End Role="Template" EntitySet="Templates" />
+            <End Role="Category" EntitySet="Categories" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -13218,6 +13243,8 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Categories_UpdatedByUserRowId" FromRole="Category" ToRole="User" />
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_Categories_CreatedByUserRowId1" FromRole="Category" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Categories_UpdatedByUserRowId1" FromRole="Category" ToRole="ServiceProvider" />
+          <Property Name="TemplateRowId" Type="Guid" />
+          <NavigationProperty Name="Template" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Category" ToRole="Template" />
         </EntityType>
         <Association Name="FK_MedicalServicesOrSupplies_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -14089,6 +14116,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Templates_UpdatedByUserRowId" FromRole="Template" ToRole="User" />
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_Templates_CreatedByUserRowId1" FromRole="Template" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Templates_UpdatedByUserRowId1" FromRole="Template" ToRole="ServiceProvider" />
+          <NavigationProperty Name="Categories" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Template" ToRole="Category" />
         </EntityType>
         <Association Name="FK_Appointments_InsuranceCoverages">
           <End Type="PracticeManagerModel.InsuranceCoverage" Role="InsuranceCoverage" Multiplicity="0..1" />
@@ -15598,6 +15626,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="TemplateFolder" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="Qty" Type="Int32" />
         </EntityType>
         <Association Name="OrderVSupplier">
           <End Type="PracticeManagerModel.OrderV" Role="OrderV" Multiplicity="*" />
@@ -22951,6 +22980,18 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Categories_Templates">
+          <End Type="PracticeManagerModel.Template" Role="Template" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Template">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="Category">
+              <PropertyRef Name="TemplateRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -22960,6 +23001,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="MedicalServicesOrSupplies">
             <EntityTypeMapping TypeName="PracticeManagerModel.MedicalServicesOrSupply">
               <MappingFragment StoreEntitySet="MedicalServicesOrSupplies">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="TemplateFolder" ColumnName="TemplateFolder" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
@@ -23590,6 +23632,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Categories">
             <EntityTypeMapping TypeName="PracticeManagerModel.Category">
               <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="TemplateRowId" ColumnName="TemplateRowId" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -24771,6 +24814,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="InventoryBalances">
             <EntityTypeMapping TypeName="PracticeManagerModel.InventoryBalance">
               <MappingFragment StoreEntitySet="InventoryBalanceView">
+                <ScalarProperty Name="Qty" ColumnName="Qty" />
                 <ScalarProperty Name="TemplateFolder" ColumnName="TemplateFolder" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />

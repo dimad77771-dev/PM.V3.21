@@ -28,7 +28,7 @@ namespace Profibiz.PracticeManager.Model
 		public string PrintLabel { get; set; }
 		public bool UsePrintLabel { get; set; }
 		public string TemplateFolder { get; set; }
-
+		public int? Qty { get; set; }
 
 		public string FullName => Name;
 		public string FullNameWithPrintLabel => (UsePrintLabel && !string.IsNullOrEmpty(PrintLabel) ? PrintLabel : Name);

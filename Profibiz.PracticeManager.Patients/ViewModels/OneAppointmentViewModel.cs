@@ -209,6 +209,25 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				//Debug.WriteLine("Entity.StartDate=" + aaa);
 			}
 
+			if (e.PropertyName == nameof(Entity.StartTime) || e.PropertyName == nameof(Entity.MedicalServicesOrSupplyRowId))
+			{
+				CalcFinishTime();
+			}
+
+
+		}
+
+		void CalcFinishTime()
+		{
+			if (!Entity.HasMultiDates)
+			{
+				var qty = LookupDataProvider.FindMedicalService(Entity.MedicalServicesOrSupplyRowId)?.Qty;
+				if (qty != null && Entity.StartTime != null)
+				{
+					Entity.FinishTime = new DateTime(2000, 1, 1) + Entity.StartTime.Value.TimeOfDay.Add(TimeSpan.FromMinutes(qty.Value));
+				}
+			}
+				
 		}
 
 		void OnInsuranceCoverageRowIdChanged()

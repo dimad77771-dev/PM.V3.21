@@ -21,7 +21,7 @@
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
 	Width="600"
-	Height="710"
+	Height="780"
 	Title="Medical Service/Supply"
 	WindowStartupLocation="CenterScreen"
 	ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
@@ -68,6 +68,8 @@
 					BorderBrush="#A0A0A0">
 					<Grid Margin="10">
 						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
@@ -299,6 +301,17 @@
 							Grid.Row="15"
 							Grid.Column="1"
 							EditValue="{Binding Entity.TemplateFolder, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="16"
+							Grid.Column="0"
+							Content="Qty"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="16"
+							Grid.Column="1"
+							EditValue="{Binding Entity.Qty, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							Style="{StaticResource baseEditStyle1}" />
 
 
