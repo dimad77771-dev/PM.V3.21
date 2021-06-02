@@ -84,6 +84,7 @@
     <Compile Include="BaseModel\BaseModelHelper.cs" />
     <Compile Include="FormDocmodel.cs" />
     <Compile Include="UserManager\UserManager.cs" />
+    <Compile Include="Setting.cs" />
     <Compile Include="WorkInout.cs" />
     <Compile Include="TemplateNameModel.cs" />
     <Compile Include="FormDocument.cs" />

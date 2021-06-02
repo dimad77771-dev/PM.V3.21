@@ -151,7 +151,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 			MedicalConditions, InsuranceProviders, ProfessionalAssociations, ThirdPartyServiceProviders, AppointmentBooks,
 			AppointmentStatuses, CalendarEventStatuses, Referrers, Suppliers, Categories,
 			InvoiceStatuses, ChargeoutStatuses, ChargeoutRecipientes,
-			PublicHolidays, PatientNoteStatuses, Users,
+			PublicHolidays, PatientNoteStatuses, Settings, Users,
 		}
 	}
 

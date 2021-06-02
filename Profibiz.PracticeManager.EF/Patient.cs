@@ -109,6 +109,10 @@ namespace Profibiz.PracticeManager.EF
         public string FamilyDoctorEmail { get; set; }
         public string SexIdentifyAs { get; set; }
         public string InsuranceCompany { get; set; }
+        public string InsurancePlanMember { get; set; }
+        public string InsurancePlanMemberOtherValue { get; set; }
+        public string InsurancePolicyNumber { get; set; }
+        public string InsuranceCertificateId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientMedicalCondition> PatientMedicalConditions { get; set; }

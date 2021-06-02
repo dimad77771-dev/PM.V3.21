@@ -156,7 +156,11 @@
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/professional-association-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 
-    <dxmvvm:ObjectToObjectConverter x:Key="appointmentBookRowtype9ToImageConverter">
+	<dxmvvm:ObjectToObjectConverter x:Key="settingRowtype9ToImageConverter">
+		<dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/professional-association-16.png" />
+	</dxmvvm:ObjectToObjectConverter>
+
+	<dxmvvm:ObjectToObjectConverter x:Key="appointmentBookRowtype9ToImageConverter">
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-book-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 

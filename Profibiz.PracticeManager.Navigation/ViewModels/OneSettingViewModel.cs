@@ -24,26 +24,28 @@ using DevExpress.Xpf.Core;
 using System.Diagnostics;
 using Profibiz.PracticeManager.Patients.BusinessService;
 
-namespace Profibiz.PracticeManager.Patients.ViewModels
+namespace Profibiz.PracticeManager.Navigation.ViewModels
 {
 	[POCOViewModel]
-	public class PaymentWindowViewModel : ViewModelBase
+	public class OneSettingViewModel : ViewModelBase
 	{
-        #region Services
-        IPatientsBusinessService businessService = BusinessServiceHelper.GetPatientsBusinessService();
-        ILookupsBusinessService lookupsBusinessService = BusinessServiceHelper.GetLookupsBusinessService();
-        IMessageBoxService MessageBoxService => this.GetRequiredService<IMessageBoxService>();
+		#region Services
+		IPatientsBusinessService businessService;
+		ILookupsBusinessService lookupsBusinessService;
+		IMessageBoxService MessageBoxService => this.GetRequiredService<IMessageBoxService>();
 		public virtual ShowWaitIndicator ShowWaitIndicator { get; set; } = new ShowWaitIndicator();
 		public virtual InteractionRequest<ShowDXWindowsActionParam> OpenWindowInteractionRequest { get; set; } = new InteractionRequest<ShowDXWindowsActionParam>();
-		public virtual InteractionRequest<CloseDXWindowsActionParam> CloseInteractionRequest { get; set; } = new InteractionRequest<CloseDXWindowsActionParam>();
 		#endregion
+
 		public OpenParams OpenParam { get; set; }
-        public virtual PaymentOneViewModel OneModel { get; set; } = PaymentOneViewModel.Create();
-		public virtual Boolean ReadOnly { get; set; }
+		public virtual Setting Entity { get; set; }
+		public bool IsNew { get; set; }
 
 
-		public PaymentWindowViewModel() : base()
+		public OneSettingViewModel(IPatientsBusinessService _businessService, ILookupsBusinessService _lookupsBusinessService) : base()
 		{
+			businessService = _businessService;
+			lookupsBusinessService = _lookupsBusinessService;
 		}
 
 		public void OnOpen(object arg)
@@ -59,27 +61,30 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					OpenParam = new OpenParams { IsNew = true };
 				}
 			}
-            DispatcherUIHelper.Run(async () =>
-            {
-                await LoadData();
-            });
+			LoadData();
 		}
 
-		async Task LoadData()
+		async void LoadData()
 		{
-			//ShowWaitIndicator.Show();
+			ShowWaitIndicator.Show();
 
-			if (OpenParam.IsVariant2)
+			IsNew = OpenParam.IsNew;
+			Setting entity;
+			if (!IsNew)
 			{
-				await OneModel.LoadData(isNew: OpenParam.IsNew, rowId: OpenParam.RowId, readOnly: OpenParam.ReadOnly, selectInvoiceRowId: OpenParam.SelectInvoiceRowId, newPayment: OpenParam.NewPayment);
+				entity = LookupDataProvider.FindSetting(OpenParam.RowId).GetPocoClone();
 			}
 			else
 			{
-				await OneModel.LoadData(isNew: false, rowId: OpenParam.RowId, readOnly: true, selectInvoiceRowId: OpenParam.SelectInvoiceRowId);
+				entity = new Setting();
+				entity.RowId = Guid.NewGuid();
 			}
-			//await OneModel.LoadData(isNew: false, rowId: OpenParam.RowId, readOnly: false, selectInvoiceRowId: OpenParam.SelectInvoiceRowId);
+			Entity = entity;
+			ResetHasChange();
 
-			ReadOnly =  OneModel?.ReadOnly ?? true;
+
+			ShowWaitIndicator.Hide();
+			DXSplashScreenHelper.Hide();
 		}
 
 
@@ -91,34 +96,66 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 
 
-
 		bool Validate()
 		{
+			List<string> errors = new List<string>();
+
+			ValidateHelper.Empty(Entity.Name, "Name", errors);
+			//ValidateHelper.Empty(Entity.ItemType, "Item Type", errors);
+
+			if (errors.Count > 0)
+			{
+				var err = string.Join("\n", errors.ToArray());
+				MessageBoxService.ShowMessage(err, CommonResources.Validation_Error, MessageButton.OK, MessageIcon.Error);
+				return false;
+			}
+
 			return true;
 		}
 
 		async Task<bool> SaveCore(bool andClose)
 		{
-			var result = await OneModel.SaveCore(andClose);
-
-			//close
-			if (result)
+			//validate
+			if (!Validate())
 			{
-				if (andClose)
-				{
-					CloseCore(force: true);
-				}
+				return false;
 			}
 
-			return result;
+			//updateEntity
+			var updateEntity = Entity.GetPocoClone();
+			var updateEntities = new[] { updateEntity };
+
+			//save
+			ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);
+			var uret = await lookupsBusinessService.PutSettings(updateEntities);
+			await lookupsBusinessService.UpdateAllLookups();
+			ShowWaitIndicator.Hide();
+			if (!uret.Validate(MessageBoxService))
+			{
+				return false;
+			}
+
+			MessengerHelper.Send(new MsgRowLookupUpdate(MsgRowLookupUpdate.TableEnum.Settings));
+			MessengerHelper.SendMsgRowChange(updateEntity, IsNew);
+			IsNew = false;
+			ResetHasChange();
+
+
+			//close
+			if (andClose)
+			{
+				CloseCore(force: true);
+			}
+
+			return true;
 		}
 
-		
-		
-		
 
 
-		
+
+
+
+		public virtual InteractionRequest<CloseDXWindowsActionParam> CloseInteractionRequest { get; set; } = new InteractionRequest<CloseDXWindowsActionParam>();
 		bool forceClose;
 		void CloseCore(bool force = false)
 		{
@@ -128,12 +165,12 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		bool HasChange()
 		{
-			return false;
+			return (IsNew || Entity.IsChanged);
 		}
 
 		void ResetHasChange()
 		{
-			//Entity.IsChanged = false;
+			Entity.IsChanged = false;
 		}
 
 
@@ -144,8 +181,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			if (HasChange())
 			{
 				var ret = MessageBoxService.ShowMessage(
-					(showOKCancel ? CommonResources.Confirmation_Save_And_Continue : CommonResources.Confirmation_Save), 
-					CommonResources.Confirmation_Caption, 
+					(showOKCancel ? CommonResources.Confirmation_Save_And_Continue : CommonResources.Confirmation_Save),
+					CommonResources.Confirmation_Caption,
 					(showOKCancel ? MessageButton.OKCancel : MessageButton.YesNoCancel),
 					MessageIcon.Question);
 				if (ret == MessageResult.Cancel)
@@ -192,12 +229,6 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			public bool IsNew { get; set; }
 			public Guid RowId { get; set; }
-            public Guid? SelectInvoiceRowId { get; set; }
-			public Payment NewPayment { get; set; }
-			public bool ReadOnly { get; set; }
-
-
-			public bool IsVariant2 { get; set; }
 		}
 
 

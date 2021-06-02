@@ -722,6 +722,61 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		}
 		public bool CanRefundNew() => ((CurrentInvoice?.Balance ?? 0) < 0);
 
+		public void PaymentNew()
+		{
+			var row = CurrentInvoice;
+			//var newPayment = new Payment
+			//{
+			//	RowId = Guid.NewGuid(),
+			//	PatientRowId = row.PatientRowId,
+			//	PatientFullName = row.PatientFullName,
+			//	PaymentDate = DateTime.Today,
+			//	//PaymentItemsType = TypeHelper.PaymentItemsType_Invoice,
+			//	IsNew = true,
+			//};
+
+			var amount = (row.Balance ?? 0);
+			var newPayment = new Payment
+			{
+				RowId = Guid.NewGuid(),
+				//Patient = CurrentInvoice.Patient,
+				PatientRowId = CurrentInvoice.PatientRowId,
+				PaymentDate = DateTime.Today,
+				Amount = amount,
+				IsNew = true,
+			};
+			var newInvoicePayment = new InvoicePayment
+			{
+				RowId = Guid.NewGuid(),
+				Amount = amount,
+				InvoiceRowId = row.RowId,
+				Invoice = row,
+				PaymentRowId = newPayment.RowId,
+				AllocationDate = DateTime.Today,
+				IsChanged = true,
+				IsNew = true,
+			};
+			newPayment.InvoicePayments = new[] { newInvoicePayment }.ToList();
+
+			////newInvoicePayment.OnAfterLoad();
+
+
+
+
+
+			ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+			{
+				ViewCode = ViewCodes.PaymentWindowView,
+				Param = new PaymentWindowViewModel.OpenParams
+				{
+					IsNew = true,
+					NewPayment = newPayment,
+					ReadOnly = false,
+					IsVariant2 = true,
+				},
+			});
+		}
+		public bool CanPaymentNew() => ((CurrentInvoice?.Balance ?? 0) > 0);
 
 		void SubsribeAdvancedFilters()
 		{

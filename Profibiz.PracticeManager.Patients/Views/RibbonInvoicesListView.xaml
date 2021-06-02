@@ -326,7 +326,23 @@
                         </dxb:BarEditItem>
                     </dxr:RibbonPageGroup>
 
-                </dxr:RibbonPage>
+					<dxr:RibbonPageGroup Caption="Payment">
+						<dxb:BarButtonItem Content="New Payment"
+                                           Command="{Binding PaymentNewCommand}"
+                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-payment-32.png"
+                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-payment-16.png" />
+						<!--<dxb:BarEditItem Content="Show eligible payments only"
+                                         EditValue="{Binding IsShowAllowPaymentOnly,
+                                                             Mode=TwoWay}"
+                                         RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:CheckEditSettings>
+								</dxe:CheckEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>-->
+					</dxr:RibbonPageGroup>
+
+				</dxr:RibbonPage>
             </dxr:RibbonDefaultPageCategory>
         </dxr:RibbonControl>
     </Grid>

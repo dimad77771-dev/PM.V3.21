@@ -50,6 +50,7 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<InsuranceProvider> GetInsuranceProviders();
 		IEnumerable<MedicalServicesOrSupply> GetMedicalServicesOrSupplies();
 		IEnumerable<ProfessionalAssociation> GetProfessionalAssociations();
+		IEnumerable<Setting> GetSettings();
 		IEnumerable<ThirdPartyServiceProvider> GetThirdPartyServiceProviders();
 		IEnumerable<Referrer> GetReferrers();
 		IEnumerable<User> GetUsers();
@@ -64,6 +65,8 @@ namespace Profibiz.PracticeManager.BL
 		void DeleteInsuranceProvider(Guid id);
 		void PutProfessionalAssociations(IEnumerable<ProfessionalAssociation> entities);
 		void DeleteProfessionalAssociation(Guid id);
+		void PutSettings(IEnumerable<Setting> entities);
+		void DeleteSetting(Guid id);
 		void PutThirdPartyServiceProviders(IEnumerable<ThirdPartyServiceProvider> entities);
 		void DeleteThirdPartyServiceProvider(Guid id);
 		void PutReferrers(IEnumerable<Referrer> entities);

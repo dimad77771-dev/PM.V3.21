@@ -12,6 +12,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<List<InsuranceProvider>> GetInsuranceProviders();
 		Task<List<MedicalServicesOrSupply>> GetMedicalServicesOrSupplies();
 		Task<List<ProfessionalAssociation>> GetProfessionalAssociations();
+		Task<List<Setting>> GetSettings();
 		Task<List<AppointmentBook>> GetAppointmentBooks();
 		Task<List<ThirdPartyServiceProvider>> GetThirdPartyServiceProviders();
 		Task UpdateAllLookups();
@@ -28,6 +29,9 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 
 		Task<UpdateReturn> PutProfessionalAssociations(IEnumerable<ProfessionalAssociation> entities);
 		Task<UpdateReturn> DeleteProfessionalAssociation(ProfessionalAssociation entity);
+
+		Task<UpdateReturn> PutSettings(IEnumerable<Setting> entities);
+		Task<UpdateReturn> DeleteSetting(Setting entity);
 
 		Task<UpdateReturn> PutAppointmentBooks(IEnumerable<AppointmentBook> entities);
 		Task<UpdateReturn> DeleteAppointmentBook(AppointmentBook entity);

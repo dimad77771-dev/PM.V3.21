@@ -476,6 +476,9 @@
     <Compile Include="ServiceProviderV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Setting.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Supplier.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>

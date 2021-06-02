@@ -40,6 +40,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			AllCategoriesItems.Add(MedicalServicesOrSuppliesFilter);
 			AllCategoriesItems.Add(CategoriesFilter);
 			AllCategoriesItems.Add(ProfessionalAssociationsFilter);
+			AllCategoriesItems.Add(SettingsFilter);
 			AllCategoriesItems.Add(AppointmentBooksFilter);
 			AllCategoriesItems.Add(AppointmentStatusesFilter);
 			AllCategoriesItems.Add(CalendarEventStatusesFilter);
@@ -74,6 +75,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 		public FilterItem InvoiceStatusesFilter { get; set; } = new FilterItem { Name = "Invoice Statuses", LookupType = FilterItem.LookupTypeEnum.InvoiceStatusesFilter };
 		public FilterItem ChargeoutStatusesFilter { get; set; } = new FilterItem { Name = "Outgoing Invoice Statuses", LookupType = FilterItem.LookupTypeEnum.ChargeoutStatusesFilter };
 		public FilterItem ChargeoutRecipientesFilter { get; set; } = new FilterItem { Name = "Outgoing Invoice Recipients", LookupType = FilterItem.LookupTypeEnum.ChargeoutRecipientesFilter };
+		public FilterItem SettingsFilter { get; set; } = new FilterItem { Name = "Settings", LookupType = FilterItem.LookupTypeEnum.Settings };
 		public FilterItem SelectedItem { get; set; }
 		public ObservableCollection<FilterItem> StaticFilterItems { get; set; }
 
@@ -103,6 +105,10 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 					else if (lookupType == FilterItem.LookupTypeEnum.ProfessionalAssociations)
 					{
 						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.ProfessionalAssociationsView, null);
+					}
+					else if (lookupType == FilterItem.LookupTypeEnum.Settings)
+					{
+						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.SettingsView, null);
 					}
 					else if (lookupType == FilterItem.LookupTypeEnum.ThirdPartyServiceProviders)
 					{
@@ -175,7 +181,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				InsuranceProviders, MedicalServices, Categories, ProfessionalAssociations, ThirdPartyServiceProviders,
 				AppointmentBooks, AppointmentStatusesFilter, PatientNoteStatusesFilter, CalendarEventStatusesFilter, PublicHolidaysFilter,
 				InvoiceStatusesFilter, ChargeoutStatusesFilter, ChargeoutRecipientesFilter,
-				Referrers, Suppliers, Users,
+				Referrers, Suppliers, Settings, Users,
 			}
 
 			public static bool IsEqual(FilterItem item1, FilterItem item2)

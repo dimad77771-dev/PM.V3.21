@@ -27,6 +27,7 @@ namespace Profibiz.PracticeManager.Model
 		public ObservableCollection<InsuranceProvider> InsuranceProviders { get; set; }
 		public ObservableCollection<MedicalServicesOrSupply> MedicalServices { get; set; }
 		public ObservableCollection<ProfessionalAssociation> ProfessionalAssociations { get; set; }
+		public ObservableCollection<Setting> Settings { get; set; }
 		public ObservableCollection<ThirdPartyServiceProvider> ThirdPartyServiceProviders { get; set; }
 		public ObservableCollection<Referrer> Referrers { get; set; }
 		public ObservableCollection<User> Users { get; set; }
@@ -78,6 +79,11 @@ namespace Profibiz.PracticeManager.Model
 		public void UpdateProfessionalAssociations(IEnumerable<ProfessionalAssociation> newData)
 		{
 			ProfessionalAssociations = new ObservableCollection<ProfessionalAssociation>(newData.OrderBy(q => q.Name));
+		}
+
+		public void UpdateSettings(IEnumerable<Setting> newData)
+		{
+			Settings = new ObservableCollection<Setting>(newData.OrderBy(q => q.Name));
 		}
 
 		public void UpdateThirdPartyServiceProviders(IEnumerable<ThirdPartyServiceProvider> newData)
@@ -188,6 +194,12 @@ namespace Profibiz.PracticeManager.Model
 		{
 			return Instance.ProfessionalAssociations.SingleOrDefault(q => q.RowId == rowId);
 		}
+
+		public static Setting FindSetting(Guid rowId)
+		{
+			return Instance.Settings.SingleOrDefault(q => q.RowId == rowId);
+		}
+
 
 		public static ThirdPartyServiceProvider FindThirdPartyServiceProvider(Guid rowId)
 		{

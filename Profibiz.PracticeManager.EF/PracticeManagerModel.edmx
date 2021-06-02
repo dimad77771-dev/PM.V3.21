@@ -1342,6 +1342,10 @@
           <Property Name="Signature" Type="varbinary(max)" />
           <Property Name="SexIdentifyAs" Type="nvarchar" MaxLength="255" />
           <Property Name="InsuranceCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePlanMember" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePlanMemberOtherValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePolicyNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsuranceCertificateId" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="PaychargeRefcharges">
           <Key>
@@ -1696,6 +1700,20 @@
           <Property Name="ChargeoutBasePriceTaxRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="ChargeoutHourlyRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
           <Property Name="ChargeoutHourlyRateTaxRate" Type="decimal" Precision="18" Scale="4" Nullable="false" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Settings">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserRowId" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" />
+          <Property Name="Type" Type="nvarchar" MaxLength="50" />
+          <Property Name="Value" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
@@ -3223,6 +3241,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsView' does not have a prim
           <Property Name="Signature" Type="varbinary(max)" />
           <Property Name="SexIdentifyAs" Type="nvarchar" MaxLength="255" />
           <Property Name="InsuranceCompany" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePlanMember" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePlanMemberOtherValue" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsurancePolicyNumber" Type="nvarchar" MaxLength="255" />
+          <Property Name="InsuranceCertificateId" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -7584,6 +7606,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySet Name="ServiceProviderAssociations" EntityType="Self.ServiceProviderAssociations" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceProviders" EntityType="Self.ServiceProviders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ServiceProviderServices" EntityType="Self.ServiceProviderServices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Settings" EntityType="Self.Settings" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierPaymentRefunds" EntityType="Self.SupplierPaymentRefunds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierPayments" EntityType="Self.SupplierPayments" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SupplierRefunds" EntityType="Self.SupplierRefunds" Schema="dbo" store:Type="Tables" />
@@ -8367,7 +8390,11 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
     [PatientsView].[IsNotRegistered] AS [IsNotRegistered], 
     [PatientsView].[Signature] AS [Signature], 
     [PatientsView].[SexIdentifyAs] AS [SexIdentifyAs], 
-    [PatientsView].[InsuranceCompany] AS [InsuranceCompany]
+    [PatientsView].[InsuranceCompany] AS [InsuranceCompany], 
+    [PatientsView].[InsurancePlanMember] AS [InsurancePlanMember], 
+    [PatientsView].[InsurancePlanMemberOtherValue] AS [InsurancePlanMemberOtherValue], 
+    [PatientsView].[InsurancePolicyNumber] AS [InsurancePolicyNumber], 
+    [PatientsView].[InsuranceCertificateId] AS [InsuranceCertificateId]
     FROM [dbo].[PatientsView] AS [PatientsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PaychargeRefchargesView" EntityType="Self.PaychargeRefchargesView" store:Type="Views" store:Schema="dbo">
@@ -12260,6 +12287,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             <End Role="Template" EntitySet="Templates" />
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
+          <EntitySet Name="Settings" EntityType="PracticeManagerModel.Setting" />
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -12361,6 +12389,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="FamilyDoctorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SexIdentifyAs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePlanMember" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePlanMemberOtherValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePolicyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceCertificateId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -13225,6 +13257,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="FamilyDoctorEmail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="SexIdentifyAs" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceCompany" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePlanMember" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePlanMemberOtherValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsurancePolicyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="InsuranceCertificateId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -22994,6 +23030,20 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Setting">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="UserRowId" Type="Guid" />
+          <Property Name="Name" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Value" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23046,6 +23096,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="PracticeManagerModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="InsuranceCertificateId" ColumnName="InsuranceCertificateId" />
+                <ScalarProperty Name="InsurancePolicyNumber" ColumnName="InsurancePolicyNumber" />
+                <ScalarProperty Name="InsurancePlanMemberOtherValue" ColumnName="InsurancePlanMemberOtherValue" />
+                <ScalarProperty Name="InsurancePlanMember" ColumnName="InsurancePlanMember" />
                 <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
                 <ScalarProperty Name="SexIdentifyAs" ColumnName="SexIdentifyAs" />
                 <ScalarProperty Name="FamilyDoctorEmail" ColumnName="FamilyDoctorEmail" />
@@ -23553,6 +23607,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="PatientsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientV">
               <MappingFragment StoreEntitySet="PatientsView">
+                <ScalarProperty Name="InsuranceCertificateId" ColumnName="InsuranceCertificateId" />
+                <ScalarProperty Name="InsurancePolicyNumber" ColumnName="InsurancePolicyNumber" />
+                <ScalarProperty Name="InsurancePlanMemberOtherValue" ColumnName="InsurancePlanMemberOtherValue" />
+                <ScalarProperty Name="InsurancePlanMember" ColumnName="InsurancePlanMember" />
                 <ScalarProperty Name="InsuranceCompany" ColumnName="InsuranceCompany" />
                 <ScalarProperty Name="SexIdentifyAs" ColumnName="SexIdentifyAs" />
                 <ScalarProperty Name="FamilyDoctorEmail" ColumnName="FamilyDoctorEmail" />
@@ -26692,6 +26750,21 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
                 <ScalarProperty Name="Date" ColumnName="Date" />
                 <ScalarProperty Name="FormRowId" ColumnName="FormRowId" />
                 <ScalarProperty Name="PatientRowId" ColumnName="PatientRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Settings">
+            <EntityTypeMapping TypeName="PracticeManagerModel.Setting">
+              <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="UserRowId" ColumnName="UserRowId" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
               </MappingFragment>
             </EntityTypeMapping>

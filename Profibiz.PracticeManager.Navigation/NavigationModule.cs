@@ -39,15 +39,18 @@ namespace Profibiz.PracticeManager.Navigation
 			_container.RegisterView<OneMedicalServiceView>();
 			_container.RegisterView<OneCategoryView>();
 			_container.RegisterView<OneProfessionalAssociationView>();
+			_container.RegisterView<OneSettingView>();
 			_container.RegisterView<OneThirdPartyServiceProviderView>();
 			_container.RegisterView<OneAppointmentBookView>();
 			_container.RegisterView<ProfessionalAssociationsView>();
+			_container.RegisterView<SettingsView>();
 			_container.RegisterView<ThirdPartyServiceProvidersView>();
 			_container.RegisterView<AppointmentBooksView>();
 			_container.RegisterView<RibbonInsuranceProvidersView>();
 			_container.RegisterView<RibbonMedicalServicesView>();
 			_container.RegisterView<RibbonCategoriesView>();
 			_container.RegisterView<RibbonProfessionalAssociationsView>();
+			_container.RegisterView<RibbonSettingsView>();
 			_container.RegisterView<RibbonThirdPartyServiceProvidersView>();
 			_container.RegisterView<RibbonAppointmentBooksView>();
 			_container.RegisterView<OneAppointmentStatusView>();

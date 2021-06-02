@@ -132,6 +132,13 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			return Ok(list);
 		}
 
+		public IHttpActionResult GetSettings()
+		{
+			var list = _repository.GetSettings();
+			return Ok(list);
+		}
+
+
 		public IHttpActionResult GetThirdPartyServiceProviders()
 		{
 			var list = _repository.GetThirdPartyServiceProviders();
@@ -205,6 +212,17 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 		public IHttpActionResult DeleteProfessionalAssociation(Guid id)
 		{
 			_repository.DeleteProfessionalAssociation(id);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+
+		public IHttpActionResult PutSettings([FromBody] IEnumerable<Setting> entities)
+		{
+			_repository.PutSettings(entities);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult DeleteSetting(Guid id)
+		{
+			_repository.DeleteSetting(id);
 			return StatusCode(HttpStatusCode.NoContent);
 		}
 

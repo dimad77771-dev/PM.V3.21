@@ -119,6 +119,13 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var patients = await response.Content.ReadAsAsync<IEnumerable<ProfessionalAssociation>>();
 			return patients.ToList();
 		}
+		async public Task<List<Setting>> GetSettings()
+		{
+			var client = new MyHttpClient();
+			var response = await client.GetResponse(_baseUrl, "api/lookups/GetSettings");
+			var patients = await response.Content.ReadAsAsync<IEnumerable<Setting>>();
+			return patients.ToList();
+		}
 		async public Task<List<ThirdPartyServiceProvider>> GetThirdPartyServiceProviders()
 		{
 			var client = new MyHttpClient();
@@ -242,6 +249,26 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var response = await _client.DeleteAsync("api/lookups/DeleteProfessionalAssociation/" + entity.RowId);
 			return await response.ValidateResponse();
 		}
+
+		async public Task<UpdateReturn> PutSettings(IEnumerable<Setting> entities)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entities);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/lookups/PutSettings", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteSetting(Setting entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/lookups/DeleteSetting/" + entity.RowId);
+			return await response.ValidateResponse();
+		}
+
 
 		async public Task<UpdateReturn> PutThirdPartyServiceProviders(IEnumerable<ThirdPartyServiceProvider> entities)
 		{
@@ -530,6 +557,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var taskInsuranceProviders = GetInsuranceProviders();
 			var taskMedicalServicesOrSupplies = GetMedicalServicesOrSupplies();
 			var taskProfessionalAssociations = GetProfessionalAssociations();
+			var taskSettings = GetSettings();
 			var taskAppointmentBooks = GetAppointmentBooks();
 			var taskServiceProviders = GetServiceProviders();
 			var taskInsuranceProvidersViewGroups = GetInsuranceProvidersViewGroups();
@@ -543,7 +571,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 					taskCategories, taskAppointmentStatuses, taskPatientNoteStatuses, taskCalendarEventStatuses, taskPublicHolidays, 
 					taskInvoiceStatuses, taskChargeoutStatuses, taskChargeoutRecipientes,
 					taskInsuranceProviders, taskMedicalServicesOrSupplies, 
-					taskProfessionalAssociations, taskAppointmentBooks, taskTemplates, 
+					taskProfessionalAssociations, taskSettings, taskAppointmentBooks, taskTemplates, 
 					taskServiceProviders, taskInsuranceProvidersViewGroups, taskThirdPartyServiceProviders, 
 					taskReferrers, taskSuppliers, taskOntarioCities, taskUsers);
 			await taskAll;
@@ -560,6 +588,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			lookupDataProvider.UpdateInsuranceProviders(taskInsuranceProviders.Result);
 			lookupDataProvider.UpdateMedicalServices(taskMedicalServicesOrSupplies.Result);
 			lookupDataProvider.UpdateProfessionalAssociations(taskProfessionalAssociations.Result);
+			lookupDataProvider.UpdateSettings(taskSettings.Result);
 			lookupDataProvider.UpdateAppointmentBooks(taskAppointmentBooks.Result);
 			lookupDataProvider.UpdateServiceProviders(taskServiceProviders.Result);
 			lookupDataProvider.UpdateThirdPartyServiceProviders(taskThirdPartyServiceProviders.Result);

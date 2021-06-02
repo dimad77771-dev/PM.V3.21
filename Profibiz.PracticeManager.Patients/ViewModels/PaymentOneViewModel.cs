@@ -43,7 +43,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public InvoicePayment InvoicePaymentSelectedEntity { get; set; }
 		public ObservableCollection<PaymentRefund> PaymentRefundEntities { get; set; }
 		public PaymentRefund PaymentRefundSelectedEntity { get; set; }
-		public Boolean ReadOnly { get; set; }
+		public virtual Boolean ReadOnly { get; set; }
 		public virtual Boolean IsCollapsedLayoutRefunds { get; set; } = true;
 
 
@@ -81,6 +81,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity = newPayment;
 			}
 			Entity = entity;
+			await LoadPatient();
 
 			InvoicePaymentEntities = new ObservableCollection<InvoicePayment>(Entity.InvoicePayments);
             InvoicePaymentEntities.ForEach(q => SubscribeInvoicePaymentRow(q));
@@ -102,7 +103,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		}
 
 
-
+		async Task LoadPatient()
+		{
+			if (Entity.PatientRowId != null && Entity.Patient == null)
+			{
+				Entity.Patient = await businessService.GetPatient(Entity.PatientRowId);
+			}
+		}
 
 
         public void InvoicePaymentNew()
@@ -236,6 +243,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 
 			MessengerHelper.SendMsgRowChange(updateEntity, IsNew);
+			foreach(var invoicePayment in InvoicePaymentEntities)
+			{
+				MessengerHelper.SendMsgRowChange(invoicePayment.Invoice, false);
+			}
 			IsNew = false;
 			ResetHasChange();
 

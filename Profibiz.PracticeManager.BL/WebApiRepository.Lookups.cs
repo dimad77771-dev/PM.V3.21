@@ -138,6 +138,14 @@ namespace Profibiz.PracticeManager.BL
 			return mapper.Map<List<DTO.ProfessionalAssociation>>(list);
 		}
 
+		public IEnumerable<DTO.Setting> GetSettings()
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			var list = db.Settings;
+			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Setting));
+			return mapper.Map<List<DTO.Setting>>(list);
+		}
+
 		public IEnumerable<DTO.ThirdPartyServiceProvider> GetThirdPartyServiceProviders()
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
@@ -376,6 +384,59 @@ namespace Profibiz.PracticeManager.BL
 			{
 				var row = db.ProfessionalAssociations.Single(q => q.RowId == id);
 				db.ProfessionalAssociations.Remove(row);
+				try
+				{
+					db.SaveChangesEx();
+				}
+				catch (Exception ex)
+				{
+					if (ExceptionHelper.IsDeleteReferenceConstraintException(ex))
+					{
+						ExceptionHelper.UserUpdateError(UserErrorCodes.DeleteForeignKey, "Row \"" + row.Name + "\" is used in database and cannot be deleted");
+					}
+					else throw ex;
+				}
+
+				scope.Complete();
+			}
+		}
+
+
+		public void PutSettings(IEnumerable<DTO.Setting> entities)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Setting));
+
+				var oldRows = db.Settings.ToArray();
+
+				foreach (var entity in entities)
+				{
+					var oldRow = oldRows.SingleOrDefault(q => q.RowId == entity.RowId);
+					if (oldRow == null)
+					{
+						var newRow = mapper.Map<EF.Setting>(entity);
+						db.Settings.Add(newRow);
+						db.SaveChangesEx();
+					}
+					else
+					{
+						mapper.Map(entity, oldRow);
+						db.SaveChangesEx();
+					}
+				}
+
+				scope.Complete();
+			}
+		}
+		public void DeleteSetting(Guid id)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var row = db.Settings.Single(q => q.RowId == id);
+				db.Settings.Remove(row);
 				try
 				{
 					db.SaveChangesEx();

@@ -85,6 +85,7 @@ namespace Profibiz.PracticeManager.EF
 	public partial class ServiceProvider : IEntityCreatedUpdated { }
 	public partial class ServiceProviderAssociation : IEntityCreatedUpdated { }
 	public partial class ServiceProviderService : IEntityCreatedUpdated { }
+	public partial class Setting : IEntityCreatedUpdated { }
 	public partial class Supplier : IEntityCreatedUpdated { }
 	public partial class SupplierPaymentRefundT : IEntityCreatedUpdated { }
 	public partial class SupplierPaymentT : IEntityCreatedUpdated { }
