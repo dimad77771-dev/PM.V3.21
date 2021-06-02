@@ -1718,6 +1718,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="Order" Type="int" />
         </EntityType>
         <EntityType Name="SupplierPaymentRefunds">
           <Key>
@@ -23043,6 +23044,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="Order" Type="Int32" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -26757,6 +26759,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Settings">
             <EntityTypeMapping TypeName="PracticeManagerModel.Setting">
               <MappingFragment StoreEntitySet="Settings">
+                <ScalarProperty Name="Order" ColumnName="Order" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />

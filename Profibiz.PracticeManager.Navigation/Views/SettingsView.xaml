@@ -99,6 +99,10 @@
 							</DataTemplate>
 						</dxg:GridColumn.CellTemplate>
 					</dxg:GridColumn>
+					<dxg:GridColumn FieldName="Order"
+                                    Header="ORDER"
+									SortOrder="Ascending"
+                                    Width="120" />
 					<dxg:GridColumn FieldName="Name"
                                     Header="NAME"
                                     Width="200*" />

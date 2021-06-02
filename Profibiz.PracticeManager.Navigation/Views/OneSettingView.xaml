@@ -81,9 +81,21 @@
 
 						<dxlc:LayoutItemLabel Grid.Row="0"
                                               Grid.Column="0"
-                                              Content="Name"
+                                              Content="Order"
                                               Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:TextEdit Grid.Row="0"
+                                      Grid.Column="1"
+                                      EditValue="{Binding Entity.Order,
+                                                          UpdateSourceTrigger=PropertyChanged,
+                                                          ValidatesOnDataErrors=True,
+                                                          NotifyOnSourceUpdated=True}"
+                                      Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel Grid.Row="1"
+                                              Grid.Column="0"
+                                              Content="Name"
+                                              Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit Grid.Row="1"
                                       Grid.Column="1"
                                       EditValue="{Binding Entity.Name,
                                                           UpdateSourceTrigger=PropertyChanged,
@@ -91,11 +103,11 @@
                                                           NotifyOnSourceUpdated=True}"
                                       Style="{StaticResource baseEditStyle1}" />
 						
-						<dxlc:LayoutItemLabel Grid.Row="1"
+						<dxlc:LayoutItemLabel Grid.Row="2"
                                               Grid.Column="0"
                                               Content="Type"
                                               Style="{StaticResource layoutItemLabelStyle1Left}" />
-						<dxe:TextEdit Grid.Row="1"
+						<dxe:TextEdit Grid.Row="2"
                                       Grid.Column="1"
                                       EditValue="{Binding Entity.Type,
                                                           UpdateSourceTrigger=PropertyChanged,
@@ -103,11 +115,11 @@
                                                           NotifyOnSourceUpdated=True}"
                                       Style="{StaticResource baseEditStyle1}" />
 
-						<dxlc:LayoutItemLabel Grid.Row="2"
+						<dxlc:LayoutItemLabel Grid.Row="3"
                                               Grid.Column="0"
                                               Content="Value"
                                               Style="{StaticResource layoutItemLabelStyle1Left}" />
-						<dxe:TextEdit Grid.Row="2"
+						<dxe:TextEdit Grid.Row="3"
                                       Grid.Column="1"
                                       EditValue="{Binding Entity.Value,
                                                           UpdateSourceTrigger=PropertyChanged,

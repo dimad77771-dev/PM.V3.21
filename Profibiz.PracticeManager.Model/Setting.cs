@@ -15,6 +15,7 @@ namespace Profibiz.PracticeManager.Model
 		public string Name { get; set; }
 		public string Type { get; set; }
 		public string Value { get; set; }
+		public int? Order { get; set; }
 
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }

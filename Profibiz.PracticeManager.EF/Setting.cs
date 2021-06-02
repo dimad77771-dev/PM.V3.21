@@ -23,5 +23,6 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public Nullable<int> Order { get; set; }
     }
 }
