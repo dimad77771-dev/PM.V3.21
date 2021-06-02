@@ -793,6 +793,15 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				});
 			};
 		}
+
+		void PaymentNew()
+		{
+			//ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+			//{
+			//	ViewCode = ViewCodes.PaymentWindowView,
+			//	Param = new PaymentWindowViewModel.OpenParams { IsNew = false, RowId = row.PaymentRowId, SelectInvoiceRowId = row.InvoiceRowId },
+			//});
+		}
 		
 
 		void SubscribeInvoicePaymentRow(InvoicePayment row)

@@ -50,6 +50,9 @@ namespace Profibiz.PracticeManager.Model
 		public List<MedicalServicesOrSupply> MedicalServices_Supply => MedicalServicesForItemType(TypeHelper.MedicalItemType.Supply);
 		public List<MedicalServicesOrSupply> MedicalServices_ThirdPartyService => MedicalServicesForItemType(TypeHelper.MedicalItemType.ThirdPartyService);
 
+
+		public List<Template> Templates_Appointment => Templates.Where(q => q.InvoiceType == "Appointment").ToList();
+
 		public List<ServiceProvider> ServiceProviders_ThirdParty => ServiceProvidersForItemType(TypeHelper.ServiceProviderServiceType.ThirdParty);
 
 		List<MedicalServicesOrSupply> MedicalServicesForItemType(string itemType)

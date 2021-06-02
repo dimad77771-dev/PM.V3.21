@@ -38,22 +38,38 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
 		{
 			var appointment = (AppointmentsSchedulerViewModel.HospitalAppointment)value;
-			if ((string)parameter == "Foreground")
+
+			if (appointment?.Entity?.IsAppointmentPaid == true)
 			{
-				if (appointment?.Patient?.IsNotRegistered == true)
+				if ((string)parameter == "Foreground")
 				{
-					return "Blue";
+					return "Black";
 				}
-				else
+				else if ((string)parameter == "Background")
 				{
-					return appointment.Doctor.ForegroundColor;
+					return "#D1D1D1";
 				}
+				else throw new ArgumentException();
 			}
-			else if ((string)parameter == "Background")
+			else
 			{
-				return appointment.Doctor.BackgroundColor;
+				if ((string)parameter == "Foreground")
+				{
+					if (appointment?.Patient?.IsNotRegistered == true)
+					{
+						return "Blue";
+					}
+					else
+					{
+						return appointment.Doctor.ForegroundColor;
+					}
+				}
+				else if ((string)parameter == "Background")
+				{
+					return appointment.Doctor.BackgroundColor;
+				}
+				else throw new ArgumentException();
 			}
-			else throw new ArgumentException();
 		}
 		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
 		{

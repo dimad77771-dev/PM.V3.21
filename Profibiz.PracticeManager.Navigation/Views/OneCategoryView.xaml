@@ -117,7 +117,7 @@
 							Grid.Column="1"
 							EditValue="{Binding Entity.TemplateRowId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							IsTextEditable="False"
-							ItemsSource="{Binding Templates, Source={StaticResource lookupDataProvider}}"
+							ItemsSource="{Binding Templates_Appointment, Source={StaticResource lookupDataProvider}}"
 							DisplayMember="FullName"
 							ValueMember="RowId"
 							NullValueButtonPlacement="EditBox"

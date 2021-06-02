@@ -95,7 +95,7 @@ namespace Profibiz.PracticeManager.BL
 
 
 		
-		IEnumerable<Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, string rowIds);
+		IEnumerable<Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, Boolean? calcAppointmentPaid, string rowIds);
 		void UpdateAppointmentCore(List<Appointment> entity, EntityState state);
 		IEnumerable<AppointmentInsuranceProviderDayInfo> GetAppointmentInsuranceProviderDayInfo(DateTime dat, Guid serviceProviderRowId);
 

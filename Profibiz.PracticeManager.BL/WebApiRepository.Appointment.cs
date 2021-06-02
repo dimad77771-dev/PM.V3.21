@@ -25,7 +25,7 @@ namespace Profibiz.PracticeManager.BL
 {
     public partial class WebApiRepository
     {
-		public IEnumerable<DTO.Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, string rowIds)
+		public IEnumerable<DTO.Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, Boolean? calcAppointmentPaid, string rowIds)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
@@ -97,8 +97,6 @@ namespace Profibiz.PracticeManager.BL
 				qry = qry.Include(q => q.AppointmentRemainders);
 			}
 
-			var list = qry.ToArray();
-
 			var options = AutoMapperHelper.CreateOptions()
 				.AddIncludeProp<DTO.Appointment>((q) => q.Patient);
 			if (forChargeout == true)
@@ -109,9 +107,31 @@ namespace Profibiz.PracticeManager.BL
 			{
 				options = options.AddIncludeProp<DTO.Appointment>((q) => q.AppointmentRemainders);
 			}
-
 			var mapper = AutoMapperHelper.GetPocoMapperWithOptions(options, typeof(EF.AppointmentV), typeof(EF.Patient), typeof(EF.InvoiceItem), typeof(EF.AppointmentRemainder));
-			var ret = mapper.Map<List<DTO.Appointment>>(list);
+
+
+			DTO.Appointment[] ret;
+			if (calcAppointmentPaid == true)
+			{
+				var qry2 = qry.Select(q => new
+				{
+					Item = q,
+					IsAppointmentPaid = db.InvoicesV.Any(z => z.RowId == q.InvoiceRowId && z.PaymentRequest <= 0)
+				});
+				var list = qry2.ToArray();
+				ret = list.Select(q =>
+				{
+					var item = mapper.Map<DTO.Appointment>(q.Item);
+					item.IsAppointmentPaid = q.IsAppointmentPaid;
+					return item;
+				}).ToArray();
+			}
+			else
+			{
+				var list = qry.ToArray();
+				ret = mapper.Map<DTO.Appointment[]>(list);
+			}
+			
 			return ret;
 		}
 

@@ -68,7 +68,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			//ShowWaitIndicator.Show();
 
-            await OneModel.LoadData(isNew: false, rowId: OpenParam.RowId, readOnly: true, selectInvoiceRowId: OpenParam.SelectInvoiceRowId);
+			await OneModel.LoadData(isNew: false, rowId: OpenParam.RowId, readOnly: true, selectInvoiceRowId: OpenParam.SelectInvoiceRowId);
+			//await OneModel.LoadData(isNew: false, rowId: OpenParam.RowId, readOnly: false, selectInvoiceRowId: OpenParam.SelectInvoiceRowId);
 		}
 
 

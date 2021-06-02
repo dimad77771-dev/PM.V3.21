@@ -192,9 +192,9 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 
 
 		
-		public IHttpActionResult GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? forChargeout = null, string rowIds = null)
+		public IHttpActionResult GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? forChargeout = null, Boolean? calcAppointmentPaid = null, string rowIds = null)
 		{
-			var entities = _repository.GetAppointmentList(appointmentBookRowId, patientRowId, insuranceProvidersViewGroupRowId, rowId, startFrom, startTo, completed, inInvoice, forChargeout, rowIds);
+			var entities = _repository.GetAppointmentList(appointmentBookRowId, patientRowId, insuranceProvidersViewGroupRowId, rowId, startFrom, startTo, completed, inInvoice, forChargeout, calcAppointmentPaid, rowIds);
 			return Ok(entities);
 		}
 		public IHttpActionResult PutAppointment([FromBody]List<Appointment> entities)

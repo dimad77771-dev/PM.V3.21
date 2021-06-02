@@ -62,6 +62,7 @@ namespace Profibiz.PracticeManager.Model
 		public DateTime PolicyCoverageValidUntil { get; set; }
 		public String PolicyFullName => InsuranceCoverage.GetPolicyFullName(InsuranceProviderRowId, PolicyOwnerFullName, PolicyNumber, PolicyCoverageStartDate, PolicyCoverageValidUntil);
 
+		public bool IsAppointmentPaid { get; set; }
 
 		public virtual Patient Patient { get; set; }
 

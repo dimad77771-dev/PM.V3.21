@@ -159,6 +159,6 @@ namespace Profibiz.PracticeManager.Model
 			}
 		}
 
-
+		public bool IsPaid => ((Total ?? 0) > 0 && (PaymentRequest ?? 0) <= 0);
 	}
 }

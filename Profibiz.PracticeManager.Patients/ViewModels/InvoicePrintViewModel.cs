@@ -288,10 +288,29 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			var location = AssemblyHelper.GetMainPath();
 			var file = Path.Combine(location, "Templates", printTemplate + ".docx");
+			file = GetTemplateFileName(file);
 			var bytes = File.ReadAllBytes(file);
 			var stream = new MemoryStream(bytes);
 			RichEditConrolManager.LoadDocument(stream, DocumentFormat.OpenXml);
 		}
+
+		string GetTemplateFileName(string file)
+		{
+			if (Entity != null)
+			{
+				if (Entity.IsPaid)
+				{
+					var filePaid = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + "_paid" + Path.GetExtension(file));
+					if (File.Exists(filePaid))
+					{
+						return filePaid;
+					}
+				}
+			}
+
+			return file;
+		}
+
 
 		void ReplaceField(Document doc, string field, string value)
 		{

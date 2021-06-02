@@ -296,7 +296,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 
 
 
-		async public Task<List<Appointment>> GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? inChargeout = null, Boolean? forChargeout = null, Guid[] rowIds = null)
+		async public Task<List<Appointment>> GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? inChargeout = null, Boolean? forChargeout = null, Boolean? calcAppointmentPaid = null, Guid[] rowIds = null)
 		{
 			var _client = new MyHttpClient();
 			var query = "";
@@ -340,6 +340,11 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			{
 				query += "forChargeout=" + forChargeout.ToWebQuery() + "&";
 			}
+			if (calcAppointmentPaid != null)
+			{
+				query += "calcAppointmentPaid=" + calcAppointmentPaid.ToWebQuery() + "&";
+			}
+
 			var response = await _client.GetResponse(_baseUrl, "api/patients/GetAppointmentList?" + query);
 			var patients = await response.Content.ReadAsAsync<IEnumerable<Appointment>>();
 			return patients.ToList();

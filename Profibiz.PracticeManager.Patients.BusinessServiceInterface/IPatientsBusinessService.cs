@@ -35,7 +35,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PostServiceProvider(ServiceProvider entity);
 		Task<UpdateReturn> DeleteServiceProvider(Guid rowId);
 
-		Task<List<Appointment>> GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? inChargeout = null, Boolean? forChargeout = null, Guid[] rowIds = null);
+		Task<List<Appointment>> GetAppointmentList(Guid? appointmentBookRowId = null, Guid? patientRowId = null, Guid? insuranceProvidersViewGroupRowId = null, Guid? rowId = null, DateTime? startFrom = null, DateTime? startTo = null, Boolean? completed = null, Boolean? inInvoice = null, Boolean? inChargeout = null, Boolean? forChargeout = null, Boolean? calcAppointmentPaid = null, Guid[] rowIds = null);
 		Task<UpdateReturn> PutAppointment(List<Appointment> entity);
 		Task<UpdateReturn> PostAppointment(List<Appointment> entity);
 		Task<UpdateReturn> DeleteAppointment(Guid rowId);

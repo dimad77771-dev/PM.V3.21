@@ -219,8 +219,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var patientRowId = OnePatient?.RowId;
 			var insuranceProvidersViewGroupRowId = SelectedInsuranceProvidersViewGroup?.RowId;
 			var task2 = ViewMode == ViewModeEnum.InsuranceGroups ?
-				businessService.GetAppointmentList(insuranceProvidersViewGroupRowId: insuranceProvidersViewGroupRowId, startFrom: FilterFrom, startTo: FilterTo ) :
-				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: patientRowId, startFrom: FilterFrom, startTo: FilterTo );
+				businessService.GetAppointmentList(insuranceProvidersViewGroupRowId: insuranceProvidersViewGroupRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true) :
+				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: patientRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true);
 			var task3 = TaskHelper.IfTrue(() => IsOnePatientOneAppointment,
 				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: null));
 			//var task444 = Task.Delay(10000);
