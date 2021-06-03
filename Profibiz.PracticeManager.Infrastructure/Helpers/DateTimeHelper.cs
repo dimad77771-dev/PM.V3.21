@@ -29,7 +29,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 
 		public static string FormatHHMM(this DateTime arg)
 		{
-			var ret = arg.ToString("HH:mm");
+			var ret = arg.ToString("h:mm tt");
 			//var ret = arg.ToString("t");
 			return ret;
 		}

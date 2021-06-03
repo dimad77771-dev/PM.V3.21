@@ -324,7 +324,7 @@ namespace Profibiz.PracticeManager.BL
 				var message = GetTemplateHtml("appointment");
 
 				message = message.Replace("{{name}}", patient.FirstName);
-				message = message.Replace("{{appointment}}", appointment.Start.ToString("yyyy-MM-dd HH:mm"));
+				message = message.Replace("{{appointment}}", appointment.Start.ToString("yyyy-MM-dd h:mm tt"));
 				message = message.Replace("{{service}}", service.Name);
 				message = message.Replace("{{url}}", url);
 

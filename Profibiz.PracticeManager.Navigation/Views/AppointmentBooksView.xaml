@@ -112,14 +112,14 @@
                                     Header="START AT"
                                     Width="100" >
                         <dxg:GridColumn.EditSettings>
-                            <dxe:TextEditSettings DisplayFormat="HH:mm"/>
+                            <dxe:TextEditSettings DisplayFormat="h:mm tt"/>
                         </dxg:GridColumn.EditSettings>    
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="FinishAt"
                                     Header="FINISH AT"
                                     Width="100">
                         <dxg:GridColumn.EditSettings>
-                            <dxe:TextEditSettings DisplayFormat="HH:mm"/>
+                            <dxe:TextEditSettings DisplayFormat="h:mm tt"/>
                         </dxg:GridColumn.EditSettings>
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="Interval"

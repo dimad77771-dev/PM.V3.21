@@ -155,7 +155,7 @@ namespace Profibiz.PracticeManager.Shell
 		{
 			var culture = (System.Globalization.CultureInfo)System.Globalization.CultureInfo.CurrentCulture.Clone();
 			culture.DateTimeFormat.ShortDatePattern = @"MM\/dd\/yyyy";
-			culture.DateTimeFormat.ShortTimePattern = @"HH:mm";
+			culture.DateTimeFormat.ShortTimePattern = @"h:mm tt";
 			culture.NumberFormat.NumberDecimalSeparator = @".";
 			culture.NumberFormat.NumberGroupSeparator = @",";
 			System.Globalization.CultureInfo.CurrentCulture = culture;
