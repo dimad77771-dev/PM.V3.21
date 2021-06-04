@@ -49,6 +49,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual Boolean IsShowAppointments { get; set; } = GlobalSettings.Instance.PatientsList.IsShowAppointments;
 		public virtual Boolean IsVisibleAppointmentsScheduler => IsShowAppointments;
 
+		public virtual User Role { get; set; } = UserManager.Role;
 
 
 
@@ -87,7 +88,12 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		async Task LoadData()
 		{
 			ShowWaitIndicator.Show();
-			var rows = await lookupsBusinessService.RunTaskAndUpdateAllLookups(businessService.GetPatientList(OpenParmQuery));
+			var qry = OpenParmQuery;
+			if (Role.Patient_RestrictPatientList)
+			{
+				qry += "&restrictPatientList=" + UserManager.UserRowId;
+			}
+			var rows = await lookupsBusinessService.RunTaskAndUpdateAllLookups(businessService.GetPatientList(qry));
 			Entities = Mapper.Map<ObservableCollection<Patient>>(rows.OrderBy(q => q.LastName).ThenBy(q => q.FirstName));
 			UpdateIsCheckBoxVisibility();
 			UpdateRibbonPatientsWithCheckBoxItems();
@@ -179,7 +185,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 			});
 		}
-		public bool CanDelete(Patient row) => (row != null);
+		public bool CanDelete(Patient row) => (row != null && !Role.Patient_DataReadOnly);
 
 		public virtual InteractionRequest<ShowDXWindowsActionParam> ShowDXWindowsInteractionRequest { get; set; } = new InteractionRequest<ShowDXWindowsActionParam>();
 		public void Edit(Patient row)
@@ -195,6 +201,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			AddEdit(null);
 		}
+		public bool CanNew() => (!Role.Patient_DataReadOnly);
 
 		void AddEdit(Patient row)
 		{

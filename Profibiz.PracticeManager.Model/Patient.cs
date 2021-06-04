@@ -213,10 +213,10 @@ namespace Profibiz.PracticeManager.Model
 		}
 
 
-		public bool IsReadOnlyAddress => UseHeadAddress;
+		public bool IsReadOnlyAddress => UseHeadAddress || IsReadOnly_Patient;
 		public bool IsVisibleUseHeadAddress => !IsFamilyHead;
 
-		public bool ReadOnlyFamilyMemberType { get; set; }
+		public bool ReadOnlyFamilyMemberType => IsReadOnly_Patient;
 		public bool IsChanged { get; set; }
 
 		public bool IsExpanded { get; set; }
@@ -226,6 +226,8 @@ namespace Profibiz.PracticeManager.Model
 		public bool IsSelectHeadFamily { get; set; }
 		public bool IsSelectUseHeadAddress { get; set; }
 		public bool IsEnabledFieldIsSelectUseHeadAddress => !IsSelectHeadFamily;
+
+		public bool IsReadOnly_Patient { get; set; } = false;
 
 
 		private byte[] _pho;

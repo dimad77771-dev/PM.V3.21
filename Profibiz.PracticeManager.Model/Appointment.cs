@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace Profibiz.PracticeManager.Model
 {
 	[ImplementPropertyChanged]
-	public partial class Appointment
+	public partial class Appointment : IEntityCreatedUpdated
 	{
 		public Appointment()
 		{
@@ -77,6 +77,12 @@ namespace Profibiz.PracticeManager.Model
 		public Decimal InsuranceCoverageInfoRemaindAmount => InsuranceCoverageInfoTotalAmount - InsuranceCoverageInfoApproveAmount;
 		public String InsuranceCoverageInfoRemaindAmountForegroundColor => InsuranceCoverageInfoRemaindAmount >= 0 ? "Green" : "Red";
 
+		public Guid? CreatedByUserRowId { get; set; }
+		public Guid? UpdatedByUserRowId { get; set; }
+		public DateTime? CreatedByDateTime { get; set; }
+		public DateTime? UpdatedByDateTime { get; set; }
+
+		public String CreatedUpdatedString => this.GetCreatedUpdatedString();
 
 		public ObservableCollection<MultiDateInfo> MultiDates { get; set; } = new ObservableCollection<MultiDateInfo>();
 		public String MultiDatesText { get; set; }

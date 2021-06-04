@@ -150,11 +150,24 @@ namespace Profibiz.PracticeManager.BL
 				foreach (var entity in entities)
 				{
 					var isDelete = (state == EntityState.Deleted);
-					var mapper = AutoMapperHelper.GetPocoMapper(typeof(EF.AppointmentT), typeof(EF.AppointmentRemainder));
+					var options = AutoMapperHelper.CreateOptions();
+					options.ExcludeCreatedUpdatedColumns = true;
+					var mapper = AutoMapperHelper.GetPocoMapperWithOptions(options, typeof(EF.AppointmentT), typeof(EF.AppointmentRemainder));
 
 					if (!isDelete)
 					{
-						var row = mapper.Map<EF.AppointmentT>(entity);
+						//var row = mapper.Map<EF.AppointmentT>(entity);
+
+						var row = db.AppointmentsT.SingleOrDefault(q => q.RowId == entity.RowId);
+						if (row == null)
+						{
+							row = mapper.Map<EF.AppointmentT>(entity);
+							db.AppointmentsT.Add(row);
+						}
+						else
+						{
+							mapper.Map(entity, row);
+						}
 
 						if (entity.Patient?.IsNotRegistered == true)
 						{
@@ -193,9 +206,10 @@ namespace Profibiz.PracticeManager.BL
 
 							AppointmentRegisteredNotify(entity);
 						}
+						
 
-						var entry = db.Entry(row);
-						entry.State = state;
+						//var entry = db.Entry(row);
+						//entry.State = state;
 						db.SaveChangesEx();
 						updateRows.Add(row);
 

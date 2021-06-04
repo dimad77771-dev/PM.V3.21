@@ -45,6 +45,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public Guid? AppointmentRowId { get; set; }
 		public Guid? PatientRowId { get; set; }
 		public MoldelType RowType { get; set; } = MoldelType.Patient;
+		public bool IsReadOnly { get; set; } = false;
 		//public OpenParams OpenParam { get; set; }
 		public virtual ObservableCollection<FormDocmodel> Entities { get; set; }
 		public virtual FormDocmodel Entity { get; set; }
@@ -75,8 +76,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 			else
 			{
-				NewCore();
-				ResetHasChange();
+				if (!IsReadOnly)
+				{
+					NewCore();
+					ResetHasChange();
+				}
 			}
 			ResetHasChange();
 		}
@@ -295,7 +299,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 			});
 		}
-		public bool CanDelete() => (Entity != null);
+		public bool CanDelete() => (Entity != null && !IsReadOnly);
 
 
 		void ClearNewRows()
@@ -336,6 +340,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 			});
 		}
+		public bool CanNew() => (!IsReadOnly);
 
 		public void BeforeLayoutRefresh(CancelRoutedEventArgs e)
 		{
@@ -421,6 +426,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						Style = MainView.TryFindResource("baseEditStyle1") as Style,
 						Width = width2,
 						HorizontalAlignment = HorizontalAlignment.Left,
+						IsReadOnly = IsReadOnly,
 					};
 					var valueBinding = new Binding("PatientForm.Date");
 					valueBinding.Source = Entity;
@@ -482,6 +488,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					textEdit = new TextEdit
 					{
 						Style = MainView.TryFindResource("baseEditStyle1") as Style,
+						IsReadOnly = IsReadOnly,
 					};
 					valueColumn = nameof(formItem.ValueText);
 				}
@@ -490,6 +497,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					textEdit = new CheckEdit
 					{
 						Style = MainView.TryFindResource("baseEditStyle1") as Style,
+						IsReadOnly = IsReadOnly,
 					};
 					valueColumn = nameof(formItem.ValueBoolean);
 					if (formItem.ValueBoolean == null)
@@ -504,6 +512,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						Style = MainView.TryFindResource("baseEditStyle1") as Style,
 						Width = width2,
 						HorizontalAlignment = HorizontalAlignment.Left,
+						IsReadOnly = IsReadOnly,
 					};
 					valueColumn = nameof(formItem.ValueDateTime);
 				}
@@ -515,6 +524,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						MaskType = MaskType.Numeric,
 						Width = width2,
 						HorizontalAlignment = HorizontalAlignment.Left,
+						IsReadOnly = IsReadOnly,
 					};
 					valueColumn = nameof(formItem.ValueNumeric);
 				}

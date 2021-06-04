@@ -338,6 +338,7 @@
 									Grid.Row="0"
 									Grid.Column="1"
 									EditValue="{Binding Entity.Title, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									IsTextEditable="True"
 									ItemsSource="{Binding PatientTitle, Source={StaticResource lookupDataProvider}}"
 									Style="{StaticResource baseEditStyle1}"
@@ -352,6 +353,7 @@
 									Grid.Row="0"
 									Grid.RowSpan="5"
 									Grid.Column="2"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									EditValue="{Binding Entity.Photo, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 									KeyboardNavigation.IsTabStop="False"
 									Stretch="Uniform"
@@ -388,6 +390,7 @@
 									Grid.Row="1"
 									Grid.Column="1"
 									EditValue="{Binding Entity.FirstName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="20" />
 								<dxlc:LayoutItemLabel
@@ -413,6 +416,7 @@
 										Grid.Column="0"
 										EditValue="{Binding Entity.RelationToFamilyHead, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 										IsTextEditable="True"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										ItemsSource="{Binding RelationToFamilyHeadVariants, Source={StaticResource lookupDataProvider}}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="150" />
@@ -421,6 +425,7 @@
 									<dxe:TextEdit
 										Grid.Column="2"
 										EditValue="{Binding Entity.Rate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Mask="P"
 										MaskType="Numeric"
 										MaskUseAsDisplayFormat="True"
@@ -440,6 +445,7 @@
 									Grid.Row="2"
 									Grid.Column="1"
 									EditValue="{Binding Entity.LastName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									FontWeight="Bold"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="30" />
@@ -461,6 +467,7 @@
 									<dxe:DateEdit
 										Grid.Column="0"
 										EditValue="{Binding Entity.FirstSeen, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="160" />
 									<dxlc:LayoutItemLabel
@@ -470,6 +477,7 @@
 									<dxe:DateEdit
 										Grid.Column="2"
 										EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="170" />
 								</Grid>
@@ -483,6 +491,7 @@
 									Grid.Row="3"
 									Grid.Column="1"
 									EditValue="{Binding Entity.MiddleName, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="35" />
 
@@ -498,6 +507,7 @@
 									Grid.Column="4"
 									Grid.ColumnSpan="2"
 									EditValue="{Binding Entity.CardNo, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="180" />
 
@@ -520,6 +530,7 @@
 										Grid.Column="0"
 										EditValue="{Binding Entity.Sex, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 										IsTextEditable="False"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										ItemsSource="{Binding Sexes, Source={StaticResource lookupDataProvider}}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="40">
@@ -553,6 +564,7 @@
 									<dxe:CheckEdit
 										Grid.Column="2"
 										IsChecked="{Binding Entity.HasNoCoverage, Mode=TwoWay}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle0}" />
 								</Grid>
 
@@ -566,6 +578,7 @@
 									Grid.Column="4"
 									Grid.ColumnSpan="2"
 									EditValue="{Binding Entity.ReferrerRowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource comboBoxReferrerStyle}"
 									TabIndex="190" />
 
@@ -602,6 +615,7 @@
 									<dxe:CheckEdit
 										Grid.Column="2"
 										IsChecked="{Binding Entity.UseHeadAddress, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										KeyboardNavigation.IsTabStop="False"
 										Style="{StaticResource baseEditStyle1}"
 										Visibility="{Binding Entity.IsVisibleUseHeadAddress, Converter={StaticResource BooleanToVisibilityConverter}}" />
@@ -755,6 +769,7 @@
 									Grid.Column="1"
 									Grid.ColumnSpan="2"
 									EditValue="{Binding Entity.AddressToUse, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									IsTextEditable="False"
 									ItemsSource="{Binding AddressToUse, Source={StaticResource lookupDataProvider}}"
 									Style="{StaticResource baseEditStyle1}"
@@ -774,6 +789,7 @@
 									AutoPopulateColumns="False"
 									DisplayMember="FirstName"
 									EditValue="{Binding Entity.SendAccountToFamilyMember, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									ImmediatePopup="True"
 									IncrementalFiltering="False"
 									IsPopupAutoWidth="False"
@@ -799,6 +815,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.HomePhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource phoneEditStyle1}"
 									TabIndex="110">
 									<dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
@@ -818,6 +835,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.WorkPhone, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource phoneEditStyle1}"
 									TabIndex="250">
 									<dxe:ButtonInfo Command="{Binding Contacts.HomeCallCommand}" GlyphKind="User">
@@ -836,6 +854,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.MobileNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource phoneEditStyle1}"
 									TabIndex="120">
 									<dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
@@ -854,6 +873,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.Occupation, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="260">
 									<dxe:ButtonInfo Command="{Binding Contacts.MobileCallCommand}" GlyphKind="User">
@@ -872,6 +892,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.EmailAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="130">
 									<dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
@@ -890,6 +911,7 @@
 									Grid.ColumnSpan="2"
 									AllowDefaultButton="False"
 									EditValue="{Binding Entity.Fax, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									Style="{StaticResource baseEditStyle1}"
 									TabIndex="270">
 									<dxe:ButtonInfo Command="{Binding Contacts.MailToCommand}" GlyphKind="User">
@@ -923,6 +945,7 @@
 									<dxe:TextEdit
 										Grid.Column="1"
 										EditValue="{Binding Entity.FamilyDoctor, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="300">
 										<!--
@@ -950,6 +973,7 @@
 									<dxe:TextEdit
 										Grid.Column="4"
 										EditValue="{Binding Entity.FamilyDoctorAddress, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle1}"
 										TabIndex="310" />
 
@@ -960,6 +984,7 @@
 									<dxe:ButtonEdit
 										Grid.Column="7"
 										EditValue="{Binding Entity.FamilyDoctorPhoneNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource phoneEditStyle1}"
 										TabIndex="320" />
 								</Grid>
@@ -984,6 +1009,7 @@
 									Height="75"
 									HorizontalAlignment="Left"
 									EditValue="{Binding Entity.Signature, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+									IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 									KeyboardNavigation.IsTabStop="False"
 									Stretch="Uniform"
 									Style="{StaticResource baseEditStyle1}" />

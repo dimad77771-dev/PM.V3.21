@@ -83,6 +83,7 @@
   <ItemGroup>
     <Compile Include="BaseModel\BaseModelHelper.cs" />
     <Compile Include="FormDocmodel.cs" />
+    <Compile Include="ModelEx\IEntityCreatedUpdated.cs" />
     <Compile Include="UserManager\UserManager.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="WorkInout.cs" />

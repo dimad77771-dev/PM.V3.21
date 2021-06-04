@@ -20,7 +20,7 @@
 	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
-	Width="800"
+	Width="1000"
 	Height="670"
 	Title="Role"
 	ResizeMode="NoResize"
@@ -89,6 +89,8 @@
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
@@ -236,174 +238,229 @@
 							Style="{StaticResource baseEditStyle1}" />
 
 
-
 						<dxlc:LayoutItemLabel
 							Grid.Row="2"
 							Grid.Column="2"
+							Content="Patient"
+							FontWeight="Bold"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="3"
+							Grid.Column="2"
+							Content="Patient Data Read Only"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="3"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_DataReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="4"
+							Grid.Column="2"
+							Content="Medical History Read Only"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="4"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_MedicalHistoryReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="5"
+							Grid.Column="2"
+							Content="Restrict Patient List"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="5"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_RestrictPatientList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="2"
+							Grid.Column="4"
 							Content="Patient Tabs"
 							FontWeight="Bold"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="3"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Patient"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="3"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_Patient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="4"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Medical History"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="4"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_MedicalHistory, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="5"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Insurance Coverage"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="5"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_InsuranceCoverage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="6"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Invoices"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="6"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_Invoices, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="7"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Calendar Events"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="7"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_CalendarEvents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="8"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Notes"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="8"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_Notes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="9"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Appontment Notes"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="9"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_AppontmentNotes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="10"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Patient Notes"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="10"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_PatientNotes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="11"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Patient Documents"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="11"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_Documents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="12"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Treatment Notes"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="12"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_TreatmentNotes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="13"
-							Grid.Column="2"
+							Grid.Column="4"
 							Content="Treatment Plan"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="13"
-							Grid.Column="3"
+							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_TreatmentPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="2"
-							Grid.Column="4"
+							Grid.Column="6"
 							Content="Appointments"
 							FontWeight="Bold"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="3"
-							Grid.Column="4"
+							Grid.Column="6"
 							Content="Read Only"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="3"
-							Grid.Column="5"
+							Grid.Column="7"
 							IsChecked="{Binding Entity.AppointmentsScheduler_IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="4"
-							Grid.Column="4"
+							Grid.Column="6"
 							Grid.RowSpan="2"
-							Content="Hide Appointments&#x0a;with Status 2"
+							Content="Hide Appointments&#x0a;in Status"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:ComboBoxEdit
 							Grid.Row="4"
-							Grid.Column="5"
+							Grid.Column="7"
 							Grid.RowSpan="2"
 							Style="{StaticResource baseEditStyle1}"
 							SeparatorString="; "
@@ -424,6 +481,17 @@
 							</dxe:ComboBoxEdit.ItemTemplate>
 						</dxe:ComboBoxEdit>
 
+						<dxlc:LayoutItemLabel
+							Grid.Row="6"
+							Grid.Column="6"
+							Content="Restrict Appointment&#x0a;Book Access"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="6"
+							Grid.Column="7"
+							IsChecked="{Binding Entity.AppointmentsScheduler_RestrictBookAccess, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
 
 
 					</Grid>

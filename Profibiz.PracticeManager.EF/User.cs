@@ -230,6 +230,10 @@ namespace Profibiz.PracticeManager.EF
         public bool Patient_TreatmentPlan { get; set; }
         public bool AppointmentsScheduler_IsReadOnly { get; set; }
         public string AppointmentsScheduler_HideStatuses2 { get; set; }
+        public bool Patient_DataReadOnly { get; set; }
+        public bool Patient_MedicalHistoryReadOnly { get; set; }
+        public bool Patient_RestrictPatientList { get; set; }
+        public bool AppointmentsScheduler_RestrictBookAccess { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AppointmentBook> AppointmentBooks { get; set; }

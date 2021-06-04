@@ -187,7 +187,12 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ShowWaitIndicator.Show();
 
 			await lookupsService.UpdateAllLookups();
-			AllAppointmentBooks = LookupDataProvider.Instance.AppointmentBooks.OrderBy(q => q.DisplayOrder).ToObservableCollection();
+			var allAppointmentBooks = LookupDataProvider.Instance.AppointmentBooks.OrderBy(q => q.DisplayOrder).ToArray();
+			if (Role.AppointmentsScheduler_RestrictBookAccess)
+			{
+				allAppointmentBooks = allAppointmentBooks.Where(q => q.RowId == LookupDataProvider.FindServiceProvider(UserManager.UserRowId)?.AppointmentBookRowId).ToArray();
+			}
+			AllAppointmentBooks = allAppointmentBooks.ToObservableCollection();
 			AllServiceProviders = LookupDataProvider.Instance.ServiceProvidersEx.ToObservableCollection();
 			AllInsuranceProvidersViewGroups = LookupDataProvider.Instance.InsuranceProvidersViewGroups.ToObservableCollection();
 			if (ViewMode != ViewModeEnum.AppointmentBooks)

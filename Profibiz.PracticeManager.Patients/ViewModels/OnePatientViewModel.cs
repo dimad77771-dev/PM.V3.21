@@ -155,7 +155,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 				NLog.vv();
 			}
-			entity.ReadOnlyFamilyMemberType = true;
+			//entity.ReadOnlyFamilyMemberType = true;
 			if (entity.PatientCoverage == null)
 			{
 				entity.PatientCoverage = new ObservableCollection<PatientCoverage>();
@@ -163,6 +163,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			entity.PatientDocuments.ForEach(q => PatientDocumentSubscribeRow(q));
 			Entity = entity;
 			IsVisibilityRate = IsNew;
+			if (Role.Patient_DataReadOnly)
+			{
+				Entity.IsReadOnly_Patient = true;
+			}
 			BuildFamilyMembersEntities();
 			SubscribeUseHeadAddressChange();
 			SubscribeHasNoCoverageChange();
@@ -249,6 +253,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		async Task LoadMedicalHistoryModel()
 		{
 			MedicalHistoryModel.PatientRowId = Entity.RowId;
+			MedicalHistoryModel.IsReadOnly = Role.Patient_MedicalHistoryReadOnly;
 
 			if (IsNew) return;
 			if (isLoadMedicalHistoryModel) return;

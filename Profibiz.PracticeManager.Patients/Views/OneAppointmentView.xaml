@@ -22,7 +22,7 @@
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
 	Title="Appointment"
 	Width="650"
-	Height="680"
+	Height="780"
 	d:DesignHeight="1060"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	Left="50"
@@ -738,6 +738,21 @@
 					Margin="30,3,30,3"
 					Command="{Binding AddOpenTreatmentNoteCommand}"
 					Content="{Binding AddOpenTreatmentNoteButtonText}" />
+
+
+				<!--<dxlc:LayoutItemLabel
+					Grid.Row="20"
+					Grid.Column="0"
+					Content="Created/Updated"
+					Style="{StaticResource layoutItemLabelStyle1Left}" />-->
+				<dxe:TextEdit
+					Grid.Row="20"
+					Grid.Column="0"
+					Grid.ColumnSpan="2"
+					Margin="4"
+					EditValue="{Binding Entity.CreatedUpdatedString, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=OneWay}"
+					IsReadOnly="true"
+					Style="{StaticResource baseEditStyle1}" />
 
 
 

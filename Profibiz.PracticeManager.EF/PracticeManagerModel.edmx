@@ -2150,6 +2150,10 @@
           <Property Name="Patient_TreatmentPlan" Type="bit" Nullable="false" />
           <Property Name="AppointmentsScheduler_IsReadOnly" Type="bit" Nullable="false" />
           <Property Name="AppointmentsScheduler_HideStatuses2" Type="nvarchar(max)" />
+          <Property Name="Patient_DataReadOnly" Type="bit" Nullable="false" />
+          <Property Name="Patient_MedicalHistoryReadOnly" Type="bit" Nullable="false" />
+          <Property Name="Patient_RestrictPatientList" Type="bit" Nullable="false" />
+          <Property Name="AppointmentsScheduler_RestrictBookAccess" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserSettings">
           <Key>
@@ -18776,6 +18780,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="Patient_TreatmentPlan" Type="Boolean" Nullable="false" />
           <Property Name="AppointmentsScheduler_IsReadOnly" Type="Boolean" Nullable="false" />
           <Property Name="AppointmentsScheduler_HideStatuses2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Patient_DataReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="Patient_MedicalHistoryReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="Patient_RestrictPatientList" Type="Boolean" Nullable="false" />
+          <Property Name="AppointmentsScheduler_RestrictBookAccess" Type="Boolean" Nullable="false" />
           </EntityType>
         <Association Name="FK_AppointmentBooks_CreatedByUserRowId">
           <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
@@ -26580,6 +26588,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PracticeManagerModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="AppointmentsScheduler_RestrictBookAccess" ColumnName="AppointmentsScheduler_RestrictBookAccess" />
+                <ScalarProperty Name="Patient_RestrictPatientList" ColumnName="Patient_RestrictPatientList" />
+                <ScalarProperty Name="Patient_MedicalHistoryReadOnly" ColumnName="Patient_MedicalHistoryReadOnly" />
+                <ScalarProperty Name="Patient_DataReadOnly" ColumnName="Patient_DataReadOnly" />
                 <ScalarProperty Name="AppointmentsScheduler_HideStatuses2" ColumnName="AppointmentsScheduler_HideStatuses2" />
                 <ScalarProperty Name="AppointmentsScheduler_IsReadOnly" ColumnName="AppointmentsScheduler_IsReadOnly" />
                 <ScalarProperty Name="Patient_TreatmentPlan" ColumnName="Patient_TreatmentPlan" />

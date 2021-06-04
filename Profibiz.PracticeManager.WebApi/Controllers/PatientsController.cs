@@ -35,9 +35,9 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			_repository.SetCurrentUserRowId(controllerContext);
 		}
 
-		public IHttpActionResult GetPatientsList(Guid? insuranceProviderRowId = null, Guid? insuranceProvidersViewGroupRowId = null, bool hasNoInsuranceProvider = false, bool includeAllFamilyMember = false)
+		public IHttpActionResult GetPatientsList(Guid? insuranceProviderRowId = null, Guid? insuranceProvidersViewGroupRowId = null, bool hasNoInsuranceProvider = false, bool includeAllFamilyMember = false, string restrictPatientList = "")
         {
-            var patients = _repository.GetPatientsList(insuranceProviderRowId, insuranceProvidersViewGroupRowId, hasNoInsuranceProvider, includeAllFamilyMember);
+            var patients = _repository.GetPatientsList(insuranceProviderRowId, insuranceProvidersViewGroupRowId, hasNoInsuranceProvider, includeAllFamilyMember, restrictPatientList);
 			return Ok(patients);
         }
 

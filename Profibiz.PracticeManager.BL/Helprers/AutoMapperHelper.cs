@@ -127,6 +127,14 @@ namespace Profibiz.PracticeManager.BL
 					ignore = false;
 				}
 
+				if (options?.ExcludeCreatedUpdatedColumns == true)
+				{
+					if (new[] { "CreatedByUserRowId", "UpdatedByUserRowId", "CreatedByDateTime", "UpdatedByDateTime" }.Contains(prop.Name))
+					{
+						ignore = true;
+					}
+				}
+
 				if (ignore)
 				{
 					mappingExpression.ForMember(prop.Name, z => z.Ignore());
@@ -205,6 +213,8 @@ namespace Profibiz.PracticeManager.BL
 			}
 
 			public bool CreateMissingTypeMaps { get; set; }
+
+			public bool ExcludeCreatedUpdatedColumns { get; set; } = false;
 		}
 
 		public static Options CreateOptions()

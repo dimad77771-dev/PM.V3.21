@@ -152,7 +152,7 @@ namespace Profibiz.PracticeManager.BL
 		
 
 
-		public IEnumerable<DTO.PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember)
+		public IEnumerable<DTO.PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember, string restrictPatientList)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
@@ -183,6 +183,12 @@ namespace Profibiz.PracticeManager.BL
 			}
 
 			wh2 = PredicateBuilder.And(wh2, q => !q.IsNotRegistered);
+
+			if (!string.IsNullOrEmpty(restrictPatientList))
+			{
+				var serviceProviderRowId = new Guid(restrictPatientList);
+				wh2 = PredicateBuilder.And(wh2, q => db.AppointmentsT.Any(z => z.PatientRowId == q.RowId && z.ServiceProviderRowId == serviceProviderRowId));
+			}
 
 			var list = db.PatientsListView.Where(wh2.Expand()).ToArray();
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.PatientsListView));

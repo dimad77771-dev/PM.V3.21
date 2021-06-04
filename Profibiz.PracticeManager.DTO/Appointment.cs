@@ -53,7 +53,12 @@ namespace Profibiz.PracticeManager.DTO
 		public DateTime PolicyCoverageValidUntil { get; set; }
 
 		public bool IsAppointmentPaid { get; set; }
-		
+
+		public Guid? CreatedByUserRowId { get; set; }
+		public Guid? UpdatedByUserRowId { get; set; }
+		public DateTime? CreatedByDateTime { get; set; }
+		public DateTime? UpdatedByDateTime { get; set; }
+
 
 		public Patient Patient { get; set; }
 		public InvoiceItem InvoiceItem { get; set; }

@@ -15,7 +15,7 @@ namespace Profibiz.PracticeManager.BL
 		Guid? CurrentUserRowId { get; set; }
 		void SetCurrentUserRowId(HttpControllerContext controllerContext);
 
-		IEnumerable<PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember);
+		IEnumerable<PatientsListView> GetPatientsList(Guid? insuranceProviderRowId, Guid? insuranceProvidersViewGroupRowId, bool hasNoInsuranceProvider, bool includeAllFamilyMember, string restrictPatientList);
 		Guid[] PatientRowId2InsuranceProviders(Guid patientRowId);
 		List<InsuranceCoverage> PatientRowId2InsuranceCoverages(Guid patientRowId);
 		Patient GetPatient(Guid id, bool isShortForm, bool isAddressOnly);
