@@ -229,6 +229,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ValidateHelper.Empty(Entity.FirstName, "First Name", errors);
 			ValidateHelper.Empty(Entity.LastName, "Last Name", errors);
 			ValidateHelper.Empty(Entity.DoctorRate, "Rate", errors);
+			ValidateHelper.Empty(Entity.Position, "Position", errors);
 			ValidateHelper.Empty(Entity.MaximumDayAppointments, "Maximum appointments per day", errors);
 			ValidateHelper.Empty(Entity.AppointmentBackgroundColor, "Background", errors);
 			ValidateHelper.Empty(Entity.AppointmentForegroundColor, "Foreground", errors);

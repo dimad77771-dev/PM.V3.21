@@ -166,6 +166,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		async Task SetupStartFinishForNewRow()
 		{
+			return; //убрал по указанию Артура от 05.06.2021
+
 			if (!IsNew) return;
 
 			if (Entity.ServiceProviderRowId != null && OpenParam.NewStart != null)
