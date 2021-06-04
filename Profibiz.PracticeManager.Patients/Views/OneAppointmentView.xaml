@@ -599,6 +599,7 @@
 
 					<dxe:ComboBoxEdit
 						Grid.Column="1"
+						Visibility="{Binding IsShowStatus2, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}"
 						Margin="4"
 						EditValue="{Binding Entity.Status2RowId, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 						IsReadOnly="{Binding IsReadOnly}"

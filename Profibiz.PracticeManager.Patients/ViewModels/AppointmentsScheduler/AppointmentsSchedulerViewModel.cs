@@ -92,6 +92,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			(ViewMode == ViewModeEnum.OnePatient && SelectedAppointmentBook != null && SelectedAppointmentBook?.RowId != ALL_APPOINTMENTBOOKS);
 		public List<Appointment> AllAppointmentInAppointmentBook;
 
+		public virtual User Role { get; set; } = UserManager.Role;
+		public virtual Boolean IsReadOnly => Role.AppointmentsScheduler_IsReadOnly;
 		public Boolean IsEnableControl { get; set; }
 		public Boolean IsMainRibbonShow { get; set; }
 		public Boolean IsSmallRibbonHide { get; set; }
@@ -219,10 +221,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var patientRowId = OnePatient?.RowId;
 			var insuranceProvidersViewGroupRowId = SelectedInsuranceProvidersViewGroup?.RowId;
 			var task2 = ViewMode == ViewModeEnum.InsuranceGroups ?
-				businessService.GetAppointmentList(insuranceProvidersViewGroupRowId: insuranceProvidersViewGroupRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true) :
-				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: patientRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true);
+				businessService.GetAppointmentList(insuranceProvidersViewGroupRowId: insuranceProvidersViewGroupRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true, hideStatuses2: Role.AppointmentsScheduler_HideStatuses2) :
+				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: patientRowId, startFrom: FilterFrom, startTo: FilterTo, calcAppointmentPaid: true, hideStatuses2: Role.AppointmentsScheduler_HideStatuses2);
 			var task3 = TaskHelper.IfTrue(() => IsOnePatientOneAppointment,
-				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: null));
+				businessService.GetAppointmentList(appointmentBookRowId: appointmentBookRowId, patientRowId: null, hideStatuses2: Role.AppointmentsScheduler_HideStatuses2));
 			//var task444 = Task.Delay(10000);
 			await TaskHelper.WhenAll(task2, task3);//, task444);
 
@@ -492,6 +494,9 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			});
 		}
 
+		public bool CanNewEntity(bool isNotRegisteredMode = false) => !IsReadOnly;
+		public bool CanDeleteEntity() => !IsReadOnly;
+
 		public void AppointmentViewInfoCustomize(DevExpress.Xpf.Scheduler.AppointmentViewInfoCustomizingEventArgs e)
 		{
 			var rowId = (Guid)e.ViewInfo.Appointment.CustomFields["RowId"];
@@ -633,6 +638,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					ItemName = q
 				});
 			});
+
+			if (IsReadOnly)
+			{
+				return;
+			}
 
 			if (!IsEnableControl || IsOnePatientAllAppointment)
 			{
@@ -940,6 +950,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ShowDays2IsVisible = ShowDays2IsVisible && !isMonthView;
 			ShowDaysIsVisible = ShowDaysIsVisible && !isMonthView;
 			ShowHoursIsVisible = ShowHoursIsVisible && !isMonthView;
+
+			if (IsReadOnly)
+			{
+				var schedulerControl = SchedulerControlManager.Control;
+				schedulerControl.OptionsCustomization.AllowAppointmentCreate = Xtra.UsedAppointmentType.None;
+				schedulerControl.OptionsCustomization.AllowAppointmentDrag = Xtra.UsedAppointmentType.None;
+				schedulerControl.OptionsCustomization.AllowAppointmentEdit = Xtra.UsedAppointmentType.None;
+				schedulerControl.OptionsCustomization.AllowAppointmentDelete = Xtra.UsedAppointmentType.None;
+				schedulerControl.OptionsCustomization.AllowAppointmentResize = Xtra.UsedAppointmentType.None;
+				schedulerControl.OptionsCustomization.AllowAppointmentMultiSelect = false;
+			}
+			
 		}
 
 

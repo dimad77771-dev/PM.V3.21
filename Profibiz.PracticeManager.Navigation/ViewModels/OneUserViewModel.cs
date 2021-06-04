@@ -80,6 +80,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				entity.RowId = Guid.NewGuid();
 			}
 			Entity = entity;
+			Entity.Load_AppointmentsScheduler_HideStatuses2();
 			ResetHasChange();
 
 
@@ -123,6 +124,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			}
 
 			//updateEntity
+			Entity.Update_AppointmentsScheduler_HideStatuses2();
 			var updateEntity = Entity.GetPocoClone();
 			var updateEntities = new[] { updateEntity };
 

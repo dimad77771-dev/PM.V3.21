@@ -25,7 +25,7 @@ namespace Profibiz.PracticeManager.BL
 {
     public partial class WebApiRepository
     {
-		public IEnumerable<DTO.Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, Boolean? calcAppointmentPaid, string rowIds)
+		public IEnumerable<DTO.Appointment> GetAppointmentList(Guid? appointmentBookRowId, Guid? patientRowId, Guid? insuranceProvidersViewGroupRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, Boolean? inInvoice, Boolean? forChargeout, Boolean? calcAppointmentPaid, string rowIds, string hideStatuses2)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
@@ -83,6 +83,11 @@ namespace Profibiz.PracticeManager.BL
 			if (forChargeout == true)
 			{
 				wh = PredicateBuilder.And(wh, q => q.InvoiceItem != null && !q.InvoiceItem.ChargeoutItems.Any() && !q.IsIgnoreForChargeout);
+			}
+			if (!string.IsNullOrEmpty(hideStatuses2))
+			{
+				var statusRowIds = hideStatuses2.Split(';').Select(q => new Guid(q)).ToArray();
+				wh = PredicateBuilder.And(wh, q => !statusRowIds.Any(z => z == q.Status2RowId));
 			}
 
 			var qry = db.AppointmentsV

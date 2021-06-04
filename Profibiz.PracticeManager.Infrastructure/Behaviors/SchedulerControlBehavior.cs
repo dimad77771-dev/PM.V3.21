@@ -54,7 +54,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 	public class SchedulerControlManager
 	{
 		public SchedulerControlBehavior Behavior { get; set; }
-		SchedulerControl Control => (SchedulerControl)Behavior.AssociatedObject;
+		public SchedulerControl Control => (SchedulerControl)Behavior.AssociatedObject;
 
 		public void SetSelection(DateTime start, DateTime finish, Object resourceId)
 		{

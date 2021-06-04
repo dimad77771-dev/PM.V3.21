@@ -20,8 +20,8 @@
 	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
-	Width="500"
-	Height="470"
+	Width="800"
+	Height="670"
 	Title="Role"
 	ResizeMode="NoResize"
 	WindowStartupLocation="CenterScreen"
@@ -80,12 +80,19 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
 							<ColumnDefinition Width="Auto" />
 							<ColumnDefinition Width="*" />
+							<ColumnDefinition Width="Auto" />
+							<ColumnDefinition Width="2*" />
 						</Grid.ColumnDefinitions>
 
 						<dxlc:LayoutItemLabel
@@ -344,6 +351,78 @@
 							IsChecked="{Binding Entity.Patient_Documents, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="12"
+							Grid.Column="2"
+							Content="Treatment Notes"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="12"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_TreatmentNotes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="13"
+							Grid.Column="2"
+							Content="Treatment Plan"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="13"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_TreatmentPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="2"
+							Grid.Column="4"
+							Content="Appointments"
+							FontWeight="Bold"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="3"
+							Grid.Column="4"
+							Content="Read Only"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="3"
+							Grid.Column="5"
+							IsChecked="{Binding Entity.AppointmentsScheduler_IsReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="4"
+							Grid.Column="4"
+							Grid.RowSpan="2"
+							Content="Hide Appointments&#x0a;with Status 2"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:ComboBoxEdit
+							Grid.Row="4"
+							Grid.Column="5"
+							Grid.RowSpan="2"
+							Style="{StaticResource baseEditStyle1}"
+							SeparatorString="; "
+							DisplayMember="Name"
+							TextWrapping="Wrap"
+							ItemsSource="{Binding Entity.AppointmentsScheduler_HideStatuses2_Items}"
+							EditValue="{Binding Entity.AppointmentsScheduler_HideStatuses2_SelectedItems, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True, Converter={infrastructure:DebugConverter}}"
+							ShowSizeGrip="False"
+							IsTextEditable="False"
+							ShowCustomItems="False">
+							<dxe:ComboBoxEdit.StyleSettings>
+								<dxe:CheckedComboBoxStyleSettings />
+							</dxe:ComboBoxEdit.StyleSettings>
+							<dxe:ComboBoxEdit.ItemTemplate>
+								<DataTemplate>
+									<TextBlock Text="{Binding Name}" TextWrapping="Wrap" />
+								</DataTemplate>
+							</dxe:ComboBoxEdit.ItemTemplate>
+						</dxe:ComboBoxEdit>
 
 
 

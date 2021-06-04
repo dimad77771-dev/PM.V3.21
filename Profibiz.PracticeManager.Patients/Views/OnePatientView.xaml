@@ -1003,7 +1003,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Treatment Plan" Visibility="{Binding IsVisibilityTreatmentPlan, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Treatment Plan" Visibility="{Binding IsTabVisibile_TreatmentPlan, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<localv:TreatmentPlanRecordView>
 								<dxmvvm:Interaction.Behaviors>
@@ -1319,7 +1319,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Treatment Notes" Visibility="{Binding IsVisibilityAppointmentTreatmentNote, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Treatment Notes" Visibility="{Binding IsTabVisibile_TreatmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<Grid>
 								<Grid.RowDefinitions>

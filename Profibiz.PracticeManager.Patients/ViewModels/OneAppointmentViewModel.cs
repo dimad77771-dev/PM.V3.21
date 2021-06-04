@@ -33,6 +33,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual InteractionRequest<ShowDXWindowsActionParam> ShowDXWindowsInteractionRequest { get; set; } = new InteractionRequest<ShowDXWindowsActionParam>();
 		#endregion
 		public OpenParams OpenParam { get; set; }
+		public virtual User Role { get; set; } = UserManager.Role;
 		public virtual Appointment Entity { get; set; }
 		public virtual AppointmentBook AppointmentBook { get; set; }
 		public virtual ObservableCollection<ServiceProvider> ServiceProviders { get; set; }
@@ -55,6 +56,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual string AddOpenClinicalNoteButtonText => (AppointmentClinicalNoteExists ? "Edit Clinical Notes..." : "Add Clinical Notes...");
 		public virtual bool AppointmentTreatmentNoteExists => (Entity?.AppointmentTreatmentNoteRowId != null);
 		public virtual string AddOpenTreatmentNoteButtonText => (AppointmentTreatmentNoteExists ? "Edit Treatment Notes..." : "Add Treatment Notes...");
+		public virtual bool IsShowStatus2 => !Role.HasAppointmentsScheduler_HideStatuses2();
 
 
 		public virtual UIElementManager UIManagerStartTime { get; set; } = new UIElementManager();
@@ -111,7 +113,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				Entity.IsSmsWhenRegistered = true;
 			}
 			IsReadOnlyAppointmentBookRowId = (Entity.AppointmentBookRowId != default(Guid));
-			IsReadOnly = (Entity.InInvoice || OpenParam.IsReadOnly);
+			IsReadOnly = (Entity.InInvoice || OpenParam.IsReadOnly || Role.AppointmentsScheduler_IsReadOnly);
 			BuildAppointmentBooks();
 			BuildInsuranceProviders(true);
 			BuildServiceProviders(true);
