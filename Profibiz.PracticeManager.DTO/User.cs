@@ -47,5 +47,9 @@ namespace Profibiz.PracticeManager.DTO
 		public bool Patient_AppontmentNotes { get; set; }
 		public bool Patient_PatientNotes { get; set; }
 		public bool Patient_Documents { get; set; }
+		public bool Patient_TreatmentNotes { get; set; }
+		public bool Patient_TreatmentPlan { get; set; }
+		public bool AppointmentsScheduler_IsReadOnly { get; set; }
+		public string AppointmentsScheduler_HideStatuses2 { get; set; }
 	}
 }

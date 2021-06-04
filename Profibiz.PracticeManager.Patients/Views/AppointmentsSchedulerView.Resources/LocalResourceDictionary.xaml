@@ -260,7 +260,7 @@
                         Background="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Background}"
                         BorderBrush="Black"
                         BorderThickness="1"
-                        Visibility="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Visibility}">
+                        Visibility="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Visibility2}">
 
                         <TextBlock
                             Padding="5"
@@ -554,7 +554,7 @@
                 Background="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Background}"
                 BorderBrush="Black"
                 BorderThickness="1"
-                Visibility="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Visibility}" />
+                Visibility="{Binding CustomViewInfo.Entity.Status2RowId, Converter={StaticResource AppointmentStatusToColorConverter}, ConverterParameter=Visibility2}" />
 
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>

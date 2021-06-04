@@ -160,7 +160,7 @@ namespace Profibiz.PracticeManager.Patients.Views
 		{
 			//static string TIME_FORMAT = "{0:t}";
 			//static string TIME_FORMAT2 = "{0:\\-t}";
-			static string TIME_FORMAT = "{0:HH:mm}";
+			static string TIME_FORMAT = "{0:t}";
 
 			public MyAppointmentFormatStringService(IAppointmentFormatStringService service) : base(service) { }
 			//public override string GetVerticalAppointmentStartFormat(IAppointmentViewInfo aptViewInfo)

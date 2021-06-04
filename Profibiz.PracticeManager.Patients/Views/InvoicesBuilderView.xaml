@@ -241,7 +241,7 @@
                                     </dxg:GridColumn.EditSettings>-->
                                 </dxg:GridColumn>
                                 <dxg:GridColumn FieldName="StartEndDateString"
-                                                Width="145"
+                                                Width="185"
                                                 Header="START/FINISH TIME" />
                                 <dxg:GridColumn FieldName="AppointmentBookName"
                                                 Width="160"

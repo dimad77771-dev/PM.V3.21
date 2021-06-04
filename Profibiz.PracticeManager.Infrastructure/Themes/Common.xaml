@@ -230,14 +230,14 @@
     <dxe:TextEditSettings
         x:Key="timeHHMMGridEditSettings"
         AllowNullInput="True"
-        Mask="HH:mm"
+        Mask="t"
         MaskType="DateTimeAdvancingCaret"
         MaskUseAsDisplayFormat="True" />
     <dxe:TextEditSettings
         x:Key="timeHHMMGridEditSettingsCenter"
         HorizontalContentAlignment="Center"
         AllowNullInput="True"
-        Mask="HH:mm"
+        Mask="t"
         MaskType="DateTimeAdvancingCaret"
         MaskUseAsDisplayFormat="True" />
     <dxe:DateEditSettings
@@ -349,7 +349,7 @@
         TargetType="dxe:ButtonEdit">
         <Setter Property="MaskType" Value="DateTimeAdvancingCaret" />
         <!--<Setter Property="Mask" Value="t" />-->
-        <Setter Property="Mask" Value="HH:mm" />
+        <Setter Property="Mask" Value="t" />
         <Setter Property="MaskUseAsDisplayFormat" Value="True" />
     </Style>
 

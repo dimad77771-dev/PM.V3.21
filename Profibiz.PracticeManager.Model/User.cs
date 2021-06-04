@@ -1,15 +1,25 @@
 ﻿using PropertyChanged;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Profibiz.PracticeManager.Infrastructure;
 
 namespace Profibiz.PracticeManager.Model
 {
 	[ImplementPropertyChanged]
 	public class User
 	{
+		public User()
+		{
+			//AppointmentsScheduler_HideStatuses2_Items = new List<object>() { "11", "22", "33", "44" }
+			//	.ToObservableCollection();
+			//AppointmentsScheduler_HideStatuses2_SelectedItems = new[] { AppointmentsScheduler_HideStatuses2_Items[0], AppointmentsScheduler_HideStatuses2_Items[3] }
+			//	.ToList();
+		}
+
 		public Guid RowId { get; set; }
 		public string UserName { get; set; }
 		public string Name { get; set; }
@@ -49,12 +59,24 @@ namespace Profibiz.PracticeManager.Model
 		public bool Patient_AppontmentNotes { get; set; }
 		public bool Patient_PatientNotes { get; set; }
 		public bool Patient_Documents { get; set; }
+		public bool Patient_TreatmentNotes { get; set; }
+		public bool Patient_TreatmentPlan { get; set; }
+		public bool AppointmentsScheduler_IsReadOnly { get; set; }
+		public string AppointmentsScheduler_HideStatuses2 { get; set; }
 
+		public ObservableCollection<object> AppointmentsScheduler_HideStatuses2_Items { get; set; } 
+				= LookupDataProvider.Instance?.AppointmentStatuses?.Cast<object>()?.ToObservableCollection();
+		public List<object> AppointmentsScheduler_HideStatuses2_SelectedItems { get; set; } = new AppointmentStatus[0].Cast<object>().ToList();
 
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }
 
 		public string Rowtype9 => "-";
+
+		public bool HasAppointmentsScheduler_HideStatuses2()
+		{
+			return !string.IsNullOrEmpty(AppointmentsScheduler_HideStatuses2);
+		}
 
 
 		public string GetAddress()
@@ -63,6 +85,28 @@ namespace Profibiz.PracticeManager.Model
 			adr = (adr ?? "").Trim();
 			return adr;
 		}
+
+		public void Update_AppointmentsScheduler_HideStatuses2()
+		{
+			if (AppointmentsScheduler_HideStatuses2_SelectedItems != null)
+			{
+				AppointmentsScheduler_HideStatuses2 = string.Join(";", AppointmentsScheduler_HideStatuses2_SelectedItems.Cast<AppointmentStatus>().Select(q => q.RowId.ToString()));
+			}
+			else
+			{
+				AppointmentsScheduler_HideStatuses2 = null;
+			}
+		}
+
+		public void Load_AppointmentsScheduler_HideStatuses2()
+		{
+			if (!string.IsNullOrEmpty(AppointmentsScheduler_HideStatuses2))
+			{
+				var rowIds = AppointmentsScheduler_HideStatuses2.Split(';').Select(q => new Guid(q)).ToArray();
+				AppointmentsScheduler_HideStatuses2_SelectedItems = AppointmentsScheduler_HideStatuses2_Items.Where(q => rowIds.Contains(((AppointmentStatus)q).RowId)).ToList();
+			}
+		}
+
 
 		public static User GetFullRole()
 		{
@@ -87,6 +131,12 @@ namespace Profibiz.PracticeManager.Model
 				Patient_AppontmentNotes = true,
 				Patient_PatientNotes = true,
 				Patient_Documents = true,
+				Patient_TreatmentNotes = true,
+				Patient_TreatmentPlan = true,
+
+				//AppointmentsScheduler_IsReadOnly = true,
+				AppointmentsScheduler_IsReadOnly = false,
+				AppointmentsScheduler_HideStatuses2 = "",//"9b3ef35d-b5a1-4f68-818b-eca0698724f4;e023d5fe-9c07-4156-a1a2-1f7c20c4b1d1;df1c22f2-ebd6-4174-969f-abeb2de19dc8",
 			};
 		}
 

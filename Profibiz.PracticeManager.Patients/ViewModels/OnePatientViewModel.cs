@@ -69,6 +69,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsTabVisibile_AppontmentNotes => Role.Patient_AppontmentNotes && IsVisibilityAppointmentClinicalNote;
 		public virtual bool IsTabVisibile_PatientNotes => Role.Patient_PatientNotes && IsVisibilityAppointmentClinicalNote;
 		public virtual bool IsTabVisibile_Documents => Role.Patient_Documents && IsVisibilityPatientDocument;
+		public virtual bool IsTabVisibile_TreatmentPlan => Role.Patient_TreatmentPlan && IsVisibilityTreatmentPlan;
+		public virtual bool IsTabVisibile_TreatmentNotes => Role.Patient_TreatmentNotes && IsVisibilityAppointmentTreatmentNote;
 		#endregion
 
 

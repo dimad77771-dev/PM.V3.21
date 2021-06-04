@@ -91,6 +91,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				{
 					return "Collapsed";
 				}
+				else if (returnType == "Visibility2")
+				{
+					return "Collapsed";
+				}
 				else if (returnType == "Background")
 				{
 					return "#FFFFFF";
@@ -109,6 +113,17 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (returnType == "Visibility")
 				{
 					return "Visible";
+				}
+				if (returnType == "Visibility2")
+				{
+					if (UserManager.Role?.HasAppointmentsScheduler_HideStatuses2() == true)
+					{
+						return "Collapsed";
+					}
+					else
+					{
+						return "Visible";
+					}
 				}
 				else if (returnType == "Background")
 				{
