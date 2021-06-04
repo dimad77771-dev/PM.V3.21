@@ -72,7 +72,7 @@ namespace DevExpress.DevAV.ViewModels
 		string GetReminderDateTime()
 		{
 			if (!Entity.Reminder || Entity.ReminderDateTime == null) return string.Empty;
-			return String.Format("Reminder by {0:dddd, MMMM d, yyyy h:mm tt}. ", Entity.ReminderDateTime.Value);
+			return String.Format("Reminder by {0:dddd, MMMM d, yyyy t}. ", Entity.ReminderDateTime.Value);
 		}
 		string GetFollowUp(EmployeeTaskFollowUp followUp)
 		{

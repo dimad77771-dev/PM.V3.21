@@ -110,7 +110,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Text="Due Date: " FontSize="12" />
-				<TextBlock Grid.Column="1" Text="{Binding Entity.DueDate, StringFormat={}{0:ddd MM/dd/yyyy h:mm tt}}" FontSize="12" />
+				<TextBlock Grid.Column="1" Text="{Binding Entity.DueDate, StringFormat={}{0:ddd MM/dd/yyyy t}}" FontSize="12" />
                 <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right" Visibility="{Binding Entity.Private, Converter={StaticResource BoolToVisibilityConverter}}">
                     <Image Source="pack://application:,,,/DevExpress.OutlookInspiredApp.Wpf;component/Resources/icon-task-private-16.png" Stretch="None" Margin="0,0,3,0" />
                     <TextBlock Text="Private" FontSize="12" />

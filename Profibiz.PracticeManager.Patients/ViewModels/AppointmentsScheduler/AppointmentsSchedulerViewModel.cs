@@ -873,7 +873,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public Xtra.SchedulerGroupType GroupType { get; set; } = Xtra.SchedulerGroupType.Resource;
 
 		public enum ShowHoursEnum { Working, All }
-		public ShowHoursEnum ShowHours { get; set; } = ShowHoursEnum.All;
+		public ShowHoursEnum ShowHours { get; set; } = ShowHoursEnum.Working;
 		public Boolean ShowHoursIsEnabled { get; set; }
 		public Boolean ShowHoursIsVisible { get; set; }
 		public void OnShowHoursChanged()

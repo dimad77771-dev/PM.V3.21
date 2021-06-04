@@ -55,8 +55,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsVisibilityPatientNote { get; set; } = true;
 		public virtual bool IsVisibilityPatientDocument { get; set; } = true;
 		public virtual bool IsVisibilityAppointmentClinicalNote { get; set; } = true;
-		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = false;
-		public virtual bool IsVisibilityTreatmentPlan { get; set; } = false;
+		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = true;
+		public virtual bool IsVisibilityTreatmentPlan { get; set; } = true;
 
 		#region Role
 		public virtual User Role { get; set; } = UserManager.Role;
