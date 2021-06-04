@@ -1181,7 +1181,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Appontment Notes" Visibility="{Binding IsTabVisibile_AppontmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Appointment Forms" Visibility="{Binding IsTabVisibile_AppontmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<Grid>
 								<Grid.RowDefinitions>
@@ -1293,7 +1293,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Patient Notes" Visibility="{Binding IsTabVisibile_PatientNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Patient Forms" Visibility="{Binding IsTabVisibile_PatientNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<dx:MeasurePixelSnapper>
 								<ItemsControl ItemsSource="{Binding Entity.PatientFormDocuments.ButtonsAppointmentForm}" Margin="2">
