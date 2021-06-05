@@ -43,11 +43,23 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				if ((string)parameter == "Foreground")
 				{
-					return "Black";
+					return "White";
 				}
 				else if ((string)parameter == "Background")
 				{
-					return "#D1D1D1";
+					return "Black";
+				}
+				else throw new ArgumentException();
+			}
+			else if (appointment?.Patient?.IsNotRegistered == true)
+			{
+				if ((string)parameter == "Foreground")
+				{
+					return "White";
+				}
+				else if ((string)parameter == "Background")
+				{
+					return "#A0A0A0";
 				}
 				else throw new ArgumentException();
 			}
@@ -55,14 +67,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				if ((string)parameter == "Foreground")
 				{
-					if (appointment?.Patient?.IsNotRegistered == true)
-					{
-						return "Blue";
-					}
-					else
-					{
-						return appointment.Doctor.ForegroundColor;
-					}
+					return appointment.Doctor.ForegroundColor;
 				}
 				else if ((string)parameter == "Background")
 				{
