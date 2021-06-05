@@ -1,367 +1,365 @@
-﻿<UserControl x:Class="Profibiz.PracticeManager.Patients.Views.RibbonAppointmentsSchedulerView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
-             xmlns:inter="http://www.codeplex.com/prism"
-             xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
-             xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
-             xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
-             xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
-             xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
-             xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
-             xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
-             xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
-             xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
-             xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
-             xmlns:sys="clr-namespace:System;assembly=mscorlib"
-             prism:ViewModelLocator.AutoWireViewModel="False"
-             mc:Ignorable="d"
-             d:DesignHeight="300"
-             d:DesignWidth="1300">
+﻿<UserControl
+	x:Class="Profibiz.PracticeManager.Patients.Views.RibbonAppointmentsSchedulerView"
+	xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+	xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+	xmlns:dx="http://schemas.devexpress.com/winfx/2008/xaml/core"
+	xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+	xmlns:infrastructure="clr-namespace:Profibiz.PracticeManager.Infrastructure;assembly=Profibiz.PracticeManager.Infrastructure"
+	xmlns:inter="http://www.codeplex.com/prism"
+	xmlns:dxb="http://schemas.devexpress.com/winfx/2008/xaml/bars"
+	xmlns:dxe="http://schemas.devexpress.com/winfx/2008/xaml/editors"
+	xmlns:dxg="http://schemas.devexpress.com/winfx/2008/xaml/grid"
+	xmlns:dxr="http://schemas.devexpress.com/winfx/2008/xaml/ribbon"
+	xmlns:dxc="http://schemas.devexpress.com/winfx/2008/xaml/charts"
+	xmlns:dxsch="http://schemas.devexpress.com/winfx/2008/xaml/scheduler"
+	xmlns:dxlc="http://schemas.devexpress.com/winfx/2008/xaml/layoutcontrol"
+	xmlns:dxm="http://schemas.devexpress.com/winfx/2008/xaml/map"
+	xmlns:dxmvvm="http://schemas.devexpress.com/winfx/2008/xaml/mvvm"
+	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
+	xmlns:sys="clr-namespace:System;assembly=mscorlib"
+	prism:ViewModelLocator.AutoWireViewModel="False"
+	mc:Ignorable="d"
+	d:DesignHeight="300"
+	d:DesignWidth="1300">
 
-    <UserControl.Resources>
-        <dxsch:SchedulerUICommand x:Key="commands" />
-        <dxsch:SchedulerControlStringIdConverter x:Key="stringIdConverter" />
-        <infrastructure:ObjectToBoolenConverter x:Key="objectToBoolenConverter" />
-        <dxmvvm:ObjectToObjectConverter x:Key="SpecialistGalleryItemGlyph">
-            <dxmvvm:MapItem Source="False" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/specialist-16.png" />
-            <dxmvvm:MapItem Source="True" Target="{dx:DXImage Image=CheckBox_16x16.png}" />
-        </dxmvvm:ObjectToObjectConverter>
-        <dxmvvm:ObjectToObjectConverter x:Key="InsuranceFilterGalleryItemGlyph">
-            <dxmvvm:MapItem Source="False" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/insurance-provider-16.png" />
-            <dxmvvm:MapItem Source="True" Target="{dx:DXImage Image=CheckBox_16x16.png}" />
-        </dxmvvm:ObjectToObjectConverter>
+	<UserControl.Resources>
+		<dxsch:SchedulerUICommand x:Key="commands" />
+		<dxsch:SchedulerControlStringIdConverter x:Key="stringIdConverter" />
+		<infrastructure:ObjectToBoolenConverter x:Key="objectToBoolenConverter" />
+		<dxmvvm:ObjectToObjectConverter x:Key="SpecialistGalleryItemGlyph">
+			<dxmvvm:MapItem Source="False" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/specialist-16.png" />
+			<dxmvvm:MapItem Source="True" Target="{dx:DXImage Image=CheckBox_16x16.png}" />
+		</dxmvvm:ObjectToObjectConverter>
+		<dxmvvm:ObjectToObjectConverter x:Key="InsuranceFilterGalleryItemGlyph">
+			<dxmvvm:MapItem Source="False" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/insurance-provider-16.png" />
+			<dxmvvm:MapItem Source="True" Target="{dx:DXImage Image=CheckBox_16x16.png}" />
+		</dxmvvm:ObjectToObjectConverter>
 
-    </UserControl.Resources>
-
-
-    <Grid>
-        <infrastructure:RibbonControlEx RibbonStyle="{Binding RibbonStyle}"
-                                        HideHeaderAndTabsGrid="{Binding RibbonHideHeaderAndTabsGrid}"
-                                        DockPanel.Dock="Top"
-                                        ShowApplicationButton="False"
-                                        RibbonTitleBarVisibility="Collapsed"
-                                        Visibility="Visible"
-                                        Name="ribbonControl">
-            <dxr:RibbonControl.Resources>
-                <ResourceDictionary>
-                    <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="RibbonAppointmentsSchedulerView.Resources/GalleryItemControl.xaml" />
-                    </ResourceDictionary.MergedDictionaries>
-                </ResourceDictionary>
-            </dxr:RibbonControl.Resources>
+	</UserControl.Resources>
 
 
-            <dxr:RibbonControl.PageHeaderItems>
-            </dxr:RibbonControl.PageHeaderItems>
-            <dxr:RibbonDefaultPageCategory Caption="defaultCategory">
-                <dxr:RibbonPage Caption="HOME">
-                    <dxr:RibbonPageGroup Caption="Appointments" IsVisible="{Binding IsVisibleRibbonEditAppointments}">
-                        <dxb:BarButtonItem Content="New"
-                                           Command="{Binding NewEntityCommand}"
-                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png"
-                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png" />
-                        <dxb:BarButtonItem Content="Edit"
-                                           Command="{Binding EditEntityCommand}"
-                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png"
-                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png" />
-                        <dxb:BarButtonItem Content="Delete"
-                                           Command="{Binding DeleteEntityCommand}"
-                                           LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
-                                           Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
-                    </dxr:RibbonPageGroup>
-
-                    <dxr:RibbonPageGroup Caption="Date Range Filter">
-                        <dxb:BarEditItem Content="From"
-                                         EditValue="{Binding FilterFrom}"
-                                         EditSettings="{StaticResource RibbonDateEditSettings}" />
-                        <dxb:BarEditItem Content="To"
-                                         EditValue="{Binding FilterTo}"
-                                         EditSettings="{StaticResource RibbonDateEditSettings}" />
-                        <dxb:BarButtonItem Content="Apply Filter"
-                                           Command="{Binding FilterCommand}"
-                                           LargeGlyph="{dx:DXImage Image=Filter_32x32.png}"
-                                           Glyph="{dx:DXImage Image=Filter_16x16.png}" />
-                    </dxr:RibbonPageGroup>
+	<Grid>
+		<infrastructure:RibbonControlEx
+			RibbonStyle="{Binding RibbonStyle}"
+			HideHeaderAndTabsGrid="{Binding RibbonHideHeaderAndTabsGrid}"
+			DockPanel.Dock="Top"
+			ShowApplicationButton="False"
+			RibbonTitleBarVisibility="Collapsed"
+			Visibility="Visible"
+			Name="ribbonControl">
+			<dxr:RibbonControl.Resources>
+				<ResourceDictionary>
+					<ResourceDictionary.MergedDictionaries>
+						<ResourceDictionary Source="RibbonAppointmentsSchedulerView.Resources/GalleryItemControl.xaml" />
+					</ResourceDictionary.MergedDictionaries>
+				</ResourceDictionary>
+			</dxr:RibbonControl.Resources>
 
 
-                    <dxr:RibbonPageGroup Caption="Navigation">
-                        <dxb:BarButtonItem Content="Backward"
-                                           LargeGlyph="{dx:DXImage Image=Backward_32x32.png}"
-                                           Glyph="{dx:DXImage Image=Backward_16x16.png}"
-                                           CommandParameter="{Binding SchedulerControl999}"
-                                           Command="{Binding NavigateViewBackward,
-                                                             Mode=OneTime,
-                                                             Source={StaticResource commands}}" />
-                        <dxb:BarButtonItem Content="Forward"
-                                           LargeGlyph="{dx:DXImage Image=Forward_32x32.png}"
-                                           Glyph="{dx:DXImage Image=Forward_16x16.png}"
-                                           CommandParameter="{Binding SchedulerControl999}"
-                                           Command="{Binding NavigateViewForward,
-                                                             Mode=OneTime,
-                                                             Source={StaticResource commands}}" />
-                        <dxb:BarButtonItem Content="Go to Today"
-                                           LargeGlyph="{dx:DXImage Image=Today_32x32.png}"
-                                           Glyph="{dx:DXImage Image=Today_16x16.png}"
-                                           CommandParameter="{Binding SchedulerControl999}"
-                                           Command="{Binding GotoToday,
-                                                             Mode=OneTime,
-                                                             Source={StaticResource commands}}" />
-                        <dxb:BarButtonItem Content="Zoom In"
-                                           LargeGlyph="{dx:DXImage Image=ZoomIn_32x32.png}"
-                                           Glyph="{dx:DXImage Image=ZoomIn_16x16.png}"
-                                           CommandParameter="{Binding SchedulerControl999}"
-                                           Command="{Binding ViewZoomInCommand}" />
-                        <dxb:BarButtonItem Content="Zoom Out"
-                                           LargeGlyph="{dx:DXImage Image=ZoomOut_32x32.png}"
-                                           Glyph="{dx:DXImage Image=ZoomOut_16x16.png}"
-                                           CommandParameter="{Binding SchedulerControl999}"
-                                           Command="{Binding ViewZoomOutCommand}" />
+			<dxr:RibbonControl.PageHeaderItems>
+			</dxr:RibbonControl.PageHeaderItems>
+			<dxr:RibbonDefaultPageCategory Caption="defaultCategory">
+				<dxr:RibbonPage Caption="HOME">
+					<dxr:RibbonPageGroup Caption="Appointments" IsVisible="{Binding IsVisibleRibbonEditAppointments}">
+						<dxb:BarButtonItem
+							Content="New"
+							Command="{Binding NewEntityCommand}"
+							LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png"
+							Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png" />
+						<dxb:BarButtonItem
+							Content="Edit"
+							Command="{Binding EditEntityCommand}"
+							LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-32.png"
+							Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-edit-16.png" />
+						<dxb:BarButtonItem
+							Content="Delete"
+							Command="{Binding DeleteEntityCommand}"
+							LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
+							Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
+					</dxr:RibbonPageGroup>
 
-                    </dxr:RibbonPageGroup>
+					<dxr:RibbonPageGroup Caption="Date Range Filter">
+						<dxb:BarEditItem
+							Content="From"
+							EditValue="{Binding FilterFrom}"
+							EditSettings="{StaticResource RibbonDateEditSettings}" />
+						<dxb:BarEditItem
+							Content="To"
+							EditValue="{Binding FilterTo}"
+							EditSettings="{StaticResource RibbonDateEditSettings}" />
+						<dxb:BarButtonItem
+							Content="Apply Filter"
+							Command="{Binding FilterCommand}"
+							LargeGlyph="{dx:DXImage Image=Filter_32x32.png}"
+							Glyph="{dx:DXImage Image=Filter_16x16.png}" />
+					</dxr:RibbonPageGroup>
 
-                    <dxr:RibbonPageGroup Caption="Active View" IsVisible="{Binding IsVisibleRibbonActiveView}">
-                        <dxb:BarCheckItem Content="Day View"
-                                          LargeGlyph="{dx:DXImage Image=DayView_32x32.png}"
-                                          Glyph="{dx:DXImage Image=DayView_16x16.png}"
-                                          IsChecked="{Binding ActiveViewType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Day,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeActiveViewCommand}"
-                                          CommandParameter="Day" />
-                        <dxb:BarCheckItem Content="Work Week View"
-                                          LargeGlyph="{dx:DXImage Image=WorkWeekView_32x32.png}"
-                                          Glyph="{dx:DXImage Image=WorkWeekView_16x16.png}"
-                                          IsChecked="{Binding ActiveViewType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=WorkWeek,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeActiveViewCommand}"
-                                          CommandParameter="WorkWeek" />
-                        <dxb:BarCheckItem Content="Week View"
-                                          LargeGlyph="{dx:DXImage Image=WeekView_32x32.png}"
-                                          Glyph="{dx:DXImage Image=WeekView_16x16.png}"
-                                          IsChecked="{Binding ActiveViewType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Week,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeActiveViewCommand}"
-                                          CommandParameter="Week" />
-                        <dxb:BarCheckItem Content="Month View"
-                                          LargeGlyph="{dx:DXImage Image=MonthView_32x32.png}"
-                                          Glyph="{dx:DXImage Image=MonthView_16x16.png}"
-                                          IsChecked="{Binding ActiveViewType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Month,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeActiveViewCommand}"
-                                          CommandParameter="Month" />
-                        <dxb:BarCheckItem Content="Timeline View"
-                                          LargeGlyph="{dx:DXImage Image=TimelineView_32x32.png}"
-                                          Glyph="{dx:DXImage Image=TimelineView_16x16.png}"
-                                          IsChecked="{Binding ActiveViewType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Timeline,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeActiveViewCommand}"
-                                          CommandParameter="Timeline" />
+					<dxr:RibbonPageGroup Caption="Navigation">
+						<dxb:BarButtonItem
+							Content="Backward"
+							LargeGlyph="{dx:DXImage Image=Backward_32x32.png}"
+							Glyph="{dx:DXImage Image=Backward_16x16.png}"
+							CommandParameter="{Binding SchedulerControl999}"
+							Command="{Binding NavigateViewBackward, Mode=OneTime, Source={StaticResource commands}}" />
+						<dxb:BarButtonItem
+							Content="Forward"
+							LargeGlyph="{dx:DXImage Image=Forward_32x32.png}"
+							Glyph="{dx:DXImage Image=Forward_16x16.png}"
+							CommandParameter="{Binding SchedulerControl999}"
+							Command="{Binding NavigateViewForward, Mode=OneTime, Source={StaticResource commands}}" />
+						<dxb:BarButtonItem
+							Content="Go to Today"
+							LargeGlyph="{dx:DXImage Image=Today_32x32.png}"
+							Glyph="{dx:DXImage Image=Today_16x16.png}"
+							CommandParameter="{Binding SchedulerControl999}"
+							Command="{Binding GotoToday, Mode=OneTime, Source={StaticResource commands}}" />
+						<dxb:BarButtonItem
+							Content="Zoom In"
+							LargeGlyph="{dx:DXImage Image=ZoomIn_32x32.png}"
+							Glyph="{dx:DXImage Image=ZoomIn_16x16.png}"
+							CommandParameter="{Binding SchedulerControl999}"
+							Command="{Binding ViewZoomInCommand}" />
+						<dxb:BarButtonItem
+							Content="Zoom Out"
+							LargeGlyph="{dx:DXImage Image=ZoomOut_32x32.png}"
+							Glyph="{dx:DXImage Image=ZoomOut_16x16.png}"
+							CommandParameter="{Binding SchedulerControl999}"
+							Command="{Binding ViewZoomOutCommand}" />
 
-                        <dxb:BarEditItem Content="Hours:"
-                                         ClosePopupOnChangingEditValue="True"
-                                         EditWidth="100"
-                                         EditValue="{Binding ShowHours,
-                                                             Mode=TwoWay}"
-                                         IsEnabled="{Binding ShowHoursIsEnabled}"
-                                         IsVisible="{Binding ShowHoursIsVisible}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
-                                    <dxe:ComboBoxEditSettings.Items>
-                                        <sys:String>Working</sys:String>
-                                        <sys:String>All</sys:String>
-                                    </dxe:ComboBoxEditSettings.Items>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem Content="Days:"
-                                         ClosePopupOnChangingEditValue="True"
-                                         EditWidth="100"
-                                         EditValue="{Binding ShowDays,
-                                                             Mode=TwoWay}"
-                                         IsEnabled="{Binding ShowDaysIsEnabled}"
-                                         IsVisible="{Binding ShowDaysIsVisible}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
-                                    <dxe:ComboBoxEditSettings.Items>
-                                        <sys:String>Mon-Fri</sys:String>
-                                        <sys:String>Mon-Sat</sys:String>
-                                        <sys:String>All</sys:String>
-                                    </dxe:ComboBoxEditSettings.Items>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem Content="Days:"
-                                         ClosePopupOnChangingEditValue="True"
-                                         EditWidth="100"
-                                         EditValue="{Binding ShowDays2,
-                                                             Mode=TwoWay}"
-                                         IsEnabled="{Binding ShowDays2IsEnabled}"
-                                         IsVisible="{Binding ShowDays2IsVisible}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
-                                    <dxe:ComboBoxEditSettings.Items>
-                                        <sys:Int32>1</sys:Int32>
-                                        <sys:Int32>2</sys:Int32>
-                                        <sys:Int32>3</sys:Int32>
-                                        <sys:Int32>4</sys:Int32>
-                                        <sys:Int32>10</sys:Int32>
-                                        <sys:Int32>20</sys:Int32>
-                                        <sys:Int32>30</sys:Int32>
-                                    </dxe:ComboBoxEditSettings.Items>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                        <dxb:BarEditItem Content="Time:"
-                                         ClosePopupOnChangingEditValue="True"
-                                         EditWidth="100"
-                                         EditValue="{Binding StartEndTimeVisibility,
-                                                             Mode=TwoWay}"
-                                         IsEnabled="{Binding StartEndTimeVisibilityIsEnabled}"
-                                         IsVisible="{Binding StartEndTimeVisibilityIsVisible}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
-                                    <dxe:ComboBoxEditSettings.Items>
-                                        <sys:String>Auto</sys:String>
-                                        <sys:String>Always</sys:String>
-                                        <sys:String>Never</sys:String>
-                                    </dxe:ComboBoxEditSettings.Items>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
+					</dxr:RibbonPageGroup>
+				</dxr:RibbonPage>
 
+				<dxr:RibbonPage Caption="VIEW">
+					<dxr:RibbonPageGroup Caption="Active View" IsVisible="{Binding IsVisibleRibbonActiveView}">
+						<dxb:BarCheckItem
+							Content="Day View"
+							LargeGlyph="{dx:DXImage Image=DayView_32x32.png}"
+							Glyph="{dx:DXImage Image=DayView_16x16.png}"
+							IsChecked="{Binding ActiveViewType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Day, Mode=OneWay}"
+							Command="{Binding ChangeActiveViewCommand}"
+							CommandParameter="Day" />
+						<dxb:BarCheckItem
+							Content="Work Week View"
+							LargeGlyph="{dx:DXImage Image=WorkWeekView_32x32.png}"
+							Glyph="{dx:DXImage Image=WorkWeekView_16x16.png}"
+							IsChecked="{Binding ActiveViewType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=WorkWeek, Mode=OneWay}"
+							Command="{Binding ChangeActiveViewCommand}"
+							CommandParameter="WorkWeek" />
+						<dxb:BarCheckItem
+							Content="Week View"
+							LargeGlyph="{dx:DXImage Image=WeekView_32x32.png}"
+							Glyph="{dx:DXImage Image=WeekView_16x16.png}"
+							IsChecked="{Binding ActiveViewType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Week, Mode=OneWay}"
+							Command="{Binding ChangeActiveViewCommand}"
+							CommandParameter="Week" />
+						<dxb:BarCheckItem
+							Content="Month View"
+							LargeGlyph="{dx:DXImage Image=MonthView_32x32.png}"
+							Glyph="{dx:DXImage Image=MonthView_16x16.png}"
+							IsChecked="{Binding ActiveViewType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Month, Mode=OneWay}"
+							Command="{Binding ChangeActiveViewCommand}"
+							CommandParameter="Month" />
+						<dxb:BarCheckItem
+							Content="Timeline View"
+							LargeGlyph="{dx:DXImage Image=TimelineView_32x32.png}"
+							Glyph="{dx:DXImage Image=TimelineView_16x16.png}"
+							IsChecked="{Binding ActiveViewType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Timeline, Mode=OneWay}"
+							Command="{Binding ChangeActiveViewCommand}"
+							CommandParameter="Timeline" />
 
-                        <dxb:BarEditItem Content="Compress Weekend"
-                                         ClosePopupOnChangingEditValue="True"
-                                         EditValue="{Binding CompressWeekend,
-                                                             Mode=TwoWay}"
-                                         IsEnabled="{Binding CompressWeekendIsEnabled}"
-                                         IsVisible="{Binding CompressWeekendIsVisible}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:CheckEditSettings>
-                                </dxe:CheckEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-
-                    </dxr:RibbonPageGroup>
-
-                    <dxr:RibbonPageGroup Caption="Group By" IsVisible="{Binding IsVisibleRibbonGroupBy}">
-                        <dxb:BarCheckItem Content="Group By None"
-                                          LargeGlyph="{dx:DXImage Image=GroupByNone_32x32.png}"
-                                          Glyph="{dx:DXImage Image=GroupByNone_16x16.png}"
-                                          IsChecked="{Binding GroupType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=None,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeGroupTypeCommand}"
-                                          CommandParameter="None" />
-                        <dxb:BarCheckItem Content="Group By Date"
-                                          LargeGlyph="{dx:DXImage Image=GroupByDate_32x32.png}"
-                                          Glyph="{dx:DXImage Image=GroupByDate_16x16.png}"
-                                          IsChecked="{Binding GroupType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Date,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeGroupTypeCommand}"
-                                          CommandParameter="Date" />
-                        <dxb:BarCheckItem Content="Group By Resource"
-                                          LargeGlyph="{dx:DXImage Image=GroupByResource_32x32.png}"
-                                          Glyph="{dx:DXImage Image=GroupByResource_16x16.png}"
-                                          IsChecked="{Binding GroupType,
-                                                              Converter={StaticResource objectToBoolenConverter},
-                                                              ConverterParameter=Resource,
-                                                              Mode=OneWay}"
-                                          Command="{Binding ChangeGroupTypeCommand}"
-                                          CommandParameter="Resource" />
-                    </dxr:RibbonPageGroup>
+						<dxb:BarEditItem
+							Content="Hours:"
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="100"
+							EditValue="{Binding ShowHours, Mode=TwoWay}"
+							IsEnabled="{Binding ShowHoursIsEnabled}"
+							IsVisible="{Binding ShowHoursIsVisible}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
+									<dxe:ComboBoxEditSettings.Items>
+										<sys:String>Working</sys:String>
+										<sys:String>All</sys:String>
+									</dxe:ComboBoxEditSettings.Items>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+						<dxb:BarEditItem
+							Content="Days:"
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="100"
+							EditValue="{Binding ShowDays, Mode=TwoWay}"
+							IsEnabled="{Binding ShowDaysIsEnabled}"
+							IsVisible="{Binding ShowDaysIsVisible}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
+									<dxe:ComboBoxEditSettings.Items>
+										<sys:String>Mon-Fri</sys:String>
+										<sys:String>Mon-Sat</sys:String>
+										<sys:String>All</sys:String>
+									</dxe:ComboBoxEditSettings.Items>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+						<dxb:BarEditItem
+							Content="Days:"
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="100"
+							EditValue="{Binding ShowDays2, Mode=TwoWay}"
+							IsEnabled="{Binding ShowDays2IsEnabled}"
+							IsVisible="{Binding ShowDays2IsVisible}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
+									<dxe:ComboBoxEditSettings.Items>
+										<sys:Int32>1</sys:Int32>
+										<sys:Int32>2</sys:Int32>
+										<sys:Int32>3</sys:Int32>
+										<sys:Int32>4</sys:Int32>
+										<sys:Int32>10</sys:Int32>
+										<sys:Int32>20</sys:Int32>
+										<sys:Int32>30</sys:Int32>
+									</dxe:ComboBoxEditSettings.Items>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+						<dxb:BarEditItem
+							Content="Time:"
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="100"
+							EditValue="{Binding StartEndTimeVisibility, Mode=TwoWay}"
+							IsEnabled="{Binding StartEndTimeVisibilityIsEnabled}"
+							IsVisible="{Binding StartEndTimeVisibilityIsVisible}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings IsTextEditable="False" PopupMaxHeight="250">
+									<dxe:ComboBoxEditSettings.Items>
+										<sys:String>Auto</sys:String>
+										<sys:String>Always</sys:String>
+										<sys:String>Never</sys:String>
+									</dxe:ComboBoxEditSettings.Items>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
 
 
-                    <dxr:RibbonPageGroup Caption="Appointment Book" IsVisible="{Binding IsVisibleRibbonAppointmentBook}">
-                        <dxb:BarEditItem ClosePopupOnChangingEditValue="True"
-                                         EditWidth="230"
-                                         EditValue="{Binding SelectedAppointmentBook,
-                                                             Mode=TwoWay}"
-                                         RibbonStyle="SmallWithText">
-                            <!--  IsEnabled="{Binding ShowHoursIsEnabled}"  -->
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False"
-                                                          PopupMaxHeight="250"
-                                                          ItemsSource="{Binding AllAppointmentBooks}">
-                                    <dxe:ComboBoxEditSettings.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Margin="2"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=Rowtype9,
-                                                                        Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="2"
-                                                           Text="{Binding Path=Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </dxe:ComboBoxEditSettings.ItemTemplate>
-                                    <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-                                        <ControlTemplate>
-                                            <StackPanel Orientation="Horizontal">
-                                                <Image Margin="5"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=SelectedItem.Rowtype9,
-                                                                        Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="5"
-                                                           Text="{Binding Path=SelectedItem.Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </ControlTemplate>
-                                    </dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
+						<dxb:BarEditItem
+							Content="Compress Weekend"
+							ClosePopupOnChangingEditValue="True"
+							EditValue="{Binding CompressWeekend, Mode=TwoWay}"
+							IsEnabled="{Binding CompressWeekendIsEnabled}"
+							IsVisible="{Binding CompressWeekendIsVisible}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:CheckEditSettings>
+								</dxe:CheckEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
 
-                    <dxr:RibbonPageGroup Caption="Insurance View Group" IsVisible="{Binding IsVisibleRibbonInsuranceProvidersViewGroup}">
-                        <dxb:BarEditItem ClosePopupOnChangingEditValue="True"
-                                         EditWidth="230"
-                                         EditValue="{Binding SelectedInsuranceProvidersViewGroup,
-                                                             Mode=TwoWay}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False"
-                                                          PopupMaxHeight="250"
-                                                          ItemsSource="{Binding AllInsuranceProvidersViewGroups}">
-                                    <dxe:ComboBoxEditSettings.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ListInsuranceProvidersCompanyName}">
-                                                <Image Margin="2"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=Rowtype9,
-                                                                        Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="2"
-                                                           Text="{Binding Path=Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                        <!--<DataTemplate>
+					</dxr:RibbonPageGroup>
+
+					<dxr:RibbonPageGroup Caption="Group By" IsVisible="{Binding IsVisibleRibbonGroupBy}">
+						<dxb:BarCheckItem
+							Content="Group By None"
+							LargeGlyph="{dx:DXImage Image=GroupByNone_32x32.png}"
+							Glyph="{dx:DXImage Image=GroupByNone_16x16.png}"
+							IsChecked="{Binding GroupType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=None, Mode=OneWay}"
+							Command="{Binding ChangeGroupTypeCommand}"
+							CommandParameter="None" />
+						<dxb:BarCheckItem
+							Content="Group By Date"
+							LargeGlyph="{dx:DXImage Image=GroupByDate_32x32.png}"
+							Glyph="{dx:DXImage Image=GroupByDate_16x16.png}"
+							IsChecked="{Binding GroupType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Date, Mode=OneWay}"
+							Command="{Binding ChangeGroupTypeCommand}"
+							CommandParameter="Date" />
+						<dxb:BarCheckItem
+							Content="Group By Resource"
+							LargeGlyph="{dx:DXImage Image=GroupByResource_32x32.png}"
+							Glyph="{dx:DXImage Image=GroupByResource_16x16.png}"
+							IsChecked="{Binding GroupType, Converter={StaticResource objectToBoolenConverter}, ConverterParameter=Resource, Mode=OneWay}"
+							Command="{Binding ChangeGroupTypeCommand}"
+							CommandParameter="Resource" />
+					</dxr:RibbonPageGroup>
+				</dxr:RibbonPage>
+
+				<dxr:RibbonPage Caption="MORE">
+					<dxr:RibbonPageGroup Caption="Appointment Book" IsVisible="{Binding IsVisibleRibbonAppointmentBook}">
+						<dxb:BarEditItem
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="230"
+							EditValue="{Binding SelectedAppointmentBook, Mode=TwoWay}"
+							RibbonStyle="SmallWithText">
+							<!--  IsEnabled="{Binding ShowHoursIsEnabled}"  -->
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings
+									IsTextEditable="False"
+									PopupMaxHeight="250"
+									ItemsSource="{Binding AllAppointmentBooks}">
+									<dxe:ComboBoxEditSettings.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Image
+													Margin="2"
+													VerticalAlignment="Center"
+													Source="{Binding Path=Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="2"
+													Text="{Binding Path=Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</DataTemplate>
+									</dxe:ComboBoxEditSettings.ItemTemplate>
+									<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+										<ControlTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Image
+													Margin="5"
+													VerticalAlignment="Center"
+													Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="5"
+													Text="{Binding Path=SelectedItem.Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</ControlTemplate>
+									</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+					</dxr:RibbonPageGroup>
+
+					<dxr:RibbonPageGroup Caption="Insurance View Group" IsVisible="{Binding IsVisibleRibbonInsuranceProvidersViewGroup}">
+						<dxb:BarEditItem
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="230"
+							EditValue="{Binding SelectedInsuranceProvidersViewGroup, Mode=TwoWay}"
+							RibbonStyle="SmallWithText">
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings
+									IsTextEditable="False"
+									PopupMaxHeight="250"
+									ItemsSource="{Binding AllInsuranceProvidersViewGroups}">
+									<dxe:ComboBoxEditSettings.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ListInsuranceProvidersCompanyName}">
+												<Image
+													Margin="2"
+													VerticalAlignment="Center"
+													Source="{Binding Path=Rowtype9, Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="2"
+													Text="{Binding Path=Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</DataTemplate>
+										<!--<DataTemplate>
                                             <Grid ToolTip="{Binding Path=ListInsuranceProvidersCompanyName}" Background="Red" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto"/>
@@ -385,151 +383,107 @@
                                                 <Border Grid.Column="2" Background="Green" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                                             </Grid>
                                         </DataTemplate>-->
-                                    </dxe:ComboBoxEditSettings.ItemTemplate>
-                                    <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-                                        <ControlTemplate>
-                                            <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=SelectedItem.ListInsuranceProvidersCompanyName}">
-                                                <Image Margin="5"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=SelectedItem.Rowtype9,
-                                                                        Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="5"
-                                                           Text="{Binding Path=SelectedItem.Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </ControlTemplate>
-                                    </dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>
+									</dxe:ComboBoxEditSettings.ItemTemplate>
+									<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+										<ControlTemplate>
+											<StackPanel Orientation="Horizontal" ToolTip="{Binding Path=SelectedItem.ListInsuranceProvidersCompanyName}">
+												<Image
+													Margin="5"
+													VerticalAlignment="Center"
+													Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="5"
+													Text="{Binding Path=SelectedItem.Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</ControlTemplate>
+									</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+					</dxr:RibbonPageGroup>
 
+					<dxr:RibbonPageGroup Caption="Specialists" IsVisible="{Binding IsVisibleRibbonSpecialists}">
+						<dxr:RibbonPageGroup.Resources>
+							<DataTemplate x:Key="galleryItemSpecialistListTemplate">
+								<ContentControl>
+									<dxb:GalleryItem
+										Caption="{Binding Name}"
+										Glyph="{Binding IsSelected, Converter={StaticResource SpecialistGalleryItemGlyph}}"
+										Command="{Binding DoctorSelectUnselectCommand}" />
+								</ContentControl>
+							</DataTemplate>
+						</dxr:RibbonPageGroup.Resources>
+						<dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}" Content="Specialists">
+							<dxr:RibbonGalleryBarItem.DropDownGallery>
+								<dxb:Gallery
+									ColCount="{Binding RibbonSpecialistListColumnCount}"
+									RowCount="2"
+									ItemGlyphSize="16,16"
+									IsItemDescriptionVisible="True"
+									IsItemCaptionVisible="True"
+									AllowFilter="True"
+									IsGroupCaptionVisible="False"
+									SizeMode="None">
+									<dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpecialistListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
+								</dxb:Gallery>
+							</dxr:RibbonGalleryBarItem.DropDownGallery>
+							<dxr:RibbonGalleryBarItem.Gallery>
+								<dxb:Gallery
+									ColCount="{Binding RibbonSpecialistListColumnCount}"
+									RowCount="2"
+									ItemGlyphSize="16,16"
+									IsItemDescriptionVisible="True"
+									IsItemCaptionVisible="True"
+									ItemMargin="0">
+									<dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpecialistListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
+								</dxb:Gallery>
+							</dxr:RibbonGalleryBarItem.Gallery>
+						</dxr:RibbonGalleryBarItem>
+					</dxr:RibbonPageGroup>
 
-                    <dxr:RibbonPageGroup Caption="Specialists" IsVisible="{Binding IsVisibleRibbonSpecialists}">
-                        <dxr:RibbonPageGroup.Resources>
-                            <DataTemplate x:Key="galleryItemSpecialistListTemplate">
-                                <ContentControl>
-                                    <dxb:GalleryItem Caption="{Binding Name}"
-                                                     Glyph="{Binding IsSelected,
-                                                                     Converter={StaticResource SpecialistGalleryItemGlyph}}"
-                                                     Command="{Binding DoctorSelectUnselectCommand}" />
-                                </ContentControl>
-                            </DataTemplate>
-                        </dxr:RibbonPageGroup.Resources>
-                        <dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}" Content="Specialists">
-                            <dxr:RibbonGalleryBarItem.DropDownGallery>
-                                <dxb:Gallery ColCount="{Binding RibbonSpecialistListColumnCount}"
-                                             RowCount="2"
-                                             ItemGlyphSize="16,16"
-                                             IsItemDescriptionVisible="True"
-                                             IsItemCaptionVisible="True"
-                                             AllowFilter="True"
-                                             IsGroupCaptionVisible="False"
-                                             SizeMode="None">
-                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpecialistListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
-                                </dxb:Gallery>
-                            </dxr:RibbonGalleryBarItem.DropDownGallery>
-                            <dxr:RibbonGalleryBarItem.Gallery>
-                                <dxb:Gallery ColCount="{Binding RibbonSpecialistListColumnCount}"
-                                             RowCount="2"
-                                             ItemGlyphSize="16,16"
-                                             IsItemDescriptionVisible="True"
-                                             IsItemCaptionVisible="True"
-                                             ItemMargin="0">
-                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonSpecialistListItems}" ItemTemplate="{StaticResource galleryItemSpecialistListTemplate}" />
-                                </dxb:Gallery>
-                            </dxr:RibbonGalleryBarItem.Gallery>
-                        </dxr:RibbonGalleryBarItem>
-                    </dxr:RibbonPageGroup>
+					<dxr:RibbonPageGroup Caption="Insurances" IsVisible="{Binding IsVisibleRibbonInsuranceFilters}">
+						<dxr:RibbonPageGroup.Resources>
+							<DataTemplate x:Key="galleryItemInsuranceFilterListTemplate">
+								<ContentControl>
+									<dxb:GalleryItem
+										Caption="{Binding Code}"
+										Glyph="{Binding IsSelected, Converter={StaticResource InsuranceFilterGalleryItemGlyph}}"
+										Command="{Binding InsuranceSelectUnselectCommand}" />
+								</ContentControl>
+							</DataTemplate>
+						</dxr:RibbonPageGroup.Resources>
+						<dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}" Content="Insurances">
+							<dxr:RibbonGalleryBarItem.DropDownGallery>
+								<dxb:Gallery
+									ColCount="{Binding RibbonInsuranceFilterListColumnCount}"
+									RowCount="2"
+									ItemGlyphSize="16,16"
+									IsItemDescriptionVisible="True"
+									IsItemCaptionVisible="True"
+									AllowFilter="True"
+									IsGroupCaptionVisible="False"
+									SizeMode="None">
+									<dxb:GalleryItemGroup ItemsSource="{Binding RibbonInsuranceFilterListItems}" ItemTemplate="{StaticResource galleryItemInsuranceFilterListTemplate}" />
+								</dxb:Gallery>
+							</dxr:RibbonGalleryBarItem.DropDownGallery>
+							<dxr:RibbonGalleryBarItem.Gallery>
+								<dxb:Gallery
+									ColCount="{Binding RibbonInsuranceFilterListColumnCount}"
+									RowCount="2"
+									ItemGlyphSize="16,16"
+									IsItemDescriptionVisible="True"
+									IsItemCaptionVisible="True"
+									ItemMargin="0">
+									<dxb:GalleryItemGroup ItemsSource="{Binding RibbonInsuranceFilterListItems}" ItemTemplate="{StaticResource galleryItemInsuranceFilterListTemplate}" />
+								</dxb:Gallery>
+							</dxr:RibbonGalleryBarItem.Gallery>
+						</dxr:RibbonGalleryBarItem>
+					</dxr:RibbonPageGroup>
 
-                    <dxr:RibbonPageGroup Caption="Insurances" IsVisible="{Binding IsVisibleRibbonInsuranceFilters}">
-                        <dxr:RibbonPageGroup.Resources>
-                            <DataTemplate x:Key="galleryItemInsuranceFilterListTemplate">
-                                <ContentControl>
-                                    <dxb:GalleryItem Caption="{Binding Code}"
-                                                     Glyph="{Binding IsSelected,
-                                                                     Converter={StaticResource InsuranceFilterGalleryItemGlyph}}"
-                                                     Command="{Binding InsuranceSelectUnselectCommand}" />
-                                </ContentControl>
-                            </DataTemplate>
-                        </dxr:RibbonPageGroup.Resources>
-                        <dxr:RibbonGalleryBarItem Glyph="{dx:DXImageOffice2013 Image=Merge_16x16.png}" Content="Insurances">
-                            <dxr:RibbonGalleryBarItem.DropDownGallery>
-                                <dxb:Gallery ColCount="{Binding RibbonInsuranceFilterListColumnCount}"
-                                             RowCount="2"
-                                             ItemGlyphSize="16,16"
-                                             IsItemDescriptionVisible="True"
-                                             IsItemCaptionVisible="True"
-                                             AllowFilter="True"
-                                             IsGroupCaptionVisible="False"
-                                             SizeMode="None">
-                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonInsuranceFilterListItems}" ItemTemplate="{StaticResource galleryItemInsuranceFilterListTemplate}" />
-                                </dxb:Gallery>
-                            </dxr:RibbonGalleryBarItem.DropDownGallery>
-                            <dxr:RibbonGalleryBarItem.Gallery>
-                                <dxb:Gallery ColCount="{Binding RibbonInsuranceFilterListColumnCount}"
-                                             RowCount="2"
-                                             ItemGlyphSize="16,16"
-                                             IsItemDescriptionVisible="True"
-                                             IsItemCaptionVisible="True"
-                                             ItemMargin="0">
-                                    <dxb:GalleryItemGroup ItemsSource="{Binding RibbonInsuranceFilterListItems}" ItemTemplate="{StaticResource galleryItemInsuranceFilterListTemplate}" />
-                                </dxb:Gallery>
-                            </dxr:RibbonGalleryBarItem.Gallery>
-                        </dxr:RibbonGalleryBarItem>
-                    </dxr:RibbonPageGroup>
-
-
-                    <!--<dxr:RibbonPageGroup Caption="Insurance View Group" >
-                        <dxb:BarEditItem ClosePopupOnChangingEditValue="True"
-                                         EditWidth="230"
-                                         EditValue="{Binding SelectedInsuranceProvidersViewGroup,
-                                                             Mode=TwoWay}"
-                                         RibbonStyle="SmallWithText">
-                            <dxb:BarEditItem.EditSettings>
-                                <dxe:ComboBoxEditSettings IsTextEditable="False"
-                                                          PopupMaxHeight="250"
-                                                          ItemsSource="{Binding AllInsuranceProvidersViewGroups}">
-                                    <dxe:ComboBoxEditSettings.ItemTemplate>
-                                        <DataTemplate>
-                                            <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=ListInsuranceProvidersCompanyName}">
-                                                <Image Margin="2"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=Rowtype9,
-                                                                        Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="2"
-                                                           Text="{Binding Path=Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </DataTemplate>
-                                    </dxe:ComboBoxEditSettings.ItemTemplate>
-                                    <dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-                                        <ControlTemplate>
-                                            <StackPanel Orientation="Horizontal" ToolTip="{Binding Path=SelectedItem.ListInsuranceProvidersCompanyName}">
-                                                <Image Margin="5"
-                                                       VerticalAlignment="Center"
-                                                       Source="{Binding Path=SelectedItem.Rowtype9,
-                                                                        Converter={StaticResource insuranceProvidersViewGroupRowtype9ToImageConverter}}"
-                                                       Stretch="None" />
-                                                <TextBlock Padding="5"
-                                                           Text="{Binding Path=SelectedItem.Name}"
-                                                           VerticalAlignment="Center" />
-                                            </StackPanel>
-                                        </ControlTemplate>
-                                    </dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-
-                                    <dxe:ComboBoxEditSettings.StyleSettings>
-                                        <dxe:CheckedComboBoxStyleSettings />
-                                    </dxe:ComboBoxEditSettings.StyleSettings>
-                                </dxe:ComboBoxEditSettings>
-                            </dxb:BarEditItem.EditSettings>
-                        </dxb:BarEditItem>
-                    </dxr:RibbonPageGroup>-->
-
-                </dxr:RibbonPage>
-            </dxr:RibbonDefaultPageCategory>
-        </infrastructure:RibbonControlEx>
-    </Grid>
+				</dxr:RibbonPage>
+			</dxr:RibbonDefaultPageCategory>
+		</infrastructure:RibbonControlEx>
+	</Grid>
 </UserControl>

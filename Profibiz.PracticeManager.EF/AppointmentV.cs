@@ -64,6 +64,9 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
         public bool IsEmailWhenRegistered { get; set; }
         public bool IsSmsWhenRegistered { get; set; }
+        public Nullable<System.Guid> ConfirmedByPatientRowId { get; set; }
+        public Nullable<System.DateTime> ConfirmedTimestamp { get; set; }
+        public string ConfirmedIpAddress { get; set; }
     
         public virtual Patient Patient { get; set; }
         public virtual InvoiceItem InvoiceItem { get; set; }

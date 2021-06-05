@@ -276,6 +276,59 @@
 								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
 						</dxr:RibbonPageGroup>
 
+						<dxr:RibbonPageGroup Caption="Other Forms" IsVisible="{Binding ShowRibbonMedicalForm}">
+							<dxb:BarButtonItem
+								Command="{Binding MedicalFormModel.NewCommand}"
+								Content="New Form"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-new-employee-32.png" />
+							<dxb:BarButtonItem
+								Command="{Binding MedicalFormModel.DeleteCommand}"
+								Content="Delete Form"
+								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png"
+								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png" />
+							<dxb:BarEditItem ClosePopupOnChangingEditValue="True"
+                                         EditWidth="230"
+                                         EditValue="{Binding SelectedAllOtherForm,
+                                                             Mode=TwoWay}"
+                                         RibbonStyle="SmallWithText">
+								<dxb:BarEditItem.EditSettings>
+									<dxe:ComboBoxEditSettings IsTextEditable="False"
+                                                          PopupMaxHeight="250"
+                                                          ItemsSource="{Binding AllOtherForms}">
+										<dxe:ComboBoxEditSettings.ItemTemplate>
+											<DataTemplate>
+												<StackPanel Orientation="Horizontal">
+													<Image Margin="2"
+                                                       VerticalAlignment="Center"
+                                                       Source="{Binding Path=Rowtype9,
+                                                                        Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+                                                       Stretch="None" />
+													<TextBlock Padding="2"
+                                                           Text="{Binding Path=Name}"
+                                                           VerticalAlignment="Center" />
+												</StackPanel>
+											</DataTemplate>
+										</dxe:ComboBoxEditSettings.ItemTemplate>
+										<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+											<ControlTemplate>
+												<StackPanel Orientation="Horizontal">
+													<Image Margin="5"
+                                                       VerticalAlignment="Center"
+                                                       Source="{Binding Path=SelectedItem.Rowtype9,
+                                                                        Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+                                                       Stretch="None" />
+													<TextBlock Padding="5"
+                                                           Text="{Binding Path=SelectedItem.Name}"
+                                                           VerticalAlignment="Center" />
+												</StackPanel>
+											</ControlTemplate>
+										</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+									</dxe:ComboBoxEditSettings>
+								</dxb:BarEditItem.EditSettings>
+							</dxb:BarEditItem>
+						</dxr:RibbonPageGroup>
+
 					</dxr:RibbonPage>
 				</dxr:RibbonDefaultPageCategory>
 			</dxr:RibbonControl>
@@ -1481,6 +1534,16 @@
 									<dxg:GridColumn FieldName="Button" Style="{StaticResource OpenDetailColumnStyle}" />
 								</dxg:GridControl.Columns>
 							</dxg:GridControl>
+						</dxlc:LayoutControl>
+					</dx:DXTabItem>
+
+					<dx:DXTabItem Header="Other Forms" Visibility="{Binding IsTabVisibile_MedicalForm, Converter={StaticResource BooleanToVisibilityConverter}}">
+						<dxlc:LayoutControl>
+							<localv:FormDocmodelView>
+								<dxmvvm:Interaction.Behaviors>
+									<infrastructure:DataContextReferenceBehavior Source="{Binding DataContext.MedicalFormModel, Mode=OneWayToSource, RelativeSource={RelativeSource AncestorType={x:Type localv:OnePatientView}}}" />
+								</dxmvvm:Interaction.Behaviors>
+							</localv:FormDocmodelView>
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 

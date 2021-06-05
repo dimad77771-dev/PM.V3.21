@@ -48,6 +48,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public InvoicesListViewModel InvoiceListModel { get; set; }
 		public CalendarEventsSchedulerViewModel CalendarEventsModel { get; set; }
 		public FormDocmodelViewModel MedicalHistoryModel { get; set; }
+		public FormDocmodelViewModel MedicalFormModel { get; set; }
 		public TreatmentPlanRecordViewModel TreatmentPlanModel { get; set; }
 		public virtual UIElementManager UIManagerFamilyDoctor { get; set; } = new UIElementManager();
 		public virtual bool IsVisibilityRate { get; set; }
@@ -57,6 +58,9 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsVisibilityAppointmentClinicalNote { get; set; } = true;
 		public virtual bool IsVisibilityAppointmentTreatmentNote { get; set; } = true;
 		public virtual bool IsVisibilityTreatmentPlan { get; set; } = true;
+		public virtual ObservableCollection<Form> AllOtherForms { get; set; }
+		public virtual Form SelectedAllOtherForm { get; set; }
+
 
 		#region Role
 		public virtual User Role { get; set; } = UserManager.Role;
@@ -71,6 +75,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsTabVisibile_Documents => Role.Patient_Documents && IsVisibilityPatientDocument;
 		public virtual bool IsTabVisibile_TreatmentPlan => Role.Patient_TreatmentPlan && IsVisibilityTreatmentPlan;
 		public virtual bool IsTabVisibile_TreatmentNotes => Role.Patient_TreatmentNotes && IsVisibilityAppointmentTreatmentNote;
+		public virtual bool IsTabVisibile_MedicalForm => Role.Patient_MedicalForm;
 		#endregion
 
 
@@ -167,12 +172,14 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				Entity.IsReadOnly_Patient = true;
 			}
+			LoadAllOtherForms();
 			BuildFamilyMembersEntities();
 			SubscribeUseHeadAddressChange();
 			SubscribeHasNoCoverageChange();
 			await LoadInvoiceListModel();
 			await LoadCalendarEventsModel();
 			await LoadMedicalHistoryModel();
+			await LoadMedicalFormModel();
 			await LoadTreatmentPlanModel();
 			ResetHasChange();
 
@@ -206,6 +213,32 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				MessengerHelper.Register<MsgRowChange<FormDocument>>(this, OnMsgRowChangeFormDocument);
 				isRegisterMessenges = true;
 			}
+		}
+
+		void LoadAllOtherForms()
+		{
+			AllOtherForms =
+				new[]
+				{
+					new Form { Code = "COVD", Name = "COVID-19 Questionnaire"},
+					new Form { Code = "CONS1", Name = "Consent Form"},
+					new Form { Code = "CONS2", Name = "Consent for Hair Removal"},
+					new Form { Code = "TERMS", Name = "Terms of the Clinic"},
+				}.ToObservableCollection();
+			SelectedAllOtherForm = AllOtherForms[0];
+
+			(this as INotifyPropertyChanged).PropertyChanged += async (s, e) =>
+			{
+				if (e.PropertyName == nameof(this.SelectedAllOtherForm))
+				{
+					var ret = await OnClose(showOKCancel: true);
+					if (ret)
+					{
+						isLoadMedicalFormModel = false;
+						await LoadMedicalFormModel();
+					}
+				}
+			};
 		}
 
 		bool isLoadInvoiceListModel;
@@ -253,6 +286,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		async Task LoadMedicalHistoryModel()
 		{
 			MedicalHistoryModel.PatientRowId = Entity.RowId;
+			MedicalHistoryModel.CurrentFormCode = "HIST";
 			MedicalHistoryModel.IsReadOnly = Role.Patient_MedicalHistoryReadOnly;
 
 			if (IsNew) return;
@@ -265,6 +299,22 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			isLoadMedicalHistoryModel = true;
 		}
 
+		bool isLoadMedicalFormModel;
+		async Task LoadMedicalFormModel()
+		{
+			MedicalFormModel.PatientRowId = Entity.RowId;
+			MedicalFormModel.CurrentFormCode = SelectedAllOtherForm.Code;
+			MedicalFormModel.IsReadOnly = Role.Patient_MedicalFormReadOnly;
+
+			if (IsNew) return;
+			if (isLoadMedicalFormModel) return;
+			if (CurrentPage != PageEnum.MedicalForm) return;
+
+			ShowWaitIndicator.Show();
+			await MedicalFormModel.LoadData();
+			ShowWaitIndicator.Hide();
+			isLoadMedicalFormModel = true;
+		}
 
 		bool isLoadTreatmentPlanModel;
 		async Task LoadTreatmentPlanModel()
@@ -431,6 +481,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				return false;
 			}
 
+			if (!await MedicalFormModel.Save())
+			{
+				return false;
+			}
+
 			if (!await TreatmentPlanModel.Save())
 			{
 				return false;
@@ -517,6 +572,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
             }
 
 			if (MedicalHistoryModel?.HasChange() == true)
+			{
+				return true;
+			}
+
+			if (MedicalFormModel?.HasChange() == true)
 			{
 				return true;
 			}
@@ -1003,7 +1063,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public PageEnum CurrentPage => GetPage(SelectedIndex);
 		public PageEnum GetPage(int index) => EnumFunc.GetValues<PageEnum>()[index];
 		public bool IsGroupPage => (CurrentPage == PageEnum.Insurances);
-		public enum PageEnum { Property, MedicalHistory, TreatmentPlan, Insurances, Invoices, CalendarEvents, Notes, AppointmentClinicalNote, PatientNotes, TreatmentNotes, Document }
+		public enum PageEnum { Property, MedicalHistory, TreatmentPlan, Insurances, Invoices, CalendarEvents, Notes, AppointmentClinicalNote, PatientNotes, TreatmentNotes, Document, MedicalForm }
 
 
 		public virtual ObservableCollection<Patient> FamilyMembersEntities { get; set; }
@@ -1206,6 +1266,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				await LoadInvoiceListModel();
 				await LoadCalendarEventsModel();
 				await LoadMedicalHistoryModel();
+				await LoadMedicalFormModel();
 				await LoadTreatmentPlanModel();
 			});
 		}
@@ -1282,17 +1343,23 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 
 
+		const int MedicalHistoryTabIndex = 1;
+		public bool CanMedicalHistoryNew() => (SelectedIndex == MedicalHistoryTabIndex);
+		public bool CanMedicalHistoryEdit() => (SelectedIndex == MedicalHistoryTabIndex);
+		public bool CanMedicalHistoryDelete() => (SelectedIndex == MedicalHistoryTabIndex);
+		public bool ShowRibbonMedicalHistory => (SelectedIndex == MedicalHistoryTabIndex);
 
-		public bool CanMedicalHistoryNew() => (SelectedIndex == 1);
-		public bool CanMedicalHistoryEdit() => (SelectedIndex == 1);
-		public bool CanMedicalHistoryDelete() => (SelectedIndex == 1);
-		public bool ShowRibbonMedicalHistory => (SelectedIndex == 1);
+		const int TreatmentPlanTabIndex = 2;
+		public bool CanTreatmentPlanNew() => (SelectedIndex == TreatmentPlanTabIndex);
+		public bool CanTreatmentPlanEdit() => (SelectedIndex == TreatmentPlanTabIndex);
+		public bool CanTreatmentPlanDelete() => (SelectedIndex == TreatmentPlanTabIndex);
+		public bool ShowRibbonTreatmentPlan => (SelectedIndex == TreatmentPlanTabIndex);
 
-
-		public bool CanTreatmentPlanNew() => (SelectedIndex == 2);
-		public bool CanTreatmentPlanEdit() => (SelectedIndex == 2);
-		public bool CanTreatmentPlanDelete() => (SelectedIndex == 2);
-		public bool ShowRibbonTreatmentPlan => (SelectedIndex == 2);
+		const int MedicalFormTabIndex = 11;
+		public bool CanMedicalFormNew() => (SelectedIndex == MedicalFormTabIndex);
+		public bool CanMedicalFormEdit() => (SelectedIndex == MedicalFormTabIndex);
+		public bool CanMedicalFormDelete() => (SelectedIndex == MedicalFormTabIndex);
+		public bool ShowRibbonMedicalForm => (SelectedIndex == MedicalFormTabIndex);
 
 
 

@@ -32,6 +32,7 @@ namespace Profibiz.PracticeManager.EF
             this.TreatmentPlanRecords = new HashSet<TreatmentPlanRecordT>();
             this.FormDocuments = new HashSet<FormDocument>();
             this.PatientForms = new HashSet<PatientForm>();
+            this.Appointments1 = new HashSet<AppointmentT>();
         }
     
         public System.Guid RowId { get; set; }
@@ -150,5 +151,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ServiceProvider ServiceProvider1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientForm> PatientForms { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<AppointmentT> Appointments1 { get; set; }
     }
 }

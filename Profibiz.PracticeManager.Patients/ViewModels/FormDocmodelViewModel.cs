@@ -51,7 +51,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual FormDocmodel Entity { get; set; }
 		public virtual FormDocmodel[] FormDictionary { get; set; }
 		public virtual FormDocmodel CurrentForm { get; set; }
-		public virtual String CurrentFormCode { get; set; } = "HIST";
+		public virtual String CurrentFormCode { get; set; }
 		public virtual FormItem[] FormItems { get; set; }
 		public FormDocmodelView MainView { get; set; }
 		public Grid MainGrid { get; set; }
@@ -358,6 +358,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		void SetupFormItems()
 		{
+			var mode3 = new[] { "CONS1","CONS2","TERMS" }.Contains(CurrentFormCode);
+
 			FormItems = Entity.FormItems.OrderBy(q => q.SectionOrder).ThenBy(q => q.OrderInSection).ToArray();
 
 			MainGrid.ColumnDefinitions.Clear();
@@ -365,10 +367,22 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			MainGrid.Children.Clear();
 
 			var columnCount = 2;
+			if (mode3)
+			{
+				columnCount = 1;
+			}
 			for (int k = 0; k < columnCount; k++)
 			{
-				MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
-				MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+				if (mode3)
+				{
+					MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+					MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Auto) });
+				}
+				else
+				{
+					MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+					MainGrid.ColumnDefinitions.Add(new ColumnDefinition { Width = new GridLength(1, GridUnitType.Star) });
+				}
 			}
 
 			var width2 = 180;
@@ -466,17 +480,36 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					isFirstSection = false;
 				}
 
-				var labelName = formItem.Name;
-				labelName = (labelName ?? "").Replace("<br/>", "\n");
-				var label = new Label
+				Control label;
+				if (mode3)
 				{
-					Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = labelName },
-					Margin = new Thickness(5),
-					HorizontalAlignment = HorizontalAlignment.Right,
-					HorizontalContentAlignment = HorizontalAlignment.Right,
-					VerticalAlignment = VerticalAlignment.Center,
-					VerticalContentAlignment = VerticalAlignment.Center,
-				};
+					label = new TheArtOfDev.HtmlRenderer.WPF.HtmlPanel
+					{
+						Text = formItem.Name,
+						Margin = new Thickness(5),
+						HorizontalAlignment = HorizontalAlignment.Right,
+						HorizontalContentAlignment = HorizontalAlignment.Right,
+						VerticalAlignment = VerticalAlignment.Center,
+						VerticalContentAlignment = VerticalAlignment.Center,
+						Background = new System.Windows.Media.SolidColorBrush(System.Windows.Media.Colors.Transparent),
+
+					};
+				}
+				else
+				{
+					var labelName = formItem.Name;
+					labelName = (labelName ?? "").Replace("<br/>", "\n");
+					label = new Label
+					{
+						Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = labelName },
+						Margin = new Thickness(5),
+						HorizontalAlignment = HorizontalAlignment.Right,
+						HorizontalContentAlignment = HorizontalAlignment.Right,
+						VerticalAlignment = VerticalAlignment.Center,
+						VerticalContentAlignment = VerticalAlignment.Center,
+					};
+				}
+
 				MainGrid.Children.Add(label);
 				Grid.SetColumn(label, col * 2);
 				Grid.SetRow(label, row);

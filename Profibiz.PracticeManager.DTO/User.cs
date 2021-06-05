@@ -55,5 +55,7 @@ namespace Profibiz.PracticeManager.DTO
 		public bool Patient_MedicalHistoryReadOnly { get; set; }
 		public bool Patient_RestrictPatientList { get; set; }
 		public bool AppointmentsScheduler_RestrictBookAccess { get; set; }
+		public bool Patient_MedicalFormReadOnly { get; set; }
+		public bool Patient_MedicalForm { get; set; }
 	}
 }

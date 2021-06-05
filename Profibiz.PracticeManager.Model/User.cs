@@ -67,6 +67,9 @@ namespace Profibiz.PracticeManager.Model
 		public bool Patient_MedicalHistoryReadOnly { get; set; }
 		public bool Patient_RestrictPatientList { get; set; }
 		public bool AppointmentsScheduler_RestrictBookAccess { get; set; }
+		public bool Patient_MedicalFormReadOnly { get; set; }
+		public bool Patient_MedicalForm { get; set; }
+
 
 		public ObservableCollection<object> AppointmentsScheduler_HideStatuses2_Items { get; set; } 
 				= LookupDataProvider.Instance?.AppointmentStatuses?.Cast<object>()?.ToObservableCollection();
@@ -137,6 +140,8 @@ namespace Profibiz.PracticeManager.Model
 				Patient_Documents = true,
 				Patient_TreatmentNotes = true,
 				Patient_TreatmentPlan = true,
+				Patient_MedicalForm = true,
+
 
 				//AppointmentsScheduler_IsReadOnly = true,
 				AppointmentsScheduler_IsReadOnly = false,
@@ -145,6 +150,7 @@ namespace Profibiz.PracticeManager.Model
 				AppointmentsScheduler_RestrictBookAccess = false,
 				Patient_DataReadOnly = false,
 				Patient_MedicalHistoryReadOnly = false,
+				Patient_MedicalFormReadOnly = false,
 				Patient_RestrictPatientList = false,
 
 				//AppointmentsScheduler_RestrictBookAccess = true,

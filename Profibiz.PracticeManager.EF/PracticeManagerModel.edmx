@@ -131,6 +131,9 @@
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="IsEmailWhenRegistered" Type="bit" Nullable="false" />
           <Property Name="IsSmsWhenRegistered" Type="bit" Nullable="false" />
+          <Property Name="ConfirmedByPatientRowId" Type="uniqueidentifier" />
+          <Property Name="ConfirmedTimestamp" Type="datetime" />
+          <Property Name="ConfirmedIpAddress" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="AppointmentStatuses">
           <Key>
@@ -588,6 +591,7 @@
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="255" />
           <Property Name="Code" Type="varchar" MaxLength="50" />
+          <Property Name="CategoryRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
@@ -1714,11 +1718,11 @@
           <Property Name="Name" Type="nvarchar" MaxLength="255" />
           <Property Name="Type" Type="nvarchar" MaxLength="50" />
           <Property Name="Value" Type="nvarchar" MaxLength="255" />
+          <Property Name="Order" Type="int" />
           <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
-          <Property Name="Order" Type="int" />
         </EntityType>
         <EntityType Name="SupplierPaymentRefunds">
           <Key>
@@ -2154,6 +2158,8 @@
           <Property Name="Patient_MedicalHistoryReadOnly" Type="bit" Nullable="false" />
           <Property Name="Patient_RestrictPatientList" Type="bit" Nullable="false" />
           <Property Name="AppointmentsScheduler_RestrictBookAccess" Type="bit" Nullable="false" />
+          <Property Name="Patient_MedicalFormReadOnly" Type="bit" Nullable="false" />
+          <Property Name="Patient_MedicalForm" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserSettings">
           <Key>
@@ -2183,7 +2189,7 @@
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentRemaindersForProcessed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.AppointmentRemaindersForProcessed' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppointmentRemaindersForProcessed">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2215,7 +2221,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentRemaindersForProcessed'
           <Property Name="IsRemainderSms" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.AppointmentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="AppointmentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2264,6 +2270,9 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentsView' does not have a 
           <Property Name="UpdatedByDateTime" Type="datetime" />
           <Property Name="IsEmailWhenRegistered" Type="bit" Nullable="false" />
           <Property Name="IsSmsWhenRegistered" Type="bit" Nullable="false" />
+          <Property Name="ConfirmedByPatientRowId" Type="uniqueidentifier" />
+          <Property Name="ConfirmedTimestamp" Type="datetime" />
+          <Property Name="ConfirmedIpAddress" Type="varchar" MaxLength="50" />
           <Property Name="AppointmentClinicalNoteRowId" Type="uniqueidentifier" />
           <Property Name="AppointmentTreatmentNoteRowId" Type="uniqueidentifier" />
           <Property Name="PatientFullName" Type="nvarchar" MaxLength="512" Nullable="false" />
@@ -2279,7 +2288,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.AppointmentsView' does not have a 
           <Property Name="InvoiceItemRowId" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsForRemainder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.CalendarEventsForRemainder' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CalendarEventsForRemainder">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2319,7 +2328,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsForRemainder' does n
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.CalendarEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CalendarEventsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2361,7 +2370,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.CalendarEventsView' does not have 
           <Property Name="ServiceProviderFullName" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutPaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.ChargeoutPaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutPaychargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2382,7 +2391,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutPaychargesView' does not 
           <Property Name="AllocateAmount" Type="decimal" Precision="19" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.ChargeoutRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutRefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2406,7 +2415,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutRefchargesView' does not 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.ChargeoutsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ChargeoutsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2457,7 +2466,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.ChargeoutsView' does not have a pr
           <Property Name="MinChargeoutItemDate" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.CHECKVIEW_InsuranceCoverages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.CHECKVIEW_InsuranceCoverages' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="CHECKVIEW_InsuranceCoverages">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2471,7 +2480,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.CHECKVIEW_InsuranceCoverages' does
           <Property Name="CoverageStartDate" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.EmailChargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.EmailChargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmailChargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2500,7 +2509,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.EmailChargesView' does not have a 
           <Property Name="ChargeoutNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.EmailSendsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.EmailSendsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="EmailSendsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2529,7 +2538,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.EmailSendsView' does not have a pr
           <Property Name="InvoiceNumber" Type="nvarchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsuranceArticleV">
           
           <Key>
@@ -2547,7 +2556,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceArticleV' does not have a
           <Property Name="ViewRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceCoveragesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InsuranceCoveragesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsuranceCoveragesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2578,7 +2587,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InsuranceCoveragesView' does not h
           <Property Name="PolicyOwnerFullName" Type="nvarchar" MaxLength="512" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InsurancePatientCategory2InsuranceArticleV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsurancePatientCategory2InsuranceArticleV">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2597,7 +2606,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2Insurance
           <Property Name="MaximumQuantity" Type="decimal" Precision="18" Scale="5" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2InvoiceClaimDetailV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InsurancePatientCategory2InvoiceClaimDetailV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InsurancePatientCategory2InvoiceClaimDetailV">
           <Key>
             <PropertyRef Name="InsuranceCoverageRowId" />
@@ -2611,7 +2620,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InsurancePatientCategory2InvoiceCl
           <Property Name="InvoiceClaimDetailRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InventoryBalanceView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InventoryBalanceView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2646,7 +2655,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryBalanceView' does not hav
           <Property Name="Balance" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InventoryView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InventoryView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2697,7 +2706,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InventoryView' does not have a pri
           <Property Name="OrderSupplierName" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceAdvinfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoiceAdvinfoView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceAdvinfoView">
           <Key>
             <PropertyRef Name="InvoiceRowId" />
@@ -2707,7 +2716,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceAdvinfoView' does not have 
           <Property Name="PolicyOwnersInClaimsList" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimDetail2InsurancePatientCategoryV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoiceClaimDetail2InsurancePatientCategoryV' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceClaimDetail2InsurancePatientCategoryV">
           <Key>
             <PropertyRef Name="InvoiceClaimDetailRowId" />
@@ -2725,7 +2734,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimDetail2InsurancePatien
           <Property Name="cnt" Type="bigint" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoiceClaimsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceClaimsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2757,7 +2766,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceClaimsView' does not have a
           <Property Name="DueByPatient" Type="decimal" Precision="38" Scale="9" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoicePaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicePaymentByDoctorAndPeriodView">
           <Key>
             <PropertyRef Name="PaymentPeriod" />
@@ -2768,7 +2777,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorAndPeriodVie
           <Property Name="SumDueToDoctor" Type="decimal" Precision="38" Scale="6" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoicePaymentByDoctorsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicePaymentByDoctorsView">
           <Key>
             <PropertyRef Name="InvoicePaymentRowId" />
@@ -2784,7 +2793,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicePaymentByDoctorsView' does 
           <Property Name="ServiceProviderRowId" Type="uniqueidentifier" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoiceRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoiceRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2808,7 +2817,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoiceRefundsView' does not have 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.InvoicesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="InvoicesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2863,7 +2872,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.InvoicesView' does not have a prim
           <Property Name="HasCoordinationProblem" Type="bit" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.MedicalHistoryRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.MedicalHistoryRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="MedicalHistoryRecordsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -2983,7 +2992,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.MedicalHistoryRecordsView' does no
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.OrderItemsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.OrderItemsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrderItemsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3010,7 +3019,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.OrderItemsView' does not have a pr
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.OrdersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.OrdersView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="OrdersView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3040,7 +3049,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.OrdersView' does not have a primar
           <Property Name="OrderItemInfo" Type="xml" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientAllFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientAllFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientAllFamilyMemberView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -3056,7 +3065,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientAllFamilyMemberView' does n
           <Property Name="ParentId" Type="int" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientFamilyMemberView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientFamilyMemberView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -3068,7 +3077,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientFamilyMemberView' does not 
           <Property Name="FamilyHeadRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceCoverageView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientInsuranceCoverageView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientInsuranceCoverageView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -3086,7 +3095,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceCoverageView' does
           <Property Name="CoverageValidUntil" Type="datetime" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceProvidersViewGroupView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientInsuranceProvidersViewGroupView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientInsuranceProvidersViewGroupView">
           <Key>
             <PropertyRef Name="PatientRowId" />
@@ -3106,7 +3115,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientInsuranceProvidersViewGroup
           <Property Name="InsuranceProvidersViewGroupRowId" Type="uniqueidentifier" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientsListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientsListView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3143,7 +3152,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsListView' does not have a 
           <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PatientsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3256,7 +3265,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PatientsView' does not have a prim
           <Property Name="InsuranceCertificateId" Type="nvarchar" MaxLength="255" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaychargeRefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3280,7 +3289,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargeRefchargesView' does not 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PaychargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaychargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3316,7 +3325,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PaychargesView' does not have a pr
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaymentRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3340,7 +3349,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentRefundsView' does not have 
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3376,7 +3385,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PaymentsView' does not have a prim
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentAllocationsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PayrollPaymentAllocationsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentAllocationsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3396,7 +3405,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentAllocationsView' doe
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PayrollPaymentByDoctorAndPeriodView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentByDoctorAndPeriodView">
           <Key>
             <PropertyRef Name="ServiceProviderRowId" />
@@ -3407,7 +3416,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentByDoctorAndPeriodVie
           <Property Name="SumPayrollAmount" Type="decimal" Precision="38" Scale="4" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.PayrollPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="PayrollPaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3438,7 +3447,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.PayrollPaymentsView' does not have
           <Property Name="AllocationInfo" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.RefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.RefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RefchargesView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3471,7 +3480,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.RefchargesView' does not have a pr
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.RefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.RefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="RefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3504,7 +3513,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.RefundsView' does not have a prima
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.ServiceProvidersListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.ServiceProvidersListView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ServiceProvidersListView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3556,7 +3565,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.ServiceProvidersListView' does not
           <Property Name="IsOfficeEmployee" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.SupplierPaymentRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierPaymentRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3580,7 +3589,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentRefundsView' does n
           <Property Name="UpdatedByDateTime" Type="datetime" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.SupplierPaymentsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierPaymentsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3616,7 +3625,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierPaymentsView' does not hav
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.SupplierRefundsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="SupplierRefundsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -3649,7 +3658,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.SupplierRefundsView' does not have
           <Property Name="FullDescription" Type="nvarchar(max)" />
         </EntityType>
         <!--Errors Found During Generation:
-warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="TreatmentPlanRecordsView">
           <Key>
             <PropertyRef Name="RowId" />
@@ -4490,6 +4499,18 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             </Principal>
             <Dependent Role="Appointments">
               <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Appointments_Patients1">
+          <End Role="Patients" Type="Self.Patients" Multiplicity="0..1" />
+          <End Role="Appointments" Type="Self.Appointments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patients">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="Appointments">
+              <PropertyRef Name="ConfirmedByPatientRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -7680,6 +7701,9 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
     [AppointmentsView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
     [AppointmentsView].[IsEmailWhenRegistered] AS [IsEmailWhenRegistered], 
     [AppointmentsView].[IsSmsWhenRegistered] AS [IsSmsWhenRegistered], 
+    [AppointmentsView].[ConfirmedByPatientRowId] AS [ConfirmedByPatientRowId], 
+    [AppointmentsView].[ConfirmedTimestamp] AS [ConfirmedTimestamp], 
+    [AppointmentsView].[ConfirmedIpAddress] AS [ConfirmedIpAddress], 
     [AppointmentsView].[AppointmentClinicalNoteRowId] AS [AppointmentClinicalNoteRowId], 
     [AppointmentsView].[AppointmentTreatmentNoteRowId] AS [AppointmentTreatmentNoteRowId], 
     [AppointmentsView].[PatientFullName] AS [PatientFullName], 
@@ -9088,6 +9112,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
           <AssociationSet Name="FK_Appointments_Patients" Association="Self.FK_Appointments_Patients">
+            <End Role="Patients" EntitySet="Patients" />
+            <End Role="Appointments" EntitySet="Appointments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Appointments_Patients1" Association="Self.FK_Appointments_Patients1">
             <End Role="Patients" EntitySet="Patients" />
             <End Role="Appointments" EntitySet="Appointments" />
           </AssociationSet>
@@ -12297,6 +12325,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
             <End Role="Category" EntitySet="Categories" />
           </AssociationSet>
           <EntitySet Name="Settings" EntityType="PracticeManagerModel.Setting" />
+          <AssociationSet Name="FK_Appointments_Patients1" Association="PracticeManagerModel.FK_Appointments_Patients1">
+            <End Role="Patient" EntitySet="Patients" />
+            <End Role="AppointmentT" EntitySet="AppointmentsT" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -12402,6 +12434,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="InsurancePlanMemberOtherValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsurancePolicyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceCertificateId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Appointments1" Relationship="PracticeManagerModel.FK_Appointments_Patients1" FromRole="Patient" ToRole="AppointmentT" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -12967,6 +13000,10 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Appointments_CreatedByUserRowId1" FromRole="AppointmentT" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider2" Relationship="PracticeManagerModel.FK_Appointments_UpdatedByUserRowId1" FromRole="AppointmentT" ToRole="ServiceProvider" />
           <NavigationProperty Name="AppointmentForms" Relationship="PracticeManagerModel.FK_AppointmentForms_Appointments" FromRole="AppointmentT" ToRole="AppointmentForm" />
+          <Property Name="ConfirmedByPatientRowId" Type="Guid" />
+          <Property Name="ConfirmedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmedIpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Patient1" Relationship="PracticeManagerModel.FK_Appointments_Patients1" FromRole="AppointmentT" ToRole="Patient" />
         </EntityType>
         <Association Name="FK_Appointments_AppointmentBooks">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="1" />
@@ -13414,6 +13451,9 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="IsEmailWhenRegistered" Type="Boolean" Nullable="false" />
           <Property Name="IsSmsWhenRegistered" Type="Boolean" Nullable="false" />
+          <Property Name="ConfirmedByPatientRowId" Type="Guid" />
+          <Property Name="ConfirmedTimestamp" Type="DateTime" Precision="3" />
+          <Property Name="ConfirmedIpAddress" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="PatientAppointmentV">
           <End Type="PracticeManagerModel.AppointmentV" Role="AppointmentV" Multiplicity="*" />
@@ -18784,6 +18824,8 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="Patient_MedicalHistoryReadOnly" Type="Boolean" Nullable="false" />
           <Property Name="Patient_RestrictPatientList" Type="Boolean" Nullable="false" />
           <Property Name="AppointmentsScheduler_RestrictBookAccess" Type="Boolean" Nullable="false" />
+          <Property Name="Patient_MedicalFormReadOnly" Type="Boolean" Nullable="false" />
+          <Property Name="Patient_MedicalForm" Type="Boolean" Nullable="false" />
           </EntityType>
         <Association Name="FK_AppointmentBooks_CreatedByUserRowId">
           <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
@@ -22885,6 +22927,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <NavigationProperty Name="AppointmentForms" Relationship="PracticeManagerModel.FK_AppointmentForms_Forms" FromRole="Form" ToRole="AppointmentForm" />
           <NavigationProperty Name="FormItems" Relationship="PracticeManagerModel.FK_FormItems_Forms" FromRole="Form" ToRole="FormItem" />
           <NavigationProperty Name="PatientForms" Relationship="PracticeManagerModel.FK_PatientForms_Forms1" FromRole="Form" ToRole="PatientForm" />
+          <Property Name="CategoryRowId" Type="Guid" />
         </EntityType>
         <EntityType Name="PatientFormItem">
           <Key>
@@ -23062,6 +23105,18 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="Order" Type="Int32" />
         </EntityType>
+        <Association Name="FK_Appointments_Patients1">
+          <End Type="PracticeManagerModel.Patient" Role="Patient" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.AppointmentT" Role="AppointmentT" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Patient">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="AppointmentT">
+              <PropertyRef Name="ConfirmedByPatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -23467,6 +23522,9 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="AppointmentsT">
             <EntityTypeMapping TypeName="PracticeManagerModel.AppointmentT">
               <MappingFragment StoreEntitySet="Appointments">
+                <ScalarProperty Name="ConfirmedIpAddress" ColumnName="ConfirmedIpAddress" />
+                <ScalarProperty Name="ConfirmedTimestamp" ColumnName="ConfirmedTimestamp" />
+                <ScalarProperty Name="ConfirmedByPatientRowId" ColumnName="ConfirmedByPatientRowId" />
                 <ScalarProperty Name="IsSmsWhenRegistered" ColumnName="IsSmsWhenRegistered" />
                 <ScalarProperty Name="IsEmailWhenRegistered" ColumnName="IsEmailWhenRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
@@ -23757,6 +23815,9 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="AppointmentsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.AppointmentV">
               <MappingFragment StoreEntitySet="AppointmentsView">
+                <ScalarProperty Name="ConfirmedIpAddress" ColumnName="ConfirmedIpAddress" />
+                <ScalarProperty Name="ConfirmedTimestamp" ColumnName="ConfirmedTimestamp" />
+                <ScalarProperty Name="ConfirmedByPatientRowId" ColumnName="ConfirmedByPatientRowId" />
                 <ScalarProperty Name="IsSmsWhenRegistered" ColumnName="IsSmsWhenRegistered" />
                 <ScalarProperty Name="IsEmailWhenRegistered" ColumnName="IsEmailWhenRegistered" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
@@ -26588,6 +26649,8 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Users">
             <EntityTypeMapping TypeName="PracticeManagerModel.User">
               <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Patient_MedicalForm" ColumnName="Patient_MedicalForm" />
+                <ScalarProperty Name="Patient_MedicalFormReadOnly" ColumnName="Patient_MedicalFormReadOnly" />
                 <ScalarProperty Name="AppointmentsScheduler_RestrictBookAccess" ColumnName="AppointmentsScheduler_RestrictBookAccess" />
                 <ScalarProperty Name="Patient_RestrictPatientList" ColumnName="Patient_RestrictPatientList" />
                 <ScalarProperty Name="Patient_MedicalHistoryReadOnly" ColumnName="Patient_MedicalHistoryReadOnly" />
@@ -26732,6 +26795,7 @@ warning 6002: The table/view 'PM_V3_iflow.dbo.TreatmentPlanRecordsView' does not
           <EntitySetMapping Name="Forms">
             <EntityTypeMapping TypeName="PracticeManagerModel.Form">
               <MappingFragment StoreEntitySet="Forms">
+                <ScalarProperty Name="CategoryRowId" ColumnName="CategoryRowId" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />

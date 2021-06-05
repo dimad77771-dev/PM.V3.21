@@ -272,10 +272,22 @@
 						<dxlc:LayoutItemLabel
 							Grid.Row="5"
 							Grid.Column="2"
-							Content="Restrict Patient List"
+							Content="Other Form Read Only"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:CheckEdit
 							Grid.Row="5"
+							Grid.Column="3"
+							IsChecked="{Binding Entity.Patient_MedicalFormReadOnly, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="6"
+							Grid.Column="2"
+							Content="Restrict Patient List"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="6"
 							Grid.Column="3"
 							IsChecked="{Binding Entity.Patient_RestrictPatientList, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
@@ -430,6 +442,18 @@
 							Grid.Row="13"
 							Grid.Column="5"
 							IsChecked="{Binding Entity.Patient_TreatmentPlan, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Style="{StaticResource baseEditStyle1}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="14"
+							Grid.Column="4"
+							Content="Other Forms"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="14"
+							Grid.Column="5"
+							IsChecked="{Binding Entity.Patient_MedicalForm, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							KeyboardNavigation.IsTabStop="False"
 							Style="{StaticResource baseEditStyle1}" />
 
