@@ -129,6 +129,53 @@
 							Command="{Binding ViewZoomOutCommand}" />
 
 					</dxr:RibbonPageGroup>
+
+					<dxr:RibbonPageGroup Caption="Appointment Book" IsVisible="{Binding IsVisibleRibbonAppointmentBook}">
+						<dxb:BarEditItem
+							ClosePopupOnChangingEditValue="True"
+							EditWidth="230"
+							EditValue="{Binding SelectedAppointmentBook, Mode=TwoWay}"
+							RibbonStyle="SmallWithText">
+							<!--  IsEnabled="{Binding ShowHoursIsEnabled}"  -->
+							<dxb:BarEditItem.EditSettings>
+								<dxe:ComboBoxEditSettings
+									IsTextEditable="False"
+									PopupMaxHeight="250"
+									ItemsSource="{Binding AllAppointmentBooks}">
+									<dxe:ComboBoxEditSettings.ItemTemplate>
+										<DataTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Image
+													Margin="2"
+													VerticalAlignment="Center"
+													Source="{Binding Path=Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="2"
+													Text="{Binding Path=Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</DataTemplate>
+									</dxe:ComboBoxEditSettings.ItemTemplate>
+									<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+										<ControlTemplate>
+											<StackPanel Orientation="Horizontal">
+												<Image
+													Margin="5"
+													VerticalAlignment="Center"
+													Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+													Stretch="None" />
+												<TextBlock
+													Padding="5"
+													Text="{Binding Path=SelectedItem.Name}"
+													VerticalAlignment="Center" />
+											</StackPanel>
+										</ControlTemplate>
+									</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+								</dxe:ComboBoxEditSettings>
+							</dxb:BarEditItem.EditSettings>
+						</dxb:BarEditItem>
+					</dxr:RibbonPageGroup>
 				</dxr:RibbonPage>
 
 				<dxr:RibbonPage Caption="VIEW">
@@ -287,53 +334,6 @@
 				</dxr:RibbonPage>
 
 				<dxr:RibbonPage Caption="MORE">
-					<dxr:RibbonPageGroup Caption="Appointment Book" IsVisible="{Binding IsVisibleRibbonAppointmentBook}">
-						<dxb:BarEditItem
-							ClosePopupOnChangingEditValue="True"
-							EditWidth="230"
-							EditValue="{Binding SelectedAppointmentBook, Mode=TwoWay}"
-							RibbonStyle="SmallWithText">
-							<!--  IsEnabled="{Binding ShowHoursIsEnabled}"  -->
-							<dxb:BarEditItem.EditSettings>
-								<dxe:ComboBoxEditSettings
-									IsTextEditable="False"
-									PopupMaxHeight="250"
-									ItemsSource="{Binding AllAppointmentBooks}">
-									<dxe:ComboBoxEditSettings.ItemTemplate>
-										<DataTemplate>
-											<StackPanel Orientation="Horizontal">
-												<Image
-													Margin="2"
-													VerticalAlignment="Center"
-													Source="{Binding Path=Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
-													Stretch="None" />
-												<TextBlock
-													Padding="2"
-													Text="{Binding Path=Name}"
-													VerticalAlignment="Center" />
-											</StackPanel>
-										</DataTemplate>
-									</dxe:ComboBoxEditSettings.ItemTemplate>
-									<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-										<ControlTemplate>
-											<StackPanel Orientation="Horizontal">
-												<Image
-													Margin="5"
-													VerticalAlignment="Center"
-													Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
-													Stretch="None" />
-												<TextBlock
-													Padding="5"
-													Text="{Binding Path=SelectedItem.Name}"
-													VerticalAlignment="Center" />
-											</StackPanel>
-										</ControlTemplate>
-									</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
-								</dxe:ComboBoxEditSettings>
-							</dxb:BarEditItem.EditSettings>
-						</dxb:BarEditItem>
-					</dxr:RibbonPageGroup>
-
 					<dxr:RibbonPageGroup Caption="Insurance View Group" IsVisible="{Binding IsVisibleRibbonInsuranceProvidersViewGroup}">
 						<dxb:BarEditItem
 							ClosePopupOnChangingEditValue="True"
