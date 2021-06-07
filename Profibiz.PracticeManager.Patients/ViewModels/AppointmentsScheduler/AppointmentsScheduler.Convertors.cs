@@ -349,7 +349,23 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		}
 	}
 
-
+	public class AppointmentVisualTimeCellToolTipConverter : IValueConverter
+	{
+		object IValueConverter.Convert(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			var obj = value as VisualTimeCellContent;
+			if (obj != null)
+			{
+				var str = obj.IntervalStart.ToString("t") + " - " + obj.IntervalEnd.ToString("t");
+				return str;
+			}
+			return "";
+		}
+		object IValueConverter.ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+		{
+			throw new NotSupportedException();
+		}
+	}
 
 
 }

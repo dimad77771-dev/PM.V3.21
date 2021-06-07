@@ -491,7 +491,7 @@
 							DisplayMember="Name"
 							TextWrapping="Wrap"
 							ItemsSource="{Binding Entity.AppointmentsScheduler_HideStatuses2_Items}"
-							EditValue="{Binding Entity.AppointmentsScheduler_HideStatuses2_SelectedItems, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True, Converter={infrastructure:DebugConverter}}"
+							EditValue="{Binding Entity.AppointmentsScheduler_HideStatuses2_SelectedItems, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 							ShowSizeGrip="False"
 							IsTextEditable="False"
 							ShowCustomItems="False">

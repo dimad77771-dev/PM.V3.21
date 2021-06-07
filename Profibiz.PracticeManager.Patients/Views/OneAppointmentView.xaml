@@ -667,7 +667,7 @@
 						Grid.Column="0"
 						Margin="4"
 						DisplayMember="Name"
-						EditValue="{Binding RemainderInMinutesSet, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Converter={infrastructure:DebugConverter}}"
+						EditValue="{Binding RemainderInMinutesSet, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
 						IsReadOnly="{Binding IsReadOnly}"
 						IsTextEditable="False"
 						ItemsSource="{Binding AppointmentRemainderEnumAll, Source={StaticResource lookupDataProvider}}"

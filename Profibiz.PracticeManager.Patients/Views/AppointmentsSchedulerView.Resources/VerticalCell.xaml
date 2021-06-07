@@ -54,7 +54,7 @@
                             Content="{Binding}"
                             ContentTemplate="{DynamicResource {dxscht:DayViewThemeKey ResourceKey=DayViewVerticalCellContentTemplate,
                                                                                       ThemeName=Office2013DarkGray}}" />
-                        <Grid.ToolTip>
+                        <!--<Grid.ToolTip>
                             <ToolTip
                                 Background="Transparent"
                                 BorderThickness="0"
@@ -63,8 +63,16 @@
                                     <local:AppointmentsSchedulerToolTipBehavior />
                                 </dxmvvm:Interaction.Behaviors>
                             </ToolTip>
-                        </Grid.ToolTip>
-                    </Grid>
+                        </Grid.ToolTip>-->
+						<Grid.ToolTip>
+							<ToolTip
+                                Background="Yellow"
+                                BorderThickness="1"
+								Content="{Binding Path=., Converter={StaticResource AppointmentVisualTimeCellToolTipConverter}}">
+							</ToolTip>
+						</Grid.ToolTip>
+						
+					</Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

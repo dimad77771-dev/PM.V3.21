@@ -91,6 +91,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			if (IsNew)
 			{
 				Entity.RowId = Guid.NewGuid();
+				if (OpenParam.ClipboardCopyAppointment != null)
+				{
+					CopyFromClipboardCopyAppointment();
+				}
 				if (AppointmentBook != null)
 				{
 					Entity.AppointmentBookRowId = AppointmentBook.RowId;
@@ -162,6 +166,23 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				MessengerHelper.Register<MsgRowChange<AppointmentTreatmentNote>>(this, OnMsgRowChangeAppointmentTreatmentNote);
 				isRegisterMessenges = true;
 			}
+		}
+
+		void CopyFromClipboardCopyAppointment()
+		{
+			var copyAppointment = OpenParam.ClipboardCopyAppointment;
+			Entity.PatientRowId = copyAppointment.PatientRowId;
+			Entity.Patient = copyAppointment.Patient;
+			Entity.MedicalServicesOrSupplyRowId = copyAppointment.MedicalServicesOrSupplyRowId;
+			Entity.ServiceProviderRowId = copyAppointment.ServiceProviderRowId;
+			Entity.Status1RowId = copyAppointment.Status1RowId;
+			Entity.Status2RowId = copyAppointment.Status2RowId;
+			Entity.Notes = copyAppointment.Notes;
+			Entity.Description = copyAppointment.Description;
+			Entity.IsRemainderEmail = copyAppointment.IsRemainderEmail;
+			Entity.IsRemainderSms = copyAppointment.IsRemainderSms;
+			Entity.AppointmentRemainders = copyAppointment.AppointmentRemainders;
+			OpenParam.NewFinish = OpenParam.NewStart + (copyAppointment.Finish - copyAppointment.Start);
 		}
 
 		async Task SetupStartFinishForNewRow()
@@ -996,6 +1017,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			public Boolean IsReadOnly { get; set; }
 
 			public Boolean IsNotRegisteredMode { get; set; }
+			public Appointment ClipboardCopyAppointment { get; set; }
 
 			public Guid? InsuranceProvidersViewGroupRowId { get; set; }
 		}

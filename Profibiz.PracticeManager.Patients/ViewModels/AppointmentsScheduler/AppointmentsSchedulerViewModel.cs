@@ -54,6 +54,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual ObservableCollection<HospitalAppointment> Appointments { get; set; }
 		public virtual ObservableCollection<XtraAppointment> SelectedAppointments { get; set; } = new ObservableCollection<XtraAppointment>();
 		XtraAppointment SelectedAppointment => (SelectedAppointments != null && SelectedAppointments.Count == 1) ? SelectedAppointments[0] : null;
+		Appointment ClipboardCopyAppointment { get; set; }
 
 		public virtual double DayViewVerticalCellMinHeight { get; set; } = 20;
 		public virtual TimeSpan TimeScale { get; set; } = new TimeSpan(0, 30, 0);
@@ -432,7 +433,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			e.Handled = true;
 			EditEntity();
 		}
-		void AddEditEntity(Appointment row, bool isNotRegisteredMode = false)
+		void AddEditEntity(Appointment row, bool isNotRegisteredMode = false, bool fromClipboard = false)
 		{
 			var param = new OneAppointmentViewModel.OpenParams
 			{
@@ -442,6 +443,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				DaysInfo = DaysInfo,
 				InsuranceProvidersViewGroupRowId = (ViewMode == ViewModeEnum.InsuranceGroups ? SelectedInsuranceProvidersViewGroup?.RowId : null),
 				IsNotRegisteredMode = isNotRegisteredMode,
+				ClipboardCopyAppointment = fromClipboard ? ClipboardCopyAppointment : null,
 			};
 			if (row == null)
 			{
@@ -517,7 +519,20 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var a = e;
 		}
 
+		public void CopyEntity()
+		{
+			if (SelectedAppointment != null)
+			{
+				ClipboardCopyAppointment = XtraAppointment2Appointment(SelectedAppointment);
+			}
+		}
+
+		public void PasteEntity()
+		{
+			AddEditEntity(null, fromClipboard: true);
+		}
 		
+
 
 
 		Appointment XtraAppointment2Appointment(XtraAppointment xtraAppointment)
@@ -676,6 +691,20 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				myMenuItem2.ItemClick += (a, b) => NewEntity(isNotRegisteredMode: true);
 				e.Customizations.Add(myMenuItem2);
 				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
+
+				var myMenuItem4 = new DevExpress.Xpf.Bars.BarButtonItem()
+				{
+					Name = "PasteAppointment",
+					Content = "Paste",
+					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-paste-16.png")),
+				};
+				myMenuItem4.ItemClick += (a, b) => PasteEntity();
+				e.Customizations.Add(myMenuItem4);
+				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
+				if (ClipboardCopyAppointment == null)
+				{
+					myMenuItem4.IsEnabled = false;
+				}
 			}
 			else if (e.Menu.Name == "AppointmentMenu")
 			{
@@ -698,6 +727,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				myMenuItem2.ItemClick += (a, b) => DeleteEntity();
 				e.Customizations.Add(myMenuItem2);
 				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
+
+				var myMenuItem3 = new DevExpress.Xpf.Bars.BarButtonItem()
+				{
+					Name = "CopyAppointment",
+					Content = "Copy",
+					Glyph = new BitmapImage(new Uri("pack://application:,,,/Profibiz.PracticeManager.InfrastructureExt;component/Resources/icon-copy-16.png")),
+				};
+				myMenuItem3.ItemClick += (a, b) => CopyEntity();
+				e.Customizations.Add(myMenuItem3);
+				e.Customizations.Add(new DevExpress.Xpf.Bars.BarItemLinkSeparator());
+
+
 			}
 		}
 
