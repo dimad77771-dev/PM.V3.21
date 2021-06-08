@@ -80,7 +80,7 @@ namespace Profibiz.PracticeManager.Service
 					var err = SendEmail(emailAddress, email_subject, email_text);
 					if (string.IsNullOrEmpty(err))
 					{
-						NLog.Debug(logheader + "START");
+						NLog.Debug(logheader + "SUCCESS");
 						SetRemainderIsProcessedEmail(db, row.Remainder.RowId);
 					}
 					else
@@ -91,6 +91,14 @@ namespace Profibiz.PracticeManager.Service
 
 
 				var mobileNumber = row.Patient.MobileNumber;
+				if (string.IsNullOrEmpty(mobileNumber))
+				{
+					mobileNumber = row.Patient.HomePhoneNumber;
+				}
+				if (string.IsNullOrEmpty(mobileNumber))
+				{
+					mobileNumber = row.Patient.HomePhoneNumber;
+				}
 				if (row.Appointment.IsRemainderSms && !string.IsNullOrEmpty(mobileNumber))
 				{
 					var logheader = logheader0 + "(sms)" + ": ";
@@ -98,7 +106,7 @@ namespace Profibiz.PracticeManager.Service
 					var err = SendSms(mobileNumber, sms_text);
 					if (string.IsNullOrEmpty(err))
 					{
-						NLog.Debug(logheader + "START");
+						NLog.Debug(logheader + "SUCCESS");
 						SetRemainderIsProcessedSms(db, row.Remainder.RowId);
 					}
 					else

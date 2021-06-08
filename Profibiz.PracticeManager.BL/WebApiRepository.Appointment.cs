@@ -213,23 +213,26 @@ namespace Profibiz.PracticeManager.BL
 						db.SaveChangesEx();
 						updateRows.Add(row);
 
-						var exRemainders = db.AppointmentRemainders.Where(q => q.AppointmentRowId == entity.RowId).ToArray();
-						var rowRemainders = mapper.Map<EF.AppointmentRemainder[]>(entity.AppointmentRemainders);
-						var newRemainders = rowRemainders.Select(q =>
+						if (entity.AppointmentRemainders != null)
 						{
-							var findRemainder = exRemainders.FirstOrDefault(z => z.RemainderInMinutes == q.RemainderInMinutes);
-							if (findRemainder != null)
-							{ 
-								return findRemainder;
-							}
-							else
+							var exRemainders = db.AppointmentRemainders.Where(q => q.AppointmentRowId == entity.RowId).ToArray();
+							var rowRemainders = mapper.Map<EF.AppointmentRemainder[]>(entity.AppointmentRemainders);
+							var newRemainders = rowRemainders.Select(q =>
 							{
-								q.RowId = Guid.NewGuid();
-								q.AppointmentRowId = row.RowId;
-								return q;
-							}
-						}).ToArray();
-						DbUpdateRowsHelper.UpdateList(exRemainders, newRemainders, q => q.RowId, db, this);
+								var findRemainder = exRemainders.FirstOrDefault(z => z.RemainderInMinutes == q.RemainderInMinutes);
+								if (findRemainder != null)
+								{
+									return findRemainder;
+								}
+								else
+								{
+									q.RowId = Guid.NewGuid();
+									q.AppointmentRowId = row.RowId;
+									return q;
+								}
+							}).ToArray();
+							DbUpdateRowsHelper.UpdateList(exRemainders, newRemainders, q => q.RowId, db, this);
+						}
 					}
 
 

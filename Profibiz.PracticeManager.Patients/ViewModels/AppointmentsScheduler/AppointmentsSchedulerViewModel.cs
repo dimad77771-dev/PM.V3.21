@@ -616,6 +616,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			appointment.Finish = finishTime;
 			appointment.ServiceProviderRowId = serviceProviderRowId;
 			var updateEntity = appointment.GetPocoClone();
+			updateEntity.AppointmentRemainders = null;
+			
 
 			//save
 			ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);

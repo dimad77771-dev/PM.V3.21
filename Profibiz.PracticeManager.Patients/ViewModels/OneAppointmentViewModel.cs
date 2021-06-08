@@ -495,6 +495,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				ValidateHelper.Empty(Entity.MedicalServicesOrSupplyRowId, "Service", errors);
 			}
 
+			ValidateRemainders(errors);
+
 			if (errors.Count > 0)
 			{
 				ShowErrors(errors);
@@ -528,6 +530,22 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						}
 					}
 				}
+			}
+		}
+
+		void ValidateRemainders(List<string> errors)
+		{
+			if ((Entity.IsRemainderEmail || Entity.IsRemainderSms) && ValidateHelper.IsEmpty(Entity.MedicalServicesOrSupplyRowId))
+			{
+				errors.Add("Service is required when Email or SMS Reminder is on");
+			}
+			if (Entity.IsRemainderEmail && string.IsNullOrEmpty(Entity.Patient.EmailAddress))
+			{
+				errors.Add("Email of Patient is required when Email Reminder is on");
+			}
+			if (Entity.IsRemainderSms && string.IsNullOrEmpty(Entity.Patient.MobileNumber))
+			{
+				errors.Add("Cell of Patient is required when Email Reminder is on");
 			}
 		}
 
