@@ -974,7 +974,7 @@
 							</Grid>
 
 							<dxlc:LayoutGroup
-								Margin="5,35,5,5"
+								Margin="5,20,5,5"
 								VerticalAlignment="Top"
 								GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
 								Header="FAMILY DOCTOR"
@@ -1040,6 +1040,90 @@
 										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource phoneEditStyle1}"
 										TabIndex="320" />
+								</Grid>
+							</dxlc:LayoutGroup>
+
+							<dxlc:LayoutGroup
+								Margin="5,20,5,5"
+								VerticalAlignment="Top"
+								GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+								Header="INITIAL INSURANCE COVERAGE"
+								View="GroupBox">
+								<Grid>
+									<Grid.RowDefinitions>
+										<RowDefinition Height="Auto" />
+										<RowDefinition Height="Auto" />
+									</Grid.RowDefinitions>
+									<Grid.ColumnDefinitions>
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="30" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="30" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="*" />
+									</Grid.ColumnDefinitions>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="0"
+										Content="Company"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="1"
+										EditValue="{Binding Entity.InsuranceCompany, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="4010"/>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="3"
+										Content="Plan Member"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="4"
+										EditValue="{Binding Entity.InsurancePlanMember, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="4020" />
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="6"
+										Content="Other Plan Member"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="7"
+										EditValue="{Binding Entity.InsurancePlanMemberOtherValue, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="4030" />
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="0"
+										Grid.Row="1"
+										Content="Policy Number"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="1"
+										Grid.Row="1"
+										EditValue="{Binding Entity.InsurancePolicyNumber, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="4110"/>
+
+									<dxlc:LayoutItemLabel
+										Grid.Column="3"
+										Grid.Row="1"
+										Content="Certificate Id"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:TextEdit
+										Grid.Column="4"
+										Grid.Row="1"
+										EditValue="{Binding Entity.InsuranceCertificateId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle1}"
+										TabIndex="4120" />
+
 								</Grid>
 							</dxlc:LayoutGroup>
 

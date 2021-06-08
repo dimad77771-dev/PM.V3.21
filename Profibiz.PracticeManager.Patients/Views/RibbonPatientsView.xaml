@@ -158,7 +158,7 @@
                         </dxr:RibbonPageGroup>
 
 						<dxr:RibbonPageGroup>
-							<dxb:BarButtonItem Content="Сhecking/Checkout"
+							<dxb:BarButtonItem Content="Check-In / Check-Out"
                                                Command="{Binding CheckingCheckoutCommand}"
                                                LargeGlyph="{dx:DXImage Image=Show_32x32.png}"
                                                Glyph="{dx:DXImage Image=Show_16x16.png}" />

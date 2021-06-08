@@ -85,6 +85,13 @@ namespace Profibiz.PracticeManager.Model
 		public bool HasNoCoverage { get; set; }
 		public bool IsNotRegistered { get; set; }
 		public byte[] Signature { get; set; }
+		public string FamilyDoctorEmail { get; set; }
+		public string SexIdentifyAs { get; set; }
+		public string InsuranceCompany { get; set; }
+		public string InsurancePlanMember { get; set; }
+		public string InsurancePlanMemberOtherValue { get; set; }
+		public string InsurancePolicyNumber { get; set; }
+		public string InsuranceCertificateId { get; set; }
 
 		public virtual ObservableCollection<Patient> FamilyMembers { get; set; }
 		public virtual Patient FamilyHead { get; set; }

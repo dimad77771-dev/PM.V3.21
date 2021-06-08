@@ -282,7 +282,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			invoiceClaimEntities.Clear();
 			if (hasNoCoverage)
 			{
-				var amount = (decimal)OneModel.Entity.Amount;
+				var amount = (decimal)OneModel.Entity.Total;
 				invoiceClaimEntities.Add(new InvoiceClaim
 				{
 					RowId = Guid.NewGuid(),
