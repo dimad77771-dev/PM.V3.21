@@ -18,13 +18,21 @@ namespace Profibiz.PracticeManager.Shell
     /// </summary>
     public partial class App : Application
     {
-		
+		private static Mutex _mutex = null;
 
 		protected override void OnStartup(StartupEventArgs e)
         {
 			//decimal x = 12345678;
 			////var b = x.ToString("0.#");
 			//var b = x.ToString("#,##0.##");
+
+			const string appName = "Profibiz.PracticeManager.V3";
+			bool createdNew;
+			_mutex = new Mutex(true, appName, out createdNew);
+			if (!createdNew)
+			{
+				Application.Current.Shutdown();
+			}
 
 
 			base.OnStartup(e);
