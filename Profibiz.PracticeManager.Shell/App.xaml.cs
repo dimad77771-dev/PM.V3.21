@@ -26,6 +26,7 @@ namespace Profibiz.PracticeManager.Shell
 			////var b = x.ToString("0.#");
 			//var b = x.ToString("#,##0.##");
 
+			/*
 			const string appName = "Profibiz.PracticeManager.V3";
 			bool createdNew;
 			_mutex = new Mutex(true, appName, out createdNew);
@@ -33,7 +34,7 @@ namespace Profibiz.PracticeManager.Shell
 			{
 				Application.Current.Shutdown();
 			}
-
+			*/
 
 			base.OnStartup(e);
 			CustimizeCultureInfo();

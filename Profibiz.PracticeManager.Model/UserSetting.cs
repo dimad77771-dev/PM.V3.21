@@ -19,5 +19,7 @@ namespace Profibiz.PracticeManager.Model
 		public bool IsNew { get; set; }
 
 		public string Rowtype9 => "-";
+
+		public bool IsRequestError { get; set; }
 	}
 }
