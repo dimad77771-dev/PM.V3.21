@@ -100,6 +100,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 		PickInsuranceCoverageView,
 		PickCategoryView,
 		PickTemplateNameView,
+		PickBodyrevivalsalonspaPatientView,
 		PickAppointmentMultiDateView,
 		PayrollAllDoctorsView,
 		PayrollDetailWindowView,

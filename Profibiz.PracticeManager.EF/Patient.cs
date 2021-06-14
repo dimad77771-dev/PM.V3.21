@@ -114,6 +114,7 @@ namespace Profibiz.PracticeManager.EF
         public string InsurancePlanMemberOtherValue { get; set; }
         public string InsurancePolicyNumber { get; set; }
         public string InsuranceCertificateId { get; set; }
+        public Nullable<int> spaCustomerNumber { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<PatientMedicalCondition> PatientMedicalConditions { get; set; }

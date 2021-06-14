@@ -113,11 +113,11 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 
 			if (RuntimeHelper.IsMachineD)
 			{
-				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Patients");
+				SelectedModule = Modules.SingleOrDefault(q => q.Code == "Patients");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Specialists");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Finances");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Chargeouts");
-				SelectedModule = Modules.SingleOrDefault(q => q.Code == "AppointmentsScheduler");
+				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "AppointmentsScheduler");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "CalendarEventsScheduler");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Inventory");
 				//SelectedModule = Modules.SingleOrDefault(q => q.Code == "Lookups");

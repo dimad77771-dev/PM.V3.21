@@ -1414,5 +1414,16 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 		}
 
 
+		async public Task<UpdateReturn> PostPatientsFromBodyrevivalsalonspa(string json)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PostAsync("api/patients/PostPatientsFromBodyrevivalsalonspa", content);
+			return await response.ValidateResponse();
+		}
+
+
 	}
 }

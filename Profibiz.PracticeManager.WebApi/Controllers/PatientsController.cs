@@ -18,6 +18,7 @@ using Profibiz.PracticeManager.BL;
 using Profibiz.PracticeManager.DTO;
 using System.Net.Http.Headers;
 using System.Web.Http.Controllers;
+using System.Text;
 
 namespace Profibiz.PracticeManager.WebApi.Controllers
 {
@@ -240,6 +241,14 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 		public IHttpActionResult DeleteCalendarEvent(Guid id)
 		{
 			_repository.UpdateCalendarEventCore(new List<CalendarEvent>() { new CalendarEvent { RowId = id } }, EntityState.Deleted);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+
+		[HttpPost]
+		public IHttpActionResult PostPatientsFromBodyrevivalsalonspa()
+		{
+			var json = Request.Content.ReadAsStringAsync().Result;
+			_repository.PostPatientsFromBodyrevivalsalonspa(json);
 			return StatusCode(HttpStatusCode.NoContent);
 		}
 

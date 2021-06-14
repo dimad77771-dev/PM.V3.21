@@ -44,7 +44,7 @@ namespace Profibiz.PracticeManager.Shell
 		{
 			if (RuntimeHelper.IsMachineD)
 			{
-				UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("FEF40518-BBFD-4587-AD2F-A62C4CBD5621");  return;
+				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("FEF40518-BBFD-4587-AD2F-A62C4CBD5621");  return;
 				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("B84FCF4B-5B88-412E-A955-B3ADA0E70912"); return;
 			}
 

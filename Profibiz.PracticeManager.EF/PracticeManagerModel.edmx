@@ -1350,6 +1350,7 @@
           <Property Name="InsurancePlanMemberOtherValue" Type="nvarchar" MaxLength="255" />
           <Property Name="InsurancePolicyNumber" Type="nvarchar" MaxLength="255" />
           <Property Name="InsuranceCertificateId" Type="nvarchar" MaxLength="255" />
+          <Property Name="spaCustomerNumber" Type="int" />
         </EntityType>
         <EntityType Name="PaychargeRefcharges">
           <Key>
@@ -2158,8 +2159,8 @@
           <Property Name="Patient_MedicalHistoryReadOnly" Type="bit" Nullable="false" />
           <Property Name="Patient_RestrictPatientList" Type="bit" Nullable="false" />
           <Property Name="AppointmentsScheduler_RestrictBookAccess" Type="bit" Nullable="false" />
-          <Property Name="Patient_MedicalFormReadOnly" Type="bit" Nullable="false" />
           <Property Name="Patient_MedicalForm" Type="bit" Nullable="false" />
+          <Property Name="Patient_MedicalFormReadOnly" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="UserSettings">
           <Key>
@@ -3150,6 +3151,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientsListView' does not have a
           <Property Name="Photo" Type="varbinary(max)" />
           <Property Name="InvoiceFamilyBalance" Type="decimal" Precision="38" Scale="4" />
           <Property Name="IsNotRegistered" Type="bit" Nullable="false" />
+          <Property Name="spaCustomerNumber" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -3263,6 +3265,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.PatientsView' does not have a pri
           <Property Name="InsurancePlanMemberOtherValue" Type="nvarchar" MaxLength="255" />
           <Property Name="InsurancePolicyNumber" Type="nvarchar" MaxLength="255" />
           <Property Name="InsuranceCertificateId" Type="nvarchar" MaxLength="255" />
+          <Property Name="spaCustomerNumber" Type="int" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3_iflow2.dbo.PaychargeRefchargesView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -8344,7 +8347,8 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
     [PatientsListView].[ReferrerName] AS [ReferrerName], 
     [PatientsListView].[Photo] AS [Photo], 
     [PatientsListView].[InvoiceFamilyBalance] AS [InvoiceFamilyBalance], 
-    [PatientsListView].[IsNotRegistered] AS [IsNotRegistered]
+    [PatientsListView].[IsNotRegistered] AS [IsNotRegistered], 
+    [PatientsListView].[spaCustomerNumber] AS [spaCustomerNumber]
     FROM [dbo].[PatientsListView] AS [PatientsListView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PatientsView" EntityType="Self.PatientsView" store:Type="Views" store:Schema="dbo">
@@ -8427,7 +8431,8 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
     [PatientsView].[InsurancePlanMember] AS [InsurancePlanMember], 
     [PatientsView].[InsurancePlanMemberOtherValue] AS [InsurancePlanMemberOtherValue], 
     [PatientsView].[InsurancePolicyNumber] AS [InsurancePolicyNumber], 
-    [PatientsView].[InsuranceCertificateId] AS [InsuranceCertificateId]
+    [PatientsView].[InsuranceCertificateId] AS [InsuranceCertificateId], 
+    [PatientsView].[spaCustomerNumber] AS [spaCustomerNumber]
     FROM [dbo].[PatientsView] AS [PatientsView]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="PaychargeRefchargesView" EntityType="Self.PaychargeRefchargesView" store:Type="Views" store:Schema="dbo">
@@ -12435,6 +12440,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <Property Name="InsurancePolicyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceCertificateId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Appointments1" Relationship="PracticeManagerModel.FK_Appointments_Patients1" FromRole="Patient" ToRole="AppointmentT" />
+          <Property Name="spaCustomerNumber" Type="Int32" />
         </EntityType>
         <Association Name="FK_PatientMedicalConditions_Patients">
           <End Type="PracticeManagerModel.Patient" Role="Patients" Multiplicity="1" />
@@ -13307,6 +13313,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <Property Name="InsurancePlanMemberOtherValue" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsurancePolicyNumber" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="InsuranceCertificateId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="spaCustomerNumber" Type="Int32" />
         </EntityType>
         <EntityType Name="Category">
           <Key>
@@ -13715,6 +13722,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <Property Name="ParentId" Type="Int32" />
           <Property Name="FamilyHeadLastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Name="IsNotRegistered" Type="Boolean" Nullable="false" />
+          <Property Name="spaCustomerNumber" Type="Int32" />
         </EntityType>
         <Association Name="FK_InsuranceCoverageServices_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -23169,6 +23177,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <EntitySetMapping Name="Patients">
             <EntityTypeMapping TypeName="PracticeManagerModel.Patient">
               <MappingFragment StoreEntitySet="Patients">
+                <ScalarProperty Name="spaCustomerNumber" ColumnName="spaCustomerNumber" />
                 <ScalarProperty Name="InsuranceCertificateId" ColumnName="InsuranceCertificateId" />
                 <ScalarProperty Name="InsurancePolicyNumber" ColumnName="InsurancePolicyNumber" />
                 <ScalarProperty Name="InsurancePlanMemberOtherValue" ColumnName="InsurancePlanMemberOtherValue" />
@@ -23683,6 +23692,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <EntitySetMapping Name="PatientsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientV">
               <MappingFragment StoreEntitySet="PatientsView">
+                <ScalarProperty Name="spaCustomerNumber" ColumnName="spaCustomerNumber" />
                 <ScalarProperty Name="InsuranceCertificateId" ColumnName="InsuranceCertificateId" />
                 <ScalarProperty Name="InsurancePolicyNumber" ColumnName="InsurancePolicyNumber" />
                 <ScalarProperty Name="InsurancePlanMemberOtherValue" ColumnName="InsurancePlanMemberOtherValue" />
@@ -23998,6 +24008,7 @@ warning 6002: The table/view 'PM_V3_iflow2.dbo.TreatmentPlanRecordsView' does no
           <EntitySetMapping Name="PatientsListView">
             <EntityTypeMapping TypeName="PracticeManagerModel.PatientsListView">
               <MappingFragment StoreEntitySet="PatientsListView">
+                <ScalarProperty Name="spaCustomerNumber" ColumnName="spaCustomerNumber" />
                 <ScalarProperty Name="IsNotRegistered" ColumnName="IsNotRegistered" />
                 <ScalarProperty Name="FamilyHeadLastName" ColumnName="FamilyHeadLastName" />
                 <ScalarProperty Name="ParentId" ColumnName="ParentId" />

@@ -209,5 +209,7 @@ namespace Profibiz.PracticeManager.BL
 		ServerReturnUpdateChargeout DeleteChargeoutCore(List<Guid> entity);
 
 		LoginInfo GetLoginInfo(string name, string password);
+
+		void PostPatientsFromBodyrevivalsalonspa(string json);
 	}
 }

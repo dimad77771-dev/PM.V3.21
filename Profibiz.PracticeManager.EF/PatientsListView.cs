@@ -36,5 +36,6 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<int> ParentId { get; set; }
         public string FamilyHeadLastName { get; set; }
         public bool IsNotRegistered { get; set; }
+        public Nullable<int> spaCustomerNumber { get; set; }
     }
 }

@@ -81,6 +81,7 @@ namespace Profibiz.PracticeManager.DTO
 		public string InsurancePlanMemberOtherValue { get; set; }
 		public string InsurancePolicyNumber { get; set; }
 		public string InsuranceCertificateId { get; set; }
+		public int? spaCustomerNumber { get; set; }
 
 		public List<Patient> FamilyMembers { get; set; }
 		public Patient FamilyHead { get; set; }

@@ -22,6 +22,7 @@ using Profibiz.PracticeManager.Patients.BusinessService;
 using System.ComponentModel;
 using DevExpress.Xpf.Grid;
 using DevExpress.Xpf.Grid.TreeList;
+using Newtonsoft.Json;
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -30,6 +31,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 	{
 		IPatientsBusinessService businessService;
 		ILookupsBusinessService lookupsBusinessService;
+		IMessageBoxService MessageBoxService => this.GetRequiredService<IMessageBoxService>();
 		public GridControlBehaviorManager BehaviorGridConrol { get; set; } = new GridControlBehaviorManager();
 
 		public virtual ObservableCollection<Patient> Entities { get; set; }
@@ -374,6 +376,34 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				});
 				patients.ForEach(q => q.IsCheckBox = false);
 				patients.ForEach(q => OnMsgRowChange(new MsgRowChange<Patient> { RowAction = RowAction.Update, Row = q } ));
+			});
+		}
+
+		public void ImportFromBodyrevivalsalonspa()
+		{
+			DispatcherUIHelper.Run(async () =>
+			{
+				var result = await PickBodyrevivalsalonspaPatientViewModel.Pick(new PickBodyrevivalsalonspaPatientViewModel.OpenParams
+				{
+					ShowDXWindowsInteractionRequest = ShowDXWindowsInteractionRequest,
+				});
+				if (!result.IsSuccess)
+				{
+					return;
+				}
+
+				var customers = result.Rows.ToArray();
+
+				ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);
+				var json = JsonConvert.SerializeObject(customers);
+				var ret = await businessService.PostPatientsFromBodyrevivalsalonspa(json);
+				ShowWaitIndicator.Hide();
+				if (!ret.Validate(MessageBoxService))
+				{
+					return;
+				}
+
+				RefreshData();
 			});
 		}
 	}
