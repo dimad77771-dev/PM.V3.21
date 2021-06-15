@@ -165,7 +165,7 @@
 						</dxr:RibbonPageGroup>
 
 						<dxr:RibbonPageGroup>
-							<dxb:BarButtonItem Content="Import from Bodyrevivalsalonspa"
+							<dxb:BarButtonItem Content="Import from MD Ware"
                                                Command="{Binding ImportFromBodyrevivalsalonspaCommand}"
                                                LargeGlyph="{dx:DXImage Image=ImportMap_32x32.png}"
                                                Glyph="{dx:DXImage Image=ImportMap_16x16.png}" />

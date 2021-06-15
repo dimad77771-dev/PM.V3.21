@@ -22,6 +22,8 @@ using Microsoft.Practices.ServiceLocation;
 using System.ComponentModel;
 using System.Collections;
 using Profibiz.PracticeManager.Patients.EF;
+using Newtonsoft.Json;
+using Profibiz.PracticeManager.Patients.BusinessService;
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -64,13 +66,27 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		public void Submit()
 		{
-			var ret = new ReturnParams
+			DispatcherUIHelper.Run(async () =>
 			{
-				IsSuccess = true,
-				Rows = SelectedEntities.ToArray(),
-			};
-			OpenParam.TaskSource.SetResult(ret);
-			CloseInteractionRequest.Raise(null);
+				var customers = SelectedEntities.ToArray();
+
+				ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);
+				var json = JsonConvert.SerializeObject(customers);
+				var rez = await OpenParam.BusinessService.PostPatientsFromBodyrevivalsalonspa(json);
+				ShowWaitIndicator.Hide();
+				if (!rez.Validate(OpenParam.MessageBoxService))
+				{
+					return;
+				}
+
+				var ret = new ReturnParams
+				{
+					IsSuccess = true,
+					Rows = SelectedEntities.ToArray(),
+				};
+				OpenParam.TaskSource.SetResult(ret);
+				CloseInteractionRequest.Raise(null);
+			});
 		}
 		public bool CanSubmit()
 		{
@@ -118,14 +134,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			await Task.Yield();
 			ShowWaitIndicator.Show();
 
-			//var rows = OpenParam.Categories;
-			//if (OpenParam.PickMode == PickModeEnum.Main)
-			//{
-			//	WindowTitle = "Select Treatment(s) / Equipment(s)";
-			//	//NewRowButtonText = "New Category";
-			//}
-			//else throw new ArgumentException();
-			WindowTitle = "Select Patients from <bodyrevivalsalonspa>";
+			WindowTitle = "Select Patients from MD Ware";
 
 			var sdb = new md_bodyrevivalsalonspaEntities();
 			var customers = sdb.Customer.ToArray();
@@ -153,6 +162,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			public IEnumerable<Guid> SelectedCategoryRowIds { get; set; }
 			public TaskCompletionSource<ReturnParams> TaskSource { get; set; }
 			public InteractionRequest<ShowDXWindowsActionParam> ShowDXWindowsInteractionRequest { get; set; }
+			public IMessageBoxService MessageBoxService { get; set; }
+			public IPatientsBusinessService BusinessService { get; set; }
 		}
 		public enum PickModeEnum { Main }
 

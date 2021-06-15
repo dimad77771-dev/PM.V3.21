@@ -386,22 +386,14 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				var result = await PickBodyrevivalsalonspaPatientViewModel.Pick(new PickBodyrevivalsalonspaPatientViewModel.OpenParams
 				{
 					ShowDXWindowsInteractionRequest = ShowDXWindowsInteractionRequest,
+					MessageBoxService = MessageBoxService,
+					BusinessService = businessService,
 				});
 				if (!result.IsSuccess)
 				{
 					return;
 				}
 
-				var customers = result.Rows.ToArray();
-
-				ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);
-				var json = JsonConvert.SerializeObject(customers);
-				var ret = await businessService.PostPatientsFromBodyrevivalsalonspa(json);
-				ShowWaitIndicator.Hide();
-				if (!ret.Validate(MessageBoxService))
-				{
-					return;
-				}
 
 				RefreshData();
 			});
