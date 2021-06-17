@@ -501,7 +501,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					labelName = (labelName ?? "").Replace("<br/>", "\n");
 					label = new Label
 					{
-						Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = labelName },
+						Content = new TextBlock { TextWrapping = TextWrapping.Wrap, Text = labelName, HorizontalAlignment = HorizontalAlignment.Right, TextAlignment = TextAlignment.Right },
 						Margin = new Thickness(5),
 						HorizontalAlignment = HorizontalAlignment.Right,
 						HorizontalContentAlignment = HorizontalAlignment.Right,
