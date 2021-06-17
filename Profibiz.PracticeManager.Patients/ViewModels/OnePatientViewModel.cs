@@ -892,6 +892,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public void AppointmentClinicalNoteEdit(Appointment row)
 		{
 			if (row == null) return;
+			if (row.AppointmentClinicalNoteRowId == null) return;
 
 			ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
 			{
