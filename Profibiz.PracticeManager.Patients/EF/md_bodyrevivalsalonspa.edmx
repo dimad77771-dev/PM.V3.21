@@ -1,0 +1,337 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="md_bodyrevivalsalonspaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerNumber" />
+          </Key>
+          <Property Name="CustomerNumber" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MembershipId" Type="nvarchar" MaxLength="100" />
+          <Property Name="MembershipNumber" Type="nvarchar" MaxLength="250" />
+          <Property Name="Undelete" Type="bit" Nullable="false" />
+          <Property Name="Hide" Type="bit" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="21" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="25" />
+          <Property Name="City" Type="nvarchar" MaxLength="21" />
+          <Property Name="State" Type="nvarchar" MaxLength="3" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="20" />
+          <Property Name="Phone1" Type="nvarchar" MaxLength="14" />
+          <Property Name="Extention1" Type="nvarchar" MaxLength="5" />
+          <Property Name="Phone2" Type="nvarchar" MaxLength="14" />
+          <Property Name="Extention2" Type="nvarchar" MaxLength="5" />
+          <Property Name="Phone3" Type="nvarchar" MaxLength="14" />
+          <Property Name="PhoneType1" Type="nvarchar" MaxLength="10" />
+          <Property Name="PhoneType2" Type="nvarchar" MaxLength="10" />
+          <Property Name="PhoneType3" Type="nvarchar" MaxLength="10" />
+          <Property Name="Visits" Type="int" />
+          <Property Name="LastVisit" Type="datetime" />
+          <Property Name="Notes" Type="ntext" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="255" />
+          <Property Name="User1" Type="nvarchar" MaxLength="100" />
+          <Property Name="User2" Type="nvarchar" MaxLength="100" />
+          <Property Name="User3" Type="nvarchar" MaxLength="100" />
+          <Property Name="User4" Type="nvarchar" MaxLength="100" />
+          <Property Name="Account" Type="bit" Nullable="false" />
+          <Property Name="Entered" Type="datetime" />
+          <Property Name="LastLocation" Type="int" />
+          <Property Name="BirthDate-Day" Type="smallint" />
+          <Property Name="BirthDate-Month" Type="smallint" />
+          <Property Name="BirthDate-Year" Type="smallint" />
+          <Property Name="LastStaff" Type="nvarchar" MaxLength="4" />
+          <Property Name="Referenced" Type="varchar" MaxLength="250" />
+          <Property Name="Gender" Type="smallint" />
+          <Property Name="HideHistory" Type="bit" Nullable="false" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Tax1Exempt" Type="bit" Nullable="false" />
+          <Property Name="Tax2Exempt" Type="bit" Nullable="false" />
+          <Property Name="Tax3Exempt" Type="bit" Nullable="false" />
+          <Property Name="Tax4Exempt" Type="bit" Nullable="false" />
+          <Property Name="NotesPopUp" Type="bit" />
+          <Property Name="PreferredStaff" Type="int" />
+          <Property Name="CustomerPicB" Type="char" MaxLength="200" />
+          <Property Name="CustomerPicA" Type="char" MaxLength="200" />
+          <Property Name="CreditCardNumber" Type="nvarchar" MaxLength="25" />
+          <Property Name="CCExpiryDate" Type="varchar" MaxLength="4" />
+          <Property Name="Extention3" Type="varchar" MaxLength="20" />
+          <Property Name="ALead" Type="bit" Nullable="false" />
+          <Property Name="AConsultation" Type="bit" Nullable="false" />
+          <Property Name="NextMileStone" Type="int" />
+          <Property Name="SMSProvider" Type="nvarchar" MaxLength="50" />
+          <Property Name="CCType" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BDInUse" Type="bit" Nullable="false" />
+          <Property Name="CustTag" Type="varchar" MaxLength="250" />
+          <Property Name="CreditCardAuth" Type="nvarchar" MaxLength="5" />
+          <Property Name="SMSNumber" Type="nvarchar" MaxLength="25" />
+          <Property Name="SendText" Type="bit" />
+          <Property Name="SendEmail" Type="bit" />
+          <Property Name="CreatedBy" Type="int" />
+          <Property Name="ModifiedBy" Type="int" />
+          <Property Name="Modified" Type="datetime" />
+          <Property Name="Height" Type="int" />
+          <Property Name="Weight" Type="int" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="25" />
+          <Property Name="Country" Type="varchar" MaxLength="50" />
+          <Property Name="Ethnicity" Type="varchar" MaxLength="50" />
+          <Property Name="MartialStatus" Type="int" />
+          <Property Name="SSN" Type="varchar" MaxLength="25" />
+          <Property Name="BloodType" Type="int" />
+          <Property Name="EmergencyContactName" Type="varchar" MaxLength="50" />
+          <Property Name="EmergencyContactPhone" Type="varchar" MaxLength="25" />
+          <Property Name="EmergencyContactRelationship" Type="varchar" MaxLength="25" />
+          <Property Name="EmploymentOccupation" Type="varchar" MaxLength="25" />
+          <Property Name="EmploymentOrganization" Type="varchar" MaxLength="25" />
+          <Property Name="EmploymentStatus" Type="int" />
+          <Property Name="EditSequence" Type="uniqueidentifier" />
+          <Property Name="CreditCardTypeID" Type="int" />
+          <Property Name="MirrorClientID" Type="char" MaxLength="17" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="25" />
+          <Property Name="OnlineStatus" Type="int" Nullable="false" />
+          <Property Name="OnlineActivationCode" Type="uniqueidentifier" />
+          <Property Name="QBID" Type="varchar" MaxLength="100" />
+          <Property Name="SMSCall" Type="smallint" Nullable="false" />
+          <Property Name="AutoCall" Type="smallint" Nullable="false" />
+          <Property Name="UseAutoCall" Type="bit" Nullable="false" />
+          <Property Name="PrimaryInsuranceId" Type="uniqueidentifier" />
+          <Property Name="SecondaryInsuranceId" Type="uniqueidentifier" />
+          <Property Name="DefaultPictureID" Type="uniqueidentifier" />
+          <Property Name="DefaultLocationId" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="47" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="md_bodyrevivalsalonspaModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="md_bodyrevivalsalonspaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerNumber" />
+          </Key>
+          <Property Name="CustomerNumber" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MembershipId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MembershipNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="Undelete" Type="Boolean" Nullable="false" />
+          <Property Name="Hide" Type="Boolean" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="21" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="21" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Phone1" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Extention1" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Phone2" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="Extention2" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="Phone3" Type="String" MaxLength="14" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneType1" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneType2" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneType3" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Visits" Type="Int32" />
+          <Property Name="LastVisit" Type="DateTime" Precision="3" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EMail" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="User1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="User2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="User3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="User4" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Account" Type="Boolean" Nullable="false" />
+          <Property Name="Entered" Type="DateTime" Precision="3" />
+          <Property Name="LastLocation" Type="Int32" />
+          <Property Name="BirthDate_Day" Type="Int16" />
+          <Property Name="BirthDate_Month" Type="Int16" />
+          <Property Name="BirthDate_Year" Type="Int16" />
+          <Property Name="LastStaff" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="Referenced" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Gender" Type="Int16" />
+          <Property Name="HideHistory" Type="Boolean" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Tax1Exempt" Type="Boolean" Nullable="false" />
+          <Property Name="Tax2Exempt" Type="Boolean" Nullable="false" />
+          <Property Name="Tax3Exempt" Type="Boolean" Nullable="false" />
+          <Property Name="Tax4Exempt" Type="Boolean" Nullable="false" />
+          <Property Name="NotesPopUp" Type="Boolean" />
+          <Property Name="PreferredStaff" Type="Int32" />
+          <Property Name="CustomerPicB" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="CustomerPicA" Type="String" MaxLength="200" FixedLength="true" Unicode="false" />
+          <Property Name="CreditCardNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="CCExpiryDate" Type="String" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="Extention3" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="ALead" Type="Boolean" Nullable="false" />
+          <Property Name="AConsultation" Type="Boolean" Nullable="false" />
+          <Property Name="NextMileStone" Type="Int32" />
+          <Property Name="SMSProvider" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CCType" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="BDInUse" Type="Boolean" Nullable="false" />
+          <Property Name="CustTag" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CreditCardAuth" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+          <Property Name="SMSNumber" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="SendText" Type="Boolean" />
+          <Property Name="SendEmail" Type="Boolean" />
+          <Property Name="CreatedBy" Type="Int32" />
+          <Property Name="ModifiedBy" Type="Int32" />
+          <Property Name="Modified" Type="DateTime" Precision="3" />
+          <Property Name="Height" Type="Int32" />
+          <Property Name="Weight" Type="Int32" />
+          <Property Name="MiddleName" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Ethnicity" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MartialStatus" Type="Int32" />
+          <Property Name="SSN" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="BloodType" Type="Int32" />
+          <Property Name="EmergencyContactName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyContactPhone" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmergencyContactRelationship" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentOccupation" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentOrganization" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="EmploymentStatus" Type="Int32" />
+          <Property Name="EditSequence" Type="Guid" />
+          <Property Name="CreditCardTypeID" Type="Int32" />
+          <Property Name="MirrorClientID" Type="String" MaxLength="17" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="25" FixedLength="false" Unicode="true" />
+          <Property Name="OnlineStatus" Type="Int32" Nullable="false" />
+          <Property Name="OnlineActivationCode" Type="Guid" />
+          <Property Name="QBID" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SMSCall" Type="Int16" Nullable="false" />
+          <Property Name="AutoCall" Type="Int16" Nullable="false" />
+          <Property Name="UseAutoCall" Type="Boolean" Nullable="false" />
+          <Property Name="PrimaryInsuranceId" Type="Guid" />
+          <Property Name="SecondaryInsuranceId" Type="Guid" />
+          <Property Name="DefaultPictureID" Type="Guid" />
+          <Property Name="DefaultLocationId" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="47" FixedLength="false" Unicode="true" annotation:StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <EntityContainer Name="md_bodyrevivalsalonspaEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customer" EntityType="Self.Customer" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="md_bodyrevivalsalonspaModelStoreContainer" CdmEntityContainer="md_bodyrevivalsalonspaEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="md_bodyrevivalsalonspaModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerNumber" ColumnName="CustomerNumber" />
+                <ScalarProperty Name="MembershipId" ColumnName="MembershipId" />
+                <ScalarProperty Name="MembershipNumber" ColumnName="MembershipNumber" />
+                <ScalarProperty Name="Undelete" ColumnName="Undelete" />
+                <ScalarProperty Name="Hide" ColumnName="Hide" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Phone1" ColumnName="Phone1" />
+                <ScalarProperty Name="Extention1" ColumnName="Extention1" />
+                <ScalarProperty Name="Phone2" ColumnName="Phone2" />
+                <ScalarProperty Name="Extention2" ColumnName="Extention2" />
+                <ScalarProperty Name="Phone3" ColumnName="Phone3" />
+                <ScalarProperty Name="PhoneType1" ColumnName="PhoneType1" />
+                <ScalarProperty Name="PhoneType2" ColumnName="PhoneType2" />
+                <ScalarProperty Name="PhoneType3" ColumnName="PhoneType3" />
+                <ScalarProperty Name="Visits" ColumnName="Visits" />
+                <ScalarProperty Name="LastVisit" ColumnName="LastVisit" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="User1" ColumnName="User1" />
+                <ScalarProperty Name="User2" ColumnName="User2" />
+                <ScalarProperty Name="User3" ColumnName="User3" />
+                <ScalarProperty Name="User4" ColumnName="User4" />
+                <ScalarProperty Name="Account" ColumnName="Account" />
+                <ScalarProperty Name="Entered" ColumnName="Entered" />
+                <ScalarProperty Name="LastLocation" ColumnName="LastLocation" />
+                <ScalarProperty Name="BirthDate_Day" ColumnName="BirthDate-Day" />
+                <ScalarProperty Name="BirthDate_Month" ColumnName="BirthDate-Month" />
+                <ScalarProperty Name="BirthDate_Year" ColumnName="BirthDate-Year" />
+                <ScalarProperty Name="LastStaff" ColumnName="LastStaff" />
+                <ScalarProperty Name="Referenced" ColumnName="Referenced" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="HideHistory" ColumnName="HideHistory" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Tax1Exempt" ColumnName="Tax1Exempt" />
+                <ScalarProperty Name="Tax2Exempt" ColumnName="Tax2Exempt" />
+                <ScalarProperty Name="Tax3Exempt" ColumnName="Tax3Exempt" />
+                <ScalarProperty Name="Tax4Exempt" ColumnName="Tax4Exempt" />
+                <ScalarProperty Name="NotesPopUp" ColumnName="NotesPopUp" />
+                <ScalarProperty Name="PreferredStaff" ColumnName="PreferredStaff" />
+                <ScalarProperty Name="CustomerPicB" ColumnName="CustomerPicB" />
+                <ScalarProperty Name="CustomerPicA" ColumnName="CustomerPicA" />
+                <ScalarProperty Name="CreditCardNumber" ColumnName="CreditCardNumber" />
+                <ScalarProperty Name="CCExpiryDate" ColumnName="CCExpiryDate" />
+                <ScalarProperty Name="Extention3" ColumnName="Extention3" />
+                <ScalarProperty Name="ALead" ColumnName="ALead" />
+                <ScalarProperty Name="AConsultation" ColumnName="AConsultation" />
+                <ScalarProperty Name="NextMileStone" ColumnName="NextMileStone" />
+                <ScalarProperty Name="SMSProvider" ColumnName="SMSProvider" />
+                <ScalarProperty Name="CCType" ColumnName="CCType" />
+                <ScalarProperty Name="BDInUse" ColumnName="BDInUse" />
+                <ScalarProperty Name="CustTag" ColumnName="CustTag" />
+                <ScalarProperty Name="CreditCardAuth" ColumnName="CreditCardAuth" />
+                <ScalarProperty Name="SMSNumber" ColumnName="SMSNumber" />
+                <ScalarProperty Name="SendText" ColumnName="SendText" />
+                <ScalarProperty Name="SendEmail" ColumnName="SendEmail" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="Modified" ColumnName="Modified" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Ethnicity" ColumnName="Ethnicity" />
+                <ScalarProperty Name="MartialStatus" ColumnName="MartialStatus" />
+                <ScalarProperty Name="SSN" ColumnName="SSN" />
+                <ScalarProperty Name="BloodType" ColumnName="BloodType" />
+                <ScalarProperty Name="EmergencyContactName" ColumnName="EmergencyContactName" />
+                <ScalarProperty Name="EmergencyContactPhone" ColumnName="EmergencyContactPhone" />
+                <ScalarProperty Name="EmergencyContactRelationship" ColumnName="EmergencyContactRelationship" />
+                <ScalarProperty Name="EmploymentOccupation" ColumnName="EmploymentOccupation" />
+                <ScalarProperty Name="EmploymentOrganization" ColumnName="EmploymentOrganization" />
+                <ScalarProperty Name="EmploymentStatus" ColumnName="EmploymentStatus" />
+                <ScalarProperty Name="EditSequence" ColumnName="EditSequence" />
+                <ScalarProperty Name="CreditCardTypeID" ColumnName="CreditCardTypeID" />
+                <ScalarProperty Name="MirrorClientID" ColumnName="MirrorClientID" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="OnlineStatus" ColumnName="OnlineStatus" />
+                <ScalarProperty Name="OnlineActivationCode" ColumnName="OnlineActivationCode" />
+                <ScalarProperty Name="QBID" ColumnName="QBID" />
+                <ScalarProperty Name="SMSCall" ColumnName="SMSCall" />
+                <ScalarProperty Name="AutoCall" ColumnName="AutoCall" />
+                <ScalarProperty Name="UseAutoCall" ColumnName="UseAutoCall" />
+                <ScalarProperty Name="PrimaryInsuranceId" ColumnName="PrimaryInsuranceId" />
+                <ScalarProperty Name="SecondaryInsuranceId" ColumnName="SecondaryInsuranceId" />
+                <ScalarProperty Name="DefaultPictureID" ColumnName="DefaultPictureID" />
+                <ScalarProperty Name="DefaultLocationId" ColumnName="DefaultLocationId" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

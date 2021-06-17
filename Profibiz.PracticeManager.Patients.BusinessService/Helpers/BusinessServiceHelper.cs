@@ -85,7 +85,31 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
 			HttpResponseMessage response = await _client.GetAsync(requestUri);
-			await ValidateResponse(response, true);
+			var rrr = await ValidateResponse(response, true);
+			var gg = rrr;
+
+			return response;
+		}
+
+		async static public Task<HttpResponseMessage> GetResponseWithException(this HttpClient _client, string _baseUrl, string requestUri, int timeoutSeconds = 0)
+		{
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			if (timeoutSeconds > 0)
+			{
+				_client.Timeout = TimeSpan.FromSeconds(timeoutSeconds);
+			}
+
+			HttpResponseMessage response = null;
+			try
+			{
+				response = await _client.GetAsync(requestUri);
+			}
+			catch (Exception ex)
+			{
+				return null;
+			}
+			var rrr = await ValidateResponse(response, true);
 
 			return response;
 		}

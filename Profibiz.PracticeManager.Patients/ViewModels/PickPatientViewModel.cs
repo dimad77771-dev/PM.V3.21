@@ -29,6 +29,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		#region Services
 		IPatientsBusinessService businessService;
 		ILookupsBusinessService lookupsBusinessService;
+		IMessageBoxService MessageBoxService => this.GetRequiredService<IMessageBoxService>();
 		public virtual ShowWaitIndicator ShowWaitIndicator { get; set; } = new ShowWaitIndicator();
 		public virtual InteractionRequest<ShowDXWindowsActionParam> ShowDXWindowsInteractionRequest { get; set; } = new InteractionRequest<ShowDXWindowsActionParam>();
 		public virtual InteractionRequest<CloseDXWindowsActionParam> CloseInteractionRequest { get; set; } = new InteractionRequest<CloseDXWindowsActionParam>();
@@ -187,6 +188,27 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				});
 			});
 		}
+
+
+		public void ImportBodyrevivalsalonspa()
+		{
+			DispatcherUIHelper.Run(async () =>
+			{
+				var result = await PickBodyrevivalsalonspaPatientViewModel.Pick(new PickBodyrevivalsalonspaPatientViewModel.OpenParams
+				{
+					ShowDXWindowsInteractionRequest = ShowDXWindowsInteractionRequest,
+					MessageBoxService = MessageBoxService,
+					BusinessService = businessService,
+				});
+				if (!result.IsSuccess)
+				{
+					return;
+				}
+
+				ReloadData();
+			});
+		}
+
 
 		void OnMsgRowChange(MsgRowChange<Patient> msg)
 		{

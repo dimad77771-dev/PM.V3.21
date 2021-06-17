@@ -58,6 +58,7 @@
     <Compile Include="Form.cs" />
     <Compile Include="FormDocmodel.cs" />
     <Compile Include="FormItem.cs" />
+    <Compile Include="spaCustomer.cs" />
     <Compile Include="PatientForm.cs" />
     <Compile Include="PatientFormItem.cs" />
     <Compile Include="FormDocument.cs" />

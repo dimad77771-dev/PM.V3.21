@@ -78,6 +78,7 @@ namespace Profibiz.PracticeManager.Patients
 			_container.RegisterView<PickAppointmentView>();
 			_container.RegisterView<InvoicePrintView>();
 			_container.RegisterView<ChargeoutPrintView>();
+			_container.RegisterView<PickBodyrevivalsalonspaPatientView>();
 			_container.RegisterView<PatientBuildFamilyView>();
 			_container.RegisterView<PickInsuranceCoverageView>();
 			_container.RegisterView<PickCategoryView>();

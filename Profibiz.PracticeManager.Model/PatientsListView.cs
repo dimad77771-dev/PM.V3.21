@@ -29,5 +29,6 @@ namespace Profibiz.PracticeManager.Model
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
 		public bool IsNotRegistered { get; set; }
+		public int? spaCustomerNumber { get; set; }
 	}
 }

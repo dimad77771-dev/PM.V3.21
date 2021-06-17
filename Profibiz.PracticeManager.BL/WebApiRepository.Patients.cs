@@ -17,6 +17,7 @@ using LinqKit;
 using System.Linq.Expressions;
 using Profibiz.PracticeManager.SharedCode;
 using System.Web.Http.Controllers;
+using Newtonsoft.Json;
 
 namespace Profibiz.PracticeManager.BL
 {
@@ -440,7 +441,57 @@ namespace Profibiz.PracticeManager.BL
 
 
 
+		public void PostPatientsFromBodyrevivalsalonspa(string json)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var customers = JsonConvert.DeserializeObject<DTO.spaCustomer[]>(json);
+				foreach(var customer in customers)
+				{
+					var birthDate = default(DateTime?);
+					if (customer.BirthDate_Year != null && customer.BirthDate_Month != null && customer.BirthDate_Day != null)
+					{
+						birthDate = new DateTime(customer.BirthDate_Year.Value, customer.BirthDate_Month.Value, customer.BirthDate_Day.Value);
+						if (birthDate <= new DateTime(1901,1,1))
+						{
+							birthDate = null;
+						}
+					}
 
+					var patientRowId = Guid.NewGuid();
+					var patient = new EF.Patient
+					{
+						RowId = patientRowId,
+						FamilyHeadRowId = patientRowId,
+						FirstName = customer.FirstName,
+						LastName = customer.LastName,
+						MiddleName = customer.MiddleName,
+						BirthDate = birthDate,
+						Province1 = customer.State?.Trim(),
+						City1 = customer.City,
+						Postcode1 = customer.Zip,
+						Address1 = customer.Address,
+						HomePhoneNumber = customer.Phone1,
+						MobileNumber = customer.Phone2,
+						WorkPhone = customer.Phone3,
+						EmailAddress = customer.EMail,
+						spaCustomerNumber = customer.CustomerNumber,
+						FamilyMemberType = "Head",
+						Rate = 0,
+					};
+
+					if (!string.IsNullOrEmpty(patient.Province1) && !new[] { "AB", "BC", "MB", "NB", "NL", "NT", "NS", "NU", "ON", "PE", "QC", "SK", "YT" }.Contains(patient.Province1))
+					{
+						patient.Province1 = null;
+					}
+
+					db.Patients.Add(patient);
+					db.SaveChangesEx();
+				}
+				scope.Complete();
+			}
+		}
 
 
 	}

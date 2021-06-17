@@ -51,11 +51,18 @@ namespace Profibiz.PracticeManager.Infrastructure
 			var userSetting = default(UserSetting);
 			var task = Task.Run(async () =>
 			{
-				var task1 = lookupsBusinessService.UpdateAllLookups();
 				var task2 = lookupsBusinessService.GetUserSettings(userCode);
-				await Task.WhenAll(task1, task2);
-
 				var row = await task2;
+				if (row.IsRequestError)
+				{
+					System.Windows.MessageBox.Show("Connection to server failed. Please make sure your VPN connection is ON", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
+					System.Windows.Application.Current.Shutdown();
+				}
+
+				var task1 = lookupsBusinessService.UpdateAllLookups();
+				await task1;
+				//await Task.WhenAll(task1, task2);
+				
 				userSetting = row;
 				json = row.Json;
 				sync.Set();

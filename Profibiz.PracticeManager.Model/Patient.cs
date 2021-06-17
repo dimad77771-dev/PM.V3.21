@@ -92,6 +92,7 @@ namespace Profibiz.PracticeManager.Model
 		public string InsurancePlanMemberOtherValue { get; set; }
 		public string InsurancePolicyNumber { get; set; }
 		public string InsuranceCertificateId { get; set; }
+		public int? spaCustomerNumber { get; set; }
 
 		public virtual ObservableCollection<Patient> FamilyMembers { get; set; }
 		public virtual Patient FamilyHead { get; set; }

@@ -24,7 +24,11 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 		async public Task<UserSetting> GetUserSettings(String userCode)
 		{
 			var client = new MyHttpClient();
-			var response = await client.GetResponse(_baseUrl, "api/lookups/GetUserSettings?userCode=" + userCode);
+			var response = await client.GetResponseWithException(_baseUrl, "api/lookups/GetUserSettings?userCode=" + userCode, 15);
+			if (response == null)
+			{
+				return new UserSetting { IsRequestError = true };
+			}
 			var list = await response.Content.ReadAsAsync<UserSetting>();
 			return list;
 		}

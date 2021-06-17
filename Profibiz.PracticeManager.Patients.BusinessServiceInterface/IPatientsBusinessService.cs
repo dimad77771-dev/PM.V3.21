@@ -178,5 +178,7 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PutWorkInout(WorkInout entity);
 		Task<UpdateReturn> PostWorkInout(WorkInout entity);
 		Task<UpdateReturn> DeleteWorkInout(Guid rowId);
+
+		Task<UpdateReturn> PostPatientsFromBodyrevivalsalonspa(string json);
 	}
 }

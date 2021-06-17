@@ -172,7 +172,10 @@
                     <dx:DialogButton Command="{Binding NewRowCommand}"
                                      Content="New Patient"
                                      Margin="5" />
-                </StackPanel>                
+					<dx:DialogButton Command="{Binding ImportBodyrevivalsalonspaCommand}"
+                                     Content="Import from MD Ware"
+                                     Margin="5" />
+				</StackPanel>                
             </Grid>
         </Grid>
     </dx:LoadingDecorator>
