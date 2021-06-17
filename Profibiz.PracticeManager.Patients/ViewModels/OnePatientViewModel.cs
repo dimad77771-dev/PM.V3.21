@@ -892,18 +892,32 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public void AppointmentClinicalNoteEdit(Appointment row)
 		{
 			if (row == null) return;
-			if (row.AppointmentClinicalNoteRowId == null) return;
 
+			var param = new OneAppointmentViewModel.OpenParams
+			{
+				IsNew = false,
+				RowId = row.RowId,
+				//IsLockPatient = true,
+				IsReadOnly = true,
+			};
 			ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
 			{
-				ViewCode = ViewCodes.AppointmentClinicalNoteView,
-				Param = new AppointmentClinicalNoteViewModel.OpenParams
-				{
-					IsNew = false,
-					RowId = (Guid)row.AppointmentClinicalNoteRowId,
-					IsReadOnly = true,
-				},
+				ViewCode = ViewCodes.OneAppointmentView,
+				Param = param,
 			});
+
+
+			//if (row.AppointmentClinicalNoteRowId == null) return;
+			//ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+			//{
+			//	ViewCode = ViewCodes.AppointmentClinicalNoteView,
+			//	Param = new AppointmentClinicalNoteViewModel.OpenParams
+			//	{
+			//		IsNew = false,
+			//		RowId = (Guid)row.AppointmentClinicalNoteRowId,
+			//		IsReadOnly = true,
+			//	},
+			//});
 		}
 		void SubscribeClinicalAppointmentRow(Appointment row)
 		{
