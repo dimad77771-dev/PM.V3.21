@@ -532,6 +532,8 @@
 										EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
 										Style="{StaticResource baseEditStyle1}"
+										Mask="yyyy-MM-dd"
+										MaskUseAsDisplayFormat="True"
 										TabIndex="170" />
 								</Grid>
 

@@ -71,6 +71,23 @@ namespace Profibiz.PracticeManager.Model
 			}
 		}
 
+		public string FullNameWithTitle
+		{
+			get
+			{
+				var ret = (FirstName + " " + LastName)?.Trim();
+				if (string.IsNullOrEmpty(ret))
+				{
+					ret = "<Empty>";
+				}
+				if (!string.IsNullOrEmpty(Title))
+				{
+					ret = Title + " " + ret;
+				}
+				return ret;
+			}
+		}
+
 		public string ListAllServicesProvided => string.Join(", ", ServiceProviderServices.Select(q => q?.MedicalService?.FullName));
 		public string ListAllCategories => string.Join(", ", ServiceProviderServices.Select(q => q?.Category?.FullName).Distinct().OrderBy(q => q));
 

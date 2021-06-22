@@ -48,7 +48,7 @@ namespace Profibiz.PracticeManager.Patients.Views
 				}
 			};
 
-
+			viewmodel.SchedulerControlPrintAdapter = this.printAdapter;
 
 
 			var oldService = schedulerControl1.GetService<IAppointmentFormatStringService>();

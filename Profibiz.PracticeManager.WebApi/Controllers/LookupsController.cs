@@ -400,7 +400,21 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			return Ok(entities);
 		}
 
+		public IHttpActionResult GetShellFiles(int all)
+		{
+			var entities = _repository.GetShellFiles(all);
+			return Ok(entities);
+		}
 
-
+		[HttpGet]
+		public HttpResponseMessage GetShellFile(string filename)
+		{
+			var bytes = _repository.GetShellFile(filename);
+			var result = new HttpResponseMessage(HttpStatusCode.OK)
+			{
+				Content = new ByteArrayContent(bytes)
+			};
+			return result;
+		}
 	}
 }

@@ -262,13 +262,13 @@
 
             </dxsch:SchedulerControl>
 
+			<dxsch:DXSchedulerControlPrintAdapter x:Name="printAdapter" 
+                                              SchedulerControl="{Binding ElementName=schedulerControl1}"/>
 
 
 
 
 
-
-
-        </Grid>
+		</Grid>
     </dx:LoadingDecorator>
 </UserControl>

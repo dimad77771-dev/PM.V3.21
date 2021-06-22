@@ -220,7 +220,13 @@
         Mask="MM\/dd\/yy"
         MaskType="DateTimeAdvancingCaret"
         MaskUseAsDisplayFormat="True" />
-    <dxe:TextEditSettings
+	<dxe:DateEditSettings
+        x:Key="dateYYYYMMDDGridEditSettings"
+        AllowNullInput="True"
+        Mask="yyyy-MM-dd"
+        MaskType="DateTimeAdvancingCaret"
+        MaskUseAsDisplayFormat="True" />
+	<dxe:TextEditSettings
         x:Key="dateGridEditSettingsCenter"
         HorizontalContentAlignment="Center"
         AllowNullInput="True"

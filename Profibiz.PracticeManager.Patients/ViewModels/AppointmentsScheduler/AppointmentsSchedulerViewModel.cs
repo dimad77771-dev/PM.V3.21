@@ -32,6 +32,10 @@ using DevExpress.Xpf.Scheduler.Drawing;
 using System.Windows.Media;
 using Profibiz.PracticeManager.Patients.BusinessService;
 using Profibiz.PracticeManager.SharedCode;
+using DevExpress.Xpf.Printing;
+using DevExpress.Xpf.Scheduler.Reporting;
+using DevExpress.XtraScheduler.Reporting;
+
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -82,6 +86,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual ObservableCollection<InsuranceProvidersViewGroup> AllInsuranceProvidersViewGroups { get; set; }
 		public virtual InsuranceProvidersViewGroup SelectedInsuranceProvidersViewGroup { get; set; }
 		
+		public DXSchedulerControlPrintAdapter SchedulerControlPrintAdapter { get; set; }
 
 
 		public enum ViewModeEnum { AppointmentBooks, InsuranceGroups, OnePatient }
@@ -759,6 +764,153 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public void ViewZoomOut()
 		{
 			SchedulerControlManager.ZoomOut();
+		}
+
+		public class WeeklyStyle : XtraSchedulerReport
+		{
+			private DevExpress.XtraScheduler.Reporting.ReportDayView reportWeekView1;
+			private DevExpress.XtraReports.UI.DetailBand Detail;
+			private DevExpress.XtraScheduler.Reporting.HorizontalResourceHeaders horizontalResourceHeaders1;
+			private DevExpress.XtraScheduler.Reporting.DayViewTimeCells fullWeek1;
+			private DevExpress.XtraScheduler.Reporting.TimeIntervalInfo timeIntervalInfo1;
+			private DevExpress.XtraScheduler.Reporting.CalendarControl calendarControl1;
+
+			public WeeklyStyle()
+			{
+				this.InitializeComponent();
+			}
+
+			private void InitializeComponent()
+			{
+				this.reportWeekView1 = new DevExpress.XtraScheduler.Reporting.ReportDayView();
+				this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+				this.fullWeek1 = new DevExpress.XtraScheduler.Reporting.DayViewTimeCells();
+				this.calendarControl1 = new DevExpress.XtraScheduler.Reporting.CalendarControl();
+				this.horizontalResourceHeaders1 = new DevExpress.XtraScheduler.Reporting.HorizontalResourceHeaders();
+				this.timeIntervalInfo1 = new DevExpress.XtraScheduler.Reporting.TimeIntervalInfo();
+				((System.ComponentModel.ISupportInitialize)(this.reportWeekView1)).BeginInit();
+				((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
+				// 
+				// reportWeekView1
+				// 
+				this.reportWeekView1.VisibleResourceCount = 2;
+				// 
+				// Detail
+				// 
+				this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+						this.horizontalResourceHeaders1,
+						this.fullWeek1,
+						this.timeIntervalInfo1,
+						this.calendarControl1});
+				this.Detail.HeightF = 875F;
+				this.Detail.Name = "Detail";
+				this.Detail.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+				this.Detail.PageBreak = DevExpress.XtraReports.UI.PageBreak.AfterBand;
+				this.Detail.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+				// 
+				// fullWeek1
+				// 
+				//this.fullWeek1.HorizontalHeaders = this.horizontalResourceHeaders1;
+				this.fullWeek1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 183F);
+				this.fullWeek1.Name = "fullWeek1";
+				this.fullWeek1.SizeF = new System.Drawing.SizeF(650F, 683F);
+				this.fullWeek1.View = this.reportWeekView1;
+				// 
+				// calendarControl1
+				// 
+				this.calendarControl1.LocationFloat = new DevExpress.Utils.PointFloat(283F, 8F);
+				this.calendarControl1.Name = "calendarControl1";
+				this.calendarControl1.SizeF = new System.Drawing.SizeF(350F, 142F);
+				this.calendarControl1.TimeCells = this.fullWeek1;
+				this.calendarControl1.View = this.reportWeekView1;
+				// 
+				// horizontalResourceHeaders1
+				// 
+				this.horizontalResourceHeaders1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 158F);
+				this.horizontalResourceHeaders1.Name = "horizontalResourceHeaders1";
+				this.horizontalResourceHeaders1.SizeF = new System.Drawing.SizeF(650F, 25F);
+				this.horizontalResourceHeaders1.View = this.reportWeekView1;
+				// 
+				// timeIntervalInfo1
+				// 
+				this.timeIntervalInfo1.LocationFloat = new DevExpress.Utils.PointFloat(25F, 33F);
+				this.timeIntervalInfo1.Name = "timeIntervalInfo1";
+				this.timeIntervalInfo1.SizeF = new System.Drawing.SizeF(233F, 92F);
+				this.timeIntervalInfo1.TimeCells = this.fullWeek1;
+				// 
+				// WeeklyStyle
+				// 
+				this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
+						this.Detail});
+				this.Name = "WeeklyStyle";
+				this.PageHeight = 1100;
+				this.PageWidth = 850;
+				this.Version = "13.1";
+				((System.ComponentModel.ISupportInitialize)(this.reportWeekView1)).EndInit();
+				((System.ComponentModel.ISupportInitialize)(this)).EndInit();
+			}
+		}
+
+		SchedulerPrintingSettings printingSettings = new SchedulerPrintingSettings();
+		public void PrintAppointment()
+		{
+			var scheduler = SchedulerControlManager.Control;
+
+			//var bitmap = new RenderTargetBitmap((int)scheduler.ActualWidth, (int)scheduler.ActualHeight, 300, 300, PixelFormats.Pbgra32);
+			var bitmap = new RenderTargetBitmap((int)scheduler.ActualWidth, (int)scheduler.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+			bitmap.Render(scheduler);
+			using (var stream = System.IO.File.Create(@"E:\PROJECTS\Profibiz.PracticeManager.V3\Profibiz.PracticeManager.Patients\Print\111.jpeg"))
+			{
+				var encoder = new JpegBitmapEncoder();
+				encoder.QualityLevel = 90;
+				encoder.Frames.Add(BitmapFrame.Create(bitmap));
+				encoder.Save(stream);
+			}
+			return;
+
+			//DevExpress.XtraScheduler.Reporting.ReportDayView
+			//DevExpress.XtraScheduler.Reporting.ReportDayView a;
+			//a.HorizontalHeaders
+
+			var printAdapter = SchedulerControlPrintAdapter;
+			printAdapter.TimeInterval = new Xtra.TimeInterval(new DateTime(2021, 5, 1), new DateTime(2021, 6, 30));
+			printAdapter.FirstDayOfWeek = Xtra.FirstDayOfWeek.Wednesday;
+
+			printingSettings.ReportInstance = new XtraSchedulerReport();
+			//printingSettings.ReportInstance = new WeeklyStyle();
+			printingSettings.SchedulerPrintAdapter = printAdapter;
+			printingSettings.ReportTemplatePath = @"E:\PROJECTS\Profibiz.PracticeManager.V3\Profibiz.PracticeManager.Patients\Print\WeeklyStyle.schrepx";
+
+			var configurator = new SchedulerReportConfigurator();
+			configurator.Configure(printingSettings);
+			PrintHelper.ShowPrintPreviewDialog(null, printingSettings.ReportInstance);
+
+			//DevExpress.Xpf.Printing.xtr
+
+			//var xr = new XtraSchedulerReport();
+			//var repDayView = new ReportDayView();
+			//xr.Views.AddRange(new[] repDayView);
+
+			//PrintHelper.ShowPrintPreviewDialog(null, )
+			//SchedulerControlPrintAdapter
+
+			//var scheduler = SchedulerControlManager.Control;
+			//scheduler
+			//ShowPrintPreview
+
+			////SetPrintStyle();
+			//string filePath = "Test.pdf";
+			//var pcl = new XtraSchedulerReport(new PrintingSystem());
+			//pcl.Component = this.schedulerControl1;
+			//pcl.CreateDocument();
+			//pcl.ExportToPdf(filePath);
+			//// Use the code below to open the file in an associated application.
+			//if (File.Exists(filePath))
+			//{
+			//	System.Diagnostics.Process process = new System.Diagnostics.Process();
+			//	process.StartInfo.FileName = filePath;
+			//	process.Start();
+			//}
 		}
 
 

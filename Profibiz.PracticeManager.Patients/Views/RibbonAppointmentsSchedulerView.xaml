@@ -127,7 +127,6 @@
 							Glyph="{dx:DXImage Image=ZoomOut_16x16.png}"
 							CommandParameter="{Binding SchedulerControl999}"
 							Command="{Binding ViewZoomOutCommand}" />
-
 					</dxr:RibbonPageGroup>
 
 					<dxr:RibbonPageGroup Caption="Appointment Book" IsVisible="{Binding IsVisibleRibbonAppointmentBook}">
@@ -176,6 +175,15 @@
 							</dxb:BarEditItem.EditSettings>
 						</dxb:BarEditItem>
 					</dxr:RibbonPageGroup>
+
+					<dxr:RibbonPageGroup Caption="Print">
+						<dxb:BarButtonItem
+							Content="Print"
+							LargeGlyph="{dx:DXImage Image=Print_32x32.png}"
+							Glyph="{dx:DXImage Image=Print_16x16.png}"
+							Command="{Binding PrintAppointmentCommand}" />
+					</dxr:RibbonPageGroup>
+
 				</dxr:RibbonPage>
 
 				<dxr:RibbonPage Caption="VIEW">

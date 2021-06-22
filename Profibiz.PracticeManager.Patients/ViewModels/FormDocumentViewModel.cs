@@ -48,6 +48,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public bool IsReadOnly { get; set; }
 		public bool IsNew { get; set; }
 		public bool ShowDeleteButton => !IsNew && !IsReadOnly;
+		public ServiceProvider ServiceProvider => LookupDataProvider.FindServiceProvider(Appointment?.ServiceProviderRowId);
 
 		public FormDocumentViewModel(IPatientsBusinessService _businessService, ILookupsBusinessService _lookupsBusinessService) : base()
 		{
@@ -105,7 +106,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			if (IsNew)
 			{
-				LoadFromTemplate();
+				await LoadFromTemplate();
 			}
 
 
@@ -113,7 +114,40 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			DXSplashScreenHelper.Hide();
 		}
 
+		void AllFieldReplace()
+		{
+			var fields = new[] 
+			{
+				"Patient_Name",
+				"Patient_BirthDate",
+				"Patient_FamilyDoctor",
+				"Patient_Sex",
+				"Patient_MobileNumber",
+				"Patient_Address",
+				"Appointment_Date",
+				"Appointment_StartTime",
+				"Appointment_FinishTime",
+				"ServiceName",
+				"ServiceProvider_FullName",
+				"ServiceProvider_Position",
+				"ServiceProvider_Qualifications",
+				"ServiceProvider_FooterText",
+				"ServiceName",
+				"Patient_Signature",
+			};
+
+			foreach (var field in fields)
+			{
+				FieldProc(field, isPaste: false);
+			}
+		}
+
 		public void PasteApply(string arg)
+		{
+			FieldProc(arg, isPaste: true);
+		}
+
+		void FieldProc(string arg, bool isPaste)
 		{
 			var oldClipboardText = System.Windows.Clipboard.GetText();
 
@@ -128,37 +162,105 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					text = Patient.FullName ?? "";
 				}
 			}
-
-			if (arg == "Appointment_Date")
+			else if (arg == "Patient_BirthDate")
+			{
+				if (Patient != null)
+				{
+					text = Patient.BirthDate.FormatYYYYMMDD();
+				}
+			}
+			else if (arg == "Patient_FamilyDoctor")
+			{
+				if (Patient != null)
+				{
+					text = Patient.FamilyDoctor;
+				}
+			}
+			else if (arg == "Patient_Sex")
+			{
+				if (Patient != null)
+				{
+					text = Patient.Sex;
+				}
+			}
+			else if (arg == "Patient_MobileNumber")
+			{
+				if (Patient != null)
+				{
+					text = Patient.MobileNumber;
+				}
+			}
+			else if (arg == "Patient_Address")
+			{
+				if (Patient != null)
+				{
+					text = Patient.GetAddress();
+				}
+			}
+			else if (arg == "Appointment_Date")
 			{
 				if (Appointment != null)
 				{
 					text = Appointment.Start.Date.FormatShortDate();
 				}
 			}
-			if (arg == "Appointment_StartTime")
+			else if (arg == "Appointment_StartTime")
 			{
 				if (Appointment != null)
 				{
 					text = Appointment.Start.FormatHHMM();
 				}
 			}
-			if (arg == "Appointment_FinishTime")
+			else if (arg == "Appointment_FinishTime")
 			{
 				if (Appointment != null)
 				{
 					text = Appointment.Finish.FormatHHMM();
 				}
 			}
-			if (arg == "ServiceName")
+			else if (arg == "ServiceName")
 			{
 				if (Appointment != null)
 				{
 					text = Appointment.MedicalServiceName;
 				}
 			}
-
-			if (arg == "Patient_Signature")
+			else if (arg == "ServiceProvider_FullName")
+			{
+				if (ServiceProvider != null)
+				{
+					text = ServiceProvider.FullNameWithTitle;
+				}
+			}
+			else if (arg == "ServiceProvider_Position")
+			{
+				if (ServiceProvider != null)
+				{
+					text = ServiceProvider.Position;
+				}
+			}
+			else if (arg == "ServiceProvider_Qualifications")
+			{
+				if (ServiceProvider != null)
+				{
+					text = ServiceProvider.Qualifications;
+				}
+			}
+			else if (arg == "ServiceProvider_FooterText")
+			{
+				if (ServiceProvider != null)
+				{
+					text = ServiceProvider.FooterText;
+				}
+			}
+			else if (arg == "ServiceName")
+			{
+				if (Appointment != null)
+				{
+					text = Appointment.MedicalServiceName;
+				}
+			}
+			else if (arg == "Patient_Signature")
 			{
 				if (Patient != null && Patient.Signature != null && Patient.Signature.Length > 0)
 				{
@@ -171,7 +273,14 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				if (!string.IsNullOrEmpty(text))
 				{
-					System.Windows.Clipboard.SetText(text);
+					if (isPaste)
+					{
+						System.Windows.Clipboard.SetText(text);
+					}
+					else
+					{
+						document.ReplaceAll("{{" + arg + "}}", text, DevExpress.XtraRichEdit.API.Native.SearchOptions.None);
+					}
 				}
 				else if (imagebytes != null)
 				{
@@ -186,16 +295,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					}
 				}
 
-
-				try
+				if (isPaste)
 				{
-					document.Paste();
-				}
-				catch (Exception) { }
+					try
+					{
+						document.Paste();
+					}
+					catch (Exception) { }
 
-				if (!string.IsNullOrEmpty(oldClipboardText))
-				{
-					System.Windows.Clipboard.SetText(oldClipboardText);
+					if (!string.IsNullOrEmpty(oldClipboardText))
+					{
+						System.Windows.Clipboard.SetText(oldClipboardText);
+					}
 				}
 			}
 		}
@@ -244,12 +355,17 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		//	}
 		//}
 
-		void LoadFromTemplate()
+		async Task LoadFromTemplate()
 		{
 			var location = FormDocumentHelper.GetBaseTemplateFolderPath();
 			var file = Path.Combine(location, Entity.TemplatePath);
 			var bytes = File.ReadAllBytes(file);
 			Entity.DocxBytes = bytes;
+			DispatcherUIHelper.Run(async () =>
+			{
+				await Task.Yield();
+				AllFieldReplace();
+			});
 		}
 
 

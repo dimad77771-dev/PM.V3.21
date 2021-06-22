@@ -66,6 +66,10 @@ namespace Profibiz.PracticeManager.Infrastructure
 		{
 			return arg == null ? "" : arg.Value.ToString("dd/MM/yy");
 		}
+		public static string FormatYYYYMMDD(this DateTime? arg)
+		{
+			return arg == null ? "" : arg.Value.ToString("yyyy-MM-dd");
+		}
 
 
 		public static string FormatLongDate(this DateTime arg)

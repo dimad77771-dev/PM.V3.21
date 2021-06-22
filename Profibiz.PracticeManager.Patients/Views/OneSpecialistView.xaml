@@ -253,7 +253,9 @@
 							<dxe:DateEdit
 								Grid.Column="0"
 								EditValue="{Binding Entity.BirthDate, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-								Style="{StaticResource baseEditStyle1}" />
+								Style="{StaticResource baseEditStyle1}"
+								Mask="yyyy-MM-dd"
+								MaskUseAsDisplayFormat="True" />
 
 
 

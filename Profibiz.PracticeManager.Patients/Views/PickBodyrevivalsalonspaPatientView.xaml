@@ -117,12 +117,6 @@
 						<dxg:GridColumn FieldName="State"
                                         Header="STATE"
                                         Width="50" />
-
-
-						<!--<dxg:GridColumn FieldName="BirthDate"
-                                        Header="DOB"
-                                        Width="80" />-->
-
 					</dxg:GridControl.Columns>
 				</dxg:GridControl>
 

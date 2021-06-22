@@ -763,9 +763,37 @@
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="Patient_Name" />
 											<dxb:BarButtonItem
+												Content="Birth Date"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_BirthDate" />
+											<dxb:BarButtonItem
+												Content="Family Doctor"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_FamilyDoctor" />
+											<dxb:BarButtonItem
+												Content="Gender"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_Sex" />
+											<dxb:BarButtonItem
+												Content="Cell"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_MobileNumber" />
+											<dxb:BarButtonItem
+												Content="Address"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_Address" />
+											<dxb:BarButtonItem
 												Content="Patient Signature"
 												Command="{Binding PasteApplyCommand}"
-												CommandParameter="Patient_Signature" />											
+												CommandParameter="Patient_Signature" />
+											<!--
+											BirthDate
+											FamilyDoctor
+											Sex - Gender
+											MobileNumber
+											Address
+											-->
+
 										</dxr:RibbonPageGroup>
 										<dxr:RibbonPageGroup Caption="Appoinment" ShowCaptionButton="False">
 											<dxb:BarButtonItem
@@ -787,6 +815,24 @@
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="ServiceName" />
 										</dxr:RibbonPageGroup>
+										<dxr:RibbonPageGroup Caption="Service Provider" ShowCaptionButton="False">
+											<dxb:BarButtonItem
+												Content="Full Name"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_FullName" />
+											<dxb:BarButtonItem
+												Content="Position"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_Position" />
+											<dxb:BarButtonItem
+												Content="Qualifications"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_Qualifications" />
+											<dxb:BarButtonItem
+												Content="Footer Text"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_FooterText" />
+										</dxr:RibbonPageGroup>										
 									</dxr:RibbonPage>
 									
 									

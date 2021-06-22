@@ -273,7 +273,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			else if (col == "AddressCity") return patient.GetAddressCity();
 			else if (col == "AddressProvince") return patient.GetAddressProvince();
 			else if (col == "AddressPostcode") return patient.GetAddressPostcode();
-			else if (col == "BirthDate") return patient.BirthDate.FormatShortDate();
+			//else if (col == "BirthDate") return patient.BirthDate.FormatShortDate();
+			else if (col == "BirthDate") return patient.BirthDate.FormatYYYYMMDD();
 			else if (col == "BirthDateDDMMYY") return patient.BirthDate.FormatDDMMYY();
 			else if (col == "BirthDateDDMMYY2") return patient.BirthDate.FormatDDMMYY2();
 			else if (col == "Age") return patient.GetAge();

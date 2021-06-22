@@ -211,5 +211,8 @@ namespace Profibiz.PracticeManager.BL
 		LoginInfo GetLoginInfo(string name, string password);
 
 		void PostPatientsFromBodyrevivalsalonspa(string json);
+
+		ShellUpgradeUtils.ShellFileInfo[] GetShellFiles(int all);
+		byte[] GetShellFile(string file);
 	}
 }

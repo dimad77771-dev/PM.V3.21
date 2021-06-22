@@ -505,7 +505,7 @@ namespace Profibiz.PracticeManager.Model
 		{
 			get
 			{
-				return new[] { "Cash", "Cheque", "American Express", "MasterCard", "Visa", "Direct Payment", "PayPal", "E-Transfer", "Interac Debit", "Other Credit Card" };
+				return new[] { "Cash", "Cheque", "American Express", "MasterCard", "Visa", "Direct Payment", "PayPal", "E-Transfer", "Interac Debit", "Other Credit Card", "Voided" };
 			}
 		}
         private static IEnumerable<String> _citiesInOntario;

@@ -16,6 +16,7 @@
     <Import_RootNamespace>Profibiz.PracticeManager.SharedCode2</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Globals\ShellUpgradeUtils.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Globals\CalculateAppointmentStartFinishResult.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Globals\ServerReturns.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Globals\UserErrorInformation_UpdateAppointmentCore.cs" />

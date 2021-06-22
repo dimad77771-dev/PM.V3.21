@@ -51,12 +51,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profibiz.PracticeManager.Se
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Profibiz.PracticeManager.Database", "Profibiz.PracticeManager.Database\Profibiz.PracticeManager.Database.sqlproj", "{B830DD47-829D-4887-B67F-7EB9713C4DA0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Profibiz.PracticeManager.Run", "Profibiz.PracticeManager.Run\Profibiz.PracticeManager.Run.csproj", "{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems*{4df6b80a-173a-44d1-b7ba-540ece6ba891}*SharedItemsImports = 13
 		Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems*{5c312cc4-42df-4d16-86df-22bcc096dbdb}*SharedItemsImports = 4
 		Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems*{81a2c2ad-b05c-472b-9157-cc37bf070efa}*SharedItemsImports = 4
 		Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems*{81a2c2ad-b05c-472b-9157-cc37bf070efa}*SharedItemsImports = 4
+		Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems*{9f3640b3-f02b-4031-ae2c-d2d0aa56f4a5}*SharedItemsImports = 4
 		Profibiz.PracticeManager.SharedCode.Model\Profibiz.PracticeManager.SharedCode.Model.projitems*{ab8b448c-dd74-4d60-a041-3e5d03a32180}*SharedItemsImports = 4
 		Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems*{ada6ba4c-7b2b-4068-9a5a-b502f2de98a8}*SharedItemsImports = 13
 	EndGlobalSection
@@ -279,6 +282,18 @@ Global
 		{B830DD47-829D-4887-B67F-7EB9713C4DA0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B830DD47-829D-4887-B67F-7EB9713C4DA0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B830DD47-829D-4887-B67F-7EB9713C4DA0}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.ClickOnce Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.ClickOnce Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.ClickOnce Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.ClickOnce Release|Any CPU.Build.0 = Release|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.DebugLocal|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.DebugLocal|Any CPU.Build.0 = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.DebugTest|Any CPU.ActiveCfg = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.DebugTest|Any CPU.Build.0 = Debug|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9F3640B3-F02B-4031-AE2C-D2D0AA56F4A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

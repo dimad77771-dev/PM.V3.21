@@ -129,6 +129,7 @@
                                         Width="30*" />
                         <dxg:GridColumn FieldName="BirthDate"
                                         Header="DOB"
+										EditSettings="{StaticResource dateYYYYMMDDGridEditSettings}"
                                         ReadOnly="True"
                                         Width="80" />
                         <dxg:GridColumn FieldName="EmailAddress"

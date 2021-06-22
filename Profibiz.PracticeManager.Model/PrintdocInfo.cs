@@ -21,5 +21,7 @@ namespace Profibiz.PracticeManager.Model
 		public List<MedicalHistoryRecord> MedicalHistoryRecords { get; set; }
 		public List<Appointment> Appointments { get; set; }
 		public DateTime? FirstAppointmentStart { get; set; }
+
+		public ServiceProvider ServiceProvider { get; set; }
 	}
 }

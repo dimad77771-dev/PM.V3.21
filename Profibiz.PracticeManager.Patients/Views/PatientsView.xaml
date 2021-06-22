@@ -257,6 +257,7 @@
                                                 Width="100" />
                                 <dxg:GridColumn FieldName="BirthDate"
                                                 Header="DOB"
+												EditSettings="{StaticResource dateYYYYMMDDGridEditSettings}"
                                                 Width="100" />
 
                                 <dxg:GridColumn FieldName="ReferrerName"

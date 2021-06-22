@@ -121,6 +121,7 @@
                                     Width="90" />
                     <dxg:GridColumn FieldName="BirthDate"
                                     Header="BIRTH&#10;DATE"
+									EditSettings="{StaticResource dateYYYYMMDDGridEditSettings}"
                                     Width="90" />
                     <dxg:GridColumn FieldName="PhoneNumber"
                                     Header="PHONE"
