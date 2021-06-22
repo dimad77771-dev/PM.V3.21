@@ -64,7 +64,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\PraciticeManager.ico</ApplicationIcon>
+    <ApplicationIcon>PraciticeManager.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>F4E6E9030F3B456B7F6CE3124776220DB73F47EB</ManifestCertificateThumbprint>
@@ -232,7 +232,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
-    <None Include="Profibiz.PracticeManager.Shell_TemporaryKey.pfx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -304,6 +303,14 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Artua-Mac-Archive-manage.ico" />
+    <Resource Include="Resources\Health-care-shield-icon.png" />
+    <Resource Include="Resources\path-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="PraciticeManager.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
