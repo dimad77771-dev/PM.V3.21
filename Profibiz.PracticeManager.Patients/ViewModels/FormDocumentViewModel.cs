@@ -134,6 +134,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				"ServiceProvider_FooterText",
 				"ServiceName",
 				"Patient_Signature",
+				"ServiceProvider_Signature",
 			};
 
 			foreach (var field in fields)
@@ -267,36 +268,37 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					imagebytes = Patient.Signature;
 				}
 			}
-
-
-			if (!string.IsNullOrEmpty(text) || imagebytes != null)
+			else if (arg == "ServiceProvider_Signature")
 			{
-				if (!string.IsNullOrEmpty(text))
+				if (ServiceProvider != null && ServiceProvider.Signature != null && ServiceProvider.Signature.Length > 0)
 				{
-					if (isPaste)
+					imagebytes = ServiceProvider.Signature;
+				}
+			}
+
+
+
+			if (isPaste)
+			{
+				if (!string.IsNullOrEmpty(text) || imagebytes != null)
+				{
+					if (!string.IsNullOrEmpty(text))
 					{
 						System.Windows.Clipboard.SetText(text);
 					}
-					else
+					else if (imagebytes != null)
 					{
-						document.ReplaceAll("{{" + arg + "}}", text, DevExpress.XtraRichEdit.API.Native.SearchOptions.None);
+						using (var ms = new MemoryStream(imagebytes))
+						{
+							var bitmapImage = new BitmapImage();
+							bitmapImage.BeginInit();
+							bitmapImage.StreamSource = ms;
+							bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+							bitmapImage.EndInit();
+							System.Windows.Clipboard.SetImage(bitmapImage);
+						}
 					}
-				}
-				else if (imagebytes != null)
-				{
-					using (var ms = new MemoryStream(imagebytes))
-					{
-						var bitmapImage = new BitmapImage();
-						bitmapImage.BeginInit();
-						bitmapImage.StreamSource = ms;
-						bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
-						bitmapImage.EndInit();
-						System.Windows.Clipboard.SetImage(bitmapImage);
-					}
-				}
 
-				if (isPaste)
-				{
 					try
 					{
 						document.Paste();
@@ -308,6 +310,32 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						System.Windows.Clipboard.SetText(oldClipboardText);
 					}
 				}
+			}
+			else
+			{
+				var fieldcode = "{{" + arg + "}}";
+				if (imagebytes != null)
+				{
+					var ranges = document.FindAll(fieldcode, DevExpress.XtraRichEdit.API.Native.SearchOptions.None);
+					foreach(var range in ranges)
+					{
+						document.Selection = range;
+
+						using (var ms = new MemoryStream(imagebytes))
+						{
+							var bitmapImage = new BitmapImage();
+							bitmapImage.BeginInit();
+							bitmapImage.StreamSource = ms;
+							bitmapImage.CacheOption = BitmapCacheOption.OnLoad;
+							bitmapImage.EndInit();
+							System.Windows.Clipboard.SetImage(bitmapImage);
+						}
+
+						document.Paste();
+					}
+				}
+				text = text ?? "";
+				document.ReplaceAll(fieldcode, text, DevExpress.XtraRichEdit.API.Native.SearchOptions.None);
 			}
 		}
 

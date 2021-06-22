@@ -143,6 +143,7 @@
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 
 					<Grid
@@ -765,6 +766,7 @@
 					<dxlc:LayoutGroup
 						Grid.Row="1"
 						Grid.Column="1"
+						Grid.ColumnSpan="2"
 						Header="SERVICE"
 						Margin="5"
 						GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
@@ -866,6 +868,35 @@
 
 
 					</dxlc:LayoutGroup>
+
+					<Grid
+						Grid.Row="0"
+						Grid.Column="2"
+						Margin="5">
+						<Grid.RowDefinitions>
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="*" />
+						</Grid.RowDefinitions>
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="0"
+							Grid.Column="0"
+							Content="Signature"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+
+						<dxe:ImageEdit
+							Grid.Row="1"
+							Grid.Column="0"
+							Width="150"
+							Height="75"
+							VerticalAlignment="Top"
+							HorizontalAlignment="Center"
+							EditValue="{Binding Entity.Signature, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							KeyboardNavigation.IsTabStop="False"
+							Stretch="Uniform"
+							Style="{StaticResource baseEditStyle1}" />
+
+					</Grid>
 				</Grid>
 			</Grid>
 		</DockPanel>

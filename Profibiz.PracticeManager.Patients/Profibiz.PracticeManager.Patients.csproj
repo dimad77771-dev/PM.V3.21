@@ -181,6 +181,34 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="ReachFramework" />
+    <Reference Include="Syncfusion.Compression.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocIO.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.DocIO.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.DocToPDFConverter.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.DocToPDFConverter.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.ExcelToPDFConverter.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.ExcelToPDFConverter.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.SfCellGrid.WPF, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.SfCellGrid.WPF.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.XlsIO.Base, Version=15.3400.0.26, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages2\Syncfusion.17.2.0.46\Syncfusion.XlsIO.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -233,8 +261,10 @@
       <DependentUpon>md_bodyrevivalsalonspa.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\ModelEx\Customer.cs" />
+    <Compile Include="Helpers\SyncfusionExtensions.cs" />
     <Compile Include="Helpers\FormDocumentPasteHelper.cs" />
     <Compile Include="Helpers\FormDocumentHelper.cs" />
+    <Compile Include="Helpers\AppointmentBookDayReport.cs" />
     <Compile Include="ModuleInit.cs" />
     <Compile Include="Helpers\PrintdocProccessing.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -712,6 +742,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\AA_INVOICE_TEMPLATE_03.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\AppointmentBookDayTemplate.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\CHARGEOUT_TEMPLATE_01.docx">

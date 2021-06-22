@@ -54,6 +54,7 @@ namespace Profibiz.PracticeManager.Model
 		public string Password { get; set; }
 		public Guid? RoleRowId { get; set; }
 		public bool IsOfficeEmployee { get; set; }
+		public byte[] Signature { get; set; }
 
 		public virtual ObservableCollection<ServiceProviderAssociation> ServiceProviderAssociations { get; set; } = new ObservableCollection<ServiceProviderAssociation>();
 		public virtual ObservableCollection<ServiceProviderService> ServiceProviderServices { get; set; } = new ObservableCollection<ServiceProviderService>();

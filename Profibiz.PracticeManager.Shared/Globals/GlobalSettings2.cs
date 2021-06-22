@@ -18,7 +18,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 	{
 		public static GlobalSettings Instance { get; set; }
 
-
+		[JsonIgnore]
 		public UserSetting UserSettings { get; set; }
 
 		public static void Update(Action<GlobalSettings> action)
@@ -268,6 +268,14 @@ namespace Profibiz.PracticeManager.Infrastructure
 			{
 				AppointmentViewDateFilterFrom = FilterFrom;
 				AppointmentViewDateFilterTo = FilterTo;
+				SendSettingsToServer();
+			}
+
+			public String DefaultActiveViewType { get; set; }
+
+			public void SetDefaultActiveViewType(string defaultActiveViewType)
+			{
+				DefaultActiveViewType = defaultActiveViewType;
 				SendSettingsToServer();
 			}
 		}

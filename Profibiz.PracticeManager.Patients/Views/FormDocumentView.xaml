@@ -786,14 +786,6 @@
 												Content="Patient Signature"
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="Patient_Signature" />
-											<!--
-											BirthDate
-											FamilyDoctor
-											Sex - Gender
-											MobileNumber
-											Address
-											-->
-
 										</dxr:RibbonPageGroup>
 										<dxr:RibbonPageGroup Caption="Appoinment" ShowCaptionButton="False">
 											<dxb:BarButtonItem
@@ -832,7 +824,12 @@
 												Content="Footer Text"
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="ServiceProvider_FooterText" />
-										</dxr:RibbonPageGroup>										
+											<dxb:BarButtonItem
+												Content="Signature"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_Signature" />											
+										</dxr:RibbonPageGroup>						
+										
 									</dxr:RibbonPage>
 									
 									
