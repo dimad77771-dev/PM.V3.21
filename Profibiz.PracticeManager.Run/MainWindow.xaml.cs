@@ -32,7 +32,7 @@ namespace Profibiz.PracticeManager.Start
 		{
 			InitializeComponent();
 			this.Loaded += MainWindow_Loaded;
-			labStatus.Content = "Check update...";
+			labStatus.Content = "Checking for updates...";
 		}
 
 		private void MainWindow_Loaded(object sender, RoutedEventArgs e)
@@ -148,7 +148,7 @@ namespace Profibiz.PracticeManager.Start
 
 		void ServerError()
 		{
-			MessageBox.Show("Connection to server failed. Please make sure your VPN connection is ON", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+			MessageBox.Show("Connection to the server failed. Please make sure your VPN connection is turned ON", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
 			Application.Current.Shutdown();
 		}
 	}
