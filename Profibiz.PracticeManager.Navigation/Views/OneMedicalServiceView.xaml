@@ -261,7 +261,13 @@
 							Grid.Row="12"
 							Grid.Column="1"
 							EditValue="{Binding Entity.PrintLabel, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
-							Style="{StaticResource baseEditStyle1}" />
+							Style="{StaticResource baseEditStyle1}"
+							Height="100"
+							TextWrapping="Wrap"
+							AcceptsReturn="True"
+							VerticalScrollBarVisibility="Auto"
+							VerticalContentAlignment="Top" />						
+						
 
 						<dxlc:LayoutItemLabel
 							Grid.Row="13"
@@ -295,7 +301,7 @@
 						<dxlc:LayoutItemLabel
 							Grid.Row="15"
 							Grid.Column="0"
-							Content="Template Folder"
+							Content="Form Folder"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:TextEdit
 							Grid.Row="15"

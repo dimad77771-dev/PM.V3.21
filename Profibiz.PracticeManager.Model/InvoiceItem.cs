@@ -71,7 +71,8 @@ namespace Profibiz.PracticeManager.Model
 
 			var description =
 				"Appointment: " + appointment.StartEndTimeString + "\n" +
-				"Service: " + appointment.MedicalServiceName + "\n" +
+				//"Service: " + appointment.MedicalServiceName + "\n" +
+				"Service: " + appointment.MedicalServiceNameWithPrintLabel + "\n" +
 				"Provider: " + appointment.ServiceProviderName;
 
 			var invoiceItem = new InvoiceItem
