@@ -112,6 +112,60 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			ShowWaitIndicator.Hide();
 			DXSplashScreenHelper.Hide();
+
+
+			var dd = RichEditConrolManager.Control;
+			dd.MouseDoubleClick += Dd_MouseDoubleClick;
+		}
+
+		const int CHECKBOX_ON = 61523;
+		const int CHECKBOX_OFF = 61603;
+		const string CHECKBOX_FONTNAME = "Wingdings 2";
+		private void Dd_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
+		{
+			var doc = RichEditConrolManager.Document;
+			if (doc.Selection == null) return;
+
+			var range = doc.CreateRange(doc.Selection.Start, 1);
+			var text = doc.GetText(range);
+			
+			var characterProperties = doc.BeginUpdateCharacters(range);
+			var fontname = characterProperties.FontName;
+			doc.EndUpdateCharacters(characterProperties);
+
+			if (fontname == CHECKBOX_FONTNAME)
+			{
+				//doc.BeginUpdate();
+				//doc.InsertText(range.Start, ">>NewText<<");
+				//doc.EndUpdate();
+
+				//System.Windows.Clipboard.SetText(ntext);
+				//doc.Paste();
+
+				var ntext = "";
+				if (text == Convert.ToChar(CHECKBOX_OFF).ToString())
+				{
+					ntext = Convert.ToChar(CHECKBOX_ON).ToString();
+				}
+				else if (text == Convert.ToChar(CHECKBOX_ON).ToString())
+				{
+					ntext = Convert.ToChar(CHECKBOX_OFF).ToString();
+				}
+
+				if (!string.IsNullOrEmpty(ntext))
+				{ 
+					doc.Delete(range);
+					var nrange = doc.InsertText(range.Start, ntext);
+					var ncharacterProperties = doc.BeginUpdateCharacters(nrange);
+					ncharacterProperties.FontName = CHECKBOX_FONTNAME;
+					doc.EndUpdateCharacters(ncharacterProperties);
+
+					if (doc.Selection.Length > 0)
+					{
+						doc.Selection = doc.CreateRange(doc.Selection.Start, 0);
+					}
+				}
+			}
 		}
 
 		void AllFieldReplace()
@@ -146,6 +200,34 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public void PasteApply(string arg)
 		{
 			FieldProc(arg, isPaste: true);
+		}
+
+		public void PasteCheckbox(string arg)
+		{
+			var doc = RichEditConrolManager.Document;
+			if (doc.Selection == null) return;
+
+			var ntext = "";
+			if (arg == "1")
+			{
+				ntext = Convert.ToChar(CHECKBOX_ON).ToString();
+			}
+			else if (arg == "0")
+			{
+				ntext = Convert.ToChar(CHECKBOX_OFF).ToString();
+			}
+
+			if (!string.IsNullOrEmpty(ntext))
+			{
+				try
+				{
+					var nrange = doc.InsertText(doc.Selection.Start, ntext);
+					var ncharacterProperties = doc.BeginUpdateCharacters(nrange);
+					ncharacterProperties.FontName = CHECKBOX_FONTNAME;
+					doc.EndUpdateCharacters(ncharacterProperties);
+				}
+				catch(Exception) { }
+			}
 		}
 
 		void FieldProc(string arg, bool isPaste)

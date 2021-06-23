@@ -828,8 +828,19 @@
 												Content="Signature"
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="ServiceProvider_Signature" />											
-										</dxr:RibbonPageGroup>						
-										
+										</dxr:RibbonPageGroup>
+
+										<dxr:RibbonPageGroup Caption="Checkbox" ShowCaptionButton="False">
+											<dxb:BarButtonItem
+												Content="On"
+												Command="{Binding PasteCheckboxCommand}"
+												CommandParameter="1" />
+											<dxb:BarButtonItem
+												Content="Off"
+												Command="{Binding PasteCheckboxCommand}"
+												CommandParameter="0" />
+										</dxr:RibbonPageGroup>
+
 									</dxr:RibbonPage>
 									
 									
