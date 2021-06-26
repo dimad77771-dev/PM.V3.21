@@ -27,6 +27,8 @@ using System.IO;
 using DevExpress.XtraRichEdit.Services;
 using DevExpress.Xpf.RichEdit;
 using System.Windows.Media.Imaging;
+using DevExpress.XtraRichEdit.API.Native;
+using System.Text.RegularExpressions;
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -135,21 +137,17 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			if (fontname == CHECKBOX_FONTNAME)
 			{
-				//doc.BeginUpdate();
-				//doc.InsertText(range.Start, ">>NewText<<");
-				//doc.EndUpdate();
-
-				//System.Windows.Clipboard.SetText(ntext);
-				//doc.Paste();
-
 				var ntext = "";
+				var nvalue = (bool?)null;
 				if (text == Convert.ToChar(CHECKBOX_OFF).ToString())
 				{
 					ntext = Convert.ToChar(CHECKBOX_ON).ToString();
+					nvalue = true;
 				}
 				else if (text == Convert.ToChar(CHECKBOX_ON).ToString())
 				{
 					ntext = Convert.ToChar(CHECKBOX_OFF).ToString();
+					nvalue = false;
 				}
 
 				if (!string.IsNullOrEmpty(ntext))
@@ -160,10 +158,98 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					ncharacterProperties.FontName = CHECKBOX_FONTNAME;
 					doc.EndUpdateCharacters(ncharacterProperties);
 
+					CheckboxYesNo(doc, nrange, nvalue.Value);
+
 					if (doc.Selection.Length > 0)
 					{
 						doc.Selection = doc.CreateRange(doc.Selection.Start, 0);
 					}
+				}
+			}
+		}
+
+		void CheckboxYesNo(Document doc, DocumentRange brange, bool bvalue)
+		{
+			var pos = brange.Start.ToInt();
+			var delta = 30;
+			var pos1 = Math.Max(pos - delta, 0);
+			var pos2 = pos + delta;
+
+			var charreg = Convert.ToChar(CHECKBOX_ON) + "|" + Convert.ToChar(CHECKBOX_OFF);
+			var variants = new[]
+			{
+				(2, $@"\syes\s*$", $@"^\s*no\s*({charreg})"),
+				(1, $@"\syes\s*({charreg})\s*no\s*$", ""),
+
+				(2, "", $@"^\s*yes\s*({charreg})\s*no"),
+				(1, $@"({charreg})\s*yes\s*$", $@"^\s*no"),
+			};
+
+			foreach (var variant in variants)
+			{
+				var numregex = variant.Item1;
+				var reg1 = variant.Item2;
+				var reg2 = variant.Item3;
+				var range1 = doc.CreateRange(pos1, pos - pos1);
+				var text1 = doc.GetText(range1);
+				var regex1 = new Regex(reg1, RegexOptions.IgnoreCase);
+				var good1 = true;
+				if (!string.IsNullOrEmpty(reg1))
+				{
+					good1 = regex1.IsMatch(" " + text1);
+				}
+
+				var range2 = doc.CreateRange(pos + 1, pos2 - pos);
+				var text2 = doc.GetText(range2);
+				var regex2 = new Regex(reg2, RegexOptions.IgnoreCase);
+				var good2 = true;
+				if (!string.IsNullOrEmpty(reg2))
+				{
+					good2 = regex2.IsMatch(text2);
+				}
+				
+
+				if (good1 && good2)
+				{
+					var direction = numregex == 1 ? -1 : 1;
+					var curpos = numregex == 1 ? range1.End.ToInt() - 1 : range2.Start.ToInt();
+					DocumentRange nrange;
+					string text;
+					while (true)
+					{
+						nrange = doc.CreateRange(curpos, 1);
+						text = doc.GetText(nrange);
+						if (text == Convert.ToChar(CHECKBOX_ON).ToString() || text == Convert.ToChar(CHECKBOX_OFF).ToString())
+						{
+							break;
+						}
+						curpos += direction;
+					}
+
+					bool exvalue;
+					if (text == Convert.ToChar(CHECKBOX_OFF).ToString())
+					{
+						exvalue = false;
+					}
+					else if (text == Convert.ToChar(CHECKBOX_ON).ToString())
+					{
+						exvalue = true;
+					}
+					else throw new ArgumentException();
+
+					var newvalue = false;
+
+					if (newvalue != exvalue)
+					{
+						doc.Delete(nrange);
+						var ntext = Convert.ToChar(newvalue ? CHECKBOX_ON : CHECKBOX_OFF).ToString();
+						var irange = doc.InsertText(nrange.Start, ntext);
+						var ncharacterProperties = doc.BeginUpdateCharacters(irange);
+						ncharacterProperties.FontName = CHECKBOX_FONTNAME;
+						doc.EndUpdateCharacters(ncharacterProperties);
+					}
+
+					break;
 				}
 			}
 		}
