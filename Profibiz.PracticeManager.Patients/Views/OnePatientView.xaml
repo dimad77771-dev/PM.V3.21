@@ -23,6 +23,8 @@
 	Title="Patient"
 	Width="1300"
 	Height="1000"
+	MaxHeight="{x:Static infrastructure:WindowInfo.HeightMax}"
+	MaxWidth="{x:Static infrastructure:WindowInfo.WidthMax}"
 	prism:ViewModelLocator.AutoWireViewModel="True"
 	ResizeMode="NoResize"
 	ShowInTaskbar="{x:Static infrastructure:WindowInfo.ShowInTaskbar}"
@@ -85,6 +87,9 @@
 				x:Name="ribbonControl"
 				DockPanel.Dock="Top"
 				RibbonStyle="Office2010">
+				<!--<dxr:RibbonControl.LayoutTransform>
+                    <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
+                </dxr:RibbonControl.LayoutTransform>-->
 				<dxr:RibbonControl.PageHeaderItems>
 					<view:RibbonStyleSelectorItem IsVisible="{Binding ElementName=ribbonControl, Path=IsBackStageViewOpen, Converter={dxmvvm:BooleanNegationConverter}}" SelectedRibbonStyle="{Binding RibbonStyle, ElementName=ribbonControl, Mode=OneWayToSource}" />
 				</dxr:RibbonControl.PageHeaderItems>
@@ -333,7 +338,8 @@
 				</dxr:RibbonDefaultPageCategory>
 			</dxr:RibbonControl>
 
-			<Grid>
+			<ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+				<Grid>
 				<!--<Grid.LayoutTransform>
                     <ScaleTransform ScaleX="0.5" ScaleY="0.5"  />
                 </Grid.LayoutTransform>-->
@@ -1635,6 +1641,7 @@
 
 				</dx:DXTabControl>
 			</Grid>
+			</ScrollViewer>	
 		</DockPanel>
 	</dx:LoadingDecorator>
 </dx:DXWindow>

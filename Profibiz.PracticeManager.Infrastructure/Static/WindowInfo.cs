@@ -28,6 +28,11 @@ namespace Profibiz.PracticeManager.Infrastructure
 		public static double Width95 => GetWidth(95);
 		public static double Width99 => GetWidth(99);
 
+		public static double HeightMax => GetHeight(95);
+		public static double WidthMax => GetWidth(99);
+		//public static double HeightMax => GetHeight(66);
+		//public static double WidthMax => GetWidth(66);
+
 
 		static double GetHeight(double percent)
         {

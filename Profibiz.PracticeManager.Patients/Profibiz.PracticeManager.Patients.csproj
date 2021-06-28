@@ -735,6 +735,9 @@
     <AppDesigner Include="Properties\" />
     <None Include="Print\WeeklyStyle - Copy.schrepx" />
     <None Include="Print\WeeklyStyle.schrepx" />
+    <None Include="Templates\AHC_INVOICE_TEMPLATE_01.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="Templates\AA_INVOICE_TEMPLATE_01.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
