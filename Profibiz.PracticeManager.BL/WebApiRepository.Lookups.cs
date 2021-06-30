@@ -28,7 +28,15 @@ namespace Profibiz.PracticeManager.BL
 				row = new EF.UserSetting();
 			}
 			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.UserSetting));
-			return mapper.Map<DTO.UserSetting>(row);
+			var userSetting = mapper.Map<DTO.UserSetting>(row);
+
+			var settings = db.Settings.Where(q => q.Name == "BusinessName").FirstOrDefault();
+			if (settings != null)
+			{
+				userSetting.BusinessName = settings.Value;
+			}
+
+			return userSetting;
 		}
 
         public IEnumerable<DTO.Category> GetCategories()

@@ -1,4 +1,4 @@
-<dx:DXWindow
+<infrastructure:DXWindowEx
 	x:Class="Profibiz.PracticeManager.Patients.Views.OneSpecialistView"
 	xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -99,7 +99,7 @@
 						</dxr:RibbonPageGroup>
 
 
-						<dxr:RibbonPageGroup Caption="Associations">
+						<dxr:RibbonPageGroup Caption="Associations" IsVisible="{Binding AllowEditingGridAssociations}">
 							<dxb:BarButtonItem
 								Content="New"
 								Command="{Binding ProfessionalAssociationNewCommand}"
@@ -110,10 +110,9 @@
 								Command="{Binding ProfessionalAssociationDeleteCommand}"
 								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
 								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
-
 						</dxr:RibbonPageGroup>
 
-						<dxr:RibbonPageGroup Caption="Services">
+						<dxr:RibbonPageGroup Caption="Services" IsVisible="{Binding AllowEditingGridAssociations}">
 							<dxb:BarButtonItem
 								Content="New"
 								Command="{Binding MedicalServiceNewCommand}"
@@ -124,7 +123,6 @@
 								Command="{Binding MedicalServiceDeleteCommand}"
 								LargeGlyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-32.png"
 								Glyph="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-delete-16.png" />
-
 						</dxr:RibbonPageGroup>
 
 					</dxr:RibbonPage>
@@ -220,6 +218,7 @@
 							Grid.RowSpan="5"
 							Width="80"
 							EditValue="{Binding Entity.Photo, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding IsRestrictedAccess, Converter={StaticResource BooleanNegationConverter}}"
 							Style="{StaticResource baseEditStyle1}"
 							Stretch="Uniform" />
 
@@ -509,6 +508,7 @@
 								IsTextEditable="False"
 								ItemsSource="{Binding AppointmentBooks, Source={StaticResource lookupDataProvider}}"
 								PopupContentTemplate="{StaticResource popupFormExtentedContentTemplate}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								Style="{StaticResource baseEditStyle1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Column="2"
@@ -519,6 +519,7 @@
 								Grid.Column="3"
 								Width="130"
 								EditValue="{Binding Entity.MaximumDayAppointments, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								HorizontalAlignment="Center"
 								Style="{StaticResource baseEditStyle1}" />
 						</Grid>
@@ -545,6 +546,7 @@
 							<dxe:PopupColorEdit
 								Grid.Column="1"
 								Color="{Binding Entity.AppointmentBackgroundColor, Converter={StaticResource ColorToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								Width="130" />
 
 							<Border
@@ -566,6 +568,7 @@
 							<dxe:PopupColorEdit
 								Grid.Column="4"
 								Color="{Binding Entity.AppointmentForegroundColor, Converter={StaticResource ColorToStringConverter}, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								Width="130" />
 
 						</Grid>
@@ -587,6 +590,7 @@
 								Width="150"
 								HorizontalAlignment="Left"
 								Command="{Binding SchedulerRecordEditCommand}"
+								IsEnabled="{Binding IsRestrictedAccess, Converter={StaticResource BooleanNegationConverter}}"
 								Margin="10,2">
 								Edit Schedule...
 							</Button>
@@ -611,6 +615,7 @@
 							Grid.Column="1"
 							Grid.ColumnSpan="2"
 							Text="{Binding Entity.FooterText, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding IsRestrictedAccess}"
 							ShowIcon="True">
 						</dxe:MemoEdit>
 
@@ -635,6 +640,7 @@
 								Grid.Column="0"
 								MinWidth="220"
 								EditValue="{Binding Entity.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								Style="{StaticResource baseEditStyle1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Column="1"
@@ -645,6 +651,7 @@
 							<dxe:ComboBoxEdit
 								Grid.Column="2"
 								EditValue="{Binding Entity.RoleRowId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								MinWidth="220"
 								DisplayMember="Name"
 								ValueMember="RowId"
@@ -682,6 +689,7 @@
 							<dxe:CheckEdit
 								Grid.Column="2"
 								IsChecked="{Binding Entity.IsOfficeEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
 								KeyboardNavigation.IsTabStop="False"
 								Style="{StaticResource baseEditStyle1}" />
 						</Grid>
@@ -707,7 +715,7 @@
 							ShowBorder="True">
 							<dxg:GridControl.View>
 								<dxg:TableView
-									AllowEditing="True"
+									AllowEditing="{Binding AllowEditingGridAssociations}"
 									AllowPerPixelScrolling="True"
 									AutoWidth="False"
 									EditorShowMode="MouseDown"
@@ -780,7 +788,7 @@
 							ShowBorder="True">
 							<dxg:GridControl.View>
 								<dxg:TableView
-									AllowEditing="True"
+									AllowEditing="{Binding AllowEditingGridService}"
 									AllowPerPixelScrolling="True"
 									AutoWidth="False"
 									EditorShowMode="MouseDown"
@@ -892,6 +900,7 @@
 							VerticalAlignment="Top"
 							HorizontalAlignment="Center"
 							EditValue="{Binding Entity.Signature, Converter={StaticResource PictureConverter}, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							IsReadOnly="{Binding IsRestrictedAccess, Converter={StaticResource BooleanNegationConverter}}"
 							KeyboardNavigation.IsTabStop="False"
 							Stretch="Uniform"
 							Style="{StaticResource baseEditStyle1}" />
@@ -901,4 +910,4 @@
 			</Grid>
 		</DockPanel>
 	</dx:LoadingDecorator>
-</dx:DXWindow>
+</infrastructure:DXWindowEx>

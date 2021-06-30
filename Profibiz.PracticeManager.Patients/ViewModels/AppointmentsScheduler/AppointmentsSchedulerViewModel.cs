@@ -325,6 +325,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			});
 		}
 
+		public void RefreshData()
+		{
+			DispatcherUIHelper.Run(async () => await LoadAppointmentData());
+		}
+
 		public HospitalAppointment Appointment2HospitalAppointment(Appointment row)
 		{
 			var ret = new HospitalAppointment
@@ -553,6 +558,26 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						{
 							IsNew = false,
 							RowId = row.PatientRowId,
+						},
+					});
+				}
+			});
+		}
+
+		public void ProfileDetails()
+		{
+			DispatcherUIHelper.Run(() =>
+			{
+				if (LookupDataProvider.Instance.ServiceProviders.Any(q => q.RowId == UserManager.UserRowId))
+				{
+					ShowDXWindowsInteractionRequest.Raise(new ShowDXWindowsActionParam
+					{
+						ViewCode = ViewCodes.OneSpecialistView,
+						Param = new OneSpecialistViewModel.OpenParams
+						{
+							IsNew = false,
+							RowId = UserManager.UserRowId.Value,
+							IsRestrictedAccess = true,
 						},
 					});
 				}

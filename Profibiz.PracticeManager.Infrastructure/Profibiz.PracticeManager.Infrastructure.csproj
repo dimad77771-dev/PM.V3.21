@@ -350,6 +350,7 @@
     <Compile Include="Views\CommandPanelView.xaml.cs">
       <DependentUpon>CommandPanelView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\DXWindowEx.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

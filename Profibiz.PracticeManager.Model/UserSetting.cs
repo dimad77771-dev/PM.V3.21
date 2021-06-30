@@ -14,6 +14,7 @@ namespace Profibiz.PracticeManager.Model
 		public string UserCode { get; set; }
 		public string Json { get; set; }
 		public bool ShowChargeout { get; set; }
+		public string BusinessName { get; set; }
 
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }

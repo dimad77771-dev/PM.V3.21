@@ -1,4 +1,4 @@
-﻿<dx:DXWindow
+﻿<infrastructure:DXWindowEx
 	x:Class="Profibiz.PracticeManager.Navigation.Views.OneMedicalServiceView"
 	xmlns="http://schemas.microsoft.com/netfx/2009/xaml/presentation"
 	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -330,4 +330,4 @@
 		</Grid>
 
 	</dx:LoadingDecorator>
-</dx:DXWindow>
+</infrastructure:DXWindowEx>

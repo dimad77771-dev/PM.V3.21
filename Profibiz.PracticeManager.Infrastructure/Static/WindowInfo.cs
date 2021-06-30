@@ -45,8 +45,21 @@ namespace Profibiz.PracticeManager.Infrastructure
         }
 
 
-        static double ScreenHeight => SystemParameters.WorkArea.Height;
-        static double ScreenWidth => SystemParameters.WorkArea.Width;
+		//static double ScreenHeight => SystemParameters.WorkArea.Height;
+		//static double ScreenWidth => SystemParameters.WorkArea.Width;
+		static double ScreenHeight => Math.Max(Application.Current.MainWindow?.ActualHeight ?? 0, 300);
+		//static double ScreenHeight
+		//{
+		//	get
+		//	{
+		//		var wnd = Application.Current.MainWindow;
+		//		var hh2 = Application.Current.MainWindow?.Height;
+		//		var hh = Math.Max(Application.Current.MainWindow?.ActualHeight ?? 0, 200);
+		//		return hh;
+		//	}
+		//}
+		static double ScreenWidth => Math.Max(Application.Current.MainWindow?.ActualWidth ?? 0, 300);
+
 
 		public static void CenterWindowVertical(Window window)
 		{

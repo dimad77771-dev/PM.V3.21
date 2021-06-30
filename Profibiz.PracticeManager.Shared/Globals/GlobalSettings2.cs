@@ -73,6 +73,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 				new GlobalSettings() :
 				JsonConvert.DeserializeObject<GlobalSettings>(json);
 			Instance.UserSettings = userSetting;
+			DXWindowEx.BusinessName = userSetting.BusinessName;
 		}
 
 
@@ -398,8 +399,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 			}
 		}
 
-
-
+		public string BusinessName { get; set; }
 	}
 
 

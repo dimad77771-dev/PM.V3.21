@@ -36,7 +36,8 @@ namespace Profibiz.PracticeManager.Shell
 				DXSplashScreen.Show<SplashScreenWindow>();
 			}
 			Application.Current.MainWindow = (Window)this.Shell;
-            Application.Current.MainWindow.Show();
+			Application.Current.MainWindow.Title = DXWindowEx.BusinessName + (string.IsNullOrEmpty(UserManager.UserName) ? "" : " (" + UserManager.UserName + ")");
+			Application.Current.MainWindow.Show();
         }
 
 
@@ -58,11 +59,6 @@ namespace Profibiz.PracticeManager.Shell
 			viewmodel.OnOpen();
 			wnd.DataContext = viewmodel;
 			wnd.ShowDialog();
-			if (!string.IsNullOrEmpty(UserManager.UserName))
-			{
-				Profibiz.PracticeManager.Shell.Shell.Instance.Title += " (" + UserManager.UserName + ")";
-			}
-
 		}
 
 

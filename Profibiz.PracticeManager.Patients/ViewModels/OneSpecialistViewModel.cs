@@ -43,7 +43,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual ServiceProviderService MedicalServiceSelectedEntity { get; set; }
 		public virtual bool IsVisibilityRate { get; set; }
 		public virtual bool IsVisibleLabelYouMustSetupSchedule { get; set; }
-
+		public virtual bool IsRestrictedAccess => OpenParam.IsRestrictedAccess;
+		public virtual bool AllowEditingGridService => !IsRestrictedAccess;
+		public virtual bool AllowEditingGridAssociations => !IsRestrictedAccess;
+		
 
 		public OneSpecialistViewModel() : base()
 		{
@@ -435,6 +438,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			public bool IsNew { get; set; }
 			public Guid RowId { get; set; }
+			public Boolean IsRestrictedAccess { get; set; }
 		}
 
 

@@ -184,6 +184,14 @@
 							Command="{Binding PrintAppointmentCommand}" />
 					</dxr:RibbonPageGroup>
 
+					<dxr:RibbonPageGroup Caption="Data">
+						<dxb:BarButtonItem Content="Refresh"
+                                               Command="{Binding RefreshDataCommand}"
+                                               LargeGlyph="{dx:DXImage Image=Refresh_32x32.png}"
+                                               Glyph="{dx:DXImage Image=Refresh_16x16.png}" />
+					</dxr:RibbonPageGroup>
+
+
 				</dxr:RibbonPage>
 
 				<dxr:RibbonPage Caption="VIEW">
@@ -490,6 +498,12 @@
 						</dxr:RibbonGalleryBarItem>
 					</dxr:RibbonPageGroup>
 
+					<dxr:RibbonPageGroup Caption="Profile">
+						<dxb:BarButtonItem Content="Edit Profile Details"
+                                               Command="{Binding ProfileDetailsCommand}"
+                                               LargeGlyph="{dx:DXImage Image=InitialState_32x32.png}"
+                                               Glyph="{dx:DXImage Image=InitialState_16x16.png}" />
+					</dxr:RibbonPageGroup>					
 				</dxr:RibbonPage>
 			</dxr:RibbonDefaultPageCategory>
 		</infrastructure:RibbonControlEx>
