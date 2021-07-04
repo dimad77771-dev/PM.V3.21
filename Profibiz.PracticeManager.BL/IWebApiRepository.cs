@@ -85,12 +85,16 @@ namespace Profibiz.PracticeManager.BL
 		void DeleteCalendarEventStatus(Guid id);
 		void PutPublicHolidays(IEnumerable<PublicHoliday> entities);
 		void DeletePublicHoliday(Guid id);
+		void PutTemplates(IEnumerable<Template> entities);
+		void DeleteTemplate(Guid id);
 		void PutInvoiceStatuses(IEnumerable<InvoiceStatus> entities);
 		void DeleteInvoiceStatus(Guid id);
 		void PutChargeoutStatuses(IEnumerable<ChargeoutStatus> entities);
 		void DeleteChargeoutStatus(Guid id);
 		void PutChargeoutRecipientes(IEnumerable<ChargeoutRecipient> entities);
 		void DeleteChargeoutRecipient(Guid id);
+
+		void PutTemplateDocumentBytes(TemplateDocumentBytes row);
 
 
 		IEnumerable<InsuranceProvidersViewGroup> GetInsuranceProvidersViewGroups();
@@ -214,5 +218,7 @@ namespace Profibiz.PracticeManager.BL
 
 		ShellUpgradeUtils.ShellFileInfo[] GetShellFiles(int all);
 		byte[] GetShellFile(string file);
+
+		TemplateDocumentBytes GetTemplateDocumentBytes(Guid rowId);
 	}
 }

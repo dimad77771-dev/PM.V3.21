@@ -113,9 +113,19 @@ namespace Profibiz.PracticeManager.BL
 		public IEnumerable<DTO.Template> GetTemplates()
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
-			var list = db.Templates.Where(q => q.IsEnabled).ToArray();
-			var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Template));
-			return mapper.Map<List<DTO.Template>>(list);
+			var list = db.Templates.Select(q => new DTO.Template
+			{
+				RowId = q.RowId,
+				Code = q.Code,
+				Name = q.Name,
+				InvoiceType = q.InvoiceType,
+				IsDefault = q.IsDefault,
+				IsEnabled = q.IsEnabled,
+				TemplateType = q.TemplateType,
+				FormType = q.FormType,
+				CategoryRowId = q.CategoryRowId,
+			}).ToArray();
+			return list;
 		}
 
 
@@ -933,6 +943,74 @@ namespace Profibiz.PracticeManager.BL
 			}
 		}
 
+		public void PutTemplates(IEnumerable<DTO.Template> entities)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.Template));
+
+				var oldRows = db.Templates.ToArray();
+
+				foreach (var entity in entities)
+				{
+					var oldRow = oldRows.SingleOrDefault(q => q.RowId == entity.RowId);
+					if (oldRow == null)
+					{
+						var newRow = mapper.Map<EF.Template>(entity);
+						db.Templates.Add(newRow);
+						db.SaveChangesEx();
+					}
+					else
+					{
+						mapper.Map(entity, oldRow);
+						db.SaveChangesEx();
+					}
+				}
+
+				scope.Complete();
+			}
+		}
+		public void DeleteTemplate(Guid id)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var row = db.Templates.Single(q => q.RowId == id);
+				db.Templates.Remove(row);
+				try
+				{
+					db.SaveChangesEx();
+				}
+				catch (Exception ex)
+				{
+					if (ExceptionHelper.IsDeleteReferenceConstraintException(ex))
+					{
+						ExceptionHelper.UserUpdateError(UserErrorCodes.DeleteForeignKey, "Row \"" + row.Name + "\" is used in database and cannot be deleted");
+					}
+					else throw ex;
+				}
+
+				scope.Complete();
+			}
+		}
+
+		public void PutTemplateDocumentBytes(DTO.TemplateDocumentBytes erow)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			using (var scope = new TransactionScope())
+			{
+				var row = db.Templates.SingleOrDefault(q => q.RowId == erow.RowId);
+				if (row != null)
+				{
+					row.DocumentBytes = erow.DocumentBytes;
+				}
+
+				db.SaveChangesEx();
+				scope.Complete();
+			}
+		}
+
 		public void PutInvoiceStatuses(IEnumerable<DTO.InvoiceStatus> entities)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
@@ -1299,6 +1377,18 @@ namespace Profibiz.PracticeManager.BL
 					Error = "Invalid username or password",
 				};
 			}
+		}
+
+		public DTO.TemplateDocumentBytes GetTemplateDocumentBytes(Guid rowId)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+			var row = db.Templates.SingleOrDefault(q => q.RowId == rowId);
+			var result = new DTO.TemplateDocumentBytes
+			{
+				RowId = row.RowId,
+				DocumentBytes = row.DocumentBytes,
+			};
+			return result;
 		}
 
 	}

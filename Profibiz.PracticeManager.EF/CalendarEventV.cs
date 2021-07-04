@@ -42,6 +42,7 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public bool IsBusyEvent { get; set; }
     
         public virtual PatientV Patient { get; set; }
     }

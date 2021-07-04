@@ -81,6 +81,9 @@ namespace Profibiz.PracticeManager.Navigation
 			_container.RegisterView<PublicHolidaysView>();
 			_container.RegisterView<RibbonPublicHolidaysView>();
 			_container.RegisterView<OnePublicHolidayView>();
+			_container.RegisterView<TemplatesView>();
+			_container.RegisterView<RibbonTemplatesView>();
+			_container.RegisterView<OneTemplateView>();
 			_container.RegisterView<OnePatientNoteStatusView>();
 			_container.RegisterView<PatientNoteStatusesView>();
 			_container.RegisterView<RibbonPatientNoteStatusesView>();

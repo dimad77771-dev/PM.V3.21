@@ -30,6 +30,10 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> UpdatedByUserRowId { get; set; }
         public Nullable<System.DateTime> CreatedByDateTime { get; set; }
         public Nullable<System.DateTime> UpdatedByDateTime { get; set; }
+        public string TemplateType { get; set; }
+        public string FormType { get; set; }
+        public Nullable<System.Guid> CategoryRowId { get; set; }
+        public byte[] DocumentBytes { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
@@ -37,5 +41,6 @@ namespace Profibiz.PracticeManager.EF
         public virtual ServiceProvider ServiceProvider1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Category> Categories { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

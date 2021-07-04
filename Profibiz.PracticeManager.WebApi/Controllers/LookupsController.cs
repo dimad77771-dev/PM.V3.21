@@ -332,6 +332,25 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 			return StatusCode(HttpStatusCode.NoContent);
 		}
 
+		public IHttpActionResult PutTemplates([FromBody] IEnumerable<Template> entities)
+		{
+			_repository.PutTemplates(entities);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+		public IHttpActionResult DeleteTemplate(Guid id)
+		{
+			_repository.DeleteTemplate(id);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+
+
+		public IHttpActionResult PutTemplateDocumentBytes([FromBody] TemplateDocumentBytes entities)
+		{
+			_repository.PutTemplateDocumentBytes(entities);
+			return StatusCode(HttpStatusCode.NoContent);
+		}
+
+
 		public IHttpActionResult PutInvoiceStatuses([FromBody]IEnumerable<InvoiceStatus> entities)
 		{
 			_repository.PutInvoiceStatuses(entities);
@@ -415,6 +434,12 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 				Content = new ByteArrayContent(bytes)
 			};
 			return result;
+		}
+
+		public IHttpActionResult GetTemplateDocumentBytes(Guid rowId)
+		{
+			var list = _repository.GetTemplateDocumentBytes(rowId);
+			return Ok(list);
 		}
 	}
 }

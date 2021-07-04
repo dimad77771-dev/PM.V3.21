@@ -322,6 +322,51 @@ namespace Profibiz.PracticeManager.BL
 					}
 				}
 
+				//тест, что нету BusyEvent(Patient)
+				{
+					var listErrors = new List<EF.CalendarEventV>();
+					foreach (var row in updateRows)
+					{
+						var errRows =
+							db.CalendarEventsV
+							.Where(q =>
+									q.PatientRowId == row.PatientRowId &&
+									q.IsBusyEvent &&
+									((row.Start >= q.Start && row.Start < q.Finish) || (row.Finish >= q.Start && row.Finish < q.Finish)))
+							.ToArray();
+						listErrors.AddRange(errRows);
+					}
+					if (listErrors.Any())
+					{
+						var mapper2 = AutoMapperHelper.GetPocoMapper(typeof(EF.CalendarEventV));
+						var errObject = mapper2.Map<DTO.CalendarEvent[]>(listErrors);
+						ExceptionHelper.UserUpdateError(UserErrorCodes.AppointmentPatientBusyEvent, "", errObject);
+					}
+				}
+
+				//тест, что нету BusyEvent(ServiceProvider)
+				{
+					var listErrors = new List<EF.CalendarEventV>();
+					foreach (var row in updateRows)
+					{
+						var errRows =
+							db.CalendarEventsV
+							.Where(q =>
+									q.ServiceProviderRowId == row.ServiceProviderRowId &&
+									q.IsBusyEvent &&
+									((row.Start >= q.Start && row.Start < q.Finish) || (row.Finish >= q.Start && row.Finish < q.Finish)))
+							.ToArray();
+						listErrors.AddRange(errRows);
+					}
+					if (listErrors.Any())
+					{
+						var mapper2 = AutoMapperHelper.GetPocoMapper(typeof(EF.CalendarEventV));
+						var errObject = mapper2.Map<DTO.CalendarEvent[]>(listErrors);
+						ExceptionHelper.UserUpdateError(UserErrorCodes.AppointmentServiceProviderBusyEvent, "", errObject);
+					}
+				}
+
+
 
 				scope.Complete();
 			}

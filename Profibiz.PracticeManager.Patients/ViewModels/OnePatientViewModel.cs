@@ -954,7 +954,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					{
 						IsNew = true,
 						RowId = default(Guid),
-						TemplatePath = template.TemplatePath,
+						//TemplatePath = template.TemplatePath,
+						TemplateRowId = template.TemplateRowId,
 						TemplateName = template.TemplateName,
 						AppointmentRowId = appointmentRowId,
 						PatientRowId = patientRowId,

@@ -112,6 +112,8 @@ namespace Profibiz.PracticeManager.Infrastructure
 		CalendarEventsRemindersView,
 		OnePublicHolidayView,
 		PublicHolidaysView,
+		OneTemplateView,
+		TemplatesView,
 		OneSupplierView,
 		OneOrderView,
 		OneWorkInoutView,

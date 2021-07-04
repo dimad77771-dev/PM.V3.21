@@ -13,6 +13,9 @@ namespace Profibiz.PracticeManager.DTO
 		public string Name { get; set; }
 		public string InvoiceType { get; set; }
 		public bool IsDefault { get; set; }
-
+		public bool IsEnabled { get; set; }
+		public string TemplateType { get; set; }
+		public string FormType { get; set; }
+		public Guid? CategoryRowId { get; set; }
 	}
 }

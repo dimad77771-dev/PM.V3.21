@@ -48,6 +48,12 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PutPublicHolidays(IEnumerable<PublicHoliday> entities);
 		Task<UpdateReturn> DeletePublicHoliday(PublicHoliday entity);
 
+		Task<UpdateReturn> PutTemplates(IEnumerable<Template> entities);
+		Task<UpdateReturn> DeleteTemplate(Template entity);
+
+		Task<UpdateReturn> PutTemplateDocumentBytes(TemplateDocumentBytes row);
+		Task<TemplateDocumentBytes> GetTemplateDocumentBytes(Guid rowId);
+
 		Task<UpdateReturn> PutInvoiceStatuses(IEnumerable<InvoiceStatus> entities);
 		Task<UpdateReturn> DeleteInvoiceStatus(InvoiceStatus entity);
 

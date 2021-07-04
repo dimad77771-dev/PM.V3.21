@@ -259,6 +259,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsBusyEvent" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CalendarEventStatuses">
           <Key>
@@ -1834,6 +1835,10 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="TemplateType" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="FormType" Type="nvarchar" MaxLength="255" />
+          <Property Name="CategoryRowId" Type="uniqueidentifier" />
+          <Property Name="DocumentBytes" Type="varbinary(max)" />
         </EntityType>
         <EntityType Name="ThirdPartyServiceProviders">
           <Key>
@@ -2301,6 +2306,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.CalendarEventsForRemainder' do
             <PropertyRef Name="RemainderInMinutes" />
             <PropertyRef Name="IsDisabled" />
             <PropertyRef Name="IsVacation" />
+            <PropertyRef Name="IsBusyEvent" />
           </Key>
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Start" Type="datetime" Nullable="false" />
@@ -2328,6 +2334,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.CalendarEventsForRemainder' do
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsBusyEvent" Type="bit" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.CalendarEventsView' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -2341,6 +2348,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.CalendarEventsView' does not h
             <PropertyRef Name="RemainderInMinutes" />
             <PropertyRef Name="IsDisabled" />
             <PropertyRef Name="IsVacation" />
+            <PropertyRef Name="IsBusyEvent" />
           </Key>
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Start" Type="datetime" Nullable="false" />
@@ -2368,6 +2376,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.CalendarEventsView' does not h
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsBusyEvent" Type="bit" Nullable="false" />
           <Property Name="PatientFullName" Type="nvarchar" MaxLength="512" />
           <Property Name="ServiceProviderFullName" Type="nvarchar" MaxLength="512" />
         </EntityType>
@@ -7411,6 +7420,18 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Templates_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Templates" Type="Self.Templates" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="Templates">
+              <PropertyRef Name="CategoryRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Templates_CreatedByUserRowId">
           <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
           <End Role="Templates" Type="Self.Templates" Multiplicity="*" />
@@ -7751,7 +7772,8 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
     [CalendarEventsForRemainder].[CreatedByUserRowId] AS [CreatedByUserRowId], 
     [CalendarEventsForRemainder].[UpdatedByUserRowId] AS [UpdatedByUserRowId], 
     [CalendarEventsForRemainder].[CreatedByDateTime] AS [CreatedByDateTime], 
-    [CalendarEventsForRemainder].[UpdatedByDateTime] AS [UpdatedByDateTime]
+    [CalendarEventsForRemainder].[UpdatedByDateTime] AS [UpdatedByDateTime], 
+    [CalendarEventsForRemainder].[IsBusyEvent] AS [IsBusyEvent]
     FROM [dbo].[CalendarEventsForRemainder] AS [CalendarEventsForRemainder]</DefiningQuery>
           </EntitySet>
           <EntitySet Name="CalendarEventsView" EntityType="Self.CalendarEventsView" store:Type="Views" store:Schema="dbo">
@@ -7782,6 +7804,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
     [CalendarEventsView].[UpdatedByUserRowId] AS [UpdatedByUserRowId], 
     [CalendarEventsView].[CreatedByDateTime] AS [CreatedByDateTime], 
     [CalendarEventsView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
+    [CalendarEventsView].[IsBusyEvent] AS [IsBusyEvent], 
     [CalendarEventsView].[PatientFullName] AS [PatientFullName], 
     [CalendarEventsView].[ServiceProviderFullName] AS [ServiceProviderFullName]
     FROM [dbo].[CalendarEventsView] AS [CalendarEventsView]</DefiningQuery>
@@ -10091,6 +10114,10 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Suppliers" EntitySet="Suppliers" />
           </AssociationSet>
+          <AssociationSet Name="FK_Templates_Categories" Association="Self.FK_Templates_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Templates" EntitySet="Templates" />
+          </AssociationSet>
           <AssociationSet Name="FK_Templates_CreatedByUserRowId" Association="Self.FK_Templates_CreatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="Templates" EntitySet="Templates" />
@@ -12337,6 +12364,10 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <End Role="Patient" EntitySet="Patients" />
             <End Role="AppointmentT" EntitySet="AppointmentsT" />
           </AssociationSet>
+          <AssociationSet Name="FK_Templates_Categories" Association="PracticeManagerModel.FK_Templates_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Template" EntitySet="Templates" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -13339,6 +13370,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <Property Name="TemplateRowId" Type="Guid" />
           <NavigationProperty Name="Template" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Category" ToRole="Template" />
           <Property Name="BookingGap" Type="Int32" />
+          <NavigationProperty Name="Templates" Relationship="PracticeManagerModel.FK_Templates_Categories" FromRole="Category" ToRole="Template" />
         </EntityType>
         <Association Name="FK_MedicalServicesOrSupplies_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -14217,6 +14249,11 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_Templates_CreatedByUserRowId1" FromRole="Template" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Templates_UpdatedByUserRowId1" FromRole="Template" ToRole="ServiceProvider" />
           <NavigationProperty Name="Categories" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Template" ToRole="Category" />
+          <Property Name="TemplateType" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="FormType" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CategoryRowId" Type="Guid" />
+          <Property Name="DocumentBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="PracticeManagerModel.FK_Templates_Categories" FromRole="Template" ToRole="Category" />
         </EntityType>
         <Association Name="FK_Appointments_InsuranceCoverages">
           <End Type="PracticeManagerModel.InsuranceCoverage" Role="InsuranceCoverage" Multiplicity="0..1" />
@@ -15213,6 +15250,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_CalendarEvents_UpdatedByUserRowId" FromRole="CalendarEventT" ToRole="User" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_CalendarEvents_CreatedByUserRowId1" FromRole="CalendarEventT" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider2" Relationship="PracticeManagerModel.FK_CalendarEvents_UpdatedByUserRowId1" FromRole="CalendarEventT" ToRole="ServiceProvider" />
+          <Property Name="IsBusyEvent" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="CalendarEventStatus">
           <Key>
@@ -15242,6 +15280,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <PropertyRef Name="RemainderInMinutes" />
             <PropertyRef Name="IsDisabled" />
             <PropertyRef Name="IsVacation" />
+            <PropertyRef Name="IsBusyEvent" />
           </Key>
           <Property Name="RowId" Type="Guid" Nullable="false" />
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
@@ -15272,6 +15311,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsBusyEvent" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_CalendarEvents_CalendarEventStatuses_1">
           <End Type="PracticeManagerModel.CalendarEventStatus" Role="CalendarEventStatus" Multiplicity="0..1" />
@@ -15331,6 +15371,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <PropertyRef Name="RemainderInMinutes" />
             <PropertyRef Name="IsDisabled" />
             <PropertyRef Name="IsVacation" />
+            <PropertyRef Name="IsBusyEvent" />
           </Key>
           <Property Name="RowId" Type="Guid" Nullable="false" />
           <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
@@ -15358,6 +15399,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsBusyEvent" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Invoices_ServiceProviders">
           <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
@@ -23130,6 +23172,18 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Templates_Categories">
+          <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.Template" Role="Template" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="Template">
+              <PropertyRef Name="CategoryRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -24189,6 +24243,10 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="Templates">
             <EntityTypeMapping TypeName="PracticeManagerModel.Template">
               <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="DocumentBytes" ColumnName="DocumentBytes" />
+                <ScalarProperty Name="CategoryRowId" ColumnName="CategoryRowId" />
+                <ScalarProperty Name="FormType" ColumnName="FormType" />
+                <ScalarProperty Name="TemplateType" ColumnName="TemplateType" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -24663,6 +24721,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="CalendarEventsT">
             <EntityTypeMapping TypeName="PracticeManagerModel.CalendarEventT">
               <MappingFragment StoreEntitySet="CalendarEvents">
+                <ScalarProperty Name="IsBusyEvent" ColumnName="IsBusyEvent" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -24711,6 +24770,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="CalendarEventsV">
             <EntityTypeMapping TypeName="PracticeManagerModel.CalendarEventV">
               <MappingFragment StoreEntitySet="CalendarEventsView">
+                <ScalarProperty Name="IsBusyEvent" ColumnName="IsBusyEvent" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -24745,6 +24805,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="CalendarEventsForRemainders">
             <EntityTypeMapping TypeName="PracticeManagerModel.CalendarEventsForRemainder">
               <MappingFragment StoreEntitySet="CalendarEventsForRemainder">
+                <ScalarProperty Name="IsBusyEvent" ColumnName="IsBusyEvent" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />

@@ -80,7 +80,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ShowWait("Loading data...");
 			await LoadDataFromServer();
 
-			var location = AssemblyHelper.GetMainPath();
+			//var location = AssemblyHelper.GetMainPath();
 
 			var cnt = 0;
 			foreach (var printDocument in PrintDocuments)
@@ -88,8 +88,15 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				cnt++;
 				ShowWait("" + cnt + " of " + PrintDocuments.Length);
 
-				var templatefile = Path.Combine(location, printDocument.TemplateFile);
-				OneDocument(templatefile, printDocument);
+				var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == printDocument.Name);
+				if (template != null)
+				{
+					var lookupsBusinessService = ServiceHelper.GetInstance<ILookupsBusinessService>();
+					var bytes = (await lookupsBusinessService.GetTemplateDocumentBytes(template.RowId)).DocumentBytes;
+
+					//var templatefile = Path.Combine(location, printDocument.TemplateFile);
+					OneDocument(bytes, printDocument);
+				}
 			}
 			HideWait();
 
@@ -108,10 +115,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 
 		//public void OneDocument(string file, string file2, string file3, string file4)
-		public void OneDocument(string file, PrintDocument printDocument)
+		//public void OneDocument(string file, PrintDocument printDocument)
+		public void OneDocument(byte[] bytes, PrintDocument printDocument)
 		{
 			RichEditControl = new RichEditControl();
-			LoadFromTemplate(file);
+			LoadFromTemplate(bytes);
 			Document = RichEditControl.Document;
 			isProcAppointments = false;
 
@@ -241,6 +249,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var location = AssemblyHelper.GetMainPath();
 			var bytes = File.ReadAllBytes(file);
 
+			var stream = new MemoryStream(bytes);
+			RichEditControl.LoadDocument(stream, DocumentFormat.OpenXml);
+			stream.Dispose();
+		}
+
+		void LoadFromTemplate(byte[] bytes)
+		{
 			var stream = new MemoryStream(bytes);
 			RichEditControl.LoadDocument(stream, DocumentFormat.OpenXml);
 			stream.Dispose();

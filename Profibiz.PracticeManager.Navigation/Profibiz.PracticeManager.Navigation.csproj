@@ -229,11 +229,13 @@
     <Compile Include="ViewModels\OneChargeoutStatusViewModel.cs" />
     <Compile Include="ViewModels\OnePatientNoteStatusViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
+    <Compile Include="ViewModels\OneTemplateViewModel.cs" />
     <Compile Include="ViewModels\OneSettingViewModel.cs" />
     <Compile Include="ViewModels\OneUserViewModel.cs" />
     <Compile Include="ViewModels\PatientNoteStatusesViewModel.cs" />
     <Compile Include="ViewModels\OnePublicHolidayViewModel.cs" />
     <Compile Include="ViewModels\OneSupplierViewModel.cs" />
+    <Compile Include="ViewModels\TemplatesViewModel.cs" />
     <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\PublicHolidaysViewModel.cs" />
     <Compile Include="ViewModels\CalendarEventStatusesViewModel.cs" />
@@ -281,6 +283,9 @@
     <Compile Include="Views\LoginView.xaml.cs">
       <DependentUpon>LoginView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\OneTemplateView.xaml.cs">
+      <DependentUpon>OneTemplateView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\OneSettingView.xaml.cs">
       <DependentUpon>OneSettingView.xaml</DependentUpon>
     </Compile>
@@ -295,6 +300,12 @@
     </Compile>
     <Compile Include="Views\OneSupplierView.xaml.cs">
       <DependentUpon>OneSupplierView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RibbonTemplatesView.xaml.cs">
+      <DependentUpon>RibbonTemplatesView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\TemplatesView.xaml.cs">
+      <DependentUpon>TemplatesView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\RibbonSettingsView.xaml.cs">
       <DependentUpon>RibbonSettingsView.xaml</DependentUpon>
@@ -481,6 +492,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\OneTemplateView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\OneSettingView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -498,6 +513,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\OneSupplierView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\RibbonTemplatesView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\TemplatesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

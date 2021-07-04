@@ -41,16 +41,18 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			var isPatientMode = (appointment.RowId == default(Guid));
 			var error = "";
-			var path = "";
+			//var path = "";
+			var wh_template = default(Func<Template, bool>);
 
 			if (isPatientMode)
 			{
-				var templateFolder = "Patient";
-				path = GetTemplateFolderPath(templateFolder);
-				if (!Directory.Exists(path))
-				{
-					error = "Directory \"" + path + "\" not found";
-				}
+				wh_template = (q => q.IsFormPatient);
+				//var templateFolder = "Patient";
+				//path = GetTemplateFolderPath(templateFolder);
+				//if (!Directory.Exists(path))
+				//{
+				//	error = "Directory \"" + path + "\" not found";
+				//}
 			}
 			else
 			{
@@ -61,20 +63,21 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				}
 				else
 				{
-					var serviceProvider = LookupDataProvider.Instance.MedicalServices.Single(q => q.RowId == medicalServicesOrSupplyRowId);
-					var templateFolder = serviceProvider.TemplateFolder;
-					if (string.IsNullOrEmpty(templateFolder))
-					{
-						error = "Template Folder for service \"" + serviceProvider + "\" not specified";
-					}
-					else
-					{
-						path = GetTemplateFolderPath(templateFolder);
-						if (!Directory.Exists(path))
-						{
-							error = "Directory \"" + path + "\" not found";
-						}
-					}
+					var medicalService = LookupDataProvider.Instance.MedicalServices.Single(q => q.RowId == medicalServicesOrSupplyRowId);
+					wh_template = (q => q.IsFormAppointment && q.CategoryRowId == medicalService.CategoryRowId);
+					//var templateFolder = serviceProvider.TemplateFolder;
+					//if (string.IsNullOrEmpty(templateFolder))
+					//{
+					//	error = "Template Folder for service \"" + serviceProvider + "\" not specified";
+					//}
+					//else
+					//{
+					//	path = GetTemplateFolderPath(templateFolder);
+					//	if (!Directory.Exists(path))
+					//	{
+					//		error = "Directory \"" + path + "\" not found";
+					//	}
+					//}
 				}
 			}
 
@@ -84,12 +87,20 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				return null;
 			}
 
-			var path0 = GetBaseTemplateFolderPath();
-			var files = Directory.GetFiles(path, "*.docx", SearchOption.AllDirectories);
-			var templateFiles = files.Select(q => new TemplateNameModel
+
+
+			//var path0 = GetBaseTemplateFolderPath();
+			//var files = Directory.GetFiles(path, "*.docx", SearchOption.AllDirectories);
+			//var templateFiles = files.Select(q => new TemplateNameModel
+			//{
+			//	TemplateName = Path.GetFileNameWithoutExtension(q),
+			//	TemplatePath = q.Substring(path0.Length + 1),
+			//}).OrderBy(q => q.TemplateName).ToArray();
+
+			var templateFiles = LookupDataProvider.Instance.Templates.Where(wh_template).Select(q => new TemplateNameModel
 			{
-				TemplateName = Path.GetFileNameWithoutExtension(q),
-				TemplatePath = q.Substring(path0.Length + 1),
+				TemplateName = q.Name,
+				TemplateRowId = q.RowId,
 			}).OrderBy(q => q.TemplateName).ToArray();
 
 			var result = await PickTemplateNameViewModel.Pick(new PickTemplateNameViewModel.OpenParams
@@ -116,6 +127,19 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var location = AssemblyHelper.GetMainPath();
 			var path = Path.Combine(location, "Templates");
 			return path;
+		}
+
+		public static async Task<byte[]> GetTemplateDocumentBytesByCode(string code, IMessageBoxService MessageBoxService)
+		{
+			var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == code);
+			var lookupsBusinessService = ServiceHelper.GetInstance<ILookupsBusinessService>();
+			var bytes = (await lookupsBusinessService.GetTemplateDocumentBytes(template.RowId))?.DocumentBytes;
+			if (bytes == null)
+			{
+				MessageBoxService.ShowError($@"Template ""{code}"" not found or is empty");
+				return bytes;
+			}
+			return bytes;
 		}
 	}
 }	

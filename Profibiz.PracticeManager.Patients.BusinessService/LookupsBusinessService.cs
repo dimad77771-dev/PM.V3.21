@@ -451,6 +451,38 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			return await response.ValidateResponse();
 		}
 
+		async public Task<UpdateReturn> PutTemplates(IEnumerable<Template> entities)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(entities);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/lookups/PutTemplates", content);
+			return await response.ValidateResponse();
+		}
+		async public Task<UpdateReturn> DeleteTemplate(Template entity)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var response = await _client.DeleteAsync("api/lookups/DeleteTemplate/" + entity.RowId);
+			return await response.ValidateResponse();
+		}
+
+
+		async public Task<UpdateReturn> PutTemplateDocumentBytes(TemplateDocumentBytes row)
+		{
+			var _client = new MyHttpClient();
+			_client.BaseAddress = new Uri(_baseUrl);
+			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+			var json = JsonConvert.SerializeObject(row);
+			var content = new StringContent(json, Encoding.UTF8, "application/json");
+			var response = await _client.PutAsync("api/lookups/PutTemplateDocumentBytes", content);
+			return await response.ValidateResponse();
+		}
+
+
 		async public Task<UpdateReturn> PutInvoiceStatuses(IEnumerable<InvoiceStatus> entities)
 		{
 			var _client = new MyHttpClient();
@@ -544,6 +576,14 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			var client = new MyHttpClient();
 			var response = await client.GetResponse(_baseUrl, "api/lookups/GetLoginInfo?name=" + Uri.EscapeUriString(name) + "&password=" + Uri.EscapeUriString(password));
 			var result = await response.Content.ReadAsAsync<LoginInfo>();
+			return result;
+		}
+
+		async public Task<TemplateDocumentBytes> GetTemplateDocumentBytes(Guid rowId)
+		{
+			var client = new MyHttpClient();
+			var response = await client.GetResponse(_baseUrl, "api/lookups/GetTemplateDocumentBytes?rowId=" + rowId);
+			var result = await response.Content.ReadAsAsync<TemplateDocumentBytes>();
 			return result;
 		}
 

@@ -84,7 +84,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity = new FormDocument();
 				entity.RowId = Guid.NewGuid();
 				entity.DocxBytes = new byte[0];
-				entity.TemplatePath = OpenParam.TemplatePath;
+				entity.TemplatePath = OpenParam.TemplateName;
 				entity.TemplateName = OpenParam.TemplateName;
 				entity.AppointmentRowId = OpenParam.AppointmentRowId;
 				entity.PatientRowId = OpenParam.PatientRowId;
@@ -553,9 +553,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		async Task LoadFromTemplate()
 		{
-			var location = FormDocumentHelper.GetBaseTemplateFolderPath();
-			var file = Path.Combine(location, Entity.TemplatePath);
-			var bytes = File.ReadAllBytes(file);
+			var bytes = (await lookupsBusinessService.GetTemplateDocumentBytes(OpenParam.TemplateRowId)).DocumentBytes;
+			//var location = FormDocumentHelper.GetBaseTemplateFolderPath();
+			//var file = Path.Combine(location, Entity.TemplatePath);
+			//var bytes = File.ReadAllBytes(file);
+
 			Entity.DocxBytes = bytes;
 			DispatcherUIHelper.Run(async () =>
 			{
@@ -734,7 +736,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			public bool IsNew { get; set; }
 			public Guid RowId { get; set; }
-			public String TemplatePath { get; set; }
+			//public String TemplatePath { get; set; }
+			public Guid TemplateRowId { get; set; }
 			public String TemplateName { get; set; }
 			public bool IsReadOnly { get; set; }
 			public Guid? AppointmentRowId { get; set; }

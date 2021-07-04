@@ -20,6 +20,7 @@ namespace Profibiz.PracticeManager.EF
             this.MedicalServicesOrSupplies = new HashSet<MedicalServicesOrSupply>();
             this.InsuranceCoverageServices = new HashSet<InsuranceCoverageService>();
             this.InsuranceCoverageItemCategories = new HashSet<InsuranceCoverageItemCategory>();
+            this.Templates = new HashSet<Template>();
         }
     
         public System.Guid RowId { get; set; }
@@ -43,5 +44,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual ServiceProvider ServiceProvider1 { get; set; }
         public virtual Template Template { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Template> Templates { get; set; }
     }
 }

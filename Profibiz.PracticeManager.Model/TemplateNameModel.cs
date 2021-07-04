@@ -16,8 +16,9 @@ namespace Profibiz.PracticeManager.Model
 		{
 		}
 
+		public Guid TemplateRowId { get; set; }
 		public string TemplateName { get; set; }
-		public string TemplatePath { get; set; }
+		//public string TemplatePath { get; set; }
 
 		public string FullName => TemplateName;
 		public string Rowtype9 => "-";

@@ -53,6 +53,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			AllCategoriesItems.Add(UsersFilter);
 			AllCategoriesItems.Add(SuppliersFilter);
 			AllCategoriesItems.Add(PublicHolidaysFilter);
+			AllCategoriesItems.Add(TemplatesFilter);
 			StaticFilterItems = AllCategoriesItems.ToObservableCollection();
 		}
 
@@ -72,6 +73,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 		public FilterItem CalendarEventStatusesFilter { get; set; } = new FilterItem { Name = "Calendar Event Statuses", LookupType = FilterItem.LookupTypeEnum.CalendarEventStatusesFilter };
 		public FilterItem PatientNoteStatusesFilter { get; set; } = new FilterItem { Name = "Patient Note Statuses", LookupType = FilterItem.LookupTypeEnum.PatientNoteStatusesFilter };
 		public FilterItem PublicHolidaysFilter { get; set; } = new FilterItem { Name = "Public Holidays", LookupType = FilterItem.LookupTypeEnum.PublicHolidaysFilter };
+		public FilterItem TemplatesFilter { get; set; } = new FilterItem { Name = "Templates", LookupType = FilterItem.LookupTypeEnum.TemplatesFilter };
 		public FilterItem InvoiceStatusesFilter { get; set; } = new FilterItem { Name = "Invoice Statuses", LookupType = FilterItem.LookupTypeEnum.InvoiceStatusesFilter };
 		public FilterItem ChargeoutStatusesFilter { get; set; } = new FilterItem { Name = "Outgoing Invoice Statuses", LookupType = FilterItem.LookupTypeEnum.ChargeoutStatusesFilter };
 		public FilterItem ChargeoutRecipientesFilter { get; set; } = new FilterItem { Name = "Outgoing Invoice Recipients", LookupType = FilterItem.LookupTypeEnum.ChargeoutRecipientesFilter };
@@ -146,6 +148,10 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 					{
 						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.PublicHolidaysView, null);
 					}
+					else if (lookupType == FilterItem.LookupTypeEnum.TemplatesFilter)
+					{
+						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.TemplatesView, null);
+					}
 					else if (lookupType == FilterItem.LookupTypeEnum.InvoiceStatusesFilter)
 					{
 						RegionHelper.OpenOrActivateViewInMainRegion(ViewCodes.InvoiceStatusesView, null);
@@ -179,7 +185,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 			public enum LookupTypeEnum
 			{
 				InsuranceProviders, MedicalServices, Categories, ProfessionalAssociations, ThirdPartyServiceProviders,
-				AppointmentBooks, AppointmentStatusesFilter, PatientNoteStatusesFilter, CalendarEventStatusesFilter, PublicHolidaysFilter,
+				AppointmentBooks, AppointmentStatusesFilter, PatientNoteStatusesFilter, CalendarEventStatusesFilter, PublicHolidaysFilter, TemplatesFilter,
 				InvoiceStatusesFilter, ChargeoutStatusesFilter, ChargeoutRecipientesFilter,
 				Referrers, Suppliers, Settings, Users,
 			}

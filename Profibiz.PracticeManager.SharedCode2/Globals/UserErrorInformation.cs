@@ -20,6 +20,8 @@ namespace Profibiz.PracticeManager.SharedCode
 		AppointmentIntersection,
 		AppointmentPatientVacation,
 		AppointmentServiceProviderVacation,
+		AppointmentPatientBusyEvent,
+		AppointmentServiceProviderBusyEvent,
 		InvoiceNumberDuplicate,
 		ChargeoutNumberDuplicate,
 		CloneInsuranceCoverageDuplicateStartDate,

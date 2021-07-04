@@ -134,7 +134,6 @@ namespace Profibiz.PracticeManager.Model
 		}
 
 
-
 		public void UpdateInvoiceStatuses(IEnumerable<InvoiceStatus> newData)
 		{
 			InvoiceStatuses = new ObservableCollection<InvoiceStatus>(newData.OrderBy(q => q.DisplayOrder));
@@ -336,6 +335,7 @@ namespace Profibiz.PracticeManager.Model
 		}
 
 
+
 		public static ServiceProvider FindServiceProvider(Guid? rowId)
 		{
 			return Instance.ServiceProviders.SingleOrDefault(q => q.RowId == rowId);
@@ -422,6 +422,29 @@ namespace Profibiz.PracticeManager.Model
 				return new[] { TypeHelper.CategoryType.Service, TypeHelper.CategoryType.Supply };
 			}
 		}
+		public IEnumerable<String> TemplateType
+		{
+			get
+			{
+				return new[] { TypeHelper.TemplateType.Template, TypeHelper.TemplateType.Form };
+			}
+		}
+		public IEnumerable<String> InvoiceType
+		{
+			get
+			{
+				return new[] { TypeHelper.InvoiceType.Appointment, TypeHelper.InvoiceType.Supply, TypeHelper.InvoiceType.ThirdParty, TypeHelper.InvoiceType.Chargeout };
+			}
+		}
+		public IEnumerable<String> FormType
+		{
+			get
+			{
+				return new[] { TypeHelper.FormType.Appointment, TypeHelper.FormType.Patient };
+			}
+		}
+
+
 
 		public IEnumerable<String> ChargeModels
 		{

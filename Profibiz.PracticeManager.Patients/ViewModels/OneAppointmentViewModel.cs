@@ -714,6 +714,26 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				//DevExpress.Xpf.Editors.DateNavigator.DateNavigator
 			}
 
+			if (uret.UserErrorCode == UserErrorCodes.AppointmentPatientBusyEvent)
+			{
+				var vacations = JsonConvert.DeserializeObject<CalendarEvent[]>(uret.UserErrorInfoObjectJson);
+				var errtext = "This appointment overlaps with the following Patient Busy:\n" +
+					string.Join("\n", vacations.Select(q => q.StartEndTimeString + " - " + q.PatientFullName).ToArray());
+				messageBoxService.ShowError(errtext);
+				return false;
+			}
+
+			if (uret.UserErrorCode == SharedCode.UserErrorCodes.AppointmentServiceProviderBusyEvent)
+			{
+				var vacations = JsonConvert.DeserializeObject<CalendarEvent[]>(uret.UserErrorInfoObjectJson);
+				var errtext = "This appointment overlaps with the following Service Provider Busy:\n" +
+					string.Join("\n", vacations.Select(q => q.StartEndTimeString + " - " + "(*)" + q.ServiceProviderFullName).ToArray());
+				messageBoxService.ShowError(errtext);
+				return false;
+				//DevExpress.Xpf.Editors.DateNavigator.DateNavigator
+			}
+
+
 
 			if (!uret.Validate(messageBoxService))
 			{

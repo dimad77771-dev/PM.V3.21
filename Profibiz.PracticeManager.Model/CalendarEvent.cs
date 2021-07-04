@@ -40,6 +40,7 @@ namespace Profibiz.PracticeManager.Model
 		public Guid? Status1RowId { get; set; }
 		public Guid? Status2RowId { get; set; }
 		public bool IsVacation { get; set; }
+		public bool IsBusyEvent { get; set; }
 		public Guid? ServiceProviderRowId { get; set; }
 		public string PatientFullName { get; set; }
 		public string ServiceProviderFullName { get; set; }
@@ -155,6 +156,7 @@ namespace Profibiz.PracticeManager.Model
 		public Double DurationInMinutes => (Finish - Start).TotalMinutes;
 
 		public virtual bool IsShowIsVacation => IsVacation;
+		public virtual bool IsShowIsVacationOrIsBusyEvent => IsVacation || IsBusyEvent;
 
 		public bool IsChanged { get; set; }
         public bool IsNew { get; set; }

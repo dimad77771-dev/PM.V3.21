@@ -234,6 +234,7 @@
         <AssociationConnector Association="PracticeManagerModel.FK_Categories_Templates" />
         <EntityTypeShape EntityType="PracticeManagerModel.Setting" Width="1.5" PointX="20.75" PointY="18.125" />
         <AssociationConnector Association="PracticeManagerModel.FK_Appointments_Patients1" />
+        <AssociationConnector Association="PracticeManagerModel.FK_Templates_Categories" />
         </Diagram>
       <Diagram DiagramId="91f349ae33a3493786f4eb2a0e83ee6d" Name="InvoiceClaim" ZoomLevel="85" >
         <EntityTypeShape EntityType="PracticeManagerModel.InvoiceClaimT" Width="3" PointX="0.5" PointY="6.625" />

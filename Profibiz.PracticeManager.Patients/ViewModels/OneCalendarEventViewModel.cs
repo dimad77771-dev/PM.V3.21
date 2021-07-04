@@ -194,9 +194,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				return false;
 			}
 
-			if (Entity.IsVacation)
+			if (Entity.IsVacation || Entity.IsBusyEvent)
 			{
 				Entity.RemainderInMinutes = -1;
+			}
+			if (Entity.IsVacation)
+			{
+				Entity.IsBusyEvent = false;
 			}
 
 			//updateEntity

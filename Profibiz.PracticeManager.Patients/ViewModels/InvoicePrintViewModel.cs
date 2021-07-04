@@ -67,7 +67,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			Entity = await task1;
 			PrintDocuments = (await task2).OrderBy(q => q.OrderNum).ToObservableCollection();
 			Invoice.CalcTotalFields(Entity, Entity.InvoiceItems, Entity.InvoiceClaims);
-			GenerateReport();
+			await GenerateReport();
 			CustomizeRibon();
 
 			ShowWaitIndicator.Hide();
@@ -123,11 +123,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			CloseInteractionRequest.Raise(null);
 		}
 
-		void GenerateReport()
+		async Task GenerateReport()
 		{
 			RichEditConrolManager.BeginUpdate();
 
-			LoadFromTemplate();
+			await LoadFromTemplate();
 
 			var doc = RichEditConrolManager.Document;
 
@@ -276,20 +276,27 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 		}
 
-		void LoadFromTemplate()
+		async Task LoadFromTemplate()
 		{
 			//RichEditConrolManager.LoadDocument(@"E:\Tmp\204\INVOICE_TEMPLATE_02.docx", DocumentFormat.OpenXml);
 
 			var printTemplate = Entity.PrintTemplate;
+			var bytes = await FormDocumentHelper.GetTemplateDocumentBytesByCode(printTemplate, MessageBoxService);
+			if (bytes == null) return;
+
+			//var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == printTemplate);
 			//var bytes =
 			//     printTemplate == "INVOICE_TEMPLATE_02" ? InvoicePrintTemplate.INVOICE_TEMPLATE_02 :
 			//     printTemplate == "INVOICE_TEMPLATE_03" ? InvoicePrintTemplate.INVOICE_TEMPLATE_03 :
 			//     InvoicePrintTemplate.INVOICE_TEMPLATE_01;
 
-			var location = AssemblyHelper.GetMainPath();
-			var file = Path.Combine(location, "Templates", printTemplate + ".docx");
-			file = GetTemplateFileName(file);
-			var bytes = File.ReadAllBytes(file);
+			//var location = AssemblyHelper.GetMainPath();
+			//var file = Path.Combine(location, "Templates", printTemplate + ".docx");
+			//file = GetTemplateFileName(file);
+			//var bytes = File.ReadAllBytes(file);
+			//var lookupsBusinessService = ServiceHelper.GetInstance<ILookupsBusinessService>();
+			//var bytes = (await lookupsBusinessService.GetTemplateDocumentBytes(template.RowId)).DocumentBytes;
+
 			var stream = new MemoryStream(bytes);
 			RichEditConrolManager.LoadDocument(stream, DocumentFormat.OpenXml);
 		}

@@ -54,6 +54,13 @@ namespace Profibiz.PracticeManager.Model
 			public const string Supply = "Supply";
 		}
 
+		public static class TemplateType
+		{
+			public const string Template = "Template";
+			public const string Form = "Form";
+		}
+
+
 
 		public static class PolicyHolderType
 		{
@@ -73,7 +80,15 @@ namespace Profibiz.PracticeManager.Model
 			public const string Appointment = "Appointment";
 			public const string Supply = "Supply";
 			public const string ThirdParty = "Third Party";
+			public const string Chargeout = "Chargeout";
 		}
+
+		public static class FormType
+		{
+			public const string Appointment = "Appointment";
+			public const string Patient = "Patient";
+		}
+
 
 		public static class ChargeoutType
 		{

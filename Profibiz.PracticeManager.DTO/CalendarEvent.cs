@@ -33,6 +33,7 @@ namespace Profibiz.PracticeManager.DTO
 		public Guid? Status1RowId { get; set; }
 		public Guid? Status2RowId { get; set; }
 		public bool IsVacation { get; set; }
+		public bool IsBusyEvent { get; set; }
 		public Guid? ServiceProviderRowId { get; set; }
 		public string PatientFullName { get; set; }
 		public string ServiceProviderFullName { get; set; }
