@@ -178,6 +178,8 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<PatientDocument> GetPatientDocumentList(Guid? rowId, Guid? patientRowId);
 		void UpdatePatientDocumentCore(PatientDocument entity, EntityState state);
 
+		IEnumerable<LoginInout> GetLoginHistory(Guid serviceProviderRowId);
+
 		IEnumerable<SchedulerRecord> GetSchedulerRecords(Guid serviceProviderRowId);
 		void PutSchedulerRecords(List<SchedulerRecord> rows);
 		IEnumerable<CalculateAppointmentStartFinishResult> CalculateAppointmentStartFinish(Guid serviceProviderRowId, DateTime[] dates);

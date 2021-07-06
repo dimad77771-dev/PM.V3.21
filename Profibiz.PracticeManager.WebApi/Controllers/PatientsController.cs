@@ -701,6 +701,13 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 		}
 		#endregion
 
+		#region LoginHistory
+		public IHttpActionResult GetLoginHistorys(Guid serviceProviderRowId)
+		{
+			var rezult = _repository.GetLoginHistory(serviceProviderRowId);
+			return Ok(rezult);
+		}
+		#endregion
 
 		#region SchedulerRecords
 		public IHttpActionResult GetSchedulerRecords(Guid serviceProviderRowId)

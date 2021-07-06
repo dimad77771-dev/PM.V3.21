@@ -86,7 +86,15 @@ namespace Profibiz.PracticeManager.Model
         public bool RecommendedWalkingSwimmingCycling { get; set; }
         public bool RecommendedNonWeightBbearing { get; set; }
         public string Comments { get; set; }
+		public bool IFC { get; set; }
+		public bool Hotpack { get; set; }
+		public bool Ultrasound { get; set; }
+		public bool SoftTissueRelease { get; set; }
+		public bool ShockwaveTherapy { get; set; }
+		public bool ColdPack { get; set; }
+		public bool Laser { get; set; }
+		public bool Exercises { get; set; }
 
-        public bool IsChanged { get; set; }
+		public bool IsChanged { get; set; }
 	}
 }

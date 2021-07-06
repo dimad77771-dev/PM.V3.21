@@ -1009,6 +1009,14 @@ namespace Profibiz.PracticeManager.Patients.BusinessService
 			return await response.ValidateResponse();
 		}
 
+		async public Task<List<LoginInout>> GetLoginHistorys(Guid serviceProviderRowId)
+		{
+			var _client = new MyHttpClient();
+			var response = await _client.GetResponse(_baseUrl, "api/patients/GetLoginHistorys?serviceProviderRowId=" + serviceProviderRowId);
+			var rez = await response.Content.ReadAsAsync<List<LoginInout>>();
+			return rez;
+		}
+
 		async public Task<List<SchedulerRecord>> GetSchedulerRecords(Guid serviceProviderRowId)
 		{
 			var _client = new MyHttpClient();

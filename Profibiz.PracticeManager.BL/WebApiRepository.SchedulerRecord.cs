@@ -76,7 +76,6 @@ namespace Profibiz.PracticeManager.BL
 			}
 		}
 
-
 		public IEnumerable<CalculateAppointmentStartFinishResult> CalculateAppointmentStartFinish(Guid serviceProviderRowId, DateTime[] dates)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
@@ -141,6 +140,28 @@ namespace Profibiz.PracticeManager.BL
 
 
 			return resultList;
+		}
+
+		public IEnumerable<DTO.LoginInout> GetLoginHistory(Guid serviceProviderRowId)
+		{
+			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
+
+			var wh = ExpressionFunc.True<EF.LoginInout>();
+			wh = PredicateBuilder.And(wh, q => q.ServiceProviderRowId == serviceProviderRowId);
+
+
+			var qry =
+				db.LoginInouts
+				.Where(wh.Expand());
+
+			var list = qry.Where(wh.Expand()).ToArray();
+
+
+			var options = AutoMapperHelper.CreateOptions();
+			var mapper = AutoMapperHelper.GetPocoMapperWithOptions(options, typeof(EF.LoginInout), typeof(EF.LoginInout));
+			var rows = mapper.Map<List<DTO.LoginInout>>(list);
+
+			return rows;
 		}
 
 	}

@@ -294,6 +294,7 @@
     <Compile Include="ViewModels\FormDocmodelViewModel.cs" />
     <Compile Include="ViewModels\OneWorkInoutViewModel.cs" />
     <Compile Include="ViewModels\PickBodyrevivalsalonspaPatientViewModel.cs" />
+    <Compile Include="ViewModels\LoginHistoryViewModel.cs" />
     <Compile Include="ViewModels\WorkInoutsListViewModel.cs" />
     <Compile Include="ViewModels\PickTemplateNameViewModel.cs" />
     <Compile Include="ViewModels\TreatmentPlanRecordViewModel.cs" />
@@ -433,6 +434,9 @@
     </Compile>
     <Compile Include="Views\PickBodyrevivalsalonspaPatientView.xaml.cs">
       <DependentUpon>PickBodyrevivalsalonspaPatientView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginHistoryView.xaml.cs">
+      <DependentUpon>LoginHistoryView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\WorkInoutsListView.xaml.cs">
       <DependentUpon>WorkInoutsListView.xaml</DependentUpon>
@@ -1103,6 +1107,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\PickBodyrevivalsalonspaPatientView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\LoginHistoryView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

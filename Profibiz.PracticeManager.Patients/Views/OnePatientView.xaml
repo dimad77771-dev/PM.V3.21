@@ -23,6 +23,7 @@
 	Title="Patient"
 	Width="1300"
 	Height="1000"
+	d:DesignHeight="1300" d:DesignWidth="1300"
 	MaxHeight="{x:Static infrastructure:WindowInfo.HeightMax}"
 	MaxWidth="{x:Static infrastructure:WindowInfo.WidthMax}"
 	prism:ViewModelLocator.AutoWireViewModel="True"
@@ -1143,7 +1144,10 @@
 								<Grid Grid.Column="0" Margin="5">
 									<Grid.ColumnDefinitions>
 										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
 										<ColumnDefinition Width="*" />
+										<ColumnDefinition Width="Auto" />
+										<ColumnDefinition Width="Auto" />
 									</Grid.ColumnDefinitions>
 
 									<dxlc:LayoutItemLabel
@@ -1163,6 +1167,19 @@
 										KeyboardNavigation.IsTabStop="False"
 										Stretch="Uniform"
 										Style="{StaticResource baseEditStyle1}" />
+
+									<dxlc:LayoutItemLabel
+										Grid.Row="0"
+										Grid.Column="3"
+										HorizontalContentAlignment="Right"
+										Content="Is Not Registered"
+										Style="{StaticResource layoutItemLabelStyle1b}" />
+									<dxe:CheckEdit
+										Grid.Row="0"
+										Grid.Column="4"
+										IsChecked="{Binding Entity.IsNotRegistered, Mode=TwoWay}"
+										IsReadOnly="{Binding Entity.IsReadOnly_Patient}"
+										Style="{StaticResource baseEditStyle0}" />
 
 								</Grid>
 
@@ -1496,7 +1513,7 @@
 						</dxlc:LayoutControl>
 					</dx:DXTabItem>
 
-					<dx:DXTabItem Header="Treatment Notes" Visibility="{Binding IsTabVisibile_TreatmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
+					<dx:DXTabItem Header="Subsequent App. Notes" Visibility="{Binding IsTabVisibile_TreatmentNotes, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<dxlc:LayoutControl>
 							<Grid>
 								<Grid.RowDefinitions>

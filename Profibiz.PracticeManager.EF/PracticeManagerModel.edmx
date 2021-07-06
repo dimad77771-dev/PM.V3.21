@@ -228,6 +228,14 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IFC" Type="bit" Nullable="false" />
+          <Property Name="Hotpack" Type="bit" Nullable="false" />
+          <Property Name="Ultrasound" Type="bit" Nullable="false" />
+          <Property Name="SoftTissueRelease" Type="bit" Nullable="false" />
+          <Property Name="ShockwaveTherapy" Type="bit" Nullable="false" />
+          <Property Name="ColdPack" Type="bit" Nullable="false" />
+          <Property Name="Laser" Type="bit" Nullable="false" />
+          <Property Name="Exercises" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="CalendarEvents">
           <Key>
@@ -971,6 +979,20 @@
           <Property Name="BackgroundColor" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="ForegroundColor" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DisplayOrder" Type="int" Nullable="false" />
+          <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
+          <Property Name="CreatedByDateTime" Type="datetime" />
+          <Property Name="UpdatedByDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="LoginInouts">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ServiceProviderRowId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Start" Type="datetime" Nullable="false" />
+          <Property Name="Finish" Type="datetime" />
+          <Property Name="Description" Type="nvarchar" MaxLength="255" />
           <Property Name="CreatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
@@ -6232,6 +6254,42 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_LoginInouts_CreatedByUserRowId">
+          <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
+          <End Role="LoginInouts" Type="Self.LoginInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviders">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInouts">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInouts_ServiceProviders">
+          <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="1" />
+          <End Role="LoginInouts" Type="Self.LoginInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviders">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInouts">
+              <PropertyRef Name="ServiceProviderRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInouts_UpdatedByUserRowId">
+          <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
+          <End Role="LoginInouts" Type="Self.LoginInouts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviders">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInouts">
+              <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_MedicalConditions_CreatedByUserRowId">
           <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
           <End Role="MedicalConditions" Type="Self.MedicalConditions" Multiplicity="*" />
@@ -7630,6 +7688,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySet Name="InvoiceRefunds" EntityType="Self.InvoiceRefunds" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoices" EntityType="Self.Invoices" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceStatuses" EntityType="Self.InvoiceStatuses" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LoginInouts" EntityType="Self.LoginInouts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedicalConditions" EntityType="Self.MedicalConditions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedicalHistoryRecords" EntityType="Self.MedicalHistoryRecords" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="MedicalServicesOrSupplies" EntityType="Self.MedicalServicesOrSupplies" Schema="dbo" store:Type="Tables" />
@@ -9717,6 +9776,18 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <AssociationSet Name="FK_InvoiceStatuses_UpdatedByUserRowId" Association="Self.FK_InvoiceStatuses_UpdatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="InvoiceStatuses" EntitySet="InvoiceStatuses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInouts_CreatedByUserRowId" Association="Self.FK_LoginInouts_CreatedByUserRowId">
+            <End Role="ServiceProviders" EntitySet="ServiceProviders" />
+            <End Role="LoginInouts" EntitySet="LoginInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInouts_ServiceProviders" Association="Self.FK_LoginInouts_ServiceProviders">
+            <End Role="ServiceProviders" EntitySet="ServiceProviders" />
+            <End Role="LoginInouts" EntitySet="LoginInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInouts_UpdatedByUserRowId" Association="Self.FK_LoginInouts_UpdatedByUserRowId">
+            <End Role="ServiceProviders" EntitySet="ServiceProviders" />
+            <End Role="LoginInouts" EntitySet="LoginInouts" />
           </AssociationSet>
           <AssociationSet Name="FK_MedicalConditions_CreatedByUserRowId" Association="Self.FK_MedicalConditions_CreatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
@@ -12368,6 +12439,19 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <End Role="Category" EntitySet="Categories" />
             <End Role="Template" EntitySet="Templates" />
           </AssociationSet>
+          <EntitySet Name="LoginInouts" EntityType="PracticeManagerModel.LoginInout" />
+          <AssociationSet Name="FK_LoginInouts_CreatedByUserRowId" Association="PracticeManagerModel.FK_LoginInouts_CreatedByUserRowId">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="LoginInout" EntitySet="LoginInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInouts_ServiceProviders" Association="PracticeManagerModel.FK_LoginInouts_ServiceProviders">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="LoginInout" EntitySet="LoginInouts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInouts_UpdatedByUserRowId" Association="PracticeManagerModel.FK_LoginInouts_UpdatedByUserRowId">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="LoginInout" EntitySet="LoginInouts" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -14061,6 +14145,9 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="WorkInouts1" Relationship="PracticeManagerModel.FK_WorkInouts_CreatedByUserRowId1" FromRole="ServiceProvider" ToRole="WorkInout" />
           <NavigationProperty Name="WorkInouts2" Relationship="PracticeManagerModel.FK_WorkInouts_UpdatedByUserRowId1" FromRole="ServiceProvider" ToRole="WorkInout" />
           <Property Name="Signature" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="LoginInouts" Relationship="PracticeManagerModel.FK_LoginInouts_CreatedByUserRowId" FromRole="ServiceProvider" ToRole="LoginInout" />
+          <NavigationProperty Name="LoginInouts1" Relationship="PracticeManagerModel.FK_LoginInouts_ServiceProviders" FromRole="ServiceProvider" ToRole="LoginInout" />
+          <NavigationProperty Name="LoginInouts2" Relationship="PracticeManagerModel.FK_LoginInouts_UpdatedByUserRowId" FromRole="ServiceProvider" ToRole="LoginInout" />
         </EntityType>
         <Association Name="FK__ServicePr__Appoi__24285DB4">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="0..1" />
@@ -18647,6 +18734,14 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_AppointmentTreatmentNotes_UpdatedByUserRowId" FromRole="AppointmentTreatmentNote" ToRole="User" />
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_AppointmentTreatmentNotes_CreatedByUserRowId1" FromRole="AppointmentTreatmentNote" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_AppointmentTreatmentNotes_UpdatedByUserRowId1" FromRole="AppointmentTreatmentNote" ToRole="ServiceProvider" />
+          <Property Name="IFC" Type="Boolean" Nullable="false" />
+          <Property Name="Hotpack" Type="Boolean" Nullable="false" />
+          <Property Name="Ultrasound" Type="Boolean" Nullable="false" />
+          <Property Name="SoftTissueRelease" Type="Boolean" Nullable="false" />
+          <Property Name="ShockwaveTherapy" Type="Boolean" Nullable="false" />
+          <Property Name="ColdPack" Type="Boolean" Nullable="false" />
+          <Property Name="Laser" Type="Boolean" Nullable="false" />
+          <Property Name="Exercises" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_AppointmentTreatmentNotes_Appointments">
           <End Type="PracticeManagerModel.AppointmentT" Role="AppointmentT" Multiplicity="1" />
@@ -23184,6 +23279,59 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="LoginInout">
+          <Key>
+            <PropertyRef Name="RowId" />
+          </Key>
+          <Property Name="RowId" Type="Guid" Nullable="false" />
+          <Property Name="ServiceProviderRowId" Type="Guid" Nullable="false" />
+          <Property Name="Start" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Finish" Type="DateTime" Precision="3" />
+          <Property Name="Description" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedByUserRowId" Type="Guid" />
+          <Property Name="UpdatedByUserRowId" Type="Guid" />
+          <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_LoginInouts_CreatedByUserRowId" FromRole="LoginInout" ToRole="ServiceProvider" />
+          <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_LoginInouts_ServiceProviders" FromRole="LoginInout" ToRole="ServiceProvider" />
+          <NavigationProperty Name="ServiceProvider2" Relationship="PracticeManagerModel.FK_LoginInouts_UpdatedByUserRowId" FromRole="LoginInout" ToRole="ServiceProvider" />
+        </EntityType>
+        <Association Name="FK_LoginInouts_CreatedByUserRowId">
+          <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.LoginInout" Role="LoginInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInout">
+              <PropertyRef Name="CreatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInouts_ServiceProviders">
+          <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="1" />
+          <End Type="PracticeManagerModel.LoginInout" Role="LoginInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInout">
+              <PropertyRef Name="ServiceProviderRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInouts_UpdatedByUserRowId">
+          <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.LoginInout" Role="LoginInout" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="LoginInout">
+              <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -26648,6 +26796,14 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="AppointmentTreatmentNotes">
             <EntityTypeMapping TypeName="PracticeManagerModel.AppointmentTreatmentNote">
               <MappingFragment StoreEntitySet="AppointmentTreatmentNotes">
+                <ScalarProperty Name="Exercises" ColumnName="Exercises" />
+                <ScalarProperty Name="Laser" ColumnName="Laser" />
+                <ScalarProperty Name="ColdPack" ColumnName="ColdPack" />
+                <ScalarProperty Name="ShockwaveTherapy" ColumnName="ShockwaveTherapy" />
+                <ScalarProperty Name="SoftTissueRelease" ColumnName="SoftTissueRelease" />
+                <ScalarProperty Name="Ultrasound" ColumnName="Ultrasound" />
+                <ScalarProperty Name="Hotpack" ColumnName="Hotpack" />
+                <ScalarProperty Name="IFC" ColumnName="IFC" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -26935,6 +27091,21 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="UserRowId" ColumnName="UserRowId" />
+                <ScalarProperty Name="RowId" ColumnName="RowId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInouts">
+            <EntityTypeMapping TypeName="PracticeManagerModel.LoginInout">
+              <MappingFragment StoreEntitySet="LoginInouts">
+                <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
+                <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
+                <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
+                <ScalarProperty Name="CreatedByUserRowId" ColumnName="CreatedByUserRowId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Finish" ColumnName="Finish" />
+                <ScalarProperty Name="Start" ColumnName="Start" />
+                <ScalarProperty Name="ServiceProviderRowId" ColumnName="ServiceProviderRowId" />
                 <ScalarProperty Name="RowId" ColumnName="RowId" />
               </MappingFragment>
             </EntityTypeMapping>

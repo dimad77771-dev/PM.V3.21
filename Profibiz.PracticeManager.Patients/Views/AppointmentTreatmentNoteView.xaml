@@ -818,49 +818,19 @@
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
 
-                            <dxlc:LayoutItemLabel
+							<!--!!!!!!!!!!!!-->
+
+
+							<dxlc:LayoutItemLabel
                                 Margin="0,10,10,10"
                                 Grid.Row="0"
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
-                                Content="TECHNIQUES AMOUNT OF PRESSURE USED"
+                                Content="TECHNIQUES USED"
                                 FontWeight="Bold"
                                 Style="{StaticResource styleHeader}" />
 
-                            <dxe:CheckEdit
-                                Grid.Row="1"
-                                Grid.Column="0"
-                                IsChecked="{Binding Entity.TechniquesDeepTissue, Mode=TwoWay}"
-                                Style="{StaticResource styleCheckbox1}" />
-                            <dxlc:LayoutItemLabel
-                                Grid.Row="1"
-                                Grid.Column="1"
-                                Content="Deep Tissue"
-                                Style="{StaticResource style1}" />
-
-                            <dxe:CheckEdit
-                                Grid.Row="2"
-                                Grid.Column="0"
-                                IsChecked="{Binding Entity.TechniquesModeratePressure, Mode=TwoWay}"
-                                Style="{StaticResource styleCheckbox1}" />
-                            <dxlc:LayoutItemLabel
-                                Grid.Row="2"
-                                Grid.Column="1"
-                                Content="Moderate pressure"
-                                Style="{StaticResource style1}" />
-
-                            <dxe:CheckEdit
-                                Grid.Row="3"
-                                Grid.Column="0"
-                                IsChecked="{Binding Entity.TechniquesLightPressure, Mode=TwoWay}"
-                                Style="{StaticResource styleCheckbox1}" />
-                            <dxlc:LayoutItemLabel
-                                Grid.Row="3"
-                                Grid.Column="1"
-                                Content="Light pressure"
-                                Style="{StaticResource style1}" />
-
-                            <dxe:CheckEdit
+							<dxe:CheckEdit
                                 Grid.Row="4"
                                 Grid.Column="0"
                                 IsChecked="{Binding Entity.TechniquesSwedish, Mode=TwoWay}"
@@ -1020,10 +990,53 @@
                                 Height="10 " />
 
 
+							<dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="21"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="AMOUNT OF PRESSURE USED"
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+
+							<dxe:CheckEdit
+                                Grid.Row="22"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesDeepTissue, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="22"
+                                Grid.Column="1"
+                                Content="Deep Tissue"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="23"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesModeratePressure, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="23"
+                                Grid.Column="1"
+                                Content="Moderate pressure"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="24"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.TechniquesLightPressure, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="24"
+                                Grid.Column="1"
+                                Content="Light pressure"
+                                Style="{StaticResource style1}" />
 
 
 
-                        </Grid>
+
+						</Grid>
 
                         <Grid
                             Grid.Column="3"
@@ -1210,11 +1223,105 @@
                                 Grid.Column="0"
                                 Height="10 " />
 
+							<dxlc:LayoutItemLabel
+                                Margin="0,10,10,10"
+                                Grid.Row="11"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="2"
+                                Content="TREATMENT - P.T."
+                                FontWeight="Bold"
+                                Style="{StaticResource styleHeader}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="12"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.IFC, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="12"
+                                Grid.Column="1"
+                                Content="IFC"
+                                Style="{StaticResource style1}" />
+							
+							<dxe:CheckEdit
+                                Grid.Row="13"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Hotpack, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="13"
+                                Grid.Column="1"
+                                Content="Hotpack"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="14"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Ultrasound, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="14"
+                                Grid.Column="1"
+                                Content="Ultrasound"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="15"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.SoftTissueRelease, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="15"
+                                Grid.Column="1"
+                                Content="Soft Tissue Release"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="16"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.ShockwaveTherapy, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="16"
+                                Grid.Column="1"
+                                Content="Shockwave Therapy"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="17"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.ColdPack, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="17"
+                                Grid.Column="1"
+                                Content="Cold Pack"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="18"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Laser, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="18"
+                                Grid.Column="1"
+                                Content="Laser"
+                                Style="{StaticResource style1}" />
+
+							<dxe:CheckEdit
+                                Grid.Row="19"
+                                Grid.Column="0"
+                                IsChecked="{Binding Entity.Exercises, Mode=TwoWay}"
+                                Style="{StaticResource styleCheckbox1}" />
+							<dxlc:LayoutItemLabel
+                                Grid.Row="19"
+                                Grid.Column="1"
+                                Content="Exercises"
+                                Style="{StaticResource style1}" />
 
 
-
-
-                        </Grid>
+						</Grid>
 
                         <Grid
                             Grid.Column="4"

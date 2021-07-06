@@ -76,11 +76,36 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity.AppointmentRowId = OpenParam.AppointmentRowIds[0];
 			}
 			Entity = entity;
+			EntitySubscribeRow(Entity);
 			ResetHasChange();
 
 
 			ShowWaitIndicator.Hide();
 			DXSplashScreenHelper.Hide();
+		}
+
+		void EntitySubscribeRow(AppointmentTreatmentNote row)
+		{
+			var cols = new[] { nameof(Entity.TechniquesDeepTissue), nameof(Entity.TechniquesModeratePressure), nameof(Entity.TechniquesLightPressure) };
+			(row as INotifyPropertyChanged).PropertyChanged += (s, e) =>
+			{
+				var prop = e.PropertyName;
+				if (prop == nameof(Entity.TechniquesDeepTissue) && Entity.TechniquesDeepTissue)
+				{
+					Entity.TechniquesModeratePressure = false;
+					Entity.TechniquesLightPressure = false;
+				}
+				else if (prop == nameof(Entity.TechniquesModeratePressure) && Entity.TechniquesModeratePressure)
+				{
+					Entity.TechniquesDeepTissue = false;
+					Entity.TechniquesLightPressure = false;
+				}
+				else if (prop == nameof(Entity.TechniquesLightPressure) && Entity.TechniquesLightPressure)
+				{
+					Entity.TechniquesDeepTissue = false;
+					Entity.TechniquesModeratePressure = false;
+				}
+			};
 		}
 
 

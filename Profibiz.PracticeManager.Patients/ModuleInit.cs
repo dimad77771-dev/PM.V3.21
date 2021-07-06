@@ -108,6 +108,7 @@ namespace Profibiz.PracticeManager.Patients
 			_container.RegisterView<OrdersListView>();
 			_container.RegisterView<RibbonOrdersView>();
 			_container.RegisterView<WorkInoutsListView>();
+			_container.RegisterView<LoginHistoryView>();
 			_container.RegisterView<RibbonWorkInoutsView>();
 			_container.RegisterView<PickOrderView>();
 			_container.RegisterView<SupplierRefundsListView>();

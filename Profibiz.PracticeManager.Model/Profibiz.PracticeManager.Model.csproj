@@ -87,6 +87,7 @@
     <Compile Include="TemplateDocumentBytes.cs" />
     <Compile Include="UserManager\UserManager.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="LoginInout.cs" />
     <Compile Include="WorkInout.cs" />
     <Compile Include="TemplateNameModel.cs" />
     <Compile Include="FormDocument.cs" />

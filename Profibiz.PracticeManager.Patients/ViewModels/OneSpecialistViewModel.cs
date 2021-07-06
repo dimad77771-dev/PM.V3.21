@@ -46,7 +46,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual bool IsRestrictedAccess => OpenParam.IsRestrictedAccess;
 		public virtual bool AllowEditingGridService => !IsRestrictedAccess;
 		public virtual bool AllowEditingGridAssociations => !IsRestrictedAccess;
-		
+		public virtual bool IsReadOnlyPassword => (Entity?.RowId != UserManager.UserRowId && !IsNew);
+
 
 		public OneSpecialistViewModel() : base()
 		{
@@ -72,6 +73,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			{
 				var rows = await businessService.GetServiceProviderList("rowid=" + OpenParam.RowId);
 				entity = rows.Single();
+				entity.PasswordConfirm = entity.Password;
 				var schedulerRecords = await businessService.GetSchedulerRecords(OpenParam.RowId);
 				IsVisibleLabelYouMustSetupSchedule = !schedulerRecords.Any();
 			}
@@ -219,6 +221,23 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			});
 		}
 
+		public bool IsShowLoginHistoryView => !IsNew && UserManager.UserRowId == Entity?.RowId;
+		public void LoginHistoryView()
+		{
+			DispatcherUIHelper.Run(() =>
+			{
+				var param = new LoginHistoryViewModel.OpenParams
+				{
+					ServiceProviderRowId = Entity.RowId,
+				};
+				OpenWindowInteractionRequest.Raise(new ShowDXWindowsActionParam
+				{
+					ViewCode = ViewCodes.LoginHistoryView,
+					Param = param,
+				});
+			});
+		}
+
 
 		public void Save() => DispatcherUIHelper.Run(async () => await SaveCore(andClose: false));
 		public void SaveAndClose() => DispatcherUIHelper.Run(async () => await SaveCore(andClose: true));
@@ -236,6 +255,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ValidateHelper.Empty(Entity.MaximumDayAppointments, "Maximum appointments per day", errors);
 			ValidateHelper.Empty(Entity.AppointmentBackgroundColor, "Background", errors);
 			ValidateHelper.Empty(Entity.AppointmentForegroundColor, "Foreground", errors);
+			if (!string.IsNullOrEmpty(Entity.Username))
+			{
+				ValidateHelper.Empty(Entity.Password, "Password", errors);
+			}
 
 			ValidateHelper.EmptyEnumerable(this, ProfessionalAssociationEntities, 
 				(q) => q.AssociationRowId, 
@@ -254,6 +277,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				(q) => q.MedicalServiceOrSupplyRowId, 
 				(q) => "Service \"" + LookupDataProvider.MedicalService2Name(q.MedicalServiceOrSupplyRowId) + "\" " + ValidateHelper.IS_DUPLICATE, 
 				() => MedicalServiceSelectedEntity, errors, ignoreEmptyValues: true);
+
+			if ( (Entity.Password ?? "") != (Entity.PasswordConfirm ?? "") )
+			{
+				errors.Add("Password and confirmation is not matched");
+			}
 
 			if (errors.Count > 0)
 			{

@@ -73,7 +73,6 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			ShowWaitIndicator.Show();
 
 			IsNew = OpenParam.IsNew;
-			IsReadOnly = OpenParam.IsReadOnly;
 			FormDocument entity;
 			if (!IsNew)
 			{
@@ -90,6 +89,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity.PatientRowId = OpenParam.PatientRowId;
 			}
 			Entity = entity;
+			ReadOnlySetup();
 			RichEditConrolManager.Control.DocumentLoaded += Control_DocumentLoaded;
 			RichEditConrolManager.ReadOnly = IsReadOnly;
 			ResetHasChange();
@@ -120,11 +120,22 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			dd.MouseDoubleClick += Dd_MouseDoubleClick;
 		}
 
+		void ReadOnlySetup()
+		{
+			IsReadOnly = OpenParam.IsReadOnly;
+			if (!IsNew && Entity.CreatedByUserRowId != null && UserManager.UserRowId != Entity.CreatedByUserRowId)
+			{
+				IsReadOnly = true;
+			}
+		}
+
 		const int CHECKBOX_ON = 61523;
 		const int CHECKBOX_OFF = 61603;
 		const string CHECKBOX_FONTNAME = "Wingdings 2";
 		private void Dd_MouseDoubleClick(object sender, System.Windows.Input.MouseButtonEventArgs e)
 		{
+			if (IsReadOnly) return;
+
 			var doc = RichEditConrolManager.Document;
 			if (doc.Selection == null) return;
 
@@ -592,6 +603,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		async Task<bool> SaveCore(bool andClose)
 		{
+			if (IsReadOnly) return true;
+
 			//validate
 			if (!Validate())
 			{

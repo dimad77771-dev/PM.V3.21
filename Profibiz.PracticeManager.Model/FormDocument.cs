@@ -7,10 +7,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Profibiz.PracticeManager.Model
 {
 	[ImplementPropertyChanged]
-	public partial class FormDocument
+	public partial class FormDocument : IEntityCreatedUpdated
 	{
 		public FormDocument()
 		{
@@ -24,5 +25,12 @@ namespace Profibiz.PracticeManager.Model
 		public Guid? PatientRowId { get; set; }
 
 		public bool IsChanged { get; set; }
+
+		public Guid? CreatedByUserRowId { get; set; }
+		public Guid? UpdatedByUserRowId { get; set; }
+		public DateTime? CreatedByDateTime { get; set; }
+		public DateTime? UpdatedByDateTime { get; set; }
+
+		public String CreatedUpdatedString => this.GetCreatedUpdatedString();
 	}
 }

@@ -121,6 +121,7 @@ namespace Profibiz.PracticeManager.Infrastructure
 		OnePatientNoteStatusView,
 		PatientNoteStatusesView,
 		SchedulerRecordView,
+		LoginHistoryView,
 		SupplierPaymentsListView,
 		SupplierRefundWindowView,
 		SupplierPaymentWindowView,

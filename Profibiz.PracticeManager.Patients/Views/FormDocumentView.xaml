@@ -756,7 +756,7 @@
 									</dxr:RibbonPage>
 
 
-									<dxr:RibbonPage Caption="Insert Field">
+									<dxr:RibbonPage Caption="Insert Field" IsVisible="False">
 										<dxr:RibbonPageGroup Caption="Patient" ShowCaptionButton="False">
 											<dxb:BarButtonItem
 												Content="Patient Name"
@@ -827,7 +827,7 @@
 											<dxb:BarButtonItem
 												Content="Signature"
 												Command="{Binding PasteApplyCommand}"
-												CommandParameter="ServiceProvider_Signature" />											
+												CommandParameter="ServiceProvider_Signature" />
 										</dxr:RibbonPageGroup>
 
 										<dxr:RibbonPageGroup Caption="Checkbox" ShowCaptionButton="False">
@@ -842,8 +842,8 @@
 										</dxr:RibbonPageGroup>
 
 									</dxr:RibbonPage>
-									
-									
+
+
 
 
 									<dxr:RibbonPage x:Name="pageInsert" Caption="{Binding ConverterParameter=Caption_PageInsert, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
@@ -907,6 +907,12 @@
 											<dxr:RibbonPageGroup.ItemLinks>
 												<dxb:BarButtonItemLink BarItemName="biInsertSymbol" />
 											</dxr:RibbonPageGroup.ItemLinks>
+										</dxr:RibbonPageGroup>
+										<dxr:RibbonPageGroup Caption="Service Provider" ShowCaptionButton="False">
+											<dxb:BarButtonItem
+												Content="Add My Signature"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceProvider_Signature" />
 										</dxr:RibbonPageGroup>
 									</dxr:RibbonPage>
 									<dxr:RibbonPage x:Name="pagePageLayout" Caption="{Binding ConverterParameter=Caption_PagePageLayout, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
@@ -1277,6 +1283,13 @@
 								CommandParameter="ServiceName" />
 						</dxb:PopupMenu>
 					</dx:DropDownButton>
+
+					<Label
+						Grid.Column="1"
+						Margin="10,5,10,0"
+						VerticalAlignment="Center"
+						VerticalContentAlignment="Center"
+						Content="{Binding Entity.CreatedUpdatedString, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=OneWay}" />
 
 					<infrastructure:CommandPanelView
 						Grid.Column="2"

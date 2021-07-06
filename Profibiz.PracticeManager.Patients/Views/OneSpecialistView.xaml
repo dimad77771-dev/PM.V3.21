@@ -19,7 +19,7 @@
 	xmlns:model="clr-namespace:DevExpress.DevAV;assembly=DevExpress.DevAV.v16.2.Data"
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
-	Height="800"
+	Height="830"
 	Width="1750"
 	Title="Specialist"
 	WindowStartupLocation="CenterScreen"
@@ -178,7 +178,8 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
-
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
@@ -634,6 +635,7 @@
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="*" />
 								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="Auto" />
 								<ColumnDefinition Width="*" />
 							</Grid.ColumnDefinitions>
 							<dxe:TextEdit
@@ -642,14 +644,25 @@
 								EditValue="{Binding Entity.Username, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 								IsReadOnly="{Binding IsRestrictedAccess}"
 								Style="{StaticResource baseEditStyle1}" />
-							<dxlc:LayoutItemLabel
+
+							<Button
 								Grid.Column="1"
+								Width="150"
+								HorizontalAlignment="Left"
+								Command="{Binding LoginHistoryViewCommand}"
+								Visibility="{Binding IsShowLoginHistoryView, Converter={StaticResource BooleanToVisibilityConverter}}"
+								Margin="10,2">
+								Login History...
+							</Button>
+
+							<dxlc:LayoutItemLabel
+								Grid.Column="2"
 								Content="Role"
 								Width="100"
 								Style="{StaticResource layoutItemLabelStyle1}" />
 
 							<dxe:ComboBoxEdit
-								Grid.Column="2"
+								Grid.Column="3"
 								EditValue="{Binding Entity.RoleRowId, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
 								IsReadOnly="{Binding IsRestrictedAccess}"
 								MinWidth="220"
@@ -680,6 +693,7 @@
 								Grid.Column="0"
 								MinWidth="220"
 								EditValue="{Binding Entity.Password, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsReadOnlyPassword}"
 								Style="{StaticResource baseEditStyle1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Column="1"
@@ -694,6 +708,40 @@
 								Style="{StaticResource baseEditStyle1}" />
 						</Grid>
 
+						<dxlc:LayoutItemLabel
+							Grid.Row="27"
+							Grid.Column="0"
+							Content="Confirm"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<Grid
+							Grid.Row="27"
+							Grid.Column="1"
+							Grid.ColumnSpan="2">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="*" />
+								<ColumnDefinition Width="Auto" />
+								<ColumnDefinition Width="*" />
+							</Grid.ColumnDefinitions>
+							<dxe:PasswordBoxEdit
+								Grid.Column="0"
+								MinWidth="220"
+								EditValue="{Binding Entity.PasswordConfirm, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsReadOnlyPassword}"
+								Style="{StaticResource baseEditStyle1}" />
+							<dxlc:LayoutItemLabel
+								Grid.Column="1"
+								Content="Office Employee"
+								Visibility="Hidden"
+								Width="100"
+								Style="{StaticResource layoutItemLabelStyle1}" />
+							<dxe:CheckEdit
+								Grid.Column="2"
+								IsChecked="{Binding Entity.IsOfficeEmployee, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsRestrictedAccess}"
+								KeyboardNavigation.IsTabStop="False"
+								Visibility="Hidden"
+								Style="{StaticResource baseEditStyle1}" />
+						</Grid>
 
 
 

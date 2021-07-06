@@ -52,6 +52,7 @@ namespace Profibiz.PracticeManager.Model
 
 		public string Username { get; set; }
 		public string Password { get; set; }
+		public string PasswordConfirm { get; set; }
 		public Guid? RoleRowId { get; set; }
 		public bool IsOfficeEmployee { get; set; }
 		public byte[] Signature { get; set; }

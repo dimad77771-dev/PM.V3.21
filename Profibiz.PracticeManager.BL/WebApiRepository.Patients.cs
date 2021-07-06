@@ -183,7 +183,7 @@ namespace Profibiz.PracticeManager.BL
 				wh2 = (q) => db.PatientFamilyMemberViews.Any(z => z.FamilyMemberPatientRowId == q.RowId && patientsQry.Contains(z.PatientRowId));
 			}
 
-			wh2 = PredicateBuilder.And(wh2, q => !q.IsNotRegistered);
+			//wh2 = PredicateBuilder.And(wh2, q => !q.IsNotRegistered);
 
 			if (!string.IsNullOrEmpty(restrictPatientList))
 			{

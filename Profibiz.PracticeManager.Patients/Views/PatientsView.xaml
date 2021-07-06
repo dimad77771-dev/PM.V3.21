@@ -99,7 +99,10 @@
                                     <dxg:FormatCondition ApplyToRow="True" Expression="[FamilyMemberType] = 'Head'">
                                         <dx:Format FontWeight="Bold" />
                                     </dxg:FormatCondition>
-                                </dxg:TableView.FormatConditions>
+									<dxg:FormatCondition ApplyToRow="True" Expression="[IsNotRegistered] == 'True'">
+										<dx:Format Foreground="Blue" />
+									</dxg:FormatCondition>
+								</dxg:TableView.FormatConditions>
                             </dxg:TableView>
 
                             <dxg:TreeListView x:Key="treeListView"
@@ -144,7 +147,10 @@
                                     <dxg:FormatCondition ApplyToRow="True" Expression="[FamilyMemberType] = 'Head'">
                                         <dx:Format FontWeight="Bold" />
                                     </dxg:FormatCondition>
-                                </dxg:TreeListView.FormatConditions>
+									<dxg:FormatCondition ApplyToRow="True" Expression="[IsNotRegistered] == 'True'">
+										<dx:Format Foreground="Blue" />
+									</dxg:FormatCondition>
+								</dxg:TreeListView.FormatConditions>
                             </dxg:TreeListView>
 
 
@@ -272,7 +278,13 @@
                                                 Header="INS.SEC"
                                                 Width="80" />
 
-                                <!--
+								<!--<dxg:GridColumn FieldName="IsNotRegistered"
+                                                Header="IsNotRegistered"
+                                                Width="80" />-->
+
+								
+
+								<!--
                     <dxg:GridColumn FieldName="EmailAddress"
                                     Header="EMAIL"
                                     Width="30*" />

@@ -86,6 +86,7 @@
     <Compile Include="ChargeoutPaycharge.cs" />
     <Compile Include="ChargeoutStatus.cs" />
     <Compile Include="Setting.cs" />
+    <Compile Include="LoginInout.cs" />
     <Compile Include="WorkInout.cs" />
     <Compile Include="User.cs" />
     <Compile Include="TreatmentPlanRecord.cs" />

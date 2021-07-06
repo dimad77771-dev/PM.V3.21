@@ -47,7 +47,7 @@ namespace Profibiz.PracticeManager.Shell
 			{
 				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("E6F2F17E-F975-4354-9196-02623B2855DF"); return;
 				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("FEF40518-BBFD-4587-AD2F-A62C4CBD5621");  return;
-				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("B84FCF4B-5B88-412E-A955-B3ADA0E70912"); return;
+				//UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("8A91497F-9195-4596-B8E1-168AFA0D488F"); return;
 				UserManager.Role = User.GetFullRole(); UserManager.UserRowId = new Guid("aac18ffc-ea24-46b4-ba7f-4e325cb29af2"); return;
 			}
 

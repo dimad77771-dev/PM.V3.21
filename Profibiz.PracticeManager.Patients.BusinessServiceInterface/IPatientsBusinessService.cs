@@ -123,10 +123,13 @@ namespace Profibiz.PracticeManager.Patients.BusinessServiceInterface
 		Task<UpdateReturn> PostPatientDocument(PatientDocument entity);
 		Task<UpdateReturn> DeletePatientDocument(Guid rowId);
 
+		Task<List<LoginInout>> GetLoginHistorys(Guid serviceProviderRowId);
+
 		Task<List<SchedulerRecord>> GetSchedulerRecords(Guid serviceProviderRowId);
 		Task<UpdateReturn> PutSchedulerRecords(List<SchedulerRecord> entities);
 		Task<List<CalculateAppointmentStartFinishResult>> CalculateAppointmentStartFinish(Guid serviceProviderRowId, DateTime[] dates);
 
+		
 		Task<UpdateReturn> SendEmail(EmailSend entity);
 		Task<List<EmailSend>> GetEmailSendList(string query);
 		Task<List<EmailSendAttachment>> GetEmailSendAttachmentList(string query);

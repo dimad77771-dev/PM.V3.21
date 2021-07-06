@@ -1362,6 +1362,14 @@ namespace Profibiz.PracticeManager.BL
 				var mapper = AutoMapperHelper.GetPocoMapper(typeof(DTO.User));
 				var drole = mapper.Map<DTO.User>(role);
 
+				db.LoginInouts.Add(new EF.LoginInout
+				{
+					RowId = Guid.NewGuid(),
+					Start = DateTime.Now,
+					ServiceProviderRowId = userRowId.Value,
+				});
+				db.SaveChanges();
+
 				return new DTO.LoginInfo
 				{
 					IsSuccess = true,

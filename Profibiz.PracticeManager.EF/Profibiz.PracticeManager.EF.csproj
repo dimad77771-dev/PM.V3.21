@@ -290,6 +290,9 @@
     <Compile Include="InvoiceV.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="LoginInout.cs">
+      <DependentUpon>PracticeManagerModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="MedicalCondition.cs">
       <DependentUpon>PracticeManagerModel.tt</DependentUpon>
     </Compile>
