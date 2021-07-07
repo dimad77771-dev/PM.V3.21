@@ -281,7 +281,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			//RichEditConrolManager.LoadDocument(@"E:\Tmp\204\INVOICE_TEMPLATE_02.docx", DocumentFormat.OpenXml);
 
 			var printTemplate = Entity.PrintTemplate;
-			var bytes = await FormDocumentHelper.GetTemplateDocumentBytesByCode(printTemplate, MessageBoxService);
+			var isPaid = Entity.IsPaid;
+			var bytes = await FormDocumentHelper.GetTemplateDocumentBytesByCode(printTemplate, isPaid, MessageBoxService);
 			if (bytes == null) return;
 
 			//var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == printTemplate);

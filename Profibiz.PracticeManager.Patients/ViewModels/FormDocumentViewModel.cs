@@ -286,6 +286,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				"ServiceName",
 				"Patient_Signature",
 				"ServiceProvider_Signature",
+				"CurrentDateTime",
 			};
 
 			foreach (var field in fields)
@@ -335,7 +336,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			var text = "";
 			byte[] imagebytes = null;
 
-			if (arg == "Patient_Name")
+			if (arg == "CurrentDateTime")
+			{
+				text = DateTime.Now.ToString("yyyy-MM-dd h:mm tt");
+			}
+			else if (arg == "Patient_Name")
 			{
 				if (Patient != null)
 				{
