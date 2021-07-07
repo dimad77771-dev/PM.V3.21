@@ -157,7 +157,25 @@
 									IsChecked="{Binding Path=RowData.Row.IsEnabled}" />
 							</DataTemplate>
 						</dxg:GridColumn.CellTemplate>
-					</dxg:GridColumn>					
+					</dxg:GridColumn>
+					<dxg:GridColumn
+						FieldName="Comments"
+						Header="COMMENT"
+						Width="*"
+						MaxWidth="400" />
+					<dxg:GridColumn
+						FieldName="HasDocumentBytes"
+						Header="DOCX"
+						Width="45">
+						<dxg:GridColumn.CellTemplate>
+							<DataTemplate>
+								<Image
+									Visibility="{Binding Path=RowData.Row.HasDocumentBytes, Converter={StaticResource BooleanToVisibilityWithHiddenConverter}}"
+									Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/word-doc-16.png"
+									Stretch="None" />
+							</DataTemplate>
+						</dxg:GridColumn.CellTemplate>
+					</dxg:GridColumn>
 
 
 

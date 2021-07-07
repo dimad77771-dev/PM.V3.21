@@ -161,7 +161,7 @@
                                 Grid.Column="0"
                                 Grid.ColumnSpan="2"
                                 VerticalAlignment="Top"
-                                Content="INFORMED CONTENT RECEIVED"
+                                Content="INFORMED CONSENT RECEIVED"
                                 FontWeight="Bold"
                                 Style="{StaticResource style2}" />
                             <dxe:ListBoxEdit

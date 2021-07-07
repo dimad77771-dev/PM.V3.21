@@ -143,6 +143,8 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 				{
 					return;
 				}
+				Entity.HasDocumentBytes = true;
+				MessengerHelper.SendMsgRowChange(Entity, IsNew);
 			});
 		}
 

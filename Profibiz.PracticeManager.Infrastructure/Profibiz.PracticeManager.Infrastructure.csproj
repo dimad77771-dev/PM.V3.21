@@ -849,6 +849,9 @@
   <ItemGroup>
     <Resource Include="Resources\download_icon_32px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\word-doc-16.png" />
+  </ItemGroup>
   <Import Project="..\Profibiz.PracticeManager.SharedCode2\Profibiz.PracticeManager.SharedCode2.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Fody.1.29.2\build\dotnet\Fody.targets" Condition="Exists('..\packages\Fody.1.29.2\build\dotnet\Fody.targets')" />

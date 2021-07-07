@@ -17,5 +17,7 @@ namespace Profibiz.PracticeManager.DTO
 		public string TemplateType { get; set; }
 		public string FormType { get; set; }
 		public Guid? CategoryRowId { get; set; }
+		public string Comments { get; set; }
+		public bool HasDocumentBytes { get; set; }
 	}
 }

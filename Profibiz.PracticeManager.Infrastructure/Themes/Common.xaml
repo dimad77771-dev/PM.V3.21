@@ -169,7 +169,12 @@
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-status-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 
-    <dxmvvm:ObjectToObjectConverter x:Key="patientNoteStatusRowtype9ToImageConverter">
+	<dxmvvm:ObjectToObjectConverter x:Key="wordIconImageConverter">
+		<dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/word-doc-16.png" />
+	</dxmvvm:ObjectToObjectConverter>
+
+
+	<dxmvvm:ObjectToObjectConverter x:Key="patientNoteStatusRowtype9ToImageConverter">
         <dxmvvm:MapItem Source="-" Target="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/appointment-status-16.png" />
     </dxmvvm:ObjectToObjectConverter>
 

@@ -83,6 +83,8 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
@@ -204,6 +206,22 @@
 							Grid.Column="1"
 							Margin="4"
 							IsChecked="{Binding Entity.IsEnabled, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="8"
+							Grid.Column="0"
+							Content="Name"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:TextEdit
+							Grid.Row="8"
+							Grid.Column="1"
+							Height="100"
+							EditValue="{Binding Entity.Comments, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+							Style="{StaticResource baseEditStyle1}"
+							TextWrapping="Wrap"
+							AcceptsReturn="True"
+							VerticalScrollBarVisibility="Auto"
+							VerticalContentAlignment="Top" />
 
 
 					</Grid>

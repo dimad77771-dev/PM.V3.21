@@ -124,6 +124,8 @@ namespace Profibiz.PracticeManager.BL
 				TemplateType = q.TemplateType,
 				FormType = q.FormType,
 				CategoryRowId = q.CategoryRowId,
+				Comments = q.Comments,
+				HasDocumentBytes = (q.DocumentBytes != null),
 			}).ToArray();
 			return list;
 		}

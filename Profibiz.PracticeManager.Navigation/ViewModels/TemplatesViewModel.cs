@@ -78,7 +78,7 @@ namespace Profibiz.PracticeManager.Navigation.ViewModels
 		{
 			var row = SelectedEntity;
 			var messageBoxService = this.GetRequiredService<IMessageBoxService>();
-			var ret = messageBoxService.ShowMessage(string.Format(CommonResources.Confirmation_Delete, "CalendarEvent Status"), CommonResources.Confirmation_Caption, MessageButton.YesNo, MessageIcon.Question);
+			var ret = messageBoxService.ShowMessage(string.Format(CommonResources.Confirmation_Delete, "Template"), CommonResources.Confirmation_Caption, MessageButton.YesNo, MessageIcon.Question);
 			if (ret == MessageResult.Yes)
 			{
 				ShowWaitIndicator.Show(ShowWaitIndicator.Mode.Save);

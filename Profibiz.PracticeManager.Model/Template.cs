@@ -19,6 +19,8 @@ namespace Profibiz.PracticeManager.Model
 		public string TemplateType { get; set; }
 		public string FormType { get; set; }
 		public Guid? CategoryRowId { get; set; }
+		public string Comments { get; set; }
+		public bool HasDocumentBytes { get; set; }
 
 		public bool IsChanged { get; set; }
 		public bool IsNew { get; set; }
