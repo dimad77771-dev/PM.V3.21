@@ -79,7 +79,7 @@ namespace Profibiz.PracticeManager.Start
 			{
 				await Task.Yield();
 				n++;
-				labStatus.Content = "Download files " + n + "/" + aremotes.Length;
+				labStatus.Content = "Downloading files " + n + "/" + aremotes.Length;
 
 				var bytes = GetShellFileRemote(rfile.filename);
 				var filename = Path.Combine(_shellCatalog, rfile.filename);
@@ -95,14 +95,8 @@ namespace Profibiz.PracticeManager.Start
 			}
 
 			await Task.Yield();
-			labStatus.Content = "Start program...";
+			labStatus.Content = "Starting application...";
 			StartShell();
-
-
-
-
-			//labStatus.Content = list;
-			//Thread.Sleep(1000);
 		}
 
 		ShellUpgradeUtils.ShellFileInfo[] GetShellFilesRemote(int all)
