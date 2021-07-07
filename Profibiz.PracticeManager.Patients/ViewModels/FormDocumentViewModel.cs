@@ -287,6 +287,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				"Patient_Signature",
 				"ServiceProvider_Signature",
 				"CurrentDateTime",
+				"Patient_Occupation",
 			};
 
 			foreach (var field in fields)
@@ -380,6 +381,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (Patient != null)
 				{
 					text = Patient.GetAddress();
+				}
+			}
+			else if (arg == "Patient_Occupation")
+			{
+				if (Patient != null)
+				{
+					text = Patient.Occupation;
 				}
 			}
 			else if (arg == "Appointment_Date")
