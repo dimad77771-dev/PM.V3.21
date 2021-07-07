@@ -183,6 +183,16 @@ namespace Profibiz.PracticeManager.Infrastructure
 		public static DateTime MAX_DATE = new DateTime(3000, 01, 01);
 
 
+		public static int GetAge(this DateTime birthdate)
+		{
+			var today = DateTime.Today;
+			var age = today.Year - birthdate.Year;
+			if (birthdate.Date > today.AddYears(-age)) age--;
+			return age;
+		}
+
+
+
 		public static string FormatTimeIntervalUserFriendly(DateTime start, DateTime finish)
 		{
 			if (start > finish)

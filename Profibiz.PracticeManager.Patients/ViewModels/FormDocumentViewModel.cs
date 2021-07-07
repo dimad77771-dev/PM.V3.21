@@ -288,6 +288,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				"ServiceProvider_Signature",
 				"CurrentDateTime",
 				"Patient_Occupation",
+				"Patient_Age",
 			};
 
 			foreach (var field in fields)
@@ -353,6 +354,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (Patient != null)
 				{
 					text = Patient.BirthDate.FormatYYYYMMDD();
+				}
+			}
+			else if (arg == "Patient_Age")
+			{
+				if (Patient != null && Patient.BirthDate != null)
+				{
+					text = Patient.BirthDate.Value.GetAge().ToString();
 				}
 			}
 			else if (arg == "Patient_FamilyDoctor")

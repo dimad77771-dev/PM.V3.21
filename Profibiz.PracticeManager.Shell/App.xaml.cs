@@ -22,7 +22,6 @@ namespace Profibiz.PracticeManager.Shell
 
 		protected override void OnStartup(StartupEventArgs e)
         {
-			//var text = DateTime.Now.ToString("yyyy-MM-dd h:mm tt");
 			//decimal x = 12345678;
 			////var b = x.ToString("0.#");
 			//var b = x.ToString("#,##0.##");
