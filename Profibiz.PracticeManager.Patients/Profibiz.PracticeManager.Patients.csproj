@@ -261,6 +261,7 @@
       <DependentUpon>md_bodyrevivalsalonspa.edmx</DependentUpon>
     </Compile>
     <Compile Include="EF\ModelEx\Customer.cs" />
+    <Compile Include="Helpers\AppointmentTreatmentNoteReport.cs" />
     <Compile Include="Helpers\SyncfusionExtensions.cs" />
     <Compile Include="Helpers\FormDocumentPasteHelper.cs" />
     <Compile Include="Helpers\FormDocumentHelper.cs" />
@@ -752,6 +753,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\AppointmentBookDayTemplate.docx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Templates\AppointmentTreatmentNoteReport.docx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Templates\CHARGEOUT_TEMPLATE_01.docx">

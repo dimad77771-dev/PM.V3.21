@@ -265,6 +265,29 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		}
 
 
+		public void Print()
+		{
+			DispatcherUIHelper.Run(async () =>
+			{
+				var ret = await OnClose(showOKCancel: true);
+				if (!ret) return;
+
+				ShowWaitIndicator.Show();
+				var appointmentRowId = Entity.AppointmentRowId;
+				var appointments = await businessService.GetAppointmentList(rowId: appointmentRowId);
+				var appointment = appointments[0];
+				var report = new AppointmentTreatmentNoteReport
+				{
+					Row = Entity,
+					Appointment = appointment,
+					Doctor = LookupDataProvider.FindServiceProvider(appointment.ServiceProviderRowId),
+					Service = LookupDataProvider.FindMedicalService(appointment.MedicalServicesOrSupplyRowId),
+					Patient = appointment.Patient,
+				};
+				report.Run();
+				ShowWaitIndicator.Hide();
+			});
+		}
 
 
 

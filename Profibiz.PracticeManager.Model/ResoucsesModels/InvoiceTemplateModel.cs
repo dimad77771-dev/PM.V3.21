@@ -25,7 +25,7 @@ namespace Profibiz.PracticeManager.Model
 
 		public static ObservableCollection<Template> GetForInvoiceType(string invoiceType)
 		{
-			return All.Where(q => q.InvoiceType == invoiceType).ToObservableCollection();
+			return All.Where(q => q.InvoiceType == invoiceType && q.IsEnabled && !q.IsHidden).ToObservableCollection();
 		}
 
 		public static string GetDefaultForInvoiceType(string invoiceType)

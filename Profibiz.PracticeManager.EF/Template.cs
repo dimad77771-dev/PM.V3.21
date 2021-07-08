@@ -35,6 +35,7 @@ namespace Profibiz.PracticeManager.EF
         public Nullable<System.Guid> CategoryRowId { get; set; }
         public byte[] DocumentBytes { get; set; }
         public string Comments { get; set; }
+        public bool IsHidden { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }

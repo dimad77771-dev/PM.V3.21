@@ -159,6 +159,19 @@
 						</dxg:GridColumn.CellTemplate>
 					</dxg:GridColumn>
 					<dxg:GridColumn
+						FieldName="IsHidden"
+						Header="HIDDEN"
+						Width="65">
+						<dxg:GridColumn.CellTemplate>
+							<DataTemplate>
+								<dxe:CheckEdit
+									IsReadOnly="True"
+									HorizontalAlignment="Center"
+									IsChecked="{Binding Path=RowData.Row.IsHidden}" />
+							</DataTemplate>
+						</dxg:GridColumn.CellTemplate>
+					</dxg:GridColumn>
+					<dxg:GridColumn
 						FieldName="Comments"
 						Header="COMMENT"
 						Width="*"

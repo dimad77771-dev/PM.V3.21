@@ -121,6 +121,7 @@ namespace Profibiz.PracticeManager.BL
 				InvoiceType = q.InvoiceType,
 				IsDefault = q.IsDefault,
 				IsEnabled = q.IsEnabled,
+				IsHidden = q.IsHidden,
 				TemplateType = q.TemplateType,
 				FormType = q.FormType,
 				CategoryRowId = q.CategoryRowId,

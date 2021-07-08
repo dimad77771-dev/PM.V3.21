@@ -21,7 +21,7 @@
 	xmlns:prism="clr-namespace:Prism.Mvvm;assembly=Prism.Wpf"
 	xmlns:view="clr-namespace:DevExpress.DevAV.Views;assembly=Profibiz.PracticeManager.InfrastructureExt"
 	Width="900"
-	Height="370"
+	Height="550"
 	Title="Template"
 	ResizeMode="NoResize"
 	WindowStartupLocation="CenterScreen"
@@ -85,6 +85,8 @@
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
 							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />
+							<RowDefinition Height="Auto" />							
 						</Grid.RowDefinitions>
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="Auto" />
@@ -210,10 +212,22 @@
 						<dxlc:LayoutItemLabel
 							Grid.Row="8"
 							Grid.Column="0"
-							Content="Name"
+							Content="Hidden"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="8"
+							Grid.Column="1"
+							Margin="4"
+							IsChecked="{Binding Entity.IsHidden, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}" />
+
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="9"
+							Grid.Column="0"
+							Content="Comment"
 							Style="{StaticResource layoutItemLabelStyle1Left}" />
 						<dxe:TextEdit
-							Grid.Row="8"
+							Grid.Row="9"
 							Grid.Column="1"
 							Height="100"
 							EditValue="{Binding Entity.Comments, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"

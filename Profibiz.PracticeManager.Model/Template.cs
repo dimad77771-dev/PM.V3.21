@@ -16,6 +16,7 @@ namespace Profibiz.PracticeManager.Model
 		public string InvoiceType { get; set; }
 		public bool IsDefault { get; set; }
 		public bool IsEnabled { get; set; }
+		public bool IsHidden { get; set; }
 		public string TemplateType { get; set; }
 		public string FormType { get; set; }
 		public Guid? CategoryRowId { get; set; }

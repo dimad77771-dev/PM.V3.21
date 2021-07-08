@@ -131,17 +131,27 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		public static async Task<byte[]> GetTemplateDocumentBytesByCode(string code, bool isPaid, IMessageBoxService MessageBoxService)
 		{
+			Template template = null;
 			if (isPaid)
 			{
-				code = code + "_paid";
+				var code2 = code + "_paid";
+				template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code.ToLower() == code2.ToLower());
 			}
-			var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == code);
+			if (template == null)
+			{
+				template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code.ToLower() == code.ToLower());
+			}
+			if (template == null)
+			{
+				MessageBoxService.ShowError($@"Template ""{code}"" not found");
+				return null;
+			}
 			var lookupsBusinessService = ServiceHelper.GetInstance<ILookupsBusinessService>();
 			var bytes = (await lookupsBusinessService.GetTemplateDocumentBytes(template.RowId))?.DocumentBytes;
 			if (bytes == null)
 			{
 				MessageBoxService.ShowError($@"Template ""{code}"" not found or is empty");
-				return bytes;
+				return null;
 			}
 			return bytes;
 		}

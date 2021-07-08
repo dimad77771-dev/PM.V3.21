@@ -1862,6 +1862,7 @@
           <Property Name="CategoryRowId" Type="uniqueidentifier" />
           <Property Name="DocumentBytes" Type="varbinary(max)" />
           <Property Name="Comments" Type="nvarchar(max)" />
+          <Property Name="IsHidden" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="ThirdPartyServiceProviders">
           <Key>
@@ -14343,6 +14344,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <Property Name="DocumentBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
           <NavigationProperty Name="Category" Relationship="PracticeManagerModel.FK_Templates_Categories" FromRole="Template" ToRole="Category" />
           <Property Name="Comments" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsHidden" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_Appointments_InsuranceCoverages">
           <End Type="PracticeManagerModel.InsuranceCoverage" Role="InsuranceCoverage" Multiplicity="0..1" />
@@ -24393,6 +24395,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="Templates">
             <EntityTypeMapping TypeName="PracticeManagerModel.Template">
               <MappingFragment StoreEntitySet="Templates">
+                <ScalarProperty Name="IsHidden" ColumnName="IsHidden" />
                 <ScalarProperty Name="Comments" ColumnName="Comments" />
                 <ScalarProperty Name="DocumentBytes" ColumnName="DocumentBytes" />
                 <ScalarProperty Name="CategoryRowId" ColumnName="CategoryRowId" />

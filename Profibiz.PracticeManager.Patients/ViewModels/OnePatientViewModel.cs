@@ -1379,7 +1379,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 
 
-		const decimal DEFAULT_RATE = 50M;
+		public const decimal DEFAULT_RATE = 100M;
 
 
 
