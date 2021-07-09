@@ -1676,13 +1676,14 @@
 
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
 					<Button
-						Grid.Column="0"
-						Margin="5,3,35,3"
+						Grid.Column="1"
+						Margin="5,0,5,0"
 						Command="{Binding DeleteCommand}"
 						Visibility="{Binding ShowDeleteButton, Converter={StaticResource BooleanToVisibilityConverter}}">
 						<StackPanel Orientation="Horizontal">
@@ -1694,8 +1695,8 @@
 						</StackPanel>
 					</Button>
 					<Button
-						Grid.Column="1"
-						Margin="5,3,5,3"
+						Grid.Column="2"
+						Margin="5,0,5,0"
 						Command="{Binding PrintCommand}">
 						<StackPanel Orientation="Horizontal">
 							<Image Source="pack://application:,,,/Profibiz.PracticeManager.Infrastructure;component/Resources/icon-print-32.png" Stretch="Uniform" />
@@ -1706,8 +1707,8 @@
 						</StackPanel>
 					</Button>
 					<infrastructure:CommandPanelView
-						Grid.Column="2"
-						Margin="0,5,0,0"
+						Grid.Column="3"
+						Margin="0"
 						HorizontalAlignment="Right"
 						HorizontalContentAlignment="Right"
 						CloseOnly="{Binding IsReadOnly}"

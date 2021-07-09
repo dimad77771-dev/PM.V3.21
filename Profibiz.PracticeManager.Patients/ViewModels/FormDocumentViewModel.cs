@@ -289,6 +289,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				"CurrentDateTime",
 				"Patient_Occupation",
 				"Patient_Age",
+				"Service_CategoryName",
 			};
 
 			foreach (var field in fields)
@@ -424,6 +425,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (Appointment != null)
 				{
 					text = Appointment.MedicalServiceName;
+				}
+			}
+			else if (arg == "Service_CategoryName")
+			{
+				if (Appointment != null)
+				{
+					text = LookupDataProvider.FindMedicalService(Appointment.MedicalServicesOrSupplyRowId)?.CategoryName;
 				}
 			}
 			else if (arg == "ServiceProvider_FullName")
