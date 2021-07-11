@@ -788,6 +788,51 @@
 												CommandParameter="Patient_Signature" />
 										</dxr:RibbonPageGroup>
 										<dxr:RibbonPageGroup Caption="Appoinment" ShowCaptionButton="False">
+											<dxb:BarEditItem IsVisible="{Binding IsCategoryMode}"
+												ClosePopupOnChangingEditValue="True"
+												EditWidth="230"
+												EditValue="{Binding SelectedAppointment, Mode=TwoWay}"
+												RibbonStyle="SmallWithText">
+												<dxb:BarEditItem.EditSettings>
+													<dxe:ComboBoxEditSettings
+														IsTextEditable="False"
+														PopupMaxHeight="250"
+														ItemsSource="{Binding AllAppointments}">
+														<dxe:ComboBoxEditSettings.ItemTemplate>
+															<DataTemplate>
+																<StackPanel Orientation="Horizontal">
+																	<Image
+																		Margin="2"
+																		VerticalAlignment="Center"
+																		Source="{Binding Path=Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+																		Stretch="None" />
+																	<TextBlock
+																		Padding="2"
+																		Text="{Binding Path=StartEndDateString}"
+																		VerticalAlignment="Center" />
+																</StackPanel>
+															</DataTemplate>
+														</dxe:ComboBoxEditSettings.ItemTemplate>
+														<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+															<ControlTemplate>
+																<StackPanel Orientation="Horizontal">
+																	<Image
+																		Margin="5"
+																		VerticalAlignment="Center"
+																		Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+																		Stretch="None" />
+																	<TextBlock
+																		Padding="5"
+																		Text="{Binding Path=SelectedItem.StartEndDateString}"
+																		VerticalAlignment="Center" />
+																</StackPanel>
+															</ControlTemplate>
+														</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+													</dxe:ComboBoxEditSettings>
+												</dxb:BarEditItem.EditSettings>
+											</dxb:BarEditItem>											
+											
+											
 											<dxb:BarButtonItem
 												Content="Appoinment Date"
 												Command="{Binding PasteApplyCommand}"
@@ -840,7 +885,6 @@
 												Command="{Binding PasteCheckboxCommand}"
 												CommandParameter="0" />
 										</dxr:RibbonPageGroup>
-
 									</dxr:RibbonPage>
 
 
@@ -908,12 +952,85 @@
 												<dxb:BarButtonItemLink BarItemName="biInsertSymbol" />
 											</dxr:RibbonPageGroup.ItemLinks>
 										</dxr:RibbonPageGroup>
-										<dxr:RibbonPageGroup Caption="Service Provider" ShowCaptionButton="False">
+
+										<dxr:RibbonPageGroup Caption="Signature" ShowCaptionButton="False">
 											<dxb:BarButtonItem
-												Content="Add My Signature"
+												Content="Add Specialist Signature"
 												Command="{Binding PasteApplyCommand}"
 												CommandParameter="ServiceProvider_Signature" />
+											<dxb:BarButtonItem
+												Content="Add Patient Signature"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Patient_Signature" />
 										</dxr:RibbonPageGroup>
+										
+										<dxr:RibbonPageGroup Caption="Appoinment" ShowCaptionButton="False">
+											<dxb:BarEditItem IsVisible="{Binding IsCategoryMode}"
+												ClosePopupOnChangingEditValue="True"
+												EditWidth="230"
+												EditValue="{Binding SelectedAppointment, Mode=TwoWay}"
+												RibbonStyle="SmallWithText">
+												<dxb:BarEditItem.EditSettings>
+													<dxe:ComboBoxEditSettings
+														IsTextEditable="False"
+														PopupMaxHeight="250"
+														ItemsSource="{Binding AllAppointments}">
+														<dxe:ComboBoxEditSettings.ItemTemplate>
+															<DataTemplate>
+																<StackPanel Orientation="Horizontal">
+																	<Image
+																		Margin="2"
+																		VerticalAlignment="Center"
+																		Source="{Binding Path=Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+																		Stretch="None" />
+																	<TextBlock
+																		Padding="2"
+																		Text="{Binding Path=StartEndDateString}"
+																		VerticalAlignment="Center" />
+																</StackPanel>
+															</DataTemplate>
+														</dxe:ComboBoxEditSettings.ItemTemplate>
+														<dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+															<ControlTemplate>
+																<StackPanel Orientation="Horizontal">
+																	<Image
+																		Margin="5"
+																		VerticalAlignment="Center"
+																		Source="{Binding Path=SelectedItem.Rowtype9, Converter={StaticResource appointmentBookRowtype9ToImageConverter}}"
+																		Stretch="None" />
+																	<TextBlock
+																		Padding="5"
+																		Text="{Binding Path=SelectedItem.StartEndDateString}"
+																		VerticalAlignment="Center" />
+																</StackPanel>
+															</ControlTemplate>
+														</dxe:ComboBoxEditSettings.EditNonEditableTemplate>
+													</dxe:ComboBoxEditSettings>
+												</dxb:BarEditItem.EditSettings>
+											</dxb:BarEditItem>
+
+
+											<dxb:BarButtonItem
+												Content="Appoinment Date"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Appointment_Date" />
+											<dxb:BarButtonItem
+												Content="Appointment Start Time"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Appointment_StartTime" />
+											<dxb:BarButtonItem
+												Content="Appointment Finish Time"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="Appointment_FinishTime" />
+										</dxr:RibbonPageGroup>
+										
+										<dxr:RibbonPageGroup Caption="Service" ShowCaptionButton="False">
+											<dxb:BarButtonItem
+												Content="Service Name"
+												Command="{Binding PasteApplyCommand}"
+												CommandParameter="ServiceName" />
+										</dxr:RibbonPageGroup>
+
 									</dxr:RibbonPage>
 									<dxr:RibbonPage x:Name="pagePageLayout" Caption="{Binding ConverterParameter=Caption_PagePageLayout, Converter={StaticResource stringIdConverter}, Mode=OneTime, Source={StaticResource stringIdConverter}}">
 										<dxr:RibbonPageGroup
@@ -1229,12 +1346,21 @@
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
 						<ColumnDefinition Width="Auto" />
-						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
+						<ColumnDefinition Width="Auto" />
+						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
-					<Button
+					
+					<Label
 						Grid.Column="0"
-						Margin="5,3,5,3"
+						Margin="10,5,10,0"
+						VerticalAlignment="Center"
+						VerticalContentAlignment="Center"
+						Content="{Binding Entity.CreatedUpdatedString, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=OneWay}" />
+
+					<Button
+						Grid.Column="2"
+						Margin="5,5,5,5"
 						Visibility="{Binding ShowDeleteButton, Converter={StaticResource BooleanToVisibilityConverter}}"
 						Command="{Binding DeleteCommand}">
 						<StackPanel Orientation="Horizontal">
@@ -1246,54 +1372,9 @@
 						</StackPanel>
 					</Button>
 
-
-					<dx:DropDownButton
-						Visibility="Collapsed"
-						Grid.Column="1"
-						Grid.Row="5"
-						Content="Paste Field"
-						Height="40"
-						Margin="35,3,5,3"
-						VerticalAlignment="Center"
-						HorizontalAlignment="Center">
-						<dxb:PopupMenu>
-							<dxb:BarButtonItem
-								Content="Patient Name"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="Patient_Name" />
-							<dxb:BarButtonItem
-								Content="Patient Signature"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="Patient_Signature" />
-							<dxb:BarButtonItem
-								Content="Appoinment Date"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="Appointment_Date" />
-							<dxb:BarButtonItem
-								Content="Appointment Start Time"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="Appointment_StartTime" />
-							<dxb:BarButtonItem
-								Content="Appointment Finish Time"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="Appointment_FinishTime" />
-							<dxb:BarButtonItem
-								Content="Service"
-								Command="{Binding PasteApplyCommand}"
-								CommandParameter="ServiceName" />
-						</dxb:PopupMenu>
-					</dx:DropDownButton>
-
-					<Label
-						Grid.Column="1"
-						Margin="10,5,10,0"
-						VerticalAlignment="Center"
-						VerticalContentAlignment="Center"
-						Content="{Binding Entity.CreatedUpdatedString, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=OneWay}" />
-
 					<infrastructure:CommandPanelView
-						Grid.Column="2"
-						Margin="0,5,0,0"
+						Grid.Column="3"
+						Margin="0,5,0,5"
 						CloseOnly="{Binding IsReadOnly}" />
 				</Grid>
 			</Grid>

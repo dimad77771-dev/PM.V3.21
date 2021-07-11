@@ -37,47 +37,32 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 {
 	public static class FormDocumentHelper
 	{
-		public static async Task<TemplateNameModel> PickTemplateName(Appointment appointment, IMessageBoxService messageBoxService, InteractionRequest<ShowDXWindowsActionParam> showDXWindowsInteractionRequest)
+		public static async Task<TemplateNameModel> PickTemplateName(Appointment appointment, Guid? multiCategoryRowId, IMessageBoxService messageBoxService, InteractionRequest<ShowDXWindowsActionParam> showDXWindowsInteractionRequest)
 		{
-			var isPatientMode = (appointment.RowId == default(Guid));
 			var error = "";
-			//var path = "";
 			var wh_template = default(Func<Template, bool>);
-
-			if (isPatientMode)
+			if (appointment.RowId == default(Guid) && multiCategoryRowId == null)
 			{
 				wh_template = (q => q.IsFormPatient);
-				//var templateFolder = "Patient";
-				//path = GetTemplateFolderPath(templateFolder);
-				//if (!Directory.Exists(path))
-				//{
-				//	error = "Directory \"" + path + "\" not found";
-				//}
 			}
 			else
 			{
-				var medicalServicesOrSupplyRowId = appointment.MedicalServicesOrSupplyRowId;
-				if (medicalServicesOrSupplyRowId == null)
+				if (multiCategoryRowId != null)
 				{
-					error = "Service not specified";
+					wh_template = (q => q.IsFormAppointmentMulti && q.CategoryRowId == multiCategoryRowId);
 				}
 				else
 				{
-					var medicalService = LookupDataProvider.Instance.MedicalServices.Single(q => q.RowId == medicalServicesOrSupplyRowId);
-					wh_template = (q => q.IsFormAppointment && q.CategoryRowId == medicalService.CategoryRowId);
-					//var templateFolder = serviceProvider.TemplateFolder;
-					//if (string.IsNullOrEmpty(templateFolder))
-					//{
-					//	error = "Template Folder for service \"" + serviceProvider + "\" not specified";
-					//}
-					//else
-					//{
-					//	path = GetTemplateFolderPath(templateFolder);
-					//	if (!Directory.Exists(path))
-					//	{
-					//		error = "Directory \"" + path + "\" not found";
-					//	}
-					//}
+					var medicalServicesOrSupplyRowId = appointment.MedicalServicesOrSupplyRowId;
+					if (medicalServicesOrSupplyRowId == null)
+					{
+						error = "Service not specified";
+					}
+					else
+					{
+						var medicalService = LookupDataProvider.Instance.MedicalServices.Single(q => q.RowId == medicalServicesOrSupplyRowId);
+						wh_template = (q => q.IsFormAppointmentSingle && q.CategoryRowId == medicalService.CategoryRowId);
+					}
 				}
 			}
 

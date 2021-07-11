@@ -86,6 +86,7 @@ namespace Profibiz.PracticeManager.Model
 		public static class FormType
 		{
 			public const string Appointment = "Appointment";
+			public const string MultiAppointment = "Multi Appointment";
 			public const string Patient = "Patient";
 		}
 

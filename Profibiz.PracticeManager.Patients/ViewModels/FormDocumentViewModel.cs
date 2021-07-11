@@ -50,7 +50,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public bool IsReadOnly { get; set; }
 		public bool IsNew { get; set; }
 		public bool ShowDeleteButton => !IsNew && !IsReadOnly;
-		public ServiceProvider ServiceProvider => LookupDataProvider.FindServiceProvider(Appointment?.ServiceProviderRowId);
+		public ServiceProvider ServiceProvider => LookupDataProvider.FindServiceProvider(CurrentAppointment?.ServiceProviderRowId);
+		public virtual ObservableCollection<Appointment> AllAppointments { get; set; } = new ObservableCollection<Appointment>();
+		public virtual Appointment SelectedAppointment { get; set; }
+
+		public virtual Appointment CurrentAppointment => Appointment ?? SelectedAppointment;
+		public bool IsCategoryMode => Entity != null && Entity.CategoryRowId != null;
+
 
 		public FormDocumentViewModel(IPatientsBusinessService _businessService, ILookupsBusinessService _lookupsBusinessService) : base()
 		{
@@ -85,8 +91,10 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity.DocxBytes = new byte[0];
 				entity.TemplatePath = OpenParam.TemplateName;
 				entity.TemplateName = OpenParam.TemplateName;
-				entity.AppointmentRowId = OpenParam.AppointmentRowId;
 				entity.PatientRowId = OpenParam.PatientRowId;
+				entity.AppointmentRowId = OpenParam.AppointmentRowId;
+				entity.CategoryRowId = OpenParam.CategoryRowId;
+				entity.ServiceProviderRowId = OpenParam.ServiceProviderRowId;
 			}
 			Entity = entity;
 			ReadOnlySetup();
@@ -99,10 +107,21 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				Appointment = (await businessService.GetAppointmentList(rowId: Entity.AppointmentRowId.Value)).FirstOrDefault();
 			}
 
-			var patientRowId = Entity.PatientRowId ?? Appointment?.PatientRowId;
+			var patientRowId = Entity.PatientRowId ?? CurrentAppointment?.PatientRowId;
 			if (patientRowId != null)
 			{
 				Patient = await businessService.GetPatient(patientRowId.Value);
+			}
+
+			if (IsCategoryMode)
+			{
+				var appointments = (await businessService.GetAppointmentList(patientRowId: Entity.PatientRowId));
+				AllAppointments = appointments
+					.Where(q => q.ServiceProviderRowId == Entity.ServiceProviderRowId 
+										&& LookupDataProvider.FindMedicalService(q.MedicalServicesOrSupplyRowId)?.CategoryRowId == Entity.CategoryRowId)
+					.OrderByDescending(q => q.Start)
+					.ToObservableCollection();
+				SelectedAppointment = AllAppointments.FirstOrDefault();
 			}
 			
 
@@ -401,37 +420,37 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 			else if (arg == "Appointment_Date")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = Appointment.Start.Date.FormatShortDate();
+					text = CurrentAppointment.Start.Date.FormatShortDate();
 				}
 			}
 			else if (arg == "Appointment_StartTime")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = Appointment.Start.FormatHHMM();
+					text = CurrentAppointment.Start.FormatHHMM();
 				}
 			}
 			else if (arg == "Appointment_FinishTime")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = Appointment.Finish.FormatHHMM();
+					text = CurrentAppointment.Finish.FormatHHMM();
 				}
 			}
 			else if (arg == "ServiceName")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = Appointment.MedicalServiceName;
+					text = CurrentAppointment.MedicalServiceName;
 				}
 			}
 			else if (arg == "Service_CategoryName")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = LookupDataProvider.FindMedicalService(Appointment.MedicalServicesOrSupplyRowId)?.CategoryName;
+					text = LookupDataProvider.FindMedicalService(CurrentAppointment.MedicalServicesOrSupplyRowId)?.CategoryName;
 				}
 			}
 			else if (arg == "ServiceProvider_FullName")
@@ -464,9 +483,9 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			}
 			else if (arg == "ServiceName")
 			{
-				if (Appointment != null)
+				if (CurrentAppointment != null)
 				{
-					text = Appointment.MedicalServiceName;
+					text = CurrentAppointment.MedicalServiceName;
 				}
 			}
 			else if (arg == "Patient_Signature")
@@ -784,6 +803,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			public bool IsReadOnly { get; set; }
 			public Guid? AppointmentRowId { get; set; }
 			public Guid? PatientRowId { get; set; }
+			public Guid? CategoryRowId { get; set; }
+			public Guid? ServiceProviderRowId { get; set; }
 		}
 
 

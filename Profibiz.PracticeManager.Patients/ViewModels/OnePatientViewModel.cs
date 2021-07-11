@@ -181,6 +181,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			await LoadMedicalHistoryModel();
 			await LoadMedicalFormModel();
 			await LoadTreatmentPlanModel();
+			AppointmentCategoryNoteEntitiesBuild();
 			ResetHasChange();
 
 			ShowWaitIndicator.Hide();
@@ -372,32 +373,46 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 		void OnMsgRowChangeFormDocument(MsgRowChange<FormDocument> msg)
 		{
-			var msgAppointmentRowId = msg.Row.AppointmentRowId ?? default(Guid);
-			var appointmentWithClinicalNote = 
-				Entity.AppointmentWithClinicalNotes.Union(new[] { Entity.PatientFormDocuments }).SingleOrDefault(q => q.RowId == msgAppointmentRowId);
-			if (appointmentWithClinicalNote == null)
+			var appointmentWithClinicalNote = default(Appointment);
+			var msgAppointmentRowId = msg.Row.AppointmentRowId;
+			if (msgAppointmentRowId != null)
 			{
-				return;
+				appointmentWithClinicalNote = Entity.AppointmentWithClinicalNotes.SingleOrDefault(q => q.RowId == msgAppointmentRowId);
 			}
-
-			var isChanged = Entity.IsChanged;
-
-			if (msg.RowAction == RowAction.Delete)
+			else
 			{
-				var formDocument = appointmentWithClinicalNote.FormDocuments.SingleOrDefault(q => q.RowId == msg.Row.RowId);
-				if (formDocument != null)
+				if (msg.Row.CategoryRowId == null)
 				{
-					appointmentWithClinicalNote.FormDocuments.Remove(formDocument);
-					BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
+					appointmentWithClinicalNote = Entity.PatientFormDocuments;
+				}
+				else
+				{
+					appointmentWithClinicalNote = AppointmentCategoryNoteEntities
+						.SingleOrDefault(q => q.CategoryRowId == msg.Row.CategoryRowId && q.ServiceProviderRowId == msg.Row.ServiceProviderRowId);
 				}
 			}
-			else if (msg.RowAction == RowAction.Insert)
-			{
-				appointmentWithClinicalNote.FormDocuments.Insert(0, msg.Row);
-				BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
-			}
 
-			Entity.IsChanged = isChanged;
+			if (appointmentWithClinicalNote != null)
+			{
+				var isChanged = Entity.IsChanged;
+
+				if (msg.RowAction == RowAction.Delete)
+				{
+					var formDocument = appointmentWithClinicalNote.FormDocuments.SingleOrDefault(q => q.RowId == msg.Row.RowId);
+					if (formDocument != null)
+					{
+						appointmentWithClinicalNote.FormDocuments.Remove(formDocument);
+						BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
+					}
+				}
+				else if (msg.RowAction == RowAction.Insert)
+				{
+					appointmentWithClinicalNote.FormDocuments.Insert(0, msg.Row);
+					BaseModelHelper.RaisePropertyChanged(appointmentWithClinicalNote, nameof(appointmentWithClinicalNote.ButtonsAppointmentForm));
+				}
+
+				Entity.IsChanged = isChanged;
+			}
 		}
 
 
@@ -889,6 +904,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual Appointment AppointmentClinicalNoteSelectedEntity { get; set; }
 		public virtual ObservableCollection<Appointment> AppointmentClinicalNoteSelectedEntities { get; set; } = new ObservableCollection<Appointment>();
 		public virtual GridControlBehaviorManager BehaviorGridConrolAppointmentClinicalNoteEntities { get; set; } = new GridControlBehaviorManager();
+
+
 		public void AppointmentClinicalNoteEdit(Appointment row)
 		{
 			if (row == null) return;
@@ -935,7 +952,15 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				{
 					Guid? patientRowId = null;
 					Guid? appointmentRowId = null;
-					if (appointment.RowId == default(Guid))
+					Guid? categoryRowId = null;
+					Guid? serviceProviderRowId = null;
+					if (appointment is AppointmentCategoryNote)
+					{
+						patientRowId = Entity.RowId;
+						categoryRowId = (appointment as AppointmentCategoryNote).CategoryRowId;
+						serviceProviderRowId = (appointment as AppointmentCategoryNote).ServiceProviderRowId;
+					}
+					else if (appointment.RowId == default(Guid))
 					{
 						patientRowId = Entity.RowId;
 					}
@@ -944,7 +969,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						appointmentRowId = appointment.RowId;
 					}
 
-					var template = await FormDocumentHelper.PickTemplateName(appointment, MessageBoxService, ShowDXWindowsInteractionRequest);
+					var multiCategoryRowId = (appointment is AppointmentCategoryNote ? (appointment as AppointmentCategoryNote).CategoryRowId : (Guid?)null);
+					var template = await FormDocumentHelper.PickTemplateName(appointment, multiCategoryRowId, MessageBoxService, ShowDXWindowsInteractionRequest);
 					if (template == null)
 					{
 						return;
@@ -959,6 +985,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 						TemplateName = template.TemplateName,
 						AppointmentRowId = appointmentRowId,
 						PatientRowId = patientRowId,
+						CategoryRowId = categoryRowId,
+						ServiceProviderRowId = serviceProviderRowId,
 					};
 				}
 				else
@@ -1020,6 +1048,54 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				pdfDocumentProcessor.Dispose();
 				ShowWaitIndicator.Hide();
 			});
+		}
+
+		#endregion
+
+		#region AppointmentCategoryNote
+		public virtual ObservableCollection<AppointmentCategoryNote> AppointmentCategoryNoteEntities { get; set; }
+		public virtual AppointmentCategoryNote AppointmentCategoryNoteSelectedEntity { get; set; }
+		public virtual ObservableCollection<AppointmentCategoryNote> AppointmentCategoryNoteSelectedEntities { get; set; } = new ObservableCollection<AppointmentCategoryNote>();
+		public virtual GridControlBehaviorManager BehaviorGridConrolAppointmentCategoryNoteEntities { get; set; } = new GridControlBehaviorManager();
+
+		void AppointmentCategoryNoteEntitiesBuild()
+		{
+			if (AppointmentClinicalNoteEntities == null) return;
+
+			AppointmentCategoryNoteEntities = AppointmentClinicalNoteEntities
+				.GroupBy(q => new { q.ServiceProviderRowId, CategoryRowId = LookupDataProvider.MedicalService2CategoryRowId(q.MedicalServicesOrSupplyRowId) })
+				.Where(q => q.Key.CategoryRowId != null)
+				.Select(q => new AppointmentCategoryNote
+				{
+					ServiceProviderRowId = q.Key.ServiceProviderRowId,
+					CategoryRowId = q.Key.CategoryRowId.Value,
+					Appointments = q.ToArray(),
+				})
+				.OrderBy(q => q.ServiceProviderName)
+				.OrderBy(q => q.CategoryName)
+				.ToObservableCollection();
+
+			//это ВСЕ формы с PatientRowId (и с категориями и "чистые")
+			var patientFormDocuments = Entity.PatientFormDocuments.FormDocuments;
+			foreach(var arow in AppointmentCategoryNoteEntities)
+			{
+				arow.FormDocuments = patientFormDocuments
+					.Where(q => q.ServiceProviderRowId == arow.ServiceProviderRowId && q.CategoryRowId == arow.CategoryRowId)
+					.ToObservableCollection();
+				arow.SetOnClickButtonAppointmentForm(AppointmentClinicalNoteClick);
+			}
+
+			//оставим только "чистые" формы
+			Entity.PatientFormDocuments.FormDocuments = Entity.PatientFormDocuments.FormDocuments
+				.Where(q => q.ServiceProviderRowId == null && q.CategoryRowId == null)
+				.ToObservableCollection();
+		}
+
+		public class AppointmentCategoryNote : Appointment
+		{
+			public Guid CategoryRowId { get; set; }
+			public String CategoryName => LookupDataProvider.Category2Name(CategoryRowId);
+			public Appointment[] Appointments { get; set; }
 		}
 
 

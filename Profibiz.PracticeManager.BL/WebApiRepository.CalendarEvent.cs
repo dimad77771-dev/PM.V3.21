@@ -63,7 +63,7 @@ namespace Profibiz.PracticeManager.BL
 			}
 			if (isVacation != null)
 			{
-				wh = PredicateBuilder.And(wh, q => q.IsVacation == isVacation.Value);
+				wh = PredicateBuilder.And(wh, q => q.IsVacation == isVacation.Value || q.IsBusyEvent == isVacation.Value);
 			}
 			var list = db.CalendarEventsV.Include(q => q.Patient).Where(wh.Expand()).ToArray();
 

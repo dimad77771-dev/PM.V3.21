@@ -24,6 +24,8 @@ namespace Profibiz.PracticeManager.EF
         public string TemplatePath { get; set; }
         public Nullable<System.Guid> AppointmentRowId { get; set; }
         public Nullable<System.Guid> PatientRowId { get; set; }
+        public Nullable<System.Guid> CategoryRowId { get; set; }
+        public Nullable<System.Guid> ServiceProviderRowId { get; set; }
     
         public virtual User User { get; set; }
         public virtual User User1 { get; set; }
@@ -31,5 +33,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual Patient Patient { get; set; }
         public virtual ServiceProvider ServiceProvider { get; set; }
         public virtual ServiceProvider ServiceProvider1 { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ServiceProvider ServiceProvider11 { get; set; }
     }
 }

@@ -23,7 +23,8 @@
 	Title="Patient"
 	Width="1300"
 	Height="1000"
-	d:DesignHeight="1300" d:DesignWidth="1300"
+	d:DesignHeight="1300"
+	d:DesignWidth="1300"
 	MaxHeight="{x:Static infrastructure:WindowInfo.HeightMax}"
 	MaxWidth="{x:Static infrastructure:WindowInfo.WidthMax}"
 	prism:ViewModelLocator.AutoWireViewModel="True"
@@ -1387,86 +1388,184 @@
 										<RowDefinition Height="*" />
 										<RowDefinition Height="Auto" />
 									</Grid.RowDefinitions>
-									<dxg:GridControl
-										ItemsSource="{Binding AppointmentClinicalNoteEntities}"
-										SelectedItem="{Binding AppointmentClinicalNoteSelectedEntity}"
-										SelectedItems="{Binding AppointmentClinicalNoteSelectedEntities}"
-										SelectionMode="None"
-										ShowBorder="True">
-										<dxmvvm:Interaction.Behaviors>
-											<dxmvvm:EventToCommand
-												Command="{Binding AppointmentClinicalNoteEditCommand}"
-												EventName="MouseDoubleClick"
-												PassEventArgsToCommand="True">
-												<dxmvvm:EventToCommand.EventArgsConverter>
-													<dx:EventArgsToDataRowConverter />
-												</dxmvvm:EventToCommand.EventArgsConverter>
-											</dxmvvm:EventToCommand>
-											<infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolAppointmentClinicalNoteEntities}" />
-										</dxmvvm:Interaction.Behaviors>
-										<dxg:GridControl.View>
-											<dxg:TableView
-												AllowEditing="False"
-												AllowPerPixelScrolling="True"
-												AutoWidth="False"
-												EnableImmediatePosting="True"
-												NavigationStyle="Row"
-												SearchPanelHorizontalAlignment="Right"
-												ShowCheckBoxSelectorColumn="True"
-												ShowGroupPanel="False"
-												ShowSearchPanelMode="Always" />
-										</dxg:GridControl.View>
-										<dxg:GridControl.Columns>
-											<dxg:GridColumn
-												Width="150"
-												FieldName="StartEndDateString"
-												Header="APPOINTMENT START/FINISH" />
-											<dxg:GridColumn
-												Width="10*"
-												FieldName="AppointmentBookName"
-												Header="APPOINTMENT BOOK" />
-											<dxg:GridColumn
-												Width="10*"
-												FieldName="ServiceProviderName"
-												Header="SPECIALIST" />
-											<dxg:GridColumn
-												Width="10*"
-												FieldName="MedicalServiceName"
-												Header="SERVICE" />
-											<dxg:GridColumn
-												Visible="False"
-												FieldName="Button"
-												Style="{StaticResource OpenDetailColumnStyle}" />
-										</dxg:GridControl.Columns>
-										<dxg:GridControl.DetailDescriptor>
-											<dxg:ContentDetailDescriptor>
-												<dxg:ContentDetailDescriptor.ContentTemplate>
-													<DataTemplate>
-														<dx:MeasurePixelSnapper>
-															<ItemsControl ItemsSource="{Binding ButtonsAppointmentForm}" Margin="2">
-																<ItemsControl.ItemTemplate>
-																	<DataTemplate>
-																		<Button
-																			Margin="5"
-																			Content="{Binding ButtonText}"
-																			Background="{Binding ButtonColor}"
-																			FontStyle="{Binding FontStyle}"
-																			FontWeight="{Binding FontWeight}"
-																			Command="{Binding OnClickCommand}" />
-																	</DataTemplate>
-																</ItemsControl.ItemTemplate>
-																<ItemsControl.ItemsPanel>
-																	<ItemsPanelTemplate>
-																		<WrapPanel />
-																	</ItemsPanelTemplate>
-																</ItemsControl.ItemsPanel>
-															</ItemsControl>
-														</dx:MeasurePixelSnapper>
-													</DataTemplate>
-												</dxg:ContentDetailDescriptor.ContentTemplate>
-											</dxg:ContentDetailDescriptor>
-										</dxg:GridControl.DetailDescriptor>
-									</dxg:GridControl>
+
+									<infrastructure:ExtraLayoutGroup
+										Grid.Row="0"
+										Background="Transparent"
+										Orientation="Vertical"
+										View="Group">
+
+										<infrastructure:ExtraLayoutGroup
+											Margin="2"
+											Background="Transparent"
+											GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+											Header="APPOINTMENTS"
+											IsCollapsible="True"
+											View="GroupBox">
+											<dxg:GridControl
+												ItemsSource="{Binding AppointmentClinicalNoteEntities}"
+												SelectedItem="{Binding AppointmentClinicalNoteSelectedEntity}"
+												SelectedItems="{Binding AppointmentClinicalNoteSelectedEntities}"
+												SelectionMode="None"
+												ShowBorder="True">
+												<dxmvvm:Interaction.Behaviors>
+													<dxmvvm:EventToCommand
+														Command="{Binding AppointmentClinicalNoteEditCommand}"
+														EventName="MouseDoubleClick"
+														PassEventArgsToCommand="True">
+														<dxmvvm:EventToCommand.EventArgsConverter>
+															<dx:EventArgsToDataRowConverter />
+														</dxmvvm:EventToCommand.EventArgsConverter>
+													</dxmvvm:EventToCommand>
+													<infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolAppointmentClinicalNoteEntities}" />
+												</dxmvvm:Interaction.Behaviors>
+												<dxg:GridControl.View>
+													<dxg:TableView
+														AllowEditing="False"
+														AllowPerPixelScrolling="True"
+														AutoWidth="False"
+														EnableImmediatePosting="True"
+														NavigationStyle="Row"
+														SearchPanelHorizontalAlignment="Right"
+														ShowCheckBoxSelectorColumn="True"
+														ShowGroupPanel="False"
+														ShowSearchPanelMode="Always" />
+												</dxg:GridControl.View>
+												<dxg:GridControl.Columns>
+													<dxg:GridColumn
+														Width="150"
+														FieldName="StartEndDateString"
+														Header="APPOINTMENT START/FINISH" />
+													<dxg:GridColumn
+														Width="10*"
+														FieldName="AppointmentBookName"
+														Header="APPOINTMENT BOOK" />
+													<dxg:GridColumn
+														Width="10*"
+														FieldName="ServiceProviderName"
+														Header="SPECIALIST" />
+													<dxg:GridColumn
+														Width="10*"
+														FieldName="MedicalServiceName"
+														Header="SERVICE" />
+													<dxg:GridColumn
+														Visible="False"
+														FieldName="Button"
+														Style="{StaticResource OpenDetailColumnStyle}" />
+												</dxg:GridControl.Columns>
+												<dxg:GridControl.DetailDescriptor>
+													<dxg:ContentDetailDescriptor>
+														<dxg:ContentDetailDescriptor.ContentTemplate>
+															<DataTemplate>
+																<dx:MeasurePixelSnapper>
+																	<ItemsControl ItemsSource="{Binding ButtonsAppointmentForm}" Margin="2">
+																		<ItemsControl.ItemTemplate>
+																			<DataTemplate>
+																				<Button
+																					Margin="5"
+																					Content="{Binding ButtonText}"
+																					Background="{Binding ButtonColor}"
+																					FontStyle="{Binding FontStyle}"
+																					FontWeight="{Binding FontWeight}"
+																					Command="{Binding OnClickCommand}" />
+																			</DataTemplate>
+																		</ItemsControl.ItemTemplate>
+																		<ItemsControl.ItemsPanel>
+																			<ItemsPanelTemplate>
+																				<WrapPanel />
+																			</ItemsPanelTemplate>
+																		</ItemsControl.ItemsPanel>
+																	</ItemsControl>
+																</dx:MeasurePixelSnapper>
+															</DataTemplate>
+														</dxg:ContentDetailDescriptor.ContentTemplate>
+													</dxg:ContentDetailDescriptor>
+												</dxg:GridControl.DetailDescriptor>
+											</dxg:GridControl>
+										</infrastructure:ExtraLayoutGroup>
+
+										<infrastructure:ExtraLayoutGroup
+											Margin="2"
+											Background="Transparent"
+											GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
+											Header="MULTI APPOINTMENTS"
+											IsCollapsible="True"
+											View="GroupBox">
+											<dxg:GridControl
+												ItemsSource="{Binding AppointmentCategoryNoteEntities}"
+												SelectedItem="{Binding AppointmentCategoryNoteSelectedEntity}"
+												SelectedItems="{Binding AppointmentCategoryNoteSelectedEntities}"
+												SelectionMode="None"
+												ShowBorder="True">
+												<dxmvvm:Interaction.Behaviors>
+													<dxmvvm:EventToCommand
+														Command="{Binding AppointmentCategoryNoteEditCommand}"
+														EventName="MouseDoubleClick"
+														PassEventArgsToCommand="True">
+														<dxmvvm:EventToCommand.EventArgsConverter>
+															<dx:EventArgsToDataRowConverter />
+														</dxmvvm:EventToCommand.EventArgsConverter>
+													</dxmvvm:EventToCommand>
+													<infrastructure:GridControlBehavior Manager="{Binding BehaviorGridConrolAppointmentCategoryNoteEntities}" />
+												</dxmvvm:Interaction.Behaviors>
+												<dxg:GridControl.View>
+													<dxg:TableView
+														AllowEditing="False"
+														AllowPerPixelScrolling="True"
+														AutoWidth="False"
+														EnableImmediatePosting="True"
+														NavigationStyle="Row"
+														SearchPanelHorizontalAlignment="Right"
+														ShowCheckBoxSelectorColumn="True"
+														ShowGroupPanel="False"
+														ShowSearchPanelMode="Always" />
+												</dxg:GridControl.View>
+												<dxg:GridControl.Columns>
+													<dxg:GridColumn
+														Width="10*"
+														FieldName="ServiceProviderName"
+														Header="SPECIALIST" />
+													<dxg:GridColumn
+														Width="10*"
+														FieldName="CategoryName"
+														Header="CATEGORY" />
+													<dxg:GridColumn
+														Visible="False"
+														FieldName="Button"
+														Style="{StaticResource OpenDetailColumnStyle}" />
+												</dxg:GridControl.Columns>
+												<dxg:GridControl.DetailDescriptor>
+													<dxg:ContentDetailDescriptor>
+														<dxg:ContentDetailDescriptor.ContentTemplate>
+															<DataTemplate>
+																<dx:MeasurePixelSnapper>
+																	<ItemsControl ItemsSource="{Binding ButtonsAppointmentForm}" Margin="2">
+																		<ItemsControl.ItemTemplate>
+																			<DataTemplate>
+																				<Button
+																					Margin="5"
+																					Content="{Binding ButtonText}"
+																					Background="{Binding ButtonColor}"
+																					FontStyle="{Binding FontStyle}"
+																					FontWeight="{Binding FontWeight}"
+																					Command="{Binding OnClickCommand}" />
+																			</DataTemplate>
+																		</ItemsControl.ItemTemplate>
+																		<ItemsControl.ItemsPanel>
+																			<ItemsPanelTemplate>
+																				<WrapPanel />
+																			</ItemsPanelTemplate>
+																		</ItemsControl.ItemsPanel>
+																	</ItemsControl>
+																</dx:MeasurePixelSnapper>
+															</DataTemplate>
+														</dxg:ContentDetailDescriptor.ContentTemplate>
+													</dxg:ContentDetailDescriptor>
+												</dxg:GridControl.DetailDescriptor>
+											</dxg:GridControl>
+										</infrastructure:ExtraLayoutGroup>
+
+									</infrastructure:ExtraLayoutGroup>
 
 									<StackPanel
 										Visibility="Collapsed"

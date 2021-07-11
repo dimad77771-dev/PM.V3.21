@@ -440,7 +440,7 @@ namespace Profibiz.PracticeManager.Model
 		{
 			get
 			{
-				return new[] { TypeHelper.FormType.Appointment, TypeHelper.FormType.Patient };
+				return new[] { TypeHelper.FormType.Appointment, TypeHelper.FormType.MultiAppointment, TypeHelper.FormType.Patient };
 			}
 		}
 

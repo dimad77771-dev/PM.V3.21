@@ -21,6 +21,7 @@ namespace Profibiz.PracticeManager.EF
             this.InsuranceCoverageServices = new HashSet<InsuranceCoverageService>();
             this.InsuranceCoverageItemCategories = new HashSet<InsuranceCoverageItemCategory>();
             this.Templates = new HashSet<Template>();
+            this.FormDocuments = new HashSet<FormDocument>();
         }
     
         public System.Guid RowId { get; set; }
@@ -46,5 +47,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual Template Template { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Template> Templates { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormDocument> FormDocuments { get; set; }
     }
 }

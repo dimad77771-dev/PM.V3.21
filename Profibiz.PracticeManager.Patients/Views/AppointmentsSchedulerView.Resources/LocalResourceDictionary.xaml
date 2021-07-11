@@ -24,6 +24,7 @@
     <local:AppointmentItemTextDecorationConverter x:Key="AppointmentItemTextDecorationConverter" />
     <local:AppointmentItemTextFontStyleConverter x:Key="AppointmentItemTextFontStyleConverter" />
 	<local:AppointmentVisualTimeCellToolTipConverter x:Key="AppointmentVisualTimeCellToolTipConverter" />
+	<local:AppointmentVisualTimeCellBackgroundConverter x:Key="AppointmentVisualTimeCellBackgroundConverter" />
 
     <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Generic\Appointment.xaml  -->
     <!--  @@@ DevExpress.Xpf.Themes\DevExpress.Xpf.Themes.Office2013DarkGray\DevExpress.Xpf.Scheduler\Generic\DefaultStyles.xaml  -->

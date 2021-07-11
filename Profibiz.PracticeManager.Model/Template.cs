@@ -31,7 +31,9 @@ namespace Profibiz.PracticeManager.Model
 
 		public bool IsTemplate => TemplateType == TypeHelper.TemplateType.Template;
 		public bool IsForm => TemplateType == TypeHelper.TemplateType.Form;
-		public bool IsFormAppointment => TemplateType == TypeHelper.TemplateType.Form && FormType == TypeHelper.FormType.Appointment;
+		public bool IsFormAppointment => TemplateType == TypeHelper.TemplateType.Form && (FormType == TypeHelper.FormType.Appointment || FormType == TypeHelper.FormType.MultiAppointment);
+		public bool IsFormAppointmentSingle => TemplateType == TypeHelper.TemplateType.Form && FormType == TypeHelper.FormType.Appointment;
+		public bool IsFormAppointmentMulti => TemplateType == TypeHelper.TemplateType.Form && FormType == TypeHelper.FormType.MultiAppointment;
 		public bool IsFormPatient => TemplateType == TypeHelper.TemplateType.Form && FormType == TypeHelper.FormType.Patient;
 	}
 }

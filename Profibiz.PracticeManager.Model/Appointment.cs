@@ -231,11 +231,6 @@ namespace Profibiz.PracticeManager.Model
 		{
 			get
 			{
-				if (this.RowId == default(Guid))
-				{
-					var b = 100;
-				}
-
 				var buttons = new List<ButtonAppointmentForm>();
 
 				foreach(var formDocument in FormDocuments)
@@ -258,7 +253,6 @@ namespace Profibiz.PracticeManager.Model
 					OnClickCommand = new DelegateCommand(() => OnClickButtonAppointmentForm(this, null)),
 				});
 
-				//AppointmentFormDocumentMappings
 				return buttons.ToArray();
 			}
 		}

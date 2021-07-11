@@ -920,6 +920,40 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				return appointmentCount >= doctorInfo.MaxAppointmentCount;
 			}
 
+			public (bool, string) GetVisualTimeCellContent(DateTime intervalStart, DateTime intervalEnd)
+			{
+				var interval = new TimeInterval(intervalStart, intervalEnd);
+				var busyDoctors = new List<Guid>();
+				var avilableDoctors = new List<Guid>();
+				foreach (var doctorInfo in DoctorInfo)
+				{
+					var serviceProviderRowId = doctorInfo.Key;
+					var info = doctorInfo.Value;
+					var busyDates = info.BusyDates;
+					if (busyDates.Any(q => q.Intersection(interval)))
+					{
+						busyDoctors.Add(serviceProviderRowId);
+					}
+					else
+					{
+						avilableDoctors.Add(serviceProviderRowId);
+					}
+				}
+
+				var tip = intervalStart.ToString("t") + " - " + intervalEnd.ToString("t");
+				if (busyDoctors.Any())
+				{
+					tip += "\n\n";
+					tip += "Busy:\n" + string.Join("\n", busyDoctors.Select(q => LookupDataProvider.ServiceProvider2Name(q)));
+					if (avilableDoctors.Any())
+					{
+						tip += "\n\nAvilable:\n" + string.Join("\n", avilableDoctors.Select(q => LookupDataProvider.ServiceProvider2Name(q)));
+					}
+				}
+
+				return (busyDoctors.Any(), tip);
+			}
+
 			public DayStatus GetDayStatus(Guid serviceProviderRowId, DateTime date)
 			{
 				var vacationDates = DoctorInfo[serviceProviderRowId].VacationDates;
@@ -948,11 +982,29 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		{
 			public DaysInfoOne() { }
 			public DateTime[] VacationDates; //выходные дни
+			public TimeInterval[] BusyDates;
 			public Int32 MaxAppointmentCount; //сколько максимум Appointment
 			public Dictionary<DateTime, Int32> AppointmentCount = new Dictionary<DateTime, Int32>(); //сколько Appointment по дням
 			public List<SchedulerRecord> SchedulerRecords; //информация о расписании клиента
 		}
 		public enum DayStatus { Work, Holiday, Nowork }
+		public class TimeInterval
+		{
+			public DateTime Start { get; set; }
+			public DateTime Finish { get; set; }
+			public TimeInterval(DateTime start, DateTime finish)
+			{
+				Start = start;
+				Finish = finish;
+			}
+			public bool Intersection(TimeInterval arg)
+			{
+				if (this.Finish <= arg.Start || arg.Finish <= this.Start)
+					return false;
+				else
+					return true;
+			}
+		}
 
 		async Task DaysInfoBuild(bool forInit = false)
 		{
@@ -960,16 +1012,19 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			foreach (var serviceProviderRowId in Doctors.Select(q => q.Id).Where(q => q != ALL_APPOINTMENTBOOKS))
 			{
 				DateTime[] vacationDates;
+				TimeInterval[] busyDates;
 				List<SchedulerRecord> schedulerRecords;
 				if (forInit)
 				{
-					vacationDates = (await businessService.GetCalendarEventList(serviceProviderRowId: serviceProviderRowId, isVacation: true))
-						.Select(q => q.Start).Distinct().ToArray();
+					var vacationEvents = (await businessService.GetCalendarEventList(serviceProviderRowId: serviceProviderRowId, isVacation: true));
+					vacationDates = vacationEvents.Where(q => q.IsVacation).Select(q => q.Start).Distinct().ToArray();
+					busyDates = vacationEvents.Where(q => q.IsBusyEvent).Select(q => new TimeInterval(q.Start, q.Finish)).ToArray();
 					schedulerRecords = await businessService.GetSchedulerRecords(serviceProviderRowId: serviceProviderRowId);
 				}
 				else
 				{
 					vacationDates = DaysInfo.DoctorInfo[serviceProviderRowId].VacationDates;
+					busyDates = DaysInfo.DoctorInfo[serviceProviderRowId].BusyDates;
 					schedulerRecords = DaysInfo.DoctorInfo[serviceProviderRowId].SchedulerRecords;
 				}
 
@@ -977,6 +1032,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				var daysInfoOne = new DaysInfoOne
 				{
 					VacationDates = vacationDates,
+					BusyDates = busyDates,
 					MaxAppointmentCount = serviceProvider.MaximumDayAppointments,
 					SchedulerRecords = schedulerRecords,
 				};

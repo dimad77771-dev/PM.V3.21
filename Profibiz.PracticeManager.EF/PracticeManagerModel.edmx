@@ -570,6 +570,8 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="CategoryRowId" Type="uniqueidentifier" />
+          <Property Name="ServiceProviderRowId" Type="uniqueidentifier" />
         </EntityType>
         <EntityType Name="FormItems">
           <Key>
@@ -5368,6 +5370,18 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_FormDocuments_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="CategoryRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_FormDocuments_CreatedByUserRowId">
           <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
           <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
@@ -5389,6 +5403,18 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Principal>
             <Dependent Role="FormDocuments">
               <PropertyRef Name="PatientRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_ServiceProviders">
+          <End Role="ServiceProviders" Type="Self.ServiceProviders" Multiplicity="0..1" />
+          <End Role="FormDocuments" Type="Self.FormDocuments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProviders">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocuments">
+              <PropertyRef Name="ServiceProviderRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -9483,12 +9509,20 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <End Role="Appointments" EntitySet="Appointments" />
             <End Role="FormDocuments" EntitySet="FormDocuments" />
           </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Categories" Association="Self.FK_FormDocuments_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
           <AssociationSet Name="FK_FormDocuments_CreatedByUserRowId" Association="Self.FK_FormDocuments_CreatedByUserRowId">
             <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="FormDocuments" EntitySet="FormDocuments" />
           </AssociationSet>
           <AssociationSet Name="FK_FormDocuments_Patients" Association="Self.FK_FormDocuments_Patients">
             <End Role="Patients" EntitySet="Patients" />
+            <End Role="FormDocuments" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_ServiceProviders" Association="Self.FK_FormDocuments_ServiceProviders">
+            <End Role="ServiceProviders" EntitySet="ServiceProviders" />
             <End Role="FormDocuments" EntitySet="FormDocuments" />
           </AssociationSet>
           <AssociationSet Name="FK_FormDocuments_UpdatedByUserRowId" Association="Self.FK_FormDocuments_UpdatedByUserRowId">
@@ -12454,6 +12488,14 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             <End Role="ServiceProvider" EntitySet="ServiceProviders" />
             <End Role="LoginInout" EntitySet="LoginInouts" />
           </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_Categories" Association="PracticeManagerModel.FK_FormDocuments_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FormDocuments_ServiceProviders" Association="PracticeManagerModel.FK_FormDocuments_ServiceProviders">
+            <End Role="ServiceProvider" EntitySet="ServiceProviders" />
+            <End Role="FormDocument" EntitySet="FormDocuments" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Patient">
           <Key>
@@ -13457,6 +13499,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="Template" Relationship="PracticeManagerModel.FK_Categories_Templates" FromRole="Category" ToRole="Template" />
           <Property Name="BookingGap" Type="Int32" />
           <NavigationProperty Name="Templates" Relationship="PracticeManagerModel.FK_Templates_Categories" FromRole="Category" ToRole="Template" />
+          <NavigationProperty Name="FormDocuments" Relationship="PracticeManagerModel.FK_FormDocuments_Categories" FromRole="Category" ToRole="FormDocument" />
         </EntityType>
         <Association Name="FK_MedicalServicesOrSupplies_Categories">
           <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="1" />
@@ -14150,6 +14193,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="LoginInouts" Relationship="PracticeManagerModel.FK_LoginInouts_CreatedByUserRowId" FromRole="ServiceProvider" ToRole="LoginInout" />
           <NavigationProperty Name="LoginInouts1" Relationship="PracticeManagerModel.FK_LoginInouts_ServiceProviders" FromRole="ServiceProvider" ToRole="LoginInout" />
           <NavigationProperty Name="LoginInouts2" Relationship="PracticeManagerModel.FK_LoginInouts_UpdatedByUserRowId" FromRole="ServiceProvider" ToRole="LoginInout" />
+          <NavigationProperty Name="FormDocuments11" Relationship="PracticeManagerModel.FK_FormDocuments_ServiceProviders" FromRole="ServiceProvider" ToRole="FormDocument" />
         </EntityType>
         <Association Name="FK__ServicePr__Appoi__24285DB4">
           <End Type="PracticeManagerModel.AppointmentBook" Role="AppointmentBook" Multiplicity="0..1" />
@@ -20921,6 +20965,10 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="Patient" Relationship="PracticeManagerModel.FK_FormDocuments_Patients" FromRole="FormDocument" ToRole="Patient" />
           <NavigationProperty Name="ServiceProvider" Relationship="PracticeManagerModel.FK_FormDocuments_CreatedByUserRowId1" FromRole="FormDocument" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_FormDocuments_UpdatedByUserRowId1" FromRole="FormDocument" ToRole="ServiceProvider" />
+          <Property Name="CategoryRowId" Type="Guid" />
+          <NavigationProperty Name="Category" Relationship="PracticeManagerModel.FK_FormDocuments_Categories" FromRole="FormDocument" ToRole="Category" />
+          <Property Name="ServiceProviderRowId" Type="Guid" />
+          <NavigationProperty Name="ServiceProvider11" Relationship="PracticeManagerModel.FK_FormDocuments_ServiceProviders" FromRole="FormDocument" ToRole="ServiceProvider" />
         </EntityType>
         <Association Name="FK_FormDocuments_CreatedByUserRowId">
           <End Type="PracticeManagerModel.User" Role="User" Multiplicity="0..1" />
@@ -23333,6 +23381,30 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
             </Principal>
             <Dependent Role="LoginInout">
               <PropertyRef Name="UpdatedByUserRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_Categories">
+          <End Type="PracticeManagerModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="CategoryRowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FormDocuments_ServiceProviders">
+          <End Type="PracticeManagerModel.ServiceProvider" Role="ServiceProvider" Multiplicity="0..1" />
+          <End Type="PracticeManagerModel.FormDocument" Role="FormDocument" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ServiceProvider">
+              <PropertyRef Name="RowId" />
+            </Principal>
+            <Dependent Role="FormDocument">
+              <PropertyRef Name="ServiceProviderRowId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -26948,6 +27020,8 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="FormDocuments">
             <EntityTypeMapping TypeName="PracticeManagerModel.FormDocument">
               <MappingFragment StoreEntitySet="FormDocuments">
+                <ScalarProperty Name="ServiceProviderRowId" ColumnName="ServiceProviderRowId" />
+                <ScalarProperty Name="CategoryRowId" ColumnName="CategoryRowId" />
                 <ScalarProperty Name="PatientRowId" ColumnName="PatientRowId" />
                 <ScalarProperty Name="AppointmentRowId" ColumnName="AppointmentRowId" />
                 <ScalarProperty Name="TemplatePath" ColumnName="TemplatePath" />

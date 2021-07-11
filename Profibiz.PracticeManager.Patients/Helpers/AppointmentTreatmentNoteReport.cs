@@ -70,6 +70,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			document.ReplaceField("{{ServiceProvider_Position}}", Doctor.Position);
 			document.ReplaceField("{{Appointment_Date}}", AppointmentDate.FormatShortDate());
 
+			document.ReplaceField("{{DocumentType}}", Row.Treatment ? "Treatment" : Row.Assessment ? "Assessment" : "" );
+
 			document.ReplaceField("{A1}", yesno(Row.InformedConsentReceived));
 			document.ReplaceField("{A2}", yesno(Row.AffectedDailyActivities));
 			var hydrotherapy = LookupDataProvider.Instance.HeatIceEnum.SingleOrDefault(q => q.Value == Row.Hydrotherapy)?.Name?.ToUpper();

@@ -107,7 +107,7 @@ namespace Profibiz.PracticeManager.BL
 
 				var appointmentWithClinicalNotes = 
 					db.AppointmentsV
-					.Where(q => q.PatientRowId == id)	// && q.AppointmentClinicalNoteRowId != null)
+					.Where(q => q.PatientRowId == id)
 					.OrderByDescending(q => q.Start);
 				ret.AppointmentWithClinicalNotes = mapper.Map<List<DTO.Appointment>>(appointmentWithClinicalNotes);
 				var appointmentRowIds = appointmentWithClinicalNotes.Select(z => (Guid?)z.RowId).ToArray();
@@ -131,7 +131,6 @@ namespace Profibiz.PracticeManager.BL
 
 				var appointmentWithTreatmentNotes =
 					db.AppointmentsV
-					//.Where(q => q.PatientRowId == id && q.AppointmentTreatmentNoteRowId != null)
 					.Where(q => q.PatientRowId == id)
 					.OrderByDescending(q => q.Start);
 				ret.AppointmentWithTreatmentNotes = mapper.Map<List<DTO.Appointment>>(appointmentWithTreatmentNotes);

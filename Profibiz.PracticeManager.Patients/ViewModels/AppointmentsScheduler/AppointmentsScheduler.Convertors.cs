@@ -367,5 +367,45 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		}
 	}
 
+	public class AppointmentVisualTimeCellBackgroundConverter : IMultiValueConverter
+	{
+		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+		{
+			var сellContent = values[0] as VisualTimeCellContent;
+			var daysInfo = values[1] as AppointmentsSchedulerViewModel.DaysInfoClass;
+			if (сellContent == null || daysInfo == null) return null;
+
+			var intervalStart = сellContent.IntervalStart;
+			var intervalEnd = сellContent.IntervalEnd;
+
+			var info = daysInfo.GetVisualTimeCellContent(intervalStart, intervalEnd);
+
+			if (parameter.ToString() == "Background")
+			{
+				if (info.Item1)
+				{
+					return new SolidColorBrush(Color.FromRgb(214, 214, 214));
+				}
+				else
+				{
+					//return values[2];
+					//return null;
+					return new SolidColorBrush(Color.FromArgb(0, 0, 0, 0));
+					//return new SolidColorBrush(Color.FromArgb(70, 255, 0, 0));
+				}
+			}
+			else if (parameter.ToString() == "ToolTip")
+			{
+				return info.Item2;
+			}
+
+			return null;
+		}
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+		{
+			throw new NotSupportedException();
+		}
+	}
+
 
 }

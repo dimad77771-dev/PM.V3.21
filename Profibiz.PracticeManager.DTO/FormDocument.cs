@@ -18,6 +18,8 @@ namespace Profibiz.PracticeManager.DTO
 		public string TemplatePath { get; set; }
 		public Guid? AppointmentRowId { get; set; }
 		public Guid? PatientRowId { get; set; }
+		public Guid? CategoryRowId { get; set; }
+		public Guid? ServiceProviderRowId { get; set; }
 
 		public Guid? CreatedByUserRowId { get; set; }
 		public Guid? UpdatedByUserRowId { get; set; }

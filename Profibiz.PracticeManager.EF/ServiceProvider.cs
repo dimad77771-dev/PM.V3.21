@@ -195,6 +195,7 @@ namespace Profibiz.PracticeManager.EF
             this.LoginInouts = new HashSet<LoginInout>();
             this.LoginInouts1 = new HashSet<LoginInout>();
             this.LoginInouts2 = new HashSet<LoginInout>();
+            this.FormDocuments11 = new HashSet<FormDocument>();
         }
     
         public System.Guid RowId { get; set; }
@@ -596,5 +597,7 @@ namespace Profibiz.PracticeManager.EF
         public virtual ICollection<LoginInout> LoginInouts1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<LoginInout> LoginInouts2 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormDocument> FormDocuments11 { get; set; }
     }
 }

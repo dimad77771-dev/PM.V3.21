@@ -149,7 +149,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				{ 
 					var ret = Entity.GetPocoClone(); 
 					ret.AppointmentRowId = appointmentRowId;
-					ret.RowId = Guid.NewGuid();
+					//ret.RowId = Guid.NewGuid();
 					return ret; 
 				}).ToArray();
 			}

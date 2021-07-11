@@ -23,6 +23,8 @@ namespace Profibiz.PracticeManager.Model
 		public string TemplatePath { get; set; }
 		public Guid? AppointmentRowId { get; set; }
 		public Guid? PatientRowId { get; set; }
+		public Guid? CategoryRowId { get; set; }
+		public Guid? ServiceProviderRowId { get; set; }
 
 		public bool IsChanged { get; set; }
 
