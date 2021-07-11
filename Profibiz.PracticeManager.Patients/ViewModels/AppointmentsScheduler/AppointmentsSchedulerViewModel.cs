@@ -920,7 +920,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				return appointmentCount >= doctorInfo.MaxAppointmentCount;
 			}
 
-			public (bool, string) GetVisualTimeCellContent(DateTime intervalStart, DateTime intervalEnd)
+			public enum BusyFreeStatus { Free, BusyAll, BusyPartition }
+			public (BusyFreeStatus, string) GetVisualTimeCellContent(DateTime intervalStart, DateTime intervalEnd)
 			{
 				var interval = new TimeInterval(intervalStart, intervalEnd);
 				var busyDoctors = new List<Guid>();
@@ -951,7 +952,11 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					}
 				}
 
-				return (busyDoctors.Any(), tip);
+				var status =
+					busyDoctors.Any() && avilableDoctors.Any() ? BusyFreeStatus.BusyPartition :
+					busyDoctors.Any() && !avilableDoctors.Any() ? BusyFreeStatus.BusyAll :
+					BusyFreeStatus.Free;
+				return (status, tip);
 			}
 
 			public DayStatus GetDayStatus(Guid serviceProviderRowId, DateTime date)

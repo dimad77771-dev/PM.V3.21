@@ -1399,7 +1399,7 @@
 											Margin="2"
 											Background="Transparent"
 											GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
-											Header="APPOINTMENTS"
+											Header="ONE FORM FOR EACH APPOINTMENT"
 											IsCollapsible="True"
 											View="GroupBox">
 											<dxg:GridControl
@@ -1488,7 +1488,7 @@
 											Margin="2"
 											Background="Transparent"
 											GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
-											Header="MULTI APPOINTMENTS"
+											Header="ONE FORM MULTIPLE APPOINTMENTS"
 											IsCollapsible="True"
 											View="GroupBox">
 											<dxg:GridControl

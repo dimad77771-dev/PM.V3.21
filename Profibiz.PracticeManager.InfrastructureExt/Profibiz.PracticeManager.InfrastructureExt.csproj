@@ -977,6 +977,20 @@
     <Resource Include="Resources\icon-paste-16.png" />
     <Resource Include="Resources\icon-paste-32.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-form-ServiceProvider_Signature-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-form-Patient_Signature-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-form-Appointment_Date-32.png" />
+    <Resource Include="Resources\icon-form-Appointment_FinishTime-32.png" />
+    <Resource Include="Resources\icon-form-Appointment_StartTime-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\icon-form-Appointment_ServiceName-32.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
   </PropertyGroup>

@@ -90,6 +90,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			(row as INotifyPropertyChanged).PropertyChanged += (s, e) =>
 			{
 				var prop = e.PropertyName;
+
 				if (prop == nameof(Entity.TechniquesDeepTissue) && Entity.TechniquesDeepTissue)
 				{
 					Entity.TechniquesModeratePressure = false;
@@ -104,6 +105,15 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				{
 					Entity.TechniquesDeepTissue = false;
 					Entity.TechniquesModeratePressure = false;
+				}
+
+				if (prop == nameof(Entity.Treatment) && Entity.Treatment)
+				{
+					Entity.Assessment = false;
+				}
+				else if (prop == nameof(Entity.Assessment) && Entity.Assessment)
+				{
+					Entity.Treatment = false;
 				}
 			};
 		}

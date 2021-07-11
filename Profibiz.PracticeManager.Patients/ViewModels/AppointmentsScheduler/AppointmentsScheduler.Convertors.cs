@@ -382,9 +382,13 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			if (parameter.ToString() == "Background")
 			{
-				if (info.Item1)
+				if (info.Item1 == AppointmentsSchedulerViewModel.DaysInfoClass.BusyFreeStatus.BusyAll)
 				{
 					return new SolidColorBrush(Color.FromRgb(214, 214, 214));
+				}
+				else if (info.Item1 == AppointmentsSchedulerViewModel.DaysInfoClass.BusyFreeStatus.BusyPartition)
+				{
+					return new SolidColorBrush(Color.FromRgb(242, 242, 242));
 				}
 				else
 				{
