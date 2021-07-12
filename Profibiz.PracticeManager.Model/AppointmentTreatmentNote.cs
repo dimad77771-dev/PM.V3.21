@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Profibiz.PracticeManager.Model
 {
 	[ImplementPropertyChanged]
-	public partial class AppointmentTreatmentNote
+	public partial class AppointmentTreatmentNote : IEntityCreatedUpdated
 	{
 		public AppointmentTreatmentNote()
 		{
@@ -96,5 +96,13 @@ namespace Profibiz.PracticeManager.Model
 		public bool Exercises { get; set; }
 
 		public bool IsChanged { get; set; }
+
+		public Guid? CreatedByUserRowId { get; set; }
+		public Guid? UpdatedByUserRowId { get; set; }
+		public DateTime? CreatedByDateTime { get; set; }
+		public DateTime? UpdatedByDateTime { get; set; }
+
+
+		public String CreatedUpdatedString => this.GetCreatedUpdatedString();
 	}
 }

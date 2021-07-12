@@ -90,5 +90,10 @@ namespace Profibiz.PracticeManager.DTO
 		public bool ColdPack { get; set; }
 		public bool Laser { get; set; }
 		public bool Exercises { get; set; }
+
+		public Guid? CreatedByUserRowId { get; set; }
+		public Guid? UpdatedByUserRowId { get; set; }
+		public DateTime? CreatedByDateTime { get; set; }
+		public DateTime? UpdatedByDateTime { get; set; }
 	}
 }

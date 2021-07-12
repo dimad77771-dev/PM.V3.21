@@ -172,6 +172,7 @@
 								DisplayMember="Name"
 								EditValue="{Binding Entity.InformedConsentReceived, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
 								ItemsSource="{Binding YesNo, Source={StaticResource lookupDataProvider}}"
+								IsReadOnly="{Binding IsReadOnly}"
 								ShowBorder="False"
 								ValueMember="Value">
 
@@ -195,6 +196,7 @@
 								Grid.Row="3"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Treatment, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="3"
@@ -206,6 +208,7 @@
 								Grid.Row="4"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Assessment, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="4"
@@ -229,6 +232,7 @@
 								HorizontalAlignment="Left"
 								DisplayMember="Name"
 								EditValue="{Binding Entity.Subjectiveinfo, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								IsReadOnly="{Binding IsReadOnly}"
 								ItemsSource="{Binding YesNo10, Source={StaticResource lookupDataProvider}}"
 								ShowBorder="False"
 								ValueMember="Value">
@@ -262,6 +266,7 @@
 								Grid.Row="9"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.CervicalSpine, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="9"
@@ -273,6 +278,7 @@
 								Grid.Row="10"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.ThoracicSpine, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="10"
@@ -284,6 +290,7 @@
 								Grid.Row="11"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.LumbarSpine, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="11"
@@ -309,6 +316,7 @@
 								Grid.Row="19"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsGlenohumeral, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="19"
@@ -320,6 +328,7 @@
 								Grid.Row="20"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsElbow, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="20"
@@ -331,6 +340,7 @@
 								Grid.Row="21"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsWrist, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="21"
@@ -342,6 +352,7 @@
 								Grid.Row="22"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsHip, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="22"
@@ -353,6 +364,7 @@
 								Grid.Row="23"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsKnee, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="23"
@@ -364,6 +376,7 @@
 								Grid.Row="24"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AffectedJointsAnkle, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="24"
@@ -476,6 +489,7 @@
 								HorizontalAlignment="Left"
 								DisplayMember="Name"
 								EditValue="{Binding Entity.AffectedDailyActivities, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								IsReadOnly="{Binding IsReadOnly}"
 								ItemsSource="{Binding YesNo, Source={StaticResource lookupDataProvider}}"
 								ShowBorder="False"
 								ValueMember="Value">
@@ -507,6 +521,7 @@
 								HorizontalAlignment="Left"
 								DisplayMember="Name"
 								EditValue="{Binding Entity.Hydrotherapy, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+								IsReadOnly="{Binding IsReadOnly}"
 								ItemsSource="{Binding HeatIceEnum, Source={StaticResource lookupDataProvider}}"
 								ShowBorder="False"
 								ValueMember="Value">
@@ -535,6 +550,7 @@
 								Grid.Row="19"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedUpperBody, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="19"
@@ -546,6 +562,7 @@
 								Grid.Row="20"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedLowerBody, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="20"
@@ -557,6 +574,7 @@
 								Grid.Row="21"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedFullBody, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="21"
@@ -568,6 +586,7 @@
 								Grid.Row="22"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedBack, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="22"
@@ -579,6 +598,7 @@
 								Grid.Row="23"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedHipArea, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="23"
@@ -590,6 +610,7 @@
 								Grid.Row="24"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedNeck, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="24"
@@ -601,6 +622,7 @@
 								Grid.Row="25"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedShoulders, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="25"
@@ -612,6 +634,7 @@
 								Grid.Row="26"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedAbdominals, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="26"
@@ -623,6 +646,7 @@
 								Grid.Row="27"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedChest, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="27"
@@ -634,6 +658,7 @@
 								Grid.Row="28"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedFace, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="28"
@@ -645,6 +670,7 @@
 								Grid.Row="29"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedScalp, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="29"
@@ -656,6 +682,7 @@
 								Grid.Row="30"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedArmLR, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="30"
@@ -667,6 +694,7 @@
 								Grid.Row="31"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.AreasTreatedLegLR, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="31"
@@ -688,6 +716,7 @@
 								Width="130"
 								HorizontalAlignment="Left"
 								EditValue="{Binding Entity.AreasTreatedOther, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, NotifyOnSourceUpdated=True}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource baseEditStyle1}"
 								TabIndex="20" />
 							<FrameworkElement
@@ -709,6 +738,7 @@
 								Grid.Row="41"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.StressReductionPain, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="41"
@@ -720,6 +750,7 @@
 								Grid.Row="42"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.ROMImprovRelaxation, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="42"
@@ -834,6 +865,7 @@
 								Grid.Row="4"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesSwedish, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="4"
@@ -845,6 +877,7 @@
 								Grid.Row="5"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesThaiOil, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="5"
@@ -856,6 +889,7 @@
 								Grid.Row="6"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesThai, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="6"
@@ -867,6 +901,7 @@
 								Grid.Row="7"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesAshiatsu, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="7"
@@ -878,6 +913,7 @@
 								Grid.Row="8"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesLymphaticDrainage, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="8"
@@ -889,6 +925,7 @@
 								Grid.Row="9"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesStroking, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="9"
@@ -900,6 +937,7 @@
 								Grid.Row="10"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesRocking, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="10"
@@ -911,6 +949,7 @@
 								Grid.Row="11"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesEffleurage, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="11"
@@ -922,6 +961,7 @@
 								Grid.Row="12"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesPetrissage, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="12"
@@ -933,6 +973,7 @@
 								Grid.Row="13"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesTriggerPoint, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="13"
@@ -944,6 +985,7 @@
 								Grid.Row="14"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesPressurePoints, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="14"
@@ -955,6 +997,7 @@
 								Grid.Row="15"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesJointMobilization, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="15"
@@ -966,6 +1009,7 @@
 								Grid.Row="16"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesFriction, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="16"
@@ -977,6 +1021,7 @@
 								Grid.Row="17"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesPassiveStretching, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="17"
@@ -1004,6 +1049,7 @@
 								Grid.Row="22"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesDeepTissue, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="22"
@@ -1015,6 +1061,7 @@
 								Grid.Row="23"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesModeratePressure, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="23"
@@ -1026,6 +1073,7 @@
 								Grid.Row="24"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.TechniquesLightPressure, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="24"
@@ -1133,6 +1181,7 @@
 								Grid.Row="1"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackRelaxation, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="1"
@@ -1144,6 +1193,7 @@
 								Grid.Row="2"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackStressReduction, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="2"
@@ -1155,6 +1205,7 @@
 								Grid.Row="3"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackMuscleRelaxation, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="3"
@@ -1166,6 +1217,7 @@
 								Grid.Row="4"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackIncreaseROM, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="4"
@@ -1177,6 +1229,7 @@
 								Grid.Row="5"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackPainReduction, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="5"
@@ -1188,6 +1241,7 @@
 								Grid.Row="6"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackPostureImprovement, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="6"
@@ -1199,6 +1253,7 @@
 								Grid.Row="7"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackTenstionReduction, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="7"
@@ -1210,6 +1265,7 @@
 								Grid.Row="8"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.FeedbackStiffnessReduction, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="8"
@@ -1236,6 +1292,7 @@
 								Grid.Row="12"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.IFC, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="12"
@@ -1247,6 +1304,7 @@
 								Grid.Row="13"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Hotpack, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="13"
@@ -1258,6 +1316,7 @@
 								Grid.Row="14"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Ultrasound, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="14"
@@ -1269,6 +1328,7 @@
 								Grid.Row="15"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.SoftTissueRelease, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="15"
@@ -1280,6 +1340,7 @@
 								Grid.Row="16"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.ShockwaveTherapy, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="16"
@@ -1291,6 +1352,7 @@
 								Grid.Row="17"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.ColdPack, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="17"
@@ -1302,6 +1364,7 @@
 								Grid.Row="18"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Laser, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="18"
@@ -1313,6 +1376,7 @@
 								Grid.Row="19"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.Exercises, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="19"
@@ -1418,6 +1482,7 @@
 								Grid.Row="1"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedHeatPacks, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="1"
@@ -1429,6 +1494,7 @@
 								Grid.Row="2"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedColdPacks, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="2"
@@ -1440,6 +1506,7 @@
 								Grid.Row="3"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedContrastHydrotherapy, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="3"
@@ -1451,6 +1518,7 @@
 								Grid.Row="4"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedHotBaths, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="4"
@@ -1462,6 +1530,7 @@
 								Grid.Row="5"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedSelfMassage, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="5"
@@ -1473,6 +1542,7 @@
 								Grid.Row="6"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedStretching, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="6"
@@ -1484,6 +1554,7 @@
 								Grid.Row="7"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedDiaphragmaticBreathing, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="7"
@@ -1495,6 +1566,7 @@
 								Grid.Row="8"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedYoga, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="8"
@@ -1506,6 +1578,7 @@
 								Grid.Row="9"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedPilates, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="9"
@@ -1517,6 +1590,7 @@
 								Grid.Row="10"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedWalkingSwimmingCycling, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="10"
@@ -1528,6 +1602,7 @@
 								Grid.Row="11"
 								Grid.Column="0"
 								IsChecked="{Binding Entity.RecommendedNonWeightBbearing, Mode=TwoWay}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource styleCheckbox1}" />
 							<dxlc:LayoutItemLabel
 								Grid.Row="11"
@@ -1649,6 +1724,7 @@
 								VerticalContentAlignment="Top"
 								AcceptsReturn="True"
 								EditValue="{Binding Entity.Comments, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"
+								IsReadOnly="{Binding IsReadOnly}"
 								Style="{StaticResource baseEditStyle1}"
 								TextWrapping="Wrap"
 								VerticalScrollBarVisibility="Auto" />
@@ -1676,13 +1752,23 @@
 
 				<Grid Grid.Row="1">
 					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="*" />
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="Auto" />
 						<ColumnDefinition Width="Auto" />
 					</Grid.ColumnDefinitions>
+
+					<Label
+						Grid.Column="0"
+						Margin="10,5,10,0"
+						VerticalAlignment="Center"
+						VerticalContentAlignment="Center"
+						Content="{Binding Entity.CreatedUpdatedString, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True, Mode=OneWay}" />
+
+
 					<Button
-						Grid.Column="1"
+						Grid.Column="2"
 						Margin="5,0,5,0"
 						Command="{Binding DeleteCommand}"
 						Visibility="{Binding ShowDeleteButton, Converter={StaticResource BooleanToVisibilityConverter}}">
@@ -1695,7 +1781,7 @@
 						</StackPanel>
 					</Button>
 					<Button
-						Grid.Column="2"
+						Grid.Column="3"
 						Margin="5,0,5,0"
 						Command="{Binding PrintCommand}">
 						<StackPanel Orientation="Horizontal">
@@ -1707,7 +1793,7 @@
 						</StackPanel>
 					</Button>
 					<infrastructure:CommandPanelView
-						Grid.Column="3"
+						Grid.Column="4"
 						Margin="0"
 						HorizontalAlignment="Right"
 						HorizontalContentAlignment="Right"

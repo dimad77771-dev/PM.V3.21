@@ -76,12 +76,22 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				entity.AppointmentRowId = OpenParam.AppointmentRowIds[0];
 			}
 			Entity = entity;
+			ReadOnlySetup();
 			EntitySubscribeRow(Entity);
 			ResetHasChange();
 
 
 			ShowWaitIndicator.Hide();
 			DXSplashScreenHelper.Hide();
+		}
+
+		void ReadOnlySetup()
+		{
+			IsReadOnly = OpenParam.IsReadOnly;
+			if (!IsNew && Entity.CreatedByUserRowId != null && UserManager.UserRowId != Entity.CreatedByUserRowId)
+			{
+				IsReadOnly = true;
+			}
 		}
 
 		void EntitySubscribeRow(AppointmentTreatmentNote row)

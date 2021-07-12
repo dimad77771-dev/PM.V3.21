@@ -30,10 +30,11 @@ using System.IO;
 using DevExpress.XtraRichEdit;
 using DevExpress.XtraRichEdit.API.Native;
 using DevExpress.XtraRichEdit.Printing;
-using System.Windows.Controls;
 using Syncfusion.DocIO.DLS;
 using Syncfusion.DocIO;
 using Syncfusion.DocToPDFConverter;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace Profibiz.PracticeManager.Patients.ViewModels
 {
@@ -164,6 +165,17 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			document.ReplaceField("{Comments}", Row.Comments);
 
+			var imagebytes = Doctor.Signature;
+			if (imagebytes != null && imagebytes.Length > 0)
+			{
+				imagebytes = GetSignatureImagebytes(imagebytes);
+				document.ReplaceImage("{{ServiceProvider_Signature}}", imagebytes);
+			}
+			else
+			{
+				document.ReplaceField("{{ServiceProvider_Signature}}", "");
+			}
+
 			var converter = new DocToPDFConverter();
 			var pdfDocument = converter.ConvertToPDF(document);
 			var pdfFilename = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + ".pdf");
@@ -172,6 +184,31 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			document.Close();
 
 			OpenPdf(pdfFilename);
+		}
+
+		byte[] GetSignatureImagebytes(byte[] imagebytes)
+		{
+			var hh0 = 75f;
+			var ms2 = new MemoryStream(imagebytes);
+			
+			var image = Image.FromStream(ms2);
+			var hh = image.Height;
+			var ww = image.Width;
+			var koef = hh / hh0;
+			hh = (int)(hh / koef);
+			ww = (int)(ww / koef);
+
+			var image2 = (Image)(new Bitmap(image, ww, hh));
+			var ms = new MemoryStream();
+			image2.Save(ms, ImageFormat.Png);
+			var newImageBytes = ms.ToArray();
+
+			image.Dispose();
+			image2.Dispose();
+			ms.Dispose();
+			ms2.Dispose();
+
+			return newImageBytes;
 		}
 
 		string check(bool? arg)

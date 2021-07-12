@@ -110,6 +110,7 @@
                     </dxg:GridColumn>
                     <dxg:GridColumn FieldName="Code" Header="CODE" Width="50"/>
                     <dxg:GridColumn FieldName="Name" Header="NAME" />
+					<dxg:GridColumn FieldName="Qty" Header="QTY" Width="50" />
                     <dxg:GridColumn FieldName="CategoryRowId"
                                     Header="CATEGORY"
                                     EditSettings="{StaticResource comboBoxCategories}" />

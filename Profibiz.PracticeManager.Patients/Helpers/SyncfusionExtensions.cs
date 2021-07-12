@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using Syncfusion.DocIO.DLS;
 
@@ -77,6 +78,20 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			for (int index = 0; index < count; index++)
 			{
 				collection.RemoveAt(0);
+			}
+		}
+
+		public static void ReplaceImage(this WordDocument document, string fieldName, byte[] imagebytes)
+		{
+			var textSelections = document.FindAll(fieldName, true, false);
+			for (int i = 0; i < textSelections.Length; i++)
+			{
+				WParagraph paragraph = new WParagraph(document);
+				WPicture picture = paragraph.AppendPicture(imagebytes) as WPicture;
+				TextSelection newSelection = new TextSelection(paragraph, 0, 1);
+				TextBodyPart bodyPart = new TextBodyPart(document);
+				bodyPart.BodyItems.Add(paragraph);
+				document.Replace(textSelections[i].SelectedText, bodyPart, true, true);
 			}
 		}
 	}
