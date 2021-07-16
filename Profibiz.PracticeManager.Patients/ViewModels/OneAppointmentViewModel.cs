@@ -144,7 +144,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					{
 						RowId = Guid.NewGuid(),
 						IsNotRegistered = true,
-						Rate = 100,
+						Rate = Patient.DEFAULT_RATE,
+						HasNoCoverage = Patient.DEFAULT_HASNOCOVERAGE,
 					};
 					Entity.PatientRowId = Entity.Patient.RowId;
 				}

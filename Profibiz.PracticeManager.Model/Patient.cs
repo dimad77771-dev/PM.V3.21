@@ -94,6 +94,9 @@ namespace Profibiz.PracticeManager.Model
 		public string InsuranceCertificateId { get; set; }
 		public int? spaCustomerNumber { get; set; }
 
+		public const decimal DEFAULT_RATE = 100M;
+		public const bool DEFAULT_HASNOCOVERAGE = true;
+
 		public virtual ObservableCollection<Patient> FamilyMembers { get; set; }
 		public virtual Patient FamilyHead { get; set; }
 		public virtual ObservableCollection<PatientCoverage> PatientCoverage { get; set; } = new ObservableCollection<Model.PatientCoverage>();

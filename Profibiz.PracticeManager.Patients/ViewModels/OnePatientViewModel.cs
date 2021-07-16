@@ -128,7 +128,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				NLog.vv();
 				entity = new Patient();
 				entity.RowId = Guid.NewGuid();
-				entity.Rate = DEFAULT_RATE;
+				entity.Rate = Patient.DEFAULT_RATE;
+				entity.HasNoCoverage = Patient.DEFAULT_HASNOCOVERAGE;
 				entity.Province1 = LookupDataProvider.PROVINCE_ONTARIO;
 				entity.Province2 = LookupDataProvider.PROVINCE_ONTARIO;
 
@@ -1423,7 +1424,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				if (e.PropertyName == nameof(Entity.HasNoCoverage))
 				{
 					UpdateIsVisibilityInsuranceCoverage();
-					Entity.Rate = (Entity.HasNoCoverage ? 100M : DEFAULT_RATE);
+					Entity.Rate = (Entity.HasNoCoverage ? 100M : Patient.DEFAULT_RATE);
 					IsVisibilityRate = true;
 				}
 			};
@@ -1455,7 +1456,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 
 
-		public const decimal DEFAULT_RATE = 100M;
+		
 
 
 
