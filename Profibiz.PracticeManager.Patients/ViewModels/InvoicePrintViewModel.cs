@@ -282,7 +282,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 
 			var printTemplate = Entity.PrintTemplate;
 			var isPaid = Entity.IsPaid;
-			var bytes = await FormDocumentHelper.GetTemplateDocumentBytesByCode(printTemplate, isPaid, MessageBoxService);
+			var isEstimation = Entity.IsEstimation;
+			var bytes = await FormDocumentHelper.GetTemplateDocumentBytesByCode(printTemplate, isPaid, isEstimation, MessageBoxService);
 			if (bytes == null) return;
 
 			//var template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code == printTemplate);
@@ -302,22 +303,21 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			RichEditConrolManager.LoadDocument(stream, DocumentFormat.OpenXml);
 		}
 
-		string GetTemplateFileName(string file)
-		{
-			if (Entity != null)
-			{
-				if (Entity.IsPaid)
-				{
-					var filePaid = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + "_paid" + Path.GetExtension(file));
-					if (File.Exists(filePaid))
-					{
-						return filePaid;
-					}
-				}
-			}
-
-			return file;
-		}
+		//string GetTemplateFileName(string file)
+		//{
+		//	if (Entity != null)
+		//	{
+		//		if (Entity.IsPaid)
+		//		{
+		//			var filePaid = Path.Combine(Path.GetDirectoryName(file), Path.GetFileNameWithoutExtension(file) + "_paid" + Path.GetExtension(file));
+		//			if (File.Exists(filePaid))
+		//			{
+		//				return filePaid;
+		//			}
+		//		}
+		//	}
+		//	return file;
+		//}
 
 
 		void ReplaceField(Document doc, string field, string value)

@@ -114,14 +114,20 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			return path;
 		}
 
-		public static async Task<byte[]> GetTemplateDocumentBytesByCode(string code, bool isPaid, IMessageBoxService MessageBoxService)
+		public static async Task<byte[]> GetTemplateDocumentBytesByCode(string code, bool isPaid, bool isEstimation, IMessageBoxService MessageBoxService)
 		{
 			Template template = null;
-			if (isPaid)
+			if (isEstimation)
+			{
+				var code2 = code + "_estimation";
+				template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code.ToLower() == code2.ToLower());
+			}
+			else if (isPaid)
 			{
 				var code2 = code + "_paid";
 				template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code.ToLower() == code2.ToLower());
 			}
+
 			if (template == null)
 			{
 				template = LookupDataProvider.Instance.Templates.FirstOrDefault(q => q.IsTemplate && q.Code.ToLower() == code.ToLower());
