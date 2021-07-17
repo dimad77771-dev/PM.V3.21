@@ -256,9 +256,9 @@ namespace Profibiz.PracticeManager.WebApi.Controllers
 
 
 		#region Invoice
-		public IHttpActionResult GetInvoiceList(Guid? rowId = null, Guid? patientRowId = null, Boolean? useFamilyHead = null, int? noPaidOnly = null, bool flagNoPaidOrNoApprovedAmount = false, bool negativeBalanceOnly = false, DateTime? invoiceDateFrom = null, DateTime? invoiceDateTo = null, bool includeInvoiceClaims = false, bool IsShowSentOnly = false, bool IsShowPaidOnly = false, Guid? ReferrerRowId = null, Guid? InsuranceProviderRowId = null, DateTime? createdDateFrom = null, DateTime? createdDateTo = null, bool isCoordinationProblemOnly = false)
+		public IHttpActionResult GetInvoiceList(Guid? rowId = null, Guid? patientRowId = null, Boolean? useFamilyHead = null, int? noPaidOnly = null, bool flagNoPaidOrNoApprovedAmount = false, bool negativeBalanceOnly = false, DateTime? invoiceDateFrom = null, DateTime? invoiceDateTo = null, bool includeInvoiceClaims = false, bool IsShowSentOnly = false, bool IsShowPaidOnly = false, Guid? ReferrerRowId = null, Guid? InsuranceProviderRowId = null, DateTime? createdDateFrom = null, DateTime? createdDateTo = null, bool isCoordinationProblemOnly = false, int hideEstimation = 0)
 		{
-			var rezult = _repository.GetInvoiceList(rowId, patientRowId, useFamilyHead, noPaidOnly, flagNoPaidOrNoApprovedAmount, negativeBalanceOnly, invoiceDateFrom, invoiceDateTo, includeInvoiceClaims, IsShowSentOnly, IsShowPaidOnly, ReferrerRowId, InsuranceProviderRowId, createdDateFrom, createdDateTo, isCoordinationProblemOnly);
+			var rezult = _repository.GetInvoiceList(rowId, patientRowId, useFamilyHead, noPaidOnly, flagNoPaidOrNoApprovedAmount, negativeBalanceOnly, invoiceDateFrom, invoiceDateTo, includeInvoiceClaims, IsShowSentOnly, IsShowPaidOnly, ReferrerRowId, InsuranceProviderRowId, createdDateFrom, createdDateTo, isCoordinationProblemOnly, hideEstimation);
 			return Ok(rezult);
 		}
 		public IHttpActionResult GetInvoice(Guid id, bool includeAppointment = false)

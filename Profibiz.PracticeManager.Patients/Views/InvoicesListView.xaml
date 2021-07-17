@@ -25,7 +25,9 @@
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
 
-    <i:Interaction.Triggers>
+	
+
+	<i:Interaction.Triggers>
         <inter:InteractionRequestTrigger SourceObject="{Binding ShowDXWindowsInteractionRequest}">
             <infrastructure:ShowDXWindowsAction />
         </inter:InteractionRequestTrigger>
@@ -39,6 +41,7 @@
         <localvmodel:InvoiceClaimFormsConverter x:Key="InvoiceClaimFormsConverter" />
         <localvmodel:InvoicesListRowItalicConverter x:Key="InvoicesListRowItalicConverter" />
         <localvmodel:InvoicesListViewModelRowBackgroundConverter x:Key="InvoicesListViewModelRowBackgroundConverter" />
+		<localvmodel:InvoicesListViewModelRowForegroundConvertor x:Key="InvoicesListViewModelRowForegroundConvertor" />
 
 
         <Style x:Key="localCellStyle0" TargetType="dxg:LightweightCellEditor">
@@ -63,7 +66,15 @@
             x:Key="localCellStyleNotMerge"
             BasedOn="{StaticResource localCellStyle0}"
             TargetType="dxg:LightweightCellEditor">
-            <Setter Property="Foreground" Value="{Binding RowData.Row.InvoiceClaim.StatusInfo, Converter={StaticResource InvoiceClaimStatusInfo2ForegroundConvertor}}" />
+			<!--<Setter Property="Foreground" Value="{Binding RowData.Row.InvoiceClaim.StatusInfo, Converter={StaticResource InvoicesListViewModelRowForegroundConvertor}}" />-->
+			<Setter Property="Foreground">
+				<Setter.Value>
+					<MultiBinding Converter="{StaticResource InvoicesListViewModelRowForegroundConvertor}">
+						<Binding Path="RowData.Row.InvoiceClaim" />
+						<Binding Path="RowData.Row.Invoice" />
+					</MultiBinding>
+				</Setter.Value>
+			</Setter>
             <Style.Triggers>
                 <DataTrigger Binding="{Binding Path=RowData.Row.RowType}" Value="Total">
                     <Setter Property="Foreground" Value="Black" />
@@ -80,7 +91,10 @@
                 <DataTrigger Binding="{Binding Path=RowData.Row.Invoice.HasNoCoverage}" Value="True">
                     <Setter Property="Foreground" Value="#0026FF" />
                 </DataTrigger>
-            </Style.Triggers>
+				<DataTrigger Binding="{Binding Path=RowData.Row.Invoice.IsEstimation}" Value="True">
+					<Setter Property="Foreground" Value="#FF9D00" />
+				</DataTrigger>
+			</Style.Triggers>
         </Style>
 
 

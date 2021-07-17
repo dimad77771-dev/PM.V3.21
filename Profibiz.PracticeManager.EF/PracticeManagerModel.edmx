@@ -970,6 +970,7 @@
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsEstimation" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="InvoiceStatuses">
           <Key>
@@ -2858,10 +2859,6 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.InvoicesView' does not have a 
         <EntityType Name="InvoicesView">
           <Key>
             <PropertyRef Name="RowId" />
-            
-            
-            
-            
           </Key>
           <Property Name="RowId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="PatientRowId" Type="uniqueidentifier" Nullable="false" />
@@ -2889,6 +2886,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.InvoicesView' does not have a 
           <Property Name="UpdatedByUserRowId" Type="uniqueidentifier" />
           <Property Name="CreatedByDateTime" Type="datetime" />
           <Property Name="UpdatedByDateTime" Type="datetime" />
+          <Property Name="IsEstimation" Type="bit" Nullable="false" />
           <Property Name="Amount" Type="decimal" Precision="38" Scale="8" />
           <Property Name="Tax" Type="decimal" Precision="38" Scale="8" />
           <Property Name="PaymentAmount" Type="decimal" Precision="38" Scale="4" />
@@ -8262,6 +8260,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
     [InvoicesView].[UpdatedByUserRowId] AS [UpdatedByUserRowId], 
     [InvoicesView].[CreatedByDateTime] AS [CreatedByDateTime], 
     [InvoicesView].[UpdatedByDateTime] AS [UpdatedByDateTime], 
+    [InvoicesView].[IsEstimation] AS [IsEstimation], 
     [InvoicesView].[Amount] AS [Amount], 
     [InvoicesView].[Tax] AS [Tax], 
     [InvoicesView].[PaymentAmount] AS [PaymentAmount], 
@@ -13388,6 +13387,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <Property Name="UpdatedByUserRowId" Type="Guid" />
           <Property Name="CreatedByDateTime" Type="DateTime" Precision="3" />
           <Property Name="UpdatedByDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IsEstimation" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="PatientV">
           <Key>
@@ -14285,6 +14285,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <NavigationProperty Name="User1" Relationship="PracticeManagerModel.FK_Invoices_UpdatedByUserRowId" FromRole="InvoiceT" ToRole="User" />
           <NavigationProperty Name="ServiceProvider1" Relationship="PracticeManagerModel.FK_Invoices_CreatedByUserRowId1" FromRole="InvoiceT" ToRole="ServiceProvider" />
           <NavigationProperty Name="ServiceProvider2" Relationship="PracticeManagerModel.FK_Invoices_UpdatedByUserRowId1" FromRole="InvoiceT" ToRole="ServiceProvider" />
+          <Property Name="IsEstimation" Type="Boolean" Nullable="false" />
         </EntityType>
         <Association Name="FK_InvoiceItems_Invoices">
           <End Type="PracticeManagerModel.InvoiceT" Role="Invoice" Multiplicity="1" />
@@ -23925,6 +23926,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="InvoicesV">
             <EntityTypeMapping TypeName="PracticeManagerModel.InvoiceV">
               <MappingFragment StoreEntitySet="InvoicesView">
+                <ScalarProperty Name="IsEstimation" ColumnName="IsEstimation" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />
@@ -24421,6 +24423,7 @@ warning 6002: The table/view 'PM_V3_iflow2_p4.dbo.TreatmentPlanRecordsView' does
           <EntitySetMapping Name="InvoicesT">
             <EntityTypeMapping TypeName="PracticeManagerModel.InvoiceT">
               <MappingFragment StoreEntitySet="Invoices">
+                <ScalarProperty Name="IsEstimation" ColumnName="IsEstimation" />
                 <ScalarProperty Name="UpdatedByDateTime" ColumnName="UpdatedByDateTime" />
                 <ScalarProperty Name="CreatedByDateTime" ColumnName="CreatedByDateTime" />
                 <ScalarProperty Name="UpdatedByUserRowId" ColumnName="UpdatedByUserRowId" />

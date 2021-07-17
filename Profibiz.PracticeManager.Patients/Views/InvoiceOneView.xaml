@@ -423,7 +423,7 @@
 						<Grid
 							Grid.Row="7"
 							Grid.Column="1"
-							Grid.ColumnSpan="5">
+							Grid.ColumnSpan="3">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="117*" />
 								<ColumnDefinition Width="335*" />
@@ -456,6 +456,18 @@
 								</StackPanel>
 							</Button>
 						</Grid>
+
+						<dxlc:LayoutItemLabel
+							Grid.Row="7"
+							Grid.Column="4"
+							Content="Estimation"
+							Style="{StaticResource layoutItemLabelStyle1Left}" />
+						<dxe:CheckEdit
+							Grid.Row="7"
+							Grid.Column="5"
+							IsChecked="{Binding Entity.IsEstimation, Mode=TwoWay}"
+							IsReadOnly="{Binding ReadOnlyIsEstimation}"
+							Style="{StaticResource baseEditStyle0}" />
 
 					</Grid>
 				</dxlc:LayoutItem>
@@ -671,6 +683,7 @@
 					Background="Transparent"
 					GroupBoxStyle="{StaticResource layoutGroupGroupBoxStyle}"
 					Header="PAYMENTS"
+					Visibility="{Binding Entity.IsEstimation, Converter={StaticResource BooleanToVisibilityInverseConverter}}"
 					IsCollapsed="{Binding IsCollapsedLayoutPayments, Mode=TwoWay}"
 					IsCollapsible="True"
 					View="GroupBox">

@@ -109,7 +109,7 @@ namespace Profibiz.PracticeManager.BL
 		IEnumerable<CalendarEvent> GetCalendarEventList(Guid? patientRowId, Guid? serviceProviderRowId, Guid? rowId, DateTime? startFrom, DateTime? startTo, Boolean? completed, string rowIds, bool? forRemainder, bool? isVacation);
 		void UpdateCalendarEventCore(List<CalendarEvent> entity, EntityState state);
 
-		IEnumerable<Invoice> GetInvoiceList(Guid? rowId, Guid? patientRowId, bool? useFamilyHead, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? invoiceDateFrom, DateTime? invoiceDateTo, bool includeInvoiceClaims, bool IsShowSentOnly, bool IsShowPaidOnly, Guid? ReferrerRowId, Guid? InsuranceProviderRowId, DateTime? createdDateFrom, DateTime? createdDateTo, bool isCoordinationProblemOnly);
+		IEnumerable<Invoice> GetInvoiceList(Guid? rowId, Guid? patientRowId, bool? useFamilyHead, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? invoiceDateFrom, DateTime? invoiceDateTo, bool includeInvoiceClaims, bool IsShowSentOnly, bool IsShowPaidOnly, Guid? ReferrerRowId, Guid? InsuranceProviderRowId, DateTime? createdDateFrom, DateTime? createdDateTo, bool isCoordinationProblemOnly, int hideEstimation);
 		Invoice GetInvoice(Guid id, bool includeAppointment);
 		ServerReturnUpdateInvoice UpdateInvoiceCore(Invoice entity);
 		ServerReturnUpdateInvoice DeleteInvoiceCore(List<Guid> entity);

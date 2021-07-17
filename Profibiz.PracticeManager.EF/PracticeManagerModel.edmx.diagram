@@ -302,7 +302,7 @@
         <EntityTypeShape EntityType="PracticeManagerModel.Patient" Width="1.5" PointX="12.75" PointY="4.25" />
         <AssociationConnector Association="PracticeManagerModel.FK_Patients_Patients" />
         <AssociationConnector Association="PracticeManagerModel.FK_Invoices_Patients" />
-        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="1.5" PointX="0.875" PointY="9.875" />
+        <EntityTypeShape EntityType="PracticeManagerModel.InvoicePayment" Width="1.5" PointX="4.75" PointY="4.25" />
         <AssociationConnector Association="PracticeManagerModel.InvoicePayment_InvoiceV" />
         <AssociationConnector Association="PracticeManagerModel.FK_InvoicePayments_Invoices" />
         <EntityTypeShape EntityType="PracticeManagerModel.PatientV" Width="1.5" PointX="3.625" PointY="11.75" />

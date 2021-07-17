@@ -31,6 +31,7 @@ namespace Profibiz.PracticeManager.Model
 		public Guid? ThirdPartyServiceProviderRowId { get; set; }
 		public Guid? Status1RowId { get; set; }
 		public Guid? Status2RowId { get; set; }
+		public bool IsEstimation { get; set; }
 
 		public decimal Rate { get; set; }
 		public bool HasNoCoverage { get; set; }
@@ -159,6 +160,6 @@ namespace Profibiz.PracticeManager.Model
 			}
 		}
 
-		public bool IsPaid => ((Total ?? 0) > 0 && (PaymentRequest ?? 0) <= 0);
+		public bool IsPaid => (Total ?? 0) > 0 && (PaymentRequest ?? 0) <= 0 && (PaymentTotal ?? 0) > 0;
 	}
 }

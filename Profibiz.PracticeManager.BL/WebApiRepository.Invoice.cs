@@ -20,7 +20,7 @@ namespace Profibiz.PracticeManager.BL
 {
     public partial class WebApiRepository
     {
-		public IEnumerable<DTO.Invoice> GetInvoiceList(Guid? rowId, Guid? patientRowId, bool? useFamilyHead, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? invoiceDateFrom, DateTime? invoiceDateTo, bool includeInvoiceClaims, bool isShowSentOnly, bool isShowPaidOnly, Guid? referrerRowId, Guid? insuranceProviderRowId, DateTime? createdDateFrom, DateTime? createdDateTo, bool isCoordinationProblemOnly)
+		public IEnumerable<DTO.Invoice> GetInvoiceList(Guid? rowId, Guid? patientRowId, bool? useFamilyHead, int? noPaidOnly, bool flagNoPaidOrNoApprovedAmount, bool negativeBalanceOnly, DateTime? invoiceDateFrom, DateTime? invoiceDateTo, bool includeInvoiceClaims, bool isShowSentOnly, bool isShowPaidOnly, Guid? referrerRowId, Guid? insuranceProviderRowId, DateTime? createdDateFrom, DateTime? createdDateTo, bool isCoordinationProblemOnly, int hideEstimation)
 		{
 			var db = EF.PracticeManagerEntities.GetConnection(CurrentUserRowId);
 
@@ -49,6 +49,10 @@ namespace Profibiz.PracticeManager.BL
 			if (noPaidOnly == 1)
 			{
 				wh = PredicateBuilder.And(wh, q => q.PaymentRequest > 0);
+			}
+			if (hideEstimation == 1)
+			{
+				wh = PredicateBuilder.And(wh, q => !q.IsEstimation);
 			}
 			if (flagNoPaidOrNoApprovedAmount)
 			{

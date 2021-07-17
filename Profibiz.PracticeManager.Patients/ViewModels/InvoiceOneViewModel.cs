@@ -67,7 +67,8 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 		public virtual Boolean IsVisibilityUserControl { get; set; } = false;
 		public virtual bool IsVisibilityRate { get; set; }
 		public virtual bool IsHideLayoutCoordinations => (Entity?.HasNoCoverage == true);
-		
+		public virtual bool ReadOnlyIsEstimation => ReadOnly || (Entity?.PaymentTotal ?? 0) > 0;
+
 
 
 		public virtual Boolean IsWindowMode { get; set; }

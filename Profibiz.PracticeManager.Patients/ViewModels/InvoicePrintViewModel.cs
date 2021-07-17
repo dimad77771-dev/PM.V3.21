@@ -478,7 +478,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 					recipients.Add(recipient);
 				}
 
-				var serviceProviderRowIds = Entity.InvoiceItems.Select(q => q.Appointment.ServiceProviderRowId).Distinct().Where(q => q != null).ToArray();
+				var serviceProviderRowIds = Entity.InvoiceItems.Select(q => q.Appointment?.ServiceProviderRowId).Distinct().Where(q => q != null).ToArray();
 				foreach(var serviceProviderRowId in serviceProviderRowIds)
 				{
 					var serviceProvider = LookupDataProvider.FindServiceProvider(serviceProviderRowId);

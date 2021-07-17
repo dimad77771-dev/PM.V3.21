@@ -194,6 +194,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				qrys.Add("negativeBalanceOnly=true");
 			}
 			qrys.Add("includeInvoiceClaims=true");
+			qrys.Add("hideEstimation=1");
 			var qry = QueryHelper.CreateQuery(qrys);
 			var rows = await businessService.GetInvoiceList(qry);
 			rows = rows.OrderBy(q => q.InvoiceDate).ToList();

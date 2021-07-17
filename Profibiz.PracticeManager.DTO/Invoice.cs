@@ -23,6 +23,7 @@ namespace Profibiz.PracticeManager.DTO
 		public Guid? ThirdPartyServiceProviderRowId { get; set; }
 		public Guid? Status1RowId { get; set; }
 		public Guid? Status2RowId { get; set; }
+		public bool IsEstimation { get; set; }
 		public Nullable<System.DateTime> Created { get; set; }
 		public string CreatedBy { get; set; }
 		public Nullable<System.DateTime> Updated { get; set; }
@@ -40,6 +41,7 @@ namespace Profibiz.PracticeManager.DTO
 		public decimal? ApproveAmont { get; set; }
 		public decimal? DueByPatient { get; set; }
 		public bool HasCoordinationProblem { get; set; }
+		
 
 
 		public decimal? Amount { get; set; }

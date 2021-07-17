@@ -776,7 +776,7 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 				},
 			});
 		}
-		public bool CanPaymentNew() => ((CurrentInvoice?.Balance ?? 0) > 0);
+		public bool CanPaymentNew() => (CurrentInvoice != null) && (CurrentInvoice?.Balance ?? 0) > 0 && (!CurrentInvoice.IsEstimation);
 
 		void SubsribeAdvancedFilters()
 		{
@@ -1094,4 +1094,42 @@ namespace Profibiz.PracticeManager.Patients.ViewModels
 			throw new System.NotImplementedException();
 		}
 	}
-}	
+
+	public class InvoicesListViewModelRowForegroundConvertor : IMultiValueConverter
+	{
+		public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+		{
+			var invoiceClaim = values[0] as InvoiceClaim;
+			var invoice = values[1] as Invoice;
+			if (invoiceClaim == null || invoice == null) return null;
+
+			var color = "";
+			if (invoiceClaim.StatusInfo == "Sent")
+			{
+				color = "Blue";
+			}
+			else if (invoiceClaim.StatusInfo == "Rejected")
+			{
+				color = "Red";
+			}
+			else if (invoiceClaim.StatusInfo == "Partially")
+			{
+				color = "#FF00DC";
+			}
+			else if (invoiceClaim.StatusInfo == "Approved")
+			{
+				color = "Green";
+			}
+			else throw new ArgumentException();
+
+			var mcolor = (Color)ColorConverter.ConvertFromString(color);
+			return new SolidColorBrush(mcolor);
+		}
+
+		public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
+		{
+			throw new NotImplementedException();
+		}
+	}
+
+}
